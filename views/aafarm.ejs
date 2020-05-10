@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%include ./head%>
+    <title><%= title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style media="screen">
+    </style>
+    <script type="text/javascript">
+
+    </script>
+  </head>
+  <body style="margin-top: 5px; margin-right: 5%; margin-left:5%;">
+    <h1><%= title %></h1>
+
+    <form action="/aafarm/1" method="get">
+      <input type="text" placeholder="찾기 버튼을 누르세요" name="searchText">
+      <select name="searchType">
+          <option value="name">이름</option>
+          <option value="feat">피트</option>
+          <option value="custom">커스텀</option>
+      </select>
+      <input type="checkbox" name="limit" value="300" checked id="chbox"> <label for="chbox" ></label>300레벨 이상
+      <input action="/aafarm/1" type="submit" class="btn" value="찾기" ></button>
+
+    </form>
+
+    <table id="eqtable">
+      <colgroup>
+        <col width="100">
+        <col width="200">
+        <col width="50">
+        <col width="50">
+        <col width="100">
+        <col width="200">
+        <col width="350">
+        <col width="300">
+        <col width="600">
+      </colgroup>
+      <thead>
+        <tr  style='text-align: center'>
+          <th>등급</th>
+          <th>이름</th>
+          <th>제한</th>
+          <th>소켓</th>
+          <th>에테르</th>
+          <th>방어력</th>
+          <th>속성 방어</th>
+          <th>피트</th>
+          <th>커스텀</th>
+        </tr>
+      </thead>
+      <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+      <tbody>
+        <% if(typeof(CurrentPage) === 'undefined'){ %>
+          <tr>
+            <td colspan="9"; style= "text-align:center;"> 검색이 필요합니다.</td>
+          </tr>
+        <% } else { %>
+          <% data.forEach(function(item) { %>
+            <tr  style="white-space: pre-line; font-size:12px;">
+              <td><%- item.armgrade %></td>
+              <td><%- item.armname %></td>
+              <td style='text-align: center'><%- item.armlimit %></td>
+              <td style='text-align: center'><%- item.armsocket %></td>
+              <td style='text-align: center'><%- item.armether %></td>
+              <td style='text-align: center'><%- item.armstats %></td>
+              <td><%- item.armproperty %></td>
+              <td><%- item.armfeat %></td>
+              <td><%- item.armcustom %></td>
+            </tr>
+          <% }); %>
+        <% } %>
+        <div class="" id="PageUl">
+          <% if(typeof(CurrentPage) === 'undefined'){ %>
+            <tr>
+              <div class="" id="pagelist" >
+                <td colspan="9" style= "text-align:center; font-size:24px">
+                  검색이 필요합니다.
+                </td>
+              </div>
+            </tr>
+
+          <% } else { %>
+            <tr>
+              <div class="" id="pagelist">
+                <td colspan="9" style= "text-align:center; font-size:24px">
+                  <% if (CurrentPage > PageSize){ %>
+                    <a href="/aafarm/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
+                    <a href="/aafarm/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
+                  <% } %>
+                  <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
+                    <% if (iCount == CurrentPage) { %>
+                      <b class="btnnonactive"><%- iCount %></b>
+                    <% } else { %>
+                      <a href="/aafarm/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
+                    <% } %>
+                  <% } %>
+                  <% if (EndPage < TotalPage){ %>
+                    <a href="/aafarm/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
+                    <a href="/aafarm/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
+                  <% } %>
+                </td>
+              </div>
+            </tr>
+          <% } %>
+        </div>
+      </tbody>
+    </table>
+
+
+  </body>
+  <footer>
+    <%include ./footer%>
+  </footer>
+</html>

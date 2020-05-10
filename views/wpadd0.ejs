@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%include ./head%>
+    <title><%= title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" />
+
+    <style media="screen">
+    </style>
+
+  </head>
+  <body style="margin-top: 5px; margin-right: 5%; margin-left:5%; ">
+    <h1><%= title %></h1>
+    <div class="">
+      <form class="" action="/test/fixwp" method="post">
+        <select class="form-control" name="">
+          <option value="">1</option>
+          <option value="">2</option>
+          <option value="">3</option>
+          <option value="">4</option>
+          <option value="">5</option>
+        </select>
+        <input action="/test/1" type="submit" class="btn" value="변경하기" ></button>
+
+
+      </form>
+
+    </div>
+
+
+    <table id="eqtable" style="width:1200px;">
+      <colgroup>
+        <col width="100">
+        <col width="200">
+        <col width="50">
+        <col width="50">
+        <col width="100">
+        <col width="200">
+        <col width="350">
+        <col width="300">
+        <col width="650">
+      </colgroup>
+      <thead>
+        <tr  style='text-align: center'>
+          <th>등급</th>
+          <th>이름</th>
+          <th>제한</th>
+          <th>소켓</th>
+          <th>에테르</th>
+          <th>성능</th>
+          <th>속성</th>
+          <th>피트</th>
+          <th>커스텀</th>
+        </tr>
+      </thead>
+      <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+
+
+      <tbody>
+        <% if(typeof(wpid) === 'undefined'){ %>
+          <tr>
+            <td colspan="9"; style= "text-align:center;"> 검색이 필요합니다.</td>
+          </tr>
+        <% } else { %>
+          <% data.forEach(function(item) { %>
+          <tr  style="white-space: pre-line; font-size:12px;">
+            <td><%- item.wpgrade %></td>
+            <td><%- item.wpname %></td>
+            <td style='text-align: center'><%- item.wplimit %></td>
+            <td style='text-align: center'><%- item.wpsocket %></td>
+            <td style='text-align: center'><%- item.wpether %></td>
+            <td style='text-align: center'><%- item.wpstats %></td>
+            <td><%- item.wpproperty %></td>
+            <td><%- item.wpfeat %></td>
+            <td><%- item.wpcustom %></td>
+          </tr>
+          <% }); %>
+        <% } %>
+
+
+      </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- select2 javascript cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
+    <script>
+      // select2 초기화
+      $('select').select2();
+    </script>
+  </body>
+  <footer>
+    <%include ./footer%>
+  </footer>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./head %>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style media="screen">
+    input {
+      width: 100%;
+      padding: 10px 20px;
+      margin: 5px 0;
+      box-sizing: border-box;
+    }
+    input[type="text"] {
+      border: none;
+      border-bottom: solid 2px #D2691E;
+    }
+    textarea {
+			width: 100%;
+			height: 200px;
+			padding: 10px;
+			box-sizing: border-box;
+			border: solid 2px;
+			border-radius: 5px;
+			font-size: 16px;
+			resize: both;
+		}
+    input[type=button], input[type=submit], input[type=reset] {
+      border: none;
+      color: black;
+      padding: 8px 16px;
+      text-decoration: none;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    </style>
+    <script type="text/javascript">
+      function checkonclick() {
+        if (document.bodyform.boardbody.value == "" || document.bodyform.boardbody.value == null || document.bodyform.boardbody.value == undefined || ( document.bodyform.boardbody.value != null && typeof document.bodyform.boardbody.value == "object" && !Object.keys(document.bodyform.boardbody.value).length ) ) {
+          alert("내용을 입력해주세요!");
+          document.bodyform.boardbody.focus();
+          return false;
+        }
+        return true;
+
+
+      }
+    </script>
+  </head>
+  <body style="margin-top: 5px; margin-right: 10%; margin-left:10%; ">
+    <h1><%= title  %></h1>
+
+    <div class="">
+      <form class="" name="bodyform" action="/board" method="post" onsubmit="return checkonclick()">
+        <div class="">
+          <div class="">
+            <label for="">제목</label>
+            <div class="">
+              <input type="text" name="title"  size='40' maxlength='50' value="제목 없음" id="title">
+            </div>
+          </div>
+          <div class="">
+            <label for="">내용</label>
+            <div class="">
+              <textarea type="text" name="boardbody" rows="6" cols="60" id="boardbody"></textarea>
+
+            </div>
+          </div>
+          <div class="">
+            <label for="">글쓴이</label>
+            <div class="">
+              <input type="text" name="writer" size='20' value="익명" id="writer">
+            </div>
+
+            <div class="" style="float:right; ">
+              <input type="submit" name="작성하기" value="작성하기" />
+              <input onclick="history.back(-1);" type="button" name="" value="뒤로" />
+
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </body>
+  <footer>
+    <% include ./footer %>
+  </footer>
+</html>

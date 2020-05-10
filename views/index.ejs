@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./head %>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style media="screen">
+
+    #indexlist {
+      text-align: center;
+      text-decoration: none;
+    }
+    #indexlist th {
+      padding: 5px;
+      font-weight: bold;
+      vertical-align: top;
+      color: #black;
+      border-bottom: 3px solid #036;
+    }
+    #indexlist td {
+      padding: 3px;
+      vertical-align: top;
+      border-bottom: 1px solid #ccc;
+    }
+
+    </style>
+  </head>
+  <body style="margin-top: 5px; margin-right: 5%; margin-left:5%; ">
+
+    <div  style=" margin-right: 5%; margin-left:5%; ">
+      <table style="width:800px" id="indexlist">
+        <colgroup>
+          <col span="" style="width:80%">
+          <col span="" >
+        </colgroup>
+        <thead>
+          <tr>
+            <th style="">그동안 바뀐 점</th>
+            <th id="indextabledate">날짜</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>예정 - 공부하는 흔적 남기기</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>예정 - 게시판 글 작성시 이미지 업로드 기능</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>예정 - 장비 재료 있을떄 장비 클릭시 재료보이기</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>예정 - 회원가입</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td style="text-decoration : line-through;">예정 - 몬스터 테이블 제작</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>미루고 미루던 페이징 완성</td>
+            <td id="indextabledate">20.04.21</td>
+          </tr>
+          <tr>
+            <td>자유게시판 최소한의 완성</td>
+            <td id="indextabledate">20.04.07</td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th>최근 게시물</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </body>
+  <footer style="margin-top:30px">
+    <%include ./footer%>
+
+  </footer>
+</html>

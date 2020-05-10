@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./head %>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body style="margin-top: 5px; margin-right: 5%; margin-left:5%; width: 1200px;">
+    <h1><%= title  %></h1>
+
+    <form action="" method="get">
+      <input type="text" placeholder="찾기 버튼을 누르세요" name="searchText">
+    <select name="searchType">
+        <option value="name">이름</option>
+        <option value="feat">피트</option>
+        <option value="custom">커스텀</option>
+    </select>
+    <input action="" type="submit" class="btn" value="찾기" ></button>
+    </form>
+
+
+    <table id="eqtable">
+      <colgroup>
+        <col width="100">
+        <col width="200">
+        <col width="50">
+        <col width="50">
+        <col width="100">
+        <col width="200">
+        <col width="300">
+        <col width="250">
+        <col width="600">
+      </colgroup>
+      <thead >
+        <tr  style='text-align: center'>
+          <th>등급</th>
+          <th>이름</th>
+          <th>제한</th>
+          <th>소켓</th>
+          <th>에테르</th>
+          <th>방어력</th>
+          <th>속성 방어</th>
+          <th>피트</th>
+          <th>커스텀</th>
+        </tr>
+      </thead>
+      <%# tbody에 있는 스타일은 '\n ' 줄바꿈을 표현함 %>
+      <tbody style="white-space: pre-line; font-size:12px;">
+        <% data.forEach(function(item) { %>
+        <tr>
+          <td><%- item.armgrade %></td>
+          <td><%- item.armname %></td>
+          <td style='text-align: center'><%- item.armlimit %></td>
+          <td style='text-align: center'><%- item.armsocket %></td>
+          <td style='text-align: center'><%- item.armether %></td>
+          <td style='text-align: center'><%- item.armstats %></td>
+          <td><%- item.armproperty %></td>
+          <td><%- item.armfeat %></td>
+          <td><%- item.armcustom %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+  </body>
+  <footer>
+    <% include ./footer %>
+  </footer>
+</html>

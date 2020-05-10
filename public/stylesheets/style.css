@@ -1,0 +1,112 @@
+  a {
+    font-family:"돋움";
+    text-decoration: none;
+  }
+  ul { margin: 0;  padding: 0; }
+
+  a:link { color: blue; text-decoration: none; }
+
+  a:visited { color: purple; text-decoration: none; }
+
+  a:hover { color: red; text-decoration: underline; }
+
+  a:active { color: white; background-color: green; }
+
+  #btnactive {
+    padding-top: 2px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    border: 1px solid #ececec;
+    color: #5795dd;
+    background-color: #fff;
+  }
+  #btnnonactive {
+    padding: 3px 9px;
+    margin: 0 1px 0 2px;
+    font: bold 12px/19px tahoma;
+    color: #666;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  #eqtable {
+    border-top: 3px solid #036;
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    }
+  #eqtable th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #369;
+    border-bottom: 3px solid #036;
+  }
+  #eqtable td {
+    padding: 3px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+  }
+
+  #mon_table {
+    border-top: 3px solid #036;
+    border-collapse: collapse;
+    text-align: center;
+    line-height: 1.5;
+    }
+  #mon_table th {
+    padding: 5px;
+    font-weight: bold;
+    color: #369;
+
+    border-bottom: 3px solid #036;
+  }
+  #mon_table td {
+    padding: 3px;
+    border-bottom: 1px solid #ccc;
+  }
+  #pagelist{
+    list-style-type: none;
+    float: left;
+    text-align: center;
+  }
+  input[id="chbox"] + label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #bcbcbc;
+    cursor: pointer;
+  }
+
+  input[id="chbox"]:checked + label {
+    background-color: #666666;
+  }
+  input[id="chbox"] {
+    display: none;
+  }
+  label{
+    vertical-align: text-top;
+
+  }
+
+  input{
+    width: auto;
+    height:30px;
+    font-size: 16px;
+    padding: 0px;
+  }
+  input.btn{
+    width: 100px;
+    height:34px;
+    font-size: 16px;
+    padding: 0px;
+  }
+  select{
+    width: auto;
+
+    height:32px;
+    font-size: 16px;
+    padding: 0px;
+
+  }

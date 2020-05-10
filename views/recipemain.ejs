@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./head %>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body style="margin-top: 5px; margin-right: 5%; margin-left:5%; ">
+
+    <h1><%= title  %></h1>
+
+    <form action=""  method="get">
+      <input type="text" placeholder="ex) 15001" name="searchText">
+      <select name="searchType">
+        <option value="number">수집품 번호</option>
+        <option value="name">수집품 이름</option>
+
+      </select>
+      <input action="" type="submit" class="btn" value="찾기" ></button>
+
+    </form>
+
+    <table >
+      <colgroup>
+      </colgroup>
+      <thead id="recipe" width='' border='1' class='aaf' bordercolor='#736BE0' cellspacing='0' cellpadding='1' bordercolorlight='#736BE0' bordercolordark='#FFFFFF'>
+        <tr>
+          <th>레시피 번호</th>
+          <th>수집품 번호</th>
+          <th>수집품 이름</th>
+        </tr>
+      </thead>
+      <tbody style="white-space: pre-line; font-size:12px;">
+      </tbody>
+    </table>
+  </body>
+</html>

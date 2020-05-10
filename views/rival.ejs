@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <script>
+    function add_row() {
+      var my_tbody = document.getElementById('my-tbody');
+      // var row = my_tbody.insertRow(0); // 상단에 추가
+      var row = my_tbody.insertRow( my_tbody.rows.length ); // 하단에 추가
+      var cell1 = row.insertCell(4);
+      var cell2 = row.insertCell(5);
+      var cell2 = row.insertCell(5);
+      var cell2 = row.insertCell(5);
+      var cell2 = row.insertCell(5);
+      var cell2 = row.insertCell(5);
+      cell1.innerHTML = '항목';
+      cell2.innerHTML = new Date().toUTCString();
+    }
+
+    function delete_row() {
+      var my_tbody = document.getElementById('my-tbody');
+      if (my_tbody.rows.length < 1) return;
+      // my_tbody.deleteRow(0); // 상단부터 삭제
+      my_tbody.deleteRow( my_tbody.rows.length-1 ); // 하단부터 삭제
+    }
+  </script>
+  <head>
+    <% include ./head %>
+    <title><%= title %></title>
+  </head>
+  <body style="margin-top: 50px; margin-right: 10%; margin-left:10%; ">
+
+    <h1><%= title  %></h1>
+
+
+
+    <table border='1'>
+      <colgroup>
+      </colgroup>
+      <thead>
+        <tr>
+          <th>강적 이름</th>
+          <th>타입</th>
+          <th>속성</th>
+          <th>내성</th>
+          <th>상속 데미지 변화</th>
+          <th>스킬</th>
+          <th>보상</th>
+        </tr>
+      </thead>
+      <tbody id="my-tbody">
+        <tr>
+          <td>테스트 강적 이름</td>
+          <td>강적 테스트 타입</td>
+          <td>강적 테스트 속성</td>
+          <td>강적 테스트 내성</td>
+          <td>강적 테스트 상속 뎀감</td>
+          <td>강적 테스트 스킬</td>
+          <td>강적 테스트 보상</td>
+        </tr>
+
+      </tbody>
+    </table>
+    <button onclick="add_row()">하와와</button>
+  </body>
+</html>

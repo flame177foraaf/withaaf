@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    $("#mywpnames option:selected").val('asdf');
+    alert('준비중입니다')
+  </script>
+    <% include ./head %>
+    <title><%= title %></title>
+
+
+
+  </head>
+  <body style="margin-top: 50px;">
+
+      <select class="" style="width:300px"  id="mywpnames" >
+
+          <% varaquafwp.forEach(function(item) { %>
+          <option selected value= "<%= item.wpname %>"><%= item.wpname %></option>
+          <% }); %>
+
+      </select>
+      <p></p>
+      <select class="" style="width:300px"  id="mywpnames" >
+
+          <% varaquafarm.forEach(function(item) { %>
+          <option value= "<%= item.armname %>"><%= item.armname %></option>
+          <% }); %>
+
+      </select>
+      <p></p>
+      <select class="" style="width:300px"  id="mywpnames" >
+
+          <% varaquafacc.forEach(function(item) { %>
+          <option value= "<%= item.accname %>"><%= item.accname %></option>
+          <% }); %>
+
+      </select>
+
+
+
+
+
+    <input type="submit">
+    <table >
+      <colgroup>
+        <col width="50">
+        <col width="50">
+        <col width="50">
+        <col width="70">
+        <col width="200">
+        <col width="300">
+        <col width="250">
+        <col width="600">
+      </colgroup>
+
+
+      <thead id="mixwp" width='' border='1' class='aaf' bordercolor='#736BE0' cellspacing='0' cellpadding='1' bordercolorlight='#736BE0' bordercolordark='#FFFFFF'>
+        <tr>
+          <th></th>
+          <th>제한</th>
+          <th>소켓</th>
+          <th>에테르</th>
+          <th>성능/방어 </th>
+          <th>속성/속성방어</th>
+          <th>피트</th>
+          <th>커스텀</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+
+      </tbody>
+
+
+
+      <tbody>
+        <tr>
+          <td> </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+
+        </tr>
+      </tbody>
+
+
+      <tbody>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+
+
+
+      <tbody>
+
+        <tr>
+          <td>
+
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+
+
+
+    </table>
+
+
+
+  </body>
+
+</html>

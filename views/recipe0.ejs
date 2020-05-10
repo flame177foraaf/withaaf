@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./head %>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style media="screen">
+      #PageUl{
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #pagelist{
+        list-style-type: none;
+        float: left;
+        text-align: center;
+      }
+      #linehead {
+        border-right: 2px solid black;
+      }
+      #line1{
+        border-left: 2px solid black;
+      }
+      #line2{
+        border-left: 1px solid grey;
+      }
+    </style>
+  </head>
+  <body style="margin-top: 5px; margin-right: 5%; margin-left:5%; width:1400px">
+
+    <h1><%= title  %></h1>
+
+    <form action="/recipe/1"  method="get">
+      <input type="text" placeholder="ex) 오이" name="searchText">
+      <select name="searchType">
+        <option value="name">수집품 이름</option>
+        <option value="number">수집품 번호</option>
+
+      </select>
+      <input action="/recipe/1" type="submit" class="btn" value="찾기" ></button>
+
+    </form>
+
+    <table id="eqtable">
+      <colgroup>
+      </colgroup>
+      <thead id="">
+        <tr style="border=top: 2px solid black">
+          <th>레시피 번호</th>
+          <th>결과물 번호</th>
+          <th id="linehead">결과물 이름</th>
+          <th id="line1"></th>
+          <th></th>
+          <th></th>
+          <th id="line2"></th>
+          <th></th>
+          <th></th>
+          <th id="line2"></th>
+          <th></th>
+          <th></th>
+          <th id="line2"></th>
+          <th></th>
+          <th></th>
+          <th id="line2"></th>
+          <th></th>
+          <th></th>
+          <th id="line2"></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody style="white-space: pre-line; font-size:12px;">
+        <% if(typeof(CurrentPage) === 'undefined'){ %>
+          <tr>
+            <td colspan="10"; style= "text-align:center;"> 검색이 필요합니다.</td>
+          </tr>
+        <% } else { %>
+          <% data.forEach(function(item) { %>
+          <tr>
+            <td><%- item.recipenum %></td>
+            <td><%- item.collectnum %></td>
+            <td id="linehead"><%- item.collectname %></td>
+            <td id="line1"><%- item.collect1num %></td>
+            <td><%- item.collect1name %></td>
+            <td><%- item.collect1unit %></td>
+            <td id="line2"><%- item.collect2num %></td>
+            <td><%- item.collect2name %></td>
+            <td><%- item.collect2unit %></td>
+            <td id="line2"><%- item.collect3num %></td>
+            <td><%- item.collect3name %></td>
+            <td><%- item.collect3unit %></td>
+            <td id="line2"><%- item.collect4num %></td>
+            <td><%- item.collect4name %></td>
+            <td><%- item.collect4unit %></td>
+            <td id="line2"><%- item.collect5num %></td>
+            <td><%- item.collect5name %></td>
+            <td><%- item.collect5unit %></td>
+            <td id="line2"><%- item.collect6num %></td>
+            <td><%- item.collect6name %></td>
+            <td><%- item.collect6unit %></td>
+          </tr>
+          <% }); %>
+        <% } %>
+      </tbody>
+    </table>
+    <div class="" id="PageUl">
+      <ul>
+        <% if(typeof(CurrentPage) === 'undefined'){ %>
+          <div class="" id="pagelist" >
+            <li> 검색이 필요합니다.
+            </li>
+          </div>
+        <% } else { %>
+          <div class="" id="pagelist" >
+            <li>
+              <% if (CurrentPage > PageSize){ %>
+                <a href="/recipe/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
+                <a href="/recipe/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
+              <% } %>
+              <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
+                <% if (iCount == CurrentPage) { %>
+                  <b class="btnnonactive"><%- iCount %></b>
+                <% } else { %>
+                  <a href="/recipe/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>" class="btnactive"><%- iCount %></a>
+                <% } %>
+              <% } %>
+              <% if (EndPage < TotalPage){ %>
+                <a href="/recipe/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>">  ▶ </a>
+                <a href="/recipe/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
+              <% } %>
+            </li>
+          </div>
+        <% } %>
+      </ul>
+    </div>
+
+  </body>
+  <footer>
+    <% include ./footer %>
+  </footer>
+</html>
