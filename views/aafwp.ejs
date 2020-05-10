@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <%- include ('head') %>
+    <title><%= title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style media="screen">
+    </style>
+    <script type="text/javascript">
+
+    </script>
+  </head>
+  <body style="">
+    <h1><%= title %></h1>
+
+    <form action="/aafwp/1" method="get">
+      <input type="text" placeholder="모든 항목" name="searchText">
+      <select name="searchType">
+          <option value="name">이름</option>
+          <option value="property">속성</option>
+          <option value="feat">피트</option>
+          <option value="custom">커스텀</option>
+      </select>
+      <input type="checkbox" name="limit" value="300" checked id="chbox"> <label for="chbox" style=""></label>300레벨 이상
+      <input action="/aafwp/1" type="submit" class="btn" value="찾기" ></button>
+
+    </form>
+
+    <table >
+
+      <colgroup>
+        <col width="100">
+        <col width="200">
+        <col width="50">
+        <col width="50">
+
+        <col width="100">
+        <col width="200">
+        <col width="350">
+        <col width="300">
+        <col width="650">
+      </colgroup>
+      <thead id="wptable" width='' border='1' class='aaf' bordercolor='#736BE0' cellspacing='0' cellpadding='2' bordercolorlight='#736BE0' bordercolordark='#FFFFFF'>
+        <tr>
+
+          <th>등급</th>
+          <th>이름</th>
+          <th>제한</th>
+          <th>소켓</th>
+          <th>에테르</th>
+          <th>성능</th>
+          <th>속성</th>
+          <th>피트</th>
+          <th>커스텀</th>
+        </tr>
+      </thead>
+      <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+
+      <tbody>
+        <% if(typeof(CurrentPage) === 'undefined'){ %>
+          <tr>
+            <td colspan="9"; style= "text-align:center;"> 검색이 필요합니다.</td>
+          </tr>
+        <% } else { %>
+          <% data.forEach(function(item) { %>
+          <tr  style="white-space: pre-line; font-size:12px;">
+            <td><%- item.wpgrade %></td>
+            <td><%- item.wpname %></td>
+            <td style='text-align: center'><%- item.wplimit %></td>
+            <td style='text-align: center'><%- item.wpsocket %></td>
+            <td style='text-align: center'><%- item.wpether %></td>
+            <td style='text-align: center'><%- item.wpstats %></td>
+            <td><%- item.wpproperty %></td>
+            <td><%- item.wpfeat %></td>
+            <td><%- item.wpcustom %></td>
+          </tr>
+          <% }); %>
+        <% } %>
+      <div class="" id="pagelist">
+        <% if(typeof(CurrentPage) === 'undefined'){ %>
+          <tr>
+            <div class="" id="pagelist" >
+              <td colspan="9" style= "text-align:center; font-size:24px">
+                검색이 필요합니다.
+              </td>
+            </div>
+          </tr>
+        <% } else { %>
+          <tr>
+            <div class="" id="pagelist">
+              <td colspan="21" style= "text-align:center; font-size:24px">
+                <% if (CurrentPage > PageSize){ %>
+                  <a href="/aafwp/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
+                  <a href="/aafwp/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
+                <% } %>
+                <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
+                  <% if (iCount == CurrentPage) { %>
+                    <b class="btnnonactive"><%- iCount %></b>
+                  <% } else { %>
+                    <a href="/aafwp/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
+                  <% } %>
+                <% } %>
+                <% if (EndPage < TotalPage){ %>
+                  <a href="/aafwp/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
+                  <a href="/aafwp/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
+                <% } %>
+              </td>
+            </div>
+          </tr>
+        <% } %>
+      </div>
+      </tbody>
+    </table>
+  </body>
+  <footer>
+    <%- include ('footer')%>
+  </footer>
+</html>

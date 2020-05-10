@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <%- include ('head') %>
+    <title><%= title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style media="screen">
+      #PageUl{
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #pagelist{
+        list-style-type: none;
+        float: left;
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript">
+
+    </script>
+  </head>
+  <body style="">
+    <h1><%= title %></h1>
+
+    <form action="/featsup/1" method="get">
+      <input type="text" placeholder="찾기 버튼을 누르세요" name="searchText">
+      <select name="searchType">
+
+
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <%- include ('head') %>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body style="margin-top: 50px; margin-right: 10%; margin-left:10%; ">
+
+    <h1><%= title  %></h1>
+
+
+    <form action="" method="get">
+      <input type="text" placeholder="모든 항목" name="searchText">
+    <select name="searchType">
+        <option value="grade">등급</option>
+
+        <option value="name">이름</option>
+        <option value="feat">피트</option>
+
+    </select>
+
+      <input action="/featsup/1" type="submit" class="btn" value="찾기" ></button>
+
+    </form>
+
+    <table id="eqtable">
+      <colgroup>
+
+    <input type="submit" class="btn" value="찾기" ></button>
+    </form>
+
+
+    <input type="submit">
+    <table  >
+      <colgroup >
+
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+      </colgroup>
+
+      <thead>
+
+
+
+      <thead id="mixwp" width='' border='1' class='aaf' bordercolor='#736BE0' cellspacing='0' cellpadding='1' bordercolorlight='#736BE0' bordercolordark='#FFFFFF'>
+
+        <tr>
+          <th>등급</th>
+          <th>이름</th>
+          <th>피트</th>
+          <th>역피트</th>
+        </tr>
+      </thead>
+
+      <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+      <tbody>
+        <% if(typeof(CurrentPage) === 'undefined'){ %>
+          <tr>
+            <td colspan="4"; style= "text-align:center;"> 검색이 필요합니다.</td>
+          </tr>
+        <% } else { %>
+          <% data.forEach(function(item) { %>
+          <tr  style="white-space: pre-line; font-size:12px;">
+            <td><%- item.featgrade %></td>
+            <td><%- item.featname %></td>
+            <td><%- item.feat %></td>
+            <td><%- item.reversefeat %></td>
+          </tr>
+          <% }); %>
+        <% } %>
+        <div class="" id="PageUl">
+            <% if(typeof(CurrentPage) === 'undefined'){ %>
+              <tr>
+                <div class=""  id="pagelist" >
+                  <td colspan="4" style= "text-align:center; font-size:24px">
+                    검색이 필요합니다.
+                  </td>
+                </div>
+              </tr>
+
+            <% } else { %>
+              <tr>
+                <div class="" id="pagelist" >
+                  <td colspan="4" style= "text-align:center; font-size:24px">
+                    <% if (CurrentPage > PageSize){ %>
+                      <a href="/featsup/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
+                      <a href="/featsup/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
+                    <% } %>
+                    <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
+                      <% if (iCount == CurrentPage) { %>
+                        <b class="btnnonactive"><%- iCount %></b>
+                      <% } else { %>
+                        <a href="/featsup/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>" class="btnactive"><%- iCount %></a>
+                      <% } %>
+                    <% } %>
+                    <% if (EndPage < TotalPage){ %>
+                      <a href="/featsup/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>">  ▶ </a>
+                      <a href="/featsup/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
+                    <% } %>
+                  </td>
+                </div>
+              </tr>
+            <% } %>
+          </tr>
+        </div>
+      </tbody>
+    </table>
+    <div class="" id="PageUl">
+      <ul>
+
+      </ul>
+    </div>
+
+  </body>
+  <footer>
+    <%- include ('footer')%>
+  </footer>
+
+
+
+</html>

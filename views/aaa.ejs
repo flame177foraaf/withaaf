@@ -1,0 +1,17 @@
+<tr>
+  <% for( l = 0; l < Data_length - 1; l++) { %>
+    <% if ( data[l].field_id != data[i].field_name  ) %>
+      <% continue; %>
+    <td><%- data[l].mon_table_lv %></td>
+    <td><%- data[l].mon_table_name %></td>
+    <td><%- data[l].mon_table_property %></td>
+    <td><%- data[l].mon_table_type %></td>
+    <td><%- data[l].mon_table_resist %></td>
+    <td><%- data[l].mon_table_gem %></td>
+    <td><%- data[l].mon_table_commom %></td>
+    <td><%- data[l].mon_table_uncommon %></td>
+    <td><%- data[l].mon_table_rare %></td>
+    <td><%- data[l].mon_table_skill %></td>
+<% } %>
+
+</tr>
