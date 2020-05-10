@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ('head') %>
+    <title><자유게시판></title>
+    <style media="screen" >
+      #showboardtable {
+        width: 100%;
+      }
+      #showboardtable td {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        white-space:pre-wrap;
+
+      }
+      #showboardtabletitles td {
+        text-align:center;
+        vertical-align: middle;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body style="margin-top: 5px; margin-right: 10%; margin-left:10%; ">
+
+    <div class="showboard">
+      <table id = "showboardtable">
+        <div class="">
+          <tr>
+          <div class="" id="showboardtabletitles" >
+            <td style="width:80px;">제목</td>
+          </div>
+          <div class="">
+            <td><%- data.fbtitle %></td>
+            <td style="width:20%;"><%- data.fbcreatedat %></td>
+            <td style="width:20%;"><%- data.fbupdatedAt %></td>
+          </div>
+          </tr>
+        </div>
+        <div class="">
+          <tr>
+            <div class="boardbody" id="showboardtabletitles" >
+              <td>글쓴이</td>
+            </div>
+            <div class="">
+              <td colspan="3"><%- data.fbname %></td>
+            </div>
+          </tr>
+        </div>
+        <div class="">
+          <tr>
+            <div class="" id="showboardtabletitles">
+              <td>내용</td>
+            </div>
+            <div class="">
+              <td style="height:400px" colspan="3"><%- data.fbbody %></td>
+            </div>
+          </tr>
+        </div>
+
+      </table>
+    </div>
+    <div class="" style="float:right">
+        <button onclick="history.back(-1);" type="button" name="button" style="font-size:20px;">뒤로</a></button>
+    </div>
+
+  </body>
+  <footer>
+    <%- include ('footer') %>
+  </footer>
+</html>

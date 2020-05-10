@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  <style>
+    .left_sidenav {
+      height: 100%;
+      width: 240px;
+      z-index: 1;
+      background-color: #111;
+      overflow-x: hidden;
+      position: absolute;
+    }
+    .left_sidenav ul{
+      padding-left: 0px;
+      font-size: 18px;
+    }
+    .left_sidenav a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      color: #818181;
+      display: block;
+    }
+
+    .left_sidenav a:hover {
+      color: white;
+    }
+    .left_sidenav li ul {
+      background: #111;
+      display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
+      height:auto;
+      padding:0px;
+      margin:0px;
+      border:0px;
+      width:240px;
+      z-index:200;
+      font-size: 12px;
+    }
+    .left_sidenav li:hover ul {
+      font-size: 14px;
+      padding-left: 10px;
+
+      display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
+    }
+
+    .main {
+      margin-left: 240px;
+      padding-left: 20px;
+    }
+
+    .linehead {
+
+      border-right: 2px solid black;
+    }
+
+    .fieldname{
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+  </style>
+  <script type="text/javascript">
+    function checkonclick() {
+      if (document.searchform.SearchText.value == "" || document.searchform.SearchText.value == null || document.searchform.SearchText.value == undefined || ( document.searchform.SearchText.value != null && typeof document.searchform.SearchText.value == "object" && !Object.keys(document.searchform.SearchText.value).length ) ) {
+        alert("내용을 입력해주세요!");
+        document.searchform.SearchText.focus();
+        return false;
+      }
+      return true;
+
+
+    }
+
+  </script>
+    <%- include ('head') %>
+  <title><%= title%></title>
+</head>
+<div class="left_sidenav">
+  <ul>
+    <li>
+      <a href="#">죽음의 던전</a>
+      <ul>
+        <li>
+          <a href="/monster/1">죽음의 던전 1 층</a>
+          <a href="/monster/2">죽음의 던전 2 층</a>
+          <a href="/monster/3">죽음의 던전 3 층</a>
+          <a href="/monster/4">죽음의 던전 4 층</a>
+
+         </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">퀘스트 던전</a>
+      <ul>
+        <li>
+          <a href="/monster/5">죽음의 신전</a>
+          <a href="/monster/6">질서의 요새 1 층</a>
+          <a href="/monster/7">질서의 요새 2 층</a>
+          <a href="/monster/8">플레인 오브 카타스트로피 1 층</a>
+          <a href="/monster/9">플레인 오브 카타스트로피 2 층</a>
+          <a href="/monster/10">플레인 오브 카타스트로피 3 층</a>
+          <a href="/monster/11">플레인 오브 카타스트로피 4 층</a>
+
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">왜곡의 동굴</a>
+      <ul>
+        <li>
+          <a href="/monster/12">태고의 홀</a>
+          <a href="/monster/13">빙령의 묘지</a>
+          <a href="/monster/14">모순의 도시</a>
+          <a href="/monster/15">감시자의 폐허</a>
+          <a href="/monster/16">혈룡의 산</a>
+          <a href="/monster/17">시류의 협곡</a>
+          <a href="/monster/18">천상성채 셀리스타</a>
+
+
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">쓰레기장</a>
+      <ul>
+        <li>
+          <a href="/monster/19">몽환도 지하 쓰레기장</a>
+          <a href="/monster/20">암운의 회랑 1층</a>
+          <a href="/monster/21">암운의 회랑 2층</a>
+          <a href="/monster/22">암운의 회랑 3층</a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="#">노다쥐 평원</a>
+      <ul>
+        <li>
+          <a href="/monster/23">동쪽 노다쥐 평원</a>
+          <a href="/monster/24">서쪽 노다쥐 평원</a>
+          <a href="/monster/25">아쿠마니안 로드</a>
+          <a href="/monster/26">아득한 다리</a>
+          <a href="/monster/27">체르페스 캠프</a>
+          <a href="/monster/28">체르페스 폐허 [동쪽 지역]</a>
+          <a href="/monster/29">체르페스 폐허 [서쪽 지역]</a>
+          <a href="/monster/30">체르페스 지하유적</a>
+          <a href="/monster/31">안식의 정원</a>
+          <a href="/monster/32">정령의 무덤 - 일리툼</a>
+
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">노다쥐 광산</a>
+      <ul>
+        <li>
+          <a href="/monster/33">노다쥐 광산 1 층</a>
+          <a href="/monster/34">노다쥐 광산 2 층</a>
+          <a href="/monster/35">노다쥐 광산 3 층</a>
+          <a href="/monster/36">노다쥐 광산 4 층</a>
+          <a href="/monster/37">노다쥐 광산 5 층</a>
+         </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">마의 숲</a>
+      <ul>
+        <li>
+          <a href="/monster/38">마의 숲 북서부</a>
+          <a href="/monster/39">마의 숲 중심부</a>
+          <a href="/monster/40">마의 숲 남동부</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">하바나 사바나</a>
+      <ul>
+        <li>
+          <a href="/monster/41">하바나 사바나 북부</a>
+          <a href="/monster/42">하바나 사바나 남부</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">즈르틀 사막</a>
+      <ul>
+        <li>
+          <a href="/monster/43">사막 북동부</a>
+          <a href="/monster/44">사막 남동부</a>
+          <a href="/monster/45">사막 북서부</a>
+          <a href="/monster/46">사막 남서부</a>
+          <a href="/monster/47">사막 전체</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">광기의 협곡</a>
+      <ul>
+        <li>
+          <a href="/monster/50">광기의 협곡 서상부</a>
+          <a href="/monster/51">광기의 협곡 서중부</a>
+          <a href="/monster/52">광기의 협곡 중심부</a>
+          <a href="/monster/53">광기의 협곡 동중부</a>
+          <a href="/monster/54">광기의 협곡 동남부</a>
+          <a href="/monster/55">광기의 협곡 동상부</a>
+
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">앳스릴 분지</a>
+      <ul>
+        <li>
+          <a href="/monster/60">남서부 앳스릴 분지</a>
+          <a href="/monster/61">남동부 앳스릴 분지</a>
+          <a href="/monster/62">북부 앳스릴 분지</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">골리암 고원</a>
+      <ul>
+        <li>
+          <a href="/monster/63">남부 골리암 고원</a>
+          <a href="/monster/64">북부 골리암 고원</a>
+          <a href="/monster/65">하일라드 산맥 - 할트릴 산로</a>
+          <a href="/monster/66">하일라드 산맥 - 바위숲</a>
+          <a href="/monster/67">철의 도시 - 트루탄트</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="/monster/90">신록의 탑</a>
+    </li>
+  </ul>
+
+
+</div>
+<body>
+
+  <div class="main">
+    <form action="/monster/search" method="get" name="searchform" onsubmit="return checkonclick()">
+      <input type="text" placeholder="찾기 버튼을 누르세요" name="SearchText" id="SearchText">
+      <select name="SearchType">
+        <option value="name">이름</option>
+        <option value="property">속성</option>
+        <option value="type">타입</option>
+        <option value="collect">수집품</option>
+      </select>
+      <input action="/monster/search" type="submit" class="btn" value="찾기"  ></button>
+
+    </form>
+    <table id="mon_table">
+      <colgroup>
+        <col span="" id ="" style="width: 50px;">
+        <col span="" id ="" style="width : 150px;">
+        <col span="" id ="" style="width : 125px;">
+        <col span="" id ="" style="width : 75px;">
+        <col span="" id ="" style="width : 75px;">
+        <col span="" id ="" style="width : 150px;">
+        <col span="" id ="" style="width : 100px;">
+        <col span="" id ="" style="width : 250px;">
+        <col span="" id ="" style="width : 250px;">
+        <col span="" id ="" style="width : 250px;">
+        <col span="" id ="" style="width : 150px;">
+
+      </colgroup>
+      <thead>
+
+        <tr>
+          <th>레벨</th>
+          <th>이름</th>
+          <th>속성</th>
+          <th>에테르</th>
+          <th>타입</th>
+          <th>저항</th>
+          <th>보석</th>
+          <th>커먼</th>
+          <th>언커먼</th>
+          <th>레어</th>
+          <th>스킬</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <% if(Data_length == 0){ %>
+          <tr>
+            <td colspan="11"; style= "text-align:left; padding-left: 50px;"> 해당하는 조건을 찾을 수 없습니다.</td>
+          </tr>
+        <% } else { %>
+            <tr>
+              <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data[0].field_name %></td>
+            </tr>
+
+            <% for( l = 0; l < Data_length; l++) { %>
+              <% if ( data[l].field_id !== data[0].field_id  ) {continue;}%>
+            <tr>
+                <td style= "text-align:center;"><%- data[l].mon_lv %></td>
+                <td><%- data[l].mon_name %></td>
+                <td><%- data[l].mon_property %></td>
+                <td><%- data[l].mon_ether %></td>
+                <td style="text-align: center"><%- data[l].mon_type %></td>
+                <td><%- data[l].mon_resist %></td>
+                <td style="text-align: center"><%- data[l].mon_gem %></td>
+                <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
+                <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
+                <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
+                <td id =""><%- data[l].mon_skill %></td>
+            </tr>
+            <% } %>
+          <% for (i = 1, j = i-1;  i < Data_length; i++, j+=1){ %>
+            <% if( data[i].field_id == data[j].field_id ){ continue;} %>
+              <tr>
+                <td colspan="11"; style= "text-align:left; padding-left: 50px" class="fieldname"> <%- data[i].field_name %></td>
+              </tr>
+
+              <% for( l = 0; l < Data_length; l++) { %>
+                <% if ( data[l].field_id !== data[i].field_id  ) {continue;}%>
+                <tr>
+                  <td style= "text-align:center;"><%- data[l].mon_lv %></td>
+                  <td><%- data[l].mon_name %></td>
+                  <td><%- data[l].mon_property %></td>
+                  <td><%- data[l].mon_ether %></td>
+                  <td style="text-align: center"><%- data[l].mon_type %></td>
+                  <td><%- data[l].mon_resist %></td>
+                  <td style="text-align: center"><%- data[l].mon_gem %></td>
+                  <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
+                  <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
+                  <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
+                  <td id =""><%- data[l].mon_skill %></td>
+                </tr>
+              <% } %>
+          <% } %>
+        <% } %>
+
+      </tbody>
+
+    </table>
+  </div>
+
+</body>
+<footer>
+  <%- include ('footer')%>
+</footer>
+</html>
