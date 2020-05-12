@@ -29,7 +29,7 @@
 
       <button onclick=location.href="/test/wpadd" type="button" name="button" style="margin-left:50px">신규등록</a></button>
 
-      <input type=text list=browsers style="margin-left:50px">
+      <input type=text list=browsers style="margin-left:50px" name="seachid">
       <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
 
       <datalist id="browsers" class="">
@@ -74,7 +74,7 @@
       <tbody>
         <% if(typeof(CurrentPage) === 'undefined'){ %>
           <tr>
-            <td colspan="9"; style= "text-align:center;"> 검색이 필요합니다.</td>
+            <td colspan="4"; style= "text-align:center;"> 검색이 필요합니다.</td>
           </tr>
         <% } else { %>
           <% data.forEach(function(item) { %>
@@ -95,7 +95,7 @@
         <% if(typeof(CurrentPage) === 'undefined'){ %>
           <tr>
             <div class="" id="pagelist" >
-              <td colspan="9" style= "text-align:center; font-size:24px">
+              <td colspan="4" style= "text-align:center; font-size:24px">
                 검색이 필요합니다.
               </td>
             </div>
