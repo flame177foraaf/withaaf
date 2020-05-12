@@ -46,10 +46,15 @@
     </style>
     <script type="text/javascript">
     var str = document.getElementById("textarea_br_n").value;
-    str = str.replaceAll("<br/>", "\r\n");
-    str = str.replaceAll("<br />", "\r\n");
+    var str = str.replaceAll("<br/>", "\r\n");
+    var str = str.replaceAll("<br />", "\r\n");
+
+    var str1 = document.getElementById("textarea").value;
+    var str1 = str.replaceAll("<br/>", "\r\n");
+    var str1 = str.replaceAll("<br />", "\r\n");
 
     document.getElementById("textarea_br_n").value = str;
+    document.getElementById("textarea_br_n").value = str1;
 
 
 
