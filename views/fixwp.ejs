@@ -25,7 +25,7 @@
 			font-size: 16px;
 			resize: both;
 		}
-    textarea.#wpgrade {
+    #wpgrade {
 			width: 100%;
 			height: 100px;
 			padding: 10px;
@@ -60,83 +60,70 @@
 
   <body style="margin-top: 5px; margin-right: 10%; margin-left:10%; ">
     <h1><%= title  %></h1>
-
-    <input type=text list=browsers style="margin-left:50px" name="seach">
-    <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
-
-    <datalist id="browsers" class="" style="width:50%">
-      <% data.forEach(function(item) { %>
-
-      <option value='<%= item.wpname%>' style="width:50%"><%- item.wpname%></option>
-      <% }); %>
-
-    </datalist>
-    <input action="/test/wpadd" type="submit" class="btn" value="변경하기" ></button>
-
     <div class="content" id="content">
-      <form class="" name="bodyform" action="/test" method="post" onsubmit="return checkonclick()">
+      <form class="" name="bodyform" action="/test/fixwp" method="post" onsubmit="return checkonclick()">
         <div class="">
           <div class="">
             <label for="">등급</label>
             <div class="">
-              <textarea type="text" name="wpgrade" rows="6" cols="60" id=""></textarea>
+              <textarea type="text" name="wpgrade" rows="6" cols="60" id="wpgrade"><%- data.wpgrade %></textarea>
             </div>
           </div>
           <div class="">
             <label for="">이름</label>
             <div class="">
-              <input type="text" name="wpname"  size='40' maxlength='50' value="" id="title">
+              <input type="text" name="wpname"  size='40' maxlength='50' value="<%= data.wpname %>" id="title">
             </div>
           </div>
           <div class="">
             <label for="">제한</label>
             <div class="">
-              <input type="text" name="wplimit"  size='40' maxlength='50' value="" id="title">
+              <input type="text" name="wplimit"  size='40' maxlength='50' value="<%= data.wplimit %>" id="title">
             </div>
           </div>
           <div class="">
             <label for="">소켓</label>
             <div class="">
-              <input type="text" name="wpsocket"  size='40' maxlength='50' value="" id="title">
+              <input type="text" name="wpsocket"  size='40' maxlength='50' value="<%= data.wpsocket %>" id="title">
             </div>
           </div>
           <div class="">
             <label for="">에테르</label>
             <div class="">
-              <input type="text" name="wpether"  size='40' maxlength='50' value="" id="title">
+              <input type="text" name="wpether"  size='40' maxlength='50' value="<%= data.wpether %>" id="title">
             </div>
           </div>
           <div class="">
             <label for="">성능</label>
             <div class="">
-              <input type="text" name="wpstats"  size='40' maxlength='50' value="" id="title">
+              <input type="text" name="wpstats"  size='40' maxlength='50' value="<%= data.wpstats %>" id="title">
             </div>
           </div>
           <div class="">
             <label for="">속성 및 강화제한</label>
             <div class="">
-              <textarea type="text" name="wpproperty" rows="6" cols="60" id=""></textarea>
+              <textarea type="text" name="wpproperty" rows="6" cols="60" id=""><%- data.wpproperty %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">피트</label>
             <div class="">
-              <textarea type="text" name="wpfeat" rows="6" cols="60" id=""></textarea>
+              <textarea type="text" name="wpfeat" rows="6" cols="60" id=""><%- data.wpfeat %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">커스텀</label>
             <div class="">
-              <textarea type="text" name="wpcustom" rows="6" cols="60" id=""></textarea>
+              <textarea type="text" name="wpcustom" rows="6" cols="60" id=""><%- data.wpcustom %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">업그레이드 재료</label>
             <div class="">
-              <textarea type="text" name="wpup" rows="6" cols="60" id=""></textarea>
+              <textarea type="text" name="wpup" rows="6" cols="60" id=""><%- data.wpup %></textarea>
 
             </div>
           </div>

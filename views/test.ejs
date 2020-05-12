@@ -119,12 +119,11 @@
         <button onclick=location.href="/test/wpadd" type="button" name="button" style="">신규등록</a></button>
 
 
-        <input type=text list=browsers style="margin-left:50px" name="seach">
+        <input type=text list=browsers style="margin-left:50px" name="Seachname">
         <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
 
         <datalist id="browsers" class="" style="width:50%">
           <% data.forEach(function(item) { %>
-
           <option value='<%= item.wpname%>' style="width:50%"><%- item.wpname%></option>
           <% }); %>
 
