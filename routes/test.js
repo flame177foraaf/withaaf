@@ -41,7 +41,7 @@ router.get('/fixwp', (req,res,next) => {
   client.query(QueryString, [Select_name], (err, response) => {
     res.render ('fixwp', {
       title:'AAF 장비',
-      data:response.row[0]
+      data:response.rows[0]
 
     });
   })
