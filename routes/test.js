@@ -18,6 +18,7 @@ router.get('/', (req,res,next) => {
       console.log('변경하기 목록 오류!')
       res.redirect('/test');
     } else {
+      console.log(response.row[0]);
       res.render('test', {
         title:'AAF 장비',
         data:response.row
