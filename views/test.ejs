@@ -24,26 +24,28 @@
       </select>
       <input type="checkbox" name="limit" value="300" checked id="chbox"> <label for="chbox" style=""></label>300레벨 이상
       <input action="/test/1" type="submit" class="btn" value="찾기" ></button>
-      <button onclick=location.href="/test/wpadd" type="button" name="button" >등록하기</a></button>
-      <button onclick=location.href="/test/wpadd" type="button" name="button" >등록하기</a></button>
+
+      <span></span>
+
+      <button onclick=location.href="/test/wpadd" type="button" name="button" style="margin-left:50px">신규등록</a></button>
+
+      <input type=text list=browsers style="margin-left:50px">
+      <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
+
+      <datalist id="browsers"class="">
+        <% data.forEach(function(item) { %>
+
+        <option value='<%= item.wpid%>'><%- item.wpname%></option>
+        <% }); %>
+
+      </datalist>
+      <button onclick=location.href="/test/wpadd" type="button" name="button" >변경하기</a></button>
 
 
     </form>
-    <div class="">
-      <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
 
-        <input type=text list=browsers>
 
-        <datalist id="browsers"class="">
-          <% data.forEach(function(item) { %>
 
-          <option value='<%= item.wpid%>'><%- item.wpname%></option>
-          <% }); %>
-
-        </datalist>
-      </form>
-
-    </div>
     <table id="eqtable" style="width:1200px;">
       <colgroup>
         <col width="100">
