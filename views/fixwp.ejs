@@ -45,9 +45,8 @@
     }
     </style>
     <script type="text/javascript">
-    var str = document.getElementById("textarea_br_\n").value;
-    str = str.replaceAll(/("<br/>"|"<br />")/g, "\r\n");
-    document.getElementById("textarea_br_\n").value = str;
+    var str = document.getElementById("textarea_br_n").value;
+    str = str.replaceAll("<br/>", "\r\n");    document.getElementById("textarea_br_\n").value = str;
 
 
 
@@ -73,7 +72,7 @@
           <div class="">
             <label for="">등급</label>
             <div class="">
-              <textarea type="text" name="wpgrade" rows="6" cols="60" id="textarea_br_\n"><%- data.wpgrade %></textarea>
+              <textarea type="text" name="wpgrade" rows="6" cols="60" id="textarea_br_n"><%- data.wpgrade %></textarea>
             </div>
           </div>
           <div class="">
@@ -109,27 +108,27 @@
           <div class="">
             <label for="">속성 및 강화제한</label>
             <div class="">
-              <textarea  type="text" name="wpproperty" rows="6" cols="60" id="textarea_br_\n"><%- data.wpproperty %></textarea>
+              <textarea  type="text" name="wpproperty" rows="6" cols="60" id="textarea_br_n"><%- data.wpproperty %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">피트</label>
             <div class="">
-              <textarea  type="text" name="wpfeat" rows="6" cols="60" id="textarea_br_\n"><%- data.wpfeat %></textarea>
+              <textarea  type="text" name="wpfeat" rows="6" cols="60" id="textarea_br_n"><%- data.wpfeat %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">커스텀</label>
-              <textarea type="text" name="wpcustom" rows="6" cols="60" id="textarea_br_\n"><%- data.wpcustom %></textarea>
+              <textarea type="text" name="wpcustom" rows="6" cols="60" id="textarea_br_n"><%- data.wpcustom %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">업그레이드 재료</label>
             <div class="">
-              <textarea type="text" name="wpup" rows="6" cols="60" id="textarea_br_\n"><%- data.wpup %></textarea>
+              <textarea type="text" name="wpup" rows="6" cols="60" id="textarea_br_n"><%- data.wpup %></textarea>
 
             </div>
           </div>
