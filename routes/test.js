@@ -54,10 +54,11 @@ router.get('/fixwp', (req,res,next) => {
 });
 
 router.post('/fixwp', (req,res,next) => {
+replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
   var Select_name = req.query.Seachname
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade !== '') {
-      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpgrade = Wpgrade.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
     }
   var Wplimit = req.body.wplimit;
     if (Wplimit == '') {
@@ -67,23 +68,23 @@ router.post('/fixwp', (req,res,next) => {
   var Wpether = req.body.wpether;
   var Wpstats = req.body.wpstats;
     if (Wpstats !== '') {
-      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpstats = Wpstats.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
     }
   var Wpproperty = req.body.wpproperty;
     if (Wpproperty !== '') {
-      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpproperty = Wpproperty.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
     }
   var Wpfeat = req.body.wpfeat;
     if (Wpfeat !== '') {
-      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpfeat = Wpfeat.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
     }
   var Wpcustom = req.body.wpcustom;
     if (Wpcustom !== ''){
-      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpcustom = Wpcustom.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
     }
   var Wpup = req.body.wpup;
     if (Wpup !== '') {
-      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpup = Wpup.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
     }
   var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wplimit = $2, wpsocket = $3, wpether = $4, wpstats = $5, wpproperty = $6, wpfeat = $7, wpcustom = $8, wpup = $9  WHERE aquafeq.aquafwp.wpname = $10 "
   client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
@@ -101,6 +102,7 @@ router.post('/', (req, res, next) => {
     if (Wpgrade !== '') {
       Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
+
   var Wpname = req.body.wpname;
   var Wplimit = req.body.wplimit;
     if (Wplimit == '') {
