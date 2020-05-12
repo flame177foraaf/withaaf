@@ -12,8 +12,6 @@
 
 
     <script type="text/javascript">
-    var data2 = data;
-      $('select').select2(data2);
     </script>
   </head>
   <body style="">
@@ -135,8 +133,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
     <script>
       // select2 초기화
-      $('select').select2(data);
-    </script>
+
+      var data2 = data;
+        $('select').select2(data2);    </script>
   </body>
   <footer>
     <%- include ('footer')%>
