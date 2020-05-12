@@ -34,16 +34,46 @@ router.get('/wpadd', (req,res,next) => {
   });
 });
 router.get('/fixwp', (req,res,next) => {
+  /*
+  var Wpgrade = req.body.wpgrade;
+    if (Wpgrade !== '') {
+      Wpgrade = Wpgrade.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+    }
 
+  var Wpname = req.body.wpname;
+  var Wplimit = req.body.wplimit;
+    if (Wplimit == '') {
+        Wplimit = null
+    }
+  var Wpsocket = req.body.wpsocket;
+  var Wpether = req.body.wpether;
+  var Wpstats = req.body.wpstats;
+    if (Wpstats !== '') {
+      Wpstats = Wpstats.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+    }
+  var Wpproperty = req.body.wpproperty;
+    if (Wpproperty !== '') {
+      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpfeat = req.body.wpfeat;
+    if (Wpfeat !== '') {
+      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpcustom = req.body.wpcustom;
+    if (Wpcustom !== ''){
+      Wpcustom = Wpcustom.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+    }
+  var Wpup = req.body.wpup;
+    if (Wpup !== '') {
+      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+
+*/
   var Select_name = req.query.Seachname;
   console.log(Select_name)
   var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
   client.query(QueryString, [Select_name], (err, response) => {
-    console.log(response.rows)
-    console.log(response.rows[0].wpname)
-    console.log(response.rows[0].wpsocket)
 
-    console.log(response.rows[0])
     res.render ('fixwp', {
       title:'AAF 장비',
       data:response.rows[0]
@@ -58,7 +88,7 @@ replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
   var Select_name = req.query.Seachname
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade !== '') {
-      Wpgrade = Wpgrade.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Wplimit = req.body.wplimit;
     if (Wplimit == '') {
@@ -68,23 +98,23 @@ replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
   var Wpether = req.body.wpether;
   var Wpstats = req.body.wpstats;
     if (Wpstats !== '') {
-      Wpstats = Wpstats.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Wpproperty = req.body.wpproperty;
     if (Wpproperty !== '') {
-      Wpproperty = Wpproperty.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Wpfeat = req.body.wpfeat;
     if (Wpfeat !== '') {
-      Wpfeat = Wpfeat.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Wpcustom = req.body.wpcustom;
     if (Wpcustom !== ''){
-      Wpcustom = Wpcustom.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Wpup = req.body.wpup;
     if (Wpup !== '') {
-      Wpup = Wpup.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wplimit = $2, wpsocket = $3, wpether = $4, wpstats = $5, wpproperty = $6, wpfeat = $7, wpcustom = $8, wpup = $9  WHERE aquafeq.aquafwp.wpname = $10 "
   client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
