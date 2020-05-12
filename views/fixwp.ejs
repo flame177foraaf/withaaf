@@ -45,6 +45,8 @@
     }
     </style>
     <script type="text/javascript">
+      document.getElementById("textarea").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+
       function checkonclick() {
         if (document.bodyform.wpname.value == "" || document.bodyform.wpname.value == null || document.bodyform.wpname.value == undefined || ( document.bodyform.wpname.value != null && typeof document.bodyform.wpname.value == "object" && !Object.keys(document.bodyform.wpname.value).length ) ) {
           alert("장비 이름을 입력해주세요!");
