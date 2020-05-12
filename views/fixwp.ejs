@@ -48,23 +48,6 @@
     <script type="text/javascript">
 
 
-    var textarea1 = document.getElementById("wpgrade").value;
-    textarea1 = textarea1.replace(/<br>/g, "\r\n");
-    document.getElementById("wpgrade").value = textarea1;
-    var textarea2 = document.getElementById("wpproperty").value;
-    textarea2 = textarea2.replace(/<br>/g, "\r\n");
-    document.getElementById("wpproperty").value = textarea2;
-    var textarea3 = document.getElementById("wpfeat").value;
-    textarea3 = textarea3.replace(/<br>/g, "\r\n");
-    document.getElementById("wpfeat").value = textarea3;
-    var textarea4 = document.getElementById("wpcustom").value;
-    textarea4 = textarea4.replace(/<br>/g, "\r\n");
-    document.getElementById("wpcustom").value = textarea4;
-    var textarea5 = document.getElementById("wpup").value;
-    textarea5 = textarea5.replace(/<br>/g, "\r\n");
-    document.getElementById("wpup").value = textarea5;
-
-
 
 
       function checkonclick() {
@@ -141,7 +124,7 @@
           <div class="">
             <label for="">업그레이드 재료</label>
             <div class="">
-              <textarea type="text" name="wpup" rows="6" cols="60" id="wpup"><%- data.wpup%></textarea>
+              <textarea type="text" name="wpup" rows="6" cols="60" id="wpup"><%- data.wpup <br> <br> aaa%></textarea>
 
             </div>
           </div>
@@ -164,5 +147,21 @@
   </footer>
   <script type="text/javascript">
 
+
+    var textarea1 = document.getElementById("wpgrade").value;
+    textarea1 = textarea1.replace(/<br>/g, "\r\n");
+    document.getElementById("wpgrade").value = textarea1;
+    var textarea2 = document.getElementById("wpproperty").value;
+    textarea2 = textarea2.replace(/<br>/g, "\r\n");
+    document.getElementById("wpproperty").value = textarea2;
+    var textarea3 = document.getElementById("wpfeat").value;
+    textarea3 = textarea3.replace(/<br>/g, "\r\n");
+    document.getElementById("wpfeat").value = textarea3;
+    var textarea4 = document.getElementById("wpcustom").value;
+    textarea4 = textarea4.replace(/<br>/g, "\r\n");
+    document.getElementById("wpcustom").value = textarea4;
+    var textarea5 = document.getElementById("wpup").value;
+    textarea5 = textarea5.replace(/<br>/g, "\r\n");
+    document.getElementById("wpup").value = textarea5;
   </script>
 </html>
