@@ -47,7 +47,6 @@
     <script type="text/javascript">
     var str = document.getElementById("textarea_br_\n").value;
     str = str.replaceAll(/("<br/>"|"<br />")/g, "\r\n");
-    str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
     document.getElementById("textarea_br_\n").value = str;
 
 
