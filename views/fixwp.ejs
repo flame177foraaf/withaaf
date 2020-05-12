@@ -45,7 +45,6 @@
     }
     </style>
     <script type="text/javascript">
-    var  data = data.replaceAll("<br>", \n);
       function checkonclick() {
         if (document.bodyform.wpname.value == "" || document.bodyform.wpname.value == null || document.bodyform.wpname.value == undefined || ( document.bodyform.wpname.value != null && typeof document.bodyform.wpname.value == "object" && !Object.keys(document.bodyform.wpname.value).length ) ) {
           alert("장비 이름을 입력해주세요!");
@@ -101,14 +100,14 @@
           <div class="">
             <label for="">속성 및 강화제한</label>
             <div class="">
-              <textarea type="text" name="wpproperty" rows="6" cols="60" id="wpproperty"><%- data.wpproperty %></textarea>
+              <textareastyle="white-space:pre;"  type="text" name="wpproperty" rows="6" cols="60" id="wpproperty"><%- data.wpproperty %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">피트</label>
             <div class="">
-              <textarea type="text" name="wpfeat" rows="6" cols="60" id="wpfeat"><%- data.wpfeat %></textarea>
+              <textarea style="white-space:pre;" type="text" name="wpfeat" rows="6" cols="60" id="wpfeat"><%- data.wpfeat %></textarea>
 
             </div>
           </div>
