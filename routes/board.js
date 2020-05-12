@@ -24,7 +24,7 @@ router.get('/', (req,res, next) => {
     });
   });
 });
-
+/*
 router.get('/board/:page', (req,res, next) => {
   var page = req.params.page
   var totalcount ="SELECT count(*) from aquafeq.freeboard;"
@@ -39,7 +39,7 @@ router.get('/board/:page', (req,res, next) => {
     });
   });
 });
-
+*/
 router.get('/write', (req, res, next) => {
   res.render('boardwrite' ,{
     title: '글 작성하기'

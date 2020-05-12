@@ -34,14 +34,17 @@ router.get('/wpadd', (req,res,next) => {
   });
 });
 router.get('/fixwp', (req,res,next) => {
-  var Seachname = req.query.Seachname
-  var QueryString = "select * from aquafeq.aquafwp where wpname = Seachname"
-  res.render ('fixwp', {
+  var Select_name = req.query.Seachname
+  var QueryString = "select * from aquafeq.aquafwp where wpname = Select_name"
+  client.query(QueryString, (err, response) => {
+    res.render ('fixwp', {
 
-    title:'AAF 장비',
-    data:response.rows
+      title:'AAF 장비',
+      data:response.rows
 
-  });
+    });
+  })
+
 });
 
 router.post('/fixwp', (req,res,next) => {
