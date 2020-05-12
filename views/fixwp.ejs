@@ -100,14 +100,14 @@
           <div class="">
             <label for="">속성 및 강화제한</label>
             <div class="">
-              <textarea style="white-space:pre;"  type="text" name="wpproperty" rows="6" cols="60" id="wpproperty"><%- data.wpproperty %></textarea>
+              <textarea  type="text" name="wpproperty" rows="6" cols="60" id="wpproperty"><%- data.wpproperty %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">피트</label>
             <div class="">
-              <textarea style="white-space:pre;" type="text" name="wpfeat" rows="6" cols="60" id="wpfeat"><%- data.wpfeat %></textarea>
+              <textarea  type="text" name="wpfeat" rows="6" cols="60" id="wpfeat"><%- data.wpfeat %></textarea>
 
             </div>
           </div>
@@ -121,7 +121,7 @@
           <div class="">
             <label for="">업그레이드 재료</label>
             <div class="">
-              <textarea type="text" name="wpup" rows="6" cols="60" id="wpup"><%- data.wpup %></textarea>
+              <textarea type="text" name="wpup" rows="6" cols="60" id="wpup"><%- data.wpup <br> %></textarea>
 
             </div>
           </div>
@@ -142,4 +142,7 @@
   <footer>
     <%- include ('footer') %>
   </footer>
+  <script type="text/javascript">
+    document.getElementById('wpup').value.replace(<br>, \n)
+  </script>
 </html>

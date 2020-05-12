@@ -84,9 +84,8 @@ router.post('/fixwp', (req,res,next) => {
   var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wplimit = $2, wpsocket = $3, wpether = $4, wpstats = $5, wpproperty = $6, wpfeat = $7, wpcustom = $8, wpup = $9  WHERE aquafeq.aquafwp.wpname = $10 "
   client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
 
-    res.render ('fixwp', {
-      title:response.rows.wpname + '변경하기',
-      data:response.rows
+    res.render ('test', {
+      title:+ '변경하기',
 
     });
   });
