@@ -39,13 +39,13 @@ router.get('/fixwp', (req,res,next) => {
   var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
   client.query(QueryString, [Select_name], (err, response) => {
     console.log(response.rows)
-    console.log(response.rows.wpname)
-    console.log(response.rows.wpsocket)
+    console.log(response.rows[0].wpname)
+    console.log(response.rows[0].wpsocket)
 
     console.log(response.rows[0])
     res.render ('fixwp', {
       title:'AAF 장비',
-      data:response.rows
+      data:response.rows[0]
 
     });
   })
