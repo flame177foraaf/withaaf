@@ -36,14 +36,28 @@
     </style>
     <script type="text/javascript">
       function checkonclick() {
+        if (document.bodyform.title.value == "" || document.bodyform.title.value == null || document.bodyform.title.value == undefined || ( document.bodyform.title.value != null && typeof document.bodyform.title.value == "object" && !Object.keys(document.bodyform.title.value).length ) ) {
+          alert("내용을 입력해주세요!");
+          document.bodyform.title.focus();
+          return false;
+        }
+        return true;
+      }
+      function checkonclick() {
         if (document.bodyform.boardbody.value == "" || document.bodyform.boardbody.value == null || document.bodyform.boardbody.value == undefined || ( document.bodyform.boardbody.value != null && typeof document.bodyform.boardbody.value == "object" && !Object.keys(document.bodyform.boardbody.value).length ) ) {
           alert("내용을 입력해주세요!");
           document.bodyform.boardbody.focus();
           return false;
         }
         return true;
-
-
+      }
+      function checkonclick() {
+        if (document.bodyform.writer.value == "" || document.bodyform.writer.value == null || document.bodyform.writer.value == undefined || ( document.bodyform.writer.value != null && typeof document.bodyform.writer.value == "object" && !Object.keys(document.bodyform.writer.value).length ) ) {
+          alert("내용을 입력해주세요!");
+          document.bodyform.writer.focus();
+          return false;
+        }
+        return true;
       }
     </script>
   </head>
