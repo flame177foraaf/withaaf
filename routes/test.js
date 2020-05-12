@@ -12,13 +12,12 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  var QueryString = "select wpid, wpname from aquafeq.aquafwp ;"
-  client.query("select wpid, wpname from aquafeq.aquafwp ;", (err, response) => {
+  var QueryString = "select * from aquafeq.aquafwp ;"
+  client.query(QueryString, (err, response) => {
     if (err) {
       console.log('변경하기 목록 오류!')
       res.redirect('/test');
     } else {
-      console.log(response.row);
       res.render('test', {
         title:'AAF 장비',
         data:response.row
