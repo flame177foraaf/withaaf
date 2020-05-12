@@ -7,6 +7,9 @@
 
     <style media="screen">
     </style>
+    <script type="text/javascript">
+
+    </script>
 
   </head>
   <body style="">
@@ -34,7 +37,7 @@
         <datalist id="browsers"class="">
           <% data.forEach(function(item) { %>
 
-          <option value='<%- item.wpname%>'><%- item.wpname%></option>
+          <option value='<%= item.wpname%>'><%- item.wpname%></option>
           <% }); %>
 
         </datalist>
@@ -122,7 +125,6 @@
       </div>
       </tbody>
     </table>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   </body>
   <footer>
     <%- include ('footer')%>
