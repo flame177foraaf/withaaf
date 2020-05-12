@@ -9,10 +9,9 @@
     </style>
     <script type="text/javascript">
     var str = document.getElementById("textarea").value;
-    str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    document.getElementById("result").value = str;
+    str = str.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+    
     </script>
-
   </head>
   <body style="">
     <h1><%= title %></h1>
