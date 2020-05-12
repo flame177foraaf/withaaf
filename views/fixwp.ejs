@@ -113,7 +113,6 @@
           </div>
           <div class="">
             <label for="">커스텀</label>
-            <div class="" style="white-space:pre;">
               <textarea type="text" name="wpcustom" rows="6" cols="60" id="wpcustom"><%- data.wpcustom %></textarea>
 
             </div>
@@ -121,7 +120,7 @@
           <div class="">
             <label for="">업그레이드 재료</label>
             <div class="">
-              <textarea type="text" name="wpup" rows="6" cols="60" id="wpup"><%- data.wpup <br> %></textarea>
+              <textarea type="text" name="wpup" rows="6" cols="60" id="wpup"><%- data.wpup %></textarea>
 
             </div>
           </div>
@@ -143,6 +142,5 @@
     <%- include ('footer') %>
   </footer>
   <script type="text/javascript">
-    document.getElementById('wpup').value.replace(<br>, \n)
   </script>
 </html>
