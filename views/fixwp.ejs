@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html><meta charset="utf-8">
+
   <head>
     <%- include ('head') %>
     <title><%= title %></title>
@@ -46,15 +47,9 @@
     </style>
     <script type="text/javascript">
 
-        var str1 = document.getElementById("textarea").value;
-        var str1 = str.replaceAll("<br/>", "\r\n");
-        var str1 = str.replaceAll("<br />", "\r\n");
-    document.getElementById("textarea_br_n").value = str1;
-
-
-
-
-
+    var str = document.getElementById("textarea").value;
+    str = str.replace(/<br>/g, "\r\n");
+    document.getElementById("textarea").value = str;
 
       function checkonclick() {
         if (document.bodyform.wpname.value == "" || document.bodyform.wpname.value == null || document.bodyform.wpname.value == undefined || ( document.bodyform.wpname.value != null && typeof document.bodyform.wpname.value == "object" && !Object.keys(document.bodyform.wpname.value).length ) ) {
@@ -69,13 +64,13 @@
 
   <body style="margin-top: 5px; margin-right: 10%; margin-left:10%; ">
     <h1><%= title  %></h1>
-    <div class="content" id="content">
+    <div class="content" name= "content"id="content">
       <form class="" name="bodyform" action="/test/fixwp" method="post" onsubmit="return checkonclick()">
         <div class="">
           <div class="">
             <label for="">등급</label>
             <div class="">
-              <textarea type="text" name="wpgrade" rows="6" cols="60" id="textarea_br_n"><%- data.wpgrade %></textarea>
+              <textarea type="text" name="wpgrade" rows="6" cols="60" id="textarea"><%- data.wpgrade %></textarea>
             </div>
           </div>
           <div class="">
@@ -111,14 +106,14 @@
           <div class="">
             <label for="">속성 및 강화제한</label>
             <div class="">
-              <textarea  type="text" name="wpproperty" rows="6" cols="60" id="textarea_br_n"><%- data.wpproperty %></textarea>
+              <textarea  type="text" name="wpproperty" rows="6" cols="60" id="textarea"><%- data.wpproperty %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">피트</label>
             <div class="">
-              <textarea  type="text" name="wpfeat" rows="6" cols="60" id="textarea_br_n"><%- data.wpfeat %></textarea>
+              <textarea  type="text" name="wpfeat" rows="6" cols="60" id="textarea"><%- data.wpfeat %></textarea>
               <table>
                 <tr>
                   <td><%- data.wpfeat %></td>
@@ -128,14 +123,14 @@
           </div>
           <div class="">
             <label for="">커스텀</label>
-              <textarea type="text" name="wpcustom" rows="6" cols="60" id="textarea_br_n"><%- data.wpcustom %></textarea>
+              <textarea type="text" name="wpcustom" rows="6" cols="60" id="textarea"><%- data.wpcustom %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">업그레이드 재료</label>
             <div class="">
-              <textarea type="text" name="wpup" rows="6" cols="60" id="textarea_br_n"><%- data.wpup %></textarea>
+              <textarea type="text" name="wpup" rows="6" cols="60" id="textarea">aaaaaaaaaaaaaa       <%- data.wpup asdfasdf <br><br><br><br><br> %></textarea>
 
             </div>
           </div>
@@ -158,11 +153,5 @@
   </footer>
   <script type="text/javascript">
 
-    var str = document.getElementById("textarea_br_n").value;
-    var str = str.replaceAll("<br/>", "\r\n");
-    var str = str.replaceAll("<br />", "\r\n");
-
-
-    document.getElementById("textarea_br_n").value = str;
   </script>
 </html>
