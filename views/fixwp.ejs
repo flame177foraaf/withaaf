@@ -25,6 +25,16 @@
 			font-size: 16px;
 			resize: both;
 		}
+    textarea.#wpgrade {
+			width: 100%;
+			height: 100px;
+			padding: 10px;
+			box-sizing: border-box;
+			border: solid 2px;
+			border-radius: 5px;
+			font-size: 16px;
+			resize: both;
+		}
     input[type=button], input[type=submit], input[type=reset] {
       border: none;
       color: black;
@@ -47,16 +57,29 @@
       }
     </script>
   </head>
+
   <body style="margin-top: 5px; margin-right: 10%; margin-left:10%; ">
     <h1><%= title  %></h1>
 
-    <div class="">
+    <input type=text list=browsers style="margin-left:50px" name="seach">
+    <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
+
+    <datalist id="browsers" class="" style="width:50%">
+      <% data.forEach(function(item) { %>
+
+      <option value='<%= item.wpname%>' style="width:50%"><%- item.wpname%></option>
+      <% }); %>
+
+    </datalist>
+    <input action="/test/wpadd" type="submit" class="btn" value="변경하기" ></button>
+
+    <div class="content" id="content">
       <form class="" name="bodyform" action="/test" method="post" onsubmit="return checkonclick()">
         <div class="">
           <div class="">
             <label for="">등급</label>
             <div class="">
-              <input type="text" name="wpgrade"  size='40' maxlength='50' value="<" id="title">
+              <textarea type="text" name="wpgrade" rows="6" cols="60" id=""></textarea>
             </div>
           </div>
           <div class="">

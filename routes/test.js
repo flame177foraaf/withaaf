@@ -33,6 +33,11 @@ router.get('/wpadd', (req,res,next) => {
     title:'AAF 장비'
   });
 });
+router.get('/fixwp', (req,res,next) => {
+  res.render ('fixwp', {
+    title:'AAF 장비'
+  });
+});
 
 router.post('/fixwp', (req,res,next) => {
   var Select_id = req.body.form_id
