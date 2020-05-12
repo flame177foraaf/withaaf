@@ -84,7 +84,6 @@ router.get('/fixwp', (req,res,next) => {
 });
 
 router.post('/fixwp', (req,res,next) => {
-replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
   var Select_name = req.query.Seachname
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade !== '') {
