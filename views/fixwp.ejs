@@ -45,6 +45,7 @@
     }
     </style>
     <script type="text/javascript">
+    var  data = data.replaceAll("<br>", \n);
       function checkonclick() {
         if (document.bodyform.wpname.value == "" || document.bodyform.wpname.value == null || document.bodyform.wpname.value == undefined || ( document.bodyform.wpname.value != null && typeof document.bodyform.wpname.value == "object" && !Object.keys(document.bodyform.wpname.value).length ) ) {
           alert("장비 이름을 입력해주세요!");
@@ -52,8 +53,6 @@
           return false;
         }
         return true;
-
-
       }
     </script>
   </head>

@@ -35,39 +35,6 @@ router.get('/wpadd', (req,res,next) => {
 });
 router.get('/fixwp', (req,res,next) => {
 
-  var Wpgrade = req.body.wpgrade;
-    if (Wpgrade !== '') {
-      Wpgrade = Wpgrade.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-    }
-
-  var Wpname = req.body.wpname;
-  var Wplimit = req.body.wplimit;
-    if (Wplimit == '') {
-        Wplimit = null
-    }
-  var Wpsocket = req.body.wpsocket;
-  var Wpether = req.body.wpether;
-  var Wpstats = req.body.wpstats;
-    if (Wpstats !== '') {
-      Wpstats = Wpstats.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-    }
-  var Wpproperty = req.body.wpproperty;
-    if (Wpproperty !== '') {
-      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-  var Wpfeat = req.body.wpfeat;
-    if (Wpfeat !== '') {
-      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-  var Wpcustom = req.body.wpcustom;
-    if (Wpcustom !== ''){
-      Wpcustom = Wpcustom.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-    }
-  var Wpup = req.body.wpup;
-    if (Wpup !== '') {
-      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-
   var Select_name = req.query.Seachname;
   console.log(Select_name)
   var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
