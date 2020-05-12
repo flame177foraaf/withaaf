@@ -45,7 +45,11 @@
     }
     </style>
     <script type="text/javascript">
-      document.getElementById("textarea").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      document.getElementByid("wpgrade").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      document.getElementByid("wpproperty").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      document.getElementByid("wpfeat").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      document.getElementByid("wpcustom").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+      document.getElementByid("wpuo").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 
       function checkonclick() {
         if (document.bodyform.wpname.value == "" || document.bodyform.wpname.value == null || document.bodyform.wpname.value == undefined || ( document.bodyform.wpname.value != null && typeof document.bodyform.wpname.value == "object" && !Object.keys(document.bodyform.wpname.value).length ) ) {
@@ -74,58 +78,58 @@
           <div class="">
             <label for="">이름</label>
             <div class="">
-              <input type="text" name="wpname"  size='40' maxlength='50' value="<%= data.wpname %>" id="title">
+              <input type="text" name="wpname"  size='40' maxlength='50' value="<%= data.wpname %>" id="">
             </div>
           </div>
           <div class="">
             <label for="">제한</label>
             <div class="">
-              <input type="text" name="wplimit"  size='40' maxlength='50' value="<%= data.wplimit %>" id="title">
+              <input type="text" name="wplimit"  size='40' maxlength='50' value="<%= data.wplimit %>" id="">
             </div>
           </div>
           <div class="">
             <label for="">소켓</label>
             <div class="">
-              <input type="text" name="wpsocket"  size='40' maxlength='50' value="<%= data.wpsocket %>" id="title">
+              <input type="text" name="wpsocket"  size='40' maxlength='50' value="<%= data.wpsocket %>" id="">
             </div>
           </div>
           <div class="">
             <label for="">에테르</label>
             <div class="">
-              <input type="text" name="wpether"  size='40' maxlength='50' value="<%= data.wpether %>" id="title">
+              <input type="text" name="wpether"  size='40' maxlength='50' value="<%= data.wpether %>" id="">
             </div>
           </div>
           <div class="">
             <label for="">성능</label>
             <div class="">
-              <input type="text" name="wpstats"  size='40' maxlength='50' value="<%= data.wpstats %>" id="title">
+              <input type="text" name="wpstats"  size='40' maxlength='50' value="<%= data.wpstats %>" id="">
             </div>
           </div>
           <div class="">
             <label for="">속성 및 강화제한</label>
             <div class="">
-              <textarea type="text" name="wpproperty" rows="6" cols="60" id=""><%- data.wpproperty %></textarea>
+              <textarea type="text" name="wpproperty" rows="6" cols="60" id="wpproperty"><%- data.wpproperty %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">피트</label>
             <div class="">
-              <textarea type="text" name="wpfeat" rows="6" cols="60" id=""><%- data.wpfeat %></textarea>
+              <textarea type="text" name="wpfeat" rows="6" cols="60" id="wpfeat"><%- data.wpfeat %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">커스텀</label>
             <div class="">
-              <textarea type="text" name="wpcustom" rows="6" cols="60" id=""><%- data.wpcustom %></textarea>
+              <textarea type="text" name="wpcustom" rows="6" cols="60" id="wpcustom"><%- data.wpcustom %></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">업그레이드 재료</label>
             <div class="">
-              <textarea type="text" name="wpup" rows="6" cols="60" id=""><%- data.wpup %></textarea>
+              <textarea type="text" name="wpup" rows="6" cols="60" id="wpup"><%- data.wpup %></textarea>
 
             </div>
           </div>
