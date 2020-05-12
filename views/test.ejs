@@ -37,8 +37,10 @@
       <form name="form_id" class="" action="/test/fixwp" method="post">
 
           <select class="form-control" name="">
+            <% data.forEach(function(item) { %>
 
-            <option value='<%- data.forEach.wpid %>'><%- data.forEach.wpname%></option>
+            <option value='<%- data.forEach.wpid %>'><%- item.wpname%></option>
+            <% }); %>
 
           </select>
 
