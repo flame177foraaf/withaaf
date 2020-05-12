@@ -39,6 +39,8 @@ router.get('/fixwp', (req,res,next) => {
   var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
   client.query(QueryString, [Select_name], (err, response) => {
     console.log(response.rows)
+    console.log(response.rows.wpname)
+    console.log(response.rows.wpsocket)
 
     console.log(response.rows[0])
     res.render ('fixwp', {
@@ -82,8 +84,8 @@ router.post('/fixwp', (req,res,next) => {
     if (Wpup !== '') {
       Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
-  var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wplimit = $2, wpsocket = $3, wpether = $4, wpstats = $5, wpproperty = $6, wpfeat = $7, wpcustom = $8, wpup = $9  WHERE aquafeq.aquafwp.wpname = Select_name "
-  client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup], (err, response) => {
+  var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wplimit = $2, wpsocket = $3, wpether = $4, wpstats = $5, wpproperty = $6, wpfeat = $7, wpcustom = $8, wpup = $9  WHERE aquafeq.aquafwp.wpname = $10 "
+  client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
 
     res.render ('fixwp', {
       title:response.rows.wpname + '변경하기',
