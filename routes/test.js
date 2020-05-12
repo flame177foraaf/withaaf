@@ -12,7 +12,7 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  QueryString = "select wpid, wpname from aquafeq.aquafwp ;"
+  var QueryString = "select wpid, wpname from aquafeq.aquafwp ;"
   client.query(QueryString, (err, response) => {
     if (err) {
       console.log('변경하기 목록 오류!')
