@@ -4,17 +4,10 @@
     <%- include ('head') %>
     <title><%= title%></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 
     <style media="screen">
     </style>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" />
 
-
-    <script type="text/javascript">
-
-      $('select').select2({wpid:wpname});
-    </script>
   </head>
   <body style="">
     <h1><%= title %></h1>
@@ -130,11 +123,6 @@
       </tbody>
     </table>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <!-- select2 javascript cdn -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
-    <script>
-        $('select').select2(data);
-      </script>
   </body>
   <footer>
     <%- include ('footer')%>
