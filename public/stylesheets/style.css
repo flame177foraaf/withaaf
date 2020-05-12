@@ -11,7 +11,7 @@
 
   a:hover { color: red; text-decoration: underline; }
 
-  a:active { color: white; background-color: green; }
+  a:active { color: white; background-color: silver; }
 
   #btnactive {
     padding-top: 2px;
