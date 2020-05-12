@@ -1,4 +1,4 @@
-aafwpvar express = require('express');
+var express = require('express');
 var router = express.Router();
 var app = express();
 
@@ -128,7 +128,7 @@ router.post('/', (req, res, next) => {
       console.log('인서트 오류!')
       res.redirect('/aafwp');
     } else {
-      res.render('test', {
+      res.render('aafwp', {
         title:'AAF 장비'
       });
     };
