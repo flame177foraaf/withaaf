@@ -25,7 +25,7 @@ router.get('/:id', (req,res,next) => {
     var CurrentPage = req.params.id;
     var SearchLimit = req.query.limit;
     if (SearchLimit === undefined) {
-      SearchLimit = 1;
+      SearchLimit = 0;
     };
     console.log(SearchLimit)
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armname LIKE $1 and cast(armlimit as INTEGER) >= $2 or armlimit is null  ORDER BY armlimit,armid asc limit 10 offset (($3- 1)*10);"
@@ -79,7 +79,7 @@ router.get('/:id', (req,res,next) => {
     var CurrentPage = req.params.id
     var SearchLimit = req.query.limit;
     if (SearchLimit === undefined) {
-      SearchLimit = 1;
+      SearchLimit = 0;
     };
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armfeat LIKE $1 and cast(armlimit as INTEGER) >= $2 or armlimit is null  ORDER BY armlimit asc limit 10 offset (($3- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
@@ -121,7 +121,7 @@ router.get('/:id', (req,res,next) => {
     var CurrentPage = req.params.id
     var SearchLimit = req.query.limit;
     if (SearchLimit === undefined) {
-      SearchLimit = 1;
+      SearchLimit = 0;
     };
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armcustom LIKE $1 and cast(armlimit as INTEGER) >= $2 or armlimit is null  ORDER BY armlimit asc limit 10 offset (($3- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
