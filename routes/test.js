@@ -22,7 +22,7 @@ router.get('/', (req,res,next) => {
     } else {
       res.render('test', {
         title:'AAF 장비',
-        data:response.row
+        data:response.rows
       });
     };
   });
