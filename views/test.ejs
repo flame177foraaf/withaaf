@@ -32,15 +32,14 @@
       <input type=text list=browsers style="margin-left:50px">
       <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
 
-      <datalist id="browsers"class="">
+      <datalist id="browsers" class="">
         <% data.forEach(function(item) { %>
 
-        <option value='<%= item.wpid%>'><%- item.wpname%></option>
+        <option value='<%= item.wpname%>'><%- item.wpname%></option>
         <% }); %>
 
       </datalist>
-      <button onclick=location.href="/test/wpadd" type="button" name="button" >변경하기</a></button>
-
+      <input action="/test/wpadd" type="submit" class="btn" value="변경하기" ></button>
 
     </form>
 
