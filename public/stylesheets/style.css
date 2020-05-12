@@ -113,9 +113,10 @@
   }
 
 body {
-    padding-left: 5%;
-    padding-rigth: 5%;
-    
+  margin-top: 25px;
+  padding-left: 5%;
+  padding-right: 5%;
+
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 body . h1{
