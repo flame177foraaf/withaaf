@@ -45,12 +45,6 @@
     }
     </style>
     <script type="text/javascript">
-      document.getElementByid("wpgrade").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-      document.getElementByid("wpproperty").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-      document.getElementByid("wpfeat").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-      document.getElementByid("wpcustom").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-      document.getElementByid("wpuo").value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-
       function checkonclick() {
         if (document.bodyform.wpname.value == "" || document.bodyform.wpname.value == null || document.bodyform.wpname.value == undefined || ( document.bodyform.wpname.value != null && typeof document.bodyform.wpname.value == "object" && !Object.keys(document.bodyform.wpname.value).length ) ) {
           alert("장비 이름을 입력해주세요!");
@@ -129,7 +123,7 @@
           <div class="">
             <label for="">업그레이드 재료</label>
             <div class="">
-              <textarea type="text" name="wpup" rows="6" cols="60" id="wpup"><%- data.wpup %></textarea>
+              <textarea type="text" name="wpup" rows="6" cols="60" id="wpup"><%- data.wpup.replace(/\n/g, '<br/>') %></textarea>
 
             </div>
           </div>

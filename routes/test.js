@@ -34,7 +34,7 @@ router.get('/wpadd', (req,res,next) => {
   });
 });
 router.get('/fixwp', (req,res,next) => {
-  /*
+
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade !== '') {
       Wpgrade = Wpgrade.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
@@ -68,7 +68,6 @@ router.get('/fixwp', (req,res,next) => {
       Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
 
-*/
   var Select_name = req.query.Seachname;
   console.log(Select_name)
   var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
