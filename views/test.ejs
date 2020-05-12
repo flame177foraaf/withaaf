@@ -12,7 +12,8 @@
 
 
     <script type="text/javascript">
-      $('select').select2(data);
+
+      $('select').select2({wpid:wpname});
     </script>
   </head>
   <body style="">
@@ -34,19 +35,16 @@
     </form>
     <div class="">
       <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
-      <form name="form_id" class="" action="/test/fixwp" method="post">
 
-          <select class="form-control" name="">
-            <% data.forEach(function(item) { %>
+        <input type=text list=browsers>
 
-            <option value='<%- data.forEach.wpid %>'><%- item.wpname%></option>
-            <% }); %>
+        <datalist id="browsers"class="">
+          <% data.forEach(function(item) { %>
 
-          </select>
+          <option value='<%= item.wpname%>'><%- item.wpname%></option>
+          <% }); %>
 
-        <input action="/test/fixwp" type="submit" class="btn" value="변경하기" ></button>
-
-
+        </datalist>
       </form>
 
     </div>
