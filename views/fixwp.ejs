@@ -50,19 +50,11 @@
 
 
 
-      function checkonclick() {
-        if (document.bodyform.wpname.value == "" || document.bodyform.wpname.value == null || document.bodyform.wpname.value == undefined || ( document.bodyform.wpname.value != null && typeof document.bodyform.wpname.value == "object" && !Object.keys(document.bodyform.wpname.value).length ) ) {
-          alert("장비 이름을 입력해주세요!");
-          document.bodyform.wpname.focus();
-          return false;
-        }
-        return true;
-      }
     </script>
   </head>
 
   <body style="margin-top: 5px; margin-right: 10%; margin-left:10%; ">
-    <h1><%= title  %></h1>
+    <h1><%- data.wpname  %> 정보 </h1>
     <div class="content" name= "content"id="content">
       <form class="" name="bodyform" action="/test/fixwp" method="post" onsubmit="return checkonclick()">
         <div class="">
@@ -70,12 +62,6 @@
             <label for="">등급</label>
             <div class="">
               <textarea type="text" name="wpgrade" rows="6" cols="60" id="wpgrade"><%- data.wpgrade %></textarea>
-            </div>
-          </div>
-          <div class="">
-            <label for="">이름</label>
-            <div class="">
-              <input type="text" name="wpname"  size='40' maxlength='50' value="<%= data.wpname %>" id="">
             </div>
           </div>
           <div class="">
