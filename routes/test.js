@@ -12,8 +12,10 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  var QueryString = "select * from aquafeq.aquafwp ;"
+  var QueryString = "select wpid, wpname from aquafeq.aquafwp;"
   client.query(QueryString, (err, response) => {
+    console.log(response.rows[0])
+
     if (err) {
       console.log('변경하기 목록 오류!')
       res.redirect('/test');
