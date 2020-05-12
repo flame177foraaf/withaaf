@@ -118,7 +118,7 @@
         <button onclick=location.href="/test/wpadd" type="button" name="button" style="">신규등록</a></button>
 
 
-        <input type=text list=browsers style="margin-left:50px" checked value="<%= data.wpname[0] %>" name="Seachname">
+        <input type=text list=browsers style="margin-left:50px" checked value="<%= data[0].wpname %>" name="Seachname">
         <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
 
         <datalist id="browsers" class="" style="width:50%">
