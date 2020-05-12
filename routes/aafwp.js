@@ -58,7 +58,7 @@ router.get('/:id', (req,res,next) => {
         EndPage = TotalPage;
       };
       console.log('엔드페이지'+ EndPage);
-
+      console.log(response.rows[0])
       res.render('aafwp', {
         title: 'AAF 장비',
         data: response.rows,
