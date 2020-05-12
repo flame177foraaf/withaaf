@@ -12,8 +12,7 @@
 
 
     <script type="text/javascript">
-      var data2 = data;
-      $('select').select2(data2);
+      $('select').select2(data);
     </script>
   </head>
   <body style="">
@@ -39,7 +38,7 @@
 
           <select class="form-control" name="">
 
-            <option value=<%= data2.forEach.wpid %>><%- data2.forEach.wpname%></option>
+            <option value='<%- data2.forEach.wpid %>'><%- data2.forEach.wpname%></option>
 
           </select>
 
@@ -134,10 +133,8 @@
     <!-- select2 javascript cdn -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
     <script>
-      // select2 초기화
-
-      var data2 = data;
-        $('select').select2(data2);    </script>
+        $('select').select2(data);
+      </script>
   </body>
   <footer>
     <%- include ('footer')%>
