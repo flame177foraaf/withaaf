@@ -36,7 +36,7 @@ router.get('/wpadd', (req,res,next) => {
 router.get('/fixwp', (req,res,next) => {
   var Select_name = req.query.Seachname
   console.log(Select_name)
-  var QueryString = "select * from aquafeq.aquafwp where wpname = Select_name"
+  var QueryString = "select * from aquafeq.aquafwp where wpname = 'Select_name'"
   client.query(QueryString, (err, response) => {
     console.log(response.rows)
 
