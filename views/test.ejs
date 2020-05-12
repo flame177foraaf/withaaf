@@ -34,18 +34,7 @@
     </form>
     <div class="">
       <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
-      <form name="form_id" class="" action="/test/fixwp" method="post">
-        <select class="form-control" name="wpid">
-          <% data.forEach(function(item) { %>
-
-          <option value="<%= item.wpid %>"><%- item.wpname%></option>
-          <% }); %>
-
-        </select>
-        <input action="/test/fixwp" type="submit" class="btn" value="변경하기" ></button>
-
-
-      </form>
+      
 
     </div>
     <table id="eqtable" style="width:1200px;">
