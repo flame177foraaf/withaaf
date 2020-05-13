@@ -35,7 +35,9 @@ router.get('/', (req,res,next) => {
 router.post('/', (req,res,next) => {
   var Select_name = req.query.Seachname;
   var Wpgrade = req.body.wpgrade;
-    if (Wpgrade !== '') {
+    if (Wpgrade == '') {
+      Wpgrade = null
+    } else if (Wpgrade !== '') {
       Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Wplimit = req.body.wplimit;
@@ -43,33 +45,46 @@ router.post('/', (req,res,next) => {
       Wplimit = null
     }
   var Wpsocket = req.body.wpsocket;
+    if (Wpsocket == '') {
+      Wpsocket = null
+    }
   var Wpether = req.body.wpether;
+    if (Wpether == '') {
+      Wpether = null
+    }
   var Wpstats = req.body.wpstats;
-    if (Wpstats !== '') {
+    if (Wpstats == '') {
+      Wpstats = null
+    } else if (Wpstats !== '') {
       Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
+
   var Wpproperty = req.body.wpproperty;
-    if (Wpproperty !== '') {
+    if (Wpproperty == '') {
+      Wpproperty = null
+    } else if (Wpproperty !== '') {
       Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Wpfeat = req.body.wpfeat;
-    if (Wpfeat !== '') {
+    if (Wpfeat == '') {
+      Wpfeat = null
+    } else if (Wpfeat !== '') {
       Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Wpcustom = req.body.wpcustom;
-    if (Wpcustom !== ''){
+    if (Wpcustom == '') {
+      Wpcustom = null
+    } else if (Wpcustom !== ''){
       Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Wpup = req.body.wpup;
-    if (Wpup !== '') {
+    if (Wpup == '') {
+      Wpup = null
+    } else if (Wpup !== '') {
       Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
-  //var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpname = $10"
-  var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1 WHERE wpname = $2 RETURNING *"
-
-  //var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wplimit = $2, wpsocket = $3, wpether = $4, wpstats = $5, wpproperty = $6, wpfeat = $7, wpcustom = $8, wpup = $9  WHERE wpname = $10 RETURNING *"
-  client.query(QueryString, [Wpgrade, Select_name], (err, response) => {
-  //client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
+  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpname = $10"
+  client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
     console.log(Select_name)
     console.log(response.rows)
 
