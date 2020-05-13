@@ -12,12 +12,11 @@ const client = new Client({
 
 client.connect();
 router.get('/', (req,res,next) => {
-  var QueryString = "select wpid, wpname from aquafeq.aquafwp;"
+  var QueryString = "select wpid, wpname from aquafeq.aquafwp ORDER BY wplimit,wpid asc ;"
   client.query(QueryString, (err, response) => {
     console.log(response.rows[0])
 
     if (err) {
-      console.log('변경하기 목록 오류!')
       res.redirect('/aafwp');
     } else {
       res.render('aafwp', {
@@ -85,10 +84,21 @@ router.post('/fixwp', (req,res,next) => {
     if (Wpup !== '') {
       Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
-  var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wpsocket = $2, wpether = $3, wpstats = $4, wpproperty = $5, wpfeat = $6, wpcustom = $7, wpup = $8  WHERE aquafeq.aquafwp.wpname = $9 "
+  var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wplimit = $2 ,wpsocket = $3, wpether = $4, wpstats = $5, wpproperty = $6, wpfeat = $7, wpcustom = $8, wpup = $9  WHERE aquafeq.aquafwp.wpname = $10 "
   client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
+    var QueryString = "select wpid, wpname from aquafeq.aquafwp ORDER BY wplimit,wpid asc ;"
+    client.query(QueryString, (err, response) => {
+      console.log(response.rows[0])
 
-    res.redirect ('/');
+      if (err) {
+        res.redirect('/aafwp');
+      } else {
+        res.render('aafwp', {
+          title:'AAF 장비',
+          data:response.rows
+        });
+      };
+    });
   });
 
 });
@@ -129,22 +139,19 @@ router.post('/', (req, res, next) => {
     }
   var QueryString = "INSERT INTO aquafeq.aquafwp(wpgrade, wpname, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
   client.query(QueryString, [Wpgrade, Wpname, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup], (err, response) => {
-    console.log(Wpgrade);
-    console.log(Wpname);
-    if (err) {
-      console.log('인서트 오류!')
-      res.redirect('/aafwp');
-    } else {
+    var QueryString = "select wpid, wpname from aquafeq.aquafwp ORDER BY wplimit,wpid asc ;"
+    client.query(QueryString, (err, response) => {
       res.render('aafwp', {
-        title:'AAF 장비'
+        title:'AAF 장비',
+        data:response.rows
       });
-    };
+    });
   });
 });
 
 
 
-
+// 일반 검색
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   if (SearchType === 'name') {
@@ -330,56 +337,6 @@ router.get('/:id', (req,res,next) => {
   };
 })
 
-
-
-/* sql 테이블 랜더링 */
-router.get('/', (req, res, next) => {
-  if(req.query.searchType === 'name') {
-    var searchingtext = req.query.searchText
-    var sql = 'SELECT * FROM aquafwp WHERE wpname LIKE ?' ;
-    connection.query(sql, "%" + searchingtext + "%",function(err, results, field) {
-      res.render('aafwp', {
-        title: '무기',
-        varaquafwp: results
-      });
-    });
-  } else if(req.query.searchType === 'property') {
-    var searchingtext =req.query.searchText
-    var sql = 'SELECT * FROM aquafwp WHERE wpproperty LIKE ?';
-    connection.query(sql, "%" + searchingtext + "%", function(err, results, field) {
-      console.log('aquafwp 속성 검색');
-      res.render('aafwp', {
-        title: '무기',
-        varaquafwp: results
-      });
-    });
-  } else if (req.query.searchType === 'feat'){
-    var searchingtext =req.query.searchText
-    var sql = 'SELECT * FROM aquafwp WHERE wpfeat LIKE ?';
-    connection.query(sql, "%" + searchingtext + "%", function(err, results, field) {
-      console.log('aquafwp 피트 검색');
-      res.render('aafwp', {
-        title: '무기',
-        varaquafwp: results
-      });
-    });
-  } else if (req.query.searchType === 'custom'){
-    var searchingtext =req.query.searchText
-    var sql = 'SELECT * FROM aquafwp WHERE wpcustom LIKE ?';
-    connection.query(sql, "%" + searchingtext + "%", function(err, results, field) {
-      console.log('aquafwp 커스텀 검색');
-      res.render('aafwp', {
-        title: '무기',
-        varaquafwp: results
-      });
-    });
-  } else {
-    res.render('aafwp', {
-      title: '무기',
-    })
-  }
-
-});
 
 
 
