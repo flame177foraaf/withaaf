@@ -116,6 +116,48 @@ router.get('/:id', (req,res,next) => {
         SearchLimit: SearchLimit
       });
     });
+  } else if (SearchType === 'property') {
+    var Search = req.query.searchText;
+    var CurrentPage = req.params.id
+    var SearchLimit = req.query.limit;
+    if (SearchLimit === undefined) {
+      SearchLimit = 0;
+    };
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accproperty LIKE $1 and cast(acclimit as INTEGER) >= $2 or acclimit is null  ORDER BY acclimit asc limit 10 offset (($3- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+      if(typeof(response.rows[0]) !== "object") {
+        var TotalCount = 1;
+      } else {
+        var TotalCount = response.rows[0].totalcount;
+      }
+      console.log(TotalCount)
+      var DataCountInPage = 10;
+      var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      };
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      };
+      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
+      var EndPage = StartPage + DataCountInPage -1;
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      };
+      res.render('aafacc', {
+        title: 'AAF 장비',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage:TotalPage,
+        SearchType: SearchType,
+        Search: Search,
+        SearchLimit: SearchLimit
+      });
+    });
   } else if (SearchType === 'custom') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
