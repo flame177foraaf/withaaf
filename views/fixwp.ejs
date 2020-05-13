@@ -54,9 +54,6 @@
   </head>
 
   <body style="margin-top: 5px; margin-right: 10%; margin-left:10%; ">
-    <div class="">
-      <label for="" name="wpname" id="wpname" value="<%= data.wpname%>"><%- data.wpname%> 정보 </label>
-    </div>
     <div class="content" name= "content"id="content">
       <form class="" name="bodyform" action="/fixwp" method="post" onsubmit="">
         <div class="">
@@ -64,6 +61,12 @@
             <label for="">등급</label>
             <div class="">
               <textarea type="text" name="wpgrade" rows="6" cols="60" id="wpgrade"><%- data.wpgrade %></textarea>
+            </div>
+          </div>
+          <div class="">
+            <label for="">이름</label>
+            <div class="">
+              <input type="text" name="wpname"  size='40' maxlength='50' value="<%= data.wpname %>" id="">
             </div>
           </div>
           <div class="">
