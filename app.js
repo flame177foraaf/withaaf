@@ -69,7 +69,7 @@ app.use('/board', aafboardRouter);
 //app.use('/qa', aafQARouter);
 app.use('/test', aaftestRouter);
 app.use('/monster', aafmontableRouter)
-app.ues('/fixeq', fixeqRouter)
+app.use('/fixeq', fixeqRouter)
 
 
 // catch 404 and forward to error handler
