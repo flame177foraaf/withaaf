@@ -38,7 +38,7 @@ router.get('/fixwp', (req,res,next) => {
   var Select_name = req.query.Seachname;
   var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
   client.query(QueryString, [Select_name], (err, response) => {
-    if (data:response.rows[0] !== "object") {
+    if (response.rows[0] !== "object") {
       res.redirect('/aafwp')
     } else {
       console.log(Select_name)
@@ -46,7 +46,6 @@ router.get('/fixwp', (req,res,next) => {
         res.render ('fixwp', {
           title:'AAF 장비',
           data:response.rows[0]
-
         });
       })
     }
