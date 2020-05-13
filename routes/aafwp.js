@@ -40,17 +40,16 @@ router.get('/fixwp', (req,res,next) => {
   client.query(QueryString, [Select_name], (err, response) => {
     console.log(response.rows[0]);
     console.log(typeof(response.rows[0]));
+    console.log(Select_name)
 
     if (response.rows[0] !== "object") {
       res.redirect('/aafwp')
     } else {
       console.log(Select_name)
-      client.query(QueryString, [Select_name], (err, response) => {
-        res.render ('fixwp', {
-          title:'AAF 장비',
-          data:response.rows[0]
-        });
-      })
+      res.render ('fixwp', {
+        title:'AAF 장비',
+        data:response.rows[0]
+      });
     }
   })
 });
