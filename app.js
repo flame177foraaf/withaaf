@@ -27,9 +27,13 @@ var aafboardRouter = require('./routes/board')
 //var aafrecipeRouter = require('./routes/recipe2')
 var aaftestRouter = require('./routes/test')
 var aafmontableRouter =require('./routes/monster')
+var fixeqRouter = require('./routes/fixeq')
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+
 
 var app = express();
 
@@ -65,7 +69,7 @@ app.use('/board', aafboardRouter);
 //app.use('/qa', aafQARouter);
 app.use('/test', aaftestRouter);
 app.use('/monster', aafmontableRouter)
-
+app.ues('/fixeq', fixeqRouter)
 
 
 // catch 404 and forward to error handler
