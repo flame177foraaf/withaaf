@@ -197,6 +197,16 @@ router.get('/', (req, res, next) => {
         varaquafacc: results
       });
     });
+  } else if(req.query.searchType === 'property') {
+    var searchingtext =req.query.searchText
+    var sql = 'SELECT * FROM aquafacc WHERE accproperty LIKE ?';
+    connection.query(sql, "%" + searchingtext + "%", function(err, results, field) {
+      console.log('aquafacc 커스텀 검색');
+      res.render('aafacc', {
+        title: '악세사리',
+        varaquafacc: results
+      });
+    });
   } else if(req.query.searchType === 'custom') {
     var searchingtext =req.query.searchText
     var sql = 'SELECT * FROM aquafacc WHERE acccustom LIKE ?';
