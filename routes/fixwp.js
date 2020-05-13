@@ -88,8 +88,15 @@ router.post('/', (req,res,next) => {
   client.query('UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Select_name RETURNING *',  (err, response) => {
   //client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
   console.log(Wpgrade)
-  console.log(Wpsocket)
   console.log(Wplimit)
+  console.log(Wpsocket)
+  console.log(Wpether)
+  console.log(Wpstats)
+  console.log(Wpproperty)
+  console.log(Wpfeat)
+  console.log(Wpcustom)
+  console.log(Wpup)
+
   console.log(typeof(response.rows[0]))
   console.log(Select_name)
 
