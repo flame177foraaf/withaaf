@@ -93,7 +93,6 @@ router.post('/', (req,res,next) => {
   console.log(typeof(response.rows[0]))
   console.log(Select_name)
 
-    console.log(response.rows)
     res.render('aafwp', {
       title:Select_name + '  변경 완료',
       data:response.rows
