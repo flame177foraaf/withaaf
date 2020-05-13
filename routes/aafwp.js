@@ -41,10 +41,6 @@ router.get('/fixwp', (req,res,next) => {
     if (err) {
       res.redirect('/aafwp')
     } else if(
-      console.log(response.rows[0])
-      console.log(typeof(response.rows[0]))
-      console.log(Select_name)
-
       res.render ('fixwp', {
         title:'AAF 장비',
         data:response.rows[0]
