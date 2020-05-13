@@ -86,6 +86,7 @@ router.post('/fixwp', (req,res,next) => {
     }
   var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wplimit = $2 ,wpsocket = $3, wpether = $4, wpstats = $5, wpproperty = $6, wpfeat = $7, wpcustom = $8, wpup = $9  WHERE aquafeq.aquafwp.wpname = $10 "
   client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
+    console.log(Wpgrade)
     var QueryString = "select wpid, wpname from aquafeq.aquafwp ORDER BY wplimit,wpid asc ;"
     client.query(QueryString, (err, response) => {
       console.log(response.rows[0])
