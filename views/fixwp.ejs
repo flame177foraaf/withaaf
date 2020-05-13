@@ -54,7 +54,9 @@
   </head>
 
   <body style="margin-top: 5px; margin-right: 10%; margin-left:10%; ">
-    <h1><%- data.wpname  %> 정보 </h1>
+    <div class="">
+      <label for="" name="wpname" id="wpname" value="<%= data.wpname%>"><%- data.wpname%> 정보 </label>
+    </div>
     <div class="content" name= "content"id="content">
       <form class="" name="bodyform" action="/fixwp" method="post" onsubmit="">
         <div class="">
@@ -149,5 +151,6 @@
     var textarea5 = document.getElementById("wpup").value;
     textarea5 = textarea5.replace(/<br>|<br \/>/g, "\r\n");
     document.getElementById("wpup").value = textarea5;
+
   </script>
 </html>
