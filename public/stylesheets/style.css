@@ -12,7 +12,15 @@
   a:hover { color: red; text-decoration: underline; }
 
   a:active { color: white; background-color: silver; }
-
+  textarea {
+    border-radius :5px;
+  }
+  button {
+    border-radius :5px;
+  }
+  input {
+    border-radius :5px;
+  }
   #btnactive {
     padding-top: 2px;
     padding-right: 8px;

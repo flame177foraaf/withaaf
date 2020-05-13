@@ -44,19 +44,19 @@
         vertical-align:baseline;
       }
       #boardlist > li > ul > li:first-child               {width:10%;} /*No 열 크기*/
-      #boardlist > li > ul > li:first-child +li           {width:45%;} /*제목 열 크기*/
+      #boardlist > li > ul > li:first-child +li           {width:55%;} /*제목 열 크기*/
       #boardlist > li > ul > li:first-child +li+li        {width:20%;} /*작성일 열 크기*/
       #boardlist > li > ul > li:first-child +li+li+li     {width:15%;} /*작성자 열 크기*/
-      #boardlist > li > ul > li:first-child +li+li+li+li{width:10%;} /*조회수 열 크기*/
+      // #boardlist > li > ul > li:first-child +li+li+li+li{width:10%;} /*조회수 열 크기*/
     </style>
 
   </head>
 
-  <body style=" width: 1200px;">
-    <div class="buttons">
-      <button onclick="history.back(-1);" type="button" name="button" style="font-size:20px;">뒤로</a></button>
-
-      <a href="/board/write" style=" float: right; margin-right: 10%; font-size:25px">글쓰기</a>
+  <body style=" width: 1000px;">
+    <div class="" style="float:right; height:50px ;" >
+      <form class="" action="/board/write" method="post">
+        <button type="submit" style=" float:right; height:50px ; width : 100px;  "   method="GET">글쓰기</button>
+      </form>
     </div>
     <div  id="mainWrapper" class="">
       <li >
