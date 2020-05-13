@@ -83,26 +83,16 @@ router.post('/', (req,res,next) => {
     } else if (Wpup !== '') {
       Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
-  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpname = $10 returning *"
-  client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
-    console.log(Select_name)
+
+  //var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpname = $10 returning *"
+  client.query('UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Select_name RETURNING *',  (err, response) => {
+  //client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
     console.log(response.rows)
-
-    var QueryString = "select * from aquafeq.aquafwp WHERE wpname like $1"
-    client.query (QueryString, ['%' + Select_name + '%'], (err,response) => {
-      console.log(Select_name)
-      console.log(response.rows)
-
-      res.render('aafwp', {
-        title:Select_name + '  변경 완료',
-        data:response.rows
-      });
+    res.render('aafwp', {
+      title:Select_name + '  변경 완료',
+      data:response.rows
     });
-    console.log(Wpgrade)
-
   });
-
 });
-
 
 module.exports = router;
