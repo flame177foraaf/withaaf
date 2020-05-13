@@ -97,14 +97,15 @@ router.post('/', (req,res,next) => {
   console.log(Wpcustom)
   console.log(Wpup)
   console.log(Wpname)
-  var QueryString = "select * from aquafeq.aquafwp where wpname = Wpname"
-  console.log(response.rows[0])
-
-
-    res.render('aafwp', {
-      title:Wpname + ' 변경 완료',
+  var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
+  client.query ( QueryString, [Wpname],  (err, response) => {
+    console.log(response.rows[0])
+      res.render('aafwp', {
+        title:Wpname + ' 변경 완료',
+      });
     });
-  });
+  })
+
 });
 
 module.exports = router;
