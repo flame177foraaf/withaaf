@@ -85,7 +85,7 @@ router.post('/', (req,res,next) => {
     }
 
   //var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpname = $10 returning *"
-  client.query('UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname RETURNING *',  (err, response) => {
+  client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
   //client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
   console.log(Wpgrade)
   console.log(Wplimit)
@@ -97,10 +97,11 @@ router.post('/', (req,res,next) => {
   console.log(Wpcustom)
   console.log(Wpup)
   console.log(Wpname)
+  var QueryString = "select * from aquafeq.aquafwp where wpname = Wpname"
   console.log(response.rows[0])
 
 
-    res.render('index', {
+    res.render('aafwp', {
       title:Wpname + ' 변경 완료',
     });
   });
