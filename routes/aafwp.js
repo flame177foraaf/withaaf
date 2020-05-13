@@ -33,7 +33,6 @@ router.get('/wpadd', (req,res,next) => {
     title:'AAF 장비'
   });
 });
-
 router.get('/fixwp', (req,res,next) => {
   var QueryString = "select wpnme from aquafeq.aquafwp"
   client.query(QueryString, (err, response) => {
@@ -41,7 +40,7 @@ router.get('/fixwp', (req,res,next) => {
     var QueryString = "select wpnme from aquafeq.aquafwp where wpname = $1"
     client.query(QueryString, [Select_name], (err, response) => {
       console.log(response.rows)
-      if(typeof(response.rows) !== 'object') {
+      if(typeof(response.rows[0]) !== "object") {
         res.render ('wpadd', {
           title: '신규 장비' + Select_name + '등록',
         })
