@@ -102,6 +102,7 @@ router.post('/', (req,res,next) => {
     console.log(response.rows[0])
       res.render('aafwp', {
         title:Wpname + ' 변경 완료',
+        data:response.rows
       });
     });
   })
