@@ -97,12 +97,10 @@ router.post('/', (req,res,next) => {
   console.log(Wpcustom)
   console.log(Wpup)
 
-  console.log(typeof(response.rows[0]))
   console.log(Select_name)
 
     res.render('aafwp', {
       title:Select_name + '  변경 완료',
-      data:response.rows
     });
   });
 });
