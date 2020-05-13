@@ -12,7 +12,7 @@ const client = new Client({
 client.connect();
 
 
-router.get('/fixwp', (req,res,next) => {
+router.get('/', (req,res,next) => {
   var QueryString = "select wpname from aquafeq.aquafwp"
   client.query(QueryString, (err, response) => {
     var Select_name = req.query.Seachname;
@@ -32,7 +32,7 @@ router.get('/fixwp', (req,res,next) => {
   })
 })
 
-router.post('/fixwp', (req,res,next) => {
+router.post('/', (req,res,next) => {
   var Select_name = req.query.Seachname
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade !== '') {
