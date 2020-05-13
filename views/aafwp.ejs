@@ -127,7 +127,7 @@
         </form>
       </div>
 
-      <form class="" name="add" action="/aafwp/fixwp" method="get"  onsubmit="return checkonclick()">
+      <form class="" name="add" action="/fixwp" method="get"  onsubmit="return checkonclick()">
         <input type=text list=browsers style="" checked value="<%= data[0].wpname %>" name="Seachname">
         <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
           <datalist id="browsers" name="datalistname" class="" style="width:50%">
@@ -135,7 +135,7 @@
             <option value='<%= item.wpname%>' style=""><%- item.wpname%></option>
             <% }); %>
           </datalist>
-        <input action="/aafwp/fixwp" type="submit" class="btn" value="변경하기" ></button>
+        <input action="/fixwp" type="submit" class="btn" value="변경하기" ></button>
       </form>
     </div>
 
