@@ -35,19 +35,23 @@ router.get('/wpadd', (req,res,next) => {
 });
 
 router.get('/fixwp', (req,res,next) => {
-  var Select_name = req.query.Seachname;
-  var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
-  client.query(QueryString, [Select_name], (err, response) => {
-    if (err) {
-      res.redirect('/aafwp')
-    } else if(
-      res.render ('fixwp', {
-        title:'AAF 장비',
-        data:response.rows[0]
-      });
-    )
+  var QueryString = "select wpnme from aquafeq.aquafwp"
+  client.query(QueryString, (err, response) => {
+    var Select_name = req.query.Seachname;
+    var QueryString = "select wpnme from aquafeq.aquafwp where wpname = $1"
+    client.query(QueryString, [Select_name] (err.response) => {
+      if(err) {
+        console.log(err);
+        res.redirect('/aafwp')
+      } else {
+        res.render ('fixwp', {
+          title:'AAF 장비',
+          data:response.rows[0]
+        });
+      }
+    })
   })
-});
+})
 
 router.post('/fixwp', (req,res,next) => {
   var Select_name = req.query.Seachname
