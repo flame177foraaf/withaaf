@@ -86,7 +86,6 @@
   }
   input[id="chbox"] + label {
     display: inline-block;
-    width: 20px;
     height: 20px;
     border: 2px solid #bcbcbc;
     cursor: pointer;
