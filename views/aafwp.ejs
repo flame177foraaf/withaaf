@@ -20,7 +20,7 @@
   </head>
   <body style="">
     <h1><%= title %></h1>
-    <form action="/test/1" method="get">
+    <form action="/aafwp/1" method="get">
       <input type="text" placeholder="찾기 버튼을 누르세요" name="searchText">
       <select name="searchType">
           <option value="name">이름</option>
@@ -29,7 +29,7 @@
           <option value="custom">커스텀</option>
       </select>
       <input type="checkbox" name="limit" value="300" id="chbox"> <label for="chbox" style=""></label>300레벨 이상
-      <input action="/test/1" type="submit" class="btn" value="찾기" ></button>
+      <input action="/aafwp/1" type="submit" class="btn" value="찾기" ></button>
 
 
 
@@ -99,19 +99,19 @@
             <div class="" id="pagelist">
               <td colspan="21" style= "text-align:center; font-size:24px">
                 <% if (CurrentPage > PageSize){ %>
-                  <a href="/test/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
-                  <a href="/test/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
+                  <a href="/aafwp/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
+                  <a href="/aafwp/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
                 <% } %>
                 <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
                   <% if (iCount == CurrentPage) { %>
                     <b class="btnnonactive"><%- iCount %></b>
                   <% } else { %>
-                    <a href="/test/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
+                    <a href="/aafwp/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
                   <% } %>
                 <% } %>
                 <% if (EndPage < TotalPage){ %>
-                  <a href="/test/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
-                  <a href="/test/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
+                  <a href="/aafwp/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
+                  <a href="/aafwp/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
                 <% } %>
               </td>
             </div>
@@ -121,8 +121,8 @@
       </tbody>
     </table>
     <div class="" style="text-align: center">
-      <form class="" name="add" action="/test/fixwp" method="get"  onsubmit="return checkonclick()">
-        <button onclick=location.href="/test/wpadd" type="button" name="button" style="">신규등록</a></button>
+      <form class="" name="add" action="/aafwp/fixwp" method="get"  onsubmit="return checkonclick()">
+        <button onclick=location.href="/aafwp/wpadd" type="button" name="button" style="">신규등록</a></button>
 
 
         <input type=text list=browsers style="margin-left:50px" checked value="<%= data[0].wpname %>" name="Seachname">
@@ -134,7 +134,7 @@
           <% }); %>
 
         </datalist>
-        <input action="/test/fixwp" type="submit" class="btn" value="변경하기" ></button>
+        <input action="/aafwp/fixwp" type="submit" class="btn" value="변경하기" ></button>
 
 
       </form>

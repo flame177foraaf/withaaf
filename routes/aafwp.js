@@ -40,7 +40,7 @@ router.get('/fixwp', (req,res,next) => {
     var Select_name = req.query.Seachname;
     var QueryString = "select wpnme from aquafeq.aquafwp where wpname = $1"
     client.query(QueryString, [Select_name], (err, response) => {
-      var rowcheck = response.row.length
+      var rowcheck = response.rows.length
       console.log(rowcheck)
       if(rowcheck !== 1) {
         res.render ('wpadd', {
