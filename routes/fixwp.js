@@ -97,6 +97,7 @@ router.post('/', (req,res,next) => {
   console.log(Wpcustom)
   console.log(Wpup)
   console.log(Wpname)
+  console.log(response.rows)
 
 
     res.render('index', {
