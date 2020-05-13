@@ -84,9 +84,9 @@ router.post('/', (req,res,next) => {
       Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
 
-  //var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpname = $10 returning *"
-  client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
-  //client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
+  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpname = $10 returning *"
+  //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
+  client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
   console.log(Wpgrade)
   console.log(Wplimit)
   console.log(Wpsocket)
@@ -97,16 +97,15 @@ router.post('/', (req,res,next) => {
   console.log(Wpcustom)
   console.log(Wpup)
   console.log(Wpname)
-  var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
-  client.query ( QueryString, [Wpname],  (err, response) => {
-    console.log(response.rows[0])
-      res.render('aafwp', {
-        title:Wpname + ' 변경 완료',
-        data:response.rows
-      });
+    var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
+    client.query ( QueryString, [Wpname],  (err, response) => {
+      console.log(response.rows[0])
+      res.render('/aafwp', {
+        title : Wpname + ' 변경 완료'
+        data: response.rows
+      })
     });
-  })
-
+  });
 });
 
 module.exports = router;
