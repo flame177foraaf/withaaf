@@ -33,19 +33,24 @@ router.get('/wpadd', (req,res,next) => {
     title:'AAF 장비'
   });
 });
-router.get('/fixwp', (req,res,next) => {
 
+router.get('/fixwp', (req,res,next) => {
   var Select_name = req.query.Seachname;
-  console.log(Select_name)
   var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
   client.query(QueryString, [Select_name], (err, response) => {
-    res.render ('fixwp', {
-      title:'AAF 장비',
-      data:response.rows[0]
+    if (data:response.rows[0] !== "object") {
+      res.redirect('/aafwp')
+    } else {
+      console.log(Select_name)
+      client.query(QueryString, [Select_name], (err, response) => {
+        res.render ('fixwp', {
+          title:'AAF 장비',
+          data:response.rows[0]
 
-    });
+        });
+      })
+    }
   })
-
 });
 
 router.post('/fixwp', (req,res,next) => {
