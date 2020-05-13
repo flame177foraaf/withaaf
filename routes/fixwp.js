@@ -97,10 +97,9 @@ router.post('/', (req,res,next) => {
   console.log(Wpcustom)
   console.log(Wpup)
 
-  console.log(Select_name)
 
     res.render('index', {
-      title:Select_name + '  변경 완료',
+      title:Wpname + ' 변경 완료',
     });
   });
 });
