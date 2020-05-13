@@ -100,7 +100,7 @@ router.post('/', (req,res,next) => {
     var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
     client.query ( QueryString, [Wpname],  (err, response) => {
       console.log(response.rows[0])
-      res.render('/aafwp', {
+      res.render('aafwp', {
         title : Wpname + ' 변경 완료',
         data: response.rows
       })
