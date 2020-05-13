@@ -11,11 +11,9 @@
       }
 
       #mainWrapper > ul > li:first-child {
-        text-align: center;
         font-size:14pt;
-        height:40px;
         vertical-align:middle;
-        line-height:30px;
+
       }
 
       #boardlist ul, li{
@@ -23,12 +21,13 @@
         text-align:center;
         padding:0;
         margin:0;
+
       }
       #boardlist {margin-top:10px;}
       #boardlist > li:first-child > ul > li {
           background-color:#c9c9c9;
           font-weight:bold;
-          text-align:center;
+
       }
       #boardlist > li > ul {
           clear:both;
@@ -37,10 +36,12 @@
           min-width:40px;
       }
       #boardlist > li > ul > li {
-          float:left;
-          font-size:10pt;
-          border-bottom:1px solid silver;
-          vertical-align:baseline;
+        height:25px;
+        line-height: 25px;
+        float:left;
+        font-size:10pt;
+        border-bottom:1px solid silver;
+        vertical-align:baseline;
       }
       #boardlist > li > ul > li:first-child               {width:10%;} /*No 열 크기*/
       #boardlist > li > ul > li:first-child +li           {width:45%;} /*제목 열 크기*/
@@ -55,13 +56,13 @@
     <div class="buttons">
       <a href="/board/write" style="font-size:25px">글쓰기</a>
     </div>
-    <div id="mainWrapper" class="">
-      <li>
+    <div  id="mainWrapper" class="">
+      <li >
         <ul id="boardlist">
           <li>
-            <ul>
-              <li>번호</li>
-              <li>제목</li>
+            <ul >
+              <li >번호</li>
+              <li >제목</li>
               <li>글쓴이</li>
               <li>작성시간</li>
             </ul>
