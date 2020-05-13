@@ -39,7 +39,7 @@ router.get('/fixwp', (req,res,next) => {
   client.query(QueryString, (err, response) => {
     var Select_name = req.query.Seachname;
     var QueryString = "select wpnme from aquafeq.aquafwp where wpname = $1"
-    client.query(QueryString, [Select_name] (err.response) => {
+    client.query(QueryString, [Select_name], (err.response) => {
       if(err) {
         console.log(err);
         res.redirect('/aafwp')
