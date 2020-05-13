@@ -99,7 +99,7 @@ router.post('/', (req,res,next) => {
 
   console.log(Select_name)
 
-    res.render('aafwp', {
+    res.render('index', {
       title:Select_name + '  변경 완료',
     });
   });
