@@ -16,6 +16,10 @@
     border-radius :5px;
   }
   button {
+    width: 100px;
+    height:34px;
+    font-size: 16px;
+    padding: 0px;
     border-radius :5px;
   }
   input {
@@ -102,12 +106,6 @@
   input{
     width: auto;
     height:30px;
-    font-size: 16px;
-    padding: 0px;
-  }
-  input.btn{
-    width: 100px;
-    height:34px;
     font-size: 16px;
     padding: 0px;
   }
