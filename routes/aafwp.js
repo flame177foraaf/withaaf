@@ -52,7 +52,7 @@ router.get('/fixwp', (req,res,next) => {
   })
 })
 
-router.post('/fixwp', (req,res,next) => {
+router.post('/aafwp/fixwp', (req,res,next) => {
   var Select_name = req.query.Seachname
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade !== '') {
@@ -92,6 +92,7 @@ router.post('/fixwp', (req,res,next) => {
       console.log(response.rows[0])
 
       if (err) {
+        console.log('에러인가')
         res.redirect('/aafwp');
       } else {
         res.render('aafwp', {
