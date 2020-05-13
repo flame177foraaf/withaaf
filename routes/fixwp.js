@@ -101,7 +101,7 @@ router.post('/', (req,res,next) => {
     client.query ( QueryString, [Wpname],  (err, response) => {
       console.log(response.rows[0])
       res.render('/aafwp', {
-        title : Wpname + ' 변경 완료'
+        title : Wpname + ' 변경 완료',
         data: response.rows
       })
     });
