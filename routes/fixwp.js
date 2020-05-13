@@ -64,7 +64,7 @@ router.post('/', (req,res,next) => {
     if (Wpup !== '') {
       Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
-  var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wplimit = $2, wpsocket = $3, wpether = $4, wpstats = $5, wpproperty = $6, wpfeat = $7, wpcustom = $8, wpup = $9  WHERE aquafeq.aquafwp.wpname = $10"
+  var QueryString = "UPDATE aquafeq.aquafwp SET wpgrade = $1, wplimit = $2, wpsocket = $3, wpether = $4, wpstats = $5, wpproperty = $6, wpfeat = $7, wpcustom = $8, wpup = $9  WHERE wpname = $10"
   client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
     console.log(Wpgrade)
     var QueryString = "select wpgrade, wpid, wpname from aquafeq.aquafwp ORDER BY wplimit,wpid asc ;"
@@ -76,7 +76,7 @@ router.post('/', (req,res,next) => {
         res.redirect('/aafwp');
       } else {
         res.render('aafwp', {
-          title:'AAF 장비',
+          title:Select_name + '  변경 완료',
           data:response.rows
         });
       };
