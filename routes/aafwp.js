@@ -38,19 +38,21 @@ router.get('/fixwp', (req,res,next) => {
   var Select_name = req.query.Seachname;
   var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
   client.query(QueryString, [Select_name], (err, response) => {
-    console.log(response.rows[0]);
-    console.log(typeof(response.rows[0]));
-    console.log(Select_name)
-
-    if (response.rows[0] !== "object") {
-      res.redirect('/aafwp')
-    } else {
+    if (err) {
+      console.log(response.rows[0]);
+      console.log(typeof(response.rows[0]));
       console.log(Select_name)
+      res.redirect('/aafwp')
+    } else if(
+      console.log(response.rows[0]);
+      console.log(typeof(response.rows[0]));
+      console.log(Select_name)
+
       res.render ('fixwp', {
         title:'AAF 장비',
         data:response.rows[0]
       });
-    }
+    )
   })
 });
 
