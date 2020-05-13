@@ -34,10 +34,10 @@ router.get('/wpadd', (req,res,next) => {
   });
 });
 router.get('/fixwp', (req,res,next) => {
-  var QueryString = "select wpnme from aquafeq.aquafwp"
+  var QueryString = "select wpname from aquafeq.aquafwp"
   client.query(QueryString, (err, response) => {
     var Select_name = req.query.Seachname;
-    var QueryString = "select wpnme from aquafeq.aquafwp where wpname = $1"
+    var QueryString = "select wpname from aquafeq.aquafwp where wpname = $1"
     client.query(QueryString, [Select_name], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         res.render ('wpadd', {
