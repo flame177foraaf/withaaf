@@ -87,6 +87,12 @@ router.post('/', (req,res,next) => {
   //var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpname = $10 returning *"
   client.query('UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Select_name RETURNING *',  (err, response) => {
   //client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Select_name], (err, response) => {
+  console.log(Wpgrade)
+  console.log(Wpsocket)
+  console.log(Wplimit)
+  console.log(typeof(response.rows[0]))
+  console.log(Select_name)
+
     console.log(response.rows)
     res.render('aafwp', {
       title:Select_name + '  변경 완료',
