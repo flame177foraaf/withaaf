@@ -22,9 +22,6 @@
     padding: 0px;
     border-radius :5px;
   }
-  input {
-    border-radius :5px;
-  }
   #seach_form_id {
     text-align:center;
     margin:5px;
@@ -103,7 +100,6 @@
   }
   label{
     vertical-align: middle;
-
   }
 
   input{
@@ -111,6 +107,8 @@
     height:30px;
     font-size: 16px;
     padding: 0px;
+    border-radius :5px;
+
   }
   select{
     width: auto;
@@ -120,7 +118,9 @@
     padding: 0px;
 
   }
-
+  .title_div {
+    text-align:center
+  }
 body {
   margin-top: 25px;
   margin-left: 5%;
