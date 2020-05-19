@@ -119,8 +119,8 @@
 
 body {
   margin-top: 25px;
-  padding-left: 5%;
-  padding-right: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
 
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
