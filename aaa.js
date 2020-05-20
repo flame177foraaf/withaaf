@@ -105,7 +105,7 @@ for (var i = 0; i < eqcustom.length; i++) {
 
           var result_custom = cut_cus_name + rancustom;
           //console.log(result_custom);
-      }
+      }console.log(result_custom);
 
     }
   }

@@ -83,6 +83,7 @@ router.get('/ing', (req,res,next) => {
           }
           if (rancustom !== 0) {
             console.log(cut_cus_name + rancustom);
+            var result_custom = cut_cus_name + rancustom;
             res.render('Assemblywp', {
               title: '무기 재조립하기',
               data: response.rows[0],
@@ -90,6 +91,7 @@ router.get('/ing', (req,res,next) => {
             });
           }
         }
+
       } else {
         var find_cus_val1 = eqcustom[i].indexOf("("); //웨이블렘 괄호
         var find_cus_val2 = eqcustom[i].indexOf(")"); //웨이블렘 괄호
@@ -140,15 +142,15 @@ router.get('/ing', (req,res,next) => {
           if (rancustom !== 0) {
             console.log(cut_cus_name + rancustom);
             var result_custom = cut_cus_name + rancustom;
-
+            res.render('Assemblywp', {
+              title: '무기 재조립하기',
+              data: response.rows[0],
+              custom: result_custom
+            });
 
           }
           console.log(result_custom);
-          res.render('Assemblywp', {
-            title: '무기 재조립하기',
-            data: response.rows[0],
-            custom: result_custom
-          });
+
         }
       }
     }
