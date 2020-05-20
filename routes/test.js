@@ -27,7 +27,7 @@ router.get('/', (req,res,next) => {
     };
   });
 });
-
+/*
 router.get('/wpadd', (req,res,next) => {
   res.render ('wpadd', {
     title:'AAF 장비'
@@ -47,7 +47,6 @@ router.get('/fixwp', (req,res,next) => {
   })
 
 });
-/*
 router.get('/testAssembly', (res,req,next) => {
   var Assemble = req.query.assemble;
   console.log(req.query.assemble);
