@@ -2,8 +2,8 @@ var text = "적의 레벨 변화(웨이블렘) ( 1 ~ 4 ) [100% 확률]<br />소�
 // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
 
 var eqcustom = text.split('<br />');
-
 for (var i = 0; i < eqcustom.length; i++) {
+
   if (eqcustom[i].indexOf("웨이블렘") == -1) {
     var find_cus_val1 = eqcustom[i].indexOf("(");
     var find_cus_val2 = eqcustom[i].indexOf(")");
@@ -20,9 +20,10 @@ for (var i = 0; i < eqcustom.length; i++) {
     var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
     var cus_per_0 = cus_per.indexOf("%");
     var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
+
     var cus_per_2 = Math.floor(Math.random() * (100 - 0 +1)) + 1
 
-    if (cus_per_2 <= parseInt(cus_per_1)) {
+    if (cus_per_2 <= cus_per_1) {
       var cut_in_custom = cut_cus_value.indexOf("~");
       var find_per_custom = cut_cus_value.indexOf("%");
       var custommin = cut_cus_value.substring(0,cut_in_custom); //커스텀 수치 최소  3 %
@@ -36,7 +37,7 @@ for (var i = 0; i < eqcustom.length; i++) {
           var choices = y - x + 1;
           return Math.floor(Math.random() * choices + x);
         }
-        var rancustom = selectFrom(parseInt(custommax), parseInt(custommin));
+        var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
 
         if (rancustom !== 0) {
           var rancustom = rancustom + ' %';
@@ -46,19 +47,19 @@ for (var i = 0; i < eqcustom.length; i++) {
           var choices = y - x + 1;
           return Math.floor(Math.random() * choices + x);
         }
-        var rancustom = selectFrom(parseInt(custommax), parseInt(custommin));
+        var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
       }
       if (rancustom !== 0) {
         var result_custom = cut_cus_name + rancustom;
-        console.log(result_custom);
 
       }
     }
+    console.log(result_custom);
+
   } else {
     var find_cus_val1 = eqcustom[i].indexOf("("); //웨이블렘 괄호
     var find_cus_val2 = eqcustom[i].indexOf(")"); //웨이블렘 괄호
     var find_cus_val1 = eqcustom[i].indexOf("(",find_cus_val1 +1);
-
     var find_cus_val2 = eqcustom[i].indexOf(")",find_cus_val2 +1);
     var find_cus_per1 = eqcustom[i].indexOf("[");
     var find_cus_per2 = eqcustom[i].indexOf("]");
@@ -89,7 +90,7 @@ for (var i = 0; i < eqcustom.length; i++) {
           var choices = y - x + 1;
           return Math.floor(Math.random() * choices + x);
         }
-        var rancustom = selectFrom(parseInt(custommax), parseInt(custommin));
+        var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
 
         if (rancustom !== 0) {
           var rancustom = rancustom + ' %';
@@ -99,13 +100,14 @@ for (var i = 0; i < eqcustom.length; i++) {
           var choices = y - x + 1;
           return Math.floor(Math.random() * choices + x);
         }
-        var rancustom = selectFrom(parseInt(custommax), parseInt(custommin));
+        var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
       }
       if (rancustom !== 0) {
 
           var result_custom = cut_cus_name + rancustom;
           //console.log(result_custom);
-      }console.log(result_custom);
+      }
+      console.log(result_custom);
 
     }
   }
@@ -153,9 +155,11 @@ console.log("커스텀 수 " + eqcustom.length)
 console.log(cut_cus_name);
 console.log(cut_cus_value);
 console.log(cus_per);
+
+console.log("커스텀 확률" + cus_per);
 console.log("ㅋ스텀 뜰 확률 수치 " + cus_per_1)
 console.log("ㅋ스텀 뜰 확률 수치 주사위굴리기" + cus_per_2)
-
+console.log("커스텀 min" + parseInt(custommin))
 console.log("소괄호 인덱스" + find_cus_val1);
 console.log("대괄호 인덱스" + find_cus_per1);
 console.log("문자 길이" + leng);
@@ -163,7 +167,4 @@ console.log("커스텀 수치" + cut_cus_value);
 
 console.log("커스텀 수치 최소치" + custommin);
 console.log("커스텀 수치 최대치" + custommax);
-
-console.log("커스텀 확률" + cus_per);
-console.log(cus_per_1);
 */

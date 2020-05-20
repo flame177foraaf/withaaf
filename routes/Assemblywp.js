@@ -65,30 +65,25 @@ router.get('/ing', (req,res,next) => {
             var find_per_cusmax = custommax.indexOf("%");
             var custommin = custommin.substring(0,find_per_cusmin);
             var custommax = custommax.substring(0, find_per_cusmax);
-            function selectFrom(x, y){
-              var choices = y - x + 1;
+            function selectFrom(min, max){
+              var choices = max - min + 1;
               return Math.floor(Math.random() * choices + x);
             }
-            var rancustom = selectFrom(parseInt(custommax), parseInt(custommin));
+            var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
 
             if (rancustom !== 0) {
               var rancustom = rancustom + ' %';
             }
           } else {
-            function selectFrom(x, y) {
-              var choices = y - x + 1;
+            function selectFrom(min, max) {
+              var choices = max - min + 1;
               return Math.floor(Math.random() * choices + x);
             }
-            var rancustom = selectFrom(parseInt(custommax), parseInt(custommin));
+            var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
           }
           if (rancustom !== 0) {
             console.log(cut_cus_name + rancustom);
             var result_custom = cut_cus_name + rancustom;
-            res.render('Assemblywp', {
-              title: '무기 재조립하기',
-              data: response.rows[0],
-              custom: result_custom
-            });
           }
         }
 
@@ -123,37 +118,36 @@ router.get('/ing', (req,res,next) => {
             var find_per_cusmax = custommax.indexOf("%");
             var custommin = custommin.substring(0,find_per_cusmin);
             var custommax = custommax.substring(0, find_per_cusmax);
-            function selectFrom(x, y){
-              var choices = y - x + 1;
+            function selectFrom(min, max){
+              var choices = max - min + 1;
               return Math.floor(Math.random() * choices + x);
             }
-            var rancustom = selectFrom(parseInt(custommax), parseInt(custommin));
+            var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
 
             if (rancustom !== 0) {
               var rancustom = rancustom + ' %';
             }
           } else {
-            function selectFrom(x, y) {
-              var choices = y - x + 1;
+            function selectFrom(min, max) {
+              var choices = max - min + 1;
               return Math.floor(Math.random() * choices + x);
             }
-            var rancustom = selectFrom(parseInt(custommax), parseInt(custommin));
+            var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
           }
           if (rancustom !== 0) {
             console.log(cut_cus_name + rancustom);
             var result_custom = cut_cus_name + rancustom;
-            res.render('Assemblywp', {
-              title: '무기 재조립하기',
-              data: response.rows[0],
-              custom: result_custom
-            });
 
           }
-          console.log(result_custom);
 
         }
       }
     }
+    res.render('Assemblywp', {
+      title: '무기 재조립하기',
+      data: response.rows[0],
+      custom: result_custom
+    });
   });
 })
 
