@@ -48,6 +48,21 @@ router.get('/fixwp', (req,res,next) => {
 
 });
 
+router.get('/testAssembly', (res,req,next) => {
+  var Assemble = req.query.assemble_to_obj;
+  console.log(req.query.assemble_to_obj);
+  console.log(Assemble);
+
+
+  var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1"
+  client.query(QueryString, [Assemble], (err, response) => {
+    res.render('testAssembly', {
+      title: '무기 재조립하기',
+      data: response.rows
+    });
+  });
+});
+
 router.post('/fixwp', (req,res,next) => {
   var Select_name = req.query.Seachname
   var Wpgrade = req.body.wpgrade;

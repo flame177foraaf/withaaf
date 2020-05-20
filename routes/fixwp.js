@@ -11,7 +11,7 @@ const client = new Client({
 
 client.connect();
 
-
+/*
 router.get('/', (req,res,next) => {
   var QueryString = "select wpname from aquafeq.aquafwp"
   client.query(QueryString, (err, response) => {
@@ -108,5 +108,5 @@ router.post('/', (req,res,next) => {
     });
   });
 });
-
+*/
 module.exports = router;
