@@ -49,15 +49,15 @@ for (var i = 0; i < eqcustom.length; i++) {
         var rancustom = selectFrom(parseInt(custommax), parseInt(custommin));
       }
       if (rancustom !== 0) {
-        console.log(cut_cus_name + rancustom);
+        var result_custom = cut_cus_name + rancustom;
+        console.log(result_custom);
+
       }
     }
   } else {
     var find_cus_val1 = eqcustom[i].indexOf("("); //웨이블렘 괄호
-    console.log(find_cus_val1);
     var find_cus_val2 = eqcustom[i].indexOf(")"); //웨이블렘 괄호
     var find_cus_val1 = eqcustom[i].indexOf("(",find_cus_val1 +1);
-    console.log(find_cus_val1);
 
     var find_cus_val2 = eqcustom[i].indexOf(")",find_cus_val2 +1);
     var find_cus_per1 = eqcustom[i].indexOf("[");
@@ -102,10 +102,14 @@ for (var i = 0; i < eqcustom.length; i++) {
         var rancustom = selectFrom(parseInt(custommax), parseInt(custommin));
       }
       if (rancustom !== 0) {
-        console.log(cut_cus_name + rancustom);
+
+          var result_custom = cut_cus_name + rancustom;
+          //console.log(result_custom);
       }
+
     }
   }
+
 
 }
 
@@ -144,7 +148,7 @@ for (var i = 0; i < eqcustom.length; i++) {
 */
 
 //math.floor 정수화
-
+/*
 console.log("커스텀 수 " + eqcustom.length)
 console.log(cut_cus_name);
 console.log(cut_cus_value);
@@ -162,3 +166,4 @@ console.log("커스텀 수치 최대치" + custommax);
 
 console.log("커스텀 확률" + cus_per);
 console.log(cus_per_1);
+*/
