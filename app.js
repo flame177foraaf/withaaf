@@ -31,7 +31,7 @@ var aaftestRouter = require('./routes/test');
 var aafmontableRouter =require('./routes/monster');
 var fixwpRouter = require('./routes/fixwp');
 
-//var assembleRouter = require('./routes/testAssembly');
+var assembleRouter = require('./routes/testAssembly');
 
 
 
@@ -52,8 +52,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.use(morgan('short')) //로그 미들웨어
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(morgan('short')); //로그 미들웨어
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/', indexRouter);
 
@@ -77,7 +77,7 @@ app.use('/monster', aafmontableRouter);
 
 app.use('/fixwp', fixwpRouter);
 
-//app.use('/testAssembly', assembleRouter);
+app.use('/testAssembly', assembleRouter);
 
 
 //app.use('/aafwp/wpadd', aafwpaddRouter);

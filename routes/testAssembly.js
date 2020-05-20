@@ -16,7 +16,7 @@ router.get('/', (res,req,next) => {
   console.log(req.query.assemble);
   console.log(Assemble);
 
-  var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = BWM 8S"
+  var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = BWM 8S;"
   client.query(QueryString, (err, response) => {
     res.render('testAssembly', {
       title: '무기 재조립하기',
