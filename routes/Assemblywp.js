@@ -22,7 +22,7 @@ router.get('/', (req,res,next) => {
       title: '무기 재조립하기',
       data: response.rows[0]
     });
-  });
+  });  
 });
 
 router.get('/ing', (req,res,next) => {
@@ -81,7 +81,7 @@ router.get('/ing', (req,res,next) => {
           console.log(cut_cus_name + rancustom);
           res.render('Assemblywp', {
             title: '무기 재조립하기',
-            data: response.rows,
+            data: response.rows[0],
             custom: cut_cus_name + rancustom
           });
         }
