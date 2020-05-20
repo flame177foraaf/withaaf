@@ -11,45 +11,28 @@ var morgan = require('morgan') //로그 모듈 임포트
 //
 
 var indexRouter = require('./routes/index');
-app.use('/', indexRouter);
 
 var usersRouter = require('./routes/users');
 var aafwpRouter = require('./routes/aafwp');
-app.use('/aafwp', aafwpRouter);
 //var aafwpaddRouter = require('./routes/wpAdd');
 var aafarmRouter = require('./routes/aafarm');
-app.use('/aafarm', aafarmRouter);
 //var aafarmaddRouter = require('./routes/armAdd');
 var aafaccRouter = require('./routes/aafacc');
-app.use('/aafacc', aafaccRouter);
 //var aafaccaddRouter = require('./routes/accadd');
 //var aafmixRouter = require('./routes/mix');
 var aaffeatsupRouter = require('./routes/featsup');
-app.use('/featsup', aaffeatsupRouter);
 //var aaffreedomRouter = require('./routes/index');
 //var aafQARouter = require('./routes/index');
 var aafgemRouter = require('./routes/aafgem');
-app.use('/aafgem', aafgemRouter);
 var aafrecipeRouter = require('./routes/recipe');
-app.use('/recipe', aafrecipeRouter);
 var aafboardRouter = require('./routes/board');
-app.use('/board', aafboardRouter);
 //var aafrecipeRouter = require('./routes/recipe2');
 var aaftestRouter = require('./routes/test');
-app.use('/test', aaftestRouter);
 var aafmontableRouter =require('./routes/monster');
-app.use('/monster', aafmontableRouter);
 var fixwpRouter = require('./routes/fixwp');
-app.use('/fixwp', fixwpRouter);
 
 var assembleRouter = require('/routes/testAssembly');
-app.use('/testAssembly', assembleRouter);
 
-//app.use('/aafwp/wpadd', aafwpaddRouter);
-//app.use('/aafarm/armadd', aafarmaddRouter);
-//app.use('/aafacc/accadd', aafaccaddRouter);
-//app.use('/mix', aafmixRouter);
-//app.use('/qa', aafQARouter);
 
 
 
@@ -72,8 +55,36 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('short')) //로그 미들웨어
 app.use(bodyParser.urlencoded({extended:true}))
 
+app.use('/', indexRouter);
+
+app.use('/aafwp', aafwpRouter);
+
+app.use('/aafarm', aafarmRouter);
+
+app.use('/aafacc', aafaccRouter);
+
+app.use('/featsup', aaffeatsupRouter);
+
+app.use('/aafgem', aafgemRouter);
+
+app.use('/recipe', aafrecipeRouter);
+
+app.use('/board', aafboardRouter);
+
+app.use('/test', aaftestRouter);
+
+app.use('/monster', aafmontableRouter);
+
+app.use('/fixwp', fixwpRouter);
+
+app.use('/testAssembly', assembleRouter);
 
 
+//app.use('/aafwp/wpadd', aafwpaddRouter);
+//app.use('/aafarm/armadd', aafarmaddRouter);
+//app.use('/aafacc/accadd', aafaccaddRouter);
+//app.use('/mix', aafmixRouter);
+//app.use('/qa', aafQARouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
