@@ -47,10 +47,10 @@ router.get('/fixwp', (req,res,next) => {
   })
 
 });
-
+/*
 router.get('/testAssembly', (res,req,next) => {
-  var Assemble = req.query.assemble_to_obj;
-  console.log(req.query.assemble_to_obj);
+  var Assemble = req.query.assemble;
+  console.log(req.query.assemble);
   console.log(Assemble);
 
 
@@ -58,11 +58,11 @@ router.get('/testAssembly', (res,req,next) => {
   client.query(QueryString, [Assemble], (err, response) => {
     res.render('testAssembly', {
       title: '무기 재조립하기',
-      data: response.rows
+      data: response.rows[0]
     });
   });
 });
-
+*/
 router.post('/fixwp', (req,res,next) => {
   var Select_name = req.query.Seachname
   var Wpgrade = req.body.wpgrade;
