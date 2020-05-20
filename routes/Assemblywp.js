@@ -142,12 +142,13 @@ router.get('/ing', (req,res,next) => {
 
         }
       }
+      res.render('Assemblywp', {
+        title: '무기 재조립하기',
+        data: response.rows[0],
+        custom: result_custom
+      });
     }
-    res.render('Assemblywp', {
-      title: '무기 재조립하기',
-      data: response.rows[0],
-      custom: result_custom
-    });
+
   });
 })
 
