@@ -35,25 +35,23 @@
         <col span="" id ="" style=" ">
 
       </colgroup>
-      <% data.forEach(function(item) { %>
 
       <tr>
-        <td colspan=""><%- item.wpname %></td>
-        <td><%- item.wplimit %></td>
-        <td><%- item.wpether %></td>
-        <td><%- item.wpproperty %></td>
+        <td colspan=""><%- data.wpname %></td>
+        <td><%- data.wplimit %></td>
+        <td><%- data.wpether %></td>
+        <td><%- data.wpproperty %></td>
       </tr>
       <tr>
-        <td><%- item.wpsocket %></td>
-        <td colspan="3"><%- item.wpstats %></td>
+        <td><%- data.wpsocket %></td>
+        <td colspan="3"><%- data.wpstats %></td>
       </tr>
       <tr>
-        <td colspan="4"><%- item.wpfeat %></td>
+        <td colspan="4"><%- data.wpfeat %></td>
       </tr>
       <tr>
-        <td colspan="4"><%- item.wpcustom %></td>
+        <td colspan="4"><%- data.wpcustom %></td>
       </tr>
-      <% } %>
     </table>
     <div class="" style="text-align: center">
       <form class="" action="/testAssembly" method="post">

@@ -21,7 +21,7 @@ router.get('/', (res,req,next) => {
   client.query(QueryString, [Assemble], (err, response) => {
     res.render('testAssembly', {
       title: '무기 재조립하기',
-      data: response.rows
+      data: response.rows[0]
     });
   });
 });
