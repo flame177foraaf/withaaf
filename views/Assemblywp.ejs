@@ -28,33 +28,62 @@
     <h1><%= title %></h1>
 
 
+    <% if(typeof(custom) === 'undefined'){ %>
+      <table id="" style="width:800px;">
+        <colgroup>
+          <col span="" id ="" style=" ">
+          <col span="" id ="" style=" ">
+          <col span="" id ="" style=" ">
+          <col span="" id ="" style=" ">
 
-    <table id="" style="width:800px;">
-      <colgroup>
-        <col span="" id ="" style=" ">
-        <col span="" id ="" style=" ">
-        <col span="" id ="" style=" ">
-        <col span="" id ="" style=" ">
+        </colgroup>
 
-      </colgroup>
+        <tr>
+          <td colspan="" value="<%= data.wpname %>" name="wpname"><%- data.wpname %></td>
+          <td name="wplimit"><%- data.wplimit %></td>
+          <td name="wpether"><%- data.wpether %></td>
+          <td name="wpproperty"><%- data.wpproperty %></td>
+        </tr>
+        <tr>
+          <td value="<%= data.wpsocket %>"  name="wpsocket"><%- data.wpsocket %></td>
+          <td colspan="3" value="<%= data.wpstats %>"  name="wpstats"><%- data.wpstats %></td>
+        </tr>
+        <tr>
+          <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
+        </tr>
+        <tr>
+          <td colspan="4" value="custom"  name="wpcustom"><%- data.wpcustom%></td>
+        </tr>
+      </table>
+    <% } else { %>
+      <table id="" style="width:800px;">
+        <colgroup>
+          <col span="" id ="" style=" ">
+          <col span="" id ="" style=" ">
+          <col span="" id ="" style=" ">
+          <col span="" id ="" style=" ">
 
-      <tr>
-        <td colspan="" value="<%= data.wpname %>" name="wpname"><%- data.wpname %></td>
-        <td name="wplimit"><%- data.wplimit %></td>
-        <td name="wpether"><%- data.wpether %></td>
-        <td name="wpproperty"><%- data.wpproperty %></td>
-      </tr>
-      <tr>
-        <td value="<%= data.wpsocket %>"  name="wpsocket"><%- data.wpsocket %></td>
-        <td colspan="3" value="<%= data.wpstats %>"  name="wpstats"><%- data.wpstats %></td>
-      </tr>
-      <tr>
-        <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
-      </tr>
-      <tr>
-        <td colspan="4" value="custom"  name="wpcustom"><%- custom%></td>
-      </tr>
-    </table>
+        </colgroup>
+
+        <tr>
+          <td colspan="" value="<%= data.wpname %>" name="wpname"><%- data.wpname %></td>
+          <td name="wplimit"><%- data.wplimit %></td>
+          <td name="wpether"><%- data.wpether %></td>
+          <td name="wpproperty"><%- data.wpproperty %></td>
+        </tr>
+        <tr>
+          <td value="<%= data.wpsocket %>"  name="wpsocket"><%- data.wpsocket %></td>
+          <td colspan="3" value="<%= data.wpstats %>"  name="wpstats"><%- data.wpstats %></td>
+        </tr>
+        <tr>
+          <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
+        </tr>
+        <tr>
+          <td colspan="4" value="custom"  name="wpcustom"><%- custom %></td>
+        </tr>
+      </table>
+    <% } %>
+
     <div class="" style="text-align: center">
       <form class="" action="/Assemblywp/ing" method="get">
         <input type="submit" name="assembly" style="" value="<%= data.wpname %>"></button>
