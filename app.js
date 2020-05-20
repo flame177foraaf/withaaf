@@ -31,7 +31,7 @@ var aaftestRouter = require('./routes/test');
 var aafmontableRouter =require('./routes/monster');
 var fixwpRouter = require('./routes/fixwp');
 
-var assembleRouter = require('/routes/testAssembly');
+var assembleRouter = require('./routes/testAssembly');
 
 
 
