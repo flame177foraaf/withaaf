@@ -13,7 +13,10 @@ client.connect();
 
 router.get('/', (res,req,next) => {
   var Assemble = req.query.assemble_to_obj;
+  console.log(req.query.assemble_to_obj);
   console.log(Assemble);
+
+
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1"
   client.query(QueryString, [Assemble], (err, response) => {
     res.render('testAssembly_wp', {
@@ -21,10 +24,6 @@ router.get('/', (res,req,next) => {
       data: response.rows
     });
   });
-});
-
-router.post('/', (res,req,next) => {
-
 });
 
 
