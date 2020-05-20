@@ -19,7 +19,7 @@ router.get('/', (res,req,next) => {
 
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1"
   client.query(QueryString, [Assemble], (err, response) => {
-    res.render('testAssembly_wp', {
+    res.render('testAssembly', {
       title: '무기 재조립하기',
       data: response.rows
     });
