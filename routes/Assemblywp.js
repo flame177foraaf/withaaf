@@ -60,6 +60,7 @@ router.get('/ing', (req,res,next) => {
         if (cus_per_2 <= parseInt(cus_per_1)) {
           var cut_in_custom = cut_cus_value.indexOf("~");
           var find_per_custom = cut_cus_value.indexOf("%");
+          var find_minus_custom = cut_cus_value.indexOf("-");
           var custommin = cut_cus_value.substring(0,cut_in_custom); //커스텀 수치 최소  3 %
           var custommax = cut_cus_value.substring(cut_in_custom+1); //커스텀 수치 최대    20 %
           if (find_per_custom !== -1) {
@@ -124,6 +125,7 @@ router.get('/ing', (req,res,next) => {
         if (cus_per_2 <= parseInt(cus_per_1)) {
           var cut_in_custom = cut_cus_value.indexOf("~");
           var find_per_custom = cut_cus_value.indexOf("%");
+          var find_minus_custom = cut_cus_value.indexOf("-");
           var custommin = cut_cus_value.substring(0,cut_in_custom); //커스텀 수치 최소  3 %
           var custommax = cut_cus_value.substring(cut_in_custom+1); //커스텀 수치 최대    20 %
           if (find_per_custom !== -1) {
