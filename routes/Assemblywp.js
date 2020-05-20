@@ -84,10 +84,18 @@ router.get('/ing', (req,res,next) => {
             var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
           }
           if (rancustom !== 0) {
-            if (result_custom === null) {
-              var result_custom = cut_cus_name + rancustom;
+            if (find_minus_custom !== -1) {
+              if (result_custom === null) {
+                var result_custom = cut_cus_name + rancustom;
+              } else {
+                var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+              }
             } else {
-              var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+              if (result_custom === null) {
+                var result_custom = cut_cus_name +"+ "+ rancustom;
+              } else {
+                var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
+              }
             }
           }
         }
@@ -140,16 +148,24 @@ router.get('/ing', (req,res,next) => {
             var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
           }
           if (rancustom !== 0) {
-            if (result_custom === null) {
-              var result_custom = cut_cus_name + rancustom;
+            if (find_minus_custom !== -1) {
+              if (result_custom === null) {
+                var result_custom = cut_cus_name + rancustom;
+              } else {
+                var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+              }
             } else {
-              var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+              if (result_custom === null) {
+                var result_custom = cut_cus_name +"+ "+ rancustom;
+              } else {
+                var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
+              }
             }
           }
 
         }
       }
-      
+
     }
     res.render('Assemblywp', {
       title: '무기 재조립하기',

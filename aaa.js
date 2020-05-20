@@ -1,4 +1,4 @@
-var text = "적의 레벨 변화(웨이블렘) ( 1 ~ 4 ) [100% 확률]<br />소울 다이아몬드 추출 기능 ( 8 ~ 25 ) [100% 확률] <br />채굴 가방 확장 ( 10 ~ 50 ) [100% 확률]<br />정신의 결정 추출 기능(웨이블렘) ( 8 ~ 25 ) [60% 확률]<br />치명타 피하기 기능(웨이블렘) ( 10 % ~ 33 % ) [40% 확률]<br />정신 속성 추가 데미지 변화(웨이블렘) ( 2 % ~ 9 % ) [50% 확률]";
+var text = "스태미너 피해 변화 ( -3 ~ 0 ) [100% 확률]<br />강한 흡혈 기능 ( 5 % ~ 12 % ) [100% 확률]<br />추가타 발동 확률 변화 ( 2 % ~ 7 % ) [100% 확률]<br />페이즈 변화 ( -2 ~ 0 ) [70% 확률]<br />스타라이터 : 제이거 ( 2 ~ 40 ) [45% 확률]";
 // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
 
 var eqcustom = text.split('<br />');
@@ -27,6 +27,7 @@ for (var i = 0; i < eqcustom.length; i++) {
     if (cus_per_2 <= cus_per_1) {
       var cut_in_custom = cut_cus_value.indexOf("~");
       var find_per_custom = cut_cus_value.indexOf("%");
+      var find_minus_custom = cut_cus_value.indexOf("-");
       var custommin = cut_cus_value.substring(0,cut_in_custom); //커스텀 수치 최소  3 %
       var custommax = cut_cus_value.substring(cut_in_custom+1); //커스텀 수치 최대    20 %
       if (find_per_custom !== -1) {
@@ -51,11 +52,24 @@ for (var i = 0; i < eqcustom.length; i++) {
         var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
       }
       if (rancustom !== 0) {
-        if (result_custom === null) {
-          var result_custom = cut_cus_name + rancustom;
+        if (find_minus_custom !== -1) {
+          console.log(find_minus_custom);
+
+          if (result_custom === null) {
+            var result_custom = cut_cus_name + rancustom;
+          } else {
+            var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+          }
         } else {
-          var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+          console.log(find_minus_custom);
+
+          if (result_custom === null) {
+            var result_custom = cut_cus_name +"+ "+ rancustom;
+          } else {
+            var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
+          }
         }
+
 
       }
     }
@@ -83,6 +97,8 @@ for (var i = 0; i < eqcustom.length; i++) {
     if (cus_per_2 <= parseInt(cus_per_1)) {
       var cut_in_custom = cut_cus_value.indexOf("~");
       var find_per_custom = cut_cus_value.indexOf("%");
+      var find_minus_custom = cut_cus_value.indexOf("-");
+
       var custommin = cut_cus_value.substring(0,cut_in_custom); //커스텀 수치 최소  3 %
       var custommax = cut_cus_value.substring(cut_in_custom+1); //커스텀 수치 최대    20 %
       if (find_per_custom !== -1) {
@@ -107,10 +123,22 @@ for (var i = 0; i < eqcustom.length; i++) {
         var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
       }
       if (rancustom !== 0) {
-        if (result_custom === null) {
-          var result_custom = cut_cus_name + rancustom;
+        if (find_minus_custom !== -1) {
+          console.log(find_minus_custom);
+
+          if (result_custom === null) {
+            var result_custom = cut_cus_name + rancustom;
+          } else {
+            var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+          }
         } else {
-          var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+          console.log(find_minus_custom);
+
+          if (result_custom === null) {
+            var result_custom = cut_cus_name +"+ "+ rancustom;
+          } else {
+            var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
+          }
         }
       }
 
@@ -121,7 +149,7 @@ for (var i = 0; i < eqcustom.length; i++) {
 
 }
 console.log(result_custom);
-
+console.log(find_minus_custom);
 
 
 // var xxx = Math.floor(Math.random() * (parseInt(custommax) - parseInt(custommin) +1)) + parseInt(custommin);
