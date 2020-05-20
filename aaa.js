@@ -33,9 +33,9 @@ for (var i = 0; i < eqcustom.length; i++) {
         var find_per_cusmax = custommax.indexOf("%");
         var custommin = custommin.substring(0,find_per_cusmin);
         var custommax = custommax.substring(0, find_per_cusmax);
-        function selectFrom(x, y){
-          var choices = y - x + 1;
-          return Math.floor(Math.random() * choices + x);
+        function selectFrom(min, max) {
+          var choices = max - min + 1;
+          return Math.floor(Math.random() * choices + min);
         }
         var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
 
@@ -43,9 +43,9 @@ for (var i = 0; i < eqcustom.length; i++) {
           var rancustom = rancustom + ' %';
         }
       } else {
-        function selectFrom(x, y) {
-          var choices = y - x + 1;
-          return Math.floor(Math.random() * choices + x);
+        function selectFrom(min, max) {
+          var choices = max - min + 1;
+          return Math.floor(Math.random() * choices + min);
         }
         var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
       }
@@ -86,9 +86,9 @@ for (var i = 0; i < eqcustom.length; i++) {
         var find_per_cusmax = custommax.indexOf("%");
         var custommin = custommin.substring(0,find_per_cusmin);
         var custommax = custommax.substring(0, find_per_cusmax);
-        function selectFrom(x, y){
-          var choices = y - x + 1;
-          return Math.floor(Math.random() * choices + x);
+        function selectFrom(min, max) {
+          var choices = max - min + 1;
+          return Math.floor(Math.random() * choices + min);
         }
         var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
 
@@ -96,9 +96,9 @@ for (var i = 0; i < eqcustom.length; i++) {
           var rancustom = rancustom + ' %';
         }
       } else {
-        function selectFrom(x, y) {
-          var choices = y - x + 1;
-          return Math.floor(Math.random() * choices + x);
+        function selectFrom(min, max) {
+          var choices = max - min + 1;
+          return Math.floor(Math.random() * choices + min);
         }
         var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
       }

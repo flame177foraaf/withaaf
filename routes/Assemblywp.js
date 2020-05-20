@@ -67,7 +67,7 @@ router.get('/ing', (req,res,next) => {
             var custommax = custommax.substring(0, find_per_cusmax);
             function selectFrom(min, max){
               var choices = max - min + 1;
-              return Math.floor(Math.random() * choices + x);
+              return Math.floor(Math.random() * choices + min);
             }
             var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
 
@@ -77,7 +77,7 @@ router.get('/ing', (req,res,next) => {
           } else {
             function selectFrom(min, max) {
               var choices = max - min + 1;
-              return Math.floor(Math.random() * choices + x);
+              return Math.floor(Math.random() * choices + min);
             }
             var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
           }
@@ -120,7 +120,7 @@ router.get('/ing', (req,res,next) => {
             var custommax = custommax.substring(0, find_per_cusmax);
             function selectFrom(min, max){
               var choices = max - min + 1;
-              return Math.floor(Math.random() * choices + x);
+              return Math.floor(Math.random() * choices + min);
             }
             var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
 
@@ -130,7 +130,7 @@ router.get('/ing', (req,res,next) => {
           } else {
             function selectFrom(min, max) {
               var choices = max - min + 1;
-              return Math.floor(Math.random() * choices + x);
+              return Math.floor(Math.random() * choices + min);
             }
             var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
           }
