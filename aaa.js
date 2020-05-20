@@ -1,4 +1,4 @@
-var text = "스태미너 피해 변화 ( -3 ~ 0 ) [100% 확률]<br />강한 흡혈 기능 ( 5 % ~ 12 % ) [100% 확률]<br />추가타 발동 확률 변화 ( 2 % ~ 7 % ) [100% 확률]<br />페이즈 변화 ( -2 ~ 0 ) [70% 확률]<br />스타라이터 : 제이거 ( 2 ~ 40 ) [45% 확률]";
+var text = "받는 아스트랄 속성 추가 데미지 변화 ( 5 % ~ 15 % ) [100% 확률]<br />수집품 취득 확률 변화(웨이블렘) ( 5 ~ 15 ) [70% 확률]<br />중간 재생 기능 ( 3 % ~ 9 % ) [80% 확률]<br />아스트랄의 결정 추출 기능(웨이블렘) ( 5 ~ 15 ) [50% 확률]";
 // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
 
 var eqcustom = text.split('<br />');
@@ -53,7 +53,6 @@ for (var i = 0; i < eqcustom.length; i++) {
       }
       if (rancustom !== 0) {
         if (find_minus_custom !== -1) {
-          console.log(find_minus_custom);
 
           if (result_custom === null) {
             var result_custom = cut_cus_name + rancustom;
@@ -61,7 +60,6 @@ for (var i = 0; i < eqcustom.length; i++) {
             var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
           }
         } else {
-          console.log(find_minus_custom);
 
           if (result_custom === null) {
             var result_custom = cut_cus_name +"+ "+ rancustom;
@@ -94,7 +92,7 @@ for (var i = 0; i < eqcustom.length; i++) {
     var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
     var cus_per_2 = Math.floor(Math.random() * (100 - 0 +1)) + 1
 
-    if (cus_per_2 <= parseInt(cus_per_1)) {
+    if (cus_per_2 <= cus_per_1) {
       var cut_in_custom = cut_cus_value.indexOf("~");
       var find_per_custom = cut_cus_value.indexOf("%");
       var find_minus_custom = cut_cus_value.indexOf("-");
@@ -124,7 +122,6 @@ for (var i = 0; i < eqcustom.length; i++) {
       }
       if (rancustom !== 0) {
         if (find_minus_custom !== -1) {
-          console.log(find_minus_custom);
 
           if (result_custom === null) {
             var result_custom = cut_cus_name + rancustom;
@@ -132,7 +129,6 @@ for (var i = 0; i < eqcustom.length; i++) {
             var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
           }
         } else {
-          console.log(find_minus_custom);
 
           if (result_custom === null) {
             var result_custom = cut_cus_name +"+ "+ rancustom;
@@ -149,7 +145,6 @@ for (var i = 0; i < eqcustom.length; i++) {
 
 }
 console.log(result_custom);
-console.log(find_minus_custom);
 
 
 // var xxx = Math.floor(Math.random() * (parseInt(custommax) - parseInt(custommin) +1)) + parseInt(custommin);

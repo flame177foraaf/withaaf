@@ -29,8 +29,6 @@ router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
-    console.log(response.rows[0]);
-    console.log(response.rows.wpcustom);
     console.log(response.rows[0].wpcustom);
 
     var Allcustom = response.rows[0].wpcustom;
@@ -57,7 +55,7 @@ router.get('/ing', (req,res,next) => {
         var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
         var cus_per_2 = Math.floor(Math.random() * (100 - 0 +1)) + 1
 
-        if (cus_per_2 <= parseInt(cus_per_1)) {
+        if (cus_per_2 <= cus_per_1) {
           var cut_in_custom = cut_cus_value.indexOf("~");
           var find_per_custom = cut_cus_value.indexOf("%");
           var find_minus_custom = cut_cus_value.indexOf("-");
@@ -122,7 +120,7 @@ router.get('/ing', (req,res,next) => {
         var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
         var cus_per_2 = Math.floor(Math.random() * (100 - 0 +1)) + 1
 
-        if (cus_per_2 <= parseInt(cus_per_1)) {
+        if (cus_per_2 <= cus_per_1) {
           var cut_in_custom = cut_cus_value.indexOf("~");
           var find_per_custom = cut_cus_value.indexOf("%");
           var find_minus_custom = cut_cus_value.indexOf("-");
