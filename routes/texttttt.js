@@ -1,22 +1,22 @@
-var testtext = "무의 결정 추출 기능 ( 3 ~ 9 ) [100% 확률]<br>절대 명중 기능 ( 3 % ~ 10 % ) [80% 확률]<br>무기 레벨업 필요 경험치 변화 ( 5 % ~ 10 % ) [100% 확률]<br>루엘 파편 획득 확률 변화 ( 5 ~ 15 ) [100% 확률]<br>실드 HP 추가 ( 3 % ~ 6 % ) [60% 확률]<br>페이즈 변화 ( 0 ~ 2 ) [20% 확률]";
+var text = "무의 결정 추출 기능 ( 3 ~ 9 ) [100% 확률]<br>절대 명중 기능 ( 3 % ~ 10 % ) [80% 확률]<br>무기 레벨업 필요 경험치 변화 ( 5 % ~ 10 % ) [100% 확률]<br>루엘 파편 획득 확률 변화 ( 5 ~ 15 ) [100% 확률]<br>실드 HP 추가 ( 3 % ~ 6 % ) [60% 확률]<br>페이즈 변화 ( 0 ~ 2 ) [20% 확률]";
 // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
 
-var test = testtext.split( '<br>');
+var eqcustom = text.split( '<br>');
 
-for (var i = 0; i < test.length; i++) {
-  var find_cus_val1 = test[i].indexOf("(");
-  var find_cus_val2 = test[i].indexOf(")");
-  var find_cus_per1 = test[i].indexOf("[");
-  var find_cus_per2 = test[i].indexOf("]");
-  var cut_cus_name = test[i].substring(0,find_cus_val1);
-  var cut_cus_value = test[i].substring(find_cus_val1+1,find_cus_val2); //커스텀 수치
+for (var i = 0; i < eqcustom.length; i++) {
+  var find_cus_val1 = eqcustom[i].indexOf("(");
+  var find_cus_val2 = eqcustom[i].indexOf(")");
+  var find_cus_per1 = eqcustom[i].indexOf("[");
+  var find_cus_per2 = eqcustom[i].indexOf("]");
+  var cut_cus_name = eqcustom[i].substring(0,find_cus_val1);
+  var cut_cus_value = eqcustom[i].substring(find_cus_val1+1,find_cus_val2); //커스텀 수치
 
 
   //var random_num = Math.floor(Math.random() * 10 + 1);
-  var leng = test[i].length;
+  var leng = eqcustom[i].length;
 
 
-  var cus_per = test[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
+  var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
   var cus_per_0 = cus_per.indexOf("%");
   var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
   var cus_per_2 = Math.floor(Math.random() * (100 - 0 +1)) + 1
@@ -59,7 +59,7 @@ for (var i = 0; i < test.length; i++) {
 
 
 
-//var cut_cus_value = testtext.subsubstring(find_cus_val1+1,leng);
+//var cut_cus_value = text.subsubstring(find_cus_val1+1,leng);
 
 //charAt  = 입력받은 index 번째 문자 반환;
 //indexof  = 해당 문자의 위치 . 없으면 -1
@@ -89,8 +89,8 @@ for (var i = 0; i < test.length; i++) {
 
 //math.floor 정수화
 
-console.log(test);
-console.log("커스텀 수 " + test.length)
+console.log(eqcustom);
+console.log("커스텀 수 " + eqcustom.length)
 console.log(cut_cus_name);
 console.log(cut_cus_value);
 console.log(cut_cus_value);

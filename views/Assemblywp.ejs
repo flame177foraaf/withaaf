@@ -5,7 +5,7 @@
     <title><%= title%></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="http://code.jquery.com/jquery-3.5.1.js"></script>
-    
+
     <style media="screen">
       table {
         border: 1px   solid #444444;
@@ -39,25 +39,25 @@
       </colgroup>
 
       <tr>
-        <td colspan="" value="<%= data.wpstats %>"><%- data.wpname %></td>
-        <td><%- data.wplimit %></td>
-        <td><%- data.wpether %></td>
-        <td><%- data.wpproperty %></td>
+        <td colspan="" value="<%= data.wpname %>" name="wpname"><%- data.wpname %></td>
+        <td name="wplimit"><%- data.wplimit %></td>
+        <td name="wpether"><%- data.wpether %></td>
+        <td name="wpproperty"><%- data.wpproperty %></td>
       </tr>
       <tr>
-        <td value="<%= data.wpstats %>"><%- data.wpsocket %></td>
-        <td colspan="3" value="<%= data.wpstats %>"><%- data.wpstats %></td>
+        <td value="<%= data.wpsocket %>"  name="wpsocket"><%- data.wpsocket %></td>
+        <td colspan="3" value="<%= data.wpstats %>"  name="wpstats"><%- data.wpstats %></td>
       </tr>
       <tr>
-        <td colspan="4"><%- data.wpfeat %></td>
+        <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
       </tr>
       <tr>
-        <td colspan="4" value="<%= data.wpstats %>"><%- data.wpcustom %></td>
+        <td colspan="4" value="<%= data.wpcustom %>"  name="wpcustom"><%- data.wpcustom %></td>
       </tr>
     </table>
     <div class="" style="text-align: center">
-      <form class="" action="/Assemblywp/ing" method="post">
-        <input type="submit" name="assembly" style=""value="재조립하기" />
+      <form class="" action="/Assemblywp/ing" method="get">
+        <input type="submit" name="assembly" style="" value="<%= data.wpname %>"></button>
       </form>
 
     </div>
