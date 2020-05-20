@@ -34,7 +34,7 @@ router.get('/ing', (req,res,next) => {
     var Allcustom = response.rows[0].wpcustom;
     console.log(Allcustom);
     var eqcustom = Allcustom.split('<br />');
-    var result_custom = null;
+    var result_custom = 'null';
 
     for (var i = 0; i < eqcustom.length; i++) {
       if (eqcustom[i].indexOf("웨이블렘") == -1) {
@@ -44,17 +44,12 @@ router.get('/ing', (req,res,next) => {
         var find_cus_per2 = eqcustom[i].indexOf("]");
         var cut_cus_name = eqcustom[i].substring(0,find_cus_val1);
         var cut_cus_value = eqcustom[i].substring(find_cus_val1+1,find_cus_val2); //커스텀 수치
-
-
         //var random_num = Math.floor(Math.random() * 10 + 1);
         var leng = eqcustom[i].length;
-
-
         var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
         var cus_per_0 = cus_per.indexOf("%");
         var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
         var cus_per_2 = Math.floor(Math.random() * (100 - 0 +1)) + 1
-
         if (cus_per_2 <= cus_per_1) {
           var cut_in_custom = cut_cus_value.indexOf("~");
           var find_per_custom = cut_cus_value.indexOf("%");
@@ -71,7 +66,6 @@ router.get('/ing', (req,res,next) => {
               return Math.floor(Math.random() * choices + min);
             }
             var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
-
             if (rancustom !== 0) {
               var rancustom = rancustom + ' %';
             }
@@ -84,13 +78,13 @@ router.get('/ing', (req,res,next) => {
           }
           if (rancustom !== 0) {
             if (find_minus_custom !== -1) {
-              if (result_custom === null) {
+              if (result_custom === 'null') {
                 var result_custom = cut_cus_name + rancustom;
               } else {
                 var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
               }
             } else {
-              if (result_custom === null) {
+              if (result_custom === 'null') {
                 var result_custom = cut_cus_name +"+ "+ rancustom;
               } else {
                 var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
@@ -98,12 +92,10 @@ router.get('/ing', (req,res,next) => {
             }
           }
         }
-
       } else {
         var find_cus_val1 = eqcustom[i].indexOf("("); //웨이블렘 괄호
         var find_cus_val2 = eqcustom[i].indexOf(")"); //웨이블렘 괄호
         var find_cus_val1 = eqcustom[i].indexOf("(",find_cus_val1 +1);
-
         var find_cus_val2 = eqcustom[i].indexOf(")",find_cus_val2 +1);
         var find_cus_per1 = eqcustom[i].indexOf("[");
         var find_cus_per2 = eqcustom[i].indexOf("]");
@@ -149,13 +141,13 @@ router.get('/ing', (req,res,next) => {
           }
           if (rancustom !== 0) {
             if (find_minus_custom !== -1) {
-              if (result_custom === null) {
+              if (result_custom === 'null') {
                 var result_custom = cut_cus_name + rancustom;
               } else {
                 var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
               }
             } else {
-              if (result_custom === null) {
+              if (result_custom === 'null') {
                 var result_custom = cut_cus_name +"+ "+ rancustom;
               } else {
                 var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
