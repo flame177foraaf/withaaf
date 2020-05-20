@@ -12,12 +12,12 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  var assembly = req.query.assembly;
-  console.log(req.query.assembly);
-  console.log(assembly);
+  var Assembly = req.query.assemble;
+  console.log(req.query.assemble);
+  console.log(Assembly);
 
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1;"
-  client.query(QueryString, [assembly],(err, response) => {
+  client.query(QueryString, [Assembly],(err, response) => {
     res.render('testAssembly', {
       title: '무기 재조립하기',
       data: response.rows[0]
