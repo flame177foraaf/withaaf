@@ -145,10 +145,8 @@ for (var i = 0; i < eqcustom.length; i++) {
 
 //math.floor 정수화
 
-console.log(eqcustom);
 console.log("커스텀 수 " + eqcustom.length)
 console.log(cut_cus_name);
-console.log(cut_cus_value);
 console.log(cut_cus_value);
 console.log(cus_per);
 console.log("ㅋ스텀 뜰 확률 수치 " + cus_per_1)

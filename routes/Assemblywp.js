@@ -142,7 +142,7 @@ router.get('/ing', (req,res,next) => {
             res.render('Assemblywp', {
               title: '무기 재조립하기',
               data: response.rows[0],
-              custom: cut_cus_name + rancustom
+              custom: cut_cus_name.rows + rancustom.rows
             });
           }
         }
