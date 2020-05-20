@@ -29,7 +29,7 @@ router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1;"
   client.query(QueryString, [Assembly],(err, response) => {
-    var Allcustom = response.rows[0].wpcustom;
+    var Allcustom = response.rows.wpcustom;
     console.log(Allcustom);
     var eqcustom = Allcustom.split( '<br>');
 
@@ -81,7 +81,7 @@ router.get('/ing', (req,res,next) => {
           console.log(cut_cus_name + rancustom);
           res.render('Assemblywp', {
             title: '무기 재조립하기',
-            data: response.rows[0],
+            data: response.rows,
             custom: cut_cus_name + rancustom
           });
         }
