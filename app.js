@@ -32,7 +32,7 @@ var fixwpRouter = require('./routes/fixwp')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var assembleRouter = requier('/routes/testAssembly_wp');
+var assembleRouter = require('/routes/testAssembly_wp');
 
 
 var app = express();
