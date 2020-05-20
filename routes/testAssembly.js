@@ -12,8 +12,8 @@ const client = new Client({
 client.connect();
 
 router.get('/', (res,req,next) => {
-  var Assemble = req.query.assemble_to_obj;
-  console.log(req.query.assemble_to_obj);
+  var Assemble = req.query.assemble;
+  console.log(req.query.assemble);
   console.log(Assemble);
 
 
