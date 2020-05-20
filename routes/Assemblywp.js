@@ -35,7 +35,7 @@ router.get('/ing', (req,res,next) => {
 
     var Allcustom = response.rows[0].wpcustom;
     console.log(Allcustom);
-    var eqcustom = Allcustom.split( '<br>');
+    var eqcustom = Allcustom.split('<br />');
 
 
 
@@ -142,7 +142,7 @@ router.get('/ing', (req,res,next) => {
             res.render('Assemblywp', {
               title: '무기 재조립하기',
               data: response.rows[0],
-              custom: cut_cus_name.rows + rancustom.rows
+              custom: cut_cus_name + rancustom
             });
           }
         }
