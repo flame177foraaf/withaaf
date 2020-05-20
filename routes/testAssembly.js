@@ -25,6 +25,9 @@ router.get('/', (req,res,next) => {
   });
 });
 
+router.post('/ing', (req,res,next) => {
+  
+})
 
 
 module.exports = router;
