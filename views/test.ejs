@@ -8,128 +8,147 @@
     <style media="screen">
     </style>
     <script type="text/javascript">
-
+      function checkonclick() {
+        if (document.add.datalistname.value == "" || document.add.title.value == null || document.add.datalistname.value == undefined || ( document.add.datalistname.value != null && typeof document.add.datalistname.value == "object" && !Object.keys(document.add.datalistname.value).length ) ) {
+          alert("내용을 입력해주세요!");
+          document.add.datalistname.focus();
+          return false;
+        }
+        return true;
+      }
     </script>
   </head>
   <body style="">
-    <h1><%= title %></h1>
-    <form action="/test/1" method="get">
-      <input type="text" placeholder="찾기 버튼을 누르세요" name="searchText">
-      <select name="searchType">
-          <option value="name">이름</option>
-          <option value="property">속성</option>
-          <option value="feat">피트</option>
-          <option value="custom">커스텀</option>
-      </select>
-      <input type="checkbox" name="limit" value="300" id="chbox"> <label for="chbox" style=""></label>300레벨 이상
-      <input action="/test/1" type="submit" class="btn" value="찾기" ></button>
+    <div class="title_div" >
+      <h1><%= title %></h1>
 
+    </div>
+    <div class="" id="seach_form_id" >
 
-
-
-
-    </form>
-
-
-
-    <table id="eqtable" style="width:1200px;">
-      <colgroup>
-        <col width="100">
-        <col width="200">
-        <col width="50">
-        <col width="50">
-        <col width="100">
-        <col width="200">
-        <col width="350">
-        <col width="300">
-        <col width="650">
-      </colgroup>
-      <thead>
-        <tr  style='text-align: center'>
-          <th>등급</th>
-          <th>이름</th>
-          <th>제한</th>
-          <th>소켓</th>
-          <th>에테르</th>
-          <th>성능</th>
-          <th>속성</th>
-          <th>피트</th>
-          <th>커스텀</th>
-        </tr>
-      </thead>
-      <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
-      <tbody>
-        <% if(typeof(CurrentPage) === 'undefined'){ %>
-          <tr>
-            <td colspan="4"; style= "text-align:center;"> 검색이 필요합니다.</td>
+      <form action="/aafwp/1" method="get">
+        <input type="text" placeholder="모든 항목" name="searchText" style="width:200px">
+        <select name="searchType">
+            <option value="name">이름</option>
+            <option value="property">속성</option>
+            <option value="feat">피트</option>
+            <option value="custom">커스텀</option>
+        </select>
+        <input type="checkbox" name="limit" value="300" id="chbox"> <label for="chbox" style="">300레벨 이상</label>
+        <input action="/aafwp/1" type="submit" class="btn" value="찾기" ></button>
+      </form>
+    </div>
+    <div class="">
+      <table id="eqtable" style="width:100%;">
+        <colgroup>
+          <col width="100">
+          <col width="200">
+          <col width="50">
+          <col width="50">
+          <col width="100">
+          <col width="200">
+          <col width="350">
+          <col width="300">
+          <col width="650">
+        </colgroup>
+        <thead>
+          <tr  style='text-align: center'>
+            <th>등급</th>
+            <th>이름</th>
+            <th>제한</th>
+            <th>소켓</th>
+            <th>에테르</th>
+            <th>성능</th>
+            <th>속성</th>
+            <th>피트</th>
+            <th>커스텀</th>
           </tr>
-        <% } else { %>
-          <% data.forEach(function(item) { %>
-          <tr  style="white-space: pre-line; font-size:12px;">
-            <td><%- item.wpgrade %></td>
-            <td><%- item.wpname %></td>
-            <td style='text-align: center'><%- item.wplimit %></td>
-            <td style='text-align: center'><%- item.wpsocket %></td>
-            <td style='text-align: center'><%- item.wpether %></td>
-            <td style='text-align: center'><%- item.wpstats %></td>
-            <td><%- item.wpproperty %></td>
-            <td><%- item.wpfeat %></td>
-            <td><%- item.wpcustom %></td>
-          </tr>
-          <% }); %>
-        <% } %>
-      <div class="" id="pagelist">
-        <% if(typeof(CurrentPage) === 'undefined'){ %>
-          <tr>
-            <div class="" id="pagelist" >
-              <td colspan="4" style= "text-align:center; font-size:24px">
-                검색이 필요합니다.
-              </td>
-            </div>
-          </tr>
-        <% } else { %>
-          <tr>
-            <div class="" id="pagelist">
-              <td colspan="21" style= "text-align:center; font-size:24px">
-                <% if (CurrentPage > PageSize){ %>
-                  <a href="/test/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
-                  <a href="/test/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
-                <% } %>
-                <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
-                  <% if (iCount == CurrentPage) { %>
-                    <b class="btnnonactive"><%- iCount %></b>
-                  <% } else { %>
-                    <a href="/test/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
+        </thead>
+        <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+        <tbody>
+          <% if(typeof(CurrentPage) === 'undefined'){ %>
+            <tr>
+              <td colspan="9"; style= "text-align:center;"> 검색이 필요합니다.</td>
+            </tr>
+          <% } else { %>
+            <% data.forEach(function(item) { %>
+            <tr  style="white-space: pre-line; font-size:12px;">
+              <td><%- item.wpgrade %></td>
+              <td><%- item.wpname %></td>
+              <td style='text-align: center'><%- item.wplimit %></td>
+              <td style='text-align: center'><%- item.wpsocket %></td>
+              <td style='text-align: center'><%- item.wpether %></td>
+              <td style='text-align: center'><%- item.wpstats %></td>
+              <td><%- item.wpproperty %></td>
+              <td><%- item.wpfeat %></td>
+              <td><%- item.wpcustom %></td>
+            </tr>
+            <% }); %>
+          <% } %>
+        <div class="" id="pagelist">
+          <% if(typeof(CurrentPage) === 'undefined'){ %>
+            <tr>
+              <div class="" id="pagelist" >
+                <td colspan="9" style= "text-align:center; font-size:24px">
+                  검색이 필요합니다.
+                </td>
+              </div>
+            </tr>
+          <% } else { %>
+            <tr>
+              <div class="" id="pagelist">
+                <td colspan="21" style= "text-align:center; font-size:24px">
+                  <% if (CurrentPage > PageSize){ %>
+                    <a href="/aafwp/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
+                    <a href="/aafwp/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
                   <% } %>
-                <% } %>
-                <% if (EndPage < TotalPage){ %>
-                  <a href="/test/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
-                  <a href="/test/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
-                <% } %>
-              </td>
-            </div>
-          </tr>
-        <% } %>
-      </div>
-      </tbody>
-    </table>
+                  <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
+                    <% if (iCount == CurrentPage) { %>
+                      <b class="btnnonactive"><%- iCount %></b>
+                    <% } else { %>
+                      <a href="/aafwp/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
+                    <% } %>
+                  <% } %>
+                  <% if (EndPage < TotalPage){ %>
+                    <a href="/aafwp/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
+                    <a href="/aafwp/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
+                  <% } %>
+                </td>
+              </div>
+            </tr>
+          <% } %>
+        </div>
+        </tbody>
+      </table>
+    </div>
+
+
+
     <div class="" style="text-align: center">
-      <form class="" action="/test/fixwp" method="get" >
-        <button onclick=location.href="/test/wpadd" type="button" name="button" style="">신규등록</a></button>
+      <div class="">
+        <form class="" action="/wpadd" method="post">
+           <button onclick=location.href="/aafwp/wpadd" type="button" name="button" style="width:200px">신규등록</a></button>
+        </form>
+      </div>
 
-
-        <input type=text list=browsers style="margin-left:50px" name="Seachname">
+      <form class="" name="add" action="/fixwp" method="get"  onsubmit="return checkonclick()">
+        <input type=text list=browsers style="" checked value="<%= data[0].wpname %>" name="Seachname">
         <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
-
-        <datalist id="browsers" class="" style="width:50%">
-          <% data.forEach(function(item) { %>
-          <option value='<%= item.wpname%>' style="width:50%"><%- item.wpname%></option>
-          <% }); %>
-
-        </datalist>
-        <input action="/test/fixwp" type="submit" class="btn" value="변경하기" ></button>
-
-
+          <datalist id="browsers" name="datalistname" class="" style="width:50%">
+            <% data.forEach(function(item) { %>
+            <option value='<%= item.wpname%>' style=""><%- item.wpname%></option>
+            <% }); %>
+          </datalist>
+        <input action="/fixwp" type="submit" class="btn" value="변경하기" ></button>
+      </form>
+      <form class="" name="" action="/testAssembly_wp" method="get"  onsubmit="return checkonclick()">
+        <input type=text list=browsers style="" checked value="<%= data[0].wpname %>" name="Seachname">
+        <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
+          <datalist id="browsers" name="datalistname" class="" style="width:50%">
+            <% data.forEach(function(item) { %>
+            <option value='<%= item.wpname%>' style=""><%- item.wpname%></option>
+            <% }); %>
+          </datalist>
+        <input action="/testAssembly_wp" type="submit" class="btn" value="재조립하기" ></button>
       </form>
     </div>
 

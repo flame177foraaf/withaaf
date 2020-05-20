@@ -90,6 +90,7 @@
     height: 20px;
     border: 2px solid #bcbcbc;
     cursor: pointer;
+    font-size: 15px
   }
 
   input[id="chbox"]:checked + label {
@@ -97,9 +98,6 @@
   }
   input[id="chbox"] {
     display: none;
-  }
-  label{
-    vertical-align: middle;
   }
 
   input{

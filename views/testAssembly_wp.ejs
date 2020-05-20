@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ('head') %>
+    <title><%= title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <style media="screen">
+      table {
+        border: 1px   solid #444444;
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+
+      }
+      th, td{
+        border: 1px solid #444444;
+        border-collapse: collapse;
+      }
+    </style>
+    <script type="text/javascript">
+
+    </script>
+  </head>
+  <body style="">
+    <h1><%= title %></h1>
+
+
+
+    <table id="" style="width:800px;">
+      <colgroup>
+        <col span="" id ="" style=" ">
+        <col span="" id ="" style=" ">
+        <col span="" id ="" style=" ">
+        <col span="" id ="" style=" ">
+
+      </colgroup>
+      <% data.forEach(function(item) { %>
+
+      <tr>
+        <td colspan=""><%- item.wpname %></td>
+        <td><%- item.wplimit %></td>
+        <td><%- item.wpether %></td>
+        <td><%- item.wpproperty %></td>
+      </tr>
+      <tr>
+        <td><%- item.wpsocket %></td>
+        <td colspan="3"><%- item.wpstats %></td>
+      </tr>
+      <tr>
+        <td colspan="4"><%- item.wpfeat %></td>
+      </tr>
+      <tr>
+        <td colspan="4"><%- item.wpcustom %></td>
+      </tr>
+    </table>
+    <div class="" style="text-align: center">
+      <form class="" action="/testAssembly_wp" method="post">
+        <input type="submit" name="assemble_to_obj" style=""value="재조립하기" />
+      </form>
+
+    </div>
+
+  </body>
+  <footer>
+    <%- include ('footer')%>
+  </footer>
+</html>
