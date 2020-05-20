@@ -2,8 +2,9 @@ var text = "적의 레벨 변화(웨이블렘) ( 1 ~ 4 ) [100% 확률]<br />소�
 // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
 
 var eqcustom = text.split('<br />');
-for (var i = 0; i < eqcustom.length; i++) {
+var result_custom = null;
 
+for (var i = 0; i < eqcustom.length; i++) {
   if (eqcustom[i].indexOf("웨이블렘") == -1) {
     var find_cus_val1 = eqcustom[i].indexOf("(");
     var find_cus_val2 = eqcustom[i].indexOf(")");
@@ -50,11 +51,14 @@ for (var i = 0; i < eqcustom.length; i++) {
         var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
       }
       if (rancustom !== 0) {
-        var result_custom = cut_cus_name + rancustom;
+        if (result_custom === null) {
+          var result_custom = cut_cus_name + rancustom;
+        } else {
+          var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+        }
 
       }
     }
-    console.log(result_custom);
 
   } else {
     var find_cus_val1 = eqcustom[i].indexOf("("); //웨이블렘 괄호
@@ -103,17 +107,20 @@ for (var i = 0; i < eqcustom.length; i++) {
         var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
       }
       if (rancustom !== 0) {
-
+        if (result_custom === null) {
           var result_custom = cut_cus_name + rancustom;
-          //console.log(result_custom);
+        } else {
+          var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+        }
       }
-      console.log(result_custom);
 
     }
+
   }
 
 
 }
+console.log(result_custom);
 
 
 
