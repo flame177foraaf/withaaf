@@ -37,6 +37,8 @@ router.get('/ing', (req,res,next) => {
     console.log(Allcustom);
     var eqcustom = Allcustom.split( '<br>');
 
+
+
     for (var i = 0; i < eqcustom.length; i++) {
       if (eqcustom[i].indexOf("웨이블렘") == -1) {
         var find_cus_val1 = eqcustom[i].indexOf("(");
@@ -137,12 +139,16 @@ router.get('/ing', (req,res,next) => {
           }
           if (rancustom !== 0) {
             console.log(cut_cus_name + rancustom);
+            res.render('Assemblywp', {
+              title: '무기 재조립하기',
+              data: response.rows[0],
+              custom: cut_cus_name + rancustom
+            });
           }
         }
       }
     }
   });
-
 })
 
 
