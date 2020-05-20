@@ -28,7 +28,11 @@ router.get('/', (req,res,next) => {
 router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1;"
-  client.query(QueryString, [Assembly],(err, response) => {
+  client.query(QueryString, [Assembly], (err, response) => {
+    console.log(response.rows[0])
+    console.log(response.rows.wpcustom)
+    console.log(response.rows[0].wpcustom)
+
     var Allcustom = response.rows[0].wpcustom;
     console.log(Allcustom);
     var eqcustom = Allcustom.split( '<br>');
