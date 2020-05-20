@@ -141,7 +141,7 @@
         <input action="/fixwp" type="submit" class="btn" value="변경하기" ></button>
       </form>
       <form class="" name="" action="/testAssembly_wp" method="get"  onsubmit="return checkonclick()">
-        <input type=text list=browsers style="" checked value="<%= data[0].wpname %>" name="Seachname">
+        <input type=text list=browsers style="" checked value="<%= data[0].wpname %>" name="assemble_to_obj">
         <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
           <datalist id="browsers" name="datalistname" class="" style="width:50%">
             <% data.forEach(function(item) { %>

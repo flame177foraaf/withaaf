@@ -32,7 +32,7 @@ var fixwpRouter = require('./routes/fixwp')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var assembleRouter = requier('/routes/testAssembly_wp');
 
 
 var app = express();
@@ -68,9 +68,9 @@ app.use('/recipe', aafrecipeRouter)
 app.use('/board', aafboardRouter);
 //app.use('/qa', aafQARouter);
 app.use('/test', aaftestRouter);
-app.use('/monster', aafmontableRouter)
-app.use('/fixwp', fixwpRouter)
-
+app.use('/monster', aafmontableRouter);
+app.use('/fixwp', fixwpRouter);
+app.use('/testAssembly_wp', assembleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
