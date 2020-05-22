@@ -87,19 +87,20 @@
           </td>
         </tr>
       </table>
-      <% var trycount = 0; %>
+      <% var clicks = 0; %>
       <% function try_button(){ %>
-      <%   trycount++; %>
+        <% clicks += 1; %>
+        <% document.getElementById("clicks").innerHTML = clicks %>
       <% } %>
       <p style="text-align:center">
-        현재 재조립을  <%= trycount %> 회 시도하였습니다.
+        현재 재조립을  <%= clicks %> 회 시도하였습니다.
       </p>
 
     <% } %>
 
     <div class="" style="text-align: center">
       <form class="" action="/Assemblywp/ing" method="get">
-        <input type="submit" name="assembly" style="" onclick="try_button()"value="<%= data.wpname %>"></button>
+        <input type="submit" name="assembly" style="" id=""onclick="try_button()"value="<%= data.wpname %>"></button>
       </form>
 
     </div>
