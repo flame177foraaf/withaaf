@@ -1,6 +1,6 @@
 var text = "받는 아스트랄 속성 추가 데미지 변화 ( 5 % ~ 15 % ) [100% 확률]<br />수집품 취득 확률 변화(웨이블렘) ( 5 ~ 15 ) [70% 확률]<br />중간 재생 기능 ( 3 % ~ 9 % ) [80% 확률]<br />아스트랄의 결정 추출 기능(웨이블렘) ( 5 ~ 15 ) [50% 확률]";
 // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
-var text = "적의 레벨 변화(웨이블렘) ( 1 ~ 4 ) [100% 확률]<br />소울 다이아몬드 추출 기능 ( 8 ~ 25 ) [100% 확률]<br />채굴 가방 확장 ( 10 ~ 50 ) [100% 확률]<br />정신의 결정 추출 기능(웨이블렘) ( 8 ~ 25 ) [60% 확률]<br />치명타 피하기 기능(웨이블렘) ( 10 % ~ 33 % ) [40% 확률]<br />정신 속성 추가 데미지 변화(웨이블렘) ( 2 % ~ 9 % ) [50% 확률]"
+var text = "스태미너 피해 변화 ( -3 ~ 0 ) [100% 확률]<br />강한 흡혈 기능 ( 5 % ~ 12 % ) [100% 확률]<br />추가타 발동 확률 변화 ( 2 % ~ 7 % ) [100% 확률]<br />페이즈 변화 ( -2 ~ 0 ) [70% 확률]<br />스타라이 터 : 제이거 ( 2 ~ 40 ) [45% 확률]"
 var eqcustom = text.split('<br />');
 var result_custom = 'null';
 
@@ -133,6 +133,9 @@ for (var i = 0; i < eqcustom.length; i++) {
 console.log(result_custom);
 
 
+
+
+
 // var xxx = Math.floor(Math.random() * (parseInt(custommax) - parseInt(custommin) +1)) + parseInt(custommin);
 
 
@@ -184,3 +187,81 @@ console.log("커스텀 수치" + cut_cus_value);
 console.log("커스텀 수치 최소치" + custommin);
 console.log("커스텀 수치 최대치" + custommax);
 */
+
+function Dice_roll(min, max){
+  var diceroll = max - min + 1;
+  return Math.floor(Math.random() * diceroll + min);
+}
+
+
+
+
+var testsocket = "2~5"
+//console.log("소켓" + testsocket.length)
+//console.log("소켓 구분" + testsocket.indexOf("~"))
+
+var minsocket = testsocket.substring(0,testsocket.indexOf("~"));
+var maxsocket = testsocket.substring(testsocket.indexOf("~")+1,testsocket.length)
+console.log("최소 소켓" + minsocket)
+console.log("최대 소켓" +maxsocket)
+
+//console.log(Dice_roll(parseInt(minsocket),parseInt(maxsocket)))
+var socket = "";
+var socketx = "";
+var socket_roll = Dice_roll(parseInt(minsocket),parseInt(maxsocket)) //소켓 범위 내에서 굴리기
+
+for (var i = 0; i < socket_roll; i++) {
+  socket = socket + "○"
+}   //최소소켓 맞추기
+for (var j = parseInt(maxsocket)-socket_roll ; j > 0; j--) {
+  socketx = socketx + "●"
+}
+console.log("소켓 주사위 굴리기" +socket_roll)
+console.log(socket + socketx)
+
+
+
+
+
+//스텟 재조립
+var teststats = "+ 1670 / + 442"
+// console.log(teststats.indexOf("/"))
+var cut1_stats = teststats.substring(0,teststats.indexOf("/"))
+var cut2_stats = teststats.substring(teststats.indexOf("/")+1)
+console.log(cut1_stats)
+console.log(cut2_stats)
+var first_stat = cut1_stats.substring(cut1_stats.indexOf("+") +1)
+var second_stat = cut2_stats.substring(cut2_stats.indexOf("+") +1)
+console.log(first_stat)
+console.log(second_stat)
+console.log(parseInt(first_stat))
+
+var Dice_roll_first_stat = parseInt(Dice_roll(-10,10))
+console.log(Dice_roll_first_stat)
+var Dice_roll_first_stat_per =  (100 + Dice_roll_first_stat  )/100
+console.log(Dice_roll_first_stat_per)
+var first_stat = parseInt(first_stat)*Dice_roll_first_stat_per
+var first_stat = Math.floor(first_stat)  //소수점 버리기
+if (Dice_roll_first_stat > 0) {
+  var result_first_stats = first_stat + "(" +" + "+ Dice_roll_first_stat + " % " + ")";
+}else {
+  var result_first_stats =first_stat + " ( " + Dice_roll_first_stat + " % " + ") ";
+
+}
+
+
+var Dice_roll_second_stat = parseInt(Dice_roll(-10,10))
+console.log(Dice_roll_second_stat)
+var Dice_roll_second_stat_per =  (100 + Dice_roll_second_stat  )/100
+console.log(Dice_roll_second_stat_per)
+var second_stat = parseInt(second_stat)*Dice_roll_second_stat_per
+var second_stat = Math.floor(second_stat) //소수점 버리기
+if (Dice_roll_second_stat > 0) {
+  var result_second_stats = second_stat + "(" +" + "+ Dice_roll_second_stat + " % " + ")";
+}else {
+  var result_second_stats =second_stat + " ( " + Dice_roll_second_stat + " % " + ") ";
+}
+
+
+
+console.log(result_first_stats +" / " +result_second_stats)

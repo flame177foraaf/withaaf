@@ -13,8 +13,6 @@ client.connect();
 
 router.get('/', (req,res,next) => {
   var Assembly = req.query.assembly;
-  console.log(req.query.assembly);
-  console.log(Assembly);
 
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
   client.query(QueryString, [Assembly],(err, response) => {
@@ -25,6 +23,7 @@ router.get('/', (req,res,next) => {
   });
 });
 
+var trytry = 0;
 router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
@@ -36,6 +35,12 @@ router.get('/ing', (req,res,next) => {
     var eqcustom = Allcustom.split('<br />');
     var result_custom = 'null';
 
+    function Dice_roll(min, max){   //주사위 굴리기
+      var diceroll = max - min + 1;
+      return Math.floor(Math.random() * diceroll + min);
+    }
+
+    // 커스텀 재조립
     for (var i = 0; i < eqcustom.length; i++) {
       if (eqcustom[i].indexOf("웨이블렘") == -1) {
         var find_cus_val1 = eqcustom[i].indexOf("(");
@@ -49,7 +54,7 @@ router.get('/ing', (req,res,next) => {
         var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
         var cus_per_0 = cus_per.indexOf("%");
         var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
-        var cus_per_2 = Math.floor(Math.random() * (100 - 0 +1)) + 1
+        var cus_per_2 = Math.floor(Math.random() * 100) + 1
         if (cus_per_2 <= cus_per_1) {
           var cut_in_custom = cut_cus_value.indexOf("~");
           var find_per_custom = cut_cus_value.indexOf("%");
@@ -61,20 +66,14 @@ router.get('/ing', (req,res,next) => {
             var find_per_cusmax = custommax.indexOf("%");
             var custommin = custommin.substring(0,find_per_cusmin);
             var custommax = custommax.substring(0, find_per_cusmax);
-            function selectFrom(min, max){
-              var choices = max - min + 1;
-              return Math.floor(Math.random() * choices + min);
-            }
-            var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
+
+            var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
             if (rancustom !== 0) {
               var rancustom = rancustom + ' %';
             }
           } else {
-            function selectFrom(min, max) {
-              var choices = max - min + 1;
-              return Math.floor(Math.random() * choices + min);
-            }
-            var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
+
+            var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
           }
           if (rancustom !== 0) {
             if (find_minus_custom !== -1) {
@@ -110,7 +109,7 @@ router.get('/ing', (req,res,next) => {
         var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
         var cus_per_0 = cus_per.indexOf("%");
         var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
-        var cus_per_2 = Math.floor(Math.random() * (100 - 0 +1)) + 1
+        var cus_per_2 = Math.floor(Math.random() * 100) + 1
 
         if (cus_per_2 <= cus_per_1) {
           var cut_in_custom = cut_cus_value.indexOf("~");
@@ -123,21 +122,15 @@ router.get('/ing', (req,res,next) => {
             var find_per_cusmax = custommax.indexOf("%");
             var custommin = custommin.substring(0,find_per_cusmin);
             var custommax = custommax.substring(0, find_per_cusmax);
-            function selectFrom(min, max){
-              var choices = max - min + 1;
-              return Math.floor(Math.random() * choices + min);
-            }
-            var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
+
+            var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
 
             if (rancustom !== 0) {
               var rancustom = rancustom + ' %';
             }
           } else {
-            function selectFrom(min, max) {
-              var choices = max - min + 1;
-              return Math.floor(Math.random() * choices + min);
-            }
-            var rancustom = selectFrom(parseInt(custommin), parseInt(custommax));
+
+            var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
           }
           if (rancustom !== 0) {
             if (find_minus_custom !== -1) {
@@ -157,12 +150,77 @@ router.get('/ing', (req,res,next) => {
 
         }
       }
+    }
+
+    //소켓 재조
+    var Allsocket = response.rows[0].wpsocket
+    //console.log("소켓" + testsocket.length)
+    //console.log("소켓 구분" + testsocket.indexOf("~"))
+
+    var minsocket = Allsocket.substring(0,Allsocket.indexOf("~"));
+    var maxsocket = Allsocket.substring(Allsocket.indexOf("~")+1,Allsocket.length)
+    var socket = "";
+    var socketx = "";
+    var socket_roll = Dice_roll(parseInt(minsocket),parseInt(maxsocket)) //소켓 범위 내에서 굴리기
+
+    for (var i = 0; i < socket_roll; i++) {
+      socket = socket + "○"
+    }
+    for (var j = parseInt(maxsocket)-socket_roll ; j > 0; j--) {
+      socketx = socketx + "●"
+    }
+    var result_socket = socket + socketx;
+    //console.log("소켓 주사위 굴리기" +socket_roll)
+    //console.log(socket + socketx)
+
+    // 스텟 재조립
+    var ALlstats = response.rows[0].wpstats
+    // console.log(ALlstats.indexOf("/"))
+    var cut1_stats = ALlstats.substring(0,ALlstats.indexOf("/"))
+    var cut2_stats = ALlstats.substring(ALlstats.indexOf("/")+1)
+    //console.log(cut1_stats)
+    //console.log(cut2_stats)
+    var first_stat = cut1_stats.substring(cut1_stats.indexOf("+") +1)
+    var second_stat = cut2_stats.substring(cut2_stats.indexOf("+") +1)
+    //console.log(first_stat)
+    //console.log(second_stat)
+    //console.log(parseInt(first_stat))
+
+    var Dice_roll_first_stat = parseInt(Dice_roll(-10,10))
+    //console.log(Dice_roll_first_stat)
+    var Dice_roll_first_stat_per =  (100 + Dice_roll_first_stat  )/100
+    //console.log(Dice_roll_first_stat_per)
+    var first_stat = parseInt(first_stat)*Dice_roll_first_stat_per
+    var first_stat = Math.floor(first_stat)  //소수점 버리기
+    if (Dice_roll_first_stat > 0) {
+      var result_first_stats = first_stat + "(" +" + "+ Dice_roll_first_stat + " % " + ")";
+    }else {
+      var result_first_stats =first_stat + " ( " + Dice_roll_first_stat + " % " + ") ";
 
     }
+
+    var Dice_roll_second_stat = parseInt(Dice_roll(-10,10))
+    //console.log(Dice_roll_second_stat)
+    var Dice_roll_second_stat_per =  (100 + Dice_roll_second_stat  )/100
+    //console.log(Dice_roll_second_stat_per)
+    var second_stat = parseInt(second_stat)*Dice_roll_second_stat_per
+    var second_stat = Math.floor(second_stat) //소수점 버리기
+    if (Dice_roll_second_stat > 0) {
+      var result_second_stats = second_stat + "(" +" + "+ Dice_roll_second_stat + " % " + ")";
+    }else {
+      var result_second_stats =second_stat + " ( " + Dice_roll_second_stat + " % " + ") ";
+    }
+    var result_stats = result_first_stats +" / " +result_second_stats;
+
+    var trytry = trytry + 1;
+
     res.render('Assemblywp', {
       title: '무기 재조립하기',
       data: response.rows[0],
-      custom: result_custom
+      wpsocket: result_socket,
+      wpcustom: result_custom,
+      wpstats:result_stats,
+      try:trytry
     });
   });
 })
