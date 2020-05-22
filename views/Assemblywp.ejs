@@ -24,10 +24,6 @@
     </style>
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script type="text/javascript">
-      var trycount = 0;
-      function try_button(){
-        trycount++;
-      }
     </script>
   </head>
   <body style="">
@@ -91,6 +87,10 @@
           </td>
         </tr>
       </table>
+      <% var trycount = 0; %>
+      <% function try_button(){ %>
+      <%   trycount++; %>
+      <% } %>
       <p style="text-align:center">
         현재 재조립을  <%= trycount %> 회 시도하였습니다.
       </p>
