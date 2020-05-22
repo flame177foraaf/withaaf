@@ -26,7 +26,6 @@ router.get('/', (req,res,next) => {
 router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
-  var trytry = 0;
 
   client.query(QueryString, [Assembly], (err, response) => {
     console.log(response.rows[0].wpcustom);
@@ -213,15 +212,13 @@ router.get('/ing', (req,res,next) => {
     }
     var result_stats = result_first_stats +" / " +result_second_stats;
 
-    var trytry = trytry + 1;
 
     res.render('Assemblywp', {
       title: '무기 재조립하기',
       data: response.rows[0],
       wpsocket: result_socket,
       wpcustom: result_custom,
-      wpstats:result_stats,
-      wptry:trytry
+      wpstats:result_stats
     });
   });
 })

@@ -24,7 +24,10 @@
     </style>
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script type="text/javascript">
-
+      var trycount = 0;
+      function try_button(){
+        trycount++;
+      }
     </script>
   </head>
   <body style="">
@@ -89,13 +92,13 @@
         </tr>
       </table>
       <br>
-        현재 재조립을 <%- wptry %> 회 시도하였습니다.
+        현재 재조립을 <% trycount %> 회 시도하였습니다.
       </br>
     <% } %>
 
     <div class="" style="text-align: center">
       <form class="" action="/Assemblywp/ing" method="get">
-        <input type="submit" name="assembly" style="" value="<%= data.wpname %>"></button>
+        <input type="submit" name="assembly" style="" onclick="try_button()"value="<%= data.wpname %>"></button>
       </form>
 
     </div>
