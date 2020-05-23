@@ -228,6 +228,8 @@ router.get('/ing', (req,res,next) => {
         result_custom: result_custom,
         result_stats:result_stats,
       };
+    console.log(Alldata);
+
     res.send(Alldata)
   });
 })

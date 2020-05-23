@@ -31,11 +31,9 @@
           }
           $('#trycount').text(trycount);
           var Params = '?assembly='+ req.query.assembly
-          console.log(Params)
           $.ajax({
             url: '/ing' + Params,
             type: 'GET',
-            dataType: 'JSON',
 
             success: function(data) {
               alert(data[0].num);
