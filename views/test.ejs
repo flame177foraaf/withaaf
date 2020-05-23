@@ -38,13 +38,14 @@
             data: {},
             dataType: 'JSON',
             success: function(data) {
-              var Alldata = JSON.parse(data)
-
+              var Alldata = JSON.parse(data);
+              console.log(Alldata);
+              console.log(Alldata.wpstats);
               var socket1 ="<td colspan="3" value="Alldata.wpstats"  name="wpstats" id="" > Alldata.result_stats </td>";
               var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"> Alldata.result_socket </td>"
 
               ;
-              var custom1  ="<td colspan="2" value="custom"  name="wpcustom"> Alldata.wpcustom </td><td colspan="2" value="custom"  name="wpcustom" id="" > Alldata.result_custom </td>"
+              var custom1  ="<td colspan="2" value="Alldata.wpcustom"  name="wpcustom"> Alldata.wpcustom </td><td colspan="2" value="custom"  name="Alldata.result_custom" id="" > Alldata.result_custom </td>"
               ;
 
               $('#Socket').html(socket1);
