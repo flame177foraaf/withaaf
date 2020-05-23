@@ -26,15 +26,11 @@
       $.ajax({
         url: '/test/ing',
         type: 'GET',
-        success: function(data) {
-          if (data) {
-            var stat1 = '<td colspan="3" >' + '냠냠'+ '</td>';
-            var socket1 = '<td style="font-size:30px">'+ '쩝쩝' + '</td>';
-            var custom1  ='<td colspan="2">' +  '냠냠' +'</td>' + '<td colspan="2">' +  '쩝쩝' + '</td>';
-            $('#Stat').html(stat1);
-            $('#Socket').html(socket1);
-            $('#Custom').html(custom1);
-          }
+        success: function() {
+          var stat1 = '<td colspan="3" >' + '냠냠'+ '</td>';
+          var socket1 = '<td style="font-size:30px">'+ '쩝쩝' + '</td>';
+          var custom1  ='<td colspan="2">' +  '냠냠' +'</td>' + '<td colspan="2">' +  '쩝쩝' + '</td>';
+          $('#Stat').html(stat1);
         }
       });
 
