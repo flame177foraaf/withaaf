@@ -36,15 +36,15 @@
 
             type: 'GET',
             data: {},
-            dataType: 'json',
+            dataType: 'JSON',
             success: function(data) {
               var Alldata = JSON.parse(data)
 
-              var socket1 ="<td colspan="3" value="Alldata.wpstats"  name="wpstats" id="" ><%- Alldata.result_stats %></td>";
-              var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata.result_socket %></td>"
+              var socket1 ="<td colspan="3" value="Alldata.wpstats"  name="wpstats" id="" > Alldata.result_stats </td>";
+              var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"> Alldata.result_socket </td>"
 
               ;
-              var custom1  ="<td colspan="2" value="custom"  name="wpcustom"><%- Alldata.wpcustom%></td><td colspan="2" value="custom"  name="wpcustom" id="" ><%- Alldata.result_custom %></td>"
+              var custom1  ="<td colspan="2" value="custom"  name="wpcustom"> Alldata.wpcustom </td><td colspan="2" value="custom"  name="wpcustom" id="" > Alldata.result_custom </td>"
               ;
 
               $('#Socket').html(socket1);
