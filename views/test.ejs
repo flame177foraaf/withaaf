@@ -21,10 +21,34 @@
       }
     </style>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-
     <script>
+    $(function() {
+      $("trycount_btn").click(function () {
+        var trycount= 0;
+        function trycountplus() {
+          trycount++;
+        }
+        $('#trycount').text(trycount);
 
+        $.ajax({
+          type: 'GET',
+          url: '/Assemblywp/ing',
+          success: function(result) {
+            var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata.result_stats %></td>";
+            var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata.result_socket %></td>"
 
+            ;
+            var custom1  ="<td colspan="2" value="custom"  name="wpcustom"><%- Alldata.wpcustom%></td><td colspan="2" value="custom"  name="wpcustom" id="" ><%- Alldata.result_custom %></td>"
+            ;
+
+            $('#Socket').html(socket1);
+            $('#Stat').html(stat1);
+            $('#Custom').html(custom1);
+
+          }
+        });
+      });
+    });
     </script>
   </head>
   <body style="">
@@ -78,34 +102,5 @@
   <footer>
     <%- include ('footer')%>
   </footer>
-  <script>
-  $(function() {
-    $("trycount_btn").click(function () {
-      var trycount= 0;
-      function trycountplus() {
-        trycount++;
-      }
-      $('#trycount').text(trycount);
 
-      $.ajax({
-        type: 'GET',
-        url: '/Assemblywp/ing',
-        data: {Alldata:Alldata},
-        success: function(result) {
-          var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata[0].wpstats %></td>";
-          var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata[0].wpsocket %></td>"
-
-          ;
-          var custom1  ="<td colspan="2" value="custom"  name="wpcustom"><%- Alldata[0].data.wpcustom%></td><td colspan="2" value="custom"  name="wpcustom" id="" ><%- Alldata[0].wpcustom %></td>"
-          ;
-
-          $('#Socket').html(socket1);
-          $('#Stat').html(stat1);
-          $('#Custom').html(custom1);
-
-        }
-      });
-    });
-  });
-  </script>
 </html>

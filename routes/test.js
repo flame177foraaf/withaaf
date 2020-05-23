@@ -218,11 +218,18 @@ router.get('/ing', (req,res,next) => {
 
     var Alldata = [
       {
-        data: response.rows[0],
-
-        wpsocket: result_socket,
-        wpcustom: result_custom,
-        wpstats:result_stats,
+        wpgrade: response.rows[0].wpgrade,
+        wpname: response.rows[0].wpname,
+        wplimit: response.rows[0].wplimit,
+        wpsocket : response.rows[0].wpsocket,
+        wpether: response.rows[0].wpether,
+        wpstats: response.rows[0].wpstats,
+        wpproperty: response.rows[0].wpproperty,
+        wpfeat: response.rows[0].wpfeat,
+        wpcustom: response.rows[0].wpcustom,
+        result_socket: result_socket,
+        result_custom: result_custom,
+        result_stats:result_stats,
       }
     ];
     res.send(Alldata)
