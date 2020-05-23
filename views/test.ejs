@@ -35,15 +35,18 @@
             url: '/ing' + Params,
             type: 'GET',
             success: function(data) {
-              var obj = JSON.parse(data);
-              var stat1 ="<td colspan="3" value="obj.result_stats"  name="" id="" > obj.result_stats </td>";
-              var socket1 ="<td  value="obj.result_socket"  name="" id="" style="font-size:30px"> obj.result_socket </td>"
-              ;
-              var custom1  ="<td colspan="2" value="obj.wpcustom"  name="wpcustom"> obj.wpcustom </td><td colspan="2"value="obj.result_custom"  name="" id="" > obj.result_custom </td>"
-              ;
-              $('#Stat').html(stat1);
-              $('#Socket').html(socket1);
-              $('#Custom').html(custom1);
+              if (data) {
+                var stat1 ="<td colspan="3" value="obj.result_stats"  name="" id="" > obj.result_stats </td>";
+                var socket1 ="<td  value="obj.result_socket"  name="" id="" style="font-size:30px"> obj.result_socket </td>"
+                ;
+                var custom1  ="<td colspan="2" value="obj.wpcustom"  name="wpcustom"> obj.wpcustom </td><td colspan="2"value="obj.result_custom"  name="" id="" > obj.result_custom </td>"
+                ;
+                $('#Stat').html(stat1);
+                $('#Socket').html(socket1);
+                $('#Custom').html(custom1);
+              }
+
+
             }
           });
         });
