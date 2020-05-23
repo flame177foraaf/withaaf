@@ -34,6 +34,7 @@
           $.ajax({
             url: '/ing' + Params,
             type: 'GET',
+            data: {Params :Params }
             success: function(data) {
               var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" > data.result_stats </td>";
               var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"> data.result_socket </td>"
