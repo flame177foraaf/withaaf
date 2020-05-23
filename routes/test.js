@@ -229,7 +229,6 @@ router.get('/ing', (req,res,next) => {
         result_stats:result_stats,
       };
     console.log(Alldata);
-    var Alldata = json_encode(Alldata)
     res.send(Alldata)
   });
 })
