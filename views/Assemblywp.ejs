@@ -23,9 +23,7 @@
       }
     </style>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript">
 
-    </script>
     <script>
       var trycount= 0;
       $('#try').click(function() {
@@ -73,30 +71,37 @@
       </table>
     <% } else { %>
       <table id="" style="width:800px;">
-        <colgroup>
-          <col span="" id ="" style=" ">
-          <col span="" id ="" style=" ">
-          <col span="" id ="" style=" ">
-          <col span="" id ="" style=" ">
+        <thead>
+          <colgroup>
+            <col span="" id ="" style=" ">
+            <col span="" id ="" style=" ">
+            <col span="" id ="" style=" ">
+            <col span="" id ="" style=" ">
 
-        </colgroup>
+          </colgroup>
+        </thead>
+        <tbody style="text-align:center">
+          <tr >
+            <td colspan="" value="<%= data.wpname %>" name="wpname" id="wpname"><%- data.wpname %></td>
+            <td name="wplimit" id="" ><%- data.wplimit %></td>
+            <td name="wpether" id="" ><%- data.wpether %></td>
+            <td name="wpproperty" id="" ><%- data.wpproperty %></td>
+          </tr>
+          <tr >
+            <td value="socket"  name="wpsocket" id="" style="font-size:30px"><%- wpsocket %></td>
+            <td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- wpstats %></td>
+          </tr>
+          <tr>
+            <td colspan="4" name="wpfeat" id="" ><%- data.wpfeat %></td>
+          </tr>
+          <tr style="height:250px">
+            <td colspan="2" value="custom"  name="wpcustom" id="" ><%- data.wpcustom %></td>
+            <td colspan="2" value="custom"  name="wpcustom" id="" ><%- wpcustom %></td>
+          </tr>
+        </tbody>
 
-        <tr style="text-align:center">
-          <td colspan="" value="<%= data.wpname %>" name="wpname" id="wpname"><%- data.wpname %></td>
-          <td name="wplimit" id="" ><%- data.wplimit %></td>
-          <td name="wpether" id="" ><%- data.wpether %></td>
-          <td name="wpproperty" id="" ><%- data.wpproperty %></td>
-        </tr>
-        <tr style="text-align:center">
-          <td value="socket"  name="wpsocket" id="" ><%- wpsocket %></td>
-          <td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- wpstats %></td>
-        </tr>
-        <tr>
-          <td colspan="4" name="wpfeat" id="" ><%- data.wpfeat %></td>
-        </tr>
-        <tr>
-          <td colspan="4" value="custom"  name="wpcustom" id="" ><%- wpcustom %></td>
-        </tr>
+
+
       </table>
       <p style="text-align:center">
         현재 재조립을 <span id ='trycount' > 0</span> 회 시도하였습니다.
