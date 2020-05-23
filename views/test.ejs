@@ -35,22 +35,15 @@
             url: '/ing' + Params,
             type: 'GET',
             success: function(data) {
-              $.each(data, function () {
-                var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" > data.result_stats </td>";
-                var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"> data.result_socket </td>"
-
-                ;
-                var custom1  ="<td colspan="2" value="data.wpcustom"  name="wpcustom"> data.wpcustom </td><td colspan="2" value="custom"  name="data.result_custom" id="" > data.result_custom </td>"
-                ;
-
-                $('#Socket').html(socket1);
-                $('#Stat').html(stat1);
-                $('#Custom').html(custom1);
-              })
-
-
+              var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" > data.result_stats </td>";
+              var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"> data.result_socket </td>"
+              ;
+              var custom1  ="<td colspan="2" value="data.wpcustom"  name="wpcustom"> data.wpcustom </td><td colspan="2"value="custom"  name="data.result_custom" id="" > data.result_custom </td>"
+              ;
+              $('#Socket').html(socket1);
+              $('#Stat').html(stat1);
+              $('#Custom').html(custom1);
             }
-
           });
         });
       })
