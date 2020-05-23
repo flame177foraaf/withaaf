@@ -17,7 +17,7 @@ router.get('/', (req,res,next) => {
 
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
   client.query(QueryString, [Assembly],(err, response) => {
-  
+
     res.render('test', {
       title: '무기 재조립하기',
       data: response.rows[0]
@@ -29,10 +29,10 @@ router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
-    console.log(response.rows[0].wpcustom);
+    //console.log(response.rows[0].wpcustom);
 
     var Allcustom = response.rows[0].wpcustom;
-    console.log(Allcustom);
+    //console.log(Allcustom);
     var eqcustom = Allcustom.split('<br />');
     var result_custom = 'null';
 
@@ -213,7 +213,7 @@ router.get('/ing', (req,res,next) => {
     }
     var result_stats = result_first_stats +" / " +result_second_stats;
 
-    var Alldata = [
+    var Alldata =
       {
         wpgrade: response.rows[0].wpgrade,
         wpname: response.rows[0].wpname,
@@ -227,8 +227,7 @@ router.get('/ing', (req,res,next) => {
         result_socket: result_socket,
         result_custom: result_custom,
         result_stats:result_stats,
-      }
-    ];
+      };
     res.send(Alldata)
   });
 })
