@@ -30,7 +30,7 @@
         }
         $('#trycount').text(trycount);
         $.ajax({
-          url: '/ing',
+          url: '/ing' + req.query.assembly,
           type: 'GET',
           success: function(data) {
             if (data) {
