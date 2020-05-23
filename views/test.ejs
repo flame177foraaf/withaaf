@@ -33,6 +33,7 @@
         $.ajax({
           type: 'GET',
           url: '/Assemblywp/ing',
+          dataType : 'JSON',
           success: function(result) {
             var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata.result_stats %></td>";
             var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata.result_socket %></td>"
@@ -45,7 +46,8 @@
             $('#Stat').html(stat1);
             $('#Custom').html(custom1);
 
-          }
+          },
+          
         });
       });
     });
