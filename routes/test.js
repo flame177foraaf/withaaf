@@ -219,6 +219,7 @@ router.get('/ing', (req,res,next) => {
     var Alldata = [
       {
         data: response.rows[0],
+
         wpsocket: result_socket,
         wpcustom: result_custom,
         wpstats:result_stats,

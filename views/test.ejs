@@ -91,11 +91,11 @@
         type: 'GET',
         url: '/Assemblywp/ing',
         success: function(result) {
-          var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata.wpstats %></td>";
-          var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata.wpsocket %></td>"
+          var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata[0].wpstats %></td>";
+          var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata[0].wpsocket %></td>"
 
           ;
-          var custom1  ="<td colspan="2" value="custom"  name="wpcustom"><%- Alldata.data.wpcustom%></td><td colspan="2" value="custom"  name="wpcustom" id="" ><%- Alldata.wpcustom %></td>"
+          var custom1  ="<td colspan="2" value="custom"  name="wpcustom"><%- Alldata[0].data.wpcustom%></td><td colspan="2" value="custom"  name="wpcustom" id="" ><%- Alldata[0].wpcustom %></td>"
           ;
 
           $('#Socket').html(socket1);
