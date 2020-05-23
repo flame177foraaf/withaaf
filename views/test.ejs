@@ -30,11 +30,9 @@
             trycount++;
           }
           $('#trycount').text(trycount);
-          var Params = '?assembly='+ req.query.assembly
           $.ajax({
-            url: '/ing' + Params,
+            url: '/ing',
             type: 'GET',
-            data : {result_custom: ""}
             success: function(data) {
               if (data) {
                 var stat1 ="<td colspan="3" value="data.result_stats"  name="" id="" > data.result_stats </td>";
