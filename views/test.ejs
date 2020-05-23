@@ -24,33 +24,7 @@
 
     <script>
 
-      $(function() {
-        $("trycount_btn").click(function () {
-          var trycount= 0;
-          function trycountplus() {
-            trycount++;
-          }
-          $('#trycount').text(trycount);
 
-          $.ajax({
-            type: 'GET',
-            url: '/Assemblywp/ing',
-            success: function(result) {
-              var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata.wpstats %></td>";
-              var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata.wpsocket %></td>"
-
-              ;
-              var custom1  ="<td colspan="2" value="custom"  name="wpcustom"><%- data.wpcustom%></td><td colspan="2" value="custom"  name="wpcustom" id="" ><%- Alldata.wpcustom %></td>"
-              ;
-
-              $('#Socket').html(socket1);
-              $('#Stat').html(stat1);
-              $('#Custom').html(custom1);
-
-            }
-          });
-        });
-      });
     </script>
   </head>
   <body style="">
@@ -104,4 +78,33 @@
   <footer>
     <%- include ('footer')%>
   </footer>
+  <script>
+  $(function() {
+    $("trycount_btn").click(function () {
+      var trycount= 0;
+      function trycountplus() {
+        trycount++;
+      }
+      $('#trycount').text(trycount);
+
+      $.ajax({
+        type: 'GET',
+        url: '/Assemblywp/ing',
+        success: function(result) {
+          var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata.wpstats %></td>";
+          var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata.wpsocket %></td>"
+
+          ;
+          var custom1  ="<td colspan="2" value="custom"  name="wpcustom"><%- Alldata.data.wpcustom%></td><td colspan="2" value="custom"  name="wpcustom" id="" ><%- Alldata.wpcustom %></td>"
+          ;
+
+          $('#Socket').html(socket1);
+          $('#Stat').html(stat1);
+          $('#Custom').html(custom1);
+
+        }
+      });
+    });
+  });
+  </script>
 </html>
