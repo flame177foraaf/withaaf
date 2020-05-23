@@ -34,17 +34,13 @@
           $.ajax({
             url: '/ing' + Params,
             type: 'GET',
-
             success: function(data) {
-              alert(data[0].num);
-              alert(data[0].wpstats);
-              alert(data[0].result_socket);
               $.each(data, function () {
-                var socket1 ="<td colspan="3" value="Alldata.wpstats"  name="wpstats" id="" > Alldata.result_stats </td>";
-                var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"> Alldata.result_socket </td>"
+                var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" > data.result_stats </td>";
+                var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"> data.result_socket </td>"
 
                 ;
-                var custom1  ="<td colspan="2" value="Alldata.wpcustom"  name="wpcustom"> Alldata.wpcustom </td><td colspan="2" value="custom"  name="Alldata.result_custom" id="" > Alldata.result_custom </td>"
+                var custom1  ="<td colspan="2" value="data.wpcustom"  name="wpcustom"> data.wpcustom </td><td colspan="2" value="custom"  name="data.result_custom" id="" > data.result_custom </td>"
                 ;
 
                 $('#Socket').html(socket1);
@@ -53,7 +49,7 @@
               })
 
 
-            },
+            }
 
           });
         });
