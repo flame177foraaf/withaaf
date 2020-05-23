@@ -23,24 +23,19 @@
     <script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script type="text/javascript">
-      $('#try_btn').on("click",function () {
-        var trycount= 0;
-          trycount++;
-        $('#trycount').text(trycount);
-        $.ajax({
-          url: '/test/ing?assembly=' + data.Assembly,
-          type: 'GET',
-          success: function(data) {
-            if (data) {
-              var stat1 = '<td colspan="3" >' +data.result_stats+ '</td>';
-              var socket1 = '<td style="font-size:30px">'+ data.result_socket + '</td>';
-              var custom1  ='<td colspan="2">' + data.wpcustom +'</td>' + '<tdcolspan="2">' + data.result_custom + '</td>';
-              $('#Stat').html(stat1);
-              $('#Socket').html(socket1);
-              $('#Custom').html(custom1);
-            }
+      $.ajax({
+        url: '/test/ing',
+        type: 'GET',
+        success: function(data) {
+          if (data) {
+            var stat1 = '<td colspan="3" >' + '냠냠'+ '</td>';
+            var socket1 = '<td style="font-size:30px">'+ '쩝쩝' + '</td>';
+            var custom1  ='<td colspan="2">' +  '냠냠' +'</td>' + '<td colspan="2">' +  '쩝쩝' + '</td>';
+            $('#Stat').html(stat1);
+            $('#Socket').html(socket1);
+            $('#Custom').html(custom1);
           }
-        });
+        }
       });
 
     </script>
@@ -60,20 +55,17 @@
 
       <tbody>
         <tr style="text-align:center">
-          <td colspan="" value="<%= data.wpname %>" name="wpname" id="wpname"style="width:40%"><%- data.wpname %></td>
-          <td name="wplimit"><%- data.wplimit %></td>
-          <td name="wpether"><%- data.wpether %></td>
-          <td name="wpproperty"><%- data.wpproperty %></td>
+          <td colspan="" value="" name="wpname" id="wpname"style="width:40%"></td>
         </tr>
         <tr style="text-align:center">
-          <td value="socket"  name="wpsocket" id="Socket" style=""><%- data.wpsocket %></td>
-          <td colspan="3" value="<%= data.wpstats %>"  name="wpstats" id="Stat"><%- data.wpstats %></td>
+          <td value="socket"  name="wpsocket" id="Socket" style=""></td>
+          <td colspan="3" value=""  name="wpstats" id="Stat"></td>
         </tr>
         <tr>
-          <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
+          <td colspan="4" name="wpfeat"></td>
         </tr>
         <tr>
-          <td colspan="4" value="custom"  name="wpcustom" id="Custom"><%- data.wpcustom%></td>
+          <td colspan="4" value="custom"  name="wpcustom" id="Custom"></td>
         </tr>
       </tbody>
     </table>
@@ -87,7 +79,7 @@
 
     <div class="" style="text-align: center">
       <form class="" id="try_btn" onclick="" action="/test/ing" method="get">
-        <input type="submit" name="assembly" style="" id="try_btn" onclick=""value="<%= data.wpname %>"></button>
+        <input type="submit" name="assembly" style="" id="try_btn" onclick=""value="크와앙"></button>
       </form>
 
     </div>
