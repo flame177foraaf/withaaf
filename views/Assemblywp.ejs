@@ -22,8 +22,22 @@
         font-size: 18px;
       }
     </style>
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript">
+
+    </script>
+    <script>
+      var trycount= 0;
+      $('#try').click(function() {
+        $.ajax({
+          url:'./Assemblywp/ing',
+          type: 'get',
+          data: 'trycount' + 1
+          success:function(data) {
+            $('#trycount').text(data)
+          }
+        })
+      })
     </script>
   </head>
   <body style="">
@@ -40,13 +54,13 @@
 
         </colgroup>
 
-        <tr>
+        <tr style="text-align:center">
           <td colspan="" value="<%= data.wpname %>" name="wpname"><%- data.wpname %></td>
           <td name="wplimit"><%- data.wplimit %></td>
           <td name="wpether"><%- data.wpether %></td>
           <td name="wpproperty"><%- data.wpproperty %></td>
         </tr>
-        <tr>
+        <tr style="text-align:center">
           <td value="<%= data.wpsocket %>"  name="wpsocket"><%- data.wpsocket %></td>
           <td colspan="3" value="<%= data.wpstats %>"  name="wpstats"><%- data.wpstats %></td>
         </tr>
@@ -67,40 +81,32 @@
 
         </colgroup>
 
-        <tr>
-          <td colspan="" value="<%= data.wpname %>" name="wpname"><%- data.wpname %></td>
-          <td name="wplimit"><%- data.wplimit %></td>
-          <td name="wpether"><%- data.wpether %></td>
-          <td name="wpproperty"><%- data.wpproperty %></td>
+        <tr style="text-align:center">
+          <td colspan="" value="<%= data.wpname %>" name="wpname" id="wpname"><%- data.wpname %></td>
+          <td name="wplimit" id="" ><%- data.wplimit %></td>
+          <td name="wpether" id="" ><%- data.wpether %></td>
+          <td name="wpproperty" id="" ><%- data.wpproperty %></td>
+        </tr>
+        <tr style="text-align:center">
+          <td value="socket"  name="wpsocket" id="" ><%- wpsocket %></td>
+          <td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- wpstats %></td>
         </tr>
         <tr>
-          <td value="socket"  name="wpsocket"><%- wpsocket %></td>
-          <td colspan="3" value="data.wpstats"  name="wpstats"><%- wpstats %></td>
+          <td colspan="4" name="wpfeat" id="" ><%- data.wpfeat %></td>
         </tr>
         <tr>
-          <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
-        </tr>
-        <tr>
-          <td colspan="4" value="custom"  name="wpcustom">
-
-            <%- wpcustom %>
-          </td>
+          <td colspan="4" value="custom"  name="wpcustom" id="" ><%- wpcustom %></td>
         </tr>
       </table>
-      <% var clicks = 0; %>
-      <% function try_button(){ %>
-        <% clicks += 1; %>
-        <% document.getElementById("clicks").innerHTML = clicks %>
-      <% } %>
       <p style="text-align:center">
-        현재 재조립을  <%= clicks %> 회 시도하였습니다.
+        현재 재조립을 <span id ='trycount' > 0</span> 회 시도하였습니다.
       </p>
 
     <% } %>
 
     <div class="" style="text-align: center">
-      <form class="" action="/Assemblywp/ing" method="get">
-        <input type="submit" name="assembly" style="" id=""onclick="try_button()"value="<%= data.wpname %>"></button>
+      <form class="" id="try" action="/Assemblywp/ing" method="get">
+        <input type="submit" name="assembly" style="" id="" onclick="try_button()"value="<%= data.wpname %>"></button>
       </form>
 
     </div>
