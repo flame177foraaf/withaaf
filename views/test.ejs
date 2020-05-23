@@ -29,10 +29,11 @@
           trycount++;
         }
         $('#trycount').text(trycount);
+        var Params = '?assembly='+ req.query.assembly
 
         $.ajax({
           type: 'GET',
-          url: '/Assemblywp/ing',
+          url: '/Assemblywp/ing' + Params,
           dataType : 'JSON',
           success: function(result) {
             var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata.result_stats %></td>";
@@ -47,7 +48,7 @@
             $('#Custom').html(custom1);
 
           },
-          
+
         });
       });
     });
