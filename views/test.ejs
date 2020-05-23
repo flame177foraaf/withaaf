@@ -25,14 +25,14 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
     <script>
-      var trycount= 0;
-      $('#try').click(function() {
+      $('#trycount_btn').click(function() {
         $.ajax({
           url:'./Assemblywp/ing',
           type: 'get',
-          data: 'trycount' + 1
+          var trycount= 0;
+          trycount: trycount
           success:function(data) {
-            $('#trycount').text(data)
+            $('#trycount').text(trycount +1)
           }
         })
       })
@@ -40,18 +40,19 @@
   </head>
   <body style="">
     <h1><%= title %></h1>
-
-
-    <% if(typeof(wpcustom) === 'undefined'){ %>
-      <table id="" style="width:800px;">
+    <table id="" style="width:60%;">
+      <thead>
         <colgroup>
           <col span="" id ="" style=" ">
           <col span="" id ="" style=" ">
           <col span="" id ="" style=" ">
           <col span="" id ="" style=" ">
-
         </colgroup>
+      </thead>
 
+    <% if(typeof(wpcustom) === 'undefined'){ %>
+
+      <tbody>
         <tr style="text-align:center">
           <td colspan="" value="<%= data.wpname %>" name="wpname"><%- data.wpname %></td>
           <td name="wplimit"><%- data.wplimit %></td>
@@ -68,18 +69,11 @@
         <tr>
           <td colspan="4" value="custom"  name="wpcustom"><%- data.wpcustom%></td>
         </tr>
-      </table>
-    <% } else { %>
-      <table id="" style="width:800px;">
-        <thead>
-          <colgroup>
-            <col span="" id ="" style=" ">
-            <col span="" id ="" style=" ">
-            <col span="" id ="" style=" ">
-            <col span="" id ="" style=" ">
+      </tbody>
+    </table>
 
-          </colgroup>
-        </thead>
+    <% } else { %>
+
         <tbody style="text-align:center">
           <tr >
             <td colspan="" value="<%= data.wpname %>" name="wpname" id="wpname"style="width:40%"><%- data.wpname %></td>
@@ -99,9 +93,6 @@
             <td colspan="2" value="custom"  name="wpcustom" id="" ><%- wpcustom %></td>
           </tr>
         </tbody>
-
-
-
       </table>
       <p style="text-align:center">
         현재 재조립을 <span id ='trycount' > 0</span> 회 시도하였습니다.
@@ -111,7 +102,7 @@
 
     <div class="" style="text-align: center">
       <form class="" id="try" action="/Assemblywp/ing" method="get">
-        <input type="submit" name="assembly" style="" id="" onclick="try_button()"value="<%= data.wpname %>"></button>
+        <input type="submit" name="assembly" style="" id="trycount_btn" onclick="()"value="<%= data.wpname %>"></button>
       </form>
 
     </div>
