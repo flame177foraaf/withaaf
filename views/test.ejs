@@ -29,14 +29,13 @@
           trycount++;
         }
         $('#trycount').text(trycount);
-        var Params = '?assembly='+ req.query.assembly
 
         $.ajax({
           type: 'GET',
-          url: '/ing' + Params,
+          url: '/ing',
           dataType : 'JSON',
           success: function(result) {
-            var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata.result_stats %></td>";
+            var socket1 ="<td colspan="3" value="Alldata.result_stats"  name="wpstats" id="" ><%- Alldata.result_stats %></td>";
             var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata.result_socket %></td>"
 
             ;
@@ -95,7 +94,7 @@
 
 
     <div class="" style="text-align: center">
-      <form class="" id="try" action="/Assemblywp/ing" method="get">
+      <form class="" id="try" action="/test/ing" method="get">
         <input type="submit" name="assembly" style="" id="trycount_btn" onclick="trycountplus()"value="<%= data.wpname %>"></button>
       </form>
 
