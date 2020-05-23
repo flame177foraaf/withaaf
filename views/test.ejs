@@ -20,8 +20,8 @@
         font-size: 18px;
       }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
+    <script type="text/javascript"src="node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
     $(function() {
       $("trycount_btn").click(function () {
         var trycount= 0;
@@ -29,13 +29,14 @@
           trycount++;
         }
         $('#trycount').text(trycount);
+        var Params = '?assembly='+ req.query.assembly
 
         $.ajax({
           type: 'GET',
-          url: '/ing',
+          url: '/ing' + Params,
           dataType : 'JSON',
           success: function(result) {
-            var socket1 ="<td colspan="3" value="Alldata.result_stats"  name="wpstats" id="" ><%- Alldata.result_stats %></td>";
+            var socket1 ="<td colspan="3" value="Alldata.wpstats"  name="wpstats" id="" ><%- Alldata.result_stats %></td>";
             var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata.result_socket %></td>"
 
             ;
