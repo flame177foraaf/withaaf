@@ -28,7 +28,7 @@
           trycount++;
         $('#trycount').text(trycount);
         $.ajax({
-          url: '/test/ing' + '?assembly' + req.params.assembly,
+          url: '/ing' + '?assembly' + req.params.assembly,
           dataType:JSON,
           type: 'GET',
           success: function(data) {
