@@ -36,10 +36,10 @@
             type: 'GET',
             data: {Params :Params }
             success: function(data) {
-              var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" > data.result_stats </td>";
-              var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"> data.result_socket </td>"
+              var stat1 ="<td colspan="3" value="data.result_stats"  name="" id="" > data.result_stats </td>";
+              var socket1 ="<td  value="data.result_socket"  name="" id="" style="font-size:30px"> data.result_socket </td>"
               ;
-              var custom1  ="<td colspan="2" value="data.wpcustom"  name="wpcustom"> data.wpcustom </td><td colspan="2"value="custom"  name="data.result_custom" id="" > data.result_custom </td>"
+              var custom1  ="<td colspan="2" value="data.wpcustom"  name="wpcustom"> data.wpcustom </td><td colspan="2"value="data.result_custom"  name="" id="" > data.result_custom </td>"
               ;
               $('#Socket').html(socket1);
               $('#Stat').html(stat1);
