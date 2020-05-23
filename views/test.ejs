@@ -20,7 +20,8 @@
         font-size: 18px;
       }
     </style>
-    <script type="text/javascript"src="node_modules/jquery/dist/jquery.js"></script>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
     <script type="text/javascript">
       $(document).ready(funtion(){
         $("trycount_btn").click(function () {
@@ -34,17 +35,25 @@
           $.ajax({
             url: '/ing' + Params,
             type: 'GET',
+            dataType: 'JSON',
+
             success: function(data) {
-              var socket1 ="<td colspan="3" value="Alldata.wpstats"  name="wpstats" id="" > Alldata.result_stats </td>";
-              var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"> Alldata.result_socket </td>"
+              alert(data[0].num);
+              alert(data[0].wpstats);
+              alert(data[0].result_socket);
+              $.each(data, function () {
+                var socket1 ="<td colspan="3" value="Alldata.wpstats"  name="wpstats" id="" > Alldata.result_stats </td>";
+                var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"> Alldata.result_socket </td>"
 
-              ;
-              var custom1  ="<td colspan="2" value="Alldata.wpcustom"  name="wpcustom"> Alldata.wpcustom </td><td colspan="2" value="custom"  name="Alldata.result_custom" id="" > Alldata.result_custom </td>"
-              ;
+                ;
+                var custom1  ="<td colspan="2" value="Alldata.wpcustom"  name="wpcustom"> Alldata.wpcustom </td><td colspan="2" value="custom"  name="Alldata.result_custom" id="" > Alldata.result_custom </td>"
+                ;
 
-              $('#Socket').html(socket1);
-              $('#Stat').html(stat1);
-              $('#Custom').html(custom1);
+                $('#Socket').html(socket1);
+                $('#Stat').html(stat1);
+                $('#Custom').html(custom1);
+              })
+
 
             },
 
