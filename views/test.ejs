@@ -23,12 +23,12 @@
     <script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script type="text/javascript">
-      $('#try_btn').click(function () {
+      $('#try_btn').on("click",function () {
         var trycount= 0;
           trycount++;
         $('#trycount').text(trycount);
         $.ajax({
-          url: '/ing',
+          url: '/ing?assembly=' + data.Assembly,
           type: 'GET',
           success: function(data) {
             if (data) {

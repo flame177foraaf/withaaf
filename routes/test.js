@@ -215,6 +215,7 @@ router.get('/ing', (req,res,next) => {
 
     var Alldata =
       {
+        Assembly:Assembly,
         wpgrade: response.rows[0].wpgrade,
         wpname: response.rows[0].wpname,
         wplimit: response.rows[0].wplimit,
