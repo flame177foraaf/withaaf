@@ -36,8 +36,7 @@
             success: function(data) {
               if (data) {
                 var stat1 ="<td colspan="3" value="data.result_stats"  name="" id="" > data.result_stats </td>";
-                var socket1 ="<td  value="data.result_socket"  name="" id="" style="font-size:30px"> data.result_socket </td>"
-                ;
+                var socket1 ="<td  value="data.result_socket"  name="" id="" style="font-size:30px"> data.result_socket </td>";
                 var custom1  ="<td colspan="2" value="data.wpcustom"  name=""> data.wpcustom </td>" + "<td colspan="2"value="data.result_custom"  name="" id="" > data.result_custom </td>"
                 ;
                 $('#Stat').html(stat1);
@@ -75,7 +74,7 @@
           <td name="wpproperty"><%- data.wpproperty %></td>
         </tr>
         <tr style="text-align:center">
-          <td value="socket"  name="wpsocket" id="Socket" style="font-size:30px"><%- data.wpsocket %></td>
+          <td value="socket"  name="wpsocket" id="Socket" style=""><%- data.wpsocket %></td>
           <td colspan="3" value="<%= data.wpstats %>"  name="wpstats" id="Stat"><%- data.wpstats %></td>
         </tr>
         <tr>
