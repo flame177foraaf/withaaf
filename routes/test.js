@@ -17,10 +17,7 @@ router.get('/', (req,res,next) => {
 
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
   client.query(QueryString, [Assembly],(err, response) => {
-    if (typeof(response.rows[0]) !== 'object') {
-      res.redirect('/');
-
-    }
+  
     res.render('test', {
       title: '무기 재조립하기',
       data: response.rows[0]
