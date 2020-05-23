@@ -269,5 +269,5 @@ var result = {
   result_custom: result_custom,
   result_stats:result_stats,
 }
-
+console.log('              var stat1 ="<td colspan="3" value="data.result_stats"  name="" id="" > data.result_stats </td>";'.substring(39))
 console.log(result)
