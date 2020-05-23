@@ -134,8 +134,6 @@ console.log(result_custom);
 
 
 
-
-
 // var xxx = Math.floor(Math.random() * (parseInt(custommax) - parseInt(custommin) +1)) + parseInt(custommin);
 
 
@@ -219,7 +217,7 @@ for (var j = parseInt(maxsocket)-socket_roll ; j > 0; j--) {
 console.log("소켓 주사위 굴리기" +socket_roll)
 console.log(socket + socketx)
 
-
+var result_socket =socket + socketx;
 
 
 
@@ -265,3 +263,11 @@ if (Dice_roll_second_stat > 0) {
 
 
 console.log(result_first_stats +" / " +result_second_stats)
+var result_stats= result_first_stats +" / " +result_second_stats;
+var result = {
+  result_socket: result_socket,
+  result_custom: result_custom,
+  result_stats:result_stats,
+}
+
+console.log(result)
