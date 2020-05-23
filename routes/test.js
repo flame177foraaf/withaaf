@@ -216,14 +216,15 @@ router.get('/ing', (req,res,next) => {
     }
     var result_stats = result_first_stats +" / " +result_second_stats;
 
-
-    res.render('test', {
-      title: '무기 재조립하기',
-      data: response.rows[0],
-      wpsocket: result_socket,
-      wpcustom: result_custom,
-      wpstats:result_stats,
-    });
+    var Alldata = [
+      {
+        data: response.rows[0],
+        wpsocket: result_socket,
+        wpcustom: result_custom,
+        wpstats:result_stats,
+      }
+    ];
+    res.send(Alldata)
   });
 })
 

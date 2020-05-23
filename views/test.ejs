@@ -23,13 +23,34 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
     <script>
-      $('#trycount_btn').click(function() {
-        var trycount= 0;
-        function trycountplus() {
-          trycount++;
-        }
 
-      })
+      $(function() {
+        $("trycount_btn").click(function () {
+          var trycount= 0;
+          function trycountplus() {
+            trycount++;
+          }
+          $('#trycount').text(trycount);
+
+          $.ajax({
+            type: 'GET',
+            url: '/Assemblywp/ing',
+            success: function(result) {
+              var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata.wpstats %></td>";
+              var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata.wpsocket %></td>"
+
+              ;
+              var custom1  ="<td colspan="2" value="custom"  name="wpcustom"><%- data.wpcustom%></td><td colspan="2" value="custom"  name="wpcustom" id="" ><%- Alldata.wpcustom %></td>"
+              ;
+
+              $('#Socket').html(socket1);
+              $('#Stat').html(stat1);
+              $('#Custom').html(custom1);
+
+            }
+          });
+        });
+      });
     </script>
   </head>
   <body style="">
@@ -44,55 +65,33 @@
         </colgroup>
       </thead>
 
-    <% if(typeof(wpcustom) === 'undefined'){ %>
 
       <tbody>
         <tr style="text-align:center">
-          <td colspan="" value="<%= data.wpname %>" name="wpname"><%- data.wpname %></td>
+          <td colspan="" value="<%= data.wpname %>" name="wpname" id="wpname"style="width:40%"><%- data.wpname %></td>
           <td name="wplimit"><%- data.wplimit %></td>
           <td name="wpether"><%- data.wpether %></td>
           <td name="wpproperty"><%- data.wpproperty %></td>
         </tr>
         <tr style="text-align:center">
-          <td value="<%= data.wpsocket %>"  name="wpsocket"><%- data.wpsocket %></td>
-          <td colspan="3" value="<%= data.wpstats %>"  name="wpstats"><%- data.wpstats %></td>
+          <td value="socket"  name="wpsocket" id="Socket" style="font-size:30px"><%- data.wpsocket %></td>
+          <td colspan="3" value="<%= data.wpstats %>"  name="wpstats" id="Stat"><%- data.wpstats %></td>
         </tr>
         <tr>
           <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
         </tr>
         <tr>
-          <td colspan="4" value="custom"  name="wpcustom"><%- data.wpcustom%></td>
+          <td colspan="4" value="custom"  name="wpcustom" id="Custom"><%- data.wpcustom%></td>
         </tr>
       </tbody>
     </table>
 
-    <% } else { %>
 
-        <tbody style="text-align:center">
-          <tr >
-            <td colspan="" value="<%= data.wpname %>" name="wpname" id="wpname"style="width:40%"><%- data.wpname %></td>
-            <td name="wplimit" id="" style="width:10%"><%- data.wplimit %></td>
-            <td name="wpether" id="" style="width:10%"><%- data.wpether %></td>
-            <td name="wpproperty" id="" style="width:40%" ><%- data.wpproperty %></td>
-          </tr>
-          <tr >
-            <td value="socket"  name="wpsocket" id="" style="font-size:30px"><%- wpsocket %></td>
-            <td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- wpstats %></td>
-          </tr>
-          <tr>
-            <td colspan="4" name="wpfeat" id="" ><%- data.wpfeat %></td>
-          </tr>
-          <tr style="height:250px">
-            <td colspan="2" value="custom"  name="wpcustom" id="" ><%- data.wpcustom %></td>
-            <td colspan="2" value="custom"  name="wpcustom" id="" ><%- wpcustom %></td>
-          </tr>
-        </tbody>
-      </table>
+
       <p style="text-align:center">
         현재 재조립을 <span id ='trycount' > 0</span> 회 시도하였습니다.
       </p>
 
-    <% } %>
 
     <div class="" style="text-align: center">
       <form class="" id="try" action="/Assemblywp/ing" method="get">
