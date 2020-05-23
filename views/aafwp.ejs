@@ -140,6 +140,16 @@
           </datalist>
         <input action="/fixwp" type="submit" class="btn" value="변경하기" ></button>
       </form>
+      <form class="" name="" action="/Assemblywp" method="get"  onsubmit="return checkonclick()">
+        <input type=text list=browsers style="" checked value="<%= data[0].wpname %>" name="assembly">
+        <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
+          <datalist id="browsers" name="datalistname" class="" style="width:50%">
+            <% data.forEach(function(item) { %>
+            <option value='<%= item.wpname%>' style=""><%- item.wpname%></option>
+            <% }); %>
+          </datalist>
+        <input action="/" type="submit" class="btn" value="재조립하기" ></button>
+      </form>
     </div>
 
   </body>
