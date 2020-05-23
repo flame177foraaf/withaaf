@@ -90,6 +90,7 @@
       $.ajax({
         type: 'GET',
         url: '/Assemblywp/ing',
+        data: {Alldata:Alldata},
         success: function(result) {
           var socket1 ="<td colspan="3" value="data.wpstats"  name="wpstats" id="" ><%- Alldata[0].wpstats %></td>";
           var stat1 ="<td colspan="2" value="socket"  name="wpsocket" id="" style="font-size:30px"><%- Alldata[0].wpsocket %></td>"
