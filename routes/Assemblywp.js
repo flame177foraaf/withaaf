@@ -157,22 +157,32 @@ router.get('/ing', (req,res,next) => {
     var Allsocket = response.rows[0].wpsocket
     //console.log("소켓" + testsocket.length)
     //console.log("소켓 구분" + testsocket.indexOf("~"))
+    if (Allsocket.indexOf("~") == -1) {
+      var socket = "";
 
-    var minsocket = Allsocket.substring(0,Allsocket.indexOf("~"));
-    var maxsocket = Allsocket.substring(Allsocket.indexOf("~")+1,Allsocket.length)
-    var socket = "";
-    var socketx = "";
-    var socket_roll = Dice_roll(parseInt(minsocket),parseInt(maxsocket)) //소켓 범위 내에서 굴리기
+      for (var i = 0; i < Allsocket; i++) {
+        socket = socket + "○"
+      }
+      var result_socket = socket ;
 
-    for (var i = 0; i < socket_roll; i++) {
-      socket = socket + "○"
+    } else {
+      var minsocket = Allsocket.substring(0,Allsocket.indexOf("~"));
+      var maxsocket = Allsocket.substring(Allsocket.indexOf("~")+1,Allsocket.length)
+      var socket = "";
+      var socketx = "";
+      var socket_roll = Dice_roll(parseInt(minsocket),parseInt(maxsocket)) //소켓 범위 내에서 굴리기
+
+      for (var i = 0; i < socket_roll; i++) {
+        socket = socket + "○"
+      }
+      for (var j = parseInt(maxsocket)-socket_roll ; j > 0; j--) {
+        socketx = socketx + "●"
+      }
+      var result_socket = socket + socketx;
+      //console.log("소켓 주사위 굴리기" +socket_roll)
+      //console.log(socket + socketx)
     }
-    for (var j = parseInt(maxsocket)-socket_roll ; j > 0; j--) {
-      socketx = socketx + "●"
-    }
-    var result_socket = socket + socketx;
-    //console.log("소켓 주사위 굴리기" +socket_roll)
-    //console.log(socket + socketx)
+
 
     // 스텟 재조립
     var ALlstats = response.rows[0].wpstats
