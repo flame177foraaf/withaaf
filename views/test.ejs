@@ -30,7 +30,8 @@
       $('#try_btn3').click(function() {
         count++
         $.ajax({
-          url: '/test/ing',
+          query: req.query.assembly,
+          url: '/test/ing?assembly=' + query,
           type: 'GET',
 
           success: function(data) {
