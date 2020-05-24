@@ -24,13 +24,14 @@
     <script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script type="text/javascript">
+    var objname = document.getElementById("wpname").value
+
     $(document).ready(function(){
-      var objname = document.getElementById("wpname").value
       $('#try_btn3').click(function() {
         count++
 
         $.ajax({
-          url: '/test/ing?assembly=' + objname+ '',
+          url: '/test/ing?assembly=' + objname,
           type: 'GET',
           success: function(data) {
             var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +
