@@ -26,8 +26,10 @@ router.get('/', (req,res,next) => {
 });
 
 router.get('/ing', (req,res,next) => {
-  var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = '쿼드 혼'";
-  client.query(QueryString,  (err, response) => {
+  var Assembly = req.query.assembly;
+
+  var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
+  client.query(QueryString, [Assembly],  (err, response) => {
     //console.log(response.rows[0].wpcustom);
 
     var Allcustom = response.rows[0].wpcustom;
