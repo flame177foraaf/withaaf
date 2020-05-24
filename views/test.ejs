@@ -26,7 +26,7 @@
       $(document).ready(function() {
         $('#try_btn').click(function() {
           $.ajax({
-            url: '/test/ing',
+            url: '/test/ing?',
             type: 'GET',
             success: function() {
               var stat1 = '<td colspan="3" >' + '냠냠'+ '</td>';
@@ -37,7 +37,26 @@
               $('#Custom').html(custom1);
 
             }
+
           });
+
+        });
+        $('#try_btn2').click(function() {
+          $.ajax({
+            url: '/test/ing?',
+            type: 'GET',
+            success: function() {
+              var stat1 = '<td colspan="3" >' + '냠냠'+ '</td>';
+              var socket1 = '<td style="font-size:30px">'+ '쩝쩝' + '</td>';
+              var custom1  ='<td colspan="2">' +  '냠냠' +'</td>' + '<td colspan="2">' +  '쩝쩝' + '</td>';
+              $('#Stat').html(stat1);
+              $('#Socket').html(socket1);
+              $('#Custom').html(custom1);
+
+            }
+
+          });
+
         });
       })
 
@@ -85,7 +104,7 @@
 
 
     <div class="" style="text-align: center">
-      <form class="" id="try_btn"  action="/test/ing" method="get">
+      <form class="" id="try_btn2"  action="/test/ing" method="get">
         <input type="submit" name="" style="" id="try_btn" value="재조립!!"></button>
       </form>
 
