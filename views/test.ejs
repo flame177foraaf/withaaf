@@ -37,7 +37,7 @@
           url: '/test/ing',
           type: 'GET',
           data: {
-            assembly : $('#wpname').val()
+            assembly : $("#wpname").text()
           },
           success: function(data) {
             var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +'<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
