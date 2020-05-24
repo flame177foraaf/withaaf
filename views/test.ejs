@@ -30,7 +30,7 @@
         var objname = document.getElementById("wpname").value
 
         $.ajax({
-          url: '/test/ing?assembly=' + objname + "",
+          url: '/test/ing?assembly=' + objname,
           type: 'GET',
           success: function(data) {
             var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +
@@ -67,7 +67,7 @@
 
       <tbody>
         <tr style="text-align:center">
-          <td colspan="" value="<%= data.wpname %>" name="wpname" id=""><%- data.wpname %></td>
+          <td colspan="" value="<%= data.wpname %>" name="" id="wpname"><%- data.wpname %></td>
           <td name="wplimit"><%- data.wplimit %></td>
           <td name="wpether"><%- data.wpether %></td>
           <td name="wpproperty"><%- data.wpproperty %></td>
