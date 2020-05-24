@@ -27,7 +27,7 @@
 
     $(document).ready(function(){
       var count = 0;
-      var assem = getElementById('wpname').value
+      var assem = $(this).attr('wpname');
       $('#try_btn3').click(function() {
         count++;
         $('#trycount').text(count)
