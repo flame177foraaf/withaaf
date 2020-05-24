@@ -26,11 +26,10 @@
     <script type="text/javascript">
     $(document).ready(function(){
       var count = 0;
-      var query = req.query.assembly;
       $('#try_btn3').click(function() {
         count++
         $.ajax({
-          url: '/test/ing?assembly='+query,
+          url: '/test/ing?assembly=쿼드+혼',
           type: 'GET',
 
           success: function(data) {
