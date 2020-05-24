@@ -31,17 +31,16 @@
           dataType: 'json',
           type: 'GET',
           success: function(result) {
-            var stat1 = '<td colspan="3" >' + '냠냠'+ '</td>';
-            var socket1 = '<td style="font-size:30px">'+ '쩝쩝' + '</td>';
-            var custom1  ='<td colspan="2">' +  '냠냠' +'</td>' + '<td colspan="2">' +  '쩝쩝' + '</td>';
-            $('#Stat').html(stat1);
-            $('#Socket').html(socket1);
+            var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="">' + data.result_socket+ '</td>' +
+            '<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
+            var custom1  ='<td colspan="2" value=""  name="wpcustom" id="">' + data.wpcustom + '</td> ' + '<td colspan="2" value=""  name="wpcustom" id="">' + data.result_custom + '</td> ';
+            $('#SocketANDStat').html(result_SocketANDStat);
             $('#Custom').html(custom1);
           }
         });
       });
      });
-        
+
 
 
 
@@ -65,17 +64,20 @@
 
       <tbody>
         <tr style="text-align:center">
-          <td colspan="" value="" name="wpname" id="wpname"style="width:40%">기본</td>
+          <td colspan="" value="<%= data.wpname %>" name="wpname" id=""style="width:40%"><%- data.wpname %></td>
+          <td name="wplimit"><%- data.wplimit %></td>
+          <td name="wpether"><%- data.wpether %></td>
+          <td name="wpproperty"><%- data.wpproperty %></td>
         </tr>
-        <tr style="text-align:center">
-          <td value="socket"  name="wpsocket" id="Socket" style="">기본</td>
-          <td colspan="3" value=""  name="wpstats" id="Stat"></td>
+        <tr style="text-align:center" id="SocketANDStat">
+          <td value=""  name="" id="" style=""><%- data.wpsocket %></td>
+          <td colspan="3" value=""  name="" id=""><%- data.wpstats %></td>
         </tr>
         <tr>
-          <td colspan="4" name="wpfeat"></td>
+          <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
         </tr>
-        <tr>
-          <td colspan="4" value="custom"  name="wpcustom" id="Custom"></td>
+        <tr id="Custom">
+          <td colspan="4" value=""  name="wpcustom" id=""><%- data.wpcustom%></td>
         </tr>
       </tbody>
     </table>
