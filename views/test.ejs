@@ -28,9 +28,10 @@
       var count = 0;
 
       $('#try_btn3').click(function() {
+        var query = req.query.assembly
         count++
         $.ajax({
-          url: '/test/ing?assembly=쿼드+혼',
+          url: '/test/ing?assembly='+query,
           type: 'GET',
 
           success: function(data) {
