@@ -26,6 +26,7 @@
     <script type="text/javascript">
 
     $(document).ready(function(){
+      var assem = $('#wpname').val()
 
       var count = 0;
       $('#try_btn3').click(function() {
@@ -33,7 +34,6 @@
         count++;
         $('#trycount').text(count)
 
-        var assem = $('#wpname').val()
         $.ajax({
           url: '/test/ing',
           type: 'GET',
