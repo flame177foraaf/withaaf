@@ -29,6 +29,8 @@
       var count = 0;
       $('#try_btn3').click(function() {
         count++;
+        $('#trycount').text(count)
+
         $.ajax({
           url: '/test/ing?assembly=' data.Assembly,
           type: 'GET',
@@ -37,11 +39,10 @@
             var custom1  ='<td colspan="2" value=""  name="wpcustom" id="">' + data.wpcustom + '</td> ' + '<td colspan="2" value=""  name="wpcustom" id="">' + data.result_custom + '</td> ';
             $('#SocketANDStat').html(result_SocketANDStat);
             $('#Custom').html(custom1);
-            $('#trycount').text(count)
           }
         });
       });
-     });
+    });
 
     </script>
   </head>
