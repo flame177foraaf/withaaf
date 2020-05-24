@@ -229,7 +229,7 @@ router.get('/ing', (req,res,next) => {
         result_custom: result_custom,
         result_stats:result_stats,
       };
-    console.log(data);
+    console.log("재조립중" + data.Assembly);
     res.send(data)
   });
 })
