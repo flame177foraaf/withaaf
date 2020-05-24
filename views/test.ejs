@@ -26,13 +26,14 @@
     <script type="text/javascript">
 
     $(document).ready(function(){
+      var assem = $('#wpname').val()
 
       var count = 0;
       $('#try_btn3').click(function() {
         count++;
         $('#trycount').text(count)
         $.ajax({
-          url: '/test/ing?assembly=디멘션 드라이버' ,
+          url: '/test/ing?assembly=' + assem ,
           type: 'GET',
           success: function(data) {
             var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +'<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
