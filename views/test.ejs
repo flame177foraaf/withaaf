@@ -24,7 +24,7 @@
     <script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script type="text/javascript">
-    var assem = $(this).attr('wpname');
+    var assem = <%- Assembly%>;
 
     $(document).ready(function(){
       var count = 0;
@@ -32,7 +32,7 @@
         count++;
         $('#trycount').text(count)
         $.ajax({
-          url: '/test/ing?assembly=' + Assembly,
+          url: '/test/ing?assembly=' + assem ,
           type: 'GET',
           success: function(data) {
             var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +'<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
