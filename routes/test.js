@@ -24,7 +24,7 @@ router.get('/', (req,res,next) => {
     });
   });
 });
-/*
+
 router.get('/ing', (req,res,next) => {
   var Assembly = '쿼드 혼';
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
@@ -233,7 +233,7 @@ router.get('/ing', (req,res,next) => {
     res.send({data:Alldata})
   });
 })
-*/
+
 
 
 module.exports = router;
