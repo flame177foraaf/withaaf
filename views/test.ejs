@@ -24,18 +24,21 @@
 
     <script type="text/javascript">
     $(document).ready(function(){
+      var count = 0;
 
       $('#try_btn3').click(function() {
+        count++
         $.ajax({
           url: '/test/ing',
           type: 'GET',
 
           success: function(data) {
-            var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="">' + data.result_socket+ '</td>' +
+            var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +
             '<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
             var custom1  ='<td colspan="2" value=""  name="wpcustom" id="">' + data.wpcustom + '</td> ' + '<td colspan="2" value=""  name="wpcustom" id="">' + data.result_custom + '</td> ';
             $('#SocketANDStat').html(result_SocketANDStat);
             $('#Custom').html(custom1);
+            $('#trycount').text(count)
           }
         });
       });
@@ -50,21 +53,21 @@
     </script>
   </head>
   <body style="">
-    <h1><%= title %></h1>
+    <h1 style="text-align:center"><%= title %></h1>
     <table id="" style="width:60%;">
       <thead>
         <colgroup>
-          <col span="" id ="" style=" ">
-          <col span="" id ="" style=" ">
-          <col span="" id ="" style=" ">
-          <col span="" id ="" style=" ">
+          <col span="" id ="" style="width:40%">
+          <col span="" id ="" style="width:10%">
+          <col span="" id ="" style="width:10% ">
+          <col span="" id ="" style="width:40% ">
         </colgroup>
       </thead>
 
 
       <tbody>
         <tr style="text-align:center">
-          <td colspan="" value="<%= data.wpname %>" name="wpname" id=""style="width:40%"><%- data.wpname %></td>
+          <td colspan="" value="<%= data.wpname %>" name="wpname" id=""><%- data.wpname %></td>
           <td name="wplimit"><%- data.wplimit %></td>
           <td name="wpether"><%- data.wpether %></td>
           <td name="wpproperty"><%- data.wpproperty %></td>
@@ -90,12 +93,6 @@
 
 
     <div class="" style="text-align: center">
-      <form class="" id="try_btn2"  action="/test/ing" method="get">
-        <input type="submit" name="" style="" id="try_btn" value="재조립!!"></button>
-      </form>
-
-    </div>
-    <div class="">
       <button type="button" id="try_btn3"name="button">재조립!!</button>
     </div>
 
