@@ -26,11 +26,11 @@ router.get('/', (req,res,next) => {
 
 router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly;
-  console.log(Assembly)
+  //console.log(Assembly)
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
     //console.log(response.rows[0].wpcustom);
-    console.log(response.rows[0])
+    //console.log(response.rows[0])
     var Allcustom = response.rows[0].wpcustom;
     //console.log(Allcustom);
     var eqcustom = Allcustom.split('<br />');
@@ -239,7 +239,7 @@ router.get('/ing', (req,res,next) => {
         result_custom: result_custom,
         result_stats:result_stats,
       };
-    console.log("재조립중" + data.Assembly);
+    console.log("재조립중   " + data.Assembly);
     res.send(data)
   });
 })
