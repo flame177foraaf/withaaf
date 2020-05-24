@@ -34,12 +34,11 @@
         count++;
         $('#trycount').text(count)
 
-        var assem = $('#wpname').val()
         $.ajax({
           url: '/test/ing',
           type: 'GET',
           data: {
-            assembly : assem
+            assembly : $('#wpname').val()
           },
           success: function(data) {
             var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +'<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
