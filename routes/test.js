@@ -230,7 +230,7 @@ router.get('/ing', (req,res,next) => {
         result_stats:result_stats,
       };
     console.log(Alldata);
-    res.send({data : Alldata})
+    res.send(Alldata)
   });
 })
 
