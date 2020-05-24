@@ -20,7 +20,8 @@ router.get('/', (req,res,next) => {
 
     res.render('test', {
       title: '무기 재조립하기',
-      data: response.rows[0]
+      data: response.rows[0],
+      Assembly:Assembly
     });
   });
 });
