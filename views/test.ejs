@@ -26,11 +26,12 @@
     <script type="text/javascript">
 
     $(document).ready(function(){
-      var assem = $('#wpname').val();
       console.log(assem)
 
       var count = 0;
       $('#try_btn3').click(function() {
+        var assem = <%- Assembly%>;
+
         count++;
         $('#trycount').text(count)
         $.ajax({
