@@ -213,7 +213,7 @@ router.get('/ing', (req,res,next) => {
     }
     var result_stats = result_first_stats +" / " +result_second_stats;
 
-    var Alldata =
+    var data =
       {
         Assembly:Assembly,
         wpgrade: response.rows[0].wpgrade,
@@ -229,8 +229,8 @@ router.get('/ing', (req,res,next) => {
         result_custom: result_custom,
         result_stats:result_stats,
       };
-    console.log(Alldata);
-    res.send({data:Alldata})
+    console.log(data);
+    res.send(data)
   });
 })
 

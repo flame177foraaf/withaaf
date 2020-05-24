@@ -28,9 +28,9 @@
       $('#try_btn3').click(function() {
         $.ajax({
           url: '/test/ing',
-          dataType: 'json',
           type: 'GET',
-          success: function(result) {
+
+          success: function(data) {
             var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="">' + data.result_socket+ '</td>' +
             '<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
             var custom1  ='<td colspan="2" value=""  name="wpcustom" id="">' + data.wpcustom + '</td> ' + '<td colspan="2" value=""  name="wpcustom" id="">' + data.result_custom + '</td> ';
