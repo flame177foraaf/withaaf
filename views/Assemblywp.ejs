@@ -65,13 +65,13 @@
 
 
       <tbody>
-        if (typeof(data[0]) === 'undefined'){
+        <% if (typeof(data[0]) === 'undefined'){ %>
           <tr style="text-align:center">
             <td colspan="4">
               해당하는 자료가 없습니다. 검색을 정확히 해주세요.
             </td>
           </tr>
-        } else {
+        <% } else { %>
           <tr style="text-align:center">
             <td colspan="" value="<%= data.wpname %>" name="" id="wpname"><%- data.wpname %></td>
             <td name="wplimit"><%- data.wplimit %></td>
@@ -93,11 +93,11 @@
       </tbody>
     </table>
 
-    if (typeof(data[0]) === 'undefined'){
+    <% if (typeof(data[0]) === 'undefined'){ %>
       <div class="" style="text-align: center">
         <input style="margin: 5px; width:100px;  height:  50px; line-height:25px;" onclick="history.back(-1);" type="button" name="" value="뒤로" />
       </div>
-    } else {
+    <% } else { %>
       <p style="text-align:center">
         현재 재조립을 <span id ='trycount' > 0</span> 회 시도하였습니다.
       </p>
