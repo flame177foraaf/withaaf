@@ -28,8 +28,8 @@ router.get('/:id', (req,res,next) => {
       SearchLimit = 0;
     };
     console.log(SearchLimit)
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armname LIKE $1 and cast(armlimit as INTEGER) >= $2 or armlimit is null  ORDER BY armlimit,armid asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armname LIKE $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       console.log('서치리밋' + SearchLimit);
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -81,8 +81,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armfeat LIKE $1 and cast(armlimit as INTEGER) >= $2 or armlimit is null  ORDER BY armlimit asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armfeat LIKE $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -123,8 +123,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armcustom LIKE $1 and cast(armlimit as INTEGER) >= $2 or armlimit is null  ORDER BY armlimit asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armcustom LIKE $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -162,58 +162,6 @@ router.get('/:id', (req,res,next) => {
     res.redirect('/aafarm');
   };
 })
-
-
-//
-/*var mysql = require('mysql');
-var connection = mysql.createConnection(require('../config/dbconfig.js'));
-
-connection.connect(function(err){
-  if(err){
-    console.log(err);
-    return;
-  }
-  console.log('mysql connect completed')
-} );
-*/
-
-/* sql 테이블 랜더링 */
-router.get('/', (req, res, next) => {
-  if(req.query.searchType === 'name') {
-    var searchingtext = req.query.searchText
-    var sql = 'SELECT * FROM aquafarm WHERE armname LIKE ?' ;
-    connection.query(sql, "%" + searchingtext + "%",function(err, results, field) {
-      res.render('aafarm', {
-        title: '방어구',
-        varaquafarm: results
-      });
-    });
-  } else if (req.query.searchType === 'feat'){
-    var searchingtext =req.query.searchText
-    var sql = 'SELECT * FROM aquafarm WHERE armfeat LIKE ?';
-    connection.query(sql, "%" + searchingtext + "%", function(err, results, field) {
-      res.render('aafarm', {
-        title: '방어구',
-        varaquafarm: results
-      });
-    });
-  } else if(req.query.searchType === 'custom') {
-    var searchingtext =req.query.searchText
-    var sql = 'SELECT * FROM aquafarm WHERE armcustom LIKE ?';
-    connection.query(sql, "%" + searchingtext + "%", function(err, results, field) {
-      console.log('aquafarm 커스텀 검색');
-      res.render('aafarm', {
-        title: '방어구',
-        varaquafarm: results
-      });
-    });
-  } else {
-    res.render('aafarmmain', {
-      title: '방어구',
-    });
-  }
-
-});
 
 
 

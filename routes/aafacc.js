@@ -28,8 +28,8 @@ router.get('/:id', (req,res,next) => {
       SearchLimit = 0;
     };
     console.log(SearchLimit)
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accname LIKE $1 and cast(acclimit as INTEGER) >= $2 or acclimit is null  ORDER BY acclimit,accid asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accname LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       console.log('서치리밋' + SearchLimit);
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -81,8 +81,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accfeat LIKE $1 and cast(acclimit as INTEGER) >= $2 or acclimit is null  ORDER BY acclimit asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accfeat LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -123,8 +123,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accproperty LIKE $1 and cast(acclimit as INTEGER) >= $2 or acclimit is null  ORDER BY acclimit asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accproperty LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -165,8 +165,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where acccustom LIKE $1 and cast(acclimit as INTEGER) >= $2 or acclimit is null  ORDER BY acclimit asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where acccustom LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -204,68 +204,6 @@ router.get('/:id', (req,res,next) => {
     res.redirect('/aafacc');
   };
 })
-
-
-//
-/*var mysql = require('mysql');
-var connection = mysql.createConnection(require('../config/dbconfig.js'));
-
-connection.connect(function(err){
-  if(err){
-    console.log(err);
-    return;
-  }
-  console.log('mysql connect completed')
-} );
-*/
-
-/* sql 테이블 랜더링 */
-router.get('/', (req, res, next) => {
-  if(req.query.searchType === 'name') {
-    var searchingtext = req.query.searchText
-    var sql = 'SELECT * FROM aquafacc WHERE accname LIKE ?' ;
-    connection.query(sql, "%" + searchingtext + "%",function(err, results, field) {
-      res.render('aafacc', {
-        title: '악세사리',
-        varaquafacc: results
-      });
-    });
-  } else if (req.query.searchType === 'feat'){
-    var searchingtext =req.query.searchText
-    var sql = 'SELECT * FROM aquafacc WHERE accfeat LIKE ?';
-    connection.query(sql, "%" + searchingtext + "%", function(err, results, field) {
-      res.render('aafacc', {
-        title: '악세사리',
-        varaquafacc: results
-      });
-    });
-  } else if(req.query.searchType === 'property') {
-    var searchingtext =req.query.searchText
-    var sql = 'SELECT * FROM aquafacc WHERE accproperty LIKE ?';
-    connection.query(sql, "%" + searchingtext + "%", function(err, results, field) {
-      console.log('aquafacc 커스텀 검색');
-      res.render('aafacc', {
-        title: '악세사리',
-        varaquafacc: results
-      });
-    });
-  } else if(req.query.searchType === 'custom') {
-    var searchingtext =req.query.searchText
-    var sql = 'SELECT * FROM aquafacc WHERE acccustom LIKE ?';
-    connection.query(sql, "%" + searchingtext + "%", function(err, results, field) {
-      console.log('aquafacc 커스텀 검색');
-      res.render('aafacc', {
-        title: '악세사리',
-        varaquafacc: results
-      });
-    });
-  } else {
-    res.render('aafaccmain', {
-      title: '악세사리',
-    });
-  }
-
-});
 
 
 
