@@ -121,6 +121,17 @@
       </table>
     </div>
 
+    <% if(typeof(CurrentPage) === 'undefined'){ %>
+      <div class="" style="text-align: center">
+        <div class="">
+          <form class="" action="/wpadd" method="post">
+             <button onclick=location.href="/aafwp/wpadd" type="button" name="button" style="width:200px">신규등록</a></button>
+          </form>
+        </div>
+      </div>
+
+
+    <% } else { %>
 
 
     <div class="" style="text-align: center">
@@ -151,7 +162,7 @@
         <input action="/" type="submit" class="btn" value="재조립하기" ></button>
       </form>
     </div>
-
+    <% } %>
   </body>
   <footer>
     <%- include ('footer')%>
