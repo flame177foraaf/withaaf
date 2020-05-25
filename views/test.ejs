@@ -69,6 +69,14 @@
             <tr>
               <td colspan="9"; style= "text-align:center;"> 검색이 필요합니다.</td>
             </tr>
+          <% } else if (typeof(data[0]) ==='undefined'){ %>
+            <tr>
+              <div class="" id="pagelist" >
+                <td colspan="9" style= "text-align:center; font-size:24px">
+                  해당하는 데이터가 없습니다.
+                </td>
+              </div>
+            </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
             <tr  style="white-space: pre-line; font-size:12px;">
@@ -93,14 +101,7 @@
                 </td>
               </div>
             </tr>
-          <% } else if (typeof(data[0]) ==='undefined'){ %>
-            <tr>
-              <div class="" id="pagelist" >
-                <td colspan="9" style= "text-align:center; font-size:24px">
-                  해당하는 데이터가 없습니다.
-                </td>
-              </div>
-            </tr>
+
           <% } else { %>
             <tr>
               <div class="" id="pagelist">
