@@ -92,7 +92,6 @@
 
       </tbody>
     </table>
-<%# ㅇㅇㅇㅇ>
     <% if (typeof(data[0]) === 'undefined'){ %>
 
 
@@ -100,6 +99,7 @@
         <input style="margin: 5px; width:100px;  height:  50px; line-height:25px;" onclick="history.back(-1);" type="button" name="" value="뒤로" />
       </div>
     <% } else { %>
+
       <p style="text-align:center">
         현재 재조립을 <span id ='trycount' > 0</span> 회 시도하였습니다.
       </p>
@@ -111,8 +111,7 @@
     <div class="" style="text-align: center">
       <input style="margin: 5px; width:100px;  height:  50px; line-height:25px;" onclick="history.back(-1);" type="button" name="" value="뒤로" />
     </div>
-    }
-
+    <% } %>
   </body>
   <footer>
     <%- include ('footer')%>
