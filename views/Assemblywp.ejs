@@ -65,7 +65,7 @@
 
 
       <tbody>
-        <% if (typeof(data.data) === null){ %>
+        <% if (typeof(data.data) === "null"){ %>
           <tr style="text-align:center">
             <td colspan="4">
               해당하는 자료가 없습니다. 검색을 정확히 해주세요.
@@ -92,7 +92,7 @@
 
       </tbody>
     </table>
-    <% if (typeof(data.wpname) === 'undefined'){ %>
+    <% if (typeof(data.data) === "null"){ %>
 
 
       <div class="" style="text-align: center">

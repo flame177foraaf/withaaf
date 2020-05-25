@@ -31,7 +31,19 @@ router.get('/ing', (req,res,next) => {
   client.query(QueryString, [Assembly], (err, response) => {
     if (typeof(response.rows[0]) === 'undefined') {
       var data = {
-        data: null
+        Assembly:"null",
+        wpgrade: "null",
+        wpname: "null",
+        wplimit: "null",
+        wpsocket : "null",
+        wpether: "null",
+        wpstats: "null",
+        wpproperty: "null",
+        wpfeat: "null",
+        wpcustom: "null",
+        result_socket: "null",
+        result_custom: "null",
+        result_stats:"null",
     };
     } else {
       //console.log(response.rows[0].wpcustom);
@@ -223,7 +235,7 @@ router.get('/ing', (req,res,next) => {
       var second_stat = Math.floor(second_stat) //소수점 버리기
       if (Dice_roll_second_stat > 0) {
         var result_second_stats = second_stat + "(" +" + "+ Dice_roll_second_stat + " % " + ")";
-      }else {
+      } else {
         var result_second_stats =second_stat + " ( " + Dice_roll_second_stat + " % " + ") ";
       }
       var result_stats = result_first_stats +" / " +result_second_stats;
