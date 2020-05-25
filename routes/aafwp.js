@@ -92,8 +92,8 @@ router.get('/:id', (req,res,next) => {
       SearchLimit = 0;
     };
     console.log(SearchLimit)
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpname LIKE $1 and cast(wplimit as INTEGER) >= $2 or wplimit is null  ORDER BY wplimit,wpid asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpname LIKE $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       console.log('서치리밋' + SearchLimit);
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -143,8 +143,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpproperty LIKE $1 and cast(wplimit as INTEGER) >= $2 or wplimit is null  ORDER BY wplimit asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpproperty LIKE $1 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%',CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -185,8 +185,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpfeat LIKE $1 and cast(wplimit as INTEGER) >= $2 or wplimit is null  ORDER BY wplimit asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpfeat LIKE $1 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -227,8 +227,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpcustom LIKE $1 and cast(wplimit as INTEGER) >= $2 or wplimit is null  ORDER BY wplimit asc limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', SearchLimit, CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpcustom LIKE $1 and ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
