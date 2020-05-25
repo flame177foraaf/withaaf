@@ -101,33 +101,25 @@
                 </td>
               </div>
             </tr>
-            <% } else if (typeof(data[0]) ==='undefined'){ %>
-              <tr>
-                <div class="" id="pagelist" >
-                  <td colspan="9" style= "text-align:center; font-size:24px">
-                    해당하는 데이터가 없습니다.
-                  </td>
-                </div>
-              </tr>
 
           <% } else { %>
             <tr>
               <div class="" id="pagelist">
                 <td colspan="21" style= "text-align:center; font-size:24px">
                   <% if (CurrentPage > PageSize){ %>
-                    <a href="/aafwp/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
-                    <a href="/aafwp/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
+                    <a href="/test/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
+                    <a href="/test/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
                   <% } %>
                   <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
                     <% if (iCount == CurrentPage) { %>
                       <b class="btnnonactive"><%- iCount %></b>
                     <% } else { %>
-                      <a href="/aafwp/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
+                      <a href="/test/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
                     <% } %>
                   <% } %>
                   <% if (EndPage < TotalPage){ %>
-                    <a href="/aafwp/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
-                    <a href="/aafwp/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
+                    <a href="/test/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
+                    <a href="/test/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
                   <% } %>
                 </td>
               </div>
@@ -138,7 +130,7 @@
       </table>
     </div>
 
-    <% if(typeof(CurrentPage) === 'undefined'){ %>
+    <% if(typeof(data[0]) === 'undefined'){ %>
       <div class="" style="text-align: center">
         <div class="">
           <form class="" action="/wpadd" method="post">
@@ -146,11 +138,7 @@
           </form>
         </div>
       </div>
-
-
     <% } else { %>
-
-
     <div class="" style="text-align: center">
       <div class="">
         <form class="" action="/wpadd" method="post">
