@@ -93,7 +93,7 @@
                 </td>
               </div>
             </tr>
-          <% } else if (data ==='undefined'){ %>
+          <% } else if (typeof(data) ==='undefined'){} %>
             <tr>
               <div class="" id="pagelist" >
                 <td colspan="9" style= "text-align:center; font-size:24px">
@@ -129,7 +129,7 @@
       </table>
     </div>
 
-    <% if(typeof(CurrentPage) === 'undefined'){ %>
+    <% if(typeof(data) === 'undefined'){ %>
       <div class="" style="text-align: center">
         <div class="">
           <form class="" action="/wpadd" method="post">
