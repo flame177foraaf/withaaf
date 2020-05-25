@@ -65,27 +65,39 @@
 
 
       <tbody>
-        <tr style="text-align:center">
-          <td colspan="" value="<%= data.wpname %>" name="" id="wpname"><%- data.wpname %></td>
-          <td name="wplimit"><%- data.wplimit %></td>
-          <td name="wpether"><%- data.wpether %></td>
-          <td name="wpproperty"><%- data.wpproperty %></td>
-        </tr>
-        <tr style="text-align:center" id="SocketANDStat">
-          <td value=""  name="" id="" style=""><%- data.wpsocket %></td>
-          <td colspan="3" value=""  name="" id=""><%- data.wpstats %></td>
-        </tr>
-        <tr>
-          <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
-        </tr>
-        <tr id="Custom" style="height:300px">
-          <td colspan="4" value=""  name="wpcustom" id=""><%- data.wpcustom%></td>
-        </tr>
+        if (typeof(data[0]) === 'undefined'){
+          <tr style="text-align:center">
+            <td colspan="4">
+              해당하는 자료가 없습니다. 검색을 정확히 해주세요.
+            </td>
+          </tr>
+        } else {
+          <tr style="text-align:center">
+            <td colspan="" value="<%= data.wpname %>" name="" id="wpname"><%- data.wpname %></td>
+            <td name="wplimit"><%- data.wplimit %></td>
+            <td name="wpether"><%- data.wpether %></td>
+            <td name="wpproperty"><%- data.wpproperty %></td>
+          </tr>
+          <tr style="text-align:center" id="SocketANDStat">
+            <td value=""  name="" id="" style=""><%- data.wpsocket %></td>
+            <td colspan="3" value=""  name="" id=""><%- data.wpstats %></td>
+          </tr>
+          <tr>
+            <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
+          </tr>
+          <tr id="Custom" style="height:300px">
+            <td colspan="4" value=""  name="wpcustom" id=""><%- data.wpcustom%></td>
+          </tr>
+        }
+
       </tbody>
     </table>
 
-
-
+    if (typeof(data[0]) === 'undefined'){
+      <div class="" style="text-align: center">
+        <input style="margin: 5px; width:100px;  height:  50px; line-height:25px;" onclick="history.back(-1);" type="button" name="" value="뒤로" />
+      </div>
+    } else {
       <p style="text-align:center">
         현재 재조립을 <span id ='trycount' > 0</span> 회 시도하였습니다.
       </p>
@@ -97,6 +109,8 @@
     <div class="" style="text-align: center">
       <input style="margin: 5px; width:100px;  height:  50px; line-height:25px;" onclick="history.back(-1);" type="button" name="" value="뒤로" />
     </div>
+    }
+
   </body>
   <footer>
     <%- include ('footer')%>
