@@ -29,7 +29,7 @@ router.get('/ing', (req,res,next) => {
   //console.log(Assembly)
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
-    if (typeof(response.rows[0]) === 'undefined') {
+    if (typeof(response.rows[0]) === undefined) {
       var data = {
         Assembly:"null",
         wpgrade: "null",
@@ -44,7 +44,7 @@ router.get('/ing', (req,res,next) => {
         result_socket: "null",
         result_custom: "null",
         result_stats:"null",
-    };
+      };
     } else {
       //console.log(response.rows[0].wpcustom);
       //console.log(response.rows[0])
