@@ -29,10 +29,8 @@
 
       var count = 0;
       $('#try_btn3').click(function() {
-
         count++;
         $('#trycount').text(count)
-
         $.ajax({
           url: '/test/ing',
           type: 'GET',
@@ -47,6 +45,9 @@
           }
         });
       });
+      $($'').click(function () {
+
+      })
     });
 
     </script>
@@ -95,7 +96,7 @@
       <button type="button" id="try_btn3" name="button" style="height:50px">재조립</button>
     </div>
     <div class="" style="text-align: center">
-      <input style="" onclick="history.back(-1);" type="button" name="" value="뒤로" />
+      <input style="" onclick="history.back(-1);" type="button" name="" value="뒤로" /button>
     </div>
   </body>
   <footer>
