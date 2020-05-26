@@ -23,9 +23,8 @@ router.get('/:id', (req,res,next) => {
   if (SearchType === 'name') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var Collate = "ko_KR.utf8";
-      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name LIKE $1 ORDER BY item_name collate $2 limit 10 offset (($3- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', Collate,  CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name LIKE $1 ORDER BY item_name collate ko_KR.utf8 limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -60,7 +59,7 @@ router.get('/:id', (req,res,next) => {
   } else if (SearchType === 'effect') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_effect LIKE $1 ORDER BY item_name collate $2 limit 10 offset (($3- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name LIKE $1 ORDER BY item_name collate ko_KR.utf8 limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
