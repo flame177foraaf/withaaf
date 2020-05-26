@@ -14,8 +14,8 @@ client.connect();
 
 router.get('/', (req,res,next) => {
   var QueryString = 'select item_name from aquafeq.aquafitem ORDER BY item_name collate "ko_KR.utf8";'
-  client.query(QueryString, [](err, response) => {
-    console.log(response.rows[0])
+  client.query(QueryString, (err, response) => {
+    console.log(response.rows[0]);
     if (err) {
       res.redirect('/');
     } else {
@@ -23,7 +23,8 @@ router.get('/', (req,res,next) => {
         title:'AAF 아이템',
         data: response.rows
       });
-    }
+    };
+  });
 });
 
 
