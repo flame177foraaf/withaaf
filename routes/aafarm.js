@@ -13,8 +13,17 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  res.render('aafarm', {
-    title:'AAF 장비'
+  var QueryString = "select armid, armname from aquafeq.aquafarm ORDER BY armlimit,armid asc ;"
+  client.query(QueryString, (err, response) => {
+    console.log(response.rows[0])
+    if (err) {
+      res.redirect('/aafarm');
+    } else {
+      res.render('aafarm', {
+        title:'AAF 장비',
+        data:response.rows
+      });
+    };
   });
 });
 

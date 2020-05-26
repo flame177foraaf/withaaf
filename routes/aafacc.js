@@ -13,10 +13,18 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  res.render('aafacc', {
-    title:'AAF 장비'
-  });
-});
+  var QueryString = "select accid, accname from aquafeq.aquafacc ORDER BY acclimit,accid asc ;"
+  client.query(QueryString, (err, response) => {
+    console.log(response.rows[0])
+    if (err) {
+      res.redirect('/aafacc');
+    } else {
+      res.render('aafacc', {
+        title:'AAF 장비',
+        data:response.rows
+      });
+    };
+  });});
 
 router.get('/fixacc', (req,res,next) => {
   res.redirect('/');

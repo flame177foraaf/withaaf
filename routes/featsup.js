@@ -13,10 +13,18 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  res.render('featsup', {
-    title:'AAF 장비'
-  });
-});
+  var QueryString = "select featid, featname from aquafeq.featsup ORDER BY featid asc ;"
+  client.query(QueryString, (err, response) => {
+    console.log(response.rows[0])
+    if (err) {
+      res.redirect('/');
+    } else {
+      res.render('featsup', {
+        title:'AAF 장비',
+        data:response.rows
+      });
+    };
+  });});
 
 router.get('/fixfeat', (req,res,next) => {
   res.redirect('/');
