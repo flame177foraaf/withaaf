@@ -74,7 +74,11 @@
             <% data.forEach(function(item) { %>
             <tr  style="white-space: pre-line; font-size:12px;">
               <td><%- item.item_name %></td>
+              <td><%- item.item_text %></td>
               <td><%- item.item_effect %></td>
+              <td><%- item.item_type %></td>
+              <td><%- item.item_count %></td>
+              <td><%- item.item_route %></td>
             </tr>
             <% }); %>
           <% } %>
