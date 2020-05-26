@@ -27,8 +27,8 @@ router.get('/', (req,res,next) => {
   });
 });
 
-router.get('/wpadd', (req,res,next) => {
-  res.render ('wpadd', {
+router.get('/addwp', (req,res,next) => {
+  res.render ('addwp', {
     title:'AAF 장비'
   });
 });

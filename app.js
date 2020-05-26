@@ -32,6 +32,7 @@ var aafmontableRouter =require('./routes/monster');
 var fixwpRouter = require('./routes/fixwp');
 
 var assemblewpRouter = require('./routes/Assemblywp');
+var itemRouter = require('./routes/item');
 
 
 
@@ -78,6 +79,7 @@ app.use('/monster', aafmontableRouter);
 app.use('/fixwp', fixwpRouter);
 
 app.use('/Assemblywp', assemblewpRouter);
+app.use('/item', itemRouter);
 
 
 //app.use('/aafwp/wpadd', aafwpaddRouter);
