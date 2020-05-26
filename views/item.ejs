@@ -68,7 +68,7 @@
         <tbody>
           <% if(typeof(CurrentPage) === 'undefined'){ %>
             <tr>
-              <td colspan="4"; style= "text-align:center;"> 검색이 필요합니다.</td>
+              <td colspan="6"; style= "text-align:center;"> 검색이 필요합니다.</td>
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
@@ -86,7 +86,7 @@
               <% if(typeof(CurrentPage) === 'undefined'){ %>
                 <tr>
                   <div class=""  id="pagelist" >
-                    <td colspan="4" style= "text-align:center; font-size:24px">
+                    <td colspan="6" style= "text-align:center; font-size:24px">
                       검색이 필요합니다.
                     </td>
                   </div>
@@ -120,7 +120,34 @@
         </tbody>
       </table>
     </div>
+    <% if(typeof(data[0]) === 'undefined'){ %>
+      <div class="" style="text-align: center">
+        <div class="">
+          <form class="" action="/add_item" method="post">
+             <button  type="button" name="button" style="width:200px">신규등록</a></button>
+          </form>
+        </div>
+      </div>
+    <% } else { %>
+    <div class="" style="text-align: center">
+      <div class="">
+        <form class="" action="/add_item" method="post">
+           <button  type="button" name="button" style="width:200px">신규등록</a></button>
+        </form>
+      </div>
 
+      <form class="" name="add" action="/fixitem" method="get"  onsubmit="return checkonclick()">
+        <input type=text list=browsers style="" checked value="<%= data[0].item_name %>" name="Seachname">
+        <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
+          <datalist id="browsers" name="datalistname" class="" style="width:50%">
+            <% data.forEach(function(item) { %>
+            <option value='<%= item.item_name%>' style=""><%- item.item_name%></option>
+            <% }); %>
+          </datalist>
+        <input action="/fixitem" type="submit" class="btn" value="변경하기" ></button>
+      </form>
+    </div>
+    <% } %>
   </body>
   <footer>
     <%- include ('footer')%>
