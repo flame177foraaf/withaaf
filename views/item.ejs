@@ -136,16 +136,16 @@
         </form>
       </div>
 
-    <%#  <form class="" name="add" action="/fixitem" method="get"  onsubmit="return checkonclick()">%>
-    <%#    <input type=text list=browsers style="" checked value="<%= data[0].item_name %>" name="Seachname"> %>
-    <%#    <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %> %>
-    <%#      <datalist id="browsers" name="datalistname" class="" style="width:50%"> %>
-    <%#        <% data.forEach(function(item) { %> %>
-    <%#        <option value='<%= item.item_name%>' style=""><%- item.item_name%></option> %>
-    <%#        <% }); %> %>
-    <%#      </datalist>%>
-    <%#    <input action="/fixitem" type="submit" class="btn" value="변경하기" ></button>%>
-    <%#  </form>%>
+      <form class="" name="add" action="/fixitem" method="get"  onsubmit="return checkonclick()">
+        <input type=text list=browsers style="" checked value="<%= data[0].item_name %>" name="Seachname">
+        <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
+          <datalist id="browsers" name="datalistname" class="" style="width:50%">
+            <% data.forEach(function(item) { %>
+            <option value='<%= item.item_name%>' style=""><%- item.item_name%></option>
+            <% }); %>
+          </datalist>
+        <input action="/fixitem" type="submit" class="btn" value="변경하기" ></button>
+      </form>
     </div>
     <% } %>
   </body>

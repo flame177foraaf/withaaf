@@ -35,6 +35,9 @@ router.get('/add_item', (req,res,next) => {
   });
 });
 
+router.get('/fixitem', (req,res,next) => {
+  res.redirect('/')
+})
 //무기 추가하기
 router.post('/', (req, res, next) => {
   var Itemname = req.body.name;
