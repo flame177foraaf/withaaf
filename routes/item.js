@@ -13,13 +13,22 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  res.render('item', {
-    title:'AAF 아이템'
-  });
+  var QueryString = 'select item_name from aquafeq.aquafitem ORDER BY item_name collate "ko_KR.utf8";'
+  client.query(QueryString, [](err, response) => {
+    console.log(response.rows[0])
+    if (err) {
+      res.redirect('/');
+    } else {
+      res.render('item', {
+        title:'AAF 아이템',
+        data: response.rows
+      });
+    }
 });
 
 
 router.get('/add_item', (req,res,next) => {
+
   res.render ('additem', {
     title:'AAF 아이템 추가'
   });
