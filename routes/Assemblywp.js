@@ -59,120 +59,125 @@ router.get('/ing', (req,res,next) => {
       }
 
       // 커스텀 재조립
-      for (var i = 0; i < eqcustom.length; i++) {
-        if (eqcustom[i].indexOf('[') === -1) {
-          var result_custom = "커스텀의 정보가 정확하지 않습니다." +"<br />"+"커스텀이 적용될 확률이 분명하게 표시되어있는지 확인해주세요."
-        } else {
-          if (eqcustom[i].indexOf("웨이블렘") == -1) {
-            var find_cus_val1 = eqcustom[i].indexOf("(");
-            var find_cus_val2 = eqcustom[i].indexOf(")");
-            var find_cus_per1 = eqcustom[i].indexOf("[");
-            var find_cus_per2 = eqcustom[i].indexOf("]");
-            var cut_cus_name = eqcustom[i].substring(0,find_cus_val1);
-            var cut_cus_value = eqcustom[i].substring(find_cus_val1+1,find_cus_val2); //커스텀 수치
-            //var random_num = Math.floor(Math.random() * 10 + 1);
-            var leng = eqcustom[i].length;
-            var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
-            var cus_per_0 = cus_per.indexOf("%");
-            var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
-            var cus_per_2 = Math.floor(Math.random() * 100) + 1
-            if (cus_per_2 <= cus_per_1) {
-              var cut_in_custom = cut_cus_value.indexOf("~");
-              var find_per_custom = cut_cus_value.indexOf("%");
-              var find_minus_custom = cut_cus_value.indexOf("-");
-              var custommin = cut_cus_value.substring(0,cut_in_custom); //커스텀 수치 최소  3 %
-              var custommax = cut_cus_value.substring(cut_in_custom+1); //커스텀 수치 최대    20 %
-              if (find_per_custom !== -1) {
-                var find_per_cusmin = custommin.indexOf("%");
-                var find_per_cusmax = custommax.indexOf("%");
-                var custommin = custommin.substring(0,find_per_cusmin);
-                var custommax = custommax.substring(0, find_per_cusmax);
+      if (Allcustom === "") {
+        var result_custom = "재조립할 커스텀이 없네요~_~";
 
-                var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
-                if (rancustom !== 0) {
-                  var rancustom = rancustom + ' %';
-                }
-              } else {
+      } else {
+        for (var i = 0; i < eqcustom.length; i++) {
 
-                var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
-              }
-              if (rancustom !== 0) {
-                if (find_minus_custom !== -1) {
-                  if (result_custom === 'null') {
-                    var result_custom = cut_cus_name + rancustom;
-                  } else {
-                    var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
-                  }
-                } else {
-                  if (result_custom === 'null') {
-                    var result_custom = cut_cus_name +"+ "+ rancustom;
-                  } else {
-                    var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
-                  }
-                }
-              }
-            }
+          if (eqcustom[i].indexOf('[') === -1) {
+            var result_custom = "커스텀의 정보가 정확하지 않습니다." +"<br />"+"커스텀이 적용될 확률이 분명하게 표시되어있는지 확인해주세요."
           } else {
-            var find_cus_val1 = eqcustom[i].indexOf("("); //웨이블렘 괄호
-            var find_cus_val2 = eqcustom[i].indexOf(")"); //웨이블렘 괄호
-            var find_cus_val1 = eqcustom[i].indexOf("(",find_cus_val1 +1);
-            var find_cus_val2 = eqcustom[i].indexOf(")",find_cus_val2 +1);
-            var find_cus_per1 = eqcustom[i].indexOf("[");
-            var find_cus_per2 = eqcustom[i].indexOf("]");
-            var cut_cus_name = eqcustom[i].substring(0,find_cus_val1);
-            var cut_cus_value = eqcustom[i].substring(find_cus_val1+1,find_cus_val2); //커스텀 수치
+            if (eqcustom[i].indexOf("웨이블렘") == -1) {
+              var find_cus_val1 = eqcustom[i].indexOf("(");
+              var find_cus_val2 = eqcustom[i].indexOf(")");
+              var find_cus_per1 = eqcustom[i].indexOf("[");
+              var find_cus_per2 = eqcustom[i].indexOf("]");
+              var cut_cus_name = eqcustom[i].substring(0,find_cus_val1);
+              var cut_cus_value = eqcustom[i].substring(find_cus_val1+1,find_cus_val2); //커스텀 수치
+              //var random_num = Math.floor(Math.random() * 10 + 1);
+              var leng = eqcustom[i].length;
+              var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
+              var cus_per_0 = cus_per.indexOf("%");
+              var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
+              var cus_per_2 = Math.floor(Math.random() * 100) + 1
+              if (cus_per_2 <= cus_per_1) {
+                var cut_in_custom = cut_cus_value.indexOf("~");
+                var find_per_custom = cut_cus_value.indexOf("%");
+                var find_minus_custom = cut_cus_value.indexOf("-");
+                var custommin = cut_cus_value.substring(0,cut_in_custom); //커스텀 수치 최소  3 %
+                var custommax = cut_cus_value.substring(cut_in_custom+1); //커스텀 수치 최대    20 %
+                if (find_per_custom !== -1) {
+                  var find_per_cusmin = custommin.indexOf("%");
+                  var find_per_cusmax = custommax.indexOf("%");
+                  var custommin = custommin.substring(0,find_per_cusmin);
+                  var custommax = custommax.substring(0, find_per_cusmax);
 
-
-            //var random_num = Math.floor(Math.random() * 10 + 1);
-            var leng = eqcustom[i].length;
-
-
-            var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
-            var cus_per_0 = cus_per.indexOf("%");
-            var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
-            var cus_per_2 = Math.floor(Math.random() * 100) + 1
-
-            if (cus_per_2 <= cus_per_1) {
-              var cut_in_custom = cut_cus_value.indexOf("~");
-              var find_per_custom = cut_cus_value.indexOf("%");
-              var find_minus_custom = cut_cus_value.indexOf("-");
-              var custommin = cut_cus_value.substring(0,cut_in_custom); //커스텀 수치 최소  3 %
-              var custommax = cut_cus_value.substring(cut_in_custom+1); //커스텀 수치 최대    20 %
-              if (find_per_custom !== -1) {
-                var find_per_cusmin = custommin.indexOf("%");
-                var find_per_cusmax = custommax.indexOf("%");
-                var custommin = custommin.substring(0,find_per_cusmin);
-                var custommax = custommax.substring(0, find_per_cusmax);
-
-                var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
-
-                if (rancustom !== 0) {
-                  var rancustom = rancustom + ' %';
-                }
-              } else {
-
-                var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
-              }
-              if (rancustom !== 0) {
-                if (find_minus_custom !== -1) {
-                  if (result_custom === 'null') {
-                    var result_custom = cut_cus_name + rancustom;
-                  } else {
-                    var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+                  var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
+                  if (rancustom !== 0) {
+                    var rancustom = rancustom + ' %';
                   }
                 } else {
-                  if (result_custom === 'null') {
-                    var result_custom = cut_cus_name +"+ "+ rancustom;
+
+                  var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
+                }
+                if (rancustom !== 0) {
+                  if (find_minus_custom !== -1) {
+                    if (result_custom === 'null') {
+                      var result_custom = cut_cus_name + rancustom;
+                    } else {
+                      var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+                    }
                   } else {
-                    var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
+                    if (result_custom === 'null') {
+                      var result_custom = cut_cus_name +"+ "+ rancustom;
+                    } else {
+                      var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
+                    }
                   }
                 }
               }
+            } else {
+              var find_cus_val1 = eqcustom[i].indexOf("("); //웨이블렘 괄호
+              var find_cus_val2 = eqcustom[i].indexOf(")"); //웨이블렘 괄호
+              var find_cus_val1 = eqcustom[i].indexOf("(",find_cus_val1 +1);
+              var find_cus_val2 = eqcustom[i].indexOf(")",find_cus_val2 +1);
+              var find_cus_per1 = eqcustom[i].indexOf("[");
+              var find_cus_per2 = eqcustom[i].indexOf("]");
+              var cut_cus_name = eqcustom[i].substring(0,find_cus_val1);
+              var cut_cus_value = eqcustom[i].substring(find_cus_val1+1,find_cus_val2); //커스텀 수치
 
+
+              //var random_num = Math.floor(Math.random() * 10 + 1);
+              var leng = eqcustom[i].length;
+
+
+              var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
+              var cus_per_0 = cus_per.indexOf("%");
+              var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
+              var cus_per_2 = Math.floor(Math.random() * 100) + 1
+
+              if (cus_per_2 <= cus_per_1) {
+                var cut_in_custom = cut_cus_value.indexOf("~");
+                var find_per_custom = cut_cus_value.indexOf("%");
+                var find_minus_custom = cut_cus_value.indexOf("-");
+                var custommin = cut_cus_value.substring(0,cut_in_custom); //커스텀 수치 최소  3 %
+                var custommax = cut_cus_value.substring(cut_in_custom+1); //커스텀 수치 최대    20 %
+                if (find_per_custom !== -1) {
+                  var find_per_cusmin = custommin.indexOf("%");
+                  var find_per_cusmax = custommax.indexOf("%");
+                  var custommin = custommin.substring(0,find_per_cusmin);
+                  var custommax = custommax.substring(0, find_per_cusmax);
+
+                  var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
+
+                  if (rancustom !== 0) {
+                    var rancustom = rancustom + ' %';
+                  }
+                } else {
+
+                  var rancustom = Dice_roll(parseInt(custommin), parseInt(custommax));
+                }
+                if (rancustom !== 0) {
+                  if (find_minus_custom !== -1) {
+                    if (result_custom === 'null') {
+                      var result_custom = cut_cus_name + rancustom;
+                    } else {
+                      var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+                    }
+                  } else {
+                    if (result_custom === 'null') {
+                      var result_custom = cut_cus_name +"+ "+ rancustom;
+                    } else {
+                      var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
+                    }
+                  }
+                }
+
+              }
             }
           }
         }
-
       }
 
       //소켓 재조
