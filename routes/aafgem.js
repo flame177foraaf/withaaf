@@ -17,6 +17,15 @@ router.get('/', (req,res,next) => {
   });
 });
 
+router.get('/fixgem', (req,res,next) => {
+  res.redirect('/')
+})
+router.get('/add_gem', (req,res,next) => {
+  res.render('addgem', {
+    title:'AAF 장비'
+  });
+})
+
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   if (SearchType === 'name') {

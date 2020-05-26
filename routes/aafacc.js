@@ -18,6 +18,16 @@ router.get('/', (req,res,next) => {
   });
 });
 
+router.get('/fixacc', (req,res,next) => {
+  res.redirect('/');
+});
+router.get('/add_acc', (req,res,next) => {
+  res.render ('addacc', {
+    title:'AAF 악세사리 등록'
+  });
+
+});
+
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   if (SearchType === 'name') {

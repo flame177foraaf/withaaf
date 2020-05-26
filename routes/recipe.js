@@ -16,6 +16,9 @@ router.get('/', (req,res,next) => {
     title:'AAF 레시피'
   });
 });
+router.get('/fixrecipe', (req,res,next) => {
+  res.redirect('/');
+});
 
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;

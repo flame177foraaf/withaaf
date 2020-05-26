@@ -18,6 +18,15 @@ router.get('/', (req,res,next) => {
   });
 });
 
+router.get('/fixarm', (req,res,next) => {
+  res.redirect('/');
+});
+router.get('/add_arm', (req,res,next) => {
+  res.render ('addarm', {
+    title:'AAF 방어구 등록'
+  });
+});
+
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   if (SearchType === 'name') {
@@ -161,7 +170,7 @@ router.get('/:id', (req,res,next) => {
   } else {
     res.redirect('/aafarm');
   };
-})
+});
 
 
 

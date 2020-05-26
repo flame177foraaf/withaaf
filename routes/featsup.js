@@ -18,6 +18,13 @@ router.get('/', (req,res,next) => {
   });
 });
 
+router.get('/fixfeat', (req,res,next) => {
+  res.redirect('/');
+});
+router.get('/add_feat', (req,res,next) => {
+  res.redirect('/');
+});
+
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   if (SearchType === 'name') {

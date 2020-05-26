@@ -29,7 +29,7 @@ router.get('/', (req,res,next) => {
 
 router.get('/addwp', (req,res,next) => {
   res.render ('addwp', {
-    title:'AAF 장비'
+    title:'AAF 무기 등록'
   });
 });
 
