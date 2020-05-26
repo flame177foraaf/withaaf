@@ -23,9 +23,9 @@ router.get('/:id', (req,res,next) => {
   if (SearchType === 'name') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var Collate = "'ko_KR.utf8'"
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name LIKE $1 ORDER BY item_name collate $3 limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage, Collate], (err, response) => {
+    var Collate = "ko_KR.utf8";
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name LIKE $1 ORDER BY item_name collate $2 limit 10 offset (($3- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', Collate, CurrentPage ], (err, response) => {
       console.log(QueryString)
       console.log(response.rows)
       if(typeof(response.rows[0]) !== "object") {
