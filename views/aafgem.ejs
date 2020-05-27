@@ -124,11 +124,11 @@
         </div>
 
         <form class="" name="add" action="/aafgem/fixgem" method="get"  onsubmit="return checkonclick()">
-          <input type=text list=browsers style="" checked value="<%= data[0].gem_name %>" name="Seachname">
+          <input type=text list=browsers style="" checked value="<%= data[0].gemname %>" name="Seachname">
           <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
             <datalist id="browsers" name="datalistname" class="" style="width:50%">
               <% data.forEach(function(item) { %>
-              <option value='<%= item.gem_name%>' style=""><%- item.gem_name%></option>
+              <option value='<%= item.gemname%>' style=""><%- item.gemname%></option>
               <% }); %>
             </datalist>
           <input action="/aafgem/fixgem" type="submit" class="btn" value="변경하기" ></button>

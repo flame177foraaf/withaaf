@@ -46,8 +46,8 @@ router.get('/:id', (req,res,next) => {
       SearchLimit = 0;
     };
     console.log(SearchLimit)
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accname LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accname LIKE $1 AND acclimit >= $3 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchLimit], (err, response) => {
       console.log('서치리밋' + SearchLimit);
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -99,8 +99,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accfeat LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accfeat LIKE $1 AND acclimit >= $3 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchLimit], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -141,8 +141,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accproperty LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accproperty LIKE $1 AND acclimit >= $3 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchLimit], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -183,8 +183,8 @@ router.get('/:id', (req,res,next) => {
     if (SearchLimit === undefined) {
       SearchLimit = 0;
     };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where acccustom LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where acccustom LIKE $1 AND acclimit >= $3 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchLimit], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
