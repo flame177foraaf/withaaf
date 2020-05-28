@@ -332,10 +332,11 @@ router.get('/ing', (req,res,next) => {
 
 
       // 스텟 재조립
-      var ALlstats = response.rows[0].armstats
-      // console.log(ALlstats.indexOf("/"))
-      var cut1_stats = ALlstats.substring(0,ALlstats.indexOf("/"))
-      var cut2_stats = ALlstats.substring(ALlstats.indexOf("/")+1)
+      var Allstats = response.rows[0].armstats
+      console.log(Allstats)
+      // console.log(Allstats.indexOf("/"))
+      var cut1_stats = Allstats.substring(0,Allstats.indexOf("/"))
+      var cut2_stats = Allstats.substring(Allstats.indexOf("/")+1)
       //console.log(cut1_stats)
       //console.log(cut2_stats)
       var first_stat = cut1_stats.substring(cut1_stats.indexOf("+") +1)
@@ -349,7 +350,12 @@ router.get('/ing', (req,res,next) => {
       var Dice_roll_first_stat_per =  (100 + Dice_roll_first_stat  )/100
       //console.log(Dice_roll_first_stat_per)
       var first_stat = parseInt(first_stat)*Dice_roll_first_stat_per
+      if (Reinforce == "checked") {
+        var first_stat = first_stat*1.61
+      }
+
       var first_stat = Math.floor(first_stat)  //소수점 버리기
+
       if (Dice_roll_first_stat > 0) {
         var result_first_stats = first_stat + "(" +" + "+ Dice_roll_first_stat + " % " + ")";
       }else {
@@ -362,6 +368,10 @@ router.get('/ing', (req,res,next) => {
       var Dice_roll_second_stat_per =  (100 + Dice_roll_second_stat  )/100
       //console.log(Dice_roll_second_stat_per)
       var second_stat = parseInt(second_stat)*Dice_roll_second_stat_per
+      if (Reinforce == "checked") {
+        var second_stat = second_stat*1.61
+      }
+
       var second_stat = Math.floor(second_stat) //소수점 버리기
       if (Dice_roll_second_stat > 0) {
         var result_second_stats = second_stat + "(" +" + "+ Dice_roll_second_stat + " % " + ")";

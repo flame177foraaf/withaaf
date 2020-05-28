@@ -37,6 +37,7 @@ router.get('/ing', (req,res,next) => {
   } else {
     var Reinforce = "Notchekd";
   }
+  console.log(req.query.special)
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
     if (typeof(response.rows) === undefined) {
@@ -259,6 +260,10 @@ router.get('/ing', (req,res,next) => {
       var Dice_roll_second_stat_per =  (100 + Dice_roll_second_stat  )/100
       //console.log(Dice_roll_second_stat_per)
       var second_stat = parseInt(second_stat)*Dice_roll_second_stat_per
+      if (Reinforce == "checked") {
+        var second_stat = second_stat*1.61
+      }
+
       var second_stat = Math.round(second_stat) //소수점 버리기 버리기는 floor
       if (Dice_roll_second_stat > 0) {
         var result_second_stats = second_stat + "(" +" + "+ Dice_roll_second_stat + " % " + ")";
