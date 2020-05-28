@@ -39,23 +39,12 @@ router.get('/ing', (req,res,next) => {
   }
   var QueryString = "SELECT * FROM aquafeq.aquafarm where armname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
+    console.log(response.rows[0])
+    console.log(response.rows)
+    console.log(typeof(response.rows))
+    console.log(typeof(response.rows[0]))
+    console.log(response.rows[0])
     if (typeof(response.rows) === undefined) {
-      var data = {
-        Assembly:"null",
-        armgrade: "null",
-        armname: "null",
-        armlimit: "null",
-        armsocket : "null",
-        armether: "null",
-        armstats: "null",
-        armproperty: "null",
-        armfeat: "null",
-        armcustom: "null",
-        result_socket: "null",
-        result_custom: "null",
-        result_stats:"null",
-      };
-    } else {
       //console.log(response.rows[0].armcustom);
       //console.log(response.rows[0])
       var Allcustom = response.rows[0].armcustom;
@@ -408,7 +397,6 @@ router.get('/ing', (req,res,next) => {
           result_custom: result_custom,
           result_stats:result_stats,
         };
-    }
 
     console.log("재조립중   " + data.Assembly);
     res.send(data)
