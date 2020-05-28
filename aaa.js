@@ -1,4 +1,4 @@
-var Allcustom = "루엘 파편 획득 확률 변화 ( -6 ~ 4 ) [100% 확률]";
+var Allcustom = "크리티컬 데미지 변화 ( 8 % ~ 15 % ) [100% 확률]'<br />상세 속성 추가 데미지 변화 ( 8 % ~ 14 % ) [100% 확률]'<br />실드 HP 추가 ( 2 % ~ 5 % ) [60% 확률]'<br />크리티컬률 변화 ( 3 % ~ 6 % ) [100% 확률]'<br />크리티컬률 변화 ( 3 % ~ 6 % ) [20% 확률]'<br />크리티컬 데미지 변화 ( 5 % ~ 13 % ) [30% 확률]'<br />소울 루비 추출 기능 ( 5 ~ 15 ) [20% 확률]'<br />소울 사파이어 추출 기능 ( 5 ~ 15 ) [20% 확률]";
 //console.log(Allcustom);
 var eqcustom = Allcustom.split('<br />');
 var eqcustom = Allcustom.split('<br />');
@@ -49,6 +49,7 @@ var result_custom = 'null';
 
                 console.log(cus_per_1)
                 var cus_per_2 = Math.floor(Math.random() * 100) + 1
+                console.log(cus_per_2)
 
                 if (cus_per_2 <= cus_per_1) {
                   var cut_in_custom = cut_cus_value.indexOf("~");

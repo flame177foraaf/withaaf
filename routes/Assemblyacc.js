@@ -201,6 +201,13 @@ router.get('/ing', (req,res,next) => {
               var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
               var cus_per_0 = cus_per.indexOf("%");
               var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
+              if (Special == "checked") {
+                cus_per_1 = parseInt(cus_per.substring(0,cus_per_0)) + 30
+                if (cus_per_1 > 100) {
+                  cus_per_1 = 100;
+                }
+              }
+
               var cus_per_2 = Math.floor(Math.random() * 100) + 1
               if (cus_per_2 <= cus_per_1) {
                 var cut_in_custom = cut_cus_value.indexOf("~");
@@ -256,6 +263,12 @@ router.get('/ing', (req,res,next) => {
               var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
               var cus_per_0 = cus_per.indexOf("%");
               var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
+              if (Special == "checked") {
+                cus_per_1 = parseInt(cus_per.substring(0,cus_per_0)) + 30
+                if (cus_per_1 > 100) {
+                  cus_per_1 = 100;
+                }
+              }
               var cus_per_2 = Math.floor(Math.random() * 100) + 1
 
               if (cus_per_2 <= cus_per_1) {

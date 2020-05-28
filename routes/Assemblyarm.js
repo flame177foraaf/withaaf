@@ -118,7 +118,7 @@ router.get('/ing', (req,res,next) => {
                   cus_per_1 = 100;
                 }
               }
-
+              
               var cus_per_2 = Math.floor(Math.random() * 100) + 1
 
               if (cus_per_2 <= cus_per_1) {
