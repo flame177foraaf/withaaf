@@ -34,64 +34,85 @@
         if($("input:checkbox[name=special]").is(":checked") == true) {
           if ($("input:checkbox[name=reinforce]").is(":checked") == true) {
             $.ajax({
-              url: '/Assembly/ing',
+              url: '/Assemblyarm/ing',
               type: 'GET',
               data: {
-                assembly : $("#wpname").text(),
+                assembly : $("#armname").text(),
                 special : "checked",
                 reinforce : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +'<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
-                var custom1  ='<td colspan="2" value=""  name="wpcustom" id="">' + data.wpcustom + '</td> ' + '<td colspan="2" value=""  name="wpcustom" id="">' + data.result_custom + '</td> ';
-                $('#SocketANDStat').html(result_SocketANDStat);
+                var result_SocketANDStat = data.result_stats
+                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%- data.result_stats %></td>'
+                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%- data.result_property %></td>'
+
+                $('#Socket').text(result_SocketANDStat);
                 $('#Custom').html(custom1);
+                $('#Stats').html(stats);
+                $('#Property').html(property)
+
               }
             });
           } else {
             $.ajax({
-              url: '/Assembly/ing',
+              url: '/Assemblyarm/ing',
               type: 'GET',
               data: {
-                assembly : $("#wpname").text(),
+                assembly : $("#armname").text(),
                 special : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +'<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
-                var custom1  ='<td colspan="2" value=""  name="wpcustom" id="">' + data.wpcustom + '</td> ' + '<td colspan="2" value=""  name="wpcustom" id="">' + data.result_custom + '</td> ';
-                $('#SocketANDStat').html(result_SocketANDStat);
+                var result_SocketANDStat = data.result_stats
+                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%- data.result_stats %></td>'
+                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%- data.result_property %></td>'
+
+                $('#Socket').text(result_SocketANDStat);
                 $('#Custom').html(custom1);
+                $('#Stats').html(stats);
+                $('#Property').html(property)
               }
             });
           }
         } else {
           if ($("input:checkbox[name=reinforce]").is(":checked") == true) {
             $.ajax({
-              url: '/Assembly/ing',
+              url: '/Assemblyarm/ing',
               type: 'GET',
               data: {
-                assembly : $("#wpname").text(),
+                assembly : $("#armname").text(),
                 reinforce : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +'<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
-                var custom1  ='<td colspan="2" value=""  name="wpcustom" id="">' + data.wpcustom + '</td> ' + '<td colspan="2" value=""  name="wpcustom" id="">' + data.result_custom + '</td> ';
-                $('#SocketANDStat').html(result_SocketANDStat);
+                var result_SocketANDStat = data.result_stats
+                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%- data.result_stats %></td>'
+                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%- data.result_property %></td>'
+
+                $('#Socket').text(result_SocketANDStat);
                 $('#Custom').html(custom1);
+                $('#Stats').html(stats);
+                $('#Property').html(property)
               }
             });
           } else {
             $.ajax({
-              url: '/Assembly/ing',
+              url: '/Assemblyarm/ing',
               type: 'GET',
               data: {
-                assembly : $("#wpname").text(),
+                assembly : $("#armname").text(),
               },
               success: function(data) {
-                var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +'<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
-                var custom1  ='<td colspan="2" value=""  name="wpcustom" id="">' + data.wpcustom + '</td> ' + '<td colspan="2" value=""  name="wpcustom" id="">' + data.result_custom + '</td> ';
-                $('#SocketANDStat').html(result_SocketANDStat);
+                var result_SocketANDStat = data.result_stats
+                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%- data.result_stats %></td>'
+                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%- data.result_property %></td>'
+
+                $('#Socket').text(result_SocketANDStat);
                 $('#Custom').html(custom1);
+                $('#Stats').html(stats);
+                $('#Property').html(property)
               }
             });
           }
@@ -123,20 +144,25 @@
           </tr>
         <% } else { %>
           <tr style="text-align:center">
-            <td colspan="" value="<%= data.wpname %>" name="" id="wpname"><%- data.wpname %></td>
-            <td name="wplimit"><%- data.wplimit %></td>
-            <td name="wpether"><%- data.wpether %></td>
-            <td name="wpproperty"><%- data.wpproperty %></td>
+            <td colspan="" value="<%= data.armname %>" name="" id="armname"><%- data.armname %></td>
+            <td name="armlimit"><%- data.armlimit %></td>
+            <td name="armether"><%- data.armether %></td>
+            <td value=""  name="" id="Socket" style=""><%- data.armsocket %></td>
+
           </tr>
-          <tr style="text-align:center" id="SocketANDStat">
-            <td value=""  name="" id="" style=""><%- data.wpsocket %></td>
-            <td colspan="3" value=""  name="" id=""><%- data.wpstats %></td>
+          <tr style="text-align:center" id="Stats">
+            <td colspan="4" name="armproperty"><%- data.armstats %></td>
+
+          </tr>
+          <tr id="Property" style="text-align:center">
+            <td colspan="4" name="armproperty"><%- data.armproperty %></td>
+
           </tr>
           <tr>
-            <td colspan="4" name="wpfeat"><%- data.wpfeat %></td>
+            <td colspan="4" name="armfeat"><%- data.armfeat %></td>
           </tr>
           <tr id="Custom" style="height:300px">
-            <td colspan="4" value=""  name="wpcustom" id=""><%- data.wpcustom%></td>
+            <td colspan="4" value=""  name="armcustom" id=""><%- data.armcustom%></td>
           </tr>
         <% } %>
 

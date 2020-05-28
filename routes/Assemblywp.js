@@ -27,6 +27,8 @@ router.get('/', (req,res,next) => {
 router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly;
   //console.log(Assembly)
+  var Special = req.query.special;
+  var Reinforce = req.query.reinforce;
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
     if (typeof(response.rows) === undefined) {
@@ -48,10 +50,7 @@ router.get('/ing', (req,res,next) => {
     } else {
       //console.log(response.rows[0].wpcustom);
       //console.log(response.rows[0])
-      var Allcustom = response.rows[0].wpcustom;
-      //console.log(Allcustom);
-      var eqcustom = Allcustom.split('<br />');
-      var result_custom = 'null';
+
 
       function Dice_roll(min, max){   //주사위 굴리기
         var diceroll = max - min + 1;
@@ -59,6 +58,10 @@ router.get('/ing', (req,res,next) => {
       }
 
       // 커스텀 재조립
+      var Allcustom = response.rows[0].wpcustom;
+      //console.log(Allcustom);
+      var eqcustom = Allcustom.split('<br />');
+      var result_custom = 'null';
       if (Allcustom === "") {
         var result_custom = "재조립할 커스텀이 없네요~_~";
 
@@ -225,10 +228,16 @@ router.get('/ing', (req,res,next) => {
       //console.log(parseInt(first_stat))
 
       var Dice_roll_first_stat = parseInt(Dice_roll(-10,10))
+      if (Special == "checked") {
+        Dice_roll_first_stat = parseInt(Dice_roll(-5,15))
+      }
       //console.log(Dice_roll_first_stat)
       var Dice_roll_first_stat_per =  (100 + Dice_roll_first_stat  )/100
       //console.log(Dice_roll_first_stat_per)
       var first_stat = parseInt(first_stat)*Dice_roll_first_stat_per
+      if (Reinforce == "checked") {
+        var first_stat = first_stat*1.61
+      }
       var first_stat = Math.round(first_stat)  //소수점 반올림   버리기는 floor
       if (Dice_roll_first_stat > 0) {
         var result_first_stats = first_stat + "(" +" + "+ Dice_roll_first_stat + " % " + ")";
@@ -242,7 +251,7 @@ router.get('/ing', (req,res,next) => {
       var Dice_roll_second_stat_per =  (100 + Dice_roll_second_stat  )/100
       //console.log(Dice_roll_second_stat_per)
       var second_stat = parseInt(second_stat)*Dice_roll_second_stat_per
-      var second_stat = Math.round(second_stat) //소수점 버리기 버리기는 floor 
+      var second_stat = Math.round(second_stat) //소수점 버리기 버리기는 floor
       if (Dice_roll_second_stat > 0) {
         var result_second_stats = second_stat + "(" +" + "+ Dice_roll_second_stat + " % " + ")";
       } else {

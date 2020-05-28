@@ -15,9 +15,9 @@ client.connect();
 router.get('/', (req,res,next) => {
   var Assembly = req.query.assembly;
 
-  var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
+  var QueryString = "SELECT * FROM aquafeq.aquafacc where accname = $1";
   client.query(QueryString, [Assembly],(err, response) => {
-    res.render('Assemblywp', {
+    res.render('Assemblyacc', {
       title: '무기 재조립하기',
       data: response.rows[0]
     });
@@ -26,44 +26,153 @@ router.get('/', (req,res,next) => {
 */
 
 router.get('/', (req,res,next) => {
-  res.redirect('/aafacc')
+  var Assembly = req.query.assembly;
+
+  var QueryString = "SELECT * FROM aquafeq.aquafacc where wpname = $1";
+  client.query(QueryString, [Assembly],(err, response) => {
+    res.render('Assemblyacc', {
+      title: '악세사리 재조립하기',
+      data: response.rows[0]
+    });
+  });
 });
 
 router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly;
   //console.log(Assembly)
-  var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
+  var Special = req.query.special;
+  var Reinforce = req.query.reinforce;
+
+  var QueryString = "SELECT * FROM aquafeq.aquafacc where accname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
     if (typeof(response.rows) === undefined) {
       var data = {
         Assembly:"null",
-        wpgrade: "null",
-        wpname: "null",
-        wplimit: "null",
-        wpsocket : "null",
-        wpether: "null",
-        wpstats: "null",
-        wpproperty: "null",
-        wpfeat: "null",
-        wpcustom: "null",
+        accgrade: "null",
+        accname: "null",
+        acclimit: "null",
+        accsocket : "null",
+        accether: "null",
+        accstats: "null",
+        accproperty: "null",
+        accfeat: "null",
+        acccustom: "null",
         result_socket: "null",
         result_custom: "null",
         result_stats:"null",
+        result_property:"null"
       };
     } else {
-      //console.log(response.rows[0].wpcustom);
-      //console.log(response.rows[0])
-      var Allcustom = response.rows[0].wpcustom;
-      //console.log(Allcustom);
-      var eqcustom = Allcustom.split('<br />');
-      var result_custom = 'null';
-
       function Dice_roll(min, max){   //주사위 굴리기
         var diceroll = max - min + 1;
         return Math.floor(Math.random() * diceroll + min);
       }
 
+      //console.log(response.rows[0].acccustom);
+      //console.log(response.rows[0])
+
+      //속방 재조립
+      var result_property = 'null'
+      var Allproperty = response.rows[0].accproperty;
+
+      var cut1_property = Allproperty.indexOf("(")
+      var cut2_property = Allproperty.indexOf(")")
+      var cut_property = Allproperty.substring(cut1_property+1,cut2_property)
+      var cuts_property = cut_property.split("/")
+
+
+      for (var i = 0; i < cuts_property.length; i++) {
+        if (Special === "checked") {
+          var random = Dice_roll(-20,40)
+        } else {
+          var random = Dice_roll(-30,30)
+        }
+
+        if (parseInt(cuts_property[i]) == 0) {
+          var eachproperty = 0;
+          if (result_property === 'null') {
+            var result_property = eachproperty
+          } else {
+            var result_property = result_property + " / " + eachproperty
+          }
+        } else if (parseInt(cuts_property[i]) > 0 ) {
+          //속방 수치가 0 이상일때
+          if (Reinforce == "checked") {
+            var Reinforce1 = 1.8435;
+          } else {
+            var Reinforce1 = 1;
+          }
+          if (random == 0) {
+            var eachproperty = parseInt(cuts_property[i]);
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          } else if ( random > 0 ){
+            var ranproperty = (100 + random )/100
+            var eachproperty = Math.round(parseInt(cuts_property[i])*Reinforce1*ranproperty)
+            console.log(eachproperty)
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          } else {
+
+            var ranproperty = (100 + random )/100
+            var eachproperty = Math.round(parseInt(cuts_property[i])*Reinforce1*ranproperty)
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          }
+
+        } else if (parseInt(cuts_property[i]) < 0 ){
+          if (Reinforce == "checked") {
+            var Reinforce1 = Math.pow(1.07,5);
+          } else {
+            var Reinforce1 = 1;
+          }
+
+          if (random == 0) {
+            var eachproperty = parseInt(cuts_property[i]);
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          } else if ( random > 0 ){
+            var ranproperty = (100 + random )/100
+            var eachproperty = Math.round(parseInt(cuts_property[i])*Reinforce1*ranproperty)
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          } else {
+            var ranproperty = (100 + random )/100
+            var eachproperty = Math.round(parseInt(cuts_property[i])*Reinforce1*ranproperty)
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          }
+        }
+      }
+
+
+
       // 커스텀 재조립
+
+      var Allcustom = response.rows[0].acccustom;
+      //console.log(Allcustom);
+      var eqcustom = Allcustom.split('<br />');
+      var result_custom = 'null';
+
+
       if (Allcustom === "") {
         var result_custom = "재조립할 커스텀이 없네요~_~";
 
@@ -186,7 +295,7 @@ router.get('/ing', (req,res,next) => {
       }
 
       //소켓 재조
-      var Allsocket = response.rows[0].wpsocket
+      var Allsocket = response.rows[0].accsocket
       //console.log("소켓" + testsocket.length)
       //console.log("소켓 구분" + testsocket.indexOf("~"))
       if (Allsocket.indexOf("~") == -1) {
@@ -217,7 +326,7 @@ router.get('/ing', (req,res,next) => {
 
 
       // 스텟 재조립
-      var ALlstats = response.rows[0].wpstats
+      var ALlstats = response.rows[0].accstats
       // console.log(ALlstats.indexOf("/"))
       var cut1_stats = ALlstats.substring(0,ALlstats.indexOf("/"))
       var cut2_stats = ALlstats.substring(ALlstats.indexOf("/")+1)
@@ -258,18 +367,19 @@ router.get('/ing', (req,res,next) => {
       var data =
         {
           Assembly:Assembly,
-          wpgrade: response.rows[0].wpgrade,
-          wpname: response.rows[0].wpname,
-          wplimit: response.rows[0].wplimit,
-          wpsocket : response.rows[0].wpsocket,
-          wpether: response.rows[0].wpether,
-          wpstats: response.rows[0].wpstats,
-          wpproperty: response.rows[0].wpproperty,
-          wpfeat: response.rows[0].wpfeat,
-          wpcustom: response.rows[0].wpcustom,
+          accgrade: response.rows[0].accgrade,
+          accname: response.rows[0].accname,
+          acclimit: response.rows[0].acclimit,
+          accsocket : response.rows[0].accsocket,
+          accether: response.rows[0].accether,
+          accstats: response.rows[0].accstats,
+          accproperty: response.rows[0].accproperty,
+          accfeat: response.rows[0].accfeat,
+          acccustom: response.rows[0].acccustom,
           result_socket: result_socket,
           result_custom: result_custom,
           result_stats:result_stats,
+          result_property:result_property
         };
     }
 
