@@ -15,7 +15,7 @@ client.connect();
 router.get('/', (req,res,next) => {
   var Assembly = req.query.assembly;
 
-}  var QueryString = "SELECT * FROM aquafeq.aquafarm where armname = $1";
+  var QueryString = "SELECT * FROM aquafeq.aquafarm where armname = $1";
   client.query(QueryString, [Assembly],(err, response) => {
     res.render('test', {
       title: '무기 재조립하기',
@@ -29,7 +29,7 @@ router.get('/ing', (req,res,next) => {
   //console.log(Assembly)
   var Special = req.query.special;
   var Reinforce = req.query.reinforce;
-}  var QueryString = "SELECT * FROM aquafeq.aquafarm where armname = $1";
+  var QueryString = "SELECT * FROM aquafeq.aquafarm where armname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
     if (typeof(response.rows) === undefined) {
       var data = {
