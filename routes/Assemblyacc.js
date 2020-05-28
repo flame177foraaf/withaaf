@@ -28,7 +28,7 @@ router.get('/', (req,res,next) => {
 router.get('/', (req,res,next) => {
   var Assembly = req.query.assembly;
 
-  var QueryString = "SELECT * FROM aquafeq.aquafacc where wpname = $1";
+  var QueryString = "SELECT * FROM aquafeq.aquafacc where accname = $1";
   client.query(QueryString, [Assembly],(err, response) => {
     res.render('Assemblyacc', {
       title: '악세사리 재조립하기',
