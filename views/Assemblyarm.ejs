@@ -44,8 +44,8 @@
               success: function(data) {
                 var result_SocketANDStat = data.result_stats
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%- data.result_stats %></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%- data.result_property %></td>'
+                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + '%></td>'
+                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-' data.result_property '%></td>'
 
                 $('#Socket').text(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -65,8 +65,8 @@
               success: function(data) {
                 var result_SocketANDStat = data.result_stats
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%- data.result_stats %></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%- data.result_property %></td>'
+                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + '%></td>'
+                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-' data.result_property '%></td>'
 
                 $('#Socket').text(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -87,8 +87,8 @@
               success: function(data) {
                 var result_SocketANDStat = data.result_stats
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%- data.result_stats %></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%- data.result_property %></td>'
+                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + '%></td>'
+                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-' data.result_property '%></td>'
 
                 $('#Socket').text(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -106,8 +106,8 @@
               success: function(data) {
                 var result_SocketANDStat = data.result_stats
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%- data.result_stats %></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%- data.result_property %></td>'
+                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + '%></td>'
+                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-' data.result_property '%></td>'
 
                 $('#Socket').text(result_SocketANDStat);
                 $('#Custom').html(custom1);

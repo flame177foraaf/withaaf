@@ -34,7 +34,7 @@
         if($("input:checkbox[name=special]").is(":checked") == true) {
           if ($("input:checkbox[name=reinforce]").is(":checked") == true) {
             $.ajax({
-              url: '/Assembly/ing',
+              url: '/Assemblywp/ing',
               type: 'GET',
               data: {
                 assembly : $("#wpname").text(),
@@ -50,7 +50,7 @@
             });
           } else {
             $.ajax({
-              url: '/Assembly/ing',
+              url: '/Assemblywp/ing',
               type: 'GET',
               data: {
                 assembly : $("#wpname").text(),
@@ -67,7 +67,7 @@
         } else {
           if ($("input:checkbox[name=reinforce]").is(":checked") == true) {
             $.ajax({
-              url: '/Assembly/ing',
+              url: '/Assemblywp/ing',
               type: 'GET',
               data: {
                 assembly : $("#wpname").text(),
@@ -82,7 +82,7 @@
             });
           } else {
             $.ajax({
-              url: '/Assembly/ing',
+              url: '/Assemblywp/ing',
               type: 'GET',
               data: {
                 assembly : $("#wpname").text(),
