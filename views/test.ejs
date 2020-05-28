@@ -75,31 +75,10 @@
         $.ajax({
           url: '/test/ing',
           type: 'GET',
-          if($("input:checkbox[name=special]").is(":checked") == true) {
-            if ($("input:checkbox[name=reinforce]").is(":checked") == true) {
-              data: {
-                assembly : $("#wpname").text(),
-                special : "checked",
-                reinforce : "checked"
-              },
-            } else {
-              data: {
-                assembly : $("#wpname").text(),
-                special : "checked"
-              },
-            }
-          } else {
-            if ($("input:checkbox[name=reinforce]").is(":checked") == true) {
-              data: {
-                assembly : $("#wpname").text(),
-                reinforce : "checked"
-              },
-            } else {
-              data: {
-                assembly : $("#wpname").text(),
-              },
-            }
-          }
+          data: {
+            assembly : $("#wpname").text(),
+          },
+          
           success: function(data) {
             var result_SocketANDStat = '<td value="socket"  name="wpsocket" id="" style="font-size:30px">' + data.result_socket+ '</td>' +'<td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
             var custom1  ='<td colspan="2" value=""  name="wpcustom" id="">' + data.wpcustom + '</td> ' + '<td colspan="2" value=""  name="wpcustom" id="">' + data.result_custom + '</td> ';
