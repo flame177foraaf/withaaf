@@ -68,7 +68,7 @@
                 reinforce : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.accname +'</td>' +'<td name="acclimit">'+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.accname +'</td>' +'<td name="acclimit">'+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="font-size:30px">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
                 var stats = '<td colspan="2" name="accstats">' + data.accstats + '</td> + <td colspan="2" name="accproperty">' + data.result_stats + '</td>'
                 var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="">' + data.result_property +  '</td>'
@@ -89,7 +89,7 @@
                 special : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="" value="" name="" id="accname">'+ data.accname +'</td>' +'<td name="acclimit">  '+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.accname +'</td>' +'<td name="acclimit">'+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="font-size:30px">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
                 var stats = '<td colspan="2" name="accproperty">' + data.accstats + '</td> + <td colspan="2" name="accproperty">' + data.result_stats + '</td>'
                 var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="accproperty">' +  data.result_property  + '</td>'
@@ -111,7 +111,7 @@
                 reinforce : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="" value="" name="" id="accname">'+ data.accname +'</td>' +'<td name="acclimit">  '+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.accname +'</td>' +'<td name="acclimit">'+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="font-size:30px">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
                 var stats = '<td colspan="2" name="accproperty">' + data.accstats + '</td> + <td colspan="2" name="accproperty">' + data.result_stats + '</td>'
                 var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="accproperty">'  + data.result_property  + '</td>'
@@ -130,7 +130,7 @@
                 assembly : $("#accname").text(),
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="" value="" name="" id="accname">'+ data.accname +'</td>' +'<td name="acclimit">  '+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.accname +'</td>' +'<td name="acclimit">'+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="font-size:30px">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
                 var stats = '<td colspan="2" name="accproperty">' + data.accstats + '</td> + <td colspan="2" name="accproperty">' + data.result_stats + '</td>'
                 var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="accproperty">' +  data.result_property +  '</td>'
@@ -169,7 +169,7 @@
             </td>
           </tr>
         <% } else { %>
-          <tr style="text-align:center"  id="Socket" >
+          <tr style="text-align:center ; height:60px"  id="Socket" >
             <td colspan="" value="<%= data.accname %>" name="" id="accname"><%- data.accname %></td>
             <td name="acclimit"><%- data.acclimit %></td>
             <td name="accether"><%- data.accether %></td>
