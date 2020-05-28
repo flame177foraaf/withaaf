@@ -27,8 +27,15 @@ router.get('/', (req,res,next) => {
 router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly;
   //console.log(Assembly)
-  var Special = req.query.special;
-  var Reinforce = req.query.reinforce;
+  if (req.query.special !== 'undefined') {
+    var Special = req.query.special;
+  } else {
+    var Special = "";
+  }
+  if (req.query.special !== 'undefined') {
+    var Reinforce = req.query.reinforce;
+  } else {
+    var Reinforce = "";
   var QueryString = "SELECT * FROM aquafeq.aquafarm where armname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
     if (typeof(response.rows) === undefined) {
