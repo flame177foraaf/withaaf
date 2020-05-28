@@ -49,7 +49,8 @@ router.get('/ing', (req,res,next) => {
     var Reinforce = req.query.reinforce;
   } else {
     var Reinforce = "Notchekd";
-  }  var QueryString = "SELECT * FROM aquafeq.aquafarm where armname = $1";
+  }
+  var QueryString = "SELECT * FROM aquafeq.aquafarm where armname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
     if (typeof(response.rows) === undefined) {
       var data = {

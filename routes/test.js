@@ -398,6 +398,7 @@ router.get('/ing', (req,res,next) => {
           result_socket: result_socket,
           result_custom: result_custom,
           result_stats:result_stats,
+          result_property:result_property
         };
 
     console.log("재조립중   " + data.Assembly);
