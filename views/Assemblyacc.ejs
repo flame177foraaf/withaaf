@@ -37,15 +37,15 @@
               url: '/Assemblyacc/ing',
               type: 'GET',
               data: {
-                assembly : $("#armname").text(),
+                assembly : $("#accname").text(),
                 special : "checked",
                 reinforce : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="3" value=""  name="" id=""> ' + data.armstats + '</td> <td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
-                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + '%></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-' + data.result_property + '%></td>'
+                var result_SocketANDStat = '<td colspan="" value="<%= data.accname %>" name="" id="accname"><%-'+ data.accname +'%></td>' +'<td name="acclimit"><%-  '+ data.acclimit + ' %></td>' +'<td name="accether"><%-' + data.accether + '%></td>' +'<td value=""  name=""  style=""><%-' + data.accsocket + '%></td>'
+                var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="accproperty"><%- data.accstats %></td> + <td colspan="2" name="accproperty"><%-' + data.result_stats + '%></td>'
+                var property = '<td colspan="2" name="accproperty"><%- data.accproperty %></td> + <td colspan="2" name="accproperty"><%-' + data.result_property + '%></td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -59,14 +59,14 @@
               url: '/Assemblyacc/ing',
               type: 'GET',
               data: {
-                assembly : $("#armname").text(),
+                assembly : $("#accname").text(),
                 special : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="3" value=""  name="" id=""> ' + data.armstats + '</td> <td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
-                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + '%></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-' + data.result_property + '%></td>'
+                var result_SocketANDStat = '<td colspan="3" value=""  name="" id=""> ' + data.accstats + '</td> <td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
+                var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="accproperty"><%- data.accstats %></td> + <td colspan="2" name="accproperty"><%-' + data.result_stats + '%></td>'
+                var property = '<td colspan="2" name="accproperty"><%- data.accproperty %></td> + <td colspan="2" name="accproperty"><%-' + data.result_property + '%></td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -81,14 +81,14 @@
               url: '/Assemblyacc/ing',
               type: 'GET',
               data: {
-                assembly : $("#armname").text(),
+                assembly : $("#accname").text(),
                 reinforce : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="3" value=""  name="" id=""> ' + data.armstats + '</td> <td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
-                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + ' %></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-' + data.result_property + ' %></td>'
+                var result_SocketANDStat = '<td colspan="3" value=""  name="" id=""> ' + data.accstats + '</td> <td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
+                var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="accproperty"><%- data.accstats %></td> + <td colspan="2" name="accproperty"><%-' + data.result_stats + ' %></td>'
+                var property = '<td colspan="2" name="accproperty"><%- data.accproperty %></td> + <td colspan="2" name="accproperty"><%-' + data.result_property + ' %></td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -101,13 +101,13 @@
               url: '/Assemblyacc/ing',
               type: 'GET',
               data: {
-                assembly : $("#armname").text(),
+                assembly : $("#accname").text(),
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="3" value=""  name="" id=""> ' + data.armstats + '</td> <td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
-                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%- ' + data.result_stats +' %></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-' + data.result_property + '%></td>'
+                var result_SocketANDStat = '<td colspan="3" value=""  name="" id=""> ' + data.accstats + '</td> <td colspan="3" value=""  name="" id=""> ' + data.result_stats + '</td>'
+                var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="accproperty"><%- data.accstats %></td> + <td colspan="2" name="accproperty"><%- ' + data.result_stats +' %></td>'
+                var property = '<td colspan="2" name="accproperty"><%- data.accproperty %></td> + <td colspan="2" name="accproperty"><%-' + data.result_property + '%></td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -143,26 +143,26 @@
             </td>
           </tr>
         <% } else { %>
-          <tr style="text-align:center">
-            <td colspan="" value="<%= data.armname %>" name="" id="armname"><%- data.armname %></td>
-            <td name="armlimit"><%- data.armlimit %></td>
-            <td name="armether"><%- data.armether %></td>
-            <td value=""  name="" id="Socket" style=""><%- data.armsocket %></td>
+          <tr style="text-align:center"  id="Socket" >
+            <td colspan="" value="<%= data.accname %>" name="" id="accname"><%- data.accname %></td>
+            <td name="acclimit"><%- data.acclimit %></td>
+            <td name="accether"><%- data.accether %></td>
+            <td value=""  name=""style=""><%- data.accsocket %></td>
 
           </tr>
           <tr style="text-align:center" id="Stats">
-            <td colspan="4" name="armproperty"><%- data.armstats %></td>
+            <td colspan="4" name="accproperty"><%- data.accstats %></td>
 
           </tr>
           <tr id="Property" style="text-align:center">
-            <td colspan="4" name="armproperty"><%- data.armproperty %></td>
+            <td colspan="4" name="accproperty"><%- data.accproperty %></td>
 
           </tr>
           <tr>
-            <td colspan="4" name="armfeat"><%- data.armfeat %></td>
+            <td colspan="4" name="accfeat"><%- data.accfeat %></td>
           </tr>
           <tr id="Custom" style="height:300px">
-            <td colspan="4" value=""  name="armcustom" id=""><%- data.armcustom%></td>
+            <td colspan="4" value=""  name="acccustom" id=""><%- data.acccustom%></td>
           </tr>
         <% } %>
 
