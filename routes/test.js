@@ -27,6 +27,8 @@ router.get('/', (req,res,next) => {
 router.get('/ing', (req,res,next) => {
   var Assembly = req.query.assembly;
   //console.log(Assembly)
+  var Special = req.query.special;
+  var Reinforce = req.query.reinforce;
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
     if (typeof(response.rows) === undefined) {
@@ -61,7 +63,6 @@ router.get('/ing', (req,res,next) => {
       // 커스텀 재조립
       if (Allcustom === "") {
         var result_custom = "재조립할 커스텀이 없네요~_~";
-
       } else {
         for (var i = 0; i < eqcustom.length; i++) {
 
@@ -80,6 +81,13 @@ router.get('/ing', (req,res,next) => {
               var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
               var cus_per_0 = cus_per.indexOf("%");
               var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
+              var cus_per_1 = parseInt(cus_per_1)
+              if (Special == "checked") {
+                cus_per_1 = cus_per_1 + 30;
+                if (cus_per_1 >= 100) {
+                  cus_per_1 = 100;
+                }
+              }
               var cus_per_2 = Math.floor(Math.random() * 100) + 1
               if (cus_per_2 <= cus_per_1) {
                 var cut_in_custom = cut_cus_value.indexOf("~");
@@ -225,24 +233,45 @@ router.get('/ing', (req,res,next) => {
       //console.log(parseInt(first_stat))
 
       var Dice_roll_first_stat = parseInt(Dice_roll(-10,10))
+      if (Special == "checked") {
+        Dice_roll_first_stat = parseInt(Dice_roll(-5,15))
+      }
       //console.log(Dice_roll_first_stat)
       var Dice_roll_first_stat_per =  (100 + Dice_roll_first_stat  )/100
       //console.log(Dice_roll_first_stat_per)
       var first_stat = parseInt(first_stat)*Dice_roll_first_stat_per
-      var first_stat = Math.floor(first_stat)  //소수점 버리기
+      console.log(first_stat)
+      if (Reinforce == "checked") {
+        var first_stat = first_stat*1.61
+      }
+      console.log(first_stat)
+      //var first_stat = Math.floor(first_stat)  //소수점 버리기
+      var first_stat = Math.round(first_stat)  //소수점 반올림
+
       if (Dice_roll_first_stat > 0) {
         var result_first_stats = first_stat + "(" +" + "+ Dice_roll_first_stat + " % " + ")";
       }else {
         var result_first_stats =first_stat + " ( " + Dice_roll_first_stat + " % " + ") ";
 
-      }
+      }console.log(first_stat)
+
 
       var Dice_roll_second_stat = parseInt(Dice_roll(-10,10))
       //console.log(Dice_roll_second_stat)
+      if (Special == "checked") {
+        Dice_roll_second_stat = parseInt(Dice_roll(-5,15))
+      }
       var Dice_roll_second_stat_per =  (100 + Dice_roll_second_stat  )/100
       //console.log(Dice_roll_second_stat_per)
+      if (Reinforce == "checked") {
+        var second_stat = parseInt(second_stat)*1.61
+      }
       var second_stat = parseInt(second_stat)*Dice_roll_second_stat_per
-      var second_stat = Math.floor(second_stat) //소수점 버리기
+
+      //var second_stat = Math.floor(second_stat) //소수점 버리기
+
+      var second_stat = Math.round(second_stat) //소수점 반올림
+
       if (Dice_roll_second_stat > 0) {
         var result_second_stats = second_stat + "(" +" + "+ Dice_roll_second_stat + " % " + ")";
       } else {

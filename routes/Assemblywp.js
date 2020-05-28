@@ -229,7 +229,7 @@ router.get('/ing', (req,res,next) => {
       var Dice_roll_first_stat_per =  (100 + Dice_roll_first_stat  )/100
       //console.log(Dice_roll_first_stat_per)
       var first_stat = parseInt(first_stat)*Dice_roll_first_stat_per
-      var first_stat = Math.floor(first_stat)  //소수점 버리기
+      var first_stat = Math.round(first_stat)  //소수점 반올림   버리기는 floor
       if (Dice_roll_first_stat > 0) {
         var result_first_stats = first_stat + "(" +" + "+ Dice_roll_first_stat + " % " + ")";
       }else {
@@ -242,7 +242,7 @@ router.get('/ing', (req,res,next) => {
       var Dice_roll_second_stat_per =  (100 + Dice_roll_second_stat  )/100
       //console.log(Dice_roll_second_stat_per)
       var second_stat = parseInt(second_stat)*Dice_roll_second_stat_per
-      var second_stat = Math.floor(second_stat) //소수점 버리기
+      var second_stat = Math.round(second_stat) //소수점 버리기 버리기는 floor 
       if (Dice_roll_second_stat > 0) {
         var result_second_stats = second_stat + "(" +" + "+ Dice_roll_second_stat + " % " + ")";
       } else {
