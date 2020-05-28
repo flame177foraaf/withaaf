@@ -45,6 +45,8 @@ router.get('/ing', (req,res,next) => {
     console.log(typeof(response.rows[0]))
     console.log(response.rows[0])
     if (typeof(response.rows) === undefined) {
+      console.log("올바르지 않습니다.")
+    } else {
       //console.log(response.rows[0].armcustom);
       //console.log(response.rows[0])
       var Allcustom = response.rows[0].armcustom;
@@ -400,6 +402,8 @@ router.get('/ing', (req,res,next) => {
 
     console.log("재조립중   " + data.Assembly);
     res.send(data)
+    }
+
   });
 })
 
