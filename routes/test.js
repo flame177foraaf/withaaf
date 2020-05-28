@@ -36,29 +36,29 @@ router.get('/ing', (req,res,next) => {
     var Reinforce = req.query.reinforce;
   } else {
     var Reinforce = "";
-  }  
+  }
   var QueryString = "SELECT * FROM aquafeq.aquafarm where armname = $1";
   client.query(QueryString, [Assembly], (err, response) => {
     if (typeof(response.rows) === undefined) {
       var data = {
         Assembly:"null",
-        wpgrade: "null",
-        wpname: "null",
-        wplimit: "null",
-        wpsocket : "null",
-        wpether: "null",
-        wpstats: "null",
-        wpproperty: "null",
-        wpfeat: "null",
-        wpcustom: "null",
+        armgrade: "null",
+        armname: "null",
+        armlimit: "null",
+        armsocket : "null",
+        armether: "null",
+        armstats: "null",
+        armproperty: "null",
+        armfeat: "null",
+        armcustom: "null",
         result_socket: "null",
         result_custom: "null",
         result_stats:"null",
       };
     } else {
-      //console.log(response.rows[0].wpcustom);
+      //console.log(response.rows[0].armcustom);
       //console.log(response.rows[0])
-      var Allcustom = response.rows[0].wpcustom;
+      var Allcustom = response.rows[0].armcustom;
       //console.log(Allcustom);
       var eqcustom = Allcustom.split('<br />');
       var result_custom = 'null';
@@ -69,13 +69,20 @@ router.get('/ing', (req,res,next) => {
       }
 
       // 커스텀 재조립
+      var Allcustom = response.rows[0].armcustom;
+      //console.log(Allcustom);
+      var eqcustom = Allcustom.split('<br />');
+      var result_custom = 'null';
+
+
       if (Allcustom === "") {
         var result_custom = "재조립할 커스텀이 없네요~_~";
+
       } else {
         for (var i = 0; i < eqcustom.length; i++) {
 
           if (eqcustom[i].indexOf('[') === -1) {
-            var result_custom = "커스텀이 적용될 확률이 얼마인지 모르겠어요." +"<br />"+"그래서 주사위를 못굴립니다. 호호."
+            var result_custom = "커스텀의 정보가 정확하지 않습니다." +"<br />"+"커스텀이 적용될 확률이 분명하게 표시되어있는지 확인해주세요."
           } else {
             if (eqcustom[i].indexOf("웨이블렘") == -1) {
               var find_cus_val1 = eqcustom[i].indexOf("(");
@@ -89,14 +96,15 @@ router.get('/ing', (req,res,next) => {
               var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
               var cus_per_0 = cus_per.indexOf("%");
               var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
-              var cus_per_1 = parseInt(cus_per_1)
               if (Special == "checked") {
-                cus_per_1 = cus_per_1 + 30;
-                if (cus_per_1 >= 100) {
+                cus_per_1 = parseInt(cus_per.substring(0,cus_per_0)) + 30
+                if (cus_per_1 > 100) {
                   cus_per_1 = 100;
                 }
               }
+
               var cus_per_2 = Math.floor(Math.random() * 100) + 1
+
               if (cus_per_2 <= cus_per_1) {
                 var cut_in_custom = cut_cus_value.indexOf("~");
                 var find_per_custom = cut_cus_value.indexOf("%");
@@ -151,6 +159,13 @@ router.get('/ing', (req,res,next) => {
               var cus_per = eqcustom[i].substring(find_cus_per1+1,find_cus_per2); // 대괄호
               var cus_per_0 = cus_per.indexOf("%");
               var cus_per_1 = cus_per.substring(0,cus_per_0);  // 커스텀 뜰 확률
+              if (Special == "checked") {
+                cus_per_1 = parseInt(cus_per.substring(0,cus_per_0)) + 30
+                if (cus_per_1 > 100) {
+                  cus_per_1 = 100;
+                }
+              }
+
               var cus_per_2 = Math.floor(Math.random() * 100) + 1
 
               if (cus_per_2 <= cus_per_1) {
@@ -197,7 +212,7 @@ router.get('/ing', (req,res,next) => {
       }
 
       //소켓 재조
-      var Allsocket = response.rows[0].wpsocket
+      var Allsocket = response.rows[0].armsocket
       //console.log("소켓" + testsocket.length)
       //console.log("소켓 구분" + testsocket.indexOf("~"))
       if (Allsocket.indexOf("~") == -1) {
@@ -228,10 +243,11 @@ router.get('/ing', (req,res,next) => {
 
 
       // 스텟 재조립
-      var ALlstats = response.rows[0].wpstats
-      // console.log(ALlstats.indexOf("/"))
-      var cut1_stats = ALlstats.substring(0,ALlstats.indexOf("/"))
-      var cut2_stats = ALlstats.substring(ALlstats.indexOf("/")+1)
+      var Allstats = response.rows[0].armstats
+      console.log(Allstats)
+      // console.log(Allstats.indexOf("/"))
+      var cut1_stats = Allstats.substring(0,Allstats.indexOf("/"))
+      var cut2_stats = Allstats.substring(Allstats.indexOf("/")+1)
       //console.log(cut1_stats)
       //console.log(cut2_stats)
       var first_stat = cut1_stats.substring(cut1_stats.indexOf("+") +1)
@@ -241,45 +257,41 @@ router.get('/ing', (req,res,next) => {
       //console.log(parseInt(first_stat))
 
       var Dice_roll_first_stat = parseInt(Dice_roll(-10,10))
+      //console.log(Dice_roll_first_stat)
       if (Special == "checked") {
         Dice_roll_first_stat = parseInt(Dice_roll(-5,15))
       }
-      //console.log(Dice_roll_first_stat)
+
       var Dice_roll_first_stat_per =  (100 + Dice_roll_first_stat  )/100
       //console.log(Dice_roll_first_stat_per)
       var first_stat = parseInt(first_stat)*Dice_roll_first_stat_per
-      console.log(first_stat)
       if (Reinforce == "checked") {
         var first_stat = first_stat*1.61
       }
-      console.log(first_stat)
-      //var first_stat = Math.floor(first_stat)  //소수점 버리기
-      var first_stat = Math.round(first_stat)  //소수점 반올림
+
+      var first_stat = Math.floor(first_stat)  //소수점 버리기
 
       if (Dice_roll_first_stat > 0) {
         var result_first_stats = first_stat + "(" +" + "+ Dice_roll_first_stat + " % " + ")";
       }else {
         var result_first_stats =first_stat + " ( " + Dice_roll_first_stat + " % " + ") ";
 
-      }console.log(first_stat)
-
+      }
 
       var Dice_roll_second_stat = parseInt(Dice_roll(-10,10))
-      //console.log(Dice_roll_second_stat)
       if (Special == "checked") {
         Dice_roll_second_stat = parseInt(Dice_roll(-5,15))
       }
+
+      //console.log(Dice_roll_second_stat)
       var Dice_roll_second_stat_per =  (100 + Dice_roll_second_stat  )/100
       //console.log(Dice_roll_second_stat_per)
-      if (Reinforce == "checked") {
-        var second_stat = parseInt(second_stat)*1.61
-      }
       var second_stat = parseInt(second_stat)*Dice_roll_second_stat_per
+      if (Reinforce == "checked") {
+        var second_stat = second_stat*1.61
+      }
 
-      //var second_stat = Math.floor(second_stat) //소수점 버리기
-
-      var second_stat = Math.round(second_stat) //소수점 반올림
-
+      var second_stat = Math.floor(second_stat) //소수점 버리기
       if (Dice_roll_second_stat > 0) {
         var result_second_stats = second_stat + "(" +" + "+ Dice_roll_second_stat + " % " + ")";
       } else {
@@ -287,18 +299,111 @@ router.get('/ing', (req,res,next) => {
       }
       var result_stats = result_first_stats +" / " +result_second_stats;
 
+
+
+      //속방 재조립
+      var result_property = 'null'
+      var Allproperty = response.rows[0].armproperty;
+
+      var cut1_property = Allproperty.indexOf("(")
+      var cut2_property = Allproperty.indexOf(")")
+      var cut_property = Allproperty.substring(cut1_property+1,cut2_property)
+      var cuts_property = cut_property.split("/")
+
+
+      for (var i = 0; i < cuts_property.length; i++) {
+        if (Special === "checked") {
+          var random = Dice_roll(-20,40)
+        } else {
+          var random = Dice_roll(-30,30)
+        }
+
+        if (parseInt(cuts_property[i]) == 0) {
+          var eachproperty = 0;
+          if (result_property === 'null') {
+            var result_property = eachproperty
+          } else {
+            var result_property = result_property + " / " + eachproperty
+          }
+        } else if (parseInt(cuts_property[i]) > 0 ) {
+          //속방 수치가 0 이상일때
+          if (Reinforce == "checked") {
+            var Reinforce1 = 1.8435;
+          } else {
+            var Reinforce1 = 1;
+          }
+          if (random == 0) {
+            var eachproperty = parseInt(cuts_property[i]);
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          } else if ( random > 0 ){
+            var ranproperty = (100 + random )/100
+            var eachproperty = Math.round(parseInt(cuts_property[i])*Reinforce1*ranproperty)
+            console.log(eachproperty)
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          } else {
+
+            var ranproperty = (100 + random )/100
+            var eachproperty = Math.round(parseInt(cuts_property[i])*Reinforce1*ranproperty)
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          }
+
+        } else if (parseInt(cuts_property[i]) < 0 ){
+          if (Reinforce == "checked") {
+            var Reinforce1 = Math.pow(1.07,5);
+          } else {
+            var Reinforce1 = 1;
+          }
+
+          if (random == 0) {
+            var eachproperty = parseInt(cuts_property[i]);
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          } else if ( random > 0 ){
+            var ranproperty = (100 + random )/100
+            var eachproperty = Math.round(parseInt(cuts_property[i])*Reinforce1*ranproperty)
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          } else {
+            var ranproperty = (100 + random )/100
+            var eachproperty = Math.round(parseInt(cuts_property[i])*Reinforce1*ranproperty)
+            if (result_property === 'null') {
+              var result_property = eachproperty + " ( " + random +" % "+ ")"
+            } else {
+              var result_property = result_property + " / " + eachproperty + " ( " + random +" % "+ ")"
+            }
+          }
+        }
+      }
       var data =
         {
           Assembly:Assembly,
-          wpgrade: response.rows[0].wpgrade,
-          wpname: response.rows[0].wpname,
-          wplimit: response.rows[0].wplimit,
-          wpsocket : response.rows[0].wpsocket,
-          wpether: response.rows[0].wpether,
-          wpstats: response.rows[0].wpstats,
-          wpproperty: response.rows[0].wpproperty,
-          wpfeat: response.rows[0].wpfeat,
-          wpcustom: response.rows[0].wpcustom,
+          armgrade: response.rows[0].armgrade,
+          armname: response.rows[0].armname,
+          armlimit: response.rows[0].armlimit,
+          armsocket : response.rows[0].armsocket,
+          armether: response.rows[0].armether,
+          armstats: response.rows[0].armstats,
+          armproperty: response.rows[0].armproperty,
+          armfeat: response.rows[0].armfeat,
+          armcustom: response.rows[0].armcustom,
           result_socket: result_socket,
           result_custom: result_custom,
           result_stats:result_stats,
