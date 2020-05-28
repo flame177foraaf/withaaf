@@ -57,37 +57,59 @@
       $('#try_btn3').click(function() {
         count++;
         $('#trycount').text(count)
+        if($("input:checkbox[name=special]").is(":checked") == true) {
+          if ($("input:checkbox[name=reinforce]").is(":checked") == true) {
             $.ajax({
               url: '/test/ing',
               type: 'GET',
               data: {
-                assembly : $("#armname").text()
+                assembly : $("#armname").text(),
+                special : "checked",
+                reinforce : "checked"
               },
-              if ($("input:checkbox[name=special]").is(":checked") !== true) {
-                if ($("input:checkbox[name=reinforce]").is(":checked") !== true)) {
-                  data: {
-                    assembly : $("#armname").text(),
-                  }
-                } else {
-                  data: {
-                    assembly : $("#armname").text(),
-                    reinforce : "checked"
-                  },
-                }
-              } else {
-                if ($("input:checkbox[name=reinforce]").is(":checked") !== true) {
-                  data: {
-                    assembly : $("#armname").text(),
-                    special : "checked",
-                  },
-                } else {
-                  data: {
-                    assembly : $("#armname").text(),
-                    special : "checked",
-                    reinforce : "checked"
-                  },
-                }
+              success: function(data) {
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="font-size:30px">' + data.result_socket + '</td>'
+                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="armstats">' + data.armstats + '</td> + <td colspan="2" name="">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="">' +  data.result_property  + '</td>'
+
+                $('#Socket').html(result_SocketANDStat);
+                $('#Custom').html(custom1);
+                $('#Stats').html(stats);
+                $('#Property').html(property)
+
               }
+            });
+          } else {
+            $.ajax({
+              url: '/test/ing',
+              type: 'GET',
+              data: {
+                assembly : $("#armname").text(),
+                special : "checked"
+              },
+              success: function(data) {
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="font-size:30px">' + data.result_socket + '</td>'
+                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="armstats">' + data.armstats + '</td> + <td colspan="2" name="">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="">'  + data.result_property +  '</td>'
+
+                $('#Socket').html(result_SocketANDStat);
+                $('#Custom').html(custom1);
+                $('#Stats').html(stats);
+                $('#Property').html(property)
+              }
+            });
+          }
+        } else {
+          if ($("input:checkbox[name=reinforce]").is(":checked") == true) {
+            $.ajax({
+              url: '/test/ing',
+              type: 'GET',
+              data: {
+                assembly : $("#armname").text(),
+                reinforce : "checked"
+              },
               success: function(data) {
                 var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="font-size:30px">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
@@ -99,10 +121,30 @@
                 $('#Stats').html(stats);
                 $('#Property').html(property)
               }
-            };
-          });
-        });
+            });
+          } else {
+            $.ajax({
+              url: '/test/ing',
+              type: 'GET',
+              data: {
+                assembly : $("#armname").text(),
+              },
+              success: function(data) {
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="font-size:30px">' + data.result_socket + '</td>'
+                var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
+                var stats = '<td colspan="2" name="armstats">' + data.armstats + '</td> + <td colspan="2" name="">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="">' +  data.result_property  + '</td>'
 
+                $('#Socket').html(result_SocketANDStat);
+                $('#Custom').html(custom1);
+                $('#Stats').html(stats);
+                $('#Property').html(property)
+              }
+            });
+          }
+        }
+      });
+    });
     </script>
   </head>
   <body style="">
