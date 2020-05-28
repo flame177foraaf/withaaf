@@ -66,7 +66,7 @@ router.get('/ing', (req,res,next) => {
         for (var i = 0; i < eqcustom.length; i++) {
 
           if (eqcustom[i].indexOf('[') === -1) {
-            var result_custom = "커스텀의 정보가 정확하지 않습니다." +"<br />"+"커스텀이 적용될 확률이 분명하게 표시되어있는지 확인해주세요."
+            var result_custom = "커스텀이 적용될 확률이 얼마인지 모르겠어요." +"<br />"+"그래서 주사위를 못굴립니다. 호호."
           } else {
             if (eqcustom[i].indexOf("웨이블렘") == -1) {
               var find_cus_val1 = eqcustom[i].indexOf("(");
