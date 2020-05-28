@@ -60,11 +60,14 @@
             $.ajax({
               url: '/test/ing',
               type: 'GET',
+              data: {
+                assembly : $("#armname").text()
+              },
               if ($("input:checkbox[name=special]").is(":checked") !== true) {
                 if ($("input:checkbox[name=reinforce]").is(":checked") !== true)) {
                   data: {
                     assembly : $("#armname").text(),
-                  }  
+                  }
                 } else {
                   data: {
                     assembly : $("#armname").text(),
