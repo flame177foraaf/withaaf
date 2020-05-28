@@ -175,6 +175,9 @@ if (Allsocket.indexOf("~") == -1) {
 }
 
 
+
+
+
 // 스텟 재조립
 var ALlstats = "+ 4404 / + 2845"
 // console.log(ALlstats.indexOf("/"))
