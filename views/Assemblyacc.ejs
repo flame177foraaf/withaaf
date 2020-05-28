@@ -42,15 +42,15 @@
                 reinforce : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.accname +'</td>' +'<td name="acclimit">  '+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.accname +'</td>' +'<td name="acclimit">'+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="accproperty">' + data.accstats + '</td> + <td colspan="2" name="accproperty">' + data.result_stats + '</td>'
-                var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="accproperty">' data.result_property '</td>'
+                var stats = '<td colspan="2" name="accstats">' + data.accstats + '</td> + <td colspan="2" name="accproperty">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="">' + data.result_property +  '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
                 $('#Stats').html(stats);
-                $('#Property').html(property)
+                $('#Property').html(property);
 
               }
             });
@@ -66,12 +66,12 @@
                 var result_SocketANDStat = '<td colspan="" value="" name="" id="accname">'+ data.accname +'</td>' +'<td name="acclimit">  '+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
                 var stats = '<td colspan="2" name="accproperty">' + data.accstats + '</td> + <td colspan="2" name="accproperty">' + data.result_stats + '</td>'
-                var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="accproperty">' data.result_property '</td>'
+                var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="accproperty">' +  data.result_property  + '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
                 $('#Stats').html(stats);
-                $('#Property').html(property)
+                $('#Property').html(property);
               }
             });
           }
@@ -88,7 +88,7 @@
                 var result_SocketANDStat = '<td colspan="" value="" name="" id="accname">'+ data.accname +'</td>' +'<td name="acclimit">  '+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
                 var stats = '<td colspan="2" name="accproperty">' + data.accstats + '</td> + <td colspan="2" name="accproperty">' + data.result_stats + '</td>'
-                var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="accproperty">' data.result_property '</td>'
+                var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="accproperty">'  + data.result_property  + '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -107,7 +107,7 @@
                 var result_SocketANDStat = '<td colspan="" value="" name="" id="accname">'+ data.accname +'</td>' +'<td name="acclimit">  '+ data.acclimit + '</td>' +'<td name="accether">' + data.accether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="acccustom" id="">' + data.acccustom + '</td> ' + '<td colspan="2" value=""  name="acccustom" id="">' + data.result_custom + '</td> ';
                 var stats = '<td colspan="2" name="accproperty">' + data.accstats + '</td> + <td colspan="2" name="accproperty">' + data.result_stats + '</td>'
-                var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="accproperty">' data.result_property '</td>'
+                var property = '<td colspan="2" name="accproperty"> ' + data.accproperty +' </td> + <td colspan="2" name="accproperty">' +  data.result_property +  '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);

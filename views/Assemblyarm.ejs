@@ -44,8 +44,8 @@
               success: function(data) {
                 var result_SocketANDStat = '<td colspan="" value="" name="" id="">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty">' + data.armstats + '</td> + <td colspan="2" name="armproperty">' + data.result_stats + '</td>'
-                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="armproperty">' data.result_property '</td>'
+                var stats = '<td colspan="2" name="armstats">' + data.armstats + '</td> + <td colspan="2" name="">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="">' +  data.result_property  + '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -65,8 +65,8 @@
               success: function(data) {
                 var result_SocketANDStat = '<td colspan="" value="" name="" id="armname">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty">' + data.armstats + '</td> + <td colspan="2" name="armproperty">' + data.result_stats + '</td>'
-                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="armproperty">' data.result_property '</td>'
+                var stats = '<td colspan="2" name="armstats">' + data.armstats + '</td> + <td colspan="2" name="">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="">'  + data.result_property +  '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -87,8 +87,8 @@
               success: function(data) {
                 var result_SocketANDStat = '<td colspan="" value="" name="" id="armname">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty">' + data.armstats + '</td> + <td colspan="2" name="armproperty">' + data.result_stats + '</td>'
-                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="armproperty">' data.result_property '</td>'
+                var stats = '<td colspan="2" name="armstats">' + data.armstats + '</td> + <td colspan="2" name="">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="">' +  data.result_property  + '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -104,10 +104,10 @@
                 assembly : $("#armname").text(),
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="" value="" name="" id="armname">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="">' + data.armsocket + '</td>'
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="armname">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="">' + data.result_socket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty">' + data.armstats + '</td> + <td colspan="2" name="armproperty">' + data.result_stats + '</td>'
-                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="armproperty">' data.result_property '</td>'
+                var stats = '<td colspan="2" name="armstats">' + data.armstats + '</td> + <td colspan="2" name="">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="">' +  data.result_property  + '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -151,15 +151,15 @@
 
           </tr>
           <tr style="text-align:center" id="Stats">
-            <td colspan="4" name="armproperty"><%- data.armstats %></td>
+            <td colspan="4" name=""><%- data.armstats %></td>
 
           </tr>
           <tr id="Property" style="text-align:center">
-            <td colspan="4" name="armproperty"><%- data.armproperty %></td>
+            <td colspan="4" name=""><%- data.armproperty %></td>
 
           </tr>
           <tr>
-            <td colspan="4" name="armfeat"><%- data.armfeat %></td>
+            <td colspan="4" name=""><%- data.armfeat %></td>
           </tr>
           <tr id="Custom" style="height:300px">
             <td colspan="4" value=""  name="armcustom" id=""><%- data.armcustom%></td>
