@@ -261,10 +261,10 @@ router.get('/ing', (req,res,next) => {
         var result_first_stats =first_stat + " ( " + Dice_roll_first_stat + " % " + ") ";
       }
 
-      
-      var Dice_roll_first_stat = parseInt(Dice_roll(-10,10))
+
+      var Dice_roll_second_stat = parseInt(Dice_roll(-10,10))
       if (Special == "checked") {
-        Dice_roll_first_stat = parseInt(Dice_roll(-5,15))
+        Dice_roll_second_stat = parseInt(Dice_roll(-5,15))
       }
 
       //console.log(Dice_roll_second_stat)

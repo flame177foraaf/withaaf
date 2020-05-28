@@ -42,10 +42,10 @@
                 reinforce : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="" value="<%= data.armname %>" name="" id="armname"><%-'+ data.armname +'%></td>' +'<td name="armlimit"><%-  '+ data.armlimit + ' %></td>' +'<td name="armether"><%-' + data.armether + '%></td>' +'<td value=""  name=""  style=""><%- data.armsocket %></td>'
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="armname">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="">' + data.armsocket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + '%></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-'+ data.result_property +'%></td>'
+                var stats = '<td colspan="2" name="armproperty">' + data.armstats + '</td> + <td colspan="2" name="armproperty">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="armproperty">' data.result_property '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -63,10 +63,10 @@
                 special : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="" value="<%= data.armname %>" name="" id="armname"><%-'+ data.armname +'%></td>' +'<td name="armlimit"><%-  '+ data.armlimit + ' %></td>' +'<td name="armether"><%-' + data.armether + '%></td>' +'<td value=""  name=""  style=""><%- ' + data.armsocket + ' %></td>'
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="armname">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="">' + data.armsocket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%-' + data.armstats + '%></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + '%></td>'
-                var property = '<td colspan="2" name="armproperty"><%-' +  data.armproperty + '%></td> + <td colspan="2" name="armproperty"><%-' data.result_property + '%></td>'
+                var stats = '<td colspan="2" name="armproperty">' + data.armstats + '</td> + <td colspan="2" name="armproperty">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="armproperty">' data.result_property '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -85,10 +85,10 @@
                 reinforce : "checked"
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="" value="<%= data.armname %>" name="" id="armname"><%-'+ data.armname +'%></td>' +'<td name="armlimit"><%-  '+ data.armlimit + ' %></td>' +'<td name="armether"><%-' + data.armether + '%></td>' +'<td value=""  name=""  style=""><%- data.armsocket %></td>'
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="armname">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="">' + data.armsocket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + '%></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-' data.result_property '%></td>'
+                var stats = '<td colspan="2" name="armproperty">' + data.armstats + '</td> + <td colspan="2" name="armproperty">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="armproperty">' data.result_property '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
@@ -104,10 +104,10 @@
                 assembly : $("#armname").text(),
               },
               success: function(data) {
-                var result_SocketANDStat = '<td colspan="" value="<%= data.armname %>" name="" id="armname"><%-'+ data.armname +'%></td>' +'<td name="armlimit"><%-  '+ data.armlimit + ' %></td>' +'<td name="armether"><%-' + data.armether + '%></td>' +'<td value=""  name=""  style=""><%- data.armsocket %></td>'
+                var result_SocketANDStat = '<td colspan="" value="" name="" id="armname">'+ data.armname +'</td>' +'<td name="armlimit">  '+ data.armlimit + '</td>' +'<td name="armether">' + data.armether + '</td>' +'<td value=""  name=""  style="">' + data.armsocket + '</td>'
                 var custom1  ='<td colspan="2" value=""  name="armcustom" id="">' + data.armcustom + '</td> ' + '<td colspan="2" value=""  name="armcustom" id="">' + data.result_custom + '</td> ';
-                var stats = '<td colspan="2" name="armproperty"><%- data.armstats %></td> + <td colspan="2" name="armproperty"><%-' + data.result_stats + '%></td>'
-                var property = '<td colspan="2" name="armproperty"><%- data.armproperty %></td> + <td colspan="2" name="armproperty"><%-' data.result_property '%></td>'
+                var stats = '<td colspan="2" name="armproperty">' + data.armstats + '</td> + <td colspan="2" name="armproperty">' + data.result_stats + '</td>'
+                var property = '<td colspan="2" name="armproperty"> ' + data.armproperty +' </td> + <td colspan="2" name="armproperty">' data.result_property '</td>'
 
                 $('#Socket').html(result_SocketANDStat);
                 $('#Custom').html(custom1);
