@@ -88,7 +88,7 @@ router.get('/fixwp', (req,res,next) => {
     client.query(QueryString, [Select_name], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         res.render ('addwp', {
-          title: '신규 장비 ' Select_name + ' 등록',
+          title: '신규 장비 ' +Select_name + ' 등록',
         });
       } else {
         res.render ('fixwp', {
