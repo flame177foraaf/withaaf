@@ -18,7 +18,10 @@
       }
     </style>
     <script type="text/javascript">
-
+    function replace(Search) {
+        Search= encodeURIComponent(Search);
+        return Search;
+    }
     </script>
   </head>
 
@@ -91,7 +94,7 @@
                   <div class="" id="pagelist" >
                     <td colspan="4" style= "text-align:center; font-size:24px">
                       <% if (CurrentPage > PageSize){ %>
-                        <a href="/featsup/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
+                        <a href="/featsup/1?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
                         <a href="/featsup/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
                       <% } %>
                       <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
