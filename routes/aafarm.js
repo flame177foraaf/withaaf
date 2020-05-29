@@ -296,7 +296,7 @@ router.get('/:id', (req,res,next) => {
 
       });
     });
-  } else if (SearchType === 'property')) {
+  } else if (SearchType === 'property') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armproperty LIKE $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
@@ -335,7 +335,7 @@ router.get('/:id', (req,res,next) => {
 
       });
     });
-  }{
+  } else {
     res.redirect('/aafarm');
   };
 });
