@@ -107,6 +107,8 @@
               <div class="" id="pagelist">
                 <td colspan="21" style= "text-align:center; font-size:24px">
                   <% if (CurrentPage > PageSize){ %>
+                    <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+
                     <a href="/aafwp/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
                     <a href="/aafwp/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
                   <% } %>
@@ -114,10 +116,14 @@
                     <% if (iCount == CurrentPage) { %>
                       <b class="btnnonactive"><%- iCount %></b>
                     <% } else { %>
+                      <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+
                       <a href="/aafwp/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
                     <% } %>
                   <% } %>
                   <% if (EndPage < TotalPage){ %>
+                    <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+
                     <a href="/aafwp/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
                     <a href="/aafwp/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
                   <% } %>
