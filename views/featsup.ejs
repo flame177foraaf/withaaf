@@ -18,7 +18,8 @@
       }
     </style>
     <script type="text/javascript">
-    
+
+
     </script>
   </head>
 
@@ -91,6 +92,7 @@
                   <div class="" id="pagelist" >
                     <td colspan="4" style= "text-align:center; font-size:24px">
                       <% if (CurrentPage > PageSize){ %>
+                        <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
                         <a href="/featsup/1?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
                         <a href="/featsup/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
                       <% } %>
@@ -98,10 +100,14 @@
                         <% if (iCount == CurrentPage) { %>
                           <b class="btnnonactive"><%- iCount %></b>
                         <% } else { %>
+                          <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+
                           <a href="/featsup/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>" class="btnactive"><%- iCount %></a>
                         <% } %>
                       <% } %>
                       <% if (EndPage < TotalPage){ %>
+                        <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+
                         <a href="/featsup/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>">  ▶ </a>
                         <a href="/featsup/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
                       <% } %>
