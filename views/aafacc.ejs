@@ -97,8 +97,8 @@
                   <% if (CurrentPage > PageSize){ %>
                     <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                    <a href="/aafacc/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
-                    <a href="/aafacc/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
+                    <a href="/aafacc/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
+                    <a href="/aafacc/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
                   <% } %>
                   <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
                     <% if (iCount == CurrentPage) { %>
@@ -106,14 +106,14 @@
                     <% } else { %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                      <a href="/aafacc/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
+                      <a href="/aafacc/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>" class="btnactive"><%- iCount %></a>
                     <% } %>
                   <% } %>
                   <% if (EndPage < TotalPage){ %>
                     <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                    <a href="/aafacc/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
-                    <a href="/aafacc/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
+                    <a href="/aafacc/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>">  ▶ </a>
+                    <a href="/aafacc/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
                   <% } %>
                 </td>
                 </div>
