@@ -91,6 +91,8 @@
                 <div class="" id="pagelist">
                   <td colspan="9" style= "text-align:center; font-size:24px">
                     <% if (CurrentPage > PageSize){ %>
+                      <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+
                       <a href="/aafarm/1?searchText=<%-Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀◀ </a>
                       <a href="/aafarm/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ◀ </a>
                     <% } %>
@@ -98,10 +100,14 @@
                       <% if (iCount == CurrentPage) { %>
                         <b class="btnnonactive"><%- iCount %></b>
                       <% } else { %>
+                        <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+
                         <a href="/aafarm/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>" class="btnactive"><%- iCount %></a>
                       <% } %>
                     <% } %>
                     <% if (EndPage < TotalPage){ %>
+                      <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+
                       <a href="/aafarm/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>">  ▶ </a>
                       <a href="/aafarm/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>&limit=<%- SearchLimit %>"> ▶▶ </a>
                     <% } %>
