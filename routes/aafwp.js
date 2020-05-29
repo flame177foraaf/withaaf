@@ -79,7 +79,104 @@ router.post('/', (req, res, next) => {
   });
 });
 
+//무기 변경 라우트
+router.get('/fixwp', (req,res,next) => {
+  var QueryString = "select wpname from aquafeq.aquafwp"
+  client.query(QueryString, (err, response) => {
+    var Select_name = req.query.Seachname;
+    var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
+    client.query(QueryString, [Select_name], (err, response) => {
+      if(typeof(response.rows[0]) !== "object") {
+        res.render ('addwp', {
+          title: '신규 장비 ' Select_name + ' 등록',
+        });
+      } else {
+        res.render ('fixwp', {
+          title:Select_name + '정보',
+          data:response.rows[0]
+        });
+      }
+    });
+  });
+});
 
+//무기 변경하기
+router.post('/fixwp', (req,res,next) => {
+  var Wpgrade = req.body.wpgrade;
+    if (Wpgrade == '') {
+      Wpgrade = null
+    } else if (Wpgrade !== '') {
+      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpname = req.body.wpname;
+  var Wplimit = req.body.wplimit;
+    if (Wplimit == '') {
+      Wplimit = null
+    }
+  var Wpsocket = req.body.wpsocket;
+    if (Wpsocket == '') {
+      Wpsocket = null
+    }
+  var Wpether = req.body.wpether;
+    if (Wpether == '') {
+      Wpether = null
+    }
+  var Wpstats = req.body.wpstats;
+    if (Wpstats == '') {
+      Wpstats = null
+    } else if (Wpstats !== '') {
+      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+
+  var Wpproperty = req.body.wpproperty;
+    if (Wpproperty == '') {
+      Wpproperty = null
+    } else if (Wpproperty !== '') {
+      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpfeat = req.body.wpfeat;
+    if (Wpfeat == '') {
+      Wpfeat = null
+    } else if (Wpfeat !== '') {
+      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpcustom = req.body.wpcustom;
+    if (Wpcustom == '') {
+      Wpcustom = null
+    } else if (Wpcustom !== ''){
+      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpup = req.body.wpup;
+    if (Wpup == '') {
+      Wpup = null
+    } else if (Wpup !== '') {
+      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+
+
+  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpname = $10 returning *"
+  //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
+  client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Wpname], (err, response) => {
+  console.log(Wpgrade)
+  console.log(Wplimit)
+  console.log(Wpsocket)
+  console.log(Wpether)
+  console.log(Wpstats)
+  console.log(Wpproperty)
+  console.log(Wpfeat)
+  console.log(Wpcustom)
+  console.log(Wpup)
+  console.log(Wpname)
+    var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
+    client.query ( QueryString, [Wpname],  (err, response) => {
+      console.log(response.rows[0])
+      res.render('aafwp', {
+        title : Wpname + ' 변경 완료',
+        data: response.rows
+      })
+    });
+  });
+});
 
 // 일반 검색
 router.get('/:id', (req,res,next) => {
@@ -87,14 +184,8 @@ router.get('/:id', (req,res,next) => {
   if (SearchType === 'name') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var SearchLimit = req.query.limit;
-    if (SearchLimit === undefined) {
-      SearchLimit = 0;
-    };
-    console.log(SearchLimit)
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpname LIKE $1 AND wplimit >= $3 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchLimit], (err, response) => {
-      console.log('서치리밋' + SearchLimit);
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpname LIKE $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -133,18 +224,16 @@ router.get('/:id', (req,res,next) => {
         TotalPage: TotalPage,
         SearchType: SearchType,
         Search: Search,
-        SearchLimit: SearchLimit
+
       });
     });
   } else if (SearchType === 'property') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
-    var SearchLimit = req.query.limit;
-    if (SearchLimit === undefined) {
-      SearchLimit = 0;
-    };
+
+
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpproperty LIKE $1 AND wplimit >= $3 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%',CurrentPage, SearchLimit], (err, response) => {
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -175,18 +264,15 @@ router.get('/:id', (req,res,next) => {
         TotalPage:TotalPage,
         SearchType: SearchType,
         Search: Search,
-        SearchLimit: SearchLimit
+
       });
     });
   } else if (SearchType === 'feat') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
-    var SearchLimit = req.query.limit;
-    if (SearchLimit === undefined) {
-      SearchLimit = 0;
-    };
+
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpfeat LIKE $1  AND wplimit >= $3 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchLimit], (err, response) => {
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -217,18 +303,15 @@ router.get('/:id', (req,res,next) => {
         TotalPage:TotalPage,
         SearchType: SearchType,
         Search: Search,
-        SearchLimit: SearchLimit
+
       });
     });
   } else if (SearchType === 'custom') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
-    var SearchLimit = req.query.limit;
-    if (SearchLimit === undefined) {
-      SearchLimit = 0;
-    };
+
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpcustom LIKE $1 AND wplimit >= $3 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchLimit], (err, response) => {
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -259,7 +342,7 @@ router.get('/:id', (req,res,next) => {
         TotalPage:TotalPage,
         SearchType: SearchType,
         Search: Search,
-        SearchLimit: SearchLimit
+
       });
     });
   } else {

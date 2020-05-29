@@ -29,7 +29,6 @@ var aafboardRouter = require('./routes/board');
 //var aafrecipeRouter = require('./routes/recipe2');
 var aaftestRouter = require('./routes/test');
 var aafmontableRouter =require('./routes/monster');
-var fixwpRouter = require('./routes/fixwp');
 
 var assemblewpRouter = require('./routes/Assemblywp');
 var assemblearmRouter = require('./routes/Assemblyarm');
@@ -79,7 +78,6 @@ app.use('/test', aaftestRouter);
 
 app.use('/monster', aafmontableRouter);
 
-app.use('/fixwp', fixwpRouter);
 
 app.use('/Assemblywp', assemblewpRouter);
 app.use('/Assemblyarm', assemblearmRouter);

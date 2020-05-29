@@ -33,7 +33,6 @@
             <option value="feat">피트</option>
             <option value="custom">커스텀</option>
         </select>
-        <input type="checkbox" name="limit" value="300" id="chbox"> <label for="chbox" style="">300레벨 이상</label>
         <input action="" type="submit" class="btn" value="찾기" ></button>
       </form>
     </div>
@@ -152,7 +151,7 @@
         </form>
       </div>
 
-      <form class="" name="add" action="/fixwp" method="get"  onsubmit="return checkonclick()">
+      <form class="" name="add" action="/aafwp/fixwp" method="get"  onsubmit="return checkonclick()">
         <input type=text list=browsers style="" checked value="<%= data[0].wpname %>" name="Seachname">
         <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
           <datalist id="browsers" name="datalistname" class="" style="width:50%">

@@ -20,7 +20,7 @@ router.get('/', (req,res,next) => {
     client.query(QueryString, [Select_name], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         res.render ('wpadd', {
-          title: '신규 장비 "' + Select_name + '" 등록',
+          title: '기존 장비 ' Select_name + ' 변경',
         });
       } else {
         res.render ('fixwp', {

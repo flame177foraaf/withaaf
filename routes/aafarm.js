@@ -27,12 +27,143 @@ router.get('/', (req,res,next) => {
   });
 });
 
-router.get('/fixarm', (req,res,next) => {
-  res.redirect('/');
-});
-router.get('/add_arm', (req,res,next) => {
+router.get('/addarm', (req,res,next) => {
   res.render ('addarm', {
     title:'AAF 방어구 등록'
+  });
+});
+
+router.post('/', (req, res, next) => {
+  var Armgrade = req.body.armgrade;
+    if (Armgrade !== '') {
+      Armgrade = Armgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+
+  var Armname = req.body.armname;
+  var Armlimit = req.body.armlimit;
+    if (Armlimit == '') {
+        Armlimit = null
+    }
+  var Armsocket = req.body.armsocket;
+  var Armether = req.body.armether;
+  var Armstats = req.body.armstats;
+    if (Armstats !== '') {
+      Armstats = Armstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Armproperty = req.body.armproperty;
+    if (Armproperty !== '') {
+      Armproperty = Armproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Armfeat = req.body.armfeat;
+    if (Armfeat !== '') {
+      Armfeat = Armfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Armcustom = req.body.armcustom;
+    if (Armcustom !== ''){
+      Armcustom = Armcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Armup = req.body.armup;
+    if (Armup !== '') {
+      Armup = Armup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var QueryString = "INSERT INTO aquafeq.aquafarm(armgrade, armname, armlimit, armsocket, armether, armstats, armproperty, armfeat, armcustom, armup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
+  client.query(QueryString, [Armgrade, Armname, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup], (err, response) => {
+    var QueryString = "select armid, armname from aquafeq.aquafarm where armname = Armname ORDER BY armlimit,armid asc ;"
+    client.query(QueryString, (err, response) => {
+      res.render('aafarm', {
+        title:'AAF 장비',
+        data:response.rows
+      });
+    });
+  });
+});
+
+
+router.get('/fixarm', (req,res,next) => {
+  var QueryString = "select armname from aquafeq.aquafarm"
+  client.query(QueryString, (err, response) => {
+    var Select_name = req.query.Seachname;
+    var QueryString = "select * from aquafeq.aquafarm where armname = $1"
+    client.query(QueryString, [Select_name], (err, response) => {
+      if(typeof(response.rows[0]) !== "object") {
+        res.render ('addarm', {
+          title: '신규 장비 ' Select_name + ' 등록',
+        });
+      } else {
+        res.render ('fixarm', {
+          title:Select_name + '정보',
+          data:response.rows[0]
+        });
+      }
+    });
+  });
+});
+
+//무기 변경하기
+router.post('/fixarm', (req,res,next) => {
+  var Armgrade = req.body.armgrade;
+    if (Armgrade == '') {
+      Armgrade = null
+    } else if (Armgrade !== '') {
+      Armgrade = Armgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Armname = req.body.armname;
+  var Armlimit = req.body.armlimit;
+    if (Armlimit == '') {
+      Armlimit = null
+    }
+  var Armsocket = req.body.armsocket;
+    if (Armsocket == '') {
+      Armsocket = null
+    }
+  var Armether = req.body.armether;
+    if (Armether == '') {
+      Armether = null
+    }
+  var Armstats = req.body.armstats;
+    if (Armstats == '') {
+      Armstats = null
+    } else if (Armstats !== '') {
+      Armstats = Armstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+
+  var Armproperty = req.body.armproperty;
+    if (Armproperty == '') {
+      Armproperty = null
+    } else if (Armproperty !== '') {
+      Armproperty = Armproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Armfeat = req.body.armfeat;
+    if (Armfeat == '') {
+      Armfeat = null
+    } else if (Armfeat !== '') {
+      Armfeat = Armfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Armcustom = req.body.armcustom;
+    if (Armcustom == '') {
+      Armcustom = null
+    } else if (Armcustom !== ''){
+      Armcustom = Armcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Armup = req.body.armup;
+    if (Armup == '') {
+      Armup = null
+    } else if (Armup !== '') {
+      Armup = Armup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+
+
+  var QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, armlimit, armsocket, armether, armstats, armproperty, armfeat, armcustom, armup) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE armname = $10 returning *"
+  client.query(QueryString, [Armgrade, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup, Armname], (err, response) => {
+
+    var QueryString = "select * from aquafeq.aquafarm where armname = $1"
+    client.query ( QueryString, [Armname],  (err, response) => {
+      console.log(response.rows[0])
+      res.render('aafarm', {
+        title : Armname + ' 변경 완료',
+        data: response.rows
+      })
+    });
   });
 });
 
@@ -41,14 +172,9 @@ router.get('/:id', (req,res,next) => {
   if (SearchType === 'name') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var SearchLimit = req.query.limit;
-    if (SearchLimit === undefined) {
-      SearchLimit = 0;
-    };
-    console.log(SearchLimit)
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armname LIKE $1  AND armlimit >= $3 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchLimit], (err, response) => {
-      console.log('서치리밋' + SearchLimit);
+
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armname LIKE $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -89,18 +215,15 @@ router.get('/:id', (req,res,next) => {
         TotalPage: TotalPage,
         SearchType: SearchType,
         Search: Search,
-        SearchLimit: SearchLimit
+
       });
     });
   } else if (SearchType === 'feat') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
-    var SearchLimit = req.query.limit;
-    if (SearchLimit === undefined) {
-      SearchLimit = 0;
-    };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armfeat LIKE $1  AND armlimit >= $3 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchLimit], (err, response) => {
+
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armfeat LIKE $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -131,18 +254,14 @@ router.get('/:id', (req,res,next) => {
         TotalPage:TotalPage,
         SearchType: SearchType,
         Search: Search,
-        SearchLimit: SearchLimit
+
       });
     });
   } else if (SearchType === 'custom') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
-    var SearchLimit = req.query.limit;
-    if (SearchLimit === undefined) {
-      SearchLimit = 0;
-    };
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armcustom LIKE $1 AND armlimit >= $3 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchLimit], (err, response) => {
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armcustom LIKE $1ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
 
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -174,7 +293,7 @@ router.get('/:id', (req,res,next) => {
         TotalPage:TotalPage,
         SearchType: SearchType,
         Search: Search,
-        SearchLimit: SearchLimit
+
       });
     });
   } else {
