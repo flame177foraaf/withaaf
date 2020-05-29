@@ -37,6 +37,10 @@ router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   if (SearchType === 'name') {
     var Search = req.query.searchText;
+    function replace(Search) {
+        Search= encodeURIComponent(Search);
+        return Search;
+    }
     var CurrentPage = req.params.id;
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where featname LIKE $1 ORDER BY row_number asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
