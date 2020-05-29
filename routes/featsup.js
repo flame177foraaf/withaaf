@@ -77,6 +77,10 @@ router.get('/:id', (req,res,next) => {
     });
   } else if (SearchType === 'feat') {
     var Search = req.query.searchText;
+    function replace(Search) {
+        Search= encodeURIComponent(Search);
+        return Search;
+    }
     var CurrentPage = req.params.id;
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where feat LIKE $1 ORDER BY row_number asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
@@ -113,6 +117,10 @@ router.get('/:id', (req,res,next) => {
     });
   } else if (SearchType === 'reversefeat') {
     var Search = req.query.searchText;
+    function replace(Search) {
+        Search= encodeURIComponent(Search);
+        return Search;
+    }
     var CurrentPage = req.params.id;
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where reversefeat LIKE $1 ORDER BY row_number asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
