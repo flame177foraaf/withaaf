@@ -106,6 +106,8 @@ router.get('/:id', (req,res,next) => {
         SearchType: SearchType,
         Search: Search,
       });
+      console.log(Search)
+
     });
   } else if (SearchType === 'reversefeat') {
     var Search = req.query.searchText;
@@ -141,7 +143,6 @@ router.get('/:id', (req,res,next) => {
         SearchType: SearchType,
         Search: Search,
       });
-      console.log(Search)
     });
   } else {
     res.redirect('/featsup');
