@@ -260,7 +260,7 @@ router.get('/:id', (req,res,next) => {
   } else if (SearchType === 'custom') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armcustom LIKE $1ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armcustom LIKE $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
 
       if(typeof(response.rows[0]) !== "object") {
@@ -296,7 +296,46 @@ router.get('/:id', (req,res,next) => {
 
       });
     });
-  } else {
+  } else if (SearchType === 'property')) {
+    var Search = req.query.searchText;
+    var CurrentPage = req.params.id
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armproperty LIKE $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+
+      if(typeof(response.rows[0]) !== "object") {
+        var TotalCount = 1;
+      } else {
+        var TotalCount = response.rows[0].totalcount;
+      }
+      console.log(TotalCount)
+      var DataCountInPage = 10;
+      var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      };
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      };
+      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
+      var EndPage = StartPage + DataCountInPage -1;
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      };
+      res.render('aafarm', {
+        title: 'AAF 장비',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage:TotalPage,
+        SearchType: SearchType,
+        Search: Search,
+
+      });
+    });
+  }{
     res.redirect('/aafarm');
   };
 });
