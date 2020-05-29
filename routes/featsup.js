@@ -37,7 +37,6 @@ router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   if (SearchType === 'name') {
     var Search = req.query.searchText;
-    Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B")
     var CurrentPage = req.params.id;
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where featname LIKE $1 ORDER BY row_number asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
@@ -74,7 +73,6 @@ router.get('/:id', (req,res,next) => {
     });
   } else if (SearchType === 'feat') {
     var Search = req.query.searchText;
-    Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B")
     var CurrentPage = req.params.id;
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where feat LIKE $1 ORDER BY row_number asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
@@ -111,7 +109,6 @@ router.get('/:id', (req,res,next) => {
     });
   } else if (SearchType === 'reversefeat') {
     var Search = req.query.searchText;
-    Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B")
     var CurrentPage = req.params.id;
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where reversefeat LIKE $1 ORDER BY row_number asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
@@ -144,6 +141,7 @@ router.get('/:id', (req,res,next) => {
         SearchType: SearchType,
         Search: Search,
       });
+      console.log(Search)
     });
   } else {
     res.redirect('/featsup');
