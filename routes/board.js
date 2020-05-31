@@ -61,20 +61,24 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   var BoardBody = req.body.boardbody;
   BoardBody = BoardBody.replace(/(?:\r\n|\r|\n)/g, '<br />');
-  var QueryString = "INSERT INTO aquafeq.freeboard(fbtitle, fbbody, fbname, fbcreatedat) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI:SS'));"
-  client.query(QueryString, [req.body.title, BoardBody, req.body.writer], (err, response) => {
-    console.log(req.body.title);
-    console.log(req.body.boardbody);
-    console.log(req.body.writer);
-    if (err) {
-      console.error();
-    } else {
-      var psql = "SELECT * FROM aquafeq.freeboard"
-      client.query(psql, (err, response) => {
-        res.redirect('/board')
-      });
-    };
-  });
+  var QueryString = "set timezone TO 'Asia/Seoul'";
+  client.query(QueryString, (err,response) => {
+    var QueryString = "INSERT INTO aquafeq.freeboard(fbtitle, fbbody, fbname, fbcreatedat) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI:SS'));"
+    client.query(QueryString, [req.body.title, BoardBody, req.body.writer], (err, response) => {
+      console.log(req.body.title);
+      console.log(req.body.boardbody);
+      console.log(req.body.writer);
+      if (err) {
+        console.error();
+      } else {
+        var psql = "SELECT * FROM aquafeq.freeboard"
+        client.query(psql, (err, response) => {
+          res.redirect('/board')
+        });
+      };
+    });
+  })
+
 });
 
 module.exports = router;
