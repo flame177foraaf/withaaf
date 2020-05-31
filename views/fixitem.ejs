@@ -48,7 +48,7 @@
     <script type="text/javascript">
       function checkonclick() {
         if (document.bodyform.name.value == "" || document.bodyform.name.value == null || document.bodyform.name.value == undefined || ( document.bodyform.name.value != null && typeof document.bodyform.name.value == "object" && !Object.keys(document.bodyform.name.value).length ) ) {
-          alert("장비 이름을 입력해주세요!");
+          alert("아이템 이름을 입력해주세요!");
           document.bodyform.name.focus();
           return false;
         }
@@ -62,44 +62,44 @@
     <h1><%= title  %></h1>
 
     <div class="">
-      <form class="" name="bodyform" action="/item/add_item" method="post" onsubmit="return checkonclick()">
+      <form class="" name="bodyform" action="/item/fixitem" method="post" onsubmit="return checkonclick()">
         <div class="">
           <div class="">
             <label for="">이름</label>
             <div class="">
-              <input type="text" name="name"  size='40' maxlength='50' value="" id="title">
+              <input type="text" name="name"  size='40' maxlength='50' value="<%= data.item_name %>" id="title">
             </div>
           </div>
           <div class="">
             <label for="">설명</label>
             <div class="">
-              <textarea type="text" name="text" rows="6" cols="60" id=""></textarea>
+              <textarea type="text" name="text" rows="6" cols="60" id=""><%- data.item_text%></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">효과</label>
             <div class="">
-              <textarea type="text" name="effect" rows="6" cols="60" id=""></textarea>
+              <textarea type="text" name="effect" rows="6" cols="60" id=""><%- data.item_effect%></textarea>
 
             </div>
           </div>
           <div class="">
             <label for="">타입</label>
             <div class="">
-              <input type="text" name="type"  size='40' maxlength='50' value="" id="title">
+              <input type="text" name="type"  size='40' maxlength='50' value="<%= data.item_type%>" id="title">
             </div>
           </div>
           <div class="">
             <label for="">개수</label>
             <div class="">
-              <input type="text" name="count"  size='40' maxlength='50' value="" id="title">
+              <input type="text" name="count"  size='40' maxlength='50' value="<%= data.item_count%>" id="title">
             </div>
           </div>
           <div class="">
             <label for="">획득 경로</label>
             <div class="">
-              <input type="text" name="route"  size='40' maxlength='50' value="" id="title">
+              <input type="text" name="route"  size='40' maxlength='50' value="<%= data.item_route%>" id="title">
             </div>
           </div>
 
