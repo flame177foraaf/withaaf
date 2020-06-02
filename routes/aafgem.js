@@ -58,7 +58,7 @@ router.post('/fixgem', (req,res,next) => {
     if (Gemeffect !== '') {
       Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
-  var QueryString = "UPDATE aquafeq.aquafgem SET (gemgrade, collectname, gemobject, gemeffect) = ($1, $2, $3, $4)  WHERE gemname = $5 returning *"
+  var QueryString = "UPDATE aquafeq.aquafgem SET (gemgrade, collectname, gemobject, gemeffect, gemname) = ($1, $2, $3, $4, $5)  WHERE gemname = $5 returning *"
   client.query(QueryString, [Gemgrade, Collectname, Gemobject, Gemeffect, Gemname], (err, response) => {
     var QueryString = "select * from aquafeq.aquafgem where gemname = $1"
     client.query (QueryString, [Gemname],  (err, response) => {
