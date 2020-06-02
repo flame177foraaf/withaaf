@@ -100,6 +100,7 @@ router.get('/fixitem', (req,res,next) => {
 router.post('/fixitem', (req,res,next) => {
   var Itemname = req.body.name;
   var Eqid = req.body.eqid;
+  console.log(Eqid)
 
   var Itemtext = req.body.text;
     if (Itemtext == '') {

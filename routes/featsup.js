@@ -48,6 +48,7 @@ router.get('/fixfeat', (req,res,next) => {
 
 router.post('/fixfeat', (req,res,next) => {
   var Eqid = req.body.eqid;
+  console.log(Eqid)
 
   var Featgrade =req.body.grade;
     if (Featgrade !== '') {

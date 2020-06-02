@@ -102,7 +102,7 @@ router.get('/fixarm', (req,res,next) => {
 //무기 변경하기
 router.post('/fixarm', (req,res,next) => {
   var Eqid = req.body.eqid;
-
+  console.log(Eqid)
   var Armgrade = req.body.armgrade;
     if (Armgrade == '') {
       Armgrade = null

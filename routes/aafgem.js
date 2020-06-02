@@ -48,6 +48,9 @@ router.get('/fixgem', (req,res,next) => {
 
 router.post('/fixgem', (req,res,next) => {
   var Eqid = req.body.eqid;
+  console.log(Eqid)
+
+  console.log(Eqid)
 
   var Gemgrade =req.body.grade;
     if (Gemgrade !== '') {

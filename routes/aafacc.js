@@ -101,6 +101,7 @@ router.get('/fixacc', (req,res,next) => {
 //무기 변경하기
 router.post('/fixacc', (req,res,next) => {
   var Eqid = req.body.eqid;
+  console.log(Eqid)
 
   var Accgrade = req.body.accgrade;
     if (Accgrade == '') {
@@ -161,7 +162,7 @@ router.post('/fixacc', (req,res,next) => {
     client.query ( QueryString, [Accname],  (err, response) => {
       console.log(response.rows[0])
       res.render('aafacc', {
-        title : accname + ' 변경 완료',
+        title : Accname + ' 변경 완료',
         data: response.rows
       })
     });
