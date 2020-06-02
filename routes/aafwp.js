@@ -102,7 +102,9 @@ router.get('/fixwp', (req,res,next) => {
 router.post('/fixwp', (req,res,next) => {
   console.log('냠냠')
   var Eqid = req.body.eqid;
+
   console.log(Eqid)
+  console.log(req.body.eqid)
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade == '') {
       Wpgrade = null
