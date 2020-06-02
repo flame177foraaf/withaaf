@@ -67,10 +67,10 @@ router.post('/fixfeat', (req,res,next) => {
     if (Featup !== '') {
       Featup = Featup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
-  var QueryString = "UPDATE aquafeq.featsup SET (featgrade, feat, reversefeat, featup) = ($1, $2, $3, $4)  WHERE featid = $6 returning *"
+  var QueryString = "UPDATE aquafeq.featsup SET (featgrade, feat, reversefeat, featup, featname) = ($1, $2, $3, $4, $5)  WHERE featid = $6 returning *"
   client.query(QueryString, [Featgrade, Feat, Reversefeat, Featup, Featname, Eqid], (err, response) => {
-    var QueryString = "select * from aquafeq.featsup where featname = $1"
-    client.query (QueryString, [Featname],  (err, response) => {
+    var QueryString = "select * from aquafeq.featsup"
+    client.query (QueryString, (err, response) => {
       res.render('featsup', {
         title : Featname + ' 변경 완료',
         data: response.rows

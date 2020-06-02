@@ -129,7 +129,7 @@ router.post('/fixitem', (req,res,next) => {
     }
 
 
-  var QueryString = "UPDATE aquafeq.aquafitem SET (item_text, item_effect, item_type, item_count, item_route) = ($2, $3, $4, $5, $6)  WHERE item_id = $7 returning *"
+  var QueryString = "UPDATE aquafeq.aquafitem SET (item_name, item_text, item_effect, item_type, item_count, item_route) = ($1, $2, $3, $4, $5, $6)  WHERE item_id = $7 returning *"
   //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
   client.query(QueryString, [Itemname, Itemtext, Itemeffect, Itemtype, Itemcount, Itemroute, Eqid], (err, response) => {
 
