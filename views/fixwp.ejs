@@ -57,8 +57,7 @@
       <form class="" name="bodyform" action="/aafwp/fixwp" method="post" onsubmit="">
         <div class="">
           <div class="">
-            <input type="text" name="eqid" value="sss">
-            <span style="float:right;" name="eqid" value=""><%- data.wpid %></span>
+            <span style="float:right; display:none;" name="eqid" value="<%= data.wpid %>" id="eqid"><%- data.wpid %></span>
           </div>
           <div class="">
             <label for="">등급</label>
@@ -140,7 +139,7 @@
   </footer>
   <script type="text/javascript">
 
-
+    var eqid = document.getElementById("eqid").value
     var textarea1 = document.getElementById("wpgrade").value;
     textarea1 = textarea1.replace(/<br>|<br \/>/g, "\r\n");
     document.getElementById("wpgrade").value = textarea1;
