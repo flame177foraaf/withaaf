@@ -111,11 +111,17 @@ router.post('/fixwp', (req,res,next) => {
     } else if (Wpgrade !== '') {
       Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
+    console.log(req.body.wpgrade)
+
   var Wpname = req.body.wpname;
+  console.log(req.body.wpname)
+
   var Wplimit = req.body.wplimit;
     if (Wplimit == '') {
       Wplimit = null
     }
+    console.log(req.body.wplimit)
+
   var Wpsocket = req.body.wpsocket;
     if (Wpsocket == '') {
       Wpsocket = null
