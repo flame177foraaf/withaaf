@@ -111,7 +111,7 @@ router.get('/:id', (req,res,next) => {
   if (SearchType === 'name') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where collectname LIKE $1 ORDER BY row_number asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where collectname LIKE $1 ORDER BY gemid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -149,7 +149,7 @@ router.get('/:id', (req,res,next) => {
   } else if (SearchType === 'effect') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where gemeffect LIKE $1 ORDER BY row_number asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where gemeffect LIKE $1 ORDER BY gemid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -185,7 +185,7 @@ router.get('/:id', (req,res,next) => {
   } else if (SearchType === 'reversefeat') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where reversefeat LIKE $1 ORDER BY row_number asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where reversefeat LIKE $1 ORDER BY gemid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
