@@ -54,13 +54,7 @@
         }
         return true;
       }
-      var textarea2 = document.getElementById("item_text").value;
-      textarea2 = textarea2.replace(/<br>|<br \/>/g, "\r\n");
-      document.getElementById("item_text").value = textarea2;
 
-      var textarea3 = document.getElementById("item_effect").value;
-      textarea3 = textarea3.replace(/<br>|<br \/>/g, "\r\n");
-      document.getElementById("item_effect").value = textarea3;
     </script>
   </head>
   <body style="margin-top: 5px; margin-right: 10%; margin-left:10%; ">
@@ -126,4 +120,13 @@
   <footer>
     <%- include ('footer') %>
   </footer>
+  <script type="text/javascript">
+    var textarea2 = document.getElementById("item_text").value;
+    textarea2 = textarea2.replace(/<br>|<br \/>/g, "\r\n");
+    document.getElementById("item_text").value = textarea2;
+
+    var textarea3 = document.getElementById("item_effect").value;
+    textarea3 = textarea3.replace(/<br>|<br \/>/g, "\r\n");
+    document.getElementById("item_effect").value = textarea3;
+  </script>
 </html>

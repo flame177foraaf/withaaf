@@ -54,13 +54,7 @@
         }
         return true;
       }
-      var textarea1 = document.getElementById("gemgrade").value;
-      textarea1 = textarea1.replace(/<br>|<br \/>/g, "\r\n");
-      document.getElementById("gemgrade").value = textarea1;
 
-      var textarea5 = document.getElementById("gemeffect").value;
-      textarea5 = textarea5.replace(/<br>|<br \/>/g, "\r\n");
-      document.getElementById("gemeffect").value = textarea5;
 
     </script>
   </head>
@@ -120,4 +114,13 @@
   <footer>
     <%- include ('footer') %>
   </footer>
+  <script type="text/javascript">
+    var textarea1 = document.getElementById("gemgrade").value;
+    textarea1 = textarea1.replace(/<br>|<br \/>/g, "\r\n");
+    document.getElementById("gemgrade").value = textarea1;
+
+    var textarea5 = document.getElementById("gemeffect").value;
+    textarea5 = textarea5.replace(/<br>|<br \/>/g, "\r\n");
+    document.getElementById("gemeffect").value = textarea5;
+  </script>
 </html>
