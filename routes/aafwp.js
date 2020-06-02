@@ -101,6 +101,7 @@ router.get('/fixwp', (req,res,next) => {
 //무기 변경하기
 router.post('/fixwp', (req,res,next) => {
   var Id = req.body.id;
+  console.log(Id)
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade == '') {
       Wpgrade = null
