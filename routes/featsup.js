@@ -27,10 +27,90 @@ router.get('/', (req,res,next) => {
   });});
 
 router.get('/fixfeat', (req,res,next) => {
-  res.redirect('/');
+  var QueryString = "select featname from aquafeq.featsup"
+  client.query(QueryString, (err, response) => {
+    var Select_name = req.query.Seachname;
+    var QueryString = "select * from aquafeq.featsup where featname = $1"
+    client.query(QueryString, [Select_name], (err, response) => {
+      if(typeof(response.rows[0]) !== "object") {
+        res.render ('addfeat', {
+          title: '신규 피트서포터 ' + Select_name + ' 등록',
+        });
+      } else {
+        res.render ('fixfeat', {
+          title:Select_name + '정보',
+          data:response.rows[0]
+        });
+      }
+    });
+  });
 });
+
+router.post('/fixfeat', (req,res,next) => {
+  var Featgrade =req.body.grade;
+    if (Featgrade !== '') {
+      Featgrade = Featgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Featname = req.body.name;
+  var Feat = req.body.feat;
+    if (Feat !== '') {
+      Feat = Feat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Reversefeat =req.body.reversefeat;
+    if (Reversefeat !== '') {
+      Reversefeat = Reversefeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Featup = req.body.up;
+    if (Featup !== '') {
+      Featup = Featup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var QueryString = "UPDATE aquafeq.featsup SET (featgrade, feat, reversefeat, featup) = ($1, $2, $3, $4)  WHERE featname = $5 returning *"
+  client.query(QueryString, [Featgrade, Feat, Reversefeat, Featup, Featname], (err, response) => {
+    var QueryString = "select * from aquafeq.featsup where featname = $1"
+    client.query (QueryString, [Gemname],  (err, response) => {
+      res.render('featsup', {
+        title : Featname + ' 변경 완료',
+        data: response.rows
+      })
+    });
+  });
+});
+
+
 router.get('/add_feat', (req,res,next) => {
-  res.redirect('/');
+  res.render('aadfeat', {
+    title:'AAF 장비'
+  });
+});
+
+router.post('/add_feat', (req,res,next) => {
+  var Featgrade =req.body.grade;
+    if (Featgrade !== '') {
+      Featgrade = Featgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Featname = req.body.name;
+  var Feat = req.body.feat;
+    if (Feat !== '') {
+      Feat = Feat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Reversefeat =req.body.reversefeat;
+    if (Reversefeat !== '') {
+      Reversefeat = Reversefeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Featup = req.body.up;
+    if (Featup !== '') {
+      Featup = Featup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var QueryString = "INSERT INTO aquafeq.featsup(featgrade, featname, feat, reversefeat, featup) values ($1, $2, $3, $4, $5);"
+  client.query(QueryString, [Featgrade, Featname, Feat, Reversefeat, Featup], (err, response) => {
+    var QueryString = "select featid, featname from aquafeq.featsup where featname = Featname ORDER BY featid asc ;"
+    client.query(QueryString, (err, response) => {
+      res.render('featsup', {
+        title:'AAF 피트서포터',
+        data:response.rows
+      });
+    });
+  });
 });
 
 router.get('/:id', (req,res,next) => {

@@ -27,15 +27,60 @@ router.get('/', (req,res,next) => {
 });
 
 router.get('/fixgem', (req,res,next) => {
-  res.redirect('/')
+  var QueryString = "select gemname from aquafeq.aquafgem"
+  client.query(QueryString, (err, response) => {
+    var Select_name = req.query.Seachname;
+    var QueryString = "select * from aquafeq.aquafgem where gemname = $1"
+    client.query(QueryString, [Select_name], (err, response) => {
+      if(typeof(response.rows[0]) !== "object") {
+        res.render ('addgem', {
+          title: '신규 루엘 ' + Select_name + ' 등록',
+        });
+      } else {
+        res.render ('fixgem', {
+          title:Select_name + '정보',
+          data:response.rows[0]
+        });
+      }
+    });
+  });
 })
+
+router.post('/fixgem', (req,res,next) => {
+  var Gemgrade =req.body.grade;
+    if (Gemgrade !== '') {
+      Gemgrade = Gemgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Collectname = req.body.name;
+  var Gemname = req.body.gemname;
+  var Gemobject =req.body.obj;
+  var Gemeffect = req.body.effect;
+    if (Gemeffect !== '') {
+      Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var QueryString = "UPDATE aquafeq.aquafgem SET (gemgrade, collectname, gemobject, gemeffect) = ($1, $2, $3, $4)  WHERE gemname = $5 returning *"
+  client.query(QueryString, [Gemgrade, Collectname, Gemobject, Gemeffect, Gemname], (err, response) => {
+    var QueryString = "select * from aquafeq.aquafgem where gemname = $1"
+    client.query (QueryString, [Gemname],  (err, response) => {
+      console.log(response.rows[0])
+      res.render('aafgem', {
+        title : Gemname + ' 변경 완료',
+        data: response.rows
+      })
+    });
+  });
+})
+
+
+
 router.get('/add_gem', (req,res,next) => {
   res.render('addgem', {
     title:'AAF 장비'
   });
 })
 
-router.post('/', (req,res,next) => {
+
+router.post('/add_gem', (req,res,next) => {
   var Gemgrade =req.body.grade;
   if (Gemgrade !== '') {
     Gemgrade = Gemgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
