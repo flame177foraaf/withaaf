@@ -78,7 +78,7 @@ router.post('/fixfeat', (req,res,next) => {
 
 
 router.get('/add_feat', (req,res,next) => {
-  res.render('aadfeat', {
+  res.render('addfeat', {
     title:'AAF 장비'
   });
 });
