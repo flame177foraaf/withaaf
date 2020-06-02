@@ -100,7 +100,7 @@ router.get('/fixwp', (req,res,next) => {
 
 //무기 변경하기
 router.post('/fixwp', (req,res,next) => {
-  var Name = req.query.Seachname;
+  var Id = req.body.id;
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade == '') {
       Wpgrade = null
@@ -153,15 +153,15 @@ router.post('/fixwp', (req,res,next) => {
     }
 
 
-  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup, wpname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE wpname = $11 returning *"
+  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup, wpname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE wpid = $11 returning *"
   //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
-  client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Wpname, Name], (err, response) => {
+  client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Wpname, Id], (err, response) => {
     console.log('쿼리스트링' + QueryString)
 
     console.log('쿼리문' + Name)
     var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
     client.query ( QueryString, [Wpname],  (err, response) => {
-      console.log(response.rows[0])
+      console.log('쿼리스트링' + QueryString)
       res.render('aafwp', {
         title : Wpname + ' 변경 완료',
         data: response.rows
