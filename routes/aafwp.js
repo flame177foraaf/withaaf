@@ -158,7 +158,6 @@ router.post('/fixwp', (req,res,next) => {
   client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Wpname, Id], (err, response) => {
     console.log('쿼리스트링' + QueryString)
 
-    console.log('쿼리문' + Name)
     var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
     client.query ( QueryString, [Wpname],  (err, response) => {
       console.log('쿼리스트링' + QueryString)
