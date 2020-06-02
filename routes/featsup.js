@@ -67,7 +67,7 @@ router.post('/fixfeat', (req,res,next) => {
   var QueryString = "UPDATE aquafeq.featsup SET (featgrade, feat, reversefeat, featup) = ($1, $2, $3, $4)  WHERE featname = $5 returning *"
   client.query(QueryString, [Featgrade, Feat, Reversefeat, Featup, Featname], (err, response) => {
     var QueryString = "select * from aquafeq.featsup where featname = $1"
-    client.query (QueryString, [Gemname],  (err, response) => {
+    client.query (QueryString, [Featname],  (err, response) => {
       res.render('featsup', {
         title : Featname + ' 변경 완료',
         data: response.rows
