@@ -99,7 +99,7 @@ router.get('/fixwp', (req,res,next) => {
 });
 
 //무기 변경하기
-router.post('/fixwp/success', (req,res,next) => {
+router.post('/fixwp', (req,res,next) => {
   console.log('냠냠')
   var Id = req.body.eqid;
   console.log(Id)
