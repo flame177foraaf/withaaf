@@ -57,6 +57,9 @@
       <form class="" name="bodyform" action="/aafacc/fixacc" method="post" onsubmit="">
         <div class="">
           <div class="">
+            <input style="float:right; width:0; display:none;"type="text" name="eqid" value="<%= data.accid %>" readonly >
+          </div>
+          <div class="">
             <label for="">등급</label>
             <div class="">
               <textarea type="text" name="accgrade" rows="6" cols="60" id="accgrade"><%- data.accgrade %></textarea>

@@ -47,6 +47,8 @@ router.get('/fixfeat', (req,res,next) => {
 });
 
 router.post('/fixfeat', (req,res,next) => {
+  var Eqid = req.body.eqid;
+
   var Featgrade =req.body.grade;
     if (Featgrade !== '') {
       Featgrade = Featgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
@@ -64,8 +66,8 @@ router.post('/fixfeat', (req,res,next) => {
     if (Featup !== '') {
       Featup = Featup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
-  var QueryString = "UPDATE aquafeq.featsup SET (featgrade, feat, reversefeat, featup) = ($1, $2, $3, $4)  WHERE featname = $5 returning *"
-  client.query(QueryString, [Featgrade, Feat, Reversefeat, Featup, Featname], (err, response) => {
+  var QueryString = "UPDATE aquafeq.featsup SET (featgrade, feat, reversefeat, featup) = ($1, $2, $3, $4)  WHERE featname = $6 returning *"
+  client.query(QueryString, [Featgrade, Feat, Reversefeat, Featup, Featname, Eqid], (err, response) => {
     var QueryString = "select * from aquafeq.featsup where featname = $1"
     client.query (QueryString, [Featname],  (err, response) => {
       res.render('featsup', {

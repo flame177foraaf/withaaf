@@ -38,6 +38,7 @@ router.get('/add_item', (req,res,next) => {
 
 //무기 추가하기
 router.post('/add_item', (req, res, next) => {
+
   var Itemname = req.body.name;
 
   var Itemtext = req.body.text;
@@ -98,6 +99,7 @@ router.get('/fixitem', (req,res,next) => {
 
 router.post('/fixitem', (req,res,next) => {
   var Itemname = req.body.name;
+  var Eqid = req.body.eqid;
 
   var Itemtext = req.body.text;
     if (Itemtext == '') {
@@ -126,9 +128,9 @@ router.post('/fixitem', (req,res,next) => {
     }
 
 
-  var QueryString = "UPDATE aquafeq.aquafitem SET (item_text, item_effect, item_type, item_count, item_route) = ($2, $3, $4, $5, $6)  WHERE item_name = $1 returning *"
+  var QueryString = "UPDATE aquafeq.aquafitem SET (item_text, item_effect, item_type, item_count, item_route) = ($2, $3, $4, $5, $6)  WHERE item_name = $7 returning *"
   //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
-  client.query(QueryString, [Itemname, Itemtext, Itemeffect, Itemtype, Itemcount, Itemroute], (err, response) => {
+  client.query(QueryString, [Itemname, Itemtext, Itemeffect, Itemtype, Itemcount, Itemroute, Eqid], (err, response) => {
 
     var QueryString = "select * from aquafeq.aquafitem where item_name = $1"
     client.query ( QueryString, [Itemname],  (err, response) => {

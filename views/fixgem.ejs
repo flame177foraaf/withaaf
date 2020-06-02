@@ -65,6 +65,9 @@
       <form class="" name="bodyform" action="/aafgem/fixgem" method="post" onsubmit="return checkonclick()">
         <div class="">
           <div class="">
+            <input style="float:right; width:0; display:none;"type="text" name="eqid" value="<%= data.gemid %>" readonly >
+          </div>
+          <div class="">
             <label for="">등급</label>
             <div class="">
               <textarea type="text" name="grade" rows="6" cols="60" id="gemgrade"><%- data.gemgrade%></textarea>

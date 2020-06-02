@@ -100,6 +100,8 @@ router.get('/fixacc', (req,res,next) => {
 
 //무기 변경하기
 router.post('/fixacc', (req,res,next) => {
+  var Eqid = req.body.eqid;
+
   var Accgrade = req.body.accgrade;
     if (Accgrade == '') {
       Accgrade = null
@@ -152,8 +154,8 @@ router.post('/fixacc', (req,res,next) => {
     }
 
 
-  var QueryString = "UPDATE aquafeq.aquafacc SET (accgrade, acclimit, accsocket, accether, accstats, accproperty, accfeat, acccustom, accup, accname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE accname = $10 returning *"
-  client.query(QueryString, [Accgrade, Acclimit, Accsocket, Accether, Accstats, Accproperty, Accfeat, Acccustom, Accup, Accname], (err, response) => {
+  var QueryString = "UPDATE aquafeq.aquafacc SET (accgrade, acclimit, accsocket, accether, accstats, accproperty, accfeat, acccustom, accup, accname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE accname = $11 returning *"
+  client.query(QueryString, [Accgrade, Acclimit, Accsocket, Accether, Accstats, Accproperty, Accfeat, Acccustom, Accup, Accname, Eqid], (err, response) => {
 
     var QueryString = "select * from aquafeq.aquafacc where accname = $1"
     client.query ( QueryString, [Accname],  (err, response) => {
