@@ -57,7 +57,9 @@
       <form class="" name="bodyform" action="/aafwp/fixwp" method="post" onsubmit="">
         <div class="">
           <div class="">
-            <label for="" style="float:right" id="eqid" value="<%= data.wpid %>"><%- data.wpid %></label>
+            <div class="">
+              <span  style="float:right;" name="eqid" value="<%= data.wpid %>"><%- data.wpid %></span>
+            </div>
             <label for="">등급</label>
             <div class="">
               <textarea type="text" name="wpgrade" rows="6" cols="60" id="wpgrade"><%- data.wpgrade %></textarea>

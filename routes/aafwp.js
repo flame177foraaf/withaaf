@@ -109,7 +109,6 @@ router.post('/fixwp', (req,res,next) => {
     } else if (Wpgrade !== '') {
       Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
-    console.log()
   var Wpname = req.body.wpname;
   var Wplimit = req.body.wplimit;
     if (Wplimit == '') {
