@@ -14,8 +14,6 @@ client.connect();
 router.get('/', (req,res,next) => {
   var QueryString = "select wpid, wpname from aquafeq.aquafwp ORDER BY wplimit,wpid asc ;"
   client.query(QueryString, (err, response) => {
-    console.log(response.rows[0])
-
     if (err) {
       res.redirect('/aafwp');
     } else {
@@ -158,6 +156,8 @@ router.post('/fixwp', (req,res,next) => {
   var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup, wpname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE wpname = $11 returning *"
   //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
   client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Wpname, Name], (err, response) => {
+    console.log('쿼리스트링' + QueryString)
+
     console.log('쿼리문' + Name)
     var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
     client.query ( QueryString, [Wpname],  (err, response) => {
@@ -183,9 +183,9 @@ router.get('/:id', (req,res,next) => {
       } else {
         var TotalCount = response.rows[0].totalcount;
       }
-      console.log('토탈 카운트 ' + TotalCount)
-      console.log(CurrentPage)
-      console.log(typeof(CurrentPage))
+      //console.log('토탈 카운트 ' + TotalCount)
+      //console.log(CurrentPage)
+      //console.log(typeof(CurrentPage))
       var DataCountInPage = 10;
       var PageSize = 10;
       var TotalPage = parseInt(TotalCount / DataCountInPage,10);
@@ -193,19 +193,19 @@ router.get('/:id', (req,res,next) => {
         TotalPage++;
       };
 
-      console.log('토탈 페이지' + TotalPage);
+      //console.log('토탈 페이지' + TotalPage);
       if (TotalPage < CurrentPage) {
         CurrentPage = TotalPage;
       };
       var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      console.log('스타트페이지' + StartPage);
+      //console.log('스타트페이지' + StartPage);
 
       var EndPage = StartPage + DataCountInPage -1;
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       };
-      console.log('엔드페이지'+ EndPage);
-      console.log(response.rows[0])
+      //console.log('엔드페이지'+ EndPage);
+      //console.log(response.rows[0])
       res.render('aafwp', {
         title: 'AAF 장비',
         data: response.rows,
@@ -231,7 +231,6 @@ router.get('/:id', (req,res,next) => {
       } else {
         var TotalCount = response.rows[0].totalcount;
       }
-      console.log(TotalCount)
       var DataCountInPage = 10;
       var PageSize = 10;
       var TotalPage = parseInt(TotalCount / DataCountInPage,10);
@@ -270,7 +269,6 @@ router.get('/:id', (req,res,next) => {
       } else {
         var TotalCount = response.rows[0].totalcount;
       }
-      console.log(TotalCount)
       var DataCountInPage = 10;
       var PageSize = 10;
       var TotalPage = parseInt(TotalCount / DataCountInPage,10);
@@ -309,7 +307,6 @@ router.get('/:id', (req,res,next) => {
       } else {
         var TotalCount = response.rows[0].totalcount;
       }
-      console.log(TotalCount)
       var DataCountInPage = 10;
       var PageSize = 10;
       var TotalPage = parseInt(TotalCount / DataCountInPage,10);
