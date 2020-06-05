@@ -71,6 +71,7 @@ router.post('/add_item', (req, res, next) => {
     client.query(QueryString, (err, response) => {
       res.render('item', {
         title:'AAF 아이템',
+        data: response.rows
       });
     });
   });
