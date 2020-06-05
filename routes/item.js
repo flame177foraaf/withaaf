@@ -67,12 +67,16 @@ router.post('/add_item', (req, res, next) => {
     }
   var QueryString = "INSERT INTO aquafeq.aquafitem(item_name, item_text, item_effect, item_type, item_count, item_route) values ($1, $2, $3, $4, $5, $6);"
   client.query(QueryString, [Itemname, Itemtext, Itemeffect, Itemtype, Itemcount, Itemroute], (err, response) => {
-    var QueryString = "select * from aquafeq.aquafitem where item_name = Itemname;"
+    var QueryString = 'select item_name from aquafeq.aquafitem ORDER BY item_name collate "ko_KR.utf8";'
     client.query(QueryString, (err, response) => {
-      res.render('item', {
-        title:'AAF 아이템',
-        data: response.rows
-      });
+      if (err) {
+        res.redirect('/');
+      } else {
+        res.render('item', {
+          title:'AAF 아이템',
+          data: response.rows
+        });
+      };
     });
   });
 });
