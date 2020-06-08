@@ -1,13 +1,12 @@
 var express = require('express');
 var router = express.Router();
-
+var sslRedirect = require('heroku-ssl-redirect');
 var app = express();
-
 const { Client } = require('pg');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  // ssl: true,
+  ssl: true,
 });
 
 client.connect();
