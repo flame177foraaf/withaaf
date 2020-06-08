@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var sslRedirect = require('heroku-ssl-redirect');
 var app = express();
+app.use(sslRedirect());
 const { Client } = require('pg');
 
 const client = new Client({
