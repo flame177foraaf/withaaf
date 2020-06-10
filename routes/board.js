@@ -24,6 +24,7 @@ router.get('/', (req,res, next) => {
     });
   });
 });
+
 /*
 router.get('/board/:page', (req,res, next) => {
   var page = req.params.page
@@ -65,9 +66,6 @@ router.post('/', (req, res, next) => {
   client.query(QueryString, (err,response) => {
     var QueryString = "INSERT INTO aquafeq.freeboard(fbtitle, fbbody, fbname, fbcreatedat) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI:SS'));"
     client.query(QueryString, [req.body.title, BoardBody, req.body.writer], (err, response) => {
-      console.log(req.body.title);
-      console.log(req.body.boardbody);
-      console.log(req.body.writer);
       if (err) {
         console.error();
       } else {

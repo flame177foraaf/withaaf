@@ -131,13 +131,22 @@ router.get('/:id', (req,res,next) => {
       if (typeof(response.rows[0]) !== 'object') {
         res.redirect('/monster')
       }
-
       var Data_length = response.rows.length;
-      res.render('monster', {
-        title:'AAF 던전 몬스터 정보',
-        data:response.rows,
-        Data_length:Data_length,
-      });
+      if (Field_Id == "90") {
+        res.render('monster_top', {
+          title:'AAF 던전 몬스터 정보',
+          data:response.rows,
+          Data_length:Data_length,
+        });
+      } else {
+        res.render('monster', {
+          title:'AAF 던전 몬스터 정보',
+          data:response.rows,
+          Data_length:Data_length,
+        });
+      }
+
+
     });
  //else if (Searchingtype === 'property') {
 

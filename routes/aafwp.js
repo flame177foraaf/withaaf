@@ -225,7 +225,6 @@ router.get('/:id', (req,res,next) => {
         TotalPage: TotalPage,
         SearchType: SearchType,
         Search: Search,
-
       });
     });
   } else if (SearchType === 'property') {
