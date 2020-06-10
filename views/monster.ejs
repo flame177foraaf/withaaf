@@ -302,41 +302,68 @@
 
               <% for( l = 0; l < Data_length; l++) { %>
                 <% if ( data[l].field_id !== data[0].field_id  ) {continue;}%>
-              <tr>
-                  <td style= "text-align:center;"><%- data[l].mon_lv %></td>
-                  <td><%- data[l].mon_name %></td>
-                  <td><%- data[l].mon_property %></td>
-                  <td><%- data[l].mon_ether %></td>
-                  <td style="text-align: center"><%- data[l].mon_type %></td>
-                  <td><%- data[l].mon_resist %></td>
-                  <td style="text-align: center"><%- data[l].mon_gem %></td>
-                  <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
-                  <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
-                  <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
-                  <td id =""><%- data[l].mon_skill %></td>
-              </tr>
+                  <% if (data[0].field_id == '90'){ %>
+                    <tr>
+                        <td style= "text-align:center;"><%- data[l].mono_field %></td>
+                        <td><%- data[l].mon_name %></td>
+                        <td><%- data[l].mon_hp %></td>
+                        <td><%- data[l].mon_property %></td>
+                        <td><%- data[l].mon_resist %></td>
+                        <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
+                        <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
+                        <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
+                        <td id =""><%- data[l].mon_skill %></td>
+                    </tr>
+                  <% } else { %>
+                    <tr>
+                        <td style= "text-align:center;"><%- data[l].mon_lv %></td>
+                        <td><%- data[l].mon_name %></td>
+                        <td><%- data[l].mon_property %></td>
+                        <td><%- data[l].mon_ether %></td>
+                        <td style="text-align: center"><%- data[l].mon_type %></td>
+                        <td><%- data[l].mon_resist %></td>
+                        <td style="text-align: center"><%- data[l].mon_gem %></td>
+                        <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
+                        <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
+                        <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
+                        <td id =""><%- data[l].mon_skill %></td>
+                    </tr>
+                  <% } %>
               <% } %>
             <% for (i = 1, j = i-1;  i < Data_length; i++, j+=1){ %>
               <% if( data[i].field_id == data[j].field_id ){ continue;} %>
                 <tr>
                   <td colspan="11"; style= "text-align:left; padding-left: 50px" class="fieldname"> <%- data[i].field_name %></td>
                 </tr>
-
-                <% for( l = 0; l < Data_length; l++) { %>
-                  <% if ( data[l].field_id !== data[i].field_id  ) {continue;}%>
+                <% if (data[0].field_id == '90'){
                   <tr>
-                    <td style= "text-align:center;"><%- data[l].mon_lv %></td>
-                    <td><%- data[l].mon_name %></td>
-                    <td><%- data[l].mon_property %></td>
-                    <td><%- data[l].mon_ether %></td>
-                    <td style="text-align: center"><%- data[l].mon_type %></td>
-                    <td><%- data[l].mon_resist %></td>
-                    <td style="text-align: center"><%- data[l].mon_gem %></td>
-                    <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
-                    <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
-                    <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
-                    <td id =""><%- data[l].mon_skill %></td>
+                      <td style= "text-align:center;"><%- data[l].mono_field %></td>
+                      <td><%- data[l].mon_name %></td>
+                      <td><%- data[l].mon_hp %></td>
+                      <td><%- data[l].mon_property %></td>
+                      <td><%- data[l].mon_resist %></td>
+                      <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
+                      <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
+                      <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
+                      <td id =""><%- data[l].mon_skill %></td>
                   </tr>
+                <% } else { %>
+                  <% for( l = 0; l < Data_length; l++) { %>
+                    <% if ( data[l].field_id !== data[i].field_id  ) {continue;}%>
+                    <tr>
+                      <td style= "text-align:center;"><%- data[l].mon_lv %></td>
+                      <td><%- data[l].mon_name %></td>
+                      <td><%- data[l].mon_property %></td>
+                      <td><%- data[l].mon_ether %></td>
+                      <td style="text-align: center"><%- data[l].mon_type %></td>
+                      <td><%- data[l].mon_resist %></td>
+                      <td style="text-align: center"><%- data[l].mon_gem %></td>
+                      <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
+                      <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
+                      <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
+                      <td id =""><%- data[l].mon_skill %></td>
+                    </tr>
+                  <% } %>
                 <% } %>
             <% } %>
           <% } %>
