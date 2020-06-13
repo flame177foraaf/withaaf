@@ -30,17 +30,17 @@
         console.log(WpP[1])
 
         if ( WpP[1] == ' 불 ') {
-          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFD5DD")
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFD5DD")
         } else if (WpP[1] == ' 물' ) {
-          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#DBE0FC")
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#DBE0FC")
         } else if (WpP[1] == ' 바람 ') {
-          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#CEFFD3")
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#CEFFD3")
         } else if (WpP[1] == ' 땅 ') {
-          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#F8EAD8")
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#F8EAD8")
         } else if (WpP[1] == ' 정신 ') {
-          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFFFDB")
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFFFDB")
         } else if (WpP[1] == ' 아스트랄 ') {
-          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#E4C1F2")
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#E4C1F2")
         }
       }
     });
@@ -107,7 +107,7 @@
           <% } else { %>
             <% data.forEach(function(item) { %>
 
-            <tr class="tabletr"id=""style="white-space: pre-line; font-size:12px;">
+            <tr class="tabletr"id="tabletr"style="white-space: pre-line; font-size:12px;">
               <td><%- item.wpgrade %></td>
               <td><%- item.wpname %></td>
               <td style='text-align: center'><%- item.wplimit %></td>
