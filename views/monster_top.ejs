@@ -73,7 +73,6 @@
 
 
     }
-
   </script>
     <%- include ('head') %>
   <title><%= title%></title>
@@ -297,12 +296,11 @@
               <% for( l = 0; l < Data_length; l++) { %>
                 <% if ( data[l].field_id !== data[0].field_id  ) {continue;}%>
 
-              <% if(data[l].mon_field_top /5 === 0){ %>
+              <% if(data[l].mon_field_top.indexOf('~') != -1){ %>
                 <tr style="border-top:2px black solid; border-bottom:2px black solid">
               <% } else { %>
                 <tr>
               <% } %>
-
                   <td style= "text-align:center;"><%- data[l].mon_field_top %></td>
                   <td><%- data[l].mon_name %></td>
                   <td><%- data[l].mon_hp %></td>
@@ -323,13 +321,13 @@
                 <% for( l = 0; l < Data_length; l++) { %>
                   <% if ( data[l].field_id !== data[i].field_id  ) {continue;}%>
 
-                  <% if(data[l].mon_field_top /5 === 0){ %>
+                  <% if(data[l].mon_field_top.indexOf('~') != -1){ %>
                     <tr style="border-top:2px black solid; border-bottom:2px black solid">
                   <% } else { %>
                     <tr>
                   <% } %>
 
-                    <td style= "text-align:center;"><%- data[l].mono_field %></td>
+                    <td style= "text-align:center;"><%- data[l].mon_field %></td>
                     <td><%- data[l].mon_name %></td>
                     <td><%- data[l].mon_hp %></td>
                     <td><%- data[l].mon_property %></td>
