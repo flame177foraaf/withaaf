@@ -296,11 +296,11 @@
               <% for( l = 0; l < Data_length; l++) { %>
                 <% if ( data[l].field_id !== data[0].field_id  ) {continue;}%>
 
-              <% if(data[l].mon_field_top.indexOf('~') != -1){ %>
-                <tr style="border-top:2px black solid; border-bottom:2px black solid">
-              <% } else { %>
-                <tr>
-              <% } %>
+                <% if(data[l].mon_field_top.indexOf('~') != -1){ %>
+                  <tr>
+                <% } else { %>
+                  <tr style="border-top:2px black solid; border-bottom:2px black solid">
+                <% } %>
                   <td style= "text-align:center;"><%- data[l].mon_field_top %></td>
                   <td><%- data[l].mon_name %></td>
                   <td><%- data[l].mon_hp %></td>
@@ -322,9 +322,9 @@
                   <% if ( data[l].field_id !== data[i].field_id  ) {continue;}%>
 
                   <% if(data[l].mon_field_top.indexOf('~') != -1){ %>
-                    <tr style="border-top:2px black solid; border-bottom:2px black solid">
-                  <% } else { %>
                     <tr>
+                  <% } else { %>
+                    <tr style="border-top:2px black solid; border-bottom:2px black solid">
                   <% } %>
 
                     <td style= "text-align:center;"><%- data[l].mon_field %></td>
