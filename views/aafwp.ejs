@@ -22,7 +22,12 @@
     <script type="text/javascript">
     $( document ).ready( function() {
       if ($('#wpproperty').text().indexOf('/') != -1) {
+        console.log($('#wpproperty').text())
+        console.log($('#wpproperty').text().indexOf('/'))
+
         var WpP = $('#wpproperty').text().split('/')
+        console.log(WpP)
+        console.log(WpP[1])
 
         if ( WpP[1] == '불') {
           $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFD5DD")
