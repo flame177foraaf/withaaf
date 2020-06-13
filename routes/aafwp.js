@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
+var $ = require('jquery');
 
 
 const { Client } = require('pg');
