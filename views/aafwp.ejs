@@ -82,7 +82,7 @@
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
-              <% if (item.wpproperty.indexOf('/') != -1){
+              <% if (item.wpproperty.indexOf('/') != -1){ %>
                 <% var WpP = item.wpproperty.split('/') %>
                 <% if ( WpP[1] == ' 불 ') { %>
                   <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD">
