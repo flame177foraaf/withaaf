@@ -23,19 +23,20 @@
     $( document ).ready( function() {
       if ($('#wpproperty').text().indexOf('/') != -1) {
         var WpP = $('#wpproperty').text().split('/')
-        if (WpP[1].indexOf('불') == -1) {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:red")
-        } else if (WpP[1].indexOf('물') == -1) {
+        if (WpP[1].text() == '불') {
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFD5DD")
+        } else if (WpP[1].text() == '물') {
           $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#DBE0FC")
-        } else if (WpP[1].indexOf('바람') == -1) {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:red")
-        } else if (WpP[1].indexOf('땅') == -1) {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:red")
-        } else if (WpP[1].indexOf('정신') == -1) {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:red")
-        } else if (WpP[1].indexOf('아스트랄') == -1) {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:red")
+        } else if (WpP[1].text() == '바람') {
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#CEFFD3")
+        } else if (WpP[1].text() == '땅') {
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#F8EAD8")
+        } else if (WpP[1].text() == '정신') {
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFFFDB")
+        } else if (WpP[1].text() == '아스트랄') {
+          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#E4C1F2")
         }
+
       }
     });
     </script>
