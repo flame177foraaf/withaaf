@@ -75,7 +75,7 @@
 
   </script>
   <script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        
+
   </script>
     <%- include ('head') %>
   <title><%= title%></title>
@@ -306,15 +306,16 @@
                 <% if ( data[l].field_id !== data[0].field_id  ) {continue;}%>
                   <% if (data[0].field_id == '90'){ %>
                     <tr>
-                        <td style= "text-align:center;"></td>
-                        <td><%- data[l].mon_name %></td>
-                        <td><%- data[l].mon_hp %></td>
-                        <td><%- data[l].mon_property %></td>
-                        <td><%- data[l].mon_resist %></td>
-                        <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
-                        <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
-                        <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
-                        <td id =""><%- data[l].mon_skill %></td>
+                      <td ></td>
+                      <td><%- data[l].mon_name %></td>
+                      <td><%- data[l].mon_property %></td>
+                      <td ></td>
+                      <td ></td>
+                      <td><%- data[l].mon_resist %></td>
+                      <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
+                      <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
+                      <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
+                      <td id =""><%- data[l].mon_skill %></td>
                     </tr>
                   <% } else { %>
                     <tr>
@@ -339,15 +340,16 @@
                 </tr>
                 <% if (data[0].field_id == '90'){ %>
                   <tr>
-                      <td style= "text-align:center;"></td>
-                      <td><%- data[l].mon_name %></td>
-                      <td><%- data[l].mon_hp %></td>
-                      <td><%- data[l].mon_property %></td>
-                      <td><%- data[l].mon_resist %></td>
-                      <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
-                      <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
-                      <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
-                      <td id =""><%- data[l].mon_skill %></td>
+                    <td ></td>
+                    <td><%- data[l].mon_name %></td>
+                    <td><%- data[l].mon_property %></td>
+                    <td ></td>
+                    <td ></td>
+                    <td><%- data[l].mon_resist %></td>
+                    <td id ="" style="text-align: center"><%- data[l].mon_common %></td>
+                    <td id ="" style="text-align: center"><%- data[l].mon_uncommon %></td>
+                    <td id ="" style="text-align: center"><%- data[l].mon_rare %></td>
+                    <td id =""><%- data[l].mon_skill %></td>
                   </tr>
                 <% } else { %>
                   <% for( l = 0; l < Data_length; l++) { %>
