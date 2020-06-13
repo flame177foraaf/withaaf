@@ -21,28 +21,27 @@
     <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
     <script type="text/javascript">
     $( document ).ready( function() {
-      if ($('#wpproperty').text().indexOf('/') != -1) {
-        console.log($('#wpproperty').text())
-        console.log($('#wpproperty').text().indexOf('/'))
+      if ($('.wpproperty').text().indexOf('/') != -1) {
+        console.log($('.wpproperty').text())
+        console.log($('.wpproperty').text().indexOf('/'))
 
-        var WpP = $('#wpproperty').text().split('/')
+        var WpP = $('.wpproperty').text().split('/')
         console.log(WpP)
         console.log(WpP[1])
 
         if ( WpP[1] == ' 불 ') {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFD5DD")
+          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFD5DD")
         } else if (WpP[1] == ' 물' ) {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#DBE0FC")
+          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#DBE0FC")
         } else if (WpP[1] == ' 바람 ') {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#CEFFD3")
+          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#CEFFD3")
         } else if (WpP[1] == ' 땅 ') {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#F8EAD8")
+          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#F8EAD8")
         } else if (WpP[1] == ' 정신 ') {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFFFDB")
+          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFFFDB")
         } else if (WpP[1] == ' 아스트랄 ') {
-          $("#tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#E4C1F2")
+          $(".tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#E4C1F2")
         }
-
       }
     });
     </script>
@@ -108,14 +107,14 @@
           <% } else { %>
             <% data.forEach(function(item) { %>
 
-            <tr id="tabletr"style="white-space: pre-line; font-size:12px;">
+            <tr class="tabletr"id=""style="white-space: pre-line; font-size:12px;">
               <td><%- item.wpgrade %></td>
               <td><%- item.wpname %></td>
               <td style='text-align: center'><%- item.wplimit %></td>
               <td style='text-align: center'><%- item.wpsocket %></td>
               <td style='text-align: center'><%- item.wpether %></td>
               <td style='text-align: center'><%- item.wpstats %></td>
-              <td id="wpproperty"><%- item.wpproperty %></td>
+              <td class="wpproperty"id=""><%- item.wpproperty %></td>
               <td><%- item.wpfeat %></td>
               <td><%- item.wpcustom %></td>
             </tr>
