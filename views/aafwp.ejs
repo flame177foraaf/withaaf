@@ -17,6 +17,26 @@
         return true;
       }
     </script>
+
+    <script  src="https://code.jquery.com/jquery-3.5.1.min.js">
+      $( document ).ready( function() {
+        var WpP = $('#wpproperty').text().split('<br>')
+        if (WpP[0].indexOf('불') != -1) {
+          $("tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFD5DD")
+        } else if (WpP[0].indexOf('물') != -1) {
+          $("tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#DBE0FC")
+        } else if (WpP[0].indexOf('바람') != -1) {
+          $("tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#CEFFD3")
+        } else if (WpP[0].indexOf('땅') != -1) {
+          $("tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#F8EAD8")
+        } else if (WpP[0].indexOf('정신') != -1) {
+          $("tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#FFFFDB")
+        } else if (WpP[0].indexOf('아스트랄') != -1) {
+          $("tabletr").attr("style", "white-space: pre-line; font-size:12px; background-color:#E4C1F2")
+        }
+      } );
+    </script>
+
   </head>
   <body style="">
     <div class="title_div" >
@@ -78,14 +98,15 @@
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
-            <tr  style="white-space: pre-line; font-size:12px;">
+
+            <tr id="tabletr"style="white-space: pre-line; font-size:12px;">
               <td><%- item.wpgrade %></td>
               <td><%- item.wpname %></td>
               <td style='text-align: center'><%- item.wplimit %></td>
               <td style='text-align: center'><%- item.wpsocket %></td>
               <td style='text-align: center'><%- item.wpether %></td>
               <td style='text-align: center'><%- item.wpstats %></td>
-              <td><%- item.wpproperty %></td>
+              <td id="wpproperty"><%- item.wpproperty %></td>
               <td><%- item.wpfeat %></td>
               <td><%- item.wpcustom %></td>
             </tr>
