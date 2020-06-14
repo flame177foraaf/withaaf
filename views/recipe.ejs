@@ -46,25 +46,25 @@
     <div class="">
       <table id="eqtable" class="recipetable" style="width:100%;">
         <colgroup>
-          <col width="60" style="text-align: center;">
-          <col width="60" style="text-align: center;">
+          <col width="60" >
+          <col width="60" >
           <col span="">
-          <col width="50">
-          <col span="">
-          <col width="60">
-          <col width="50">
+          <col width="40">
           <col span="">
           <col width="60">
-          <col width="50">
+          <col width="40">
           <col span="">
           <col width="60">
-          <col width="50">
+          <col width="40">
           <col span="">
           <col width="60">
-          <col width="50">
+          <col width="40">
           <col span="">
           <col width="60">
-          <col width="50">
+          <col width="40">
+          <col span="">
+          <col width="60">
+          <col width="40">
           <col span="">
           <col width="60">
 
@@ -107,27 +107,27 @@
           <% } else{ %>
             <% data.forEach(function(item) { %>
             <tr style="white-space: pre-line; font-size:12px;">
-              <td><%- item.recipenum %></td>
-              <td><%- item.collectnum %></td>
+              <td style="text-align: center;"><%- item.recipenum %></td>
+              <td style="text-align: center;"><%- item.collectnum %></td>
               <td id="linehead"><%- item.collectname %></td>
               <td id="line1"><%- item.collect1num %></td>
               <td><%- item.collect1name %></td>
-              <td><%- item.collect1unit %></td>
+              <td style="text-align: center;"><%- item.collect1unit %></td>
               <td id="line2"><%- item.collect2num %></td>
               <td><%- item.collect2name %></td>
-              <td><%- item.collect2unit %></td>
+              <td style="text-align: center;"><%- item.collect2unit %></td>
               <td id="line2"><%- item.collect3num %></td>
               <td><%- item.collect3name %></td>
-              <td><%- item.collect3unit %></td>
+              <td style="text-align: center;"><%- item.collect3unit %></td>
               <td id="line2"><%- item.collect4num %></td>
               <td><%- item.collect4name %></td>
-              <td><%- item.collect4unit %></td>
+              <td style="text-align: center;"><%- item.collect4unit %></td>
               <td id="line2"><%- item.collect5num %></td>
               <td><%- item.collect5name %></td>
-              <td><%- item.collect5unit %></td>
+              <td style="text-align: center;"><%- item.collect5unit %></td>
               <td id="line2"><%- item.collect6num %></td>
               <td><%- item.collect6name %></td>
-              <td><%- item.collect6unit %></td>
+              <td style="text-align: center;"><%- item.collect6unit %></td>
             </tr>
             <% }); %>
           <% } %>
