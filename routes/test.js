@@ -407,6 +407,4 @@ router.get('/ing', (req,res,next) => {
 
   });
 })
-"/test/ing?assembly=%EC%A0%80%EC%8A%A4%ED%8B%B0%EC%8A%A4%20%ED%9E%88%EC%96%B4%EB%A1%9C%20%EC%8A%88%EC%B8%A0&special=checked&reinforce=checked"
-"/test?assembly=%EC%A0%80%EC%8A%A4%ED%8B%B0%EC%8A%A4+%ED%9E%88%EC%96%B4%EB%A1%9C+%EC%8A%88%EC%B8%A0"
 module.exports = router;
