@@ -186,7 +186,7 @@ router.get('/:id', (req,res,next) => {
   if (SearchType === 'name') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpname LIKE $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpname Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -233,7 +233,7 @@ router.get('/:id', (req,res,next) => {
     var CurrentPage = req.params.id
 
 
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpproperty LIKE $1 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpproperty Ilike $1 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -271,7 +271,7 @@ router.get('/:id', (req,res,next) => {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
 
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpfeat LIKE $1  ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpfeat Ilike $1  ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -309,7 +309,7 @@ router.get('/:id', (req,res,next) => {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
 
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpcustom LIKE $1 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpcustom Ilike $1 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;

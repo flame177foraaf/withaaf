@@ -49,7 +49,7 @@ console.log('asdf')
 /*
   if(req.query.searchType === 'name') {
     var searchingtext = req.query.searchText
-    var sqlwp = 'SELECT * FROM aquafwp WHERE wpname LIKE ?' ;
+    var sqlwp = 'SELECT * FROM aquafwp WHERE wpname Ilike ?' ;
     connection.query(sqlwp, "%" + searchingtext + "%",function(err, results, field) {
       res.render('mix', {
         title: '회로굴리기',

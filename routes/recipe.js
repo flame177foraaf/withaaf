@@ -25,7 +25,7 @@ router.get('/:id', (req,res,next) => {
   if (SearchType === 'name') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM  aquafeq.aquafrecipe WHERE collectname LIKE $1 OR collect1name LIKE $1 OR collect2name LIKE $1 OR collect3name LIKE $1 OR collect4name LIKE $1 OR collect5name LIKE $1 OR collect6name LIKE $1 limit 20 offset (($2- 1)*20);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM  aquafeq.aquafrecipe WHERE collectname Ilike $1 OR collect1name Ilike $1 OR collect2name Ilike $1 OR collect3name Ilike $1 OR collect4name Ilike $1 OR collect5name Ilike $1 OR collect6name Ilike $1 limit 20 offset (($2- 1)*20);"
     client.query(QueryString, ['%' + Search + '%',  CurrentPage], (err, response) => {
       if (err) {
         res.redirect('/')

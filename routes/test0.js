@@ -22,7 +22,7 @@ router.get('/:id', (req,res,next) => {
   if (SearchType === 'name') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() FROM aquafeq.aquafrecipe WHERE collectname LIKE $1 OR collect1name LIKE $1 OR collect2name LIKE $1 OR collect3name LIKE $1 OR collect4name LIKE $1 OR collect5name LIKE $1 OR collect6name LIKE $1 limit 20 offset (($2- 1)*20);"
+    var QueryString = "SELECT *, count(*) over() FROM aquafeq.aquafrecipe WHERE collectname Ilike $1 OR collect1name Ilike $1 OR collect2name Ilike $1 OR collect3name Ilike $1 OR collect4name Ilike $1 OR collect5name Ilike $1 OR collect6name Ilike $1 limit 20 offset (($2- 1)*20);"
     client.query(QueryString, ['%' + Search + '%',  CurrentPage], (err, response) => {
       if (err) {
         res.redirect('/')
@@ -75,7 +75,7 @@ router.get('/:id', (req,res,next) => {
   } else if (SearchType === 'number') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectnum LIKE $1 OR collect1num LIKE $1 OR collect2num LIKE $1 OR collect3num LIKE $1 OR collect4num LIKE $1 OR collect5num LIKE $1 OR collect6num LIKE $1 limit 20 offset (($2- 1)*20);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectnum Ilike $1 OR collect1num Ilike $1 OR collect2num Ilike $1 OR collect3num Ilike $1 OR collect4num Ilike $1 OR collect5num Ilike $1 OR collect6num Ilike $1 limit 20 offset (($2- 1)*20);"
     console.log(QueryString)
     client.query(QueryString, ['%' + Search + '%',  CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {

@@ -173,7 +173,7 @@ router.get('/:id', (req,res,next) => {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
 
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accname LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accname Ilike $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -222,7 +222,7 @@ router.get('/:id', (req,res,next) => {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
 
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accfeat LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accfeat Ilike $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -261,7 +261,7 @@ router.get('/:id', (req,res,next) => {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
 
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accproperty LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where accproperty Ilike $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -300,7 +300,7 @@ router.get('/:id', (req,res,next) => {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id
 
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where acccustom LIKE $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc where acccustom Ilike $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;

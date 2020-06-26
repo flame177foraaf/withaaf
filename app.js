@@ -27,7 +27,7 @@ var aafgemRouter = require('./routes/aafgem');
 var aafrecipeRouter = require('./routes/recipe');
 var aafboardRouter = require('./routes/board');
 //var aafrecipeRouter = require('./routes/recipe2');
-//var aaftestRouter = require('./routes/test');
+var aaftestRouter = require('./routes/test');
 var aafmontableRouter =require('./routes/monster');
 
 var assemblewpRouter = require('./routes/Assemblywp');
@@ -75,7 +75,7 @@ app.use('/recipe', aafrecipeRouter);
 
 app.use('/board', aafboardRouter);
 
-//app.use('/test', aaftestRouter);
+app.use('/test', aaftestRouter);
 
 app.use('/monster', aafmontableRouter);
 
