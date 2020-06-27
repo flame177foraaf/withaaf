@@ -210,8 +210,8 @@
                     <% if (CurrentPage > PageSize){ %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                      <a href=" <%- FuncPageurl(1) %>" onclick="" id="MoveFirstpage"> ◀◀ </a>
-                      <a onclick="" id="MovePrepage"> ◀ </a>
+                      <a href=" <%- FuncPageurl(1) %>" id="MoveFirstpage"> ◀◀ </a>
+                      <a href=" <%- FuncPageurl(StartPage-1) %>" onclick="" id="MovePrepage"> ◀ </a>
                     <% } %>
                     <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
                       <% if (iCount == CurrentPage) { %>
@@ -225,8 +225,8 @@
                     <% if (EndPage < TotalPage){ %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                      <a onclick="" id="MoveNextpage">  ▶ </a>
-                      <a onclick="" id="MoveEndpage"> ▶▶ </a>
+                      <a href=" <%- FuncPageurl(EndPage+1) %>" onclick="" id="MoveNextpage">  ▶ </a>
+                      <a href=" <%- FuncPageurl(TotalPage) %>" onclick="" id="MoveEndpage"> ▶▶ </a>
                     <% } %>
                   <% } %>
 
