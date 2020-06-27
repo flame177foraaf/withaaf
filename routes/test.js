@@ -191,9 +191,8 @@ router.get('/:id', (req,res,next) => {
   if (req.query.searchText2 != 'undefined') {
     var Search2 = req.query.searchText2;
     var Search22 = [];
-    console.log(Search2[i])
-    console.log(typeof(Search2))
-    console.log(typeof(Search22))
+    console.log('추가 검색' + Search2)
+    console.log('추가 검색타입 '+ typeof(Search2))
 
     if (typeof(Search2) == 'object') {
       for (var i = 0; i < Search2.length; i++) {
