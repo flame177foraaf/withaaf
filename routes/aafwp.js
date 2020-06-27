@@ -183,25 +183,21 @@ router.post('/fixwp', (req,res,next) => {
 // 일반 검색
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
-  console.log(SearchType);
-
-  console.log(req.query.searchText2);
-  console.log(req.query.searchType2);
   var Search = req.query.searchText;
-  console.log(Search)
   var CurrentPage = req.params.id;
   var SearchPlus = "";
 
   if (req.query.searchText2 != undefined) {
     var Search2 = req.query.searchText2;
-    var Search22 = [];
-    for (var i = 0; i < Search2.length; i++) {
-      Search22.push(Search2[i]) ;
-    }
     var SearchType2 = req.query.searchType2;
-    var SearchType22 = [];
-    for (var i = 0; i < SearchType22.length; i++) {
-      SearchType22.push(SearchType2[i]) ;
+    var Searchcount = req.query.searchText2.length;
+    if (typeof(SearchType2) !== 'object') {
+      var SearchPlus = SearchPlus+ ' AND ' + SearchType2 + ' Ilike ' +" '%"+ Search2 +"%' "
+    } else {
+      for (var i = 0; i < Searchcount; i++) {
+        var SearchPlus = SearchPlus+ ' AND ' + SearchType2[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+
+      }
     }
     var Searchcount = req.query.searchText2.length;
     var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "

@@ -171,7 +171,7 @@
             <tr>
               <div class="" id="pagelist">
                 <td colspan="21" style= "text-align:center; font-size:24px">
-                  <% if (SearchPlus == ""){ %>
+                  <% if (typeof(SearchPlus) === "undefined"){ %>
                     <% if (CurrentPage > PageSize){ %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
