@@ -183,171 +183,81 @@ router.post('/fixwp', (req,res,next) => {
 // 일반 검색
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
-  if (SearchType === 'name') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpname Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
+  console.log(req.query.searchType);
+
+  console.log(req.query.searchText2);
+  console.log(req.query.searchType2);
+  var Search = req.query.searchText;
+  var CurrentPage = req.params.id;
+  if (req.query.searchText2 != undefined) {
+    var Search2 = req.query.searchText2;
+    var SearchType2 = req.query.searchType2;
+    console.log(typeof(SearchType2))
+    var Searchcount = req.query.searchText2.length;
+    console.log(Searchcount)
+    var SearchPlus = "";
+    if (typeof(SearchType2) !== 'object') {
+      var SearchPlus = SearchPlus+ ' AND ' + SearchType2 + ' Ilike ' +" '%"+ Search2 +"%' "
+    } else {
+      for (var i = 0; i < Searchcount; i++) {
+        var SearchPlus = SearchPlus+ ' AND ' + SearchType2[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+
       }
-      //console.log('토탈 카운트 ' + TotalCount)
-      //console.log(CurrentPage)
-      //console.log(typeof(CurrentPage))
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-
-      //console.log('토탈 페이지' + TotalPage);
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      //console.log('스타트페이지' + StartPage);
-
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      //console.log('엔드페이지'+ EndPage);
-      //console.log(response.rows[0])
-      res.render('aafwp', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage: TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-      });
-    });
-  } else if (SearchType === 'property') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id
+    }
 
 
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpproperty Ilike $1 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      res.render('aafwp', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage:TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-
-      });
-    });
-  } else if (SearchType === 'feat') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id
-
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpfeat Ilike $1  ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      res.render('aafwp', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage:TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-
-      });
-    });
-  } else if (SearchType === 'custom') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id
-
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpcustom Ilike $1 ORDER BY wplimit asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      res.render('aafwp', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage:TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-
-      });
-    });
+    //var SearchPlus = 'AND SearchType2.[0] Ilike Search2.[0] AND SearchType2.[1] Ilike Search2.[1] AND SearchType2.[2] Ilike Search2.[2] '
+    console.log(SearchPlus)
+    //SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE wpname Ilike $1  ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10)
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where $3 Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
   } else {
-    res.redirect('/aafwp');
-  };
-})
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where $3 Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
 
+  }
+  client.query(QueryString, ['%' + Search + '%', CurrentPage, SearchType], (err, response) => {
+    console.log(QueryString)
+    if(typeof(response.rows[0]) !== "object") {
+      var TotalCount = 1;
+    } else {
+      var TotalCount = response.rows[0].totalcount;
+    }
+    //console.log('토탈 카운트 ' + TotalCount)
+    //console.log(CurrentPage)
+    //console.log(typeof(CurrentPage))
+    var DataCountInPage = 10;
+    var PageSize = 10;
+    var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+    if (TotalCount % DataCountInPage > 0) {
+      TotalPage++;
+    };
+
+    //console.log('토탈 페이지' + TotalPage);
+    if (TotalPage < CurrentPage) {
+      CurrentPage = TotalPage;
+    };
+    var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
+    //console.log('스타트페이지' + StartPage);
+
+    var EndPage = StartPage + DataCountInPage -1;
+    if (EndPage > TotalPage) {
+      EndPage = TotalPage;
+    };
+    //console.log('엔드페이지'+ EndPage);
+    //console.log(response.rows[0])
+    res.render('aafwp', {
+      title: 'AAF 장비',
+      data: response.rows,
+      CurrentPage: CurrentPage,
+      PageSize: PageSize,
+      StartPage: StartPage,
+      EndPage: EndPage,
+      TotalPage: TotalPage,
+      SearchType: SearchType,
+      Search: Search,
+    });
+  });
+
+})
 
 
 
