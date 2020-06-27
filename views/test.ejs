@@ -48,22 +48,7 @@
 
           aaa.remove(); //tr 테그 삭제
       });
-      if ( Search !== 'undefined') {
-        function FuncPageurl(pagenumber) {
-          var pageurl = "/test/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType
-          return pageurl
-        }
-        if (Searchcount !== 'undefined') {
-          for (var i = 0; i < Searchcount; i++) {
-           pageurl = pageurl + "&searchText2=" + Search22[i]  + "&searchType2=" +  SearchType22[i]
-          }
-        }
-      }
-      $(function(){
-        $('#MoveFirstpage').click(function () {
-          location.href = "'" + FuncPageurl(1) + "'"
-        })
-      })
+
     })
 
 
@@ -210,12 +195,22 @@
                       <a href="/test/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
                     <% } %>
                   <% } else { %>
-
+                    <% if ( Search !== 'undefined') { %>
+                      <% function FuncPageurl(pagenumber) { %>
+                        <% var pageurl = "/test/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
+                        <% if (Searchcount !== 'undefined') { %>
+                          <% for (var i = 0; i < Searchcount; i++) { %>
+                            <% pageurl = pageurl + "&searchText2=" + Search22[i]  + "&searchType2=" +  SearchType22[i] %>
+                          <% } %>
+                        <% } %>
+                        <% return pageurl %>
+                      <% } %>
+                    <% } %>
 
                     <% if (CurrentPage > PageSize){ %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                      <a onclick="" id="MoveFirstpage"> ◀◀ </a>
+                      <a href="FuncPageurl(1)" onclick="" id="MoveFirstpage"> ◀◀ </a>
                       <a onclick="" id="MovePrepage"> ◀ </a>
                     <% } %>
                     <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
