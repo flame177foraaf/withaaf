@@ -186,13 +186,14 @@ router.get('/:id', (req,res,next) => {
   console.log(req.query.searchText2);
   console.log(req.query.searchType2);
   var Search = req.query.searchText;
-  console.log(Search2[i])
   var CurrentPage = req.params.id;
   var SearchPlus = "";
-  console.log(typeof(Search2))
   if (req.query.searchText2 != 'undefined') {
     var Search2 = req.query.searchText2;
     var Search22 = [];
+    console.log(Search2[i])
+    console.log(typeof(Search2))
+    console.log(typeof(Search22))
 
     if (typeof(Search2) == 'object') {
       for (var i = 0; i < Search2.length; i++) {
@@ -201,6 +202,7 @@ router.get('/:id', (req,res,next) => {
     } else if(typeof(Search2) == 'string' ){
         Search22.push(Search2) ;
     }
+    console.log(Search22)
 
     var SearchType2 = req.query.searchType2;
     var SearchType22 = [];
