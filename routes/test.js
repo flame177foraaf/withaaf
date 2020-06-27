@@ -197,7 +197,7 @@ router.get('/:id', (req,res,next) => {
         var SearchPlus = 'AND' + SearchType2.[i] + 'Ilike' + Search2.[i]
         console.log(SearchPlus)
 
-        SearchPlus = + SearchPlus
+        SearchPlus = SearchPlus + SearchPlus
 
       }
       //var SearchPlus = 'AND SearchType2.[0] Ilike Search2.[0] AND SearchType2.[1] Ilike Search2.[1] AND SearchType2.[2] Ilike Search2.[2] '
