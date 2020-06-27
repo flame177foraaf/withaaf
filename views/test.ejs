@@ -16,6 +16,10 @@
         }
         return true;
       }
+      var pageurl = "?searchText=<%- Search %>&searchType=<%- SearchType %>"
+      for (var i = 0; i < Searchcount; i++) {
+       pageurl = pageurl + "&searchText2=<%- Search22[i] %>&searchType2=<%- SearchType22[i] %>"
+      }
     </script>
 
     <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
@@ -187,15 +191,12 @@
                     <% } %>
                   <% } else { %>
 
-                    <% var pageurl = "?searchText=<%- Search %>&searchType=<%- SearchType %>" %>
-                    <% for (var i = 0; i < Searchcount; i++) { %>
-                    <%   pageurl = pageurl + "&searchText2=<%- Search22[i] %>&searchType2=<%- SearchType22[i] %>" %>
-                    <% } %>
+
                     <% if (CurrentPage > PageSize){ %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                      <a href="/test/1<%- pageurl %>"> ◀◀ </a>
-                      <a href="/test/<%- StartPage-1 %><%- pageurl %>"> ◀ </a>
+                      <a href="/test/1<%= pageurl %>"> ◀◀ </a>
+                      <a href="/test/<%- StartPage-1 %><%= pageurl %>"> ◀ </a>
                     <% } %>
                     <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
                       <% if (iCount == CurrentPage) { %>
@@ -203,14 +204,14 @@
                       <% } else { %>
                         <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                        <a href="/test/<%- iCount %><%- pageurl %>" class="btnactive"><%- iCount %></a>
+                        <a href="/test/<%- iCount %><%= pageurl %>" class="btnactive"><%- iCount %></a>
                       <% } %>
                     <% } %>
                     <% if (EndPage < TotalPage){ %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                      <a href="/test/<%- EndPage+1 %><%- pageurl %>">  ▶ </a>
-                      <a href="/test/<%- TotalPage %><%- pageurl %>"> ▶▶ </a>
+                      <a href="/test/<%- EndPage+1 %><%= pageurl %>">  ▶ </a>
+                      <a href="/test/<%- TotalPage %><%= pageurl %>"> ▶▶ </a>
                     <% } %>
                   <% } %>
 

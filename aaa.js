@@ -1,4 +1,5 @@
 var Search2 = [];
+console.log(Search2.length)
 var search3 = ['정신'];
 if (typeof(search3) == 'object') {
   for (var i = 0; i < search3.length; i++) {
