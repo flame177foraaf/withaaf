@@ -263,9 +263,9 @@
     <%- include ('footer')%>
   </footer>
   <script type="text/javascript">
-    var pageurl = "?searchText=<%- Search %>&searchType=<%- SearchType %>"
+    var pageurl = "?searchText=<%= Search %>&searchType=<%= SearchType %>"
     for (var i = 0; i < Searchcount; i++) {
-     pageurl = pageurl + "&searchText2=<%- Search22[i] %>&searchType2=<%- SearchType22[i] %>"
+     pageurl = pageurl + "&searchText2=<%= Search22[i] %>&searchType2=<%= SearchType22[i] %>"
     }
 
   </script>
