@@ -194,10 +194,10 @@ router.get('/:id', (req,res,next) => {
       var Searchcount = req.query.searchText2.length;
       console.log(Searchcount)
       for (var i = 0; i < Searchcount -1; i++) {
-        var SearchPlus = ' AND ' + SearchType2.[i] + 'Ilike' + Search2.[i]
-        console.log(SearchPlus)
+        var SearchPlus = ' AND ' + SearchType2[i] + ' Ilike ' + Search2[i]
 
         SearchPlus = SearchPlus + SearchPlus
+        console.log(SearchPlus)
 
       }
       //var SearchPlus = 'AND SearchType2.[0] Ilike Search2.[0] AND SearchType2.[1] Ilike Search2.[1] AND SearchType2.[2] Ilike Search2.[2] '
