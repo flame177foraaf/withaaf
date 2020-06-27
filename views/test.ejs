@@ -17,7 +17,10 @@
         return true;
       }
       if ( Search != 'undefined') {
-        var pageurl = "?searchText=" + Search + "&searchType=" +  SearchType
+        function FuncPageurl(pagenumber) {
+          var pageurl = "/test/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType
+          return pageurl
+        }
         if (Searchcount != "undefined") {
           for (var i = 0; i < Searchcount; i++) {
            pageurl = pageurl + "&searchText2=" + Search22[i]  + "&searchType2=" +  SearchType22[i]
@@ -26,8 +29,8 @@
       }
 
       $(function(){
-        $('#MoveEndpage').click(function () {
-          location.href = pageurl
+        $('#MoveFirstpage').click(function () {
+          location.href = FuncPageurl(1)
         })
       })
 
@@ -184,6 +187,8 @@
                   <% if (typeof(SearchPlus) === "undefined"){ %>
                     <% if (CurrentPage > PageSize){ %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+                      <a onclick="" id="MoveFirstpage"> ◀◀ </a>
+                      <a onclick="" id="MovePrepage"> ◀ </a>
 
                       <a href="/test/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
                       <a href="/test/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
@@ -218,7 +223,7 @@
                       <% } else { %>
                         <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                        <a href="/test/<%- iCount %><%- pageurl %>" class="btnactive"><%- iCount %></a>
+                        <a class="btnactive" id="MoveNumpage"><%- iCount %></a>
                       <% } %>
                     <% } %>
                     <% if (EndPage < TotalPage){ %>
