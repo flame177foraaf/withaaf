@@ -172,11 +172,12 @@ router.get('/:id', (req,res,next) => {
 
   var Search = req.query.searchText;
   var CurrentPage = req.params.id;
+  var SearchPlus = "";
+
   if (req.query.searchText2 != undefined) {
     var Search2 = req.query.searchText2;
     var SearchType2 = req.query.searchType2;
     var Searchcount = req.query.searchText2.length;
-    var SearchPlus = "";
     if (typeof(SearchType2) !== 'object') {
       var SearchPlus = SearchPlus+ ' AND ' + SearchType2 + ' Ilike ' +" '%"+ Search2 +"%' "
     } else {
@@ -229,6 +230,8 @@ router.get('/:id', (req,res,next) => {
       TotalPage: TotalPage,
       SearchType: SearchType,
       Search: Search,
+      SearchPlus: SearchPlus
+
     });
   });
 

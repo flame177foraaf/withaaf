@@ -163,27 +163,28 @@
             <tr>
               <div class="" id="pagelist">
                 <td colspan="21" style= "text-align:center; font-size:24px">
-                  <% if (CurrentPage > PageSize){ %>
-                    <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-
-                    <a href="/aafwp/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
-                    <a href="/aafwp/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
-                  <% } %>
-                  <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
-                    <% if (iCount == CurrentPage) { %>
-                      <b class="btnnonactive"><%- iCount %></b>
-                    <% } else { %>
+                    <% if (CurrentPage > PageSize){ %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                      <a href="/aafwp/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>" class="btnactive"><%- iCount %></a>
+                      <a href="/aafwp/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
+                      <a href="/aafwp/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
                     <% } %>
-                  <% } %>
-                  <% if (EndPage < TotalPage){ %>
-                    <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+                    <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
+                      <% if (iCount == CurrentPage) { %>
+                        <b class="btnnonactive"><%- iCount %></b>
+                      <% } else { %>
+                        <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                    <a href="/aafwp/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>">  ▶ </a>
-                    <a href="/aafwp/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
-                  <% } %>
+                        <a href="/aafwp/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>" class="btnactive"><%- iCount %></a>
+                      <% } %>
+                    <% } %>
+                    <% if (EndPage < TotalPage){ %>
+                      <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+
+                      <a href="/aafwp/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>">  ▶ </a>
+                      <a href="/aafwp/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
+                    <% } %>
+
                 </td>
               </div>
             </tr>

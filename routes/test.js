@@ -183,32 +183,31 @@ router.post('/fixwp', (req,res,next) => {
 // 일반 검색
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
-  console.log(req.query.searchType);
+  console.log(SearchType);
 
   console.log(req.query.searchText2);
   console.log(req.query.searchType2);
   var Search = req.query.searchText;
+  console.log(Search)
   var CurrentPage = req.params.id;
+  var SearchPlus = "";
+
   if (req.query.searchText2 != undefined) {
     var Search2 = req.query.searchText2;
-    var SearchType2 = req.query.searchType2;
-    console.log(typeof(SearchType2))
-    var Searchcount = req.query.searchText2.length;
-    console.log(Searchcount)
-    var SearchPlus = "";
-    if (typeof(SearchType2) !== 'object') {
-      var SearchPlus = SearchPlus+ ' AND ' + SearchType2 + ' Ilike ' +" '%"+ Search2 +"%' "
-    } else {
-      for (var i = 0; i < Searchcount; i++) {
-        var SearchPlus = SearchPlus+ ' AND ' + SearchType2[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
-
-      }
+    var Search22 = [];
+    for (var i = 0; i < Search2.length; i++) {
+      Search22.push(Search2[i]) ;
     }
+    var SearchType2 = req.query.searchType2;
+    var SearchType22 = [];
+    for (var i = 0; i < SearchType22.length; i++) {
+      SearchType22.push(SearchType2[i]) ;
+    }
+    var Searchcount = req.query.searchText2.length;
+    var SearchPlus = SearchPlus+ ' AND ' + SearchType23[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
 
-
-    //var SearchPlus = 'AND SearchType2.[0] Ilike Search2.[0] AND SearchType2.[1] Ilike Search2.[1] AND SearchType2.[2] Ilike Search2.[2] '
     console.log(SearchPlus)
-    //SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE wpname Ilike $1  ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10)
+
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
   } else {
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
@@ -254,11 +253,17 @@ router.get('/:id', (req,res,next) => {
       TotalPage: TotalPage,
       SearchType: SearchType,
       Search: Search,
+      SearchPlus: SearchPlus,
+      Search2: Search2,
+      Search22: Search22,
+      SearchType2: SearchType2,
+      SearchType22: SearchType22,
+
+
     });
   });
 
 })
-
 
 
 

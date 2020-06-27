@@ -1,18 +1,21 @@
-var Search2 = '정신';
-var Search2 = ['정신', '바람'];
-
-console.log(typeof(Search2))
-var SearchType2 = [ 'wpproperty', 'wpproperty' ];
-var Searchcount = Search2.length;
+var Search2 = [];
+var search3 = ['정신'];
+for (var i = 0; i < search3.length; i++) {
+  Search2.push(search3[i]) ;
+}
+var SearchType2 = [];
+var SearchType23 = [ 'wpproperty' ];
+for (var i = 0; i < search3.length; i++) {
+  SearchType2.push(SearchType23[i]) ;
+}
 
 var SearchPlus = "";
-console.log(Search2)
-console.log(SearchType2[0] )
-if (typeof(Search2) !== 'object') {
-  var SearchPlus = SearchPlus+ ' AND ' + SearchType2[0] + ' Ilike ' +" '%"+ Search2 +"%' "
-} else if (typeof(Search2) === 'object') {
-  for (var i = 0; i < Searchcount; i++) {
-    var SearchPlus = SearchPlus+ ' AND ' + SearchType2[i] + ' Ilike ' +  ' %'+ Search2[i] +'% '
+for (var i = 0; i < SearchType23.length; i++) {
+  if (typeof(Search2) !== '') {
+    var SearchPlus = SearchPlus+ ' AND ' + SearchType23[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+
+  } else if (typeof(Search2) === 'object') {
+    var SearchPlus = SearchPlus+ ' AND ' + SearchType23[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
   }
 }
 console.log(SearchPlus)
