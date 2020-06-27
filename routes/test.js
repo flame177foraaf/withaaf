@@ -193,11 +193,9 @@ router.get('/:id', (req,res,next) => {
       var SearchType2 = req.query.searchType2;
       var Searchcount = req.query.searchText2.length;
       console.log(Searchcount)
-      for (var i = 0; i < Searchcount -1; i++) {
-        var SearchPlus = ' AND ' + SearchType2[i] + ' Ilike ' +' %'+ Search2[i] +'% '
-
-        SearchPlus = SearchPlus + SearchPlus
-        console.log(SearchPlus)
+      var SearchPlus = "";
+      for (var i = 0; i < Searchcount; i++) {
+        var SearchPlus = SearchPlus+ ' AND ' + SearchType2[i] + ' Ilike ' +' %'+ Search2[i] +'% '
 
       }
 
@@ -209,8 +207,8 @@ router.get('/:id', (req,res,next) => {
       var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpname Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
 
     }
-    console.log(QueryString)
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+      console.log(QueryString)
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
