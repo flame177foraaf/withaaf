@@ -208,12 +208,12 @@ router.get('/:id', (req,res,next) => {
     //var SearchPlus = 'AND SearchType2.[0] Ilike Search2.[0] AND SearchType2.[1] Ilike Search2.[1] AND SearchType2.[2] Ilike Search2.[2] '
     console.log(SearchPlus)
     //SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE wpname Ilike $1  ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10)
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE $1 Ilike $2 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($3- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
   } else {
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE $1 Ilike $2 ORDER BY wplimit,wpid asc limit 10 offset (($3- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
 
   }
-  client.query(QueryString, [SearchType, '%' + Search + '%', CurrentPage], (err, response) => {
+  client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
     console.log(QueryString)
     if(typeof(response.rows[0]) !== "object") {
       var TotalCount = 1;
