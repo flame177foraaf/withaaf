@@ -183,11 +183,12 @@ router.post('/fixwp', (req,res,next) => {
 // 일반 검색
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
-  console.log(req.query.searchType);
+  console.log(SearchType);
 
   console.log(req.query.searchText2);
   console.log(req.query.searchType2);
   var Search = req.query.searchText;
+  console.log(Search)
   var CurrentPage = req.params.id;
   if (req.query.searchText2 != undefined) {
     var Search2 = req.query.searchText2;
@@ -204,8 +205,6 @@ router.get('/:id', (req,res,next) => {
 
       }
     }
-
-
     //var SearchPlus = 'AND SearchType2.[0] Ilike Search2.[0] AND SearchType2.[1] Ilike Search2.[1] AND SearchType2.[2] Ilike Search2.[2] '
     console.log(SearchPlus)
     //SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE wpname Ilike $1  ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10)
