@@ -210,7 +210,7 @@
                     <% if (CurrentPage > PageSize){ %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                      <a href="FuncPageurl(1)" onclick="" id="MoveFirstpage"> ◀◀ </a>
+                      <a href=" <%- FuncPageurl(1) %>" onclick="" id="MoveFirstpage"> ◀◀ </a>
                       <a onclick="" id="MovePrepage"> ◀ </a>
                     <% } %>
                     <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
