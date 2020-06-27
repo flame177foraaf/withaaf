@@ -204,7 +204,7 @@ router.get('/:id', (req,res,next) => {
       SearchType22.push(SearchType2[i]) ;
     }
     var Searchcount = req.query.searchText2.length;
-    var SearchPlus = SearchPlus+ ' AND ' + SearchType23[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+    var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
 
     console.log(SearchPlus)
 
