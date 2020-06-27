@@ -186,13 +186,14 @@ router.get('/:id', (req,res,next) => {
   console.log(req.query.searchText2);
   console.log(req.query.searchType2);
   var Search = req.query.searchText;
-  console.log(Search)
+  console.log(Search2[i])
   var CurrentPage = req.params.id;
   var SearchPlus = "";
-
+  console.log(typeof(Search2))
   if (req.query.searchText2 != 'undefined') {
     var Search2 = req.query.searchText2;
     var Search22 = [];
+
     if (typeof(Search2) == 'object') {
       for (var i = 0; i < Search2.length; i++) {
         Search22.push(Search2[i]) ;
