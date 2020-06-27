@@ -20,6 +20,31 @@
 
     <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
     <script type="text/javascript">
+      $(document).on("click","input[name=findadd]",function(){
+
+      var addStaffText =
+      '<div class="" id="seach_form_id2" name="seach_form_id2">'
+      +'<input type="text" placeholder="모든 항목" name="searchText2" style="width:200px">'
+      + '<select name="searchType2">'
+      +    '<option value="wpproperty">속성</option>'
+      +    '<option value="wpfeat">피트</option>'
+      +    '<option value="wpcustom">커스텀</option>'
+      +'</select>'
+      +'<button class="btn btn-default" name="delStaff">삭제</button>'
+      +'</div>'
+      var aaa = $( "div[name=seach_form_id]:last" ); //last를 사용하여 trStaff라는 명을 가진 마지막 태그 호출
+
+      aaa.after(addStaffText); //마지막 trStaff명 뒤에 붙인다.
+
+      });
+
+      //삭제 버튼
+      $(document).on("click","button[name=delStaff]",function(){
+
+          var aaa = $(this).parent();
+
+          aaa.remove(); //tr 테그 삭제
+      });
     </script>
   </head>
   <body style="">
@@ -32,10 +57,10 @@
       <form action="/aafwp/1" method="get">
         <input type="text" placeholder="모든 항목" name="searchText" style="width:200px">
         <select name="searchType">
-            <option value="name">이름</option>
-            <option value="property">속성</option>
-            <option value="feat">피트</option>
-            <option value="custom">커스텀</option>
+            <option value="wpname">이름</option>
+            <option value="wpproperty">속성</option>
+            <option value="wpfeat">피트</option>
+            <option value="wpcustom">커스텀</option>
         </select>
         <input action="" type="submit" class="btn" value="찾기" ></button>
       </form>
@@ -100,7 +125,7 @@
                   <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA">
                 <% } else { %>
                   <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
-                <% } %>                
+                <% } %>
               <% } else { %>
                 <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
               <% } %>
