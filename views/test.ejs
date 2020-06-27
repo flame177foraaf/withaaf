@@ -16,6 +16,14 @@
         }
         return true;
       }
+      if (Search != 'undefined') {
+        var pageurl = "?searchText=" + "<%- Search %>" + "&searchType=" + "<%- SearchType %>"
+        if (Searchcount != "undefined") {
+          for (var i = 0; i < Searchcount; i++) {
+           pageurl = pageurl + "&searchText2=" + "<%- Search22[i] %>" + "&searchType2=" + "<%- SearchType22[i] %>"
+          }
+        }
+      }
     </script>
 
     <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
@@ -263,12 +271,8 @@
     <%- include ('footer')%>
   </footer>
   <script type="text/javascript">
-    var pageurl = "?searchText=" + "<%= Search %>" + "&searchType=" + "<%= SearchType %>"
-    if (Searchcount != "undefined") {
-      for (var i = 0; i < Searchcount; i++) {
-       pageurl = pageurl + "&searchText2=" + "<%= Search22[i] %>" + "&searchType2=" + "<%= SearchType22[i] %>"
-      }
-    }
+
+
 
 
   </script>
