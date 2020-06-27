@@ -184,6 +184,7 @@ router.post('/fixwp', (req,res,next) => {
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   if (SearchType === 'name') {
+    console.log(req.query.searchText2)
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp where wpname Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
