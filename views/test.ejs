@@ -17,10 +17,10 @@
         return true;
       }
       if ( Search != 'undefined') {
-        var pageurl = "?searchText=" + "<%- Search %>" + "&searchType=" + "<%- SearchType %>"
+        var pageurl = "?searchText=" + Search + "&searchType=" +  SearchType
         if (Searchcount != "undefined") {
           for (var i = 0; i < Searchcount; i++) {
-           pageurl = pageurl + "&searchText2=" + "<%- Search22[i] %>" + "&searchType2=" + "<%- SearchType22[i] %>"
+           pageurl = pageurl + "&searchText2=" + Search22[i]  + "&searchType2=" +  SearchType22[i]
           }
         }
       }
