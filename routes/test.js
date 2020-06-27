@@ -186,7 +186,6 @@ router.get('/:id', (req,res,next) => {
   if (SearchType === 'name') {
     console.log(req.query.searchText2);
     console.log(req.query.searchType2);
-    console.log(req.query.searchText2.length)
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
     if (req.query.searchText2 != undefined) {
