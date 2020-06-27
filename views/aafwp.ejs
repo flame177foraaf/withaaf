@@ -163,28 +163,33 @@
             <tr>
               <div class="" id="pagelist">
                 <td colspan="21" style= "text-align:center; font-size:24px">
-                    <% if (CurrentPage > PageSize){ %>
-                      <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-
-                      <a href="/aafwp/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
-                      <a href="/aafwp/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
-                    <% } %>
-                    <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
-                      <% if (iCount == CurrentPage) { %>
-                        <b class="btnnonactive"><%- iCount %></b>
-                      <% } else { %>
-                        <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-
-                        <a href="/aafwp/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>" class="btnactive"><%- iCount %></a>
+                  <% function FuncPageurl(pagenumber) { %>
+                    <% var pageurl = "/aafwp/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
+                    <% if (Searchcount !== 'undefined') { %>
+                      <% for (var i = 0; i < Searchcount; i++) { %>
+                        <% pageurl = pageurl + "&searchText2=" + Search22[i]  + "&searchType2=" +  SearchType22[i] %>
                       <% } %>
                     <% } %>
-                    <% if (EndPage < TotalPage){ %>
+                    <% return pageurl %>
+                  <% } %>
+                  <% if (CurrentPage > PageSize){ %>
+                    <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+                    <a href=" <%- FuncPageurl(1) %>" id="MoveFirstpage"> ◀◀ </a>
+                    <a href=" <%- FuncPageurl(StartPage-1) %>" onclick="" id="MovePrepage"> ◀ </a>
+                  <% } %>
+                  <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
+                    <% if (iCount == CurrentPage) { %>
+                      <b class="btnnonactive"><%- iCount %></b>
+                    <% } else { %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-
-                      <a href="/aafwp/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>">  ▶ </a>
-                      <a href="/aafwp/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
+                      <a href=" <%- FuncPageurl(iCount) %>" class="btnactive" id="MoveNumpage"><%- iCount %></a>
                     <% } %>
-
+                  <% } %>
+                  <% if (EndPage < TotalPage){ %>
+                    <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+                    <a href=" <%- FuncPageurl(EndPage+1) %>" onclick="" id="MoveNextpage">  ▶ </a>
+                    <a href=" <%- FuncPageurl(TotalPage) %>" onclick="" id="MoveEndpage"> ▶▶ </a>
+                  <% } %>
                 </td>
               </div>
             </tr>

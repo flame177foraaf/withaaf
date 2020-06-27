@@ -176,16 +176,34 @@ router.get('/:id', (req,res,next) => {
   var CurrentPage = req.params.id;
   var SearchPlus = "";
 
-  if (req.query.searchText2 != undefined) {
+  if (req.query.searchText2 != 'undefined') {
     var Search2 = req.query.searchText2;
-    var SearchType2 = req.query.searchType2;
-    var Searchcount = req.query.searchText2.length;
-    if (typeof(SearchType2) !== 'object') {
-      var SearchPlus = SearchPlus+ ' AND ' + SearchType2 + ' Ilike ' +" '%"+ Search2 +"%' "
-    } else {
-      for (var i = 0; i < Searchcount; i++) {
-        var SearchPlus = SearchPlus+ ' AND ' + SearchType2[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+    var Search22 = [];
 
+    if (typeof(Search2) == 'object') {
+      for (var i = 0; i < Search2.length; i++) {
+        Search22.push(Search2[i]) ;
+      }
+    } else if(typeof(Search2) == 'string' ){
+        Search22.push(Search2) ;
+    }
+    // 포 문 에서 search2 배열의 각각의 값중에서 빈 값이 있는 경우 빈 배열에 넣지않고 그냥 넘어가는 작업을 해야함, 이에 따라 아래의 타입 배열에 넣는 경우에서도 동일함
+
+    var SearchType2 = req.query.searchType2;
+    var SearchType22 = [];
+    if (typeof(SearchType2) == 'object') {
+      for (var i = 0; i < Search2.length; i++) {
+        SearchType22.push(SearchType2[i]) ;
+      }
+    } else if(typeof(SearchType2) == 'string' ){
+      SearchType22.push(SearchType2) ;
+    }
+    var Searchcount = Search22.length;
+    if (typeof(SearchType2) == 'string') {
+      var SearchPlus = SearchPlus+ ' AND ' + SearchType22+ ' Ilike ' +" '%"+ Search2 +"%' "
+    } else if (typeof(SearchType2) == 'object') {
+      for (var i = 0; i < Searchcount; i++) {
+        var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
       }
     }
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
@@ -232,7 +250,12 @@ router.get('/:id', (req,res,next) => {
       TotalPage: TotalPage,
       SearchType: SearchType,
       Search: Search,
-      SearchPlus: SearchPlus
+      SearchPlus: SearchPlus,
+      Search2: Search2,
+      Search22: Search22,
+      SearchType2: SearchType2,
+      SearchType22: SearchType22,
+      Searchcount:Searchcount
 
     });
   });
