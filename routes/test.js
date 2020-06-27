@@ -195,19 +195,27 @@ router.get('/:id', (req,res,next) => {
   if (req.query.searchText2 != undefined) {
     var Search2 = req.query.searchText2;
     var Search22 = [];
-    for (var i = 0; i < Search2.length; i++) {
-      Search22.push(Search2[i]) ;
+    if (typeof(Search2) == 'object') {
+      for (var i = 0; i < Search2.length; i++) {
+        Search2.push(Search2[i]) ;
+      }
+    } else if(typeof(Search2) == 'string' ){
+        Search2.push(Search2) ;
     }
+
     var SearchType2 = req.query.searchType2;
     var SearchType22 = [];
-    for (var i = 0; i < SearchType22.length; i++) {
-      SearchType22.push(SearchType2[i]) ;
+    if (typeof(SearchType2) == 'object') {
+      for (var i = 0; i < Search2.length; i++) {
+        SearchType22.push(SearchType2[i]) ;
+      }
+    } else if(typeof(SearchType2) == 'string' ){
+      SearchType22.push(SearchType2) ;
     }
-    var Searchcount = req.query.searchText2.length;
+    var Searchcount = Search22.length;
     var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
 
     console.log(SearchPlus)
-
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
   } else {
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
