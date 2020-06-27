@@ -186,10 +186,11 @@
                       <a href="/test/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
                     <% } %>
                   <% } else { %>
-                    var pageurl = "?searchText=<%- Search %>&searchType=<%- SearchType %>"
-                    for (var i = 0; i < Search2.length; i++) {
-                      pageurl = pageurl + "&searchText2=<%- Search22[i] %>&searchType2=<%- SearchType22[i] %>"
-                    }
+
+                    <% var pageurl = "?searchText=<%- Search %>&searchType=<%- SearchType %>" %>
+                    <% for (var i = 0; i < Searchcount; i++) { %>
+                    <%   pageurl = pageurl + "&searchText2=<%- Search22[i] %>&searchType2=<%- SearchType22[i] %>" %>
+                    <% } %>
                     <% if (CurrentPage > PageSize){ %>
                       <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 

@@ -197,10 +197,10 @@ router.get('/:id', (req,res,next) => {
     var Search22 = [];
     if (typeof(Search2) == 'object') {
       for (var i = 0; i < Search2.length; i++) {
-        Search2.push(Search2[i]) ;
+        Search22.push(Search2[i]) ;
       }
     } else if(typeof(Search2) == 'string' ){
-        Search2.push(Search2) ;
+        Search22.push(Search2) ;
     }
 
     var SearchType2 = req.query.searchType2;
@@ -266,7 +266,7 @@ router.get('/:id', (req,res,next) => {
       Search22: Search22,
       SearchType2: SearchType2,
       SearchType22: SearchType22,
-
+      Searchcount:Searchcount
 
     });
   });
