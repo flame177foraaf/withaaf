@@ -251,9 +251,7 @@ router.get('/:id', (req,res,next) => {
       Search: Search,
       SearchPlus: SearchPlus,
       Search2: Search2,
-      Search22: Search22,
       SearchType2: SearchType2,
-      SearchType22: SearchType22,
 
 
     });
