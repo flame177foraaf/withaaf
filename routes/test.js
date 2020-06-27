@@ -183,8 +183,6 @@ router.post('/fixwp', (req,res,next) => {
 // 일반 검색
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
-  console.log(SearchType);
-
   console.log(req.query.searchText2);
   console.log(req.query.searchType2);
   var Search = req.query.searchText;
@@ -192,7 +190,7 @@ router.get('/:id', (req,res,next) => {
   var CurrentPage = req.params.id;
   var SearchPlus = "";
 
-  if (req.query.searchText2 != undefined) {
+  if (req.query.searchText2 != 'undefined') {
     var Search2 = req.query.searchText2;
     var Search22 = [];
     if (typeof(Search2) == 'object') {
