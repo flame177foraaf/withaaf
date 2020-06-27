@@ -214,7 +214,9 @@ router.get('/:id', (req,res,next) => {
       SearchType22.push(SearchType2) ;
     }
     var Searchcount = Search22.length;
-    var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+    for (var i = 0; i < Searchcount; i++) {
+      var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+    }
 
     console.log(SearchPlus)
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
