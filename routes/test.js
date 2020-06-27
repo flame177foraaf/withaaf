@@ -192,13 +192,19 @@ router.get('/:id', (req,res,next) => {
   if (req.query.searchText2 != undefined) {
     var Search2 = req.query.searchText2;
     var SearchType2 = req.query.searchType2;
+    console.log(typeof(SearchType2))
     var Searchcount = req.query.searchText2.length;
     console.log(Searchcount)
     var SearchPlus = "";
-    for (var i = 0; i < Searchcount; i++) {
-      var SearchPlus = SearchPlus+ ' AND ' + SearchType2[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+    if (typeof(SearchType2) !== 'object') {
+      var SearchPlus = SearchPlus+ ' AND ' + SearchType2 + ' Ilike ' +" '%"+ Search2 +"%' "
+    } else {
+      for (var i = 0; i < Searchcount; i++) {
+        var SearchPlus = SearchPlus+ ' AND ' + SearchType2[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
 
+      }
     }
+
 
     //var SearchPlus = 'AND SearchType2.[0] Ilike Search2.[0] AND SearchType2.[1] Ilike Search2.[1] AND SearchType2.[2] Ilike Search2.[2] '
     console.log(SearchPlus)
