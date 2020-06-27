@@ -200,7 +200,6 @@ router.get('/:id', (req,res,next) => {
       }
     }
     var Searchcount = req.query.searchText2.length;
-    var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
 
     console.log(SearchPlus)
 
