@@ -171,177 +171,70 @@ router.post('/fixarm', (req,res,next) => {
 
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
-  if (SearchType === 'name') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id;
 
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armname Ilike $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
+  var Search = req.query.searchText;
+  var CurrentPage = req.params.id;
+  if (req.query.searchText2 != undefined) {
+    var Search2 = req.query.searchText2;
+    var SearchType2 = req.query.searchType2;
+    var Searchcount = req.query.searchText2.length;
+    var SearchPlus = "";
+    if (typeof(SearchType2) !== 'object') {
+      var SearchPlus = SearchPlus+ ' AND ' + SearchType2 + ' Ilike ' +" '%"+ Search2 +"%' "
+    } else {
+      for (var i = 0; i < Searchcount; i++) {
+        var SearchPlus = SearchPlus+ ' AND ' + SearchType2[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+
       }
-      console.log(TotalCount)
-      if (TotalCount === undefined) {
-        TotalCount = 1;
-      }
-      console.log('토탈 카운트 ' + TotalCount)
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-
-      console.log('토탈 페이지' + TotalPage);
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      console.log('스타트페이지' + StartPage);
-
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      console.log('엔드페이지'+ EndPage);
-
-      res.render('aafarm', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage: TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-
-      });
-    });
-  } else if (SearchType === 'feat') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id
-
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armfeat Ilike $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      console.log(TotalCount)
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      res.render('aafarm', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage:TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-
-      });
-    });
-  } else if (SearchType === 'custom') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armcustom Ilike $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      console.log(TotalCount)
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      res.render('aafarm', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage:TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-
-      });
-    });
-  } else if (SearchType === 'property') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm where armproperty Ilike $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      console.log(TotalCount)
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      res.render('aafarm', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage:TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-
-      });
-    });
+    }
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
   } else {
-    res.redirect('/aafarm');
-  };
-});
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE "+ SearchType +" Ilike $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
 
+  }
+  client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+    if(typeof(response.rows[0]) !== "object") {
+      var TotalCount = 1;
+    } else {
+      var TotalCount = response.rows[0].totalcount;
+    }
+    //console.log('토탈 카운트 ' + TotalCount)
+    //console.log(CurrentPage)
+    //console.log(typeof(CurrentPage))
+    var DataCountInPage = 10;
+    var PageSize = 10;
+    var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+    if (TotalCount % DataCountInPage > 0) {
+      TotalPage++;
+    };
+
+    //console.log('토탈 페이지' + TotalPage);
+    if (TotalPage < CurrentPage) {
+      CurrentPage = TotalPage;
+    };
+    var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
+    //console.log('스타트페이지' + StartPage);
+
+    var EndPage = StartPage + DataCountInPage -1;
+    if (EndPage > TotalPage) {
+      EndPage = TotalPage;
+    };
+    //console.log('엔드페이지'+ EndPage);
+    //console.log(response.rows[0])
+    res.render('aafarm', {
+      title: 'AAF 장비',
+      data: response.rows,
+      CurrentPage: CurrentPage,
+      PageSize: PageSize,
+      StartPage: StartPage,
+      EndPage: EndPage,
+      TotalPage: TotalPage,
+      SearchType: SearchType,
+      Search: Search,
+    });
+  });
+
+})
 
 
 
