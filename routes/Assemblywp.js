@@ -71,7 +71,7 @@ router.get('/ing', (req,res,next) => {
       console.log(Allcustom);
       console.log(typeof(Allcustom));
 
-      if (Allcustom === "null") {
+      if (Allcustom == null) {
         var result_custom = "재조립할 커스텀이 없네요~_~";
 
       } else {
