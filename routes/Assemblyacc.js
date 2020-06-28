@@ -176,14 +176,15 @@ router.get('/ing', (req,res,next) => {
 
       var Allcustom = response.rows[0].acccustom;
       //console.log(Allcustom);
-      var eqcustom = Allcustom.split('<br />');
-      var result_custom = 'null';
 
 
       if (Allcustom === "") {
         var result_custom = "재조립할 커스텀이 없네요~_~";
 
       } else {
+        var eqcustom = Allcustom.split('<br />');
+        var result_custom = 'null';
+
         for (var i = 0; i < eqcustom.length; i++) {
 
           if (eqcustom[i].indexOf('[') === -1) {

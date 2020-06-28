@@ -87,14 +87,15 @@ router.get('/ing', (req,res,next) => {
 
       var Allcustom = response.rows[0].armcustom;
       //console.log(Allcustom);
-      var eqcustom = Allcustom.split('<br />');
-      var result_custom = 'null';
+
 
 
       if (Allcustom === "") {
         var result_custom = "재조립할 커스텀이 없네요~_~";
 
       } else {
+        var eqcustom = Allcustom.split('<br />');
+        var result_custom = 'null';
         for (var i = 0; i < eqcustom.length; i++) {
 
           if (eqcustom[i].indexOf('[') === -1) {
@@ -118,7 +119,7 @@ router.get('/ing', (req,res,next) => {
                   cus_per_1 = 100;
                 }
               }
-              
+
               var cus_per_2 = Math.floor(Math.random() * 100) + 1
 
               if (cus_per_2 <= cus_per_1) {
