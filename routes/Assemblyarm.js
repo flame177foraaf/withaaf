@@ -234,7 +234,10 @@ router.get('/ing', (req,res,next) => {
       var Allsocket = response.rows[0].armsocket
       //console.log("소켓" + testsocket.length)
       //console.log("소켓 구분" + testsocket.indexOf("~"))
-      if (Allsocket.indexOf("~") == -1) {
+      if (Allsocket == null) {
+        var result_socket = '돌릴 소켓이 정확하지 않아요 ~_~' ;
+
+      } else if (Allsocket.indexOf("~") == -1) {
         var socket = "";
 
         for (var i = 0; i < Allsocket; i++) {
