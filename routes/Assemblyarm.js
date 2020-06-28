@@ -90,7 +90,7 @@ router.get('/ing', (req,res,next) => {
 
 
 
-      if (Allcustom === "") {
+      if (Allcustom === "null") {
         var result_custom = "재조립할 커스텀이 없네요~_~";
 
       } else {
