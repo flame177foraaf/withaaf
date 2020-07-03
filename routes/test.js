@@ -100,7 +100,7 @@ router.post('/comment', (req, res, next) => {
     client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
       console.log('우와아?!')
 
-      res.redirect('/ '+ Fbid)
+      res.redirect('/'Fbid)
     });
   })
 });

@@ -93,15 +93,18 @@
       </table>
     </div>
     <div class="" id="comment_list">
-      <% if(typeof(data_comment[0]) !== 'undefined'){ %>
-        <% data_comment.forEach(function(item_comment) { %>
-        <tr>
-          <td><%- item_comment.writer %></td>
-          <td><%- item_comment.body %></td>
-          <td><%- item_comment.time %></td>
-        </tr>
-        <% }) %>
-      <% } %>
+      <table>
+        <% if(typeof(data_comment[0]) !== 'undefined'){ %>
+          <% data_comment.forEach(function(item_comment) { %>
+          <tr>
+            <td><%- item_comment.writer %></td>
+            <td><%- item_comment.body %></td>
+            <td><%- item_comment.time %></td>
+          </tr>
+          <% }) %>
+        <% } %>
+      </table>
+
 
     </div>
     <div class="">
