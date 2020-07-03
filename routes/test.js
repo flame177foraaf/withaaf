@@ -49,7 +49,7 @@ router.get('/write', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   var fbid = req.params.id;
-  client.query("SELECT fbid, fbtitle, fbbody, fbname, fbcreatedat FROM aquafeq.freeboard WHERE fbid=$1", [fbid], (err, response) => {
+  client.query("SELECT * FROM aquafeq.freeboard WHERE fbid=$1", [fbid], (err, response) => {
     client.query("SELECT * FROM aquafeq.fb_comment WHERE fbid=$1", [fbid], (err, response_comment) => {
 
       res.render('testshowboard', {
