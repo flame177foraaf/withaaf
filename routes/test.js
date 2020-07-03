@@ -111,8 +111,8 @@ router.post('/comment', (req, res, next) => {
     client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
       Count_Comment = Count_Comment+1;
       console.log(Count_Comment)
-      var QueryString = "UPDATE aquafeq.freeboard SET commentcount = $1 where fbid = Fbid;"
-      client.query(QueryString, [Count_Comment], (err, response) => {
+      var QueryString = "UPDATE aquafeq.freeboard SET commentcount = $1 where fbid = $2"
+      client.query(QueryString, [Count_Comment, Fbid], (err, response) => {
         res.redirect(url)
       });
     });
