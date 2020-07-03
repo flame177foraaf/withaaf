@@ -8,12 +8,16 @@
     <style media="screen" >
       #showboardtable {
         width: 100%;
+        font-size: 18px;
       }
-      #showboardtable td {
+      #showboardtable tr td {
         padding: 10px;
         border-bottom: 1px solid #ccc;
         white-space:pre-wrap;
 
+      }
+      #showboardtable td:first-of-type {
+        text-align: center;
       }
       #showboardtabletitles td {
         text-align:center;
@@ -92,14 +96,14 @@
 
       </table>
     </div>
-    <div class="" id="comment_list">
+    <div class="" id="comment_list" style="margin-left:10%; margin-right:10%">
       <table>
         <% if(typeof(data_comment[0]) !== 'undefined'){ %>
           <% data_comment.forEach(function(item_comment) { %>
-          <tr>
-            <td><%- item_comment.writer %></td>
-            <td><%- item_comment.body %></td>
-            <td><%- item_comment.time %></td>
+          <tr style="">
+            <td style="width:15%; border-bottom: 1px solid #ccc"><%- item_comment.writer %></td>
+            <td style="width:70%; border-bottom: 1px solid #ccc"><%- item_comment.body %></td>
+            <td style="width:15%; border-bottom: 1px solid #ccc"><%- item_comment.time %></td>
           </tr>
           <% }) %>
         <% } %>
@@ -120,7 +124,7 @@
             </div>
 
             <div class="" style="position: relative; float:right" >
-              <input   id="comment_submit" style="line-height:25px;" type="submit" name="작성하기" value="작성하기" />
+              <input   id="comment_submit" style="line-height:25px;" type="submit" name="작성하기" value="댓글 작성" />
 
             </div>
           </form>
