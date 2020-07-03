@@ -37,6 +37,9 @@
           success: function(data) {
             var subcomment = '<tr> <td>' + data.writer + '</td> <td> ' + data.body + '</td> <td> '+ data.time +'</td> </tr>'
             $('#comment_list').append(subcomment);
+            alert("Data Loaded: " + data);
+            console.log("Data Loaded: " + data);
+
           }
         });
       })
