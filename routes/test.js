@@ -93,12 +93,11 @@ router.post('/comment', (req, res, next) => {
   Count_Comment = parseInt(Count_Comment)
   console.log(Count_Comment)
 
-
   var url ='/test/'+Fbid
   console.log(Comment_body)
   console.log(Comment_writer)
   console.log(Count_Comment)
-  console.log(typeOf(Count_Comment))
+  console.log(typeof(Count_Comment))
   console.log(Fbid)
   console.log(url)
 
