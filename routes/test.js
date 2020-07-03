@@ -18,6 +18,8 @@ client.connect();
 router.get('/', (req,res, next) => {
   var psql = "SELECT * FROM aquafeq.freeboard ORDER BY fbid DESC"
   client.query(psql, (err, response) => {
+    console.log(response)
+
       res.render('test', {
         title: '자유게시판',
         data: response.rows
