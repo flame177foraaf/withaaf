@@ -97,6 +97,7 @@ router.post('/comment', (req, res, next) => {
   console.log(Comment_body)
   console.log(Comment_writer)
   console.log(Count_Comment)
+  console.log(typeOf(Count_Comment))
   console.log(Fbid)
   console.log(url)
 
@@ -108,7 +109,7 @@ router.post('/comment', (req, res, next) => {
     client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
       Count_Comment = Count_Comment+1;
       console.log(Count_Comment)
-      var QueryString = "UPDATE SET aquafeq.freeboard (commentcount) = ($1) returning *;"
+      var QueryString = "UPDATE SET aquafeq.freeboard (commentcount);"
       client.query(QueryString, [Count_Comment], (err, response) => {
         res.redirect(url)
       });
