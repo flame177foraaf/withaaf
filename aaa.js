@@ -1,10 +1,5 @@
-var ttt = 67
 
- function FuncPageurl(pagenumber) {
-   var pageurl = "/test/" + pagenumber + "?searchText=" + 'a' + "&searchType=" +  'b'
+var Fbid =     156;
 
-   return pageurl
-
-
- }
-console.log(FuncPageurl(ttt-1))
+var url = '/test/'+Fbid
+console.log(url)

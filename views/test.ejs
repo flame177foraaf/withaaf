@@ -70,11 +70,11 @@
           <li>
             <ul>
               <li><%- item.fbid %></li>
-              <% if(item.commentcount == '' || item.commentcount =='0'){  %>
-                <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a></li>
+              <% if(item.commentcount !== '' || item.commentcount !== '0'){  %>
+                <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a> [<%- item.commentcount %>]</li>
 
               <% } else { %>
-                <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a> [<%- item.commentcount %>]</li>
+                <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a></li>
 
               <% } %>
               <li><%- item.fbname %></li>
