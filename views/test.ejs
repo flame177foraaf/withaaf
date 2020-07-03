@@ -66,10 +66,16 @@
             </ul>
           </li>
           <% data.forEach(function(item) { %>
+
           <li>
             <ul>
               <li><%- item.fbid %></li>
-              <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a> [<%- item.commentcount %>]</li>
+              <% if(item.commentcount == 'undefined'){  %>
+                <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a> [<%- item.commentcount %>]</li>
+
+              <% } else { %>
+                <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a></li>
+              <% } %>
               <li><%- item.fbname %></li>
               <li><%- item.fbcreatedat %></li>
             </ul>
