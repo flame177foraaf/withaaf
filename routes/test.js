@@ -18,13 +18,10 @@ client.connect();
 router.get('/', (req,res, next) => {
   var psql = "SELECT * FROM aquafeq.freeboard ORDER BY fbid DESC"
   client.query(psql, (err, response) => {
-    client.query("SELECT fbid, COUNT(*) FROM aquafeq.fb_comment GROUP BY fbid HAVING COUNT(*)>0", [fbid], (err, response_comment) => {
-
       res.render('test', {
         title: '자유게시판',
         data: response.rows
       });
-    });
   });
 });
 
@@ -53,10 +50,13 @@ router.get('/write', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   var fbid = req.params.id;
   client.query("SELECT fbid, fbtitle, fbbody, fbname, fbcreatedat FROM aquafeq.freeboard WHERE fbid=$1", [fbid], (err, response) => {
+    client.query("SELECT * FROM aquafeq.fb_comment WHERE fbid=$1", [fbid], (err, response_comment) => {
+
       res.render('testshowboard', {
         data: response.rows[0],
         data_comment: response_comment.rows
       });
+    });
   });
 });
 
