@@ -52,10 +52,11 @@ router.get('/:id', (req, res, next) => {
   client.query("SELECT fbid, fbtitle, fbbody, fbname, fbcreatedat FROM aquafeq.freeboard WHERE fbid=$1", [fbid], (err, response) => {
     client.query("SELECT * FROM aquafeq.fb_comment WHERE fbid=$1", [fbid], (err, response_comment) => {
 
-    res.render('testshowboard', {
-      data: response.rows[0],
-      data_comment: response_comment.rows
-    });
+      res.render('testshowboard', {
+        data: response.rows[0],
+        data_comment: response_comment.rows
+      });
+    });  
   });
 });
 
