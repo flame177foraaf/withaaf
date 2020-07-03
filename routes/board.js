@@ -18,10 +18,17 @@ client.connect();
 router.get('/', (req,res, next) => {
   var psql = "SELECT * FROM aquafeq.freeboard ORDER BY fbid DESC"
   client.query(psql, (err, response) => {
-    res.render('board', {
-      title: '자유게시판',
-      data: response.rows
-    });
+    var psql2 = "SELECT * FROM aquafeq.fb_comment"
+    click.query(psql2, (err, responsecommentlength ) => {
+
+      res.render('board', {
+        title: '자유게시판',
+        data: response.rows
+        
+      });
+
+    })
+
   });
 });
 

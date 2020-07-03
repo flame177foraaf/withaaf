@@ -18,9 +18,12 @@ client.connect();
 router.get('/', (req,res, next) => {
   var psql = "SELECT * FROM aquafeq.freeboard ORDER BY fbid DESC"
   client.query(psql, (err, response) => {
-    res.render('test', {
-      title: '자유게시판',
-      data: response.rows
+    client.query("SELECT fbid, COUNT(*) FROM aquafeq.fb_comment GROUP BY fbid HAVING COUNT(*)>0", [fbid], (err, response_comment) => {
+
+      res.render('test', {
+        title: '자유게시판',
+        data: response.rows
+      });
     });
   });
 });
@@ -50,13 +53,10 @@ router.get('/write', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   var fbid = req.params.id;
   client.query("SELECT fbid, fbtitle, fbbody, fbname, fbcreatedat FROM aquafeq.freeboard WHERE fbid=$1", [fbid], (err, response) => {
-    client.query("SELECT * FROM aquafeq.fb_comment WHERE fbid=$1", [fbid], (err, response_comment) => {
-
       res.render('testshowboard', {
         data: response.rows[0],
         data_comment: response_comment.rows
       });
-    });
   });
 });
 
@@ -86,22 +86,29 @@ router.post('/comment', (req, res, next) => {
   var Comment_body = req.body.comment_box;
   var Comment_writer = req.body.comment_writer;
   var Fbid = req.body.fbid;
+  var Count_Comment = req.body.commentcount
+  if (Count_Comment == 'undefined') {
+    Count_Comment = 0;
+  }
   var url = '/test/'+Fbid
   console.log(Comment_body)
   console.log(Comment_writer)
+  console.log(Count_Comment)
   console.log(Fbid)
+  console.log(url)
 
 
-  console.log('포스트 성공!')
   Comment_body = Comment_body.replace(/(?:\r\n|\r|\n)/g, '<br />');
   var QueryString = "set timezone TO 'Asia/Seoul'";
   client.query(QueryString, (err,response) => {
-    console.log('여기까지 성공?!')
     var QueryString = "INSERT INTO aquafeq.fb_comment(fbid, writer, body, time) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI'));"
     client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
-      console.log('우와아?!')
-
-      res.redirect(url)
+      Count_Comment = Count_Comment+1;
+      console.log(Count_Comment)
+      var QueryString = "INSERT INTO aquafeq.freeboard (commentcount) values ($1);"
+      client.query(QueryString, [Count_Comment], (err, response) => {
+        res.redirect(url)
+      });
     });
   })
 });
