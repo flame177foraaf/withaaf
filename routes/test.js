@@ -86,6 +86,11 @@ router.post('/comment', (req, res, next) => {
   var Comment_body = req.body.comment_box;
   var Comment_writer = req.body.comment_writer
   var Fbid = req.body.fbid;
+  console.log(Comment_body)
+  console.log(Comment_writer)
+  console.log(Fbid)
+
+
   console.log('포스트 성공!')
   Comment_body = Comment_body.replace(/(?:\r\n|\r|\n)/g, '<br />');
   var QueryString = "set timezone TO 'Asia/Seoul'";
