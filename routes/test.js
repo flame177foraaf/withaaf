@@ -84,7 +84,7 @@ router.post('/', (req, res, next) => {
 
 router.post('/comment', (req, res, next) => {
   var Comment_body = req.body.comment_box;
-  var Comment_writer = req.body.comment_writer
+  var Comment_writer = req.body.comment_writer;
   var Fbid = req.body.fbid;
   console.log(Comment_body)
   console.log(Comment_writer)
