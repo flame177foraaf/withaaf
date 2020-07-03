@@ -49,10 +49,13 @@ router.get('/write', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   var fbid = req.params.id;
-  client.query("SELECT fbid, fbtitle, fbbody, fbname, fbcreatedat FROM aquafeq.freeboard WHERE fbid=$1", [fbid], (err, response) => {
-    console.log( )
-    res.render('showboard', {
-      data: response.rows[0]
+  client.query("SELECT * FROM aquafeq.freeboard WHERE fbid=$1", [fbid], (err, response) => {
+    client.query("SELECT * FROM aquafeq.fb_comment WHERE fbid=$1", [fbid], (err, response_comment) => {
+
+      res.render('showboard', {
+        data: response.rows[0],
+        data_comment: response_comment.rows
+      });
     });
   });
 });
@@ -79,4 +82,38 @@ router.post('/', (req, res, next) => {
 
 });
 
+router.post('/comment', (req, res, next) => {
+  var Comment_body = req.body.comment_box;
+  var Comment_writer = req.body.comment_writer;
+  var Fbid =req.body.fbid;
+  var Count_Comment = req.body.commentcount;
+  if (Count_Comment == null) {
+    Count_Comment = 0;
+  }
+  Count_Comment = parseInt(Count_Comment)
+  console.log(Count_Comment)
+
+  var url ='/board/'+Fbid
+  console.log(Comment_body)
+  console.log(Comment_writer)
+  console.log(Count_Comment)
+  console.log(typeof(Count_Comment))
+  console.log(Fbid)
+  console.log(url)
+
+
+  Comment_body = Comment_body.replace(/(?:\r\n|\r|\n)/g, '<br />');
+  var QueryString = "set timezone TO 'Asia/Seoul'";
+  client.query(QueryString, (err,response) => {
+    var QueryString = "INSERT INTO aquafeq.fb_comment(fbid, writer, body, time) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI'));"
+    client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
+      Count_Comment = Count_Comment+1;
+      console.log(Count_Comment)
+      var QueryString = "UPDATE aquafeq.freeboard SET commentcount = $1 where fbid = $2"
+      client.query(QueryString, [Count_Comment, Fbid], (err, response) => {
+        res.redirect(url)
+      });
+    });
+  })
+});
 module.exports = router;

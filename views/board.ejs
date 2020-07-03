@@ -65,16 +65,20 @@
               <li>작성시간</li>
             </ul>
           </li>
-          <% data.forEach(function(item) { %>
-          <li>
-            <ul>
-              <li><%- item.fbid %></li>
-              <li><a href="/board/<%- item.fbid %>"><%- item.fbtitle %></a></li>
-              <li><%- item.fbname %></li>
-              <li><%- item.fbcreatedat %></li>
-            </ul>
-          </li>
-          <% }); %>
+          <% for (var i = 0; i < data.length; i++) {  %>
+            <li>
+              <ul>
+                <li><%- data[i].fbid %></li>
+                <% if(data[i].commentcount != '0' ){  %>
+                  <li><a href="/board/<%- data[i].fbid %>"><%- data[i].fbtitle %></a> [<%- data[i].commentcount %>]</li>
+                <% } else { %>
+                  <li><a href="/board/<%- data[i].fbid %>"><%- data[i].fbtitle %></a></li>
+                <% } %>
+                <li><%- data[i].fbname %></li>
+                <li><%- data[i].fbcreatedat %></li>
+              </ul>
+            </li>
+          <% }; %>
         </ul>
       </li>
     </div>
