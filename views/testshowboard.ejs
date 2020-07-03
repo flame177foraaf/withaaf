@@ -96,11 +96,11 @@
 
       </table>
     </div>
-    <div class="" id="comment_list" style="margin-left:10%; margin-right:10%">
-      <table>
+    <div class="" id="comment_list" style="margin-left:10%; margin-right:10%; margin-top:10px">
+      <table style="width:100%;   border-spacing: 5 5px;">
         <% if(typeof(data_comment[0]) !== 'undefined'){ %>
           <% data_comment.forEach(function(item_comment) { %>
-          <tr style="">
+          <tr style="mag">
             <td style="width:15%; border-bottom: 1px solid #ccc"><%- item_comment.writer %></td>
             <td style="width:70%; border-bottom: 1px solid #ccc"><%- item_comment.body %></td>
             <td style="width:15%; border-bottom: 1px solid #ccc"><%- item_comment.time %></td>
