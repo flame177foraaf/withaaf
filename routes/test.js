@@ -105,7 +105,7 @@ router.post('/comment', (req, res, next) => {
     client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
       Count_Comment = Count_Comment+1;
       console.log(Count_Comment)
-      var QueryString = "INSERT INTO aquafeq.freeboard (commentcount) values ($1);"
+      var QueryString = "UPDATE SET aquafeq.freeboard (commentcount) = ($1) returning *;"
       client.query(QueryString, [Count_Comment], (err, response) => {
         res.redirect(url)
       });
