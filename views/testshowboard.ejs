@@ -105,9 +105,12 @@
       <div class="" style="border:2px solid; width:50%;  margin-right: 25%; margin-left:25%; " >
         <div class="" style="position: relative; margin:20px; margin-bottom:30px">
           <form class="" action="/test/comment" method="post">
+            <div class="" style="display:none" >
+              <td name="fbid" id="fbid"><%- data.fbid %></td>
+            </div>
             <div class="">
-              <input type="text" name="comment_writer" size='15' value="익명"  style="border-top:none; border-left:none; border-right:none; margin-bottom:15px" id="">
-              <textarea type="text" name="comment_box"  style="resize: none; width:100% ; border:none" rows="3"  id="" placeholder="댓글을 적어보세요!"></textarea>
+              <input type="text" name="comment_writer" size='15' value="익명"  style="border-top:none; border-left:none; border-right:none; margin-bottom:15px" id="comment_writer">
+              <textarea type="text" name="comment_box"  style="resize: none; width:100% ; border:none" rows="3"  id="comment_box" placeholder="댓글을 적어보세요!"></textarea>
             </div>
 
             <div class="" style="position: relative; float:right" >
