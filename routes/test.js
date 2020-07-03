@@ -56,7 +56,7 @@ router.get('/:id', (req, res, next) => {
         data: response.rows[0],
         data_comment: response_comment.rows
       });
-    });  
+    });
   });
 });
 
@@ -86,12 +86,15 @@ router.post('/comment', (req, res, next) => {
   var Comment_body = req.body.comment_box;
   var Comment_writer = req.body.comment_writer
   var Fbid = req.body.fbid;
-
+  console.log('포스트 성공!')
   Comment_body = Comment_body.replace(/(?:\r\n|\r|\n)/g, '<br />');
   var QueryString = "set timezone TO 'Asia/Seoul'";
   client.query(QueryString, (err,response) => {
+    console.log('여기까지 성공?!')
     var QueryString = "INSERT INTO aquafeq.fb_comment(fbid, writer, body, time) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI'));"
     client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
+      console.log('우와아?!')
+
       res.send(response)
     });
   })
