@@ -50,7 +50,6 @@ router.get('/write', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   var fbid = req.params.id;
   client.query("SELECT fbid, fbtitle, fbbody, fbname, fbcreatedat FROM aquafeq.freeboard WHERE fbid=$1", [fbid], (err, response) => {
-    console.log( 'ss')
     res.render('testshowboard', {
       data: response.rows[0]
     });
@@ -64,7 +63,7 @@ router.post('/', (req, res, next) => {
   BoardBody = BoardBody.replace(/(?:\r\n|\r|\n)/g, '<br />');
   var QueryString = "set timezone TO 'Asia/Seoul'";
   client.query(QueryString, (err,response) => {
-    var QueryString = "INSERT INTO aquafeq.freeboard(fbtitle, fbbody, fbname, fbcreatedat) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI:SS'));"
+    var QueryString = "INSERT INTO aquafeq.freeboard(fbtitle, fbbody, fbname, fbcreatedat) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI'));"
     client.query(QueryString, [req.body.title, BoardBody, req.body.writer], (err, response) => {
       if (err) {
         console.error();
@@ -77,6 +76,33 @@ router.post('/', (req, res, next) => {
     });
   })
 
+});
+
+router.post('/:id', (req, res, next) => {
+  var Comment_body = req.body.comment_box;
+  var Comment_writer = req.body.comment_writer
+  var Fbid = req.params.id;
+
+  comment_body = BoardBody.replace(/(?:\r\n|\r|\n)/g, '<br />');
+  var QueryString = "set timezone TO 'Asia/Seoul'";
+  client.query(QueryString, (err,response) => {
+    var QueryString = "INSERT INTO aquafeq.fb_comment(fbid, writer, body, time) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI'));"
+    client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
+      if (err) {
+        console.error();
+      } else {
+        var fbid = req.params.id;
+        client.query("SELECT fbid, fbtitle, fbbody, fbname, fbcreatedat FROM aquafeq.freeboard WHERE fbid=$1", [fbid], (err, response) => {
+          client.query("SELECT * FROM fb_comment WHERE fbid=$1", [fbid], (err, responsecomment) => {
+            res.render('testshowboard', {
+              data: response.rows[0],
+              data_comment: responsecomment.rows
+            });
+          })
+        });
+      };
+    });
+  })
 });
 
 module.exports = router;

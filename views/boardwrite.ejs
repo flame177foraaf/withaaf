@@ -37,7 +37,7 @@
     <script type="text/javascript">
       function checkonclick() {
         if (document.bodyform.title.value == "" || document.bodyform.title.value == null || document.bodyform.title.value == undefined || ( document.bodyform.title.value != null && typeof document.bodyform.title.value == "object" && !Object.keys(document.bodyform.title.value).length ) ) {
-          alert("내용을 입력해주세요!");
+          alert("제목을 입력해주세요!");
           document.bodyform.title.focus();
           return false;
         }
@@ -53,7 +53,7 @@
       }
       function checkonclick() {
         if (document.bodyform.writer.value == "" || document.bodyform.writer.value == null || document.bodyform.writer.value == undefined || ( document.bodyform.writer.value != null && typeof document.bodyform.writer.value == "object" && !Object.keys(document.bodyform.writer.value).length ) ) {
-          alert("내용을 입력해주세요!");
+          alert("작성자 이름을 입력해주세요!");
           document.bodyform.writer.focus();
           return false;
         }
