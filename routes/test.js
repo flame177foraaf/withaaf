@@ -18,7 +18,7 @@ client.connect();
 router.get('/', (req,res, next) => {
   var psql = "SELECT * FROM aquafeq.freeboard ORDER BY fbid DESC"
   client.query(psql, (err, response) => {
-    console.log(response)
+    console.log(response.rows.commentcount)
 
       res.render('test', {
         title: '자유게시판',
@@ -111,7 +111,7 @@ router.post('/comment', (req, res, next) => {
     client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
       Count_Comment = Count_Comment+1;
       console.log(Count_Comment)
-      var QueryString = "UPDATE SET aquafeq.freeboard (commentcount);"
+      var QueryString = "UPDATE aquafeq.freeboard SET commentcount = $1;"
       client.query(QueryString, [Count_Comment], (err, response) => {
         res.redirect(url)
       });

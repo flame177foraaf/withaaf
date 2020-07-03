@@ -70,12 +70,10 @@
           <li>
             <ul>
               <li><%- item.fbid %></li>
-              <% if(item.commentcount === '' || item.commentcount === undefined){  %>
+              <% if(typeof(item.commentcount) === 'number'){  %>
                 <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a> [<%- item.commentcount %>]</li>
-
               <% } else { %>
                 <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a></li>
-
               <% } %>
               <li><%- item.fbname %></li>
               <li><%- item.fbcreatedat %></li>
