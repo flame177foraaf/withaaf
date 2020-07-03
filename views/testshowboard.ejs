@@ -31,8 +31,8 @@
           dataType: "json",
           data: {
             comment_box : $("#comment_box").text(),
-            comment_writer:$("#comment_writer").text(),
-            fbid:$("#fbid").text(),
+            comment_writer: $("#comment_writer").text(),
+            fbid: $("#fbid").text(),
           },
           success: function(data) {
             var subcomment = '<tr> <td>' + data.writer + '</td> <td> ' + data.body + '</td> <td> '+ data.time +'</td> </tr>'
