@@ -70,7 +70,7 @@
           <li>
             <ul>
               <li><%- item.fbid %></li>
-              <% if(item.commentcount == 'undefined'){  %>
+              <% if(item.commentcount == '' || '0'){  %>
                 <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a></li>
 
               <% } else { %>
