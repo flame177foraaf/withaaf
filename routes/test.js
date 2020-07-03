@@ -87,12 +87,13 @@ router.post('/comment', (req, res, next) => {
   var Comment_writer = req.body.comment_writer;
   var Fbid =req.body.fbid;
   var Count_Comment = req.body.commentcount;
+  if (Count_Comment == null) {
+    Count_Comment = 0;
+  }
   Count_Comment = parseInt(Count_Comment)
   console.log(Count_Comment)
 
-  if (Count_Comment == 'undefined' || Count_Comment == '') {
-    Count_Comment = 0;
-  }
+
   var url ='/test/'+Fbid
   console.log(Comment_body)
   console.log(Comment_writer)
