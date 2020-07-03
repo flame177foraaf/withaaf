@@ -86,6 +86,7 @@ router.post('/comment', (req, res, next) => {
   var Comment_body = req.body.comment_box;
   var Comment_writer = req.body.comment_writer;
   var Fbid = req.body.fbid;
+  var url = '/'+Fbid
   console.log(Comment_body)
   console.log(Comment_writer)
   console.log(Fbid)
@@ -100,7 +101,7 @@ router.post('/comment', (req, res, next) => {
     client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
       console.log('우와아?!')
 
-      res.redirect('/'Fbid)
+      res.redirect(url)
     });
   })
 });
