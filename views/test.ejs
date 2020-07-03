@@ -69,7 +69,7 @@
             <li>
               <ul>
                 <li><%- data[i].fbid %></li>
-                <% if(data[i].commentcount !== '0' || data[i].commentcount !== null ){  %>
+                <% if(data[i].commentcount != '0' ){  %>
                   <li><a href="/test/<%- data[i].fbid %>"><%- data[i].fbtitle %></a> [<%- data[i].commentcount %>]</li>
                 <% } else { %>
                   <li><a href="/test/<%- data[i].fbid %>"><%- data[i].fbtitle %></a></li>
