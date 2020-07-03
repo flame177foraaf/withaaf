@@ -71,10 +71,11 @@
             <ul>
               <li><%- item.fbid %></li>
               <% if(item.commentcount == 'undefined'){  %>
-                <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a> [<%- item.commentcount %>]</li>
+                <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a></li>
 
               <% } else { %>
-                <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a></li>
+                <li><a href="/test/<%- item.fbid %>"><%- item.fbtitle %></a> [<%- item.commentcount %>]</li>
+
               <% } %>
               <li><%- item.fbname %></li>
               <li><%- item.fbcreatedat %></li>
