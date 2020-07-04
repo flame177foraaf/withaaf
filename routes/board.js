@@ -66,9 +66,10 @@ router.post('/', (req, res, next) => {
   var BoardBody = req.body.boardbody;
   BoardBody = BoardBody.replace(/(?:\r\n|\r|\n)/g, '<br />');
   var QueryString = "set timezone TO 'Asia/Seoul'";
+  var Commentcount = 0;
   client.query(QueryString, (err,response) => {
-    var QueryString = "INSERT INTO aquafeq.freeboard(fbtitle, fbbody, fbname, fbcreatedat) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI:SS'));"
-    client.query(QueryString, [req.body.title, BoardBody, req.body.writer], (err, response) => {
+    var QueryString = "INSERT INTO aquafeq.freeboard(fbtitle, fbbody, fbname, fbcreatedat, commentcount) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI:SS'), $4);"
+    client.query(QueryString, [req.body.title, BoardBody, req.body.writer, Commentcount], (err, response) => {
       if (err) {
         console.error();
       } else {
@@ -91,15 +92,8 @@ router.post('/comment', (req, res, next) => {
     Count_Comment = 0;
   }
   Count_Comment = parseInt(Count_Comment)
-  console.log(Count_Comment)
 
   var url ='/board/'+Fbid
-  console.log(Comment_body)
-  console.log(Comment_writer)
-  console.log(Count_Comment)
-  console.log(typeof(Count_Comment))
-  console.log(Fbid)
-  console.log(url)
 
 
   Comment_body = Comment_body.replace(/(?:\r\n|\r|\n)/g, '<br />');
@@ -108,7 +102,6 @@ router.post('/comment', (req, res, next) => {
     var QueryString = "INSERT INTO aquafeq.fb_comment(fbid, writer, body, time) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI'));"
     client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
       Count_Comment = Count_Comment+1;
-      console.log(Count_Comment)
       var QueryString = "UPDATE aquafeq.freeboard SET commentcount = $1 where fbid = $2"
       client.query(QueryString, [Count_Comment, Fbid], (err, response) => {
         res.redirect(url)
