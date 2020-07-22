@@ -16,9 +16,9 @@ router.get('/', (req,res,next) => {
   var QueryString = "select wpid, wpname from aquafeq.aquafwp ORDER BY wplimit,wpid asc ;"
   client.query(QueryString, (err, response) => {
     if (err) {
-      res.redirect('/aafwp');
+      res.redirect('/test');
     } else {
-      res.render('aafwp', {
+      res.render('test', {
         title:'AAF 장비',
         data:response.rows
       });
@@ -70,7 +70,7 @@ router.post('/', (req, res, next) => {
   client.query(QueryString, [Wpgrade, Wpname, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup], (err, response) => {
     var QueryString = "select wpid, wpname from aquafeq.aquafwp where wpname = Wpname ORDER BY wplimit,wpid asc ;"
     client.query(QueryString, (err, response) => {
-      res.render('aafwp', {
+      res.render('test', {
         title:'AAF 장비',
         data:response.rows
       });
@@ -172,7 +172,7 @@ router.post('/fixwp', (req,res,next) => {
     var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
     client.query ( QueryString, [Wpname],  (err, response) => {
       console.log('쿼리스트링' + QueryString)
-      res.render('aafwp', {
+      res.render('test', {
         title : Wpname + ' 변경 완료',
         data: response.rows
       })
@@ -258,7 +258,7 @@ router.get('/:id', (req,res,next) => {
     };
     //console.log('엔드페이지'+ EndPage);
     //console.log(response.rows[0])
-    res.render('aafwp', {
+    res.render('test', {
       title: 'AAF 장비',
       data: response.rows,
       CurrentPage: CurrentPage,
