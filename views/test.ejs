@@ -6,6 +6,153 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
     <style media="screen">
+
+      a {
+        font-family:"돋움";
+        text-decoration: none;
+      }
+      ul { margin: 0;  padding: 0; }
+
+      a:link { color: blue; text-decoration: none; }
+
+      a:visited { color: purple; text-decoration: none; }
+
+      a:hover { color: red; text-decoration: underline; }
+
+      a:active { color: white; background-color: silver; }
+      textarea {
+        border-radius :5px;
+      }
+      button {
+        width: 100px;
+        height:34px;
+        font-size: 16px;
+        padding: 0px;
+        border-radius :5px;
+      }
+      #comment_submit {
+        width: 80px;
+        height:30px;
+        font-size: 16px;
+        padding: 0px;
+        border-radius :5px;
+      }
+      #seach_form_id {
+        text-align:center;
+        margin:5px;
+      }
+      #seach_form_id2 {
+        text-align:center;
+        margin:5px;
+      }
+      #btnactive {
+        padding-top: 2px;
+        padding-right: 8px;
+        padding-bottom: 2px;
+        padding-left: 8px;
+        border: 1px solid #ececec;
+        color: #5795dd;
+        background-color: #fff;
+      }
+      #btnnonactive {
+        padding: 3px 9px;
+        margin: 0 1px 0 2px;
+        font: bold 12px/19px tahoma;
+        color: #666;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      #eqtable {
+        border-top: 3px solid #036;
+        border-collapse: collapse;
+        text-align: left;
+        line-height: 1.5;
+        }
+      #eqtable th {
+        padding: 5px;
+        font-weight: bold;
+        vertical-align: center;
+        text-align: center;
+        color: #369;
+        border-bottom: 3px solid #036;
+      }
+      #eqtable td {
+        padding: 3px;
+        vertical-align: center;
+        border-bottom: 1px solid #ccc;
+      }
+
+      #mon_table {
+        border-top: 3px solid #036;
+        border-collapse: collapse;
+        text-align: center;
+        line-height: 1.5;
+        }
+      #mon_table th {
+        padding: 5px;
+        font-weight: bold;
+        color: #369;
+
+        border-bottom: 3px solid #036;
+      }
+      #mon_table td {
+        padding: 3px;
+        border-bottom: 1px solid #ccc;
+      }
+      #pagelist{
+        list-style-type: none;
+        float: left;
+        text-align: center;
+      }
+      input[id="chbox"] + label {
+        display: inline-block;
+        height: 20px;
+        border: 2px solid #bcbcbc;
+        cursor: pointer;
+        font-size: 15px
+      }
+
+      input[id="chbox"]:checked + label {
+        background-color: #666666;
+      }
+      input[id="chbox"] {
+        display: none;
+      }
+
+      input{
+        width: 100px;
+        height:30px;
+        font-size: 16px;
+        padding: 0px;
+        border-radius :5px;
+
+      }
+      select{
+        width: auto;
+
+        height:32px;
+        font-size: 16px;
+        padding: 0px;
+
+      }
+      .title_div {
+        text-align:center
+      }
+    body {
+      margin-top: 25px;
+      margin-left: 5%;
+      margin-right: 5%;
+
+      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    }
+    body .h1{
+      padding-top: 25px;
+    }
+    a {
+      color: #00B7FF;
+    }
+
     </style>
     <script type="text/javascript">
       function checkonclick() {
@@ -106,12 +253,12 @@
         <tbody>
           <% if(typeof(CurrentPage) === 'undefined'){ %>
             <tr>
-              <td colspan="9"; style= "text-align:center;"> 검색이 필요합니다.</td>
+              <td colspan="10"; style= "text-align:center;"> 검색이 필요합니다.</td>
             </tr>
           <% } else if (typeof(data[0]) === 'undefined'){ %>
             <tr>
               <div class="" id="pagelist" >
-                <td colspan="9" style= "text-align:center; font-size:24px">
+                <td colspan="10" style= "text-align:center; font-size:24px">
                   해당하는 데이터가 없습니다.
                 </td>
               </div>
@@ -149,16 +296,16 @@
               <td style='text-align: center'><%- item.wpproperty %></td>
               <td><%- item.wpfeat %></td>
               <td><%- item.wpcustom %></td>
-              <td>
-                <div class="" style="width:40%">
-                  <form action="/aafwp/fixwp?Seachname=<%= data[0].wpname %>" method="get">
-                    <input type="submit" value="변경" />
-                  </form>
+              <td style="white-space: normal;">
+                <div class="" style="float:left;">
+                  <form action="/aafwp/fixwp?Seachname=<%= data[0].wpname %>" method="get ">
+                    <input style="width:60px; " type="submit" value="변경" />
                 </div>
-                <div class="" style="width:40%">
+
+                <div class="" style="float:left;">
 
                   <form action="/Assemblywp?assembly=<%= data[0].wpname %>" method="get">
-                    <input type="submit" value="재조립" />
+                    <input style="width:60px " type="submit" value="재조립" />
                   </form>
                 </div>
 
@@ -172,7 +319,7 @@
           <% if(typeof(CurrentPage) === 'undefined'){ %>
             <tr>
               <div class="" id="pagelist" >
-                <td colspan="9" style= "text-align:center; font-size:24px">
+                <td colspan="10" style= "text-align:center; font-size:24px">
                   검색이 필요합니다.
                 </td>
               </div>
@@ -218,7 +365,6 @@
       </table>
     </div>
 
-    <% if(typeof(data[0]) === 'undefined'){ %>
       <div class="" style="text-align: center">
         <div class="">
           <form class="" action="/addwp" method="get">
@@ -226,16 +372,7 @@
           </form>
         </div>
       </div>
-    <% } else { %>
-    <div class="" style="text-align: center">
-      <div class="">
-        <form class="" action="/aafwp/addwp" method="get">
-           <button onclick=location.href="/aafwp/addwp" type="button" name="button" style="width:200px">신규등록</a></button>
-        </form>
-      </div>
 
-
-    </div>
     <% } %>
   </body>
   <footer>
