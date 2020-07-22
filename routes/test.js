@@ -191,8 +191,8 @@ router.get('/:id', (req,res,next) => {
   if (req.query.searchText2 != 'undefined') {
     var Search2 = req.query.searchText2;
     var Search22 = [];
-    console.log('추가 검색' + Search2)
-    console.log('추가 검색타입 '+ typeof(Search2))
+    console.log('추가 검색' + Search2);
+    console.log('추가 검색타입 '+ typeof(Search2));
 
     if (typeof(Search2) == 'object') {
       for (var i = 0; i < Search2.length; i++) {
@@ -202,7 +202,7 @@ router.get('/:id', (req,res,next) => {
         Search22.push(Search2) ;
     }
     // 포 문 에서 search2 배열의 각각의 값중에서 빈 값이 있는 경우 빈 배열에 넣지않고 그냥 넘어가는 작업을 해야함, 이에 따라 아래의 타입 배열에 넣는 경우에서도 동일함
-    console.log(Search22)
+    console.log(Search22);
 
     var SearchType2 = req.query.searchType2;
     var SearchType22 = [];
