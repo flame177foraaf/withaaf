@@ -6,6 +6,10 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <style media="screen">
+    .contentbox {
+      margin: 30px 0px 30px 0px
+    }
+
     input {
       width: 100%;
       padding: 10px 20px;
@@ -65,33 +69,34 @@
           <div class="">
             <input style="float:right; width:0; display:none;"type="text" name="eqid" value="<%= data.wpid %>" readonly >
           </div>
-          <div class="">
+          <div class="contentbox">
             <label for="wpgrade">등급</label>
               <textarea type="text" name="wpgrade" rows="6" cols="60" id="wpgrade"><%- data.wpgrade %></textarea>
           </div>
-          <div class="">
+          <div class="contentbox">
+            <br>
             <label for="wpname">이름</label>
 
               <input type="text" name="wpname"  size='40' maxlength='50' value="<%= data.wpname %>" id="wpname">
-            <label for="">이름</label>
 
           </div>
-          <div class="">
+          <div class="contentbox">
             <label for="wplimit">제한</label>
 
               <input type="text" name="wplimit"  size='40' maxlength='50' value="<%= data.wplimit %>" id="wplimit">
           </div>
-          <div class="">
+
+          <div class="contentbox">
             <label for="wpsocket">소켓</label>
 
               <input type="text" name="wpsocket"  size='40' maxlength='50' value="<%= data.wpsocket %>" id="wpsocket">
           </div>
-          <div class="">
+          <div class="contentbox">
             <label for="wpether">에테르</label>
 
                 <input type="text" name="wpether"  size='40' maxlength='50' value="<%= data.wpether %>" id="wpether">
           </div>
-          <div class="">
+          <div class="contentbox">
             <label for="wpstats">방어력</label>
             <p id="hint" class="input-hint">
               다음과 같이 ' / ' 를 이용해 물리 마법 공격력을 구분지어 주세요.
@@ -101,14 +106,11 @@
               <input type="text" name="wpstats"  size='40' maxlength='50' value="<%= data.wpstats %>" id="wpstats"  />
 
           </div>
-          <div class="">
+          <div class="contentbox">
             <label for="wpproperty">속성 및 강화제한</label>
               <textarea  type="text" name="wpproperty" rows="6" cols="60" id="wpproperty"><%- data.wpproperty %></textarea>
-
-
-
           </div>
-          <div class="">
+          <div class="contentbox">
             <label for="wpfeat">피트</label>
             <p id="hint" class="input-hint">
             예시 :<br>
@@ -123,7 +125,7 @@
               <textarea  type="text" name="wpfeat" rows="6" cols="60" id="wpfeat"><%- data.wpfeat %></textarea>
 
           </div>
-          <div class="">
+          <div class="contentbox">
 
               <label for="wpcustom">커스텀</label>
               <p id="hint" class="input-hint">
@@ -137,7 +139,7 @@
               </p>
                 <textarea type="text" name="wpcustom" rows="6" cols="60" id="wpcustom"><%- data.wpcustom %></textarea>
           </div>
-          <div class="">
+          <div class="contentbox">
             <label for="">업그레이드 재료</label>
             <div class="">
               <textarea type="text" name="wpup" rows="6" cols="60" id="wpup"><%- data.wpup%></textarea>
