@@ -22,7 +22,7 @@ router.get('/', (req,res,next) => {
         title:'AAF 장비',
         data:response.rows
       });
-    };
+    }
   });
 });
 
@@ -185,7 +185,7 @@ router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   var Search = req.query.searchText;
   var CurrentPage = req.params.id;
-  
+
   var SearchPlus = "";
 
   if (req.query.searchText2 != 'undefined') {
