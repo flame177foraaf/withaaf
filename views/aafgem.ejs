@@ -44,6 +44,7 @@
           <col width="200">
           <col width="100">
           <col width="400">
+          <col width="100">
         </colgroup>
         <thead>
           <tr  style='text-align: center'>
@@ -52,13 +53,14 @@
             <th>루엘 이름</th>
             <th>착용 대상</th>
             <th>효과</th>
+            <th></th>
           </tr>
         </thead>
         <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
         <tbody >
           <% if(typeof(CurrentPage) === 'undefined'){ %>
             <tr>
-              <td colspan="5"; style= "text-align:center;"> 검색이 필요합니다.</td>
+              <td colspan="6"; style= "text-align:center;"> 검색이 필요합니다.</td>
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
@@ -68,6 +70,18 @@
               <td style='text-align: center'><%- item.gemname %></td>
               <td style='text-align: center'><%- item.gemobject %></td>
               <td><%- item.gemeffect %></td>
+              <td style="white-space: normal; text-align:center">
+                <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
+
+                  <div class="" style="display: inline-block">
+                    <form action="/aafgem/fixgem" method="get ">
+                      <input type=text list=browsers style="display:none" checked value="<%= item.gemname %>" name="Seachname">
+
+                      <input style="width:60px; " type="submit" value="수정" />
+                    </form>
+                  </div>
+
+                </td>
             </tr>
             <% }); %>
           <% } %>
@@ -75,7 +89,7 @@
             <% if(typeof(CurrentPage) === 'undefined'){ %>
               <tr>
                 <div class="" id="pagelist" >
-                  <td colspan="5" style= "text-align:center; font-size:24px">
+                  <td colspan="6" style= "text-align:center; font-size:24px">
                     검색이 필요합니다.
                   </td>
                 </div>
@@ -83,7 +97,7 @@
             <% } else { %>
               <tr>
                 <div class=""  id="pagelist" >
-                  <td colspan="5" style= "text-align:center; font-size:24px">
+                  <td colspan="6" style= "text-align:center; font-size:24px">
                     <% if (CurrentPage > PageSize){ %>
                       <a href="/aafgem/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
                       <a href="/aafgem/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
@@ -107,7 +121,6 @@
         </tbody>
       </table>
 
-      <% if(typeof(data[0]) === 'undefined'){ %>
         <div class="" style="text-align: center">
           <div class="">
             <form class="" action="/aafgem/add_gem" method="get">
@@ -115,26 +128,8 @@
             </form>
           </div>
         </div>
-      <% } else { %>
-      <div class="" style="text-align: center">
-        <div class="">
-          <form class="" action="/aafgem/add_gem" method="get">
-            <button onclick=location.href="/aafgem/add_gem" type="button" name="button" style="width:200px">신규등록</a></button>
-          </form>
-        </div>
 
-        <form class="" name="add" action="/aafgem/fixgem" method="get"  onsubmit="return checkonclick()">
-          <input type=text list=browsers style="" checked value="<%= data[0].gemname %>" name="Seachname">
-          <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
-            <datalist id="browsers" name="datalistname" class="" style="width:50%">
-              <% data.forEach(function(item) { %>
-              <option value='<%= item.gemname%>' style=""><%- item.gemname%></option>
-              <% }); %>
-            </datalist>
-          <input action="/aafgem/fixgem" type="submit" class="btn" value="변경하기" ></button>
-        </form>
       </div>
-      <% } %>
     </div>
 
 

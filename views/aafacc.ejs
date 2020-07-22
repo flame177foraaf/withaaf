@@ -86,6 +86,8 @@
           <col width="250">
           <col width="250">
           <col width="600">
+          <col width="200">
+
         </colgroup>
         <thead>
 
@@ -99,6 +101,7 @@
             <th>속성 방어</th>
             <th>피트</th>
             <th>커스텀</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -106,7 +109,7 @@
         <tbody >
           <% if(typeof(CurrentPage) === 'undefined'){ %>
             <tr>
-              <td colspan="9"; style= "text-align:center;"> 검색이 필요합니다.</td>
+              <td colspan="10"; style= "text-align:center;"> 검색이 필요합니다.</td>
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
@@ -120,6 +123,24 @@
               <td style='text-align: center'><%- item.accproperty %></td>
               <td><%- item.accfeat %></td>
               <td><%- item.acccustom %></td>
+              <td style="white-space: normal; text-align:center">
+                <div class="" style="">
+                  <div class="" style="display: inline-block">
+                    <form action="/aafacc/fixacc" method="get ">
+                      <input type=text list=browsers style="display:none" checked value="<%= item.accname %>" name="Seachname">
+
+                      <input style="width:60px; " type="submit" value="수정" />
+                    </form>
+                  </div>
+                  <div class="" style="display: inline-block">
+
+                    <form action="/Assemblyacc" method="get">
+                      <input type=text list=browsers style="display:none" checked value="<%= item.accname %>" name="assembly">
+                      <input style="width:60px " type="submit" value="재조립" />
+                    </form>
+                  </div>
+                  </div>
+                </td>
             </tr>
             <% }); %>
           <% } %>
@@ -127,7 +148,7 @@
             <% if(typeof(CurrentPage) === 'undefined'){ %>
               <tr>
                 <div class="" id="pagelist" >
-                  <td colspan="9" style= "text-align:center; font-size:24px">
+                  <td colspan="10" style= "text-align:center; font-size:24px">
                     검색이 필요합니다.
                   </td>
                 </div>
@@ -135,7 +156,7 @@
             <% } else { %>
               <tr>
                 <div class="" id="pagelist" >
-                  <td colspan="9" style= "text-align:center; font-size:24px">
+                  <td colspan="10" style= "text-align:center; font-size:24px">
                     <% function FuncPageurl(pagenumber) { %>
                       <% var pageurl = "/aafacc/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
                       <% if (Searchcount !== 'undefined') { %>
@@ -172,45 +193,11 @@
       </table>
     </div>
 
-    <% if(typeof(data[0]) === 'undefined'){ %>
-    <div class="" style="text-align: center">
-      <div class="">
-        <form class="" action="/addacc" method="get">
-          <button onclick=location.href="/aafacc/addacc" type="button" name="button" style="width:200px">신규등록</a></button>
-        </form>
-      </div>
-    </div>
-    <% } else { %>
-    <div class="" style="text-align: center">
-      <div class="">
-        <form class="" action="/addacc" method="get">
-          <button onclick=location.href="/aafacc/addacc" type="button" name="button" style="width:200px">신규등록</a></button>
-        </form>
-      </div>
-
-      <form class="" name="add" action="/aafacc/fixacc" method="get"  onsubmit="return checkonclick()">
-        <input type=text list=browsers style="" checked value="<%= data[0].accname %>" name="Seachname">
-        <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
-          <datalist id="browsers" name="datalistname" class="" style="width:50%">
-            <% data.forEach(function(item) { %>
-            <option value='<%= item.accname%>' style=""><%- item.accname%></option>
-            <% }); %>
-          </datalist>
-        <input action="/aafacc/fixacc" type="submit" class="btn" value="변경하기" ></button>
-      </form>
-      <form class="" name="" action="/Assemblyacc" method="get"  onsubmit="return checkonclick()">
-        <input type=text list=browsers style="" checked value="<%= data[0].accname %>" name="assembly">
-        <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
-          <datalist id="browsers" name="datalistname" class="" style="width:50%">
-            <% data.forEach(function(item) { %>
-            <option value='<%= item.accname%>' style=""><%- item.accname%></option>
-            <% }); %>
-          </datalist>
-        <input action="/" type="submit" class="btn" value="재조립하기" ></button>
+    <div class="" style="text-align: center; padding-top:30px;">
+      <form class="" action="/addacc" method="get">
+        <button onclick=location.href="/aafacc/addacc" type="button" ame="button" style="width:200px">신규등록</a></button>
       </form>
     </div>
-    <% } %>
-
 
 
   </body>

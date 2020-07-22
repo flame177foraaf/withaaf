@@ -50,6 +50,7 @@
           <col width="150">
           <col width="150">
           <col width="150">
+          <col width="100">
         </colgroup>
 
         <thead id="featsup" width='' border='1' class='aaf' bordercolor='#736BE0' cellspacing='0' cellpadding='1' bordercolorlight='#736BE0' bordercolordark='#FFFFFF'>
@@ -58,6 +59,7 @@
             <th>이름</th>
             <th>피트</th>
             <th>역피트</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -65,7 +67,7 @@
         <tbody>
           <% if(typeof(CurrentPage) === 'undefined'){ %>
             <tr>
-              <td colspan="4"; style= "text-align:center;"> 검색이 필요합니다.</td>
+              <td colspan="5"; style= "text-align:center;"> 검색이 필요합니다.</td>
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
@@ -74,6 +76,18 @@
               <td><%- item.featname %></td>
               <td><%- item.feat %></td>
               <td><%- item.reversefeat %></td>
+              <td style="white-space: normal; text-align:center">
+                <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
+
+                  <div class="" style="display: inline-block">
+                    <form action="/featsup/fixfeat" method="get ">
+                      <input type=text list=browsers style="display:none" checked value="<%= item.featname %>" name="Seachname">
+
+                      <input style="width:60px; " type="submit" value="수정" />
+                    </form>
+                  </div>
+
+                </td>
             </tr>
             <% }); %>
           <% } %>
@@ -81,7 +95,7 @@
               <% if(typeof(CurrentPage) === 'undefined'){ %>
                 <tr>
                   <div class=""  id="pagelist" >
-                    <td colspan="4" style= "text-align:center; font-size:24px">
+                    <td colspan="5" style= "text-align:center; font-size:24px">
                       검색이 필요합니다.
                     </td>
                   </div>
@@ -90,7 +104,7 @@
               <% } else { %>
                 <tr>
                   <div class="" id="pagelist" >
-                    <td colspan="4" style= "text-align:center; font-size:24px">
+                    <td colspan="5" style= "text-align:center; font-size:24px">
                       <% if (CurrentPage > PageSize){ %>
                         <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
                         <a href="/featsup/1?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
@@ -120,7 +134,6 @@
         </tbody>
       </table>
     </div>
-    <% if(typeof(data[0]) === 'undefined'){ %>
     <div class="" style="text-align: center">
       <div class="">
         <form class="" action="/featsup/add_feat" method="get">
@@ -128,26 +141,7 @@
         </form>
       </div>
     </div>
-    <% } else { %>
-    <div class="" style="text-align: center">
-      <div class="">
-        <form class="" action="/featsup/add_feat" method="get">
-          <button onclick=location.href="/featsup/add_feat" type="button" name="button" style="width:200px">신규등록</a></button>
-        </form>
-      </div>
-
-      <form class="" name="add" action="/featsup/fixfeat" method="get"  onsubmit="return checkonclick()">
-        <input type=text list=browsers style="" checked value="<%= data[0].featname %>" name="Seachname">
-        <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
-          <datalist id="browsers" name="datalistname" class="" style="width:50%">
-            <% data.forEach(function(item) { %>
-            <option value='<%= item.featname%>' style=""><%- item.featname%></option>
-            <% }); %>
-          </datalist>
-        <input action="/featsup/fixfeat" type="submit" class="btn" value="변경하기" ></button>
-      </form>
-    </div>
-    <% } %>
+    
   </body>
   <footer>
     <%- include ('footer')%>
