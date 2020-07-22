@@ -200,7 +200,7 @@
 
     </div>
     <div class="">
-      <form action="/aafwp/1" method="get">
+      <form action="/test/1" method="get">
         <div class="" id="seach_form_id" name="seach_form_id">
 
           <input type="text" placeholder="모든 항목" name="searchText" style="width:200px">
@@ -298,7 +298,7 @@
               <td><%- item.wpcustom %></td>
               <td style="white-space: normal;">
                 <div class="" style="float:left;">
-                  <form action="/aafwp/fixwp" method="get ">
+                  <form action="/test/fixwp" method="get ">
                     <input type=text list=browsers style="display:none" checked value="<%= data[0].wpname %>" name="Seachname">
 
                     <input style="width:60px; " type="submit" value="변경" />
@@ -333,7 +333,7 @@
               <div class="" id="pagelist">
                 <td colspan="21" style= "text-align:center; font-size:24px">
                   <% function FuncPageurl(pagenumber) { %>
-                    <% var pageurl = "/aafwp/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
+                    <% var pageurl = "/test/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
                     <% if (Searchcount !== 'undefined') { %>
                       <% for (var i = 0; i < Searchcount; i++) { %>
                         <% pageurl = pageurl + "&searchText2=" + Search22[i]  + "&searchType2=" +  SearchType22[i] %>
@@ -369,11 +369,9 @@
     </div>
 
       <div class="" style="text-align: center">
-        <div class="">
           <form class="" action="/addwp" method="get">
-             <button onclick=location.href="/aafwp/addwp" type="button" name="button" style="width:200px">신규등록</a></button>
+             <button onclick=location.href="/test/addwp" type="button" name="button" style="width:200px">신규등록</a></button>
           </form>
-        </div>
       </div>
 
     <% } %>
