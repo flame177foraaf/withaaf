@@ -6,6 +6,9 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <style media="screen">
+    .contentbox {
+      margin: 30px 0px 30px 0px
+    }
     input {
       width: 100%;
       padding: 10px 20px;
@@ -14,7 +17,7 @@
     }
     input[type="text"] {
       border: none;
-      border-bottom: solid 2px #D2691E;
+      border-bottom: solid 1px #D2691E;
     }
     textarea {
 			width: 100%;
@@ -44,7 +47,14 @@
       margin: 4px 2px;
       cursor: pointer;
     }
+    label {
+      font-size: 18px
+    }
+    #hint {
+      font-size: 14px
+    }
     </style>
+
     <script type="text/javascript">
 
 
@@ -59,67 +69,97 @@
           <div class="">
             <input style="float:right; width:0; display:none;"type="text" name="eqid" value="<%= data.accid %>" readonly >
           </div>
-          <div class="">
-            <label for="">등급</label>
-            <div class="">
+          <div class="contentbox" >
+            <label for="accgrade">등급</label>
+
               <textarea type="text" name="accgrade" rows="6" cols="60" id="accgrade"><%- data.accgrade %></textarea>
-            </div>
+
           </div>
-          <div class="">
-            <label for="">이름</label>
-            <div class="">
-              <input type="text" name="accname"  size='40' maxlength='50' value="<%= data.accname %>" id="">
-            </div>
+          <div class="contentbox" >
+            <label for="accname">이름</label>
+
+              <input type="text" name="accname"  size='40' maxlength='50' value="<%= data.accname %>" id="accname">
+
           </div>
-          <div class="">
-            <label for="">제한</label>
-            <div class="">
-              <input type="text" name="acclimit"  size='40' maxlength='50' value="<%= data.acclimit %>" id="">
-            </div>
+          <div class="contentbox" >
+            <label for="acclimit">제한</label>
+
+              <input type="text" name="acclimit"  size='40' maxlength='50' value="<%= data.acclimit %>" id="acclimit">
+
           </div>
-          <div class="">
-            <label for="">소켓</label>
-            <div class="">
-              <input type="text" name="accsocket"  size='40' maxlength='50' value="<%= data.accsocket %>" id="">
-            </div>
+          <div class="contentbox" >
+            <label for="accsocket">소켓</label>
+
+              <input type="text" name="accsocket"  size='40' maxlength='50' value="<%= data.accsocket %>" id="accsocket">
+
           </div>
-          <div class="">
-            <label for="">에테르</label>
-            <div class="">
-              <input type="text" name="accether"  size='40' maxlength='50' value="<%= data.accether %>" id="">
-            </div>
+          <div class="contentbox" >
+            <label for="accether">에테르</label>
+
+                <input type="text" name="accether"  size='40' maxlength='50' value="<%= data.accether %>" id="accether">
+
           </div>
-          <div class="">
-            <label for="">방어력</label>
-            <div class="">
-              <input type="text" name="accstats"  size='40' maxlength='50' value="<%= data.accstats %>" id="">
-            </div>
+          <div class="contentbox" >
+            <label for="accstats">방어력</label>
+            <p id="hint" class="input-hint">
+              다음과 같이 ' / ' 를 이용해 물리 마법 방어력을 구분지어 주세요.
+              <br>
+              예시: <samp>  + 3338 / + 4021 </samp>
+            </p>
+              <input type="text" name="accstats"  size='40' maxlength='50' value="<%= data.accstats %>" id="accstats" aria-describedby="accstats-hint" />
+
           </div>
-          <div class="">
-            <label for="">속성방어 및 강화제한</label>
-            <div class="">
+          <div class="contentbox" >
+            <label for="accproperty">속성방어 및 강화제한</label>
+            <p id="hint" class="input-hint">
+              속성방어력의 처음과 끝을 괄호로 묶어주세요. 예시 :<br>
+              <samp>
+                (3500/3500/3500/-2500/0/-2000)<br>
+                * 강화비용 12 배 증가 *<br>
+                * 강화성공률 6 % 감소 *
+
+              </samp>
+
+            </p>
               <textarea  type="text" name="accproperty" rows="6" cols="60" id="accproperty"><%- data.accproperty %></textarea>
 
-            </div>
           </div>
-          <div class="">
-            <label for="">피트</label>
-            <div class="">
+          <div class="contentbox" >
+            <label for="accfeat">피트</label>
+            <p id="hint" class="input-hint">
+            예시 :<br>
+            <samp>
+              디펜시브 페이즈 (+ 6)<br>
+              크리티컬 (+ 5)<br>
+              어보이드 페이즈 (-4)<br>
+              어큐레이시 페이즈 (- 6)
+
+            </samp>
+            </p>
               <textarea  type="text" name="accfeat" rows="6" cols="60" id="accfeat"><%- data.accfeat %></textarea>
-            </div>
+
           </div>
-          <div class="">
-            <label for="">커스텀</label>
+          <div class="contentbox" >
+            <label for="acccustom">커스텀</label>
+            <p id="hint" class="input-hint">
+
+            예시 : <br>
+            <samp>
+              크리티컬 데미지 변화 (8% ~ 15 % ) [100% 확률]<br>
+              상세 속성 추가 데미지 변화 ( 8%~14 % ) [100% 확률]<br>
+              실드 HP 추가 ( 2 % ~ 5 % ) [60% 확률]
+            </samp>
+            </p>
+
               <textarea type="text" name="acccustom" rows="6" cols="60" id="acccustom"><%- data.acccustom %></textarea>
 
-            </div>
           </div>
-          <div class="">
-            <label for="">업그레이드 재료</label>
-            <div class="">
-              <textarea type="text" name="accup" rows="6" cols="60" id="accup"><%- data.accup%></textarea>
+          <div class="contentbox" >
 
-            </div>
+              <label for="accup">업그레이드 재료</label>
+                <textarea type="text" name="accup" rows="6" cols="60" id="accup"><%- data.accup%></textarea>
+
+
           </div>
           <div class="writhingbtn" style="height:100px">
 

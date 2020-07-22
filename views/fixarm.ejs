@@ -6,6 +6,9 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <style media="screen">
+    .contentbox {
+      margin: 30px 0px 30px 0px
+    }
     input {
       width: 100%;
       padding: 10px 20px;
@@ -14,7 +17,7 @@
     }
     input[type="text"] {
       border: none;
-      border-bottom: solid 2px #D2691E;
+      border-bottom: solid 1px #D2691E;
     }
     textarea {
 			width: 100%;
@@ -44,7 +47,14 @@
       margin: 4px 2px;
       cursor: pointer;
     }
+    label {
+      font-size: 18px
+    }
+    #hint {
+      font-size: 14px
+    }
     </style>
+
     <script type="text/javascript">
 
 
@@ -59,67 +69,97 @@
           <div class="">
             <input style="float:right; width:0; display:none;"type="text" name="eqid" value="<%= data.armid %>" readonly >
           </div>
-          <div class="">
-            <label for="">등급</label>
-            <div class="">
+          <div class="contentbox" >
+            <label for="armgrade">등급</label>
+
               <textarea type="text" name="armgrade" rows="6" cols="60" id="armgrade"><%- data.armgrade %></textarea>
-            </div>
+
           </div>
-          <div class="">
-            <label for="">이름</label>
-            <div class="">
-              <input type="text" name="armname"  size='40' maxlength='50' value="<%= data.armname %>" id="">
-            </div>
+          <div class="contentbox" >
+            <label for="armname">이름</label>
+
+              <input type="text" name="armname"  size='40' maxlength='50' value="<%= data.armname %>" id="armname">
+
           </div>
-          <div class="">
-            <label for="">제한</label>
-            <div class="">
-              <input type="text" name="armlimit"  size='40' maxlength='50' value="<%= data.armlimit %>" id="">
-            </div>
+          <div class="contentbox" >
+            <label for="armlimit">제한</label>
+
+              <input type="text" name="armlimit"  size='40' maxlength='50' value="<%= data.armlimit %>" id="armlimit">
+
           </div>
-          <div class="">
-            <label for="">소켓</label>
-            <div class="">
-              <input type="text" name="armsocket"  size='40' maxlength='50' value="<%= data.armsocket %>" id="">
-            </div>
+          <div class="contentbox" >
+            <label for="armsocket">소켓</label>
+
+              <input type="text" name="armsocket"  size='40' maxlength='50' value="<%= data.armsocket %>" id="armsocket">
+
           </div>
-          <div class="">
-            <label for="">에테르</label>
-            <div class="">
-              <input type="text" name="armether"  size='40' maxlength='50' value="<%= data.armether %>" id="">
-            </div>
+          <div class="contentbox" >
+            <label for="armether">에테르</label>
+
+                <input type="text" name="armether"  size='40' maxlength='50' value="<%= data.armether %>" id="armether">
+
           </div>
-          <div class="">
-            <label for="">방어력</label>
-            <div class="">
-              <input type="text" name="armstats"  size='40' maxlength='50' value="<%= data.armstats %>" id="">
-            </div>
+          <div class="contentbox" >
+            <label for="armstats">방어력</label>
+            <p id="hint" class="input-hint">
+              다음과 같이 ' / ' 를 이용해 물리 마법 방어력을 구분지어 주세요.
+              <br>
+              예시: <samp>  + 3338 / + 4021 </samp>
+            </p>
+              <input type="text" name="armstats"  size='40' maxlength='50' value="<%= data.armstats %>" id="armstats"  />
+
           </div>
-          <div class="">
-            <label for="">속성방어 및 강화제한</label>
-            <div class="">
+          <div class="contentbox" >
+            <label for="armproperty">속성방어 및 강화제한</label>
+            <p id="hint" class="input-hint">
+              속성방어력의 처음과 끝을 괄호로 묶어주세요. 예시 :<br>
+              <samp>
+                (3500/3500/3500/-2500/0/-2000)<br>
+                * 강화비용 12 배 증가 *<br>
+                * 강화성공률 6 % 감소 *
+
+              </samp>
+
+            </p>
               <textarea  type="text" name="armproperty" rows="6" cols="60" id="armproperty"><%- data.armproperty %></textarea>
 
-            </div>
           </div>
-          <div class="">
-            <label for="">피트</label>
-            <div class="">
+          <div class="contentbox" >
+            <label for="armfeat">피트</label>
+            <p id="hint" class="input-hint">
+            예시 :<br>
+            <samp>
+              디펜시브 페이즈 (+ 6)<br>
+              크리티컬 (+ 5)<br>
+              어보이드 페이즈 (-4)<br>
+              어큐레이시 페이즈 (- 6)
+
+            </samp>
+            </p>
               <textarea  type="text" name="armfeat" rows="6" cols="60" id="armfeat"><%- data.armfeat %></textarea>
-            </div>
+
           </div>
-          <div class="">
-            <label for="">커스텀</label>
+          <div class="contentbox" >
+            <label for="armcustom">커스텀</label>
+            <p id="hint" class="input-hint">
+
+            예시 : <br>
+            <samp>
+              크리티컬 데미지 변화 (8% ~ 15 % ) [100% 확률]<br>
+              상세 속성 추가 데미지 변화 ( 8%~14 % ) [100% 확률]<br>
+              실드 HP 추가 ( 2 % ~ 5 % ) [60% 확률]
+            </samp>
+            </p>
+
               <textarea type="text" name="armcustom" rows="6" cols="60" id="armcustom"><%- data.armcustom %></textarea>
 
-            </div>
           </div>
-          <div class="">
-            <label for="">업그레이드 재료</label>
-            <div class="">
-              <textarea type="text" name="armup" rows="6" cols="60" id="armup"><%- data.armup%></textarea>
+          <div class="contentbox" >
 
-            </div>
+              <label for="armup">업그레이드 재료</label>
+                <textarea type="text" name="armup" rows="6" cols="60" id="armup"><%- data.armup%></textarea>
+
+
           </div>
           <div class="writhingbtn" style="height:100px">
 
