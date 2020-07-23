@@ -34,6 +34,7 @@ router.get('/fixrecipetest', (req,res,next) => {
 
 router.post('/fixrecipetest', (req,res,next) => {
   var RecipeN = req.body.recipenum;
+  //req.body.name ... id와 항상 헷갈리지 말자 ㅠㅠ
 
   console.log('레시피번호'+   RecipeN)
   console.log('결과물 이름'+  req.body.collectname)
@@ -100,10 +101,9 @@ router.post('/fixrecipetest', (req,res,next) => {
   var Collect6unit = req.body.collect6unit
 
 
-  var QueryString = "UPDATE aquafeq.aquafrecipe SET (collectnum,   collectname,  collect1num,  collect1name,  collect1unit,  collect2num,  collect2name,  collect2unit,  collect3num,  collect3name,  collect3unit,  collect4num,  collect4name,  collect4unit,  collect5num,  collect5name,  collect5unit,  collect6num,  collect6name,  collect6unit) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, )  WHERE recipenum = $21 returning *"
+  var QueryString = "UPDATE aquafeq.aquafrecipe SET (collectnum,   collectname,  collect1num,  collect1name,  collect1unit,  collect2num,  collect2name,  collect2unit,  collect3num,  collect3name,  collect3unit,  collect4num,  collect4name,  collect4unit,  collect5num,  collect5name,  collect5unit,  collect6num,  collect6name,  collect6unit) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20 )  WHERE recipenum = $21 returning *"
   //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
   client.query(QueryString, [Collectname, Collectnum, Collect1name,  Collect2name,  Collect3name,  Collect4name,  Collect5name,  Collect6name,  Collect1num,  Collect2num,  Collect3num,  Collect4num,  Collect5num,  Collect6num,  Collect1unit,  Collect2unit,  Collect3unit,  Collect4unit,  Collect5unit,  Collect6unit, RecipeN], (err, response) => {
-    console.log('쿼리스트링' + QueryString)
 
     var QueryString = "select * from aquafeq.aquafrecipe where recipenum = $1"
     client.query ( QueryString, [RecipeN],  (err, response) => {
