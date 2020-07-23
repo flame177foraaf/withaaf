@@ -52,41 +52,17 @@ router.post('/fixrecipetest', (req,res,next) => {
   console.log(req.body.collect5num)
   console.log(req.body.collect6num)
   var Collectname = req.body.collectname
-  if (Collectname  == '') {
-    Collectname = null
-  }
   console.log(Collectname)
 
   var Collectnum = req.body.collectnum
-  if (Collectnum  == '') {
-    Collectnum = null
-  }
   console.log(Collectname)
 
   var Collect1name = req.body.collect1name
-  if (Collect1name  == '') {
-    Collect1name = null
-  }
   var Collect2name = req.body.collect2name
-  if (Collectnum  == '') {
-    Collectnum = null
-  }
   var Collect3name = req.body.collect3name
-  if (Collect3name  == '') {
-    Collect3name = null
-  }
   var Collect4name = req.body.collect4name
-  if (Collect4name  == '') {
-    Collect4name = null
-  }
   var Collect5name = req.body.collect5name
-  if (Collect5name  == '') {
-    Collect5name = null
-  }
   var Collect6name = req.body.collect6name
-  if (Collect6name  == '') {
-    Collect6name = null
-  }
   var Collect1num = req.body.collect1num
   var Collect2num = req.body.collect2num
   var Collect3num = req.body.collect3num
