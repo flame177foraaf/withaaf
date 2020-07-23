@@ -75,19 +75,22 @@
       border-bottom: 1px solid #ccc;
       text-align:center
     }
+    #recipetable > tr:nth-child(n+4){
+
+    }
     </style>
     <script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script type="text/javascript">
     $(document).ready(function(){
-      if ($("jquery3").value === "") {
-        $('recipetable > tr:nth-child(n+3)').css ( "display" , "none");
-      } else if ($("jquery4").value === "") {
-        $('recipetable > tr:nth-child(n+4)').css ( "display" , "none");
-      } else if ($("jquery5").value === "") {
-        $('recipetable > tr:nth-child(n+5)').css ( "display" , "none");
-      } else if ($("jquery6").value === "") {
-        $('recipetable > tr:last-child').css ( "display" , "none");
+      if ($("#jquery3").value === "") {
+        $('#recipetable > tr:nth-child(n+3)').css ( "display" , "none");
+      } else if ($("#jquery4").value === "") {
+        $('#recipetable > tr:nth-child(n+4)').css ( "display" , "none");
+      } else if ($("#jquery5").value === "") {
+        $('#recipetable > tr:nth-child(n+5)').css ( "display" , "none");
+      } else if ($("#jquery6").value === "") {
+        $('#recipetable > tr:last-child').css ( "display" , "none");
       }
     })
     </script>
