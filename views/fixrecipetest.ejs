@@ -114,12 +114,13 @@
           <th>합성품 이름</th>
         </thead>
         <tbody>
-          <td style="text-align:center">
+          <td style="text-align:center" value>
+            <input style="float:right; width:0; display:none;"type="text" name="recipenum" value="<%= data.recipenum %>" readonly >
+
             <%= data.recipenum %>
           </td>
           <td>
             <input type="text" name=""  size='40' maxlength='20' value="<%= data.collectnum %>" id="collectnum">
-
           </td>
 
           <td>
@@ -255,7 +256,7 @@
   </div>
 
 </div>
-  
+
 </form>
 
 
