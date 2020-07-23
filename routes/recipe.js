@@ -16,9 +16,13 @@ router.get('/', (req,res,next) => {
     title:'AAF 레시피'
   });
 });
+
+//레시피 수정 라우트
 router.get('/fixrecipe', (req,res,next) => {
   res.redirect('/');
 });
+
+//레시피 수정 포스트
 
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;

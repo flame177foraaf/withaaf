@@ -21,23 +21,23 @@
     <script type="text/javascript">
       $(document).on("click","input[name=findadd]",function(){
 
-      var addStaffText =
+      var add =
       '<div class="" id="seach_form_id2" name="seach_form_id2">'
       +'<input type="text" placeholder="모든 항목" name="searchText2" style="width:200px">'
       + '<select name="searchType2">'
       +    '<option value="accfeat">피트</option>'
       +    '<option value="acccustom">커스텀</option>'
       +'</select>'
-      +'<button class="btn btn-default" name="delStaff">삭제</button>'
+      +'<button class="btn btn-default" name="delbut">삭제</button>'
       +'</div>'
-      var aaa = $( "div[name=seach_form_id2]:last" ); //last를 사용하여 trStaff라는 명을 가진 마지막 태그 호출
+      var aaa = $( "div[name=seach_form_id2]:last" ); //last를 사용하여 seach_form_id2 명을 가진 마지막 태그 호출
 
-      aaa.after(addStaffText); //마지막 trStaff명 뒤에 붙인다.
+      aaa.after(add); //마지막 seach_form_id2 뒤에 붙인다.
 
       });
 
       //삭제 버튼
-      $(document).on("click","button[name=delStaff]",function(){
+      $(document).on("click","button[name=delbut]",function(){
 
           var aaa = $(this).parent();
 

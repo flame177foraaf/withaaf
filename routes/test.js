@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
-var $ = require('jquery');
-
 
 const { Client } = require('pg');
 
@@ -12,275 +10,202 @@ const client = new Client({
 });
 
 client.connect();
+
 router.get('/', (req,res,next) => {
-  var QueryString = "select wpid, wpname from aquafeq.aquafwp ORDER BY wplimit,wpid asc ;"
+  res.render('test', {
+    title:'AAF 레시피'
+  });
+});
+
+router.get('/fixrecipetest', (req,res,next) => {
+  var QueryString = "select recipenum from aquafeq.aquafrecipe"
   client.query(QueryString, (err, response) => {
-    if (err) {
-      res.redirect('/test');
-    } else {
-      res.render('test', {
-        title:'AAF 장비',
-        data:response.rows
-      });
-    }
-  });
-});
+    var SeachRecipeNum = req.query.SeachNum;
+    var QueryString = "select * from aquafeq.aquafrecipe where recipenum = $1"
+    client.query(QueryString, [SeachRecipeNum], (err, response) => {
 
-router.get('/addwp', (req,res,next) => {
-  res.render ('addwp', {
-    title:'AAF 무기 등록'
-  });
-});
-
-//무기 추가하기
-router.post('/', (req, res, next) => {
-  var Wpgrade = req.body.wpgrade;
-    if (Wpgrade !== '') {
-      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-
-  var Wpname = req.body.wpname;
-  var Wplimit = req.body.wplimit;
-    if (Wplimit == '') {
-        Wplimit = null
-    }
-  var Wpsocket = req.body.wpsocket;
-  var Wpether = req.body.wpether;
-  var Wpstats = req.body.wpstats;
-    if (Wpstats !== '') {
-      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-  var Wpproperty = req.body.wpproperty;
-    if (Wpproperty !== '') {
-      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-  var Wpfeat = req.body.wpfeat;
-    if (Wpfeat !== '') {
-      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-  var Wpcustom = req.body.wpcustom;
-    if (Wpcustom !== ''){
-      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-  var Wpup = req.body.wpup;
-    if (Wpup !== '') {
-      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-  var QueryString = "INSERT INTO aquafeq.aquafwp(wpgrade, wpname, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
-  client.query(QueryString, [Wpgrade, Wpname, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup], (err, response) => {
-    var QueryString = "select wpid, wpname from aquafeq.aquafwp where wpname = Wpname ORDER BY wplimit,wpid asc ;"
-    client.query(QueryString, (err, response) => {
-      res.render('test', {
-        title:'AAF 장비',
-        data:response.rows
+      res.render ('fixrecipetest', {
+        title:SeachRecipeNum + ' 번 레시피 수정',
+        data:response.rows[0]
       });
     });
   });
 });
 
-//무기 변경 라우트
-router.get('/fixwp', (req,res,next) => {
-  var QueryString = "select wpname from aquafeq.aquafwp"
-  client.query(QueryString, (err, response) => {
-    var Select_name = req.query.Seachname;
-    var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
-    client.query(QueryString, [Select_name], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        res.render ('addwp', {
-          title: '신규 장비 ' + Select_name + ' 등록',
-        });
-      } else {
-        res.render ('fixwp', {
-          title:Select_name + '정보',
-          data:response.rows[0]
-        });
-      }
-    });
-  });
-});
-
-//무기 변경하기
 router.post('/fixwp', (req,res,next) => {
-  console.log('냠냠')
-  var Eqid = req.body.eqid;
+  console.log('레시피 수정')
+  var RecipeN = req.body.recipenum;
 
-  console.log(Eqid)
-  console.log(req.body.eqid)
-  var Wpgrade = req.body.wpgrade;
-    if (Wpgrade == '') {
-      Wpgrade = null
-    } else if (Wpgrade !== '') {
-      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-    console.log(req.body.wpgrade)
-
-  var Wpname = req.body.wpname;
-  console.log(req.body.wpname)
-
-  var Wplimit = req.body.wplimit;
-    if (Wplimit == '') {
-      Wplimit = null
-    }
-    console.log(req.body.wplimit)
-
-  var Wpsocket = req.body.wpsocket;
-    if (Wpsocket == '') {
-      Wpsocket = null
-    }
-  var Wpether = req.body.wpether;
-    if (Wpether == '') {
-      Wpether = null
-    }
-  var Wpstats = req.body.wpstats;
-    if (Wpstats == '') {
-      Wpstats = null
-    } else if (Wpstats !== '') {
-      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-
-  var Wpproperty = req.body.wpproperty;
-    if (Wpproperty == '') {
-      Wpproperty = null
-    } else if (Wpproperty !== '') {
-      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-  var Wpfeat = req.body.wpfeat;
-    if (Wpfeat == '') {
-      Wpfeat = null
-    } else if (Wpfeat !== '') {
-      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-  var Wpcustom = req.body.wpcustom;
-    if (Wpcustom == '') {
-      Wpcustom = null
-    } else if (Wpcustom !== ''){
-      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
-  var Wpup = req.body.wpup;
-    if (Wpup == '') {
-      Wpup = null
-    } else if (Wpup !== '') {
-      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    }
+  console.log(RecipeN)
+  console.log(req.body.collectname)
+  console.log(req.body.collect1name)
+  console.log(req.body.collect2name)
+  console.log(req.body.collect3name)
+  console.log(req.body.collect4name)
+  console.log(req.body.collect5name)
+  console.log(req.body.collect6name)
+  console.log(req.body.collectnum)
+  console.log(req.body.collect1num)
+  console.log(req.body.collect2num)
+  console.log(req.body.collect3num)
+  console.log(req.body.collect4num)
+  console.log(req.body.collect5num)
+  console.log(req.body.collect6num)
+  console.log(req.body.collect1unit)
+  console.log(req.body.collect2unit)
+  console.log(req.body.collect3unit)
+  console.log(req.body.collect4unit)
+  console.log(req.body.collect5unit)
+  console.log(req.body.collect6unit)
+  var Collectname = req.body.collectname
+  var Collectnum = req.body.collectnum
+  var Collect1name = req.body.collect1name
+  var Collect2name = req.body.collect2name
+  var Collect3name = req.body.collect3name
+  var Collect4name = req.body.collect4name
+  var Collect5name = req.body.collect5name
+  var Collect6name = req.body.collect6name
+  var Collect1num = req.body.collect1num
+  var Collect2num = req.body.collect2num
+  var Collect3num = req.body.collect3num
+  var Collect4num = req.body.collect4num
+  var Collect5num = req.body.collect5num
+  var Collect6num = req.body.collect6num
+  var Collect1unit = req.body.collect1unit
+  var Collect2unit = req.body.collect2unit
+  var Collect3unit = req.body.collect3unit
+  var Collect4unit = req.body.collect4unit
+  var Collect5unit = req.body.collect5unit
+  var Collect6unit = req.body.collect6unit
 
 
-  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup, wpname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE wpid = $11 returning *"
+  var QueryString = "UPDATE aquafeq.aquafrecipe SET (collectnum,   collectname,  collect1num,  collect1name,  collect1unit,  collect2num,  collect2name,  collect2unit,  collect3num,  collect3name,  collect3unit,  collect4num,  collect4name,  collect4unit,  collect5num,  collect5name,  collect5unit,  collect6num,  collect6name,  collect6unit) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, )  WHERE recipenum = $21 returning *"
   //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
-  client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Wpname, Eqid], (err, response) => {
+  client.query(QueryString, [Collectname, Collectnum, Collect1name,  Collect2name,  Collect3name,  Collect4name,  Collect5name,  Collect6name,  Collect1num,  Collect2num,  Collect3num,  Collect4num,  Collect5num,  Collect6num,  Collect1unit,  Collect2unit,  Collect3unit,  Collect4unit,  Collect5unit,  Collect6unit, RecipeN], (err, response) => {
     console.log('쿼리스트링' + QueryString)
 
-    var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
-    client.query ( QueryString, [Wpname],  (err, response) => {
+    var QueryString = "select * from aquafeq.aquafrecipe where recipenum = $1"
+    client.query ( QueryString, [RecipeN],  (err, response) => {
       console.log('쿼리스트링' + QueryString)
       res.render('test', {
-        title : Wpname + ' 변경 완료',
+        title : RecipeN + ' 번 레시피 수정 완료',
         data: response.rows
       })
     });
   });
 });
 
-// 일반 검색
+
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
-  var Search = req.query.searchText;
-  var CurrentPage = req.params.id;
+  if (SearchType === 'name') {
+    var Search = req.query.searchText;
+    var CurrentPage = req.params.id;
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM  aquafeq.aquafrecipe WHERE collectname Ilike $1 OR collect1name Ilike $1 OR collect2name Ilike $1 OR collect3name Ilike $1 OR collect4name Ilike $1 OR collect5name Ilike $1 OR collect6name Ilike $1 limit 20 offset (($2- 1)*20);"
+    client.query(QueryString, ['%' + Search + '%',  CurrentPage], (err, response) => {
+      if (err) {
+        res.redirect('/')
+      } else {
+        console.log(typeof(response.rows[0]))
+        console.log(typeof(response.rows))
 
-  var SearchPlus = "";
 
-  if (req.query.searchText2 != 'undefined') {
-    var Search2 = req.query.searchText2;
-    var Search22 = [];
-    console.log('추가 검색' + Search2);
-    console.log('추가 검색타입 '+ typeof(Search2));
+        if(typeof(response.rows[0]) !== "object") {
+          var TotalCountNull = 0;
+          var TotalCount = 1;
+        } else {
+          var TotalCountNull = 1;
+          var TotalCount = response.rows[0].totalcount;
+        }
+        console.log(TotalCount)
+        console.log(typeof(TotalCount))
+        var DataCountInPage = 20;
+        var PageSize = 10;
+        var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+        console.log(TotalPage)
+        if (TotalCount % DataCountInPage > 0) {
+          TotalPage++;
+        };
+        console.log(TotalPage)
 
-    if (typeof(Search2) == 'object') {
-      for (var i = 0; i < Search2.length; i++) {
-        Search22.push(Search2[i]) ;
+        if (TotalPage < CurrentPage) {
+          CurrentPage = TotalPage;
+        };
+        console.log(CurrentPage)
+        var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
+        var EndPage = StartPage + PageSize -1;
+        console.log(EndPage)
+        if (EndPage > TotalPage) {
+          EndPage = TotalPage;
+        };
+        console.log(EndPage)
+        res.render('test', {
+          title: 'AAF 레시피',
+          data: response.rows,
+          CurrentPage: CurrentPage,
+          PageSize: PageSize,
+          StartPage: StartPage,
+          EndPage: EndPage,
+          TotalPage: TotalPage,
+          SearchType: SearchType,
+          Search: Search,
+          TotalCountNull:TotalCountNull
+        });
       }
-    } else if(typeof(Search2) == 'string' ){
-        Search22.push(Search2) ;
-    }
-    // 포 문 에서 search2 배열의 각각의 값중에서 빈 값이 있는 경우 빈 배열에 넣지않고 그냥 넘어가는 작업을 해야함, 이에 따라 아래의 타입 배열에 넣는 경우에서도 동일함
-    console.log(Search22);
-
-    var SearchType2 = req.query.searchType2;
-    var SearchType22 = [];
-    if (typeof(SearchType2) == 'object') {
-      for (var i = 0; i < Search2.length; i++) {
-        SearchType22.push(SearchType2[i]) ;
-      }
-    } else if(typeof(SearchType2) == 'string' ){
-      SearchType22.push(SearchType2) ;
-    }
-    var Searchcount = Search22.length;
-    if (typeof(SearchType2) == 'string') {
-      var SearchPlus = SearchPlus+ ' AND ' + SearchType22+ ' Ilike ' +" '%"+ Search2 +"%' "
-    } else if (typeof(SearchType2) == 'object') {
-      for (var i = 0; i < Searchcount; i++) {
-        var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
-      }
-    }
-    console.log(SearchPlus)
-
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
-  } else {
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
-
-  }
-  client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-    console.log(QueryString)
-    if(typeof(response.rows[0]) !== "object") {
-      var TotalCount = 1;
-    } else {
-      var TotalCount = response.rows[0].totalcount;
-    }
-    //console.log('토탈 카운트 ' + TotalCount)
-    //console.log(CurrentPage)
-    //console.log(typeof(CurrentPage))
-    var DataCountInPage = 10;
-    var PageSize = 10;
-    var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-    if (TotalCount % DataCountInPage > 0) {
-      TotalPage++;
-    };
-
-    //console.log('토탈 페이지' + TotalPage);
-    if (TotalPage < CurrentPage) {
-      CurrentPage = TotalPage;
-    };
-    var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-    //console.log('스타트페이지' + StartPage);
-
-    var EndPage = StartPage + DataCountInPage -1;
-    if (EndPage > TotalPage) {
-      EndPage = TotalPage;
-    };
-    //console.log('엔드페이지'+ EndPage);
-    //console.log(response.rows[0])
-    res.render('test', {
-      title: 'AAF 장비',
-      data: response.rows,
-      CurrentPage: CurrentPage,
-      PageSize: PageSize,
-      StartPage: StartPage,
-      EndPage: EndPage,
-      TotalPage: TotalPage,
-      SearchType: SearchType,
-      Search: Search,
-      SearchPlus: SearchPlus,
-      Search2: Search2,
-      Search22: Search22,
-      SearchType2: SearchType2,
-      SearchType22: SearchType22,
-      Searchcount:Searchcount
-
-
-
     });
-  });
+  } else if (SearchType === 'number') {
+    var Search = req.query.searchText;
+    var CurrentPage = req.params.id;
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectnum = $1 OR collect1num = $1 OR collect2num = $1 OR collect3num = $1 OR collect4num = $1 OR collect5num = $1 OR collect6num = $1 limit 20 offset (($2- 1)*20);"
+    console.log(QueryString)
+    client.query(QueryString, [Search,  CurrentPage], (err, response) => {
+      if(typeof(response.rows[0]) !== "object") {
+        var TotalCountNull = 0;
+        var TotalCount = 1;
+      } else {
+        var TotalCountNull = 1;
+        var TotalCount = response.rows[0].totalcount;
+      }
+      console.log(typeof(TotalCount))
+      var DataCountInPage = 20;
+      var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+      console.log(TotalPage)
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      };
+      console.log(TotalPage)
 
-})
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      };
+      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
+      console.log(StartPage)
+
+      var EndPage = StartPage + PageSize -1;
+      console.log(EndPage)
+
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      };
+      console.log(EndPage)
+      res.render('test', {
+        title: 'AAF 레시피',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage: TotalPage,
+        SearchType: SearchType,
+        Search: Search,
+        TotalCountNull: TotalCountNull
+      });
+    });
+  } else {
+    res.redirect('/test');
+  };
+});
 
 
 

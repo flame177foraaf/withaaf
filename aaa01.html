@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <script type="application/javascript">
+  function draw() {
+    var canvas = document.getElementById('canvas');
+    if (canvas.getContext) {
+      var ctx = canvas.getContext('2d');
+
+      for (var i = 0; i < 1; i++) {
+        var x = 100*i;
+
+
+
+        ctx.beginPath();//키패드1
+        ctx.moveTo(15 + x , 85);
+        ctx.lineTo(15 + x , 65);
+        ctx.lineTo(35 + x , 85);
+        ctx.fill()
+
+        ctx.beginPath(); //키패드4
+        ctx.moveTo(0 + x , 50);
+        ctx.lineTo(15 + x , 65);
+        ctx.lineTo(15 + x , 35);
+        ctx.fill()
+
+
+        ctx.beginPath();//키패드7
+        ctx.moveTo(15 + x , 15);
+        ctx.lineTo(35 + x , 15);
+        ctx.lineTo(15 + x , 35);        //
+        ctx.fill()
+
+
+        ctx.beginPath();      //키패드8
+        ctx.moveTo(50 + x , 0);
+        ctx.lineTo(35 + x , 15);
+        ctx.lineTo(65 + x , 15);       //
+        ctx.fill()
+
+        ctx.beginPath();     //키패드9
+        ctx.moveTo(85 + x , 15);
+        ctx.lineTo(65 + x , 15);       //
+        ctx.lineTo(85 + x , 35);       //
+        ctx.fill()
+
+        ctx.beginPath();        //키패드6
+        ctx.moveTo(100 + x , 50);
+        ctx.lineTo(85 + x , 35);       //
+        ctx.lineTo(85 + x , 65);       //
+        ctx.fill()
+
+        ctx.beginPath();
+        ctx.moveTo(85 + x , 85);       //키패드3
+        ctx.lineTo(85 + x , 65);       //
+        ctx.lineTo(65 + x , 85);        //
+        ctx.fill()
+
+        ctx.beginPath();
+        ctx.moveTo(50 + x , 100);       //키패드2
+        ctx.lineTo(65 + x , 85);        //
+        ctx.lineTo(35 + x , 85);        //
+        ctx.fill()
+        for (var j = 0; j < 1; j++) {
+          var y = 100*j
+          ctx.strokeRect(x, y, 100, 100);
+
+          ctx.beginPath();//키패드1
+          ctx.moveTo(15 + x , 85 + y );
+          ctx.lineTo(15 + x , 65 + y );
+          ctx.lineTo(35 + x , 85 + y );
+          ctx.fill()
+
+          ctx.beginPath(); //키패드4
+          ctx.moveTo(0 + x , 50 + y );
+          ctx.lineTo(15 + x , 65 + y );
+          ctx.lineTo(15 + x , 35 + y );
+          ctx.fill()
+
+
+          ctx.beginPath();//키패드7
+          ctx.moveTo(15 + x , 15 + y );
+          ctx.lineTo(35 + x , 15 + y );
+          ctx.lineTo(15 + x , 35 + y );        //
+          ctx.fill()
+
+
+          ctx.beginPath();      //키패드8
+          ctx.moveTo(50 + x , 0 + y );
+          ctx.lineTo(65 + x , 15 + y );       //
+          ctx.lineTo(35 + x , 15 + y );
+          ctx.fill()
+
+          ctx.beginPath();     //키패드9
+          ctx.moveTo(85 + x , 15 + y );
+          ctx.lineTo(65 + x , 15 + y );       //
+          ctx.lineTo(85 + x , 35 + y );       //
+          ctx.fill()
+
+          ctx.beginPath();        //키패드6
+          ctx.moveTo(100 + x , 50 + y );
+          ctx.lineTo(85 + x , 35 + y );       //
+          ctx.lineTo(85 + x , 65 + y );       //
+          ctx.fill()
+
+          ctx.beginPath();
+          ctx.moveTo(85 + x , 85 + y );       //키패드3
+          ctx.lineTo(85 + x , 65 + y );       //
+          ctx.lineTo(65 + x , 85 + y );        //
+          ctx.fill()
+
+          ctx.beginPath();
+          ctx.moveTo(50 + x , 100 + y );       //키패드2
+          ctx.lineTo(65 + x , 85 + y );        //
+          ctx.lineTo(35 + x , 85 + y );        //
+          ctx.fill()
+
+        }
+      }
+
+    }
+
+  }
+
+  </script>
+
+  <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
+  <script type="text/javascript">
+
+    $(document).on("click","button[name=Xadd]",function(){
+
+      var add =
+      '<div class="" id="seach_form_id2" name="seach_form_id2">'
+      +'<input type="text" placeholder="모든 항목" name="searchText2" style="width:200px">'
+      + '<select name="searchType2">'
+      +    '<option value="wpproperty">속성</option>'
+      +    '<option value="wpfeat">피트</option>'
+      +    '<option value="wpcustom">커스텀</option>'
+      +'</select>'
+      +'<button class="btn btn-default" name="delbut">삭제</button>'
+      +'</div>'
+
+      var aaa = $( "div[name=seach_form_id2]:last" ); //last를 사용하여 seach_form_id2라는 명을 가진 마지막 태그 호출
+        aaa.after(add); //마지막 seach_form_id2  뒤에 붙인다.
+      });
+
+      //삭제 버튼
+      $(document).on("click","button[name=delbut]",function(){
+
+          var aaa = $(this).parent();
+
+          aaa.remove(); //tr 테그 삭제
+      });
+  </script>
+  <style media="screen">
+     table, td {
+       border: 2px solid #bcbcbc;
+     }
+     tr{
+       height: 100
+     }
+     td {
+       width: 100;
+     }
+
+  </style>
+ </head>
+ <body>
+   <button type="button" name="Xadd">버튼</button>
+
+
+
+   <table id="eqtable" style="border:1px;">
+     <thead>
+     </thead>
+     <tbody>
+       <tr >
+
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+       </tr>
+       <tr >
+
+         <td onload="draw();" >
+                      <canvas id="canvas"  width="100%" height="100%" ></canvas>
+                    </td>
+        <td onload="draw();" >
+                     <canvas id="canvas"  width="100%" height="100%" ></canvas>
+                   </td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+       </tr>
+     </tbody>
+   </table>
+ </body>
+ <body onload="draw();" style="margin:20px">
+   <canvas id="canvas" width="40px" height="40px"></canvas>
+ </body>
+</html>
