@@ -33,30 +33,23 @@ router.get('/fixrecipetest', (req,res,next) => {
 });
 
 router.post('/fixrecipetest', (req,res,next) => {
-  console.log('레시피 수정')
   var RecipeN = req.body.recipenum;
 
-  console.log(RecipeN)
-  console.log(req.body.collectname)
+  console.log('레시피번호'+   RecipeN)
+  console.log('결과물 이름'+  req.body.collectname)
   console.log(req.body.collect1name)
   console.log(req.body.collect2name)
   console.log(req.body.collect3name)
   console.log(req.body.collect4name)
   console.log(req.body.collect5name)
   console.log(req.body.collect6name)
-  console.log(req.body.collectnum)
+  console.log('결과물 번호'+  req.body.collectnum)
   console.log(req.body.collect1num)
   console.log(req.body.collect2num)
   console.log(req.body.collect3num)
   console.log(req.body.collect4num)
   console.log(req.body.collect5num)
   console.log(req.body.collect6num)
-  console.log(req.body.collect1unit)
-  console.log(req.body.collect2unit)
-  console.log(req.body.collect3unit)
-  console.log(req.body.collect4unit)
-  console.log(req.body.collect5unit)
-  console.log(req.body.collect6unit)
   var Collectname = req.body.collectname
   if (Collectname  == '') {
     Collectname = null
