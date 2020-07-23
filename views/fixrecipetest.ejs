@@ -134,7 +134,7 @@
       <th> 재료 개수</th>
 
     </thead>
-    <tbody>
+    <tbody id="recipetable">
       <tr>
         <td> 첫 번째 재료 </td>
         <td style="text-align:center">
@@ -251,7 +251,6 @@
   <script type="text/javascript">
   $(document).ready(function(){
     if ($("collect3num").value === '') {
-       ;
       $('#recipetable > tr:nth-child(n+3)').css ( "display" , "none");
     } else if ($("collect4num").value === '') {
       $('#recipetable > tr:nth-child(n+4)').css ( "display" , "none");
