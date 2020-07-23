@@ -32,7 +32,7 @@ router.get('/fixrecipetest', (req,res,next) => {
   });
 });
 
-router.post('/fixwp', (req,res,next) => {
+router.post('/fixrecipetest', (req,res,next) => {
   console.log('레시피 수정')
   var RecipeN = req.body.recipenum;
 
