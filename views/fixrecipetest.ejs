@@ -82,7 +82,7 @@
 
       $(document).ready(function(){
 
-        if ($("#jquery3").value === "") {
+        if ($("#jquery3").val() === "") {
           $('#recipetable > tr:nth-child(n+3)').css ("display", "none");
         } else if ($("#jquery4").value === "") {
           $('#recipetable > tr:nth-child(n+4)').css ("display", "none");
@@ -92,7 +92,7 @@
           $('#recipetable > tr:last-child').css ("display", "none");
         }
       })
-      
+
     </script>
   </head>
 
