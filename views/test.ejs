@@ -120,20 +120,21 @@
       </form>
 
       <table id="mon_table" style="margin-top:5px;">
-        <% if (Field_Id != 'FireTower' || Field_Id != 'EarthTower' ){ %>
-          <colgroup>
-            <col span="" id ="" style="width: 50px;">
-            <col span="" id ="" style="width : 150px;">
-            <col span="" id ="" style="width : 125px;">
-            <col span="" id ="" style="width : 75px;">
-            <col span="" id ="" style="width : 75px;">
-            <col span="" id ="" style="width : 150px;">
-            <col span="" id ="" style="width : 100px;">
-            <col span="" id ="" style="width : 250px;">
-            <col span="" id ="" style="width : 250px;">
-            <col span="" id ="" style="width : 250px;">
-            <col span="" id ="" style="width : 150px;">
-          </colgroup>
+        <colgroup>
+          <col span="" id ="" style="width: 50px;">
+          <col span="" id ="" style="width : 150px;">
+          <col span="" id ="" style="width : 125px;">
+          <col span="" id ="" style="width : 75px;">
+          <col span="" id ="" style="width : 75px;">
+          <col span="" id ="" style="width : 150px;">
+          <col span="" id ="" style="width : 100px;">
+          <col span="" id ="" style="width : 250px;">
+          <col span="" id ="" style="width : 250px;">
+          <col span="" id ="" style="width : 250px;">
+          <col span="" id ="" style="width : 150px;">
+        </colgroup>
+
+        <% if(Field_Id == undefined){ %>
           <thead>
             <tr>
               <th>레벨</th>
@@ -149,18 +150,7 @@
               <th>스킬</th>
             </tr>
           </thead>
-        <% } else { %>
-          <colgroup>
-            <col span="" id ="" style="width : 50px;">
-            <col span="" id ="" style="width : 200px;">
-            <col span="" id ="" style="width : 100px;">
-            <col span="" id ="" style="width : 150px;">
-            <col span="" id ="" style="width : 500px;">
-            <col span="" id ="" style="width : 250px;">
-            <col span="" id ="" style="width : 250px;">
-            <col span="" id ="" style="width : 250px;">
-            <col span="" id ="" style="width : 250px;">
-          </colgroup>
+        <% } else if (Field_Id != 'FireTower' || Field_Id != 'EarthTower' ){ %>
           <thead>
             <tr>
               <th>층</th>
@@ -168,6 +158,23 @@
               <th>HP계수</th>
               <th>속성</th>
               <th>내성 정보</th>
+              <th></th>
+              <th>커먼</th>
+              <th>언커먼</th>
+              <th>레어</th>
+              <th>스킬</th>
+            </tr>
+          </thead>
+        <% } else { %>
+          <thead>
+            <tr>
+              <th>레벨</th>
+              <th>이름</th>
+              <th>속성</th>
+              <th>에테르</th>
+              <th>타입</th>
+              <th>저항</th>
+              <th>보석</th>
               <th>커먼</th>
               <th>언커먼</th>
               <th>레어</th>
@@ -177,11 +184,13 @@
         <% } %>
 
 
+
         <tbody>
           <% if(Data_length == 0){ %>
             <tr>
               <td colspan="11"; style= "text-align:left; padding-left: 50px;"> 해당 자료를 찾을 수 없습니다.</td>
             </tr>
+
           <% } else if (Searching == 'YES') { %>
             <% for ( i = 0, j = i-1 ; i < Data_length ; i++, j+=1){ %>
               <% if ( i = 0 || data_monster[i].PartitionName != data_monster[j].PartitionName){ %>
@@ -228,6 +237,9 @@
               <tr>
                 <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
               </tr>
+              if (){
+
+              }
                 <% if ( data_monster[k].part != 'FireTower' || data_monster[k].part != 'EarthTower'){ %>
                   <tr>
                     <td style= "text-align:center;"><%- data_monster[k].mon_lv %></td>

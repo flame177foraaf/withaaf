@@ -115,7 +115,6 @@ router.get('/:id', (req,res,next) => {
       client.query(QueryString, [Field_Id], (err,response2) => {
         var Data_length = response2.rows.length;
         res.render('test', {
-
           Field_Id:Field_Id,
           title:'AAF 던전 몬스터 정보',
           fieldname:'검색이 필요합니다',
