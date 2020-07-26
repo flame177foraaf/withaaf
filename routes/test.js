@@ -113,6 +113,7 @@ router.get('/:id', (req,res,next) => {
       var Field_Id = req.params.id;
       var QueryString = "SELECT * FROM aquafeq.monster as table1 left join aquafeq.dungeon_partition as table2 on table1.mon_field = table2.part where mon_field = $1 order by table1.mon_lv asc;"
       client.query(QueryString, [Field_Id], (err,response2) => {
+        console.log(data_monster[0].rows)
         var Data_length = response2.rows.length;
         res.render('test', {
           Field_Id:Field_Id,
