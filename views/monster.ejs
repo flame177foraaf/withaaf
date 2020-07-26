@@ -203,9 +203,9 @@
               <% for ( k = 0; k < Data_length ; k++){ %>
                 <% if (data_monster[k].part == data_monster[0].part){ %>
                   <% if (data_monster[k].TowerFloor.indexOf('~') != -1){ %>
-                    <tr style="border-bottom: 3px solid #000; border-top: 3px solid #000;">
-                  <% } else { %>
                     <tr>
+                  <% } else { %>
+                    <tr style="border-bottom: 3px solid #000; border-top: 3px solid #000;">
                   <% } %> %>
                       <td><%- data_monster[k].TowerFloor %></td>
                       <td><%- data_monster[k].mon_name %></td>
