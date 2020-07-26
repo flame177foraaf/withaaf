@@ -13,23 +13,18 @@ client.connect();
 
 router.get('/', (req,res,next) => {
   var Data_length = 0;
-
   var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
   client.query(QueryString, (err,response) => {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id asc"
     client.query(QueryString, (err, response1) => {
-
-
       res.render('test', {
       title:'AAF 던전 몬스터 정보',
       fieldname:'검색이 필요합니다',
-
       data:response.rows,
       data_partition:response1.rows,
       Data_length:Data_length,
       });
     })
-
   });
 });
 //  var QueryString = "SELECT * FROM aquafeq.monster where mon_property Ilike $1;"
@@ -141,38 +136,37 @@ router.get('/search', (req,res,next) => {
 
 // params.id 를 쓰는 라우터는 마지막에 쓰라고 한다
 router.get('/:id', (req,res,next) => {
-  var Field_Id = req.params.id;
-    var QueryString = "SELECT * FROM aquafeq.monster where mon_field = $1"
-    client.query(QueryString, [Field_Id], (err,response) => {
-      if (typeof(response.rows[0]) !== 'object') {
-        res.redirect('/test')
-
-      }
-      var Data_length = response.rows.length;
-      if (Field_Id == "90") {
-        res.render('monster_top', {
-          title:'AAF 던전 몬스터 정보',
-          data:response.rows,
-          Data_length:Data_length,
-        });
-      } else {
-        res.render('test', {
-          title:'AAF 던전 몬스터 정보',
-          data:response.rows,
-          Data_length:Data_length,
-        });
-      }
-
-
-    });
- //else if (Searchingtype === 'property') {
-
-  //} else if (Searchingtype === 'type') {
-
-  //} else if (Searchingtype === 'collect') {
-
-  //}
-
+  var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
+  client.query(QueryString, (err,response) => {
+    var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id asc"
+    client.query(QueryString, (err, response1) => {
+      var Field_Id = req.params.id;
+      var QueryString = "SELECT * FROM aquafeq.monster where mon_field = $1 oder by id asc"
+      client.query(QueryString, [Field_Id], (err,response) => {
+        if (typeof(response.rows[0]) !== 'object') {
+          res.redirect('/test')
+        }
+        var Data_length = response.rows.length;
+        if (Field_Id == "EarthTower" || Field_Id == "FireTower") {
+          res.render('monster_top', {
+            title:'AAF 던전 몬스터 정보',
+            fieldname:'검색이 필요합니다',
+            data:response.rows,
+            data_partition:response1.rows,
+            Data_length:Data_length,
+          });
+        } else {
+          res.render('test', {
+            title:'AAF 던전 몬스터 정보',
+            fieldname:'검색이 필요합니다',
+            data:response.rows,
+            data_partition:response1.rows,
+            Data_length:Data_length,
+          });
+        }
+      });
+    })
+  });
 });
 
 
