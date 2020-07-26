@@ -224,7 +224,44 @@
             <% } %>
           <% } else { %>
             <% if (Data_length != 0 ){ %>
-              <% for (i = 0; j = i+1, l = i-1; i < Data_length; i++, j+=1, l+=1){ %>
+              <tr>
+                <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data[0].field_name %></td>
+              </tr>
+                <% for ( k = 0; k < Data_length ; k++){ %>
+                  <% if (data_monster[k].part != data_monster[0].part){ %>
+                    <% if ( data_monster[k].part !== 'FireTower' || data_monster[k].part !== 'EarthTower'){ %>
+                      <tr>
+                        <td style= "text-align:center;"><%- data_monster[k].mon_lv %></td>
+                        <td><%- data_monster[k].mon_name %></td>
+                        <td><%- data_monster[k].mon_property %></td>
+                        <td><%- data_monster[k].mon_ether %></td>
+                        <td style="text-align: center"><%- data_monster[k].mon_type %></td>
+                        <td><%- data_monster[k].mon_resist %></td>
+                        <td style="text-align: center"><%- data_monster[k].mon_gem %></td>
+                        <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
+                        <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
+                        <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
+                        <td id =""><%- data_monster[k].mon_skill %></td>
+                      </tr>
+                    <% } else { %>
+                      <tr>
+                        <td ></td>
+                        <td><%- data_monster[k].mon_name %></td>
+                        <td><%- data_monster[k].mon_property %></td>
+                        <td><%- data_monster[k].mon_ether %></td>
+                        <td style="text-align: center"><%- data_monster[k].mon_type %></td>
+                        <td><%- data_monster[k].mon_resist %></td>
+                        <td ></td>
+                        <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
+                        <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
+                        <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
+                        <td id =""><%- data_monster[k].mon_skill %></td>
+                      </tr>
+                    <% } %>
+                  <% } %>
+                <% } %>
+
+              <% for (i = 1, j = i-1; i < Data_length; i++, j+=1){ %>
                 <% if(  data_monster[i].PartitionName !== data_monster[j].PartitionName){continue} %>
                 <tr>
                   <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[i].PartitionName %></td>
