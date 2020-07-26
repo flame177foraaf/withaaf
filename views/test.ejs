@@ -89,14 +89,12 @@
         <a href="#"><%- item.Field %></a>
         <ul>
           <% data_partition.forEach(funtion(item_partition){ %>
-            <% if(data_partition.FieldName == data.FieldName){ %>
+            <% if(item_partition.FieldName == item.FieldName){ %>
               <li>
-                <a href="/monster/<%- data_partition.Partition %>"><%- data_partition.PartitionName%></a>
+                <a href="/monster/<%- data_partition.Partition %>"><%- data_partition.PartitionName %></a>
                 </li>
             <% } %>
-
           <% }) %>
-
         </ul>
       </li>
       <% }); %>
