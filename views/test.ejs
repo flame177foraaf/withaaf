@@ -187,9 +187,16 @@
 
         <tbody>
           <% if (Data_length != 0 ){ %>
-            <tr>
-              <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
-            </tr>
+            <% if (data_monster[0].FieldName === Training){ %>
+              <tr>
+                <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[0].PartitionName %></td>
+              </tr>
+            <% } else { %>
+              <tr>
+                <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
+              </tr>
+            <% } %>
+
               <% for ( k = 0; k < Data_length ; k++){ %>
                 <% if (data_monster[k].part == data_monster[0].part){ %>
                   <% if ( data_monster[k].part !== 'FireTower' || data_monster[k].part !== 'EarthTower'){ %>
@@ -226,9 +233,15 @@
               <% } %>
               <% for (i = 1, j = i-1;  i < Data_length; i++, j+=1){ %>
                 <% if( data_monster[i].part == data_monster[j].part ){continue} %>
+                <% if (data_monster[0].FieldName === Training){ %>
+                  <tr>
+                    <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[i].PartitionName %></td>
+                  </tr>
+                <% } else { %>
                   <tr>
                     <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[i].PartitionName %></td>
                   </tr>
+                <% } %>
                     <% for ( k = 0; k < Data_length ; k++){ %>
                       <% if (data_monster[k].part == data_monster[i].part){ %>
                         <% if ( data_monster[k].part !== 'FireTower' || data_monster[k].part !== 'EarthTower'){ %>
