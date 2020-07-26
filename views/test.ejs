@@ -110,9 +110,9 @@
       <form action="/test/search" method="get" name="searchform" onsubmit="return checkonclick()">
         <input type="text" placeholder="찾기 버튼을 누르세요" name="SearchText" id="SearchText" style="width:200px">
         <select name="SearchType">
-          <option value="name">이름</option>
-          <option value="property">속성</option>
-          <option value="type">타입</option>
+          <option value="mon_name">이름</option>
+          <option value="mon_property">속성</option>
+          <option value="mon_type">타입</option>
           <option value="collect">수집품</option>
         </select>
         <input action="/test/search" type="submit" class="btn" value="찾기"  ></button>
@@ -233,7 +233,7 @@
               <% } %>
               <% for (i = 1, j = i-1;  i < Data_length; i++, j+=1){ %>
                 <% if( data_monster[i].part == data_monster[j].part ){continue} %>
-                <% if (data_monster[0].FieldName === 'Training'){ %>
+                <% if (data_monster[i].FieldName === 'Training'){ %>
                   <tr>
                     <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[i].PartitionName %></td>
                   </tr>
