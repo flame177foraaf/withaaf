@@ -151,7 +151,7 @@ router.get('/:id', (req,res,next) => {
         var Data_length = response2.rows.length;
         console.log(Data_length)
         if (Field_Id == "EarthTower" || Field_Id == "FireTower") {
-          res.render('monster_top', {
+          res.render('test_top', {
             title:'AAF 던전 몬스터 정보',
             fieldname:'검색이 필요합니다',
             data:response.rows,
