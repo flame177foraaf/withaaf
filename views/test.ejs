@@ -89,7 +89,7 @@
           <a href="#"><%- data[i].Field %></a>
           <ul>
             <% for ( j = 0; j < data_partition.length ; j++){ %>
-              <% if(data_partition[j].FieldName == data[i].FieldName){ %>
+              <% if(data_partition[j].FieldName === data[i].FieldName){ %>
                 <li>
                   <a href="/test/<%- data_partition[j].part %>"><%- data_partition[j].PartitionName %></a>
                 </li>
@@ -134,7 +134,7 @@
           <col span="" id ="" style="width : 150px;">
         </colgroup>
 
-        <% if(Field_Id == undefined){ %>
+        <% if(Field_Id === 'undefined'){ %>
           <thead>
             <tr>
               <th>레벨</th>
@@ -186,12 +186,12 @@
 
 
         <tbody>
-          <% if(Data_length == 0){ %>
+          <% if(Data_length === 0){ %>
             <tr>
               <td colspan="11"; style= "text-align:left; padding-left: 50px;"> 해당 자료를 찾을 수 없습니다.</td>
             </tr>
 
-          <% } else if (Searching == 'YES') { %>
+          <% } else if (Searching === 'undefined') { %>
             <% for ( i = 0, j = i-1 ; i < Data_length ; i++, j+=1){ %>
               <% if ( i = 0 || data_monster[i].PartitionName != data_monster[j].PartitionName){ %>
                 <tr>
@@ -232,7 +232,7 @@
                   <% } %>
                 <% } %>
               <% } %>
-          <% } else if (Searching != 'YES') { %>
+          <% } else if (Searching === 'undefined') { %>
             <% for ( k = 0; k < Data_length ; k++){ %>
               <tr>
                 <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
