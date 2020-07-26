@@ -234,7 +234,11 @@
               <% for ( k = 0; k < Data_length ; k++){ %>
                 <% if (data_monster[k].part == data_monster[0].part){ %>
                   <% if ( data_monster[k].part !== 'FireTower' || data_monster[k].part !== 'EarthTower'){ %>
-                    <tr>
+                    <% if (data_monster[k].TowerFloor.indexOf('~') != -1){ %>
+                      <tr>
+                    <% } else { %>
+                      <tr style="border-bottom: 3px solid #000; border-top: 3px solid #000;">
+                    <% } %>
                       <td style= "text-align:center;"><%- data_monster[k].mon_lv %></td>
                       <td><%- data_monster[k].mon_name %></td>
                       <td><%- data_monster[k].mon_property %></td>
