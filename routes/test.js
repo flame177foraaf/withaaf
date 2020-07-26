@@ -48,6 +48,7 @@ router.get('/search', (req,res,next) => {
         var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_name Ilike $1 order by table1.id, mon_lv;"
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
           var Data_length = response2.rows.length;
+            console.log(response2.rows[0])
           res.render('test', {
             Searching:'YES',
             title:'AAF 던전 몬스터 정보',
@@ -62,6 +63,7 @@ router.get('/search', (req,res,next) => {
         var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_property Ilike $1 order by table1.id, mon_lv;;"
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
           var Data_length = response2.rows.length;
+            console.log(response2.rows[0])
           res.render('test', {
             Searching:'YES',
             title:'AAF 던전 몬스터 정보',
@@ -75,6 +77,7 @@ router.get('/search', (req,res,next) => {
         var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_type Ilike $1 order by table1.id, mon_lv;"
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
           var Data_length = response2.rows.length;
+            console.log(response2.rows[0])
           res.render('test', {
             Searching:'YES',
             title:'AAF 던전 몬스터 정보',
@@ -89,6 +92,7 @@ router.get('/search', (req,res,next) => {
         var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_common Ilike $1 or table2.mon_uncommon Ilike $1 or table2.mon_rare Ilike $1 order by table1.id,mon_lv;"
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
           var Data_length = response2.rows.length;
+            console.log(response2.rows[0])
           res.render('test', {
             Searching:'YES',
             title:'AAF 던전 몬스터 정보',
