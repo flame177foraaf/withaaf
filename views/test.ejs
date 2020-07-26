@@ -84,20 +84,17 @@
 <body>
   <div id="left_sidenav">
     <ul>
-      <% data.forEach(function(item) { %>
-      <li>
-        <a href="#"><%- item.Field %></a>
+
         <ul>
           <% data_partition.forEach(funtion(item_partition){ %>
             <% if(item_partition.FieldName == item.FieldName){ %>
               <li>
                 <a href="/monster/<%- item_partition.Partition %>"><%- item_partition.PartitionName %></a>
-                </li>
+              </li>
             <% } %>
           <% }) %>
         </ul>
-      </li>
-      <% }); %>
+      
     </ul>
 
 
