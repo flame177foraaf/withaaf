@@ -24,13 +24,6 @@ router.get('/', (req,res,next) => {
     Data_length:Data_length,
   });
 
-
-
-  res.render('test', {
-    title:'AAF 던전 몬스터 정보',
-    Data_length:Data_length,
-
-  });
 });
 //  var QueryString = "SELECT * FROM aquafeq.monster where mon_property Ilike $1;"
 //  var QueryString = "select * from aquafeq.field inner join aquafeq.monster on aquafeq.field.field_id =  aquafeq.monster.mon_field where aquafeq.monster.mon_property Ilike $1 order by aquafeq.field.field_id, aquafeq.monster.mon_lv;"
