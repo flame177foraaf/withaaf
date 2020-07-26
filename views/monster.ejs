@@ -190,7 +190,7 @@
 
         <tbody>
           <% if (Data_length != 0 ){ %>
-            <% if (typeof(Field_Id) != 'undefined'){ %>
+            <% if (typeof(Field_Id) != 'undefined' && Field_Id === 'EarthTower' || Field_Id === 'FireTower'){ %>
               <% if (data_monster[0].FieldName === 'Training'){ %>
                 <tr>
                   <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[0].PartitionName %></td>
