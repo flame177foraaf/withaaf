@@ -193,7 +193,7 @@
                   <% } %>
               <% } %>
             <% for (i = 1, j = i-1;  i < Data_length; i++, j+=1){ %>
-              <% if( data_monster[i].mon_field == data_monster[j].mon_field ){ continue;} %>
+              <% if( data_monster[i].mon_field == data_monster[j].part ){ continue;} %>
                 <tr>
                   <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[i].PartitionName %></td>
                 </tr>
