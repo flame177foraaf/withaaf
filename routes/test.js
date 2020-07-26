@@ -17,7 +17,7 @@ router.get('/', (req,res,next) => {
   var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
   client.query(QueryString, (err,response) => {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id asc"
-    cline.query(QueryString, (err, response1) => {
+    client.query(QueryString, (err, response1) => {
 
 
       res.render('test', {
