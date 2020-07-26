@@ -141,8 +141,10 @@ router.get('/:id', (req,res,next) => {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id asc"
     client.query(QueryString, (err, response1) => {
       var Field_Id = req.params.id;
-      var QueryString = "SELECT * FROM aquafeq.monster where mon_field = $1 oder by id asc"
+      var QueryString = "SELECT * FROM aquafeq.monster where mon_field = $1 order by id asc"
       client.query(QueryString, [Field_Id], (err,response) => {
+        console.log(req.params.id)
+        console.log(Field_Id)
         if (typeof(response.rows[0]) !== 'object') {
           res.redirect('/test')
         }
