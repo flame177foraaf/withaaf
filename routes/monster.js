@@ -20,11 +20,11 @@ router.get('/', (req,res,next) => {
 
   });
 });
-//  var QueryString = "SELECT * FROM aquafeq.monster where mon_property Ilike $1;"
-//  var QueryString = "select * from aquafeq.field inner join aquafeq.monster on aquafeq.field.field_id =  aquafeq.monster.mon_field where aquafeq.monster.mon_property Ilike $1 order by aquafeq.field.field_id, aquafeq.monster.mon_lv;"
-// var QueryString = "select (ROW_NUMBER() over()) as num, (select count (DISTINCT field_id) from aquafeq.field  as t1 inner join aquafeq.monster as t2 on t1.field_id =  t2.mon_field where t2.mon_property Ilike $1), * from aquafeq.field  as t1 inner join aquafeq.monster as t2 on t1.field_id =  t2.mon_field where t2.mon_property Ilike $1 order by field_id, mon_lv;"
+//  var QueryString = "SELECT * FROM aquafeq.monster2 where mon_property Ilike $1;"
+//  var QueryString = "select * from aquafeq.field inner join aquafeq.monster2 on aquafeq.field.field_id =  aquafeq.monster.mon_field where aquafeq.monster.mon_property Ilike $1 order by aquafeq.field.field_id, aquafeq.monster.mon_lv;"
+// var QueryString = "select (ROW_NUMBER() over()) as num, (select count (DISTINCT field_id) from aquafeq.field  as t1 inner join aquafeq.monster2 as t2 on t1.field_id =  t2.mon_field where t2.mon_property Ilike $1), * from aquafeq.field  as t1 inner join aquafeq.monster2 as t2 on t1.field_id =  t2.mon_field where t2.mon_property Ilike $1 order by field_id, mon_lv;"
 
-// var QueryString = "SELECT * FROM aquafeq.monster where mon_name Ilike $1"
+// var QueryString = "SELECT * FROM aquafeq.monster2 where mon_name Ilike $1"
 
 
 
@@ -34,7 +34,7 @@ router.get('/search', (req,res,next) => {
   var SearchingText = req.query.SearchText;
   if (SearchingType === 'name'){
     // var FieldNum = req.params.id;
-    var QueryString = "select (ROW_NUMBER() over()) as num, (select count (DISTINCT field_id) as searchcount from aquafeq.field  as t1 inner join aquafeq.monster as t2 on t1.field_id =  t2.mon_field  where t2.mon_name Ilike $1), * from aquafeq.field  as t1 inner join aquafeq.monster as t2 on t1.field_id =  t2.mon_field where t2.mon_name Ilike $1 order by field_id, mon_lv;"
+    var QueryString = "select (ROW_NUMBER() over()) as num, (select count (DISTINCT field_id) as searchcount from aquafeq.field  as t1 inner join aquafeq.monster2 as t2 on t1.field_id =  t2.mon_field  where t2.mon_name Ilike $1), * from aquafeq.field  as t1 inner join aquafeq.monster2 as t2 on t1.field_id =  t2.mon_field where t2.mon_name Ilike $1 order by field_id, mon_lv;"
     client.query(QueryString, ['%' + SearchingText + '%'], (err,response) => {
       console.log(SearchingText)
       console.log(typeof(SearchingType))
@@ -55,7 +55,7 @@ router.get('/search', (req,res,next) => {
     });
   } else  if (SearchingType === 'property'){
     // var FieldNum = req.params.id;
-    var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.field  as t1 inner join aquafeq.monster as t2 on t1.field_id =  t2.mon_field where t2.mon_property Ilike $1 order by field_id, mon_lv;;"
+    var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.field  as t1 inner join aquafeq.monster2 as t2 on t1.field_id =  t2.mon_field where t2.mon_property Ilike $1 order by field_id, mon_lv;;"
     client.query(QueryString, ['%' + SearchingText + '%'], (err,response) => {
       console.log(SearchingText)
       console.log(typeof(SearchingType))
@@ -76,7 +76,7 @@ router.get('/search', (req,res,next) => {
       });
     });
   } else if (SearchingType === 'type'){
-    var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.field  as t1 inner join aquafeq.monster as t2 on t1.field_id =  t2.mon_field where t2.mon_type Ilike $1 order by field_id, mon_lv;;"
+    var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.field  as t1 inner join aquafeq.monster2 as t2 on t1.field_id =  t2.mon_field where t2.mon_type Ilike $1 order by field_id, mon_lv;;"
     client.query(QueryString, ['%' + SearchingText + '%'], (err,response) => {
       console.log(SearchingText)
       console.log(typeof(SearchingType))
@@ -99,7 +99,7 @@ router.get('/search', (req,res,next) => {
     });
 
   } else if (SearchingType === 'collect') {
-    var QueryString = "select * from aquafeq.field as t1 inner join aquafeq.monster as t2 on t1.field_id = t2.mon_field where t2.mon_common Ilike $1 or t2.mon_uncommon Ilike $1 or t2.mon_rare Ilike $1 order by field_id,mon_lv;"
+    var QueryString = "select * from aquafeq.field as t1 inner join aquafeq.monster2 as t2 on t1.field_id = t2.mon_field where t2.mon_common Ilike $1 or t2.mon_uncommon Ilike $1 or t2.mon_rare Ilike $1 order by field_id,mon_lv;"
     client.query(QueryString, ['%' + SearchingText + '%'], (err,response) => {
       console.log(SearchingText)
       console.log(typeof(SearchingType))
@@ -126,7 +126,7 @@ router.get('/search', (req,res,next) => {
 // params.id 를 쓰는 라우터는 마지막에 쓰라고 한다
 router.get('/:id', (req,res,next) => {
   var Field_Id = req.params.id;
-    var QueryString = "SELECT * FROM aquafeq.monster where mon_field = $1"
+    var QueryString = "SELECT * FROM aquafeq.monster2 where mon_field = $1"
     client.query(QueryString, [Field_Id], (err,response) => {
       if (typeof(response.rows[0]) !== 'object') {
         res.redirect('/monster')
