@@ -49,7 +49,7 @@ router.get('/search', (req,res,next) => {
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
           var Data_length = response2.rows.length;
           res.render('test', {
-            SearchingText:SearchingText,
+            Searching:'YES',
             title:'AAF 던전 몬스터 정보',
             data:response.rows,
             data_partition:response1.rows,
@@ -63,7 +63,7 @@ router.get('/search', (req,res,next) => {
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
           var Data_length = response2.rows.length;
           res.render('test', {
-            SearchingText:SearchingText,
+            Searching:'YES',
             title:'AAF 던전 몬스터 정보',
             data:response.rows,
             data_partition:response1.rows,
@@ -76,7 +76,7 @@ router.get('/search', (req,res,next) => {
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
           var Data_length = response2.rows.length;
           res.render('test', {
-            SearchingText:SearchingText,
+            Searching:'YES',
             title:'AAF 던전 몬스터 정보',
             data:response.rows,
             data_partition:response1.rows,
@@ -90,7 +90,7 @@ router.get('/search', (req,res,next) => {
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
           var Data_length = response2.rows.length;
           res.render('test', {
-            SearchingText:SearchingText,
+            Searching:'YES',
             title:'AAF 던전 몬스터 정보',
             data:response.rows,
             data_partition:response1.rows,
@@ -113,27 +113,16 @@ router.get('/:id', (req,res,next) => {
       var Field_Id = req.params.id;
       var QueryString = "SELECT * FROM aquafeq.monster as table1 left join aquafeq.dungeon_partition as table2 on table1.mon_field = table2.part where mon_field = $1 order by table1.mon_lv asc;"
       client.query(QueryString, [Field_Id], (err,response2) => {
-
         var Data_length = response2.rows.length;
-        if (Field_Id == "EarthTower" || Field_Id == "FireTower") {
-          res.render('test_top', {
-            title:'AAF 던전 몬스터 정보',
-            fieldname:'검색이 필요합니다',
-            data:response.rows,
-            data_partition:response1.rows,
-            data_monster:response2.rows,
-            Data_length:Data_length,
-          });
-        } else {
-          res.render('test', {
-            title:'AAF 던전 몬스터 정보',
-            fieldname:'검색이 필요합니다',
-            data:response.rows,
-            data_partition:response1.rows,
-            data_monster:response2.rows,
-            Data_length:Data_length,
-          });
-        }
+        res.render('test', {
+          Field_Id:Field_Id,
+          title:'AAF 던전 몬스터 정보',
+          fieldname:'검색이 필요합니다',
+          data:response.rows,
+          data_partition:response1.rows,
+          data_monster:response2.rows,
+          Data_length:Data_length,
+        });
       });
     })
   });
