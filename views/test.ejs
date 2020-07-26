@@ -225,7 +225,7 @@
           <% } else { %>
             <% if (Data_length != 0 ){ %>
               <tr>
-                <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data[0].field_name %></td>
+                <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
               </tr>
                 <% for ( k = 0; k < Data_length ; k++){ %>
                   <% if (data_monster[k].part == data_monster[0].part){break} %>
@@ -260,9 +260,9 @@
                     <% } %>
                 <% } %>
               <% for (i = 1, j = i-1;  i < Data_length; i++, j+=1){ %>
-                <% if( data[i].field_id == data[j].field_id ){ continue;} %>
+                <% if( data_monster[i].part == data_monster[j].part ){ continue;} %>
                 <tr>
-                  <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data[i].field_name %></td>
+                  <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[i].PartitionName %></td>
                 </tr>
                   <% for ( k = 0; k < Data_length ; k++){ %>
                     <% if (data_monster[k].part != data_monster[i].part){ %>
