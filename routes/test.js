@@ -78,8 +78,6 @@ router.get('/search', (req,res,next) => {
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
           var Data_length = response2.rows.length;
           console.log(response2.rows[0])
-          console.log(Searching)
-          console.log(typeof(Searching))
           res.render('test', {
             Searching:'YES',
             title:'AAF 던전 몬스터 정보',

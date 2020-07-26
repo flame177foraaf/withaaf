@@ -186,7 +186,7 @@
 
 
         <tbody>
-          <% if (typeof(Searching) !== 'undefined') { %>
+          <% if (Searching !== 'YES') { %>
             <tr>
               <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
             </tr>
@@ -261,7 +261,7 @@
                   <% } %>
 
                 <% } %>
-              
+
             <% } else { %>
               <tr>
                 <td colspan="11"; style= "text-align:center; " class="fieldname"> 이런! 원하시는 자료를 찾을 수 없습니다! </td>
