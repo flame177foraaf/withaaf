@@ -197,7 +197,6 @@
                   <tr>
                     <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[i].PartitionName %></td>
                   </tr>
-                <% } %>
                   <% for ( k = 0; k < Data_length ; k++){ %>
                     <% if (data_monster[i].part = data_monster[k].part ){ %>
                       <% if ( data_monster[k].part != 'FireTower' || data_monster[k].part != 'EarthTower'){ %>
@@ -232,7 +231,9 @@
                     <% } %>
                   <% } %>
                 <% } %>
+
               <% } %>
+            <% } %>
           <% } else if (typeof(Searching) !== 'undefined') { %>
             <% if(Data_length === 0){ %>
               <tr>
