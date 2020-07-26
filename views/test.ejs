@@ -162,8 +162,8 @@
               </tr>
 
               <% for( l = 0; l < Data_length; l++) { %>
-                <% if ( data_monster[l].mon_field !== data_partition[0].part  ) {continue;}%>
-                  <% if (data_monster[0].field_id == 'EarthTower' || data_monster[0].field_id == 'FireTower'){ %>
+                <% if ( data_monster[l].mon_field !== data_partition[0].mon_field  ) {continue;}%>
+                  <% if (data_monster[0].mon_field == 'EarthTower' || data_monster[0].mon_field == 'FireTower'){ %>
                     <tr>
                       <td ></td>
                       <td><%- data_monster[l].mon_name %></td>
@@ -194,11 +194,11 @@
                   <% } %>
               <% } %>
             <% for (i = 1, j = i-1;  i < Data_length; i++, j+=1){ %>
-              <% if ( data_monster[l].mon_field !== data_partition[0].part  ) {continue;}%>
+              <% if( data_monster[i].mon_field == data_monster[j].mon_field ){ continue;} %>
                 <tr>
-                  <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
+                  <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[0].PartitionName %></td>
                 </tr>
-                <% if (data_monster[0].field_id == 'EarthTower' || data_monster[0].field_id == 'FireTower'){ %>
+                <% if (data_monster[0].mon_field == 'EarthTower' || data_monster[0].mon_field == 'FireTower'){ %>
                   <tr>
                     <td ></td>
                     <td><%- data_monster[l].mon_name %></td>
