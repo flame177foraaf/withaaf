@@ -44,7 +44,7 @@ router.get('/search', (req,res,next) => {
       var SearchingType = req.query.SearchType;
       var SearchingText = req.query.SearchText;
       if (SearchingType !== 'collect'){
-        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_type Ilike $1 order by table1.id, mon_lv;"
+        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.$2 Ilike $1 order by table1.id, mon_lv;"
         client.query(QueryString, ['%' + SearchingText + '%', SearchingType], (err,response2) => {
           console.log(QueryString)
           var Data_length = response2.rows.length;
