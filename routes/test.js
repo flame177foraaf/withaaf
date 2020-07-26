@@ -145,7 +145,7 @@ router.get('/:id', (req,res,next) => {
       client.query(QueryString, [Field_Id], (err,response2) => {
         console.log(req.params.id)
         console.log(Field_Id)
-        console.log(typeOf(response2))
+        console.log(typeOf(response2.rows))
         var Data_length = response2.rows.length;
         if (Field_Id == "EarthTower" || Field_Id == "FireTower") {
           res.render('monster_top', {
