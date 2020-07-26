@@ -107,7 +107,7 @@
       <h1>몬스터</h1>
     </div>
     <div class="" id="seach_form_id" >
-      <form action="/monster/search" method="get" name="searchform" onsubmit="return checkonclick()">
+      <form action="/test/search" method="get" name="searchform" onsubmit="return checkonclick()">
         <input type="text" placeholder="찾기 버튼을 누르세요" name="SearchText" id="SearchText" style="width:200px">
         <select name="SearchType">
           <option value="name">이름</option>
@@ -115,7 +115,7 @@
           <option value="type">타입</option>
           <option value="collect">수집품</option>
         </select>
-        <input action="/monster/search" type="submit" class="btn" value="찾기"  ></button>
+        <input action="/test/search" type="submit" class="btn" value="찾기"  ></button>
 
       </form>
       <table id="mon_table" style="margin-top:5px;">
@@ -154,7 +154,7 @@
 
           <% if(Data_length == 0){ %>
             <tr>
-              <td colspan="11"; style= "text-align:left; padding-left: 50px;"> 해당하는 조건을 찾을 수 없습니다.</td>
+              <td colspan="11"; style= "text-align:left; padding-left: 50px;"> 해당 자료를 찾을 수 없습니다.</td>
             </tr>
           <% } else { %>
               <tr>
@@ -197,7 +197,7 @@
                 <tr>
                   <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[i].PartitionName %></td>
                 </tr>
-                <% if (data_monster[0].mon_field == 'EarthTower' || data_monster[0].mon_field == 'FireTower'){ %>
+                <% if (data_monster[0].mon_field == 'EarthTower' || data_monster[i].mon_field == 'FireTower'){ %>
                   <tr>
                     <td ></td>
                     <td><%- data_monster[l].mon_name %></td>
@@ -214,7 +214,7 @@
                 <% } else { %>
 
                   <% for( l = 0; l < Data_length; l++) { %>
-                    <% if ( data_monster[l].mon_field !== data_monster[0].part  ) {continue;}%>
+                    <% if ( data_monster[l].mon_field !== data_monster[i].part  ) {continue;}%>
                     <tr>
                       <td style= "text-align:center;"><%- data_monster[l].mon_lv %></td>
                       <td><%- data_monster[l].mon_name %></td>
