@@ -186,7 +186,7 @@
 
 
         <tbody>
-            <% if(Data_length === 0){ %>
+            <% if(Data_length === 0 || typeof(Data_length) === undefined){ %>
               <tr>
                 <td colspan="11"; style= "text-align:left; padding-left: 50px;"> 해당하는 자료가 없습니다. </td>
               </tr>
@@ -229,12 +229,12 @@
                       <% } %>
                     <% } %>
                   <% } %>
-                <% } else if (data_monster[i].PartitionName != data_monster[j].PartitionName ){
+                <% } else {
                   <tr>
                     <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[i].PartitionName %></td>
                   </tr>
                   <% for ( k = 0; k < Data_length ; k++){ %>
-                    <% if (data_monster[i].part = data_monster[k].part ){ %>
+                    <% if (data_monster[0].part = data_monster[k].part ){ %>
                       <% if ( data_monster[k].part != 'FireTower' || data_monster[k].part != 'EarthTower'){ %>
                         <tr>
                           <td style= "text-align:center;"><%- data_monster[k].mon_lv %></td>
@@ -266,51 +266,10 @@
                       <% } %>
                     <% } %>
                   <% } %>
-                } %>
-
+                <% } %>
               <% } %>
             <% } %>
-            <% if(Data_length === 0){ %>
-              <tr>
-                <td colspan="11"; style= "text-align:left; padding-left: 50px;"> 검색 또는 왼쪽 메뉴를 이용해주세요.</td>
 
-              </tr>
-            <% } else { %>
-              <% for ( k = 0; k < Data_length ; k++){ %>
-                <tr>
-                  <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
-                </tr>
-                  <% if ( data_monster[k].part != 'FireTower' || data_monster[k].part != 'EarthTower'){ %>
-                    <tr>
-                      <td style= "text-align:center;"><%- data_monster[k].mon_lv %></td>
-                      <td><%- data_monster[k].mon_name %></td>
-                      <td><%- data_monster[k].mon_property %></td>
-                      <td><%- data_monster[k].mon_ether %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                      <td><%- data_monster[k].mon_resist %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_gem %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                      <td id =""><%- data_monster[k].mon_skill %></td>
-                    </tr>
-                  <% } else { %>
-                    <tr>
-                      <td><%- data_monster[k].TowerFloor %></td>
-                      <td><%- data_monster[k].mon_name %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].Tower_HP %></td>
-                      <td><%- data_monster[k].mon_property %></td>
-                      <td><%- data_monster[k].mon_ether %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                      <td><%- data_monster[k].mon_resist %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                      <td id =""><%- data_monster[k].mon_skill %></td>
-                    </tr>
-                  <% } %>
-              <% } %>
-          <% } %>
 
         </tbody>
       </table>
