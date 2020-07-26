@@ -146,7 +146,6 @@ router.get('/:id', (req,res,next) => {
         console.log(req.params.id)
         console.log(Field_Id)
         console.log(QueryString)
-        console.log(typeof(response2.rows))
         console.log(response2.rows)
 
         var Data_length = response2.rows.length;
