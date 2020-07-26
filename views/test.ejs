@@ -88,13 +88,15 @@
       <li>
         <a href="#"><%- item.Field %></a>
         <ul>
-          <li>
-            <a href="/monster/1">죽음의 던전 1 층</a>
-            <a href="/monster/2">죽음의 던전 2 층</a>
-            <a href="/monster/3">죽음의 던전 3 층</a>
-            <a href="/monster/4">죽음의 던전 4 층</a>
+          <% data_partition.forEach(funtion(item_partition){ %>
+            <% if(data_partition.FieldName == data.FieldName){ %>
+              <li>
+                <a href="/monster/<%- data_partition.Partition %>"><%- data_partition.PartitionName%></a>
+                </li>
+            <% } %>
 
-           </li>
+          <% }) %>
+
         </ul>
       </li>
       <% }); %>

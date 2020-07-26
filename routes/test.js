@@ -14,15 +14,22 @@ client.connect();
 router.get('/', (req,res,next) => {
   var Data_length = 0;
 
-  var QueryString = "SELECT * FROM aquafeq.Dungeon order by id asc"
+  var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
   client.query(QueryString, (err,response) => {
-    res.render('test', {
-    title:'AAF 던전 몬스터 정보',
-    fieldname:'검색이 필요합니다',
+    var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id asc"
+    cline.query(QueryString, (err, response1) => {
 
-    data:response.rows,
-    Data_length:Data_length,
-    });
+
+      res.render('test', {
+      title:'AAF 던전 몬스터 정보',
+      fieldname:'검색이 필요합니다',
+
+      data:response.rows,
+      data_partition:response1.rows,
+      Data_length:Data_length,
+      });
+    })
+
   });
 });
 //  var QueryString = "SELECT * FROM aquafeq.monster where mon_property Ilike $1;"
