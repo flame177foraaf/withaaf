@@ -70,18 +70,20 @@
 
   </script>
   <script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    $(document).ready(function(){
-      $('.partition menu').click(function(){
-        if($('.partition menu').hasClass('partition menu')){
-          $('.partition menu').addClass('close').removeClass('partition menu');
-          $('.partition ul').css('visibility', 'visible');
-        }else if($('.close').hasClass('close')){
-          $('.close').addClass('partition menu').removeClass('close');
-          $('.partition ul').css('visibility', 'hidden');
-        }
-      });
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.partition menu').click(function(){
+      if($('.partition menu').hasClass('partition menu')){
+        $('.partition menu').addClass('close').removeClass('partition menu');
+        $('.partition ul').css('visibility', 'visible');
+      }else if($('.close').hasClass('close')){
+        $('.close').addClass('partition menu').removeClass('close');
+        $('.partition ul').css('visibility', 'hidden');
+      }
     });
+  });
   </script>
+
     <%- include ('head') %>
   <title><%= title%></title>
 </head>
