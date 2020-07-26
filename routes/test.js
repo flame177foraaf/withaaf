@@ -141,8 +141,8 @@ router.get('/:id', (req,res,next) => {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id asc"
     client.query(QueryString, (err, response1) => {
       var Field_Id = req.params.id;
-      var QueryString = "SELECT * FROM aquafeq.monster where mon_field = $1 order by id asc"
-      client.query(QueryString, [Field_Id], (err,response) => {
+      var QueryString = "SELECT * FROM aquafeq.monster table1 left join aquafeq.dungeon_partition table2 on table1.mon_field = table2.part where mon_field = Field_Id order by table1.id asc;"
+      client.query(QueryString, [Field_Id], (err,response2) => {
         console.log(req.params.id)
         console.log(Field_Id)
         if (typeof(response.rows[0]) !== 'object') {
@@ -155,6 +155,7 @@ router.get('/:id', (req,res,next) => {
             fieldname:'검색이 필요합니다',
             data:response.rows,
             data_partition:response1.rows,
+            data_monster:response2.rows,
             Data_length:Data_length,
           });
         } else {
@@ -163,6 +164,7 @@ router.get('/:id', (req,res,next) => {
             fieldname:'검색이 필요합니다',
             data:response.rows,
             data_partition:response1.rows,
+            data_monster:response2.rows,
             Data_length:Data_length,
           });
         }
