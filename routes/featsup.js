@@ -190,8 +190,9 @@ router.get('/:id', (req,res,next) => {
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where reversefeat Ilike $1 ORDER BY featid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
-      if (typeof(TotalCount) === 'undefined') {
-        TotalCount = 1;
+        var TotalCount = 1;
+      } else {
+        var TotalCount = response.rows[0].totalcount;
       }
       var DataCountInPage = 10;
       var PageSize = 10;
@@ -218,7 +219,7 @@ router.get('/:id', (req,res,next) => {
         SearchType: SearchType,
         Search: Search,
       });
-    });
+    })
   } else {
     res.redirect('/featsup');
   };
