@@ -13,18 +13,10 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  var QueryString = "select featid, featname from aquafeq.featsup ORDER BY featid asc ;"
-  client.query(QueryString, (err, response) => {
-    console.log(response.rows[0])
-    if (err) {
-      res.redirect('/');
-    } else {
       res.render('featsup', {
         title:'AAF 장비',
-        data:response.rows
       });
-    };
-  });});
+});
 
 router.get('/fixfeat', (req,res,next) => {
   var QueryString = "select featname from aquafeq.featsup"
@@ -197,7 +189,7 @@ router.get('/:id', (req,res,next) => {
     var CurrentPage = req.params.id;
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where reversefeat Ilike $1 ORDER BY featid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      var TotalCount = response.rows.totalcount;
+      if(typeof(response.rows[0]) !== "object") {
       if (typeof(TotalCount) === 'undefined') {
         TotalCount = 1;
       }
