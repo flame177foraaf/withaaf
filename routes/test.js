@@ -12,6 +12,7 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
+  var Search = req.params.id;
 
   var QueryString = "select rival_name from aquafeq.rival where rival_grade like '%일반%'"
   client.query(QueryString, (err, response1) =>{
@@ -20,11 +21,13 @@ router.get('/', (req,res,next) => {
       var QueryString = "select rival_name from aquafeq.rival where rival_grade like '%대강적%'"
       client.query(QueryString, (err, response3) =>{
         res.render('test' , {
-          Rival: '왼쪽 목록에서 선택해주세요.',
-
-          list1: response1.rows,
-          list2: response2.rows,
-          list3: response3.rows,
+          Rival: Search,
+          rival_information:rival_information.rows,
+          data1: data1.rows,
+          data2: data2.rows,
+          data3: data3.rows,
+          data4: data4.rows,
+          data5: data5.rows,
         })
       })
     })
