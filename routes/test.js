@@ -36,19 +36,29 @@ router.get('/', (req,res,next) => {
 
 router.get(':id' , (req,res,next) => {
   var Search = req.params.id;
-  console.log(Search)
+  console.log(Search);
+  if (Search === '천룡왕') {
+    Search = '희귀 강적 천룡왕'
+  }
   var QueryString = 'SELECT * FROM aquafeq.rival where rival_information like $1';
-  client.query( QueryString, [Search], (err, rival_information) => {
+  client.query( QueryString, ['%' + Search + '%'], (err, rival_information) => {
     var QueryString = 'SELECT * FROM aquafeq.aquafwp where wpgrade like $1';
-    client.query( QueryString, [Search], (err, data1) => {
+    client.query( QueryString, ['%' + Search + '%'], (err, data1) => {
       var QueryString = 'SELECT * FROM aquafeq.aquafarm where armgrade like $1';
-      client.query( QueryString, [Search], (err, data2) => {
+      client.query( QueryString, ['%' + Search + '%'], (err, data2) => {
         var QueryString = 'SELECT * FROM aquafeq.aquafacc where accgrade like $1';
-        client.query( QueryString, [Search], (err, data3) => {
+        if (Search.indexOf('사흑천') === -1 ) {
+          var QueryString = 'SELECT * FROM aquafeq.aquafacc where accgrade like %사흑천%';
+        }
+        client.query( QueryString, ['%' + Search + '%'], (err, data3) => {
           var QueryString = 'SELECT * FROM aquafeq.featsup where featgrade like $1';
-          client.query( QueryString, [Search], (err, data4) => {
+          if (Search.indexOf('사흑천') === -1 ) {
+            var QueryString = 'SELECT * FROM aquafeq.aquafacc where accgrade like %사흑천%';
+          }
+
+          client.query( QueryString, ['%' + Search + '%'], (err, data4) => {
             var QueryString = 'SELECT * FROM aquafeq.aquafgem where collectname like $1';
-            client.query( QueryString, [Search], (err, data5) => {
+            client.query( QueryString, ['%' + Search + '%'], (err, data5) => {
               res.render('test' , {
 
                 Rival: Search,
