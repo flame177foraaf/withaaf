@@ -163,11 +163,12 @@
             </tr>
           <% } else { %>
             <% data5.forEach(function(item) { %>
-            <td><%- item.gemgrade %></td>
-            <td style='text-align: center'><%- item.collectname %></td>
-            <td style='text-align: center'><%- item.gemname %></td>
-            <td style='text-align: center'><%- item.gemobject %></td>
-            <td><%- item.gemeffect %></td>
+              <tr>
+                <td><%- item.gemgrade %></td>
+                <td style='text-align: center'><%- item.gemname %></td>
+                <td style='text-align: center'><%- item.gemobject %></td>
+                <td><%- item.gemeffect %></td>
+              </tr>
             <% }); %>
           <% } %>
 
