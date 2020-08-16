@@ -19,6 +19,8 @@ router.get('/', (req,res,next) => {
       var QueryString = "select rival_name from aquafeq.rival where rival_grade like '%대강적%'"
       client.query(QueryString, (err, response3) =>{
         res.render('test' , {
+          Rival: Search,
+
           list1: response1.rows,
           list2: response2.rows,
           list3: response3.rows,
@@ -65,7 +67,7 @@ router.get(':id' , (req,res,next) => {
     })
 
   })
-  
+
 })
 /*
 router.get('/', (req,res,next) => {
