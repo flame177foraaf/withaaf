@@ -50,7 +50,8 @@ router.get('/:id' , (req,res,next) => {
               var QueryString = 'SELECT * FROM aquafeq.featsup where featgrade like $1';
 
             }
-
+            console.log(data3.rows[0])
+            console.log(data3.rows);
             client.query( QueryString, ['%' + Search + '%'], (err, data4) => {
               var QueryString = 'SELECT * FROM aquafeq.aquafgem where collectname like $1';
               client.query( QueryString, ['%' + Search + '%'], (err, data5) => {
