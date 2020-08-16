@@ -33,48 +33,20 @@ router.get('/:id' , (req,res,next) => {
   }
   var QueryString = "select * from aquafeq.rival"
   client.query(QueryString, (err, response1) =>{
-      var QueryString = 'SELECT * FROM aquafeq.aquafwp where wpgrade like $1';
-      client.query( QueryString, ['%' + Search + '%'], (err, data1) => {
-        var QueryString = 'SELECT * FROM aquafeq.aquafarm where armgrade like $1';
-        client.query( QueryString, ['%' + Search + '%'], (err, data2) => {
-          if (Search.indexOf('사흑천') == '-1' ) {
-            var QueryString = 'SELECT * FROM aquafeq.aquafacc where accgrade like %사흑천%';
-          } else {
-            var QueryString = 'SELECT * FROM aquafeq.aquafacc where accgrade like $1';
+    var QueryString = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like $1 or feat.featgrade like $1;'
+    if(Search.indexOf('사흑천') != '-1'){
+      var QueryString = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like "%사흑천%" or feat.featgrade like "%사흑천%";'
 
-          }
-          client.query( QueryString, ['%' + Search + '%'], (err, data3) => {
-            if (Search.indexOf('사흑천') == '-1' ) {
-              var QueryString = 'SELECT * FROM aquafeq.featsup where featgrade like %사흑천%';
-            } else {
-              var QueryString = 'SELECT * FROM aquafeq.featsup where featgrade like $1';
-
-            }
-            console.log(data3.rows[0])
-            console.log(data3.rows);
-            client.query( QueryString, ['%' + Search + '%'], (err, data4) => {
-              var QueryString = 'SELECT * FROM aquafeq.aquafgem where collectname like $1';
-              client.query( QueryString, ['%' + Search + '%'], (err, data5) => {
-                res.render('test' , {
-                  list1: response1.rows,
-                  data1: data1.rows,
-                  data2: data2.rows,
-                  data3: data3.rows,
-                  data4: data4.rows,
-                  data5: data5.rows,
-                })
-
-              })
-
-            })
-
-          })
-
-        })
-
+    }
+    client.query( QueryString, ['%' + Search + '%' ], (err, data1) => {
+      res.render('test' , {
+        list1: response1.rows,
+        data1: data1.rows,
       })
 
+
     })
+  })  
 })
 /*
 router.get('/', (req,res,next) => {

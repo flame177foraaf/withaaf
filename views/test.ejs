@@ -143,13 +143,13 @@
             </tr>
           <% } %>
 
-            <% if (typeof(data2[0]) !== 'undefined'){ %>
+            <% if (typeof(data1[0]) !== 'undefined'){ %>
               <tr >
                 <td colspan="9" style="text-align:center">
                   방어구
                 </td>
               </tr>
-              <% data2.forEach(function(item) { %>
+              <% data1.forEach(function(item) { %>
                 <tr>
                   <td><%- item.armname %></td>
                   <td style='text-align: center'><%- item.armlimit %></td>
@@ -164,13 +164,13 @@
             <% } %>
 
 
-            <% if (typeof(data3[0]) !== 'undefined'){ %>
+            <% if (typeof(data1[0]) !== 'undefined'){ %>
               <tr>
                 <td colspan="9" style="text-align:center">
                   악세사리
                 </td>
               </tr>
-              <% data3.forEach(function(item) { %>
+              <% data1.forEach(function(item) { %>
                 <tr>
                   <td><%- item.accname %></td>
                   <td style='text-align: center'><%- item.acclimit %></td>
@@ -187,13 +187,13 @@
 
 
 
-            <% if (typeof(data4[0]) !== 'undefined'){ %>
+            <% if (typeof(data1[0]) !== 'undefined'){ %>
               <tr>
                 <td colspan="9" style="text-align:center">
                   피트서포터
                 </td>
               </tr>
-              <% data4.forEach(function(item) { %>
+              <% data1.forEach(function(item) { %>
                 <tr>
                   <td><%- item.featname %></td>
                   <td><%- item.feat %></td>
@@ -203,13 +203,13 @@
             <% } %>
 
 
-            <% if (typeof(data5[0]) !== 'undefined'){ %>
+            <% if (typeof(data1[0]) !== 'undefined'){ %>
               <tr>
                 <td colspan="9" style="text-align:center">
                   루엘
                 </td>
               </tr>
-              <% data5.forEach(function(item) { %>
+              <% data1.forEach(function(item) { %>
                 <tr>
                   <td><%- item.gemgrade %></td>
                   <td style='text-align: center'><%- item.gemname %></td>
