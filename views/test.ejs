@@ -88,9 +88,9 @@
 
 
 
-    <div style="margin-left:350px">
+    <div style="margin-left:400px">
       <% if (typeof(Search) != 'undefined'){ %>
-        <table width="80%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="rival_RoseWhip">
+        <table width="100%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="rival_RoseWhip">
           <thead>
             <colgroup>
               <col width="200">
@@ -105,11 +105,11 @@
           </thead>
           <tbody>
             <tr align="center" height="40">
-              <td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="8"><%- list2.rival_name %></td>
+              <td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="8"><%- list2[0].rival_name %></td>
             </tr>
             <tr>
                 <td style="padding:18px 18px 0 18px;" colspan="8">
-                  <%- list2.rival_information %>
+                  <%- list2[0].rival_information %>
                 </td>
             </tr>
 
