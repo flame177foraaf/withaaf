@@ -161,7 +161,7 @@
                   </td>
                 </tr>
 
-                <% data2.forEach(function(item) { %>
+                <% data1.forEach(function(item) { %>
                   <% if (item.armname != null){ %>
                     <tr>
                       <td><%- item.armname %></td>
@@ -183,7 +183,7 @@
                     악세사리
                   </td>
                 </tr>
-                <% data3.forEach(function(item) { %>
+                <% data1.forEach(function(item) { %>
                   <% if (item.accname != null){ %>
                     <tr>
                       <td><%- item.accname %></td>
@@ -216,7 +216,7 @@
                       피트서포터
                     </td>
                   </tr>
-                  <% data4.forEach(function(item) { %>
+                  <% data1.forEach(function(item) { %>
                     <% if (item.featname != null){ %>
                       <tr>
                         <td colspan=""><%- item.featname %></td>
@@ -247,7 +247,7 @@
                       루엘
                     </td>
                   </tr>
-                  <% data5.forEach(function(item) { %>
+                  <% data1.forEach(function(item) { %>
                     <% if (item.gemname != null){ %>
                       <tr>
                         <td colspan=""><%- item.gemgrade %></td>

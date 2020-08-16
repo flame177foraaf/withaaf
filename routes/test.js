@@ -37,24 +37,45 @@ router.get('/:id' , (req,res,next) => {
     var QueryString = "select * from aquafeq.rival where rival_name like $1 ";
     console.log(QueryString);
     client.query(QueryString, ['%' + Search + '%'], (err, response2) => {
-      var QueryString1 = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like $1 or feat.featgrade like $1;'
-      if (Search.indexOf('사흑천') != '-1') {
-        var QueryString1 = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like ' + "'%사흑천%'" + ' or feat.featgrade like ' + "'%사흑천%'" + ';'
+      var QueryString1 = 'select * from aquafeq.aquafwp as wp where wp.wpgrade like $1'
 
-      }
       client.query( QueryString1, ['%' + Search + '%'], (err, data1) => {
-        if (err) {
-          console.log(err);
-          res.redirect('/test');
-        } else {
-          console.log(data1)
-          res.render('test' , {
-            Search: Search,
-            list1: response1.rows,
-            list2: response2.rows,
-            data1: data1.rows,
+        var QueryString1 = 'select * from aquafeq.aquafarm as arm  where arm.amgrade like $1'
+        client.query( QueryString1, ['%' + Search + '%'], (err, data2) => {
+          var QueryString1 = 'select * from aquafeq.aquafacc  as acc where acc.accgrade like $1'
+          if (Search.indexOf('사흑천') != '-1') {
+            Search = '사흑천'
+          }
+          client.query( QueryString1, ['%' + Search + '%'], (err, data3) => {
+            var QueryString1 = 'select * from aquafeq.aquaffeat as feat where feat.featgrade like $1'
+            if (Search.indexOf('사흑천') != '-1') {
+              Search = '사흑천'
+            }
+            client.query( QueryString1, ['%' + Search + '%'], (err, data4) => {
+              var QueryString1 = 'select * from aquafeq.aquafgem as gem where gem.collectname like $1'
+              client.query( QueryString1, ['%' + Search + '%'], (err, data5) => {
+                  if (err) {
+                    console.log(err);
+                    res.redirect('/test');
+                  } else {
+                    console.log(data1)
+                    res.render('test' , {
+                      Search: Search,
+                      list1: response1.rows,
+                      list2: response2.rows,
+                      data1: data1.rows,
+                      data2: data2.rows,
+                      data3: data3.rows,
+                      data4: data4.rows,
+                      data5: data5.rows,
+                    })
+                  }
+              })
+            })
           })
-        }
+        })
+
+
 
 
       })
