@@ -44,9 +44,8 @@ router.get('/:id' , (req,res,next) => {
         data1: data1.rows,
       })
 
-
     })
-  })  
+  })
 })
 /*
 router.get('/', (req,res,next) => {
