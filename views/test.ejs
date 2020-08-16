@@ -48,38 +48,38 @@
     <div class="" style="width:25%" id="left_sidenav">
       <ul>
         <h3 class="" style="margin:5px" >강적</h3>
-          <% list1.forEach(function(item){ %>
-            <% if (item.rival_grade === '일반 강적'){ %>
-              <% var rival_firstname = item.rival_name.split(' "')[0] %>
-              <li>
-                <a href="/test/<%- rival_firstname %>" class=" "> <%- item.rival_name %></a>
-              </li>
-            <% } %>
+        <% for ( i = 0; i < list1.length; i++){ %>
+          <% if (list1[i].rival_grade === '일반 강적'){ %>
+            <% var rival_firstname = list1[i].rival_name.split(' "')[0] %>
+            <li>
+              <a href="/test/<%- rival_firstname %>" class=" "> <%- list1.rival_name %></a>
+            </li>
+          <% } %>
 
-          <% }) %>
+        <% } %>
+
 
         <h3 class="" style="margin:5px" >희귀 강적</h3>
-          <% list1.forEach(function(item){ %>
-            <% if (item.rival_grade === '희귀 강적'){ %>
-              <% var rival_firstname = item.rival_name.split(' "')[0] %>
-              <li>
-                <a href="/test/<%- rival_firstname %>" class=" "> <%- item.rival_name %></a>
-              </li>
-              <% } %>
-            <% }) %>
+        <% for ( i = 0; i < list1.length; i++){ %>
+          <% if (list1.rival_grade[i] === '희귀 강적'){ %>
+            <% var rival_firstname = list1[i].rival_name.split(' "')[0] %>
+            <li>
+              <a href="/test/<%- rival_firstname %>" class=" "> <%- list1.rival_name %></a>
+            </li>
+          <% } %>
+        <% } %>
 
 
 
           <h3 class="" style="margin:5px" >대강적 강적</h3>
-          <% list1.forEach(function(item){ %>
-            <% if (item.rival_grade === '대강적'){ %>
-              <% var rival_firstname = item.rival_name.split(' "')[0] %>
+          <% for ( i = 0; i < list1.length; i++){ %>
+            <% if (list1.rival_grade[i] === '대강적'){ %>
+              <% var rival_firstname = list1[i].rival_name.split(' "')[0] %>
               <li>
-                <a href="/test/<%- rival_firstname %>" class=" "> <%- item.rival_name %></a>
+                <a href="/test/<%- rival_firstname %>" class=" "> <%- list1.rival_name %></a>
               </li>
-              <% } %>
-            <% }) %>
-
+            <% } %>
+          <% } %>
 
       </ul>
     </div>
