@@ -44,6 +44,10 @@ router.get('/:id' , (req,res,next) => {
         console.log(err);
         res.redirect('/test');
       } else {
+        console.log(data1)
+        console.log(data1.wpproperty)
+
+
         res.render('test' , {
           Search: Search,
           list1: response1.rows,
