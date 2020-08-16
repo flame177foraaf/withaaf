@@ -7,9 +7,9 @@
 	</tr>
 	<tr>
 		<td style="padding:18px;" colspan="9">
-			- 40 레벨 상태부터 등장<br><br>
-			- 각 페이즈에 따라 <b>오래된 장미장식의 상자, 화려한 장미장식의 상자, 빛나는 장미장식의 상자</b> 획득<br><br>
-			- 보상의 상자 식별을 통해 <b>조수 카드 "세레스 파스크움" 고용</b> 가능(언커먼, 레어까지 브레이크 가능)<br><br>
+			- 40 레벨 상태부터 등장<br>
+			- 각 페이즈에 따라 <b>오래된 장미장식의 상자, 화려한 장미장식의 상자, 빛나는 장미장식의 상자</b> 획득<br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "세레스 파스크움" 고용</b> 가능(언커먼, 레어까지 브레이크 가능)<br>
 			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 수집품 , 2 종의 피트 서포터</b> 획득 가능
 		</td>
 	</tr>
@@ -21,15 +21,15 @@
   <% if (typeof(data1[0]) === 'undefined'){ %>
     <tr>
       <div class="" id="pagelist" >
-        <td colspan="9" style= "text-align:center; font-size:24px">
+        <td colspan="9" style= "text-align:center;">
           해당하는 데이터가 없습니다.
         </td>
       </div>
     </tr>
   <% } else { %>
-    <% data1.forEach(function(item1) { %>
-      <% if (item1.wpproperty.indexOf('/') != -1){ %>
-        <% var WpP = item1.wpproperty.split('/') %>
+    <% data1.forEach(function(item) { %>
+      <% if (item.wpproperty.indexOf('/') != -1){ %>
+        <% var WpP = item.wpproperty.split('/') %>
         <% if ( WpP[1] == ' 불 ') { %>
           <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD">
         <% } else if (WpP[1] == ' 물 ' ) { %>
@@ -50,20 +50,125 @@
       <% } else { %>
         <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
       <% } %>
-      <td><%- item1.wpgrade %></td>
-      <td><%- item1.wpname %></td>
-      <td style='text-align: center'><%- item1.wplimit %></td>
-      <td style='text-align: center'><%- item1.wpsocket %></td>
-      <td style='text-align: center'><%- item1.wpether %></td>
-      <td style='text-align: center'><%- item1.wpstats %></td>
-      <td style='text-align: center'><%- item1.wpproperty %></td>
-      <td><%- item1.wpfeat %></td>
-      <td><%- item1.wpcustom %></td>
+      <td><%- item.wpgrade %></td>
+      <td><%- item.wpname %></td>
+      <td style='text-align: center'><%- item.wplimit %></td>
+      <td style='text-align: center'><%- item.wpsocket %></td>
+      <td style='text-align: center'><%- item.wpether %></td>
+      <td style='text-align: center'><%- item.wpstats %></td>
+      <td style='text-align: center'><%- item.wpproperty %></td>
+      <td><%- item.wpfeat %></td>
+      <td><%- item.wpcustom %></td>
     <% }) %>
   <% } %>
 
 
   </tr>
+  <tr >
+    <td colspan="9" style="text-align:center">
+      방어구
+    </td>
+  </tr>
+  <tr>
+    <% if (typeof(data2[0]) === 'undefined'){ %>
+          <td colspan="9" style= "text-align:center;">
+            해당하는 데이터가 없습니다.
+          </td>
+
+    <% } else { %>
+      <% data2.forEach(function(item) { %>
+        <td><%- item.armgrade %></td>
+        <td><%- item.armname %></td>
+        <td style='text-align: center'><%- item.armlimit %></td>
+        <td style='text-align: center'><%- item.armsocket %></td>
+        <td style='text-align: center'><%- item.armether %></td>
+        <td style='text-align: center'><%- item.armstats %></td>
+        <td style='text-align: center'><%- item.armproperty %></td>
+        <td><%- item.armfeat %></td>
+        <td><%- item.armcustom %></td>
+      <% }) %>
+    <% } %>
+
+  </tr>
+  <tr>
+    <td colspan="9" style="text-align:center">
+      악세사리
+    </td>
+  </tr>
+  <tr>
+    <% if (typeof(data3[0]) === 'undefined'){ %>
+          <td colspan="9" style= "text-align:center;">
+            해당하는 데이터가 없습니다.
+    <% } else { %>
+      <% data3.forEach(function(item) { %>
+        <td><%- item.accgrade %></td>
+        <td><%- item.accname %></td>
+        <td style='text-align: center'><%- item.acclimit %></td>
+        <td style='text-align: center'><%- item.accsocket %></td>
+        <td style='text-align: center'><%- item.accether %></td>
+        <td style='text-align: center'><%- item.accstats %></td>
+        <td style='text-align: center'><%- item.accproperty %></td>
+        <td><%- item.accfeat %></td>
+        <td><%- item.acccustom %></td>
+      <% }) %>
+    <% } %>
+  </tr>
+  <tr>
+    <td>피트서포터</td>
+  </tr>
+  <tr>
+    <% if (typeof(data4[0]) === 'undefined'){ %>
+          <td colspan="9" style= "text-align:center;">
+            해당하는 데이터가 없습니다.
+          </td>
+    <% } else { %>
+      <% data4.forEach(function(item) { %>
+        <td><%- item.featgrade %></td>
+        <td><%- item.featname %></td>
+        <td><%- item.feat %></td>
+        <td><%- item.reversefeat %></td>
+
+      <% }); %>
+    <% } %>
+
+  </tr>
+  <tr>
+    <td>루엘</td>
+  </tr>
+  <tr>
+    <% if (typeof(data1[0]) === 'undefined'){ %>
+      <tr>
+        <div class="" id="pagelist" >
+          <td colspan="9" style= "text-align:center; font-size:24px">
+            해당하는 데이터가 없습니다.
+          </td>
+        </div>
+      </tr>
+    <% } else { %>
+
+    <% } %>
+      <% data1.forEach(function(item) { %>
+
+      <td><%- item.gemgrade %></td>
+      <td style='text-align: center'><%- item.collectname %></td>
+      <td style='text-align: center'><%- item.gemname %></td>
+      <td style='text-align: center'><%- item.gemobject %></td>
+      <td><%- item.gemeffect %></td>
+      <% }); %>
+
+  </tr>
+  <tr>
+    <td>수집품 - 준비중입니다</td>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td>조수 - 준비중입니다</td>
+  </tr>
+  <tr>
+    <td>칭호 - 준비중입니다</td>
+  </tr>
+
 
 </table>
 <br>

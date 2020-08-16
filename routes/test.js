@@ -15,14 +15,31 @@ router.get('/', (req,res,next) => {
   var Data_length = 0;
   var QueryString = "SELECT * FROM aquafeq.aquafwp WHERE wpgrade ilike $1 "
   client.query(QueryString, ['%' + '세레스' + '%'], (err, data1) => {
-    if (err) {
-      console.log(err);
-    }
+    var QueryString = "SELECT * FROM aquafeq.aquafarm WHERE armgrade ilike $1 "
+    client.query(QueryString, ['%' + '세레스' + '%'], (err, data2) => {
+      var QueryString = "SELECT * FROM aquafeq.aquafacc WHERE accgrade ilike $1 "
+      client.query(QueryString, ['%' + '세레스' + '%'], (err, data3) => {
+        var QueryString = "SELECT * FROM aquafeq.featsup WHERE featgrade ilike $1 "
+        client.query(QueryString, ['%' + '세레스' + '%'], (err, data4) => {
+          var QueryString = "SELECT * FROM aquafeq.aquafgem WHERE gemgrade ilike $1 "
+          client.query(QueryString, ['%' + '세레스' + '%'], (err, data5) => {
 
-    res.render('test', {
-    data1: data1.rows,
-    });
+            if (err) {
+              console.log(err);
+            }
 
+            res.render('test', {
+              data1: data1.rows,
+              data2: data2.rows,
+              data3: data3.rows,
+              data4: data4.rows,
+              data5: data5.rows,
+            });
+
+          })
+        })
+      })
+    })
 
   })
 });
