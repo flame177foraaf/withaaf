@@ -49,7 +49,7 @@
       <ul>
         <h3 class="" style="margin:5px" >강적</h3>
         <% for ( i = 0; i < list1.length; i++){ %>
-          <% if (list1[i].rival_grade === '일반 강적'){ %>
+          <% if (list1[i].rival_grade == '일반 강적'){ %>
             <% var rival_firstname = list1[i].rival_name.split(' "')[0] %>
             <li>
               <a href="/test/<%- rival_firstname %>" class=" "> <%- list1[i].rival_name %></a>
@@ -61,7 +61,7 @@
 
         <h3 class="" style="margin:5px" >희귀 강적</h3>
         <% for ( i = 0; i < list1.length; i++){ %>
-          <% if (list1[i].rival_grade === '희귀 강적'){ %>
+          <% if (list1[i].rival_grade == '희귀 강적'){ %>
             <% var rival_firstname = list1[i].rival_name.split(' "')[0] %>
             <li>
               <a href="/test/<%- rival_firstname %>" class=" "> <%- list1[i].rival_name %></a>
@@ -73,7 +73,7 @@
 
           <h3 class="" style="margin:5px" >대강적</h3>
           <% for ( i = 0; i < list1.length; i++){ %>
-            <% if (list1[i].rival_grade === '대강적'){ %>
+            <% if (list1[i].rival_grade == '대강적'){ %>
               <% var rival_firstname = list1[i].rival_name.split(' "')[0] %>
               <li>
                 <a href="/test/<%- rival_firstname %>" class=" "> <%- list1[i].rival_name %></a>
