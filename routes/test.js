@@ -34,7 +34,7 @@ router.get('/', (req,res,next) => {
 })
 
 
-router.get(':id' , (req,res,next) => {
+router.get('/:id' , (req,res,next) => {
   var Search = req.params.id;
   console.log(Search);
   if (Search === '천룡왕') {
