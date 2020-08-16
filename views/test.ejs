@@ -45,7 +45,7 @@
     </style>
   </head>
   <body style="margin:20px 50px 20px 50px">
-    <div class="" style="width:25%" id="left_sidenav">
+    <div class="" style="width:350px" id="left_sidenav">
       <ul>
         <h3 class="" style="margin:5px" >강적</h3>
         <% for ( i = 0; i < list1.length; i++){ %>
@@ -88,7 +88,7 @@
 
 
 
-    <div style="margin-left:25%">
+    <div style="margin-left:350px">
       <% if (typeof(Search) != 'undefined'){ %>
         <table width="80%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="rival_RoseWhip">
           <thead>
@@ -124,19 +124,19 @@
                   <% if (item.wpproperty.indexOf('/') != -1){ %>
                     <% var WpP = item.wpproperty.split('/') %>
                     <% if ( WpP[1] == ' 불 ') { %>
-                      <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD">
+                      <tr class="" id="tabletr" style="white-space: pre-line; background-color:#FFD5DD">
                     <% } else if (WpP[1] == ' 물 ' ) { %>
-                      <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC">
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#DBE0FC">
                     <% } else if (WpP[1] == ' 바람 ') { %>
-                      <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3">
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#CEFFD3">
                     <% } else if (WpP[1] == ' 땅 ') { %>
-                      <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8">
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#F8EAD8">
                     <% } else if (WpP[1] == ' 정신 ') { %>
-                      <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB">
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#FFFFDB">
                     <% } else if (WpP[1] == ' 아스트랄 ') { %>
-                      <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2">
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#E4C1F2">
                     <% } else if (WpP[1] == ' 무속성 ') { %>
-                      <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA">
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#EAEAEA">
                     <% } %>
                   <% } else { %>
                     <tr class="" id="tabletr" style="white-space: pre-line; ">
