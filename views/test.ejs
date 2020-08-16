@@ -47,12 +47,28 @@
   <body style="margin:20px 50px 20px 50px">
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%" id="left_sidenav">
       <ul>
-        <h3 class="w3-bar-item">일반 강적 목록</h3>
+        <h3 class="w3-bar-item">강적</h3>
+          <% list1.forEach(item){
+            <li>
+              <a href="#" class="w3-bar-item w3-button"> <%- item.rival_name %></a>
+            </li>
+          <% } %>
 
-        <li>
-          <a href="#" class="w3-bar-item w3-button">세레스 파스크움</a>
+        <h3 class="w3-bar-item">희귀 강적</h3>
+        <% list2.forEach(item){
+          <li>
+            <a href="#" class="w3-bar-item w3-button"> <%- item.rival_name %></a>
+          </li>
+        <% } %>
 
-        </li>
+
+        <h3 class="w3-bar-item">대강적 강적</h3>
+        <% list3.forEach(item){
+          <li>
+            <a href="#" class="w3-bar-item w3-button"> <%- item.rival_name %></a>
+          </li>
+        <% } %>
+
       </ul>
     </div>
 
@@ -63,16 +79,14 @@
     <div style="margin-left:25%">
       <table width="80%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="rival_RoseWhip">
       	<tr align="center" height="40">
-      		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="9">로즈 휩 "세레스 파스크움"</td>
+      		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="9"><% Rival %></td>
       	</tr>
       	<tr>
-      		<td style="padding:18px 18px 0 18px;" colspan="9">
-      			- 40 레벨 상태부터 등장<br>
-      			- 각 페이즈에 따라 <b>오래된 장미장식의 상자, 화려한 장미장식의 상자, 빛나는 장미장식의 상자</b> 획득<br>
-      			- 보상의 상자 식별을 통해 <b>조수 카드 "세레스 파스크움" 고용</b> 가능(언커먼, 레어까지 브레이크 가능)<br>
-      			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 수집품 , 2 종의 피트 서포터</b> 획득 가능
-            <p style="text-align:center; font-size:20px ; margin: 0px" >  ▼</p>
-      		</td>
+            <td style="padding:18px 18px 0 18px;" colspan="9">
+              
+        		</td>
+
+
       	</tr>
 
         <% if (typeof(data1[0]) !== 'undefined'){ %>
