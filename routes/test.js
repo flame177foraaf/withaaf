@@ -22,7 +22,7 @@ router.get('/', (req,res,next) => {
       client.query(QueryString, (err, response3) =>{
         res.render('test' , {
           Rival: Search,
-            
+
           list1: response1.rows,
           list2: response2.rows,
           list3: response3.rows,
@@ -35,6 +35,7 @@ router.get('/', (req,res,next) => {
 
 router.get(':id' , (req,res,next) => {
   var Search = req.params.id;
+  console.log(Search)
   var QueryString = 'SELECT * FROM aquafeq.rival where rival_information like $1';
   client.query( QueryString, [Search], (err, rival_information) => {
     var QueryString = 'SELECT * FROM aquafeq.aquafwp where wpgrade like $1';
