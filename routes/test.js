@@ -12,6 +12,8 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
+  var Search = req.params.id;
+
   var QueryString = "select rival_name from aquafeq.rival where rival_grade like '%일반%'"
   client.query(QueryString, (err, response1) =>{
     var QueryString = "select rival_name from aquafeq.rival where rival_grade like '%희귀 강적%'"
@@ -19,7 +21,7 @@ router.get('/', (req,res,next) => {
       var QueryString = "select rival_name from aquafeq.rival where rival_grade like '%대강적%'"
       client.query(QueryString, (err, response3) =>{
         res.render('test' , {
-          Rival: Search,
+          Rival: '왼쪽 목록에서 선택해주세요.',
 
           list1: response1.rows,
           list2: response2.rows,
