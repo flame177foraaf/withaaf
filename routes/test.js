@@ -59,7 +59,7 @@ router.get('/:id' , (req,res,next) => {
               client.query( QueryString, ['%' + Search + '%'], (err, data3) => {
                 var QueryString = 'SELECT * FROM aquafeq.featsup where featgrade like $1';
                 if (Search.indexOf('사흑천') === -1 ) {
-                  var QueryString = 'SELECT * FROM aquafeq.aquafacc where accgrade like %사흑천%';
+                  var QueryString = 'SELECT * FROM aquafeq.featsup where featgrade like %사흑천%';
                 }
 
                 client.query( QueryString, ['%' + Search + '%'], (err, data4) => {
@@ -71,7 +71,7 @@ router.get('/:id' , (req,res,next) => {
                       list3: response3.rows,
 
                       Rival: Search,
-                      
+
                       rival_information:rival_information.rows,
                       data1: data1.rows,
                       data2: data2.rows,
