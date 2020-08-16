@@ -13,8 +13,8 @@ client.connect();
 
 router.get('/', (req,res,next) => {
   var Data_length = 0;
-  var QueryString = "SELECT * FROM aquafeq.aquafwp WHERE wpgrade ilike %세레스% "
-  client.query(QueryString, (err, data1) => {
+  var QueryString = "SELECT * FROM aquafeq.aquafwp WHERE wpgrade ilike $1 "
+  client.query(QueryString, ['%' + '세레스' + '%'], (err, data1) => {
     if (err) {
       console.log(err);
     }
