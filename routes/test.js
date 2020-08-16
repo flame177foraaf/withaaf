@@ -12,7 +12,6 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  var Search = req.params.id;
 
   var QueryString = "select rival_name from aquafeq.rival where rival_grade like '%일반%'"
   client.query(QueryString, (err, response1) =>{
