@@ -22,12 +22,10 @@ router.get('/', (req,res,next) => {
       client.query(QueryString, (err, response3) =>{
         res.render('test' , {
           Rival: Search,
-          rival_information:rival_information.rows,
-          data1: data1.rows,
-          data2: data2.rows,
-          data3: data3.rows,
-          data4: data4.rows,
-          data5: data5.rows,
+            
+          list1: response1.rows,
+          list2: response2.rows,
+          list3: response3.rows,
         })
       })
     })
