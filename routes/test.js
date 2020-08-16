@@ -38,12 +38,12 @@ router.get('/:id' , (req,res,next) => {
         var QueryString = 'SELECT * FROM aquafeq.aquafarm where armgrade like $1';
         client.query( QueryString, ['%' + Search + '%'], (err, data2) => {
           var QueryString = 'SELECT * FROM aquafeq.aquafacc where accgrade like $1';
-          if (Search.indexOf('사흑천') === -1 ) {
+          if (Search.indexOf('사흑천') == '-1' ) {
             var QueryString = 'SELECT * FROM aquafeq.aquafacc where accgrade like %사흑천%';
           }
           client.query( QueryString, ['%' + Search + '%'], (err, data3) => {
             var QueryString = 'SELECT * FROM aquafeq.featsup where featgrade like $1';
-            if (Search.indexOf('사흑천') === -1 ) {
+            if (Search.indexOf('사흑천') == '-1' ) {
               var QueryString = 'SELECT * FROM aquafeq.featsup where featgrade like %사흑천%';
             }
 
