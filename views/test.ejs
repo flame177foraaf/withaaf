@@ -108,28 +108,7 @@
               </td>
             </tr>
             <% data1.forEach(function(item) { %>
-              <% if (item.wpproperty.indexOf('/') != '-1'){ %>
-                <% var WpP = item.wpproperty.split('/') %>
-                <% if ( WpP[1] == ' 불 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD">
-                <% } else if (WpP[1] == ' 물 ' ) { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC">
-                <% } else if (WpP[1] == ' 바람 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3">
-                <% } else if (WpP[1] == ' 땅 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8">
-                <% } else if (WpP[1] == ' 정신 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB">
-                <% } else if (WpP[1] == ' 아스트랄 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2">
-                <% } else if (WpP[1] == ' 무속성 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA">
-                <% } else { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
-                <% } %>
-              <% } else { %>
-                <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
-              <% } %>
+              <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
               <td><%- item.wpname %></td>
               <td style='text-align: center'><%- item.wplimit %></td>
               <td style='text-align: center'><%- item.wpsocket %></td>
