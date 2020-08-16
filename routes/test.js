@@ -47,7 +47,7 @@ router.get('/:id' , (req,res,next) => {
             Search = '사흑천'
           }
           client.query( QueryString1, ['%' + Search + '%'], (err, data3) => {
-            var QueryString1 = 'select * from aquafeq.aquaffeat as feat where feat.featgrade like $1'
+            var QueryString1 = 'select * from aquafeq.featsup as feat where feat.featgrade like $1'
             if (Search.indexOf('사흑천') != '-1') {
               Search = '사흑천'
             }
