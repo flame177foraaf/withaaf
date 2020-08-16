@@ -1,308 +1,869 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-
-  <style>
-    #left_sidenav {
-      height: 100%;
-      width: 15%;
-      z-index: 1;
-      background-color: #111;
-      overflow-x: hidden;
-      position: absolute;
-    }
-    #left_sidenav ul{
-      padding-left: 0px;
-      font-size: 18px;
-    }
-    #left_sidenav a {
-      padding: 6px 8px 6px 16px;
-      text-decoration: none;
-      color: #818181;
-      display: block;
-    }
-
-    #left_sidenav a:hover {
-      color: white;
-    }
-    #left_sidenav li ul {
-      background: #111;
-      display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
-      height:auto;
-      padding:0px;
-      margin:0px;
-      border:0px;
-      z-index:200;
-      font-size: 12px;
-    }
-
-
-    .main {
-      margin-left: 15%;
-      padding-left: 20px;
-    }
-
-    .linehead {
-
-      border-right: 2px solid black;
-    }
-
-    .fieldname{
-      font-weight: bold;
-      font-size: 20px;
-    }
-
-  </style>
-  <script type="text/javascript">
-    function checkonclick() {
-      if (document.searchform.SearchText.value == "" || document.searchform.SearchText.value == null || document.searchform.SearchText.value == undefined || ( document.searchform.SearchText.value != null && typeof document.searchform.SearchText.value == "object" && !Object.keys(document.searchform.SearchText.value).length ) ) {
-        alert("내용을 입력해주세요!");
-        document.searchform.SearchText.focus();
-        return false;
-      }
-      return true;
-    }
-
-
-  </script>
-  <script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script type="text/javascript">
-  $(document).ready(function(){
-    $('.partition menu').click(function(){
-      if($('.partition menu').hasClass('partition menu')){
-        $('.partition menu').addClass('close').removeClass('partition menu');
-        $('.partition ul').css('visibility', 'visible');
-      }else if($('.close').hasClass('close')){
-        $('.close').addClass('partition menu').removeClass('close');
-        $('.partition ul').css('visibility', 'hidden');
-      }
-    });
-  });
-  </script>
-
-    <%- include ('head') %>
-  <title><%= title%></title>
-</head>
-
-<body>
-  <div id="left_sidenav">
-    <ul>
-      <% for ( i = 0; i < data.length ; i++){ %>
-        <li class="partition menu">
-          <a href="#"><%- data[i].Field %></a>
-          <ul class="partition ul">
-            <% for ( j = 0; j < data_partition.length ; j++){ %>
-              <% if(data_partition[j].FieldName === data[i].FieldName){ %>
-                <li>
-                  <a href="/test/<%- data_partition[j].part %>"><%- data_partition[j].PartitionName %></a>
-                </li>
-              <% }; %>
-            <% } %>
-          </ul>
-        </li>
-      <% } %>
-    </ul>
-
-
-  </div>
-  <div class="main" >
-    <div class="title_div" >
-      <h1>몬스터</h1>
-    </div>
-    <div class="" id="seach_form_id" >
-      <form action="/test/search" method="get" name="searchform" onsubmit="return checkonclick()">
-        <input type="text" placeholder="찾기 버튼을 누르세요" name="SearchText" id="SearchText" style="width:200px">
-        <select name="SearchType">
-          <option value="name">이름</option>
-          <option value="property">속성</option>
-          <option value="type">타입</option>
-          <option value="collect">수집품</option>
-        </select>
-        <input action="/test/search" type="submit" class="btn" value="찾기"  ></button>
-
-      </form>
-
-      <table id="mon_table" style="margin-top:5px;">
-        <colgroup>
-          <col span="" id ="" style="width: 50px;">
-          <col span="" id ="" style="width : 150px;">
-          <col span="" id ="" style="width : 125px;">
-          <col span="" id ="" style="width : 75px;">
-          <col span="" id ="" style="width : 75px;">
-          <col span="" id ="" style="width : 150px;">
-          <col span="" id ="" style="width : 100px;">
-          <col span="" id ="" style="width : 250px;">
-          <col span="" id ="" style="width : 250px;">
-          <col span="" id ="" style="width : 250px;">
-          <col span="" id ="" style="width : 150px;">
-        </colgroup>
-
-        <% if(typeof(Field_Id) === 'undefined'){ %>
-          <thead>
-            <tr>
-              <th>레벨</th>
-              <th>이름</th>
-              <th>속성</th>
-              <th>에테르</th>
-              <th>타입</th>
-              <th>저항</th>
-              <th>보석</th>
-              <th>커먼</th>
-              <th>언커먼</th>
-              <th>레어</th>
-              <th>스킬</th>
-            </tr>
-          </thead>
-        <% } else if (Field_Id === 'FireTower' || Field_Id === 'EarthTower' ){ %>
-          <thead>
-            <tr>
-              <th>층</th>
-              <th>이름</th>
-              <th>HP계수</th>
-              <th>속성</th>
-              <th>내성 정보</th>
-              <th></th>
-              <th>커먼</th>
-              <th>언커먼</th>
-              <th>레어</th>
-              <th>스킬</th>
-            </tr>
-          </thead>
+<div class="aaf" style="text-align:center;">
+<div style="width:100%; height:40px; font-size:22px; background-color:#8acd38; font-weight:bold; color:#ffffff; padding-top:20px;">일반 강적 목록</div>
+<br>
+<table width="800" border="1" class="aaf table_st" style="border-collapse: collapse">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="9">로즈 휩 "세레스 파스크움"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;" colspan="9">
+			- 40 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>오래된 장미장식의 상자, 화려한 장미장식의 상자, 빛나는 장미장식의 상자</b> 획득<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "세레스 파스크움" 고용</b> 가능(언커먼, 레어까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 수집품 , 2 종의 피트 서포터</b> 획득 가능
+		</td>
+	</tr>
+  <tr>
+    <td colspan="9" style="text-align:center">
+      무기
+    </td>
+  </tr>
+    <% data1.forEach(function(item1) { %>
+      <% if (item1.wpproperty.indexOf('/') != -1){ %>
+        <% var WpP = item1.wpproperty.split('/') %>
+        <% if ( WpP[1] == ' 불 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD">
+        <% } else if (WpP[1] == ' 물 ' ) { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC">
+        <% } else if (WpP[1] == ' 바람 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3">
+        <% } else if (WpP[1] == ' 땅 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8">
+        <% } else if (WpP[1] == ' 정신 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB">
+        <% } else if (WpP[1] == ' 아스트랄 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2">
+        <% } else if (WpP[1] == ' 무속성 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA">
         <% } else { %>
-          <thead>
-            <tr>
-              <th>레벨</th>
-              <th>이름</th>
-              <th>속성</th>
-              <th>에테르</th>
-              <th>타입</th>
-              <th>저항</th>
-              <th>보석</th>
-              <th>커먼</th>
-              <th>언커먼</th>
-              <th>레어</th>
-              <th>스킬</th>
-            </tr>
-          </thead>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
         <% } %>
+      <% } else { %>
+        <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
+      <% } %>
+      <td><%- item1.wpgrade %></td>
+      <td><%- item1.wpname %></td>
+      <td style='text-align: center'><%- item1.wplimit %></td>
+      <td style='text-align: center'><%- item1.wpsocket %></td>
+      <td style='text-align: center'><%- item1.wpether %></td>
+      <td style='text-align: center'><%- item1.wpstats %></td>
+      <td style='text-align: center'><%- item1.wpproperty %></td>
+      <td><%- item1.wpfeat %></td>
+      <td><%- item1.wpcustom %></td>
+    <% }) %>
+  </tr>
+  <tr >
+    <td colspan="9" style="text-align:center">
+      방어구
+    </td>
+  </tr>
+  <tr>
+    <% data1.forEach(function(item1) { %>
+      <td><%- item1.armgrade %></td>
+      <td><%- item1.armname %></td>
+      <td style='text-align: center'><%- item1.armlimit %></td>
+      <td style='text-align: center'><%- item1.armsocket %></td>
+      <td style='text-align: center'><%- item1.armether %></td>
+      <td style='text-align: center'><%- item1.armstats %></td>
+      <td style='text-align: center'><%- item1.armproperty %></td>
+      <td><%- item1.armfeat %></td>
+      <td><%- item1.armcustom %></td>
+    <% }) %>
+  </tr>
+  <tr>
+    <td colspan="9" style="text-align:center">
+      악세사리
+    </td>
+  </tr>
+  <tr>
+      <% data1.forEach(function(item1) { %>
+        <td><%- item1.accgrade %></td>
+        <td><%- item1.accname %></td>
+        <td style='text-align: center'><%- item1.acclimit %></td>
+        <td style='text-align: center'><%- item1.accsocket %></td>
+        <td style='text-align: center'><%- item1.accether %></td>
+        <td style='text-align: center'><%- item1.accstats %></td>
+        <td style='text-align: center'><%- item1.accproperty %></td>
+        <td><%- item1.accfeat %></td>
+        <td><%- item1.acccustom %></td>
+      <% }) %>
 
 
+  </tr>
+  <tr>
+    <td>피트서포터</td>
+  </tr>
+  <tr>
+    <% data1.forEach(function(item1) { %>
+      <td><%- item1.featgrade %></td>
+      <td><%- item1.featname %></td>
+      <td><%- item1.feat %></td>
+      <td><%- item1.reversefeat %></td>
 
-        <tbody>
-          <% if (Data_length != 0 ){ %>
-            <% if (data_monster[0].FieldName === 'Training'){ %>
-              <tr>
-                <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[0].PartitionName %></td>
-              </tr>
-            <% } else { %>
-              <tr>
-                <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
-              </tr>
-            <% } %>
+    <% }); %>
+  </tr>
+  <tr>
+    <td>루엘</td>
+  </tr>
+  <tr>
+      <% data1.forEach(function(item1) { %>
 
-              <% for ( k = 0; k < Data_length ; k++){ %>
-                <% if (data_monster[k].part == data_monster[0].part){ %>
-                  <% if ( data_monster[k].part !== 'FireTower' || data_monster[k].part !== 'EarthTower'){ %>
-                    <tr>
-                      <td style= "text-align:center;"><%- data_monster[k].mon_lv %></td>
-                      <td><%- data_monster[k].mon_name %></td>
-                      <td><%- data_monster[k].mon_property %></td>
-                      <td><%- data_monster[k].mon_ether %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                      <td><%- data_monster[k].mon_resist %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_gem %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                      <td id =""><%- data_monster[k].mon_skill %></td>
-                    </tr>
-                  <% } else { %>
-                    <tr>
-                      <td ></td>
-                      <td><%- data_monster[k].mon_name %></td>
-                      <td><%- data_monster[k].mon_property %></td>
-                      <td><%- data_monster[k].mon_ether %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                      <td><%- data_monster[k].mon_resist %></td>
-                      <td ></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                      <td id =""><%- data_monster[k].mon_skill %></td>
-                    </tr>
-                  <% } %>
-                <% } %>
+      <td><%- item1.gemgrade %></td>
+      <td style='text-align: center'><%- item1.collectname %></td>
+      <td style='text-align: center'><%- item1.gemname %></td>
+      <td style='text-align: center'><%- item1.gemobject %></td>
+      <td><%- item1.gemeffect %></td>
+      <% }); %>
 
-              <% } %>
-              <% for (i = 1, j = i-1;  i < Data_length; i++, j+=1){ %>
-                <% if( data_monster[i].part == data_monster[j].part ){continue} %>
-                <% if (data_monster[i].FieldName === 'Training'){ %>
-                  <tr>
-                    <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[i].PartitionName %></td>
-                  </tr>
-                <% } else { %>
-                  <tr>
-                    <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[i].PartitionName %></td>
-                  </tr>
-                <% } %>
-                    <% for ( k = 0; k < Data_length ; k++){ %>
-                      <% if (data_monster[k].part == data_monster[i].part){ %>
-                        <% if ( data_monster[k].part !== 'FireTower' || data_monster[k].part !== 'EarthTower'){ %>
-                          <tr>
-                            <td style= "text-align:center;"><%- data_monster[k].mon_lv %></td>
-                            <td><%- data_monster[k].mon_name %></td>
-                            <td><%- data_monster[k].mon_property %></td>
-                            <td><%- data_monster[k].mon_ether %></td>
-                            <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                            <td><%- data_monster[k].mon_resist %></td>
-                            <td style="text-align: center"><%- data_monster[k].mon_gem %></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                            <td id =""><%- data_monster[k].mon_skill %></td>
-                          </tr>
-                        <% } else { %>
-                          <tr>
-                            <td ></td>
-                            <td><%- data_monster[k].mon_name %></td>
-                            <td><%- data_monster[k].mon_property %></td>
-                            <td><%- data_monster[k].mon_ether %></td>
-                            <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                            <td><%- data_monster[k].mon_resist %></td>
-                            <td ></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                            <td id =""><%- data_monster[k].mon_skill %></td>
-                          </tr>
-                        <% } %>
-                      <% } %>
+  </tr>
+  <tr>
+    <td>수집품 - 준비중입니다</td>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td>조수 - 준비중입니다</td>
+  </tr>
+  <tr>
+    <td>칭호 - 준비중입니다</td>
+  </tr>
+</table>
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">마해의 수마 "스큐라"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>녹슨 마수의 상자 , 끈적한 마수의 상자, 매끈한 마수의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 조수 카드 "스큐라" 고용</b> 가능(언커먼, 레어까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>1 종의 루엘, 1 종의 무기, 2 종의 수집품 , 1 종의 피트 서포터</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"마해의 수마" 칭호</b> 획득 가능
+		</td>
+	</tr>
+  <tr>
+    <td>
+      무기
+    </td>
+  </tr>
+  <tr>
+    <td>
 
-                    <% } %>
+     </td>
+  </tr>
+  <tr>
+    <td>
+      방어구
+    </td>
+  </tr>
+  <tr>
+    <td>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      악세사리
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td>피트서포터</td>
+  </tr>
+  <tr>
+    <td>
 
-              <% } %>
-          <% } else { %>
-            <tr>
-              <td colspan="11"; style= "text-align:center; " class="fieldname"> 이런! 원하시는 자료를 찾을 수 없습니다! </td>
-            </tr>
-          <% } %>
+    </td>
+  </tr>
+  <tr>
+    <td>루엘</td>
+  </tr>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td>수집품</td>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td>조수</td>
+  </tr>
+  <tr>
+    <td>준비중입니다</td>
+  </tr>
+</table>
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">드림 헌터 "엔도우 리리무"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>둔탁한 꿈의 고치 , 깜빡이는 꿈의 고치, 영롱한 꿈의 고치</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "엔도우 리리무" 고용</b> 가능(언커먼, 레어까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>1 종의 루엘, 1 종의 악세서리, 1 종의 수집품 , 1 종의 피트 서포터</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"Dream Hunter" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
 
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">요귀비 "쿠즈노하 마오"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장 <br><br>
+			- 각 페이즈에 따라 <b>요녀의 상자 , 다홍색 요녀의 상자, 진홍색 요녀의 상자</b> 획득 가능 <br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "쿠즈노하 마오" 고용</b> 가능(기본 언커먼 + 이며 에픽 레어까지 브레이크 가능) <br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 방어구, 2 종의 수집품 , 1 종의 피트 서포터</b> 획득 가능 <br><br>
+			- 유물 복원을 통해 <b>"요귀비" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
 
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">대연신 "테스카토리포카"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장 <br><br>
+			- 각 페이즈에 따라 <b>옅은 연기의 구체 , 진한 연기의 구체, 칠흑 연기의 구체</b> 획득 가능 <br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "테스카토리포카" 고용</b> 가능(기본 언커먼 + 이며 에픽 레어까지 브레이크 가능) <br><br>
+			- 유물 복원을 통해 <b>1 종의 루엘, 1 종의 무기, 2 종의 수집품 , 1 종의 피트 서포터</b> 획득 가능 <br><br>
+			- 유물 복원을 통해 <b>"대연신" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
 
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">정숙의 지휘자 "사일렌스"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>고요의 주머니 , 정숙의 주머니 , 정적의 주머니 획득 가능</b><br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "사일렌스" 고용</b> 가능(언커먼, 레어까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 무기(웨이블렘사양), 2 종의 피트 서포터, 2 종의 수집품 , 1 종의 부적</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"정숙의 지휘자" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
 
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">사흑천-염천 "이그드밀레누"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 각 페이즈에 따라 <b>사흑천의 상자, 염천의 상자, 진 · 염천의 상자</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>1 종의 루엘, 2 종의 수집품, 1 종의 무기, 1 종의 악세서리 , 1 종의 피트 서포터</b> 획득 가능<br><br>
+			- 악세서리 유물인 [ 사원의 소용돌이 팔찌 ] 는 다른 일반 강적의 상자에서 나머지 조각을 얻을 수 있습니다<br><br>
+			- 피트 서포터 유물인 [ 사흑천영주의 조각 ] 은 다른 일반 강적의 상자에서 나머지 조각을 얻을 수 있습니다<br><br>
+			- 사흑천의 상자는 같은 사흑천에서 공유되는 상자 입니다<br><br>
+			☆☆☆☆☆ 사흑천 공용 ☆☆☆☆☆<br><br>
+			- [ 사원의 소용돌이 팔찌 ] 는 희귀 450 렙제로 2 티어 성능을 가지고 있습니다<br><br>
+			- [ 四黑天靈珠 ] 는 피트 서포터로 매우 희귀한 급 성능을 가지고 있습니다
+		</td>
+	</tr>
+</table>
 
-        </tbody>
-      </table>
-    </div>
-  </div>
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">사흑천-빙천 "카이트락트"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>사흑천의 상자, 빙천의 상자, 진 · 빙천의 상자</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>1 종의 루엘, 2 종의 수집품, 1 종의 무기, 1 종의 악세서리 , 1 종의 피트 서포터</b> 획득 가능<br><br>
+			- 악세서리 유물인 [ 사원의 소용돌이 팔찌 ] 는 다른 일반 강적의 상자에서 나머지 조각을 얻을 수 있습니다<br><br>
+			- 피트 서포터 유물인 [ 사흑천영주의 조각 ] 은 다른 일반 강적의 상자에서 나머지 조각을 얻을 수 있습니다<br><br>
+			- 사흑천의 상자는 같은 사흑천에서 공유되는 상자 입니다<br><br>
+			☆☆☆☆☆ 사흑천 공용 ☆☆☆☆☆<br><br>
+			- [ 사원의 소용돌이 팔찌 ] 는 희귀 450 렙제로 2 티어 성능을 가지고 있습니다<br><br>
+			- [ 四黑天靈珠 ] 는 피트 서포터로 매우 희귀한 급 성능을 가지고 있습니다
+		</td>
+	</tr>
+</table>
 
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">사흑천-뢰천 "벨빌레크"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>사흑천의 상자, 뢰천의 상자, 진 · 뢰천의 상자</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>1 종의 루엘, 2 종의 수집품, 1 종의 무기, 1 종의 악세서리 , 1 종의 피트 서포터</b> 획득 가능<br><br>
+			- 악세서리 유물인 [ 사원의 소용돌이 팔찌 ] 는 다른 일반 강적의 상자에서 나머지 조각을 얻을 수 있습니다<br><br>
+			- 피트 서포터 유물인 [ 사흑천영주의 조각 ] 은 다른 일반 강적의 상자에서 나머지 조각을 얻을 수 있습니다<br><br>
+			- 사흑천의 상자는 같은 사흑천에서 공유되는 상자 입니다<br><br>
+			☆☆☆☆☆ 사흑천 공용 ☆☆☆☆☆<br><br>
+			- [ 사원의 소용돌이 팔찌 ] 는 희귀 450 렙제로 2 티어 성능을 가지고 있습니다<br><br>
+			- [ 四黑天靈珠 ] 는 피트 서포터로 매우 희귀한 급 성능을 가지고 있습니다
+		</td>
+	</tr>
+</table>
 
-</body>
-<footer style="margin-left:15%">
-  <%- include ('footer')%>
-</footer>
-</html>
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">사흑천-패천 "브이블디"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>사흑천의 상자, 패천의 상자, 진 · 패천의 상자</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>1 종의 루엘, 2 종의 수집품, 1 종의 무기, 1 종의 악세서리 , 1 종의 피트 서포터</b> 획득 가능<br><br>
+			- 악세서리 유물인 [ 사원의 소용돌이 팔찌 ] 는 다른 일반 강적의 상자에서 나머지 조각을 얻을 수 있습니다<br><br>
+			- 피트 서포터 유물인 [ 사흑천영주의 조각 ] 은 다른 일반 강적의 상자에서 나머지 조각을 얻을 수 있습니다<br><br>
+			- 사흑천의 상자는 같은 사흑천에서 공유되는 상자 입니다<br><br>
+			☆☆☆☆☆ 사흑천 공용 ☆☆☆☆☆<br><br>
+			- [ 사원의 소용돌이 팔찌 ] 는 희귀 450 렙제로 2 티어 성능을 가지고 있습니다<br><br>
+			- [ 四黑天靈珠 ] 는 피트 서포터로 매우 희귀한 급 성능을 가지고 있습니다
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">황금의 기사 "탐 린"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>황금의 상자, 빛나는 황금의 상자, 찬란한 황금의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "탐 린" 고용</b> 가능(언커먼+, 레어까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 악세서리, 3 종의 수집품 , 1 종의 피트 서포터</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"黃金騎士" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">얼티밋 트레이더 "카렌 휼러"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 20 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>트레이더의 자루, 트레이더의 고급 자루, 트레이더의 최고급 자루</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "카렌 휼러" 고용</b> 가능(언커먼+, 레어까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>1 종의 루엘, 1 종의 무기, 3 종의 수집품 , 2 종의 피트 서포터</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"UlTiMaTe TrAdEr" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">불사신의 살인귀 "체이니 제이솔"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>불사신의 상자, 수상한 불사신의 상자, 사악한 불사신의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "체이니 제이솔" 고용</b> 가능(언커먼 등급이며 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 피트 서포터, 1 종의 무기, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"不死神의 살인귀" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">검은달의 암수 "취영"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 41 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>검은달의 주머니, 차가운 검은달의 주머니, 불길한 검은달의 주머니</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>3 종의 루엘, 2 종의 피트 서포터, 1 종의 악세서리, 2 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"검은달의 暗手" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">자연령 "다프네"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>수풀의 고치, 빽빽한 수풀의 고치, 영적인 수풀의 고치</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "다프네" 고용</b> 가능(언커먼 등급이며 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 피트 서포터, 1 종의 악세서리, 1 종의 적층석 참, 2 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"자연령" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">일각성수 "유니콘"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>일각수의 상자, 빛나는 일각수의 상자, 찬란한 일각수의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "유니콘" 고용</b> 가능(언커먼 등급이며 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>3 종의 루엘, 2 종의 피트 서포터, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"일각성수" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">거중인형 "밀그레이타크"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 51 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>튼튼한 큐브, 무거운 큐브, 육중한 큐브</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 피트 서포터, 1 종의 방어구, 1 종의 적층석 참 아이템, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"거중인형" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">미라쥬 블레이드 "카노마 노조미"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 61 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>보존용 캡슐, 커다란 보존용 캡슐, 기적의 보존용 캡슐</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 "카노마 노조미" 고용</b> 가능(언커먼 등급이며 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 피트 서포터, 2 종의 무기, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"MIRAGE BLADE" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">아틀란티스의 괴조 "페류톤"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>고대도시의 돌상자, 화려한 고대도시의 돌상자, 유서깊은 고대도시의 돌상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>"페류톤" 고용</b> 가능(언커먼 등급이며 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 2 종의 피트 서포터, 1 종의 악세서리, 3 종의 수집품 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"▒▒아틀란티스의 怪鳥▒▒" 칭호 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">폭풍조 "시무르그"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 21 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>깃털의 상자, 큰 깃털의 상자, 바람을 두른 깃털 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>"시무르그" 고용</b> 가능(언커먼 등급이며 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 무기, 1 종의 방어구, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"폭풍조" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">타임워커 "크리스티나 힐데"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 41 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>태엽달린 상자, 수많은 태엽달린 상자, 무수한 태엽달린 상자</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 2 종의 피트 서포터, 1 종의 적층석 참 아이템, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"TIME WALKER" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">멜트 버스터 "렘브렐 림브레르"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>용암 고치, 불타는 용암 고치, 녹아내리는 용암 고치</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>3 종의 루엘, 2 종의 피트 서포터, 1 종의 무기, 2 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"멜트 버스터" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">나비공주 "루실 파피용"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 31 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>비늘가루의 상자, 향기나는 비늘가루의 상자, 무지개빛 비늘가루의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>"루실 파피용" 고용</b> 가능(언커먼 등급이며 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 피트 서포터, 1 종의 방어구, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"나비 공주" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">에인션트 트리언트 "나달루만타"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>말라버린 고목 상자, 뒤틀린 고목 상자, 영험한 고목 상자</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 2 종의 피트 서포터, 1 종의 방어구, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"고영목의 파수꾼" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">연옥의 대번견 "나인베로스"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>잿빛 개가죽 주머니, 암갈색 개가죽 주머니, 재앙의 개가죽 주머니</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 에볼루션 룬스톤 <b>"무서운 신경" 복원</b> 가능(언커먼 등급이며 레어 등급까지 각성 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 2 종의 피트 서포터, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"연옥의 대번견" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<div style="width:100%; height:40px; font-size:22px; background-color:#e8b42b; font-weight:bold; color:#ffffff; padding-top:20px;">희귀 강적 목록</div>
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">천룡왕 "마나사"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 100 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>철제 용왕의 상자, 은제 용왕의 상자, 칠보 용왕의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 용선 "마나사" 고용</b> 가능(언커먼 + , 에픽 레어까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 2 종의 수집품 , 2 종의 피트 서포터, 1 종의 방어구</b> 획득 가능
+		</td>
+	</tr>
+</table>
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">묘성조 "가릉빈가"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 50 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>예조의 상자, 묘조의 상자, 신조의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 예조 "가릉빈가" 고용</b> 가능(언커먼 + , 에픽 레어까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 악세서리, 2 종의 수집품 , 2 종의 피트 서포터</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"妙聲鳥" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">풀파이어 크러셔 "SPG-F44"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 20 레벨 상태부터 등장 <br><br>
+			- 각 페이즈에 따라 <b>사이버틱 박스, 튼튼한 사이버틱 박스, 진동하는 사이버틱 박스</b> 획득 가능 <br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 사이보그 "SPG-F44" 고용</b> 가능(언커먼 + , 에픽 레어까지 브레이크 가능) <br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 악세서리, 2 종의 수집품 , 2 종의 피트 서포터</b> 획득 가능 <br><br>
+			- 유물 복원을 통해 <b>"풀파이어 크러셔" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">성스러운 죄인 "쟌누 비포겟"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 70 레벨 상태부터 등장 <br><br>
+			- 각 페이즈에 따라 <b>죄의 상자, 대죄의 상자, 원죄의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 죄인 "쟌누 비포겟" 고용</b> 가능(언커먼 + , 에픽 레어까지 브레이크 가능) <br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 방어구, 2 종의 피트 서포터, 2 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"성스러운 罪人" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">청수의 소인 "피아레이"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 40 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>왜소한 주머니, 소인의 주머니, 촉촉한 소인의 주머니</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 소인 "피아레이" 고용</b> 가능(언커먼 + , 에픽 레어까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 누적형 부적 아이템, 2 종의 피트 서포터, 2 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"水面의 소인" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">마인 "넬루브스"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 60 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>독의 거품, 강독의 거품, 극독의 거품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 누적형 부적, 3 종의 수집품 , 2 종의 피트 서포터</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"만§독§마§왕" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">태양의 휘신 "헬리오스"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 51 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>태양문양의 상자, 빛나는 태양문양의 상자, 찬란한 태양문양의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 양정신 "헬리오스" 고용</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 2 종의 피트 서포터, 1 종의 악세서리, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"太陽의 輝神" 칭호 획득 가능
+
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">푸른사슬 "칼베르뮌데 듀스크"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 61 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>녹슨 사슬의 상자, 사슬의 상자, 빛나는 사슬의 상자</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 2 종의 피트 서포터, 2 종의 무기, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"심연의 군청사슬" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">자양신묘 "바스테트"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 41 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>고양이털의 주머니, 복슬한 고양이털의 주머니, 부드러운 고양이털의 주머니</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 흑묘신 "바스테트" 고용</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 피트 서포터,1 종의 무기, 1 종의 악세서리, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"자양신묘" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">허수의 중재자 "갈라덱"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 41 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>희미한 상자, 매우 희미한 상자, 극히 희미한 상자</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 2 종의 피트 서포터, 1 종의 적층석 참 아이템, 4 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"허수의 중재자" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">불사의 염조 "피닉스"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 61 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>불새의 상자, 타오르는 불새의 상자, 격렬히 타오르는 불새의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 영조 "피닉스" 고용</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>3 종의 루엘, 2 종의 피트 서포터,1 종의 방어구, 2 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"불사의 炎鳥" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">멸망의 큰뱀 "요르문간드"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 1 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>뱀비늘의 상자, 미끈한 뱀비늘의 상자, 새끈한 뱀비늘의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 불길한 뱀 "요르문간드" 고용</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 피트 서포터,1 종의 무기,1 종의 악세서리, 2 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"멸망의 큰뱀" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">문 메이지 "미렌 하인드"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 51 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>빛바랜 달보석의 상자, 화려한 달보석의 상자, 영롱한 달보석의 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 문 위치 "미렌 하인드" 고용</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 피트 서포터,1 종의 무기,1 종의 악세서리, 2 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"MOON MAGE" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">죽음의 인도자 "사마엘"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 81 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>검은깃털 주머니, 윤기나는 검은깃털 주머니, 죽음의 검은깃털 주머니</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 흑천사 "사마엘" 고용</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 브레이크 가능)<br><br>
+			- 유물 복원을 통해 <b>3 종의 루엘, 1 종의 피트 서포터,1 종의 무기, 2 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"죽음의 인도자" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">독신 "아지 다하카"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 21 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>독고름의 덩어리, 꿈틀대는 독고름의 덩어리, 요동치는 독고름의 덩어리</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 독녀 "아지 다하카" 고용</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 브레이크 가능)<br><br>
+			- 보상의 상자 식별을 통해 에볼루션 룬스톤 <b>"비참한 사랑" 복원</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 각성 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 1 종의 피트 서포터,1 종의 방어구,1 종의 악세서리, 2 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"독신" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<div style="width:100%; height:40px; font-size:22px; background-color:#c541dc; font-weight:bold; color:#ffffff; padding-top:20px;">대강적 목록</div>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">거짓 태공황제 "찬카이"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 601 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>옥새가 찍힌 금속 상자, 옥새가 찍힌 보석 상자, 옥새가 찍힌 칠보 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 에볼루션 룬스톤 <b>"생산적인 불법" 복원</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 각성 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 2 종의 피트 서포터, 1 종의 무기, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"태공황제" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">성천룡왕 "마나사"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 651 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>천룡왕의 축성 상자, 천룡왕의 신비 상자, 천룡왕의 별내림 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 에볼루션 룬스톤 <b>"튼튼한 후회" 복원</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 각성 가능)<br><br>
+			- 보상의 상자 식별을 통해 에볼루션 룬스톤 <b>"빛나는 접촉" 복원</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 각성 가능)<br><br>
+			- 유물 복원을 통해 <b>1 종의 루엘, 1 종의 피트 서포터, 1 종의 무기, 1 종의 악세서리, 2 종의 수집품</b> 획득 가능<br><br>
+			- 일부 상자에서 하위의 강적인 천룡왕 "마나사"의 상자로부터 획득가능한 일부 유물조각 획득<br><br>
+			- 유물 복원을 통해 <b>"성천룡왕" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+<br>
+<table width="800" border="1" class="aaf table_st">
+	<tr align="center" height="40">
+		<td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;">시간의 뱀 "우로보로스"</td>
+	</tr>
+	<tr>
+		<td style="padding:18px;">
+			- 641 레벨 상태부터 등장<br><br>
+			- 각 페이즈에 따라 <b>시간뱀의 비늘 상자, 시간뱀의 옥비늘 상자, 시간뱀의 숨겨진비늘 상자</b> 획득 가능<br><br>
+			- 보상의 상자 식별을 통해 <b>조수 카드 불길한 뱀 "요르문간드" 고용</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 브레이크 가능)<br><br>
+			- 보상의 상자 식별을 통해 에볼루션 룬스톤 <b>"순수한 가치" 복원</b> 가능(언커먼+ 등급이며 에픽 레어 등급까지 각성 가능)<br><br>
+			- 유물 복원을 통해 <b>2 종의 루엘, 3 종의 피트 서포터, 2 종의 악세서리, 1 종의 적층형 부적, 3 종의 수집품</b> 획득 가능<br><br>
+			- 유물 복원을 통해 <b>"시간의 지배자" 칭호</b> 획득 가능
+		</td>
+	</tr>
+</table>
+
+</center>
+</div
