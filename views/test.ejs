@@ -18,6 +18,15 @@
       무기
     </td>
   </tr>
+  <% if (typeof(data1[0]) === 'undefined'){ %>
+    <tr>
+      <div class="" id="pagelist" >
+        <td colspan="9" style= "text-align:center; font-size:24px">
+          해당하는 데이터가 없습니다.
+        </td>
+      </div>
+    </tr>
+  <% } else { %>
     <% data1.forEach(function(item1) { %>
       <% if (item1.wpproperty.indexOf('/') != -1){ %>
         <% var WpP = item1.wpproperty.split('/') %>
@@ -51,82 +60,11 @@
       <td><%- item1.wpfeat %></td>
       <td><%- item1.wpcustom %></td>
     <% }) %>
-  </tr>
-  <tr >
-    <td colspan="9" style="text-align:center">
-      방어구
-    </td>
-  </tr>
-  <tr>
-    <% data1.forEach(function(item1) { %>
-      <td><%- item1.armgrade %></td>
-      <td><%- item1.armname %></td>
-      <td style='text-align: center'><%- item1.armlimit %></td>
-      <td style='text-align: center'><%- item1.armsocket %></td>
-      <td style='text-align: center'><%- item1.armether %></td>
-      <td style='text-align: center'><%- item1.armstats %></td>
-      <td style='text-align: center'><%- item1.armproperty %></td>
-      <td><%- item1.armfeat %></td>
-      <td><%- item1.armcustom %></td>
-    <% }) %>
-  </tr>
-  <tr>
-    <td colspan="9" style="text-align:center">
-      악세사리
-    </td>
-  </tr>
-  <tr>
-      <% data1.forEach(function(item1) { %>
-        <td><%- item1.accgrade %></td>
-        <td><%- item1.accname %></td>
-        <td style='text-align: center'><%- item1.acclimit %></td>
-        <td style='text-align: center'><%- item1.accsocket %></td>
-        <td style='text-align: center'><%- item1.accether %></td>
-        <td style='text-align: center'><%- item1.accstats %></td>
-        <td style='text-align: center'><%- item1.accproperty %></td>
-        <td><%- item1.accfeat %></td>
-        <td><%- item1.acccustom %></td>
-      <% }) %>
+  <% } %>
 
 
   </tr>
-  <tr>
-    <td>피트서포터</td>
-  </tr>
-  <tr>
-    <% data1.forEach(function(item1) { %>
-      <td><%- item1.featgrade %></td>
-      <td><%- item1.featname %></td>
-      <td><%- item1.feat %></td>
-      <td><%- item1.reversefeat %></td>
 
-    <% }); %>
-  </tr>
-  <tr>
-    <td>루엘</td>
-  </tr>
-  <tr>
-      <% data1.forEach(function(item1) { %>
-
-      <td><%- item1.gemgrade %></td>
-      <td style='text-align: center'><%- item1.collectname %></td>
-      <td style='text-align: center'><%- item1.gemname %></td>
-      <td style='text-align: center'><%- item1.gemobject %></td>
-      <td><%- item1.gemeffect %></td>
-      <% }); %>
-
-  </tr>
-  <tr>
-    <td>수집품 - 준비중입니다</td>
-  <tr>
-    <td></td>
-  </tr>
-  <tr>
-    <td>조수 - 준비중입니다</td>
-  </tr>
-  <tr>
-    <td>칭호 - 준비중입니다</td>
-  </tr>
 </table>
 <br>
 <table width="800" border="1" class="aaf table_st">
