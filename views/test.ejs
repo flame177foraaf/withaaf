@@ -11,7 +11,7 @@
       width: 15%;
       z-index: 1;
       overflow-x: hidden;
-      position: absolute;
+      position: fixed;
     }
     #left_sidenav ul{
       padding-left: 0px;
@@ -79,6 +79,9 @@
               <% var rival_firstname = list1[i].rival_name.split(' "')[0] %>
               <li>
                 <a href="/test/<%- rival_firstname %>" class=" "> <%- list1[i].rival_name %></a>
+              </li>
+              <li>
+                
               </li>
             <% } %>
           <% } %>
