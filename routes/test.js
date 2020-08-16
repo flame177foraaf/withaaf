@@ -34,12 +34,12 @@ router.get('/:id' , (req,res,next) => {
   }
   var QueryString = "select * from aquafeq.rival"
   client.query(QueryString, (err, response1) =>{
-    var QueryString = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like $1 or feat.featgrade like $1;'
+    var QueryString1 = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like $1 or feat.featgrade like $1;'
     if (Search.indexOf('사흑천') != '-1') {
-      var QueryString = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like $2 or feat.featgrade like $2;'
+      var QueryString1 = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like %사흑천% or feat.featgrade like %사흑천%;'
 
     }
-    client.query( QueryString, ['%' + Search + '%', '%' + Darksky + '%'], (err, data1) => {
+    client.query( QueryString1, ['%' + Search + '%'], (err, data1) => {
       if (err) {
         console.log(err);
         res.redirect('/test');
