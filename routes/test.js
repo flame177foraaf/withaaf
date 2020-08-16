@@ -15,10 +15,17 @@ router.get('/', (req,res,next) => {
   var Data_length = 0;
   var QueryString = "SELECT * FROM aquafeq.aquafwp WHERE wpgrade ilike %세레스% "
   client.query(QueryString, (err, data1) => {
-    res.render('test', {
-    data1: data1.rows,
-    Data_length: Data_length,
-    });
+    if(typeof(data1.rows[0]) !== "object") {
+      res.render('test', {
+      data1: '자료가 없습니다.',
+      });
+    } else {
+      res.render('test', {
+      data1: data1.rows,
+      });
+    }
+
+
   })
 });
 //  var QueryString = "SELECT * FROM aquafeq.monster where mon_property Ilike $1;"
