@@ -50,7 +50,6 @@
       <% } else { %>
         <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
       <% } %>
-      <td><%- item.wpgrade %></td>
       <td><%- item.wpname %></td>
       <td style='text-align: center'><%- item.wplimit %></td>
       <td style='text-align: center'><%- item.wpsocket %></td>
@@ -60,6 +59,7 @@
       <td><%- item.wpfeat %></td>
       <td><%- item.wpcustom %></td>
     <% }) %>
+    </tr>
   <% } %>
 
 
@@ -71,21 +71,24 @@
   </tr>
   <tr>
     <% if (typeof(data2[0]) === 'undefined'){ %>
-          <td colspan="9" style= "text-align:center;">
-            해당하는 데이터가 없습니다.
-          </td>
-
+      <tr>
+        <td colspan="9" style= "text-align:center;">
+          해당하는 데이터가 없습니다.
+        </td>
+      </tr>
     <% } else { %>
       <% data2.forEach(function(item) { %>
-        <td><%- item.armgrade %></td>
-        <td><%- item.armname %></td>
-        <td style='text-align: center'><%- item.armlimit %></td>
-        <td style='text-align: center'><%- item.armsocket %></td>
-        <td style='text-align: center'><%- item.armether %></td>
-        <td style='text-align: center'><%- item.armstats %></td>
-        <td style='text-align: center'><%- item.armproperty %></td>
-        <td><%- item.armfeat %></td>
-        <td><%- item.armcustom %></td>
+        <tr>
+          <td><%- item.armname %></td>
+          <td style='text-align: center'><%- item.armlimit %></td>
+          <td style='text-align: center'><%- item.armsocket %></td>
+          <td style='text-align: center'><%- item.armether %></td>
+          <td style='text-align: center'><%- item.armstats %></td>
+          <td style='text-align: center'><%- item.armproperty %></td>
+          <td><%- item.armfeat %></td>
+          <td><%- item.armcustom %></td>
+        </tr>
+
       <% }) %>
     <% } %>
 
@@ -97,19 +100,25 @@
   </tr>
   <tr>
     <% if (typeof(data3[0]) === 'undefined'){ %>
-          <td colspan="9" style= "text-align:center;">
-            해당하는 데이터가 없습니다.
+      <tr>
+        <td colspan="9" style= "text-align:center;">
+          해당하는 데이터가 없습니다.
+        </td>
+      </tr>
+
     <% } else { %>
       <% data3.forEach(function(item) { %>
-        <td><%- item.accgrade %></td>
-        <td><%- item.accname %></td>
-        <td style='text-align: center'><%- item.acclimit %></td>
-        <td style='text-align: center'><%- item.accsocket %></td>
-        <td style='text-align: center'><%- item.accether %></td>
-        <td style='text-align: center'><%- item.accstats %></td>
-        <td style='text-align: center'><%- item.accproperty %></td>
-        <td><%- item.accfeat %></td>
-        <td><%- item.acccustom %></td>
+        <tr>
+          <td><%- item.accname %></td>
+          <td style='text-align: center'><%- item.acclimit %></td>
+          <td style='text-align: center'><%- item.accsocket %></td>
+          <td style='text-align: center'><%- item.accether %></td>
+          <td style='text-align: center'><%- item.accstats %></td>
+          <td style='text-align: center'><%- item.accproperty %></td>
+          <td><%- item.accfeat %></td>
+          <td><%- item.acccustom %></td>
+        </tr>
+
       <% }) %>
     <% } %>
   </tr>
@@ -118,15 +127,20 @@
   </tr>
   <tr>
     <% if (typeof(data4[0]) === 'undefined'){ %>
-          <td colspan="9" style= "text-align:center;">
-            해당하는 데이터가 없습니다.
-          </td>
+      <tr>
+        <td colspan="9" style= "text-align:center;">
+          해당하는 데이터가 없습니다.
+        </td>
+      </tr>
+
     <% } else { %>
       <% data4.forEach(function(item) { %>
-        <td><%- item.featgrade %></td>
-        <td><%- item.featname %></td>
-        <td><%- item.feat %></td>
-        <td><%- item.reversefeat %></td>
+        <tr>
+          <td><%- item.featname %></td>
+          <td><%- item.feat %></td>
+          <td><%- item.reversefeat %></td>
+        </tr>
+
 
       <% }); %>
     <% } %>
@@ -139,7 +153,7 @@
     <% if (typeof(data1[0]) === 'undefined'){ %>
       <tr>
         <div class="" id="pagelist" >
-          <td colspan="9" style= "text-align:center; font-size:24px">
+          <td colspan="9" style= "text-align:center; ">
             해당하는 데이터가 없습니다.
           </td>
         </div>

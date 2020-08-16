@@ -21,7 +21,7 @@ router.get('/', (req,res,next) => {
       client.query(QueryString, ['%' + '세레스' + '%'], (err, data3) => {
         var QueryString = "SELECT * FROM aquafeq.featsup WHERE featgrade ilike $1 "
         client.query(QueryString, ['%' + '세레스' + '%'], (err, data4) => {
-          var QueryString = "SELECT * FROM aquafeq.aquafgem WHERE gemgrade ilike $1 "
+          var QueryString = "SELECT * FROM aquafeq.aquafgem WHERE gemname ilike $1 "
           client.query(QueryString, ['%' + '세레스' + '%'], (err, data5) => {
 
             if (err) {
