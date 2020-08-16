@@ -49,28 +49,37 @@
       <ul>
         <h3 class="" style="margin:5px" >강적</h3>
           <% list1.forEach(function(item){ %>
-            <% var rival_firstname = item.rival_name.split(' "')[0] %>
-            <li>
-              <a href="/test/<%- rival_firstname %>" class=" "> <%- item.rival_name %></a>
-            </li>
+            <% if (item.rival_grade === '일반 강적'){ %>
+              <% var rival_firstname = item.rival_name.split(' "')[0] %>
+              <li>
+                <a href="/test/<%- rival_firstname %>" class=" "> <%- item.rival_name %></a>
+              </li>
+            <% } %>
+
           <% }) %>
 
         <h3 class="" style="margin:5px" >희귀 강적</h3>
-          <% list2.forEach(function(item){ %>
-            <% var rival_firstname = item.rival_name.split(' "')[0] %>
-            <li>
-              <a href="/test/<%- rival_firstname %>" class=" "> <%- item.rival_name %></a>
-            </li>
-            <% }) %>
+          <% list1.forEach(function(item){ %>
+            <% if (item.rival_grade === '희귀 강적'){ %>
+              <% var rival_firstname = item.rival_name.split(' "')[0] %>
+              <li>
+                <a href="/test/<%- rival_firstname %>" class=" "> <%- item.rival_name %></a>
+              </li>
+              <% }) %>
+            <% } %>
+
 
 
           <h3 class="" style="margin:5px" >대강적 강적</h3>
-          <% list3.forEach(function(item){ %>
-            <% var rival_firstname = item.rival_name.split(' "')[0] %>
-            <li>
-              <a href="/test/<%- rival_firstname %>" class=" "> <%- item.rival_name %></a>
-            </li>
-            <% }) %>
+          <% list1.forEach(function(item){ %>
+            <% if (item.rival_grade === '대강적'){ %>
+              <% var rival_firstname = item.rival_name.split(' "')[0] %>
+              <li>
+                <a href="/test/<%- rival_firstname %>" class=" "> <%- item.rival_name %></a>
+              </li>
+              <% }) %>
+            <% } %>
+
 
       </ul>
     </div>
@@ -83,11 +92,11 @@
       <% if (typeof(Search) !== 'undefined'){ %>
         <table width="80%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="rival_RoseWhip">
           <tr align="center" height="40">
-            <td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="9"><%= Rival %></td>
+            <td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="9"><%- data.rival_name %></td>
           </tr>
           <tr>
               <td style="padding:18px 18px 0 18px;" colspan="9">
-                <%= rival_information %>
+                <%- data.rival_information %>
               </td>
 
 
