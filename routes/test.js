@@ -21,20 +21,22 @@ router.get('/', (req,res,next) => {
       client.query(QueryString, ['%' + '세레스' + '%'], (err, data3) => {
         var QueryString = "SELECT * FROM aquafeq.featsup WHERE featgrade ilike $1 "
         client.query(QueryString, ['%' + '세레스' + '%'], (err, data4) => {
-          var QueryString = "SELECT * FROM aquafeq.aquafgem WHERE gemname ilike $1 "
+          var QueryString = "SELECT * FROM aquafeq.aquafgem WHERE collectname ilike $1 "
           client.query(QueryString, ['%' + '세레스' + '%'], (err, data5) => {
 
             if (err) {
               console.log(err);
+            } else {
+              res.render('test', {
+                data1: data1.rows,
+                data2: data2.rows,
+                data3: data3.rows,
+                data4: data4.rows,
+                data5: data5.rows,
+              });
             }
 
-            res.render('test', {
-              data1: data1.rows,
-              data2: data2.rows,
-              data3: data3.rows,
-              data4: data4.rows,
-              data5: data5.rows,
-            });
+
 
           })
         })
