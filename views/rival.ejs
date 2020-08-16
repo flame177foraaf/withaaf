@@ -1,64 +1,304 @@
 <!DOCTYPE html>
-<html><meta charset="utf-8">
-  <script>
-    function add_row() {
-      var my_tbody = document.getElementById('my-tbody');
-      // var row = my_tbody.insertRow(0); // 상단에 추가
-      var row = my_tbody.insertRow( my_tbody.rows.length ); // 하단에 추가
-      var cell1 = row.insertCell(4);
-      var cell2 = row.insertCell(5);
-      var cell2 = row.insertCell(5);
-      var cell2 = row.insertCell(5);
-      var cell2 = row.insertCell(5);
-      var cell2 = row.insertCell(5);
-      cell1.innerHTML = '항목';
-      cell2.innerHTML = new Date().toUTCString();
-    }
-
-    function delete_row() {
-      var my_tbody = document.getElementById('my-tbody');
-      if (my_tbody.rows.length < 1) return;
-      // my_tbody.deleteRow(0); // 상단부터 삭제
-      my_tbody.deleteRow( my_tbody.rows.length-1 ); // 하단부터 삭제
-    }
-  </script>
+<html lang="en" dir="ltr">
   <head>
+    <meta charset="utf-8">
     <%- include ('head') %>
-    <title><%= title %></title>
+
+    <title>강적</title>
+    <style media="screen">
+    #left_sidenav {
+      height: 100%;
+      width: 15%;
+      z-index: 1;
+      overflow-x: hidden;
+      position: absolute;
+    }
+    #left_sidenav ul{
+      padding-left: 0px;
+      font-size: 16px;
+    }
+    #left_sidenav a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      color: black;
+      display: block;
+    }
+
+    #left_sidenav a:hover {
+      color: white;
+      background-color: gray;
+    }
+    #left_sidenav li ul {
+      background: ;
+      display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
+      height:auto;
+      padding:0px;
+      margin:0px;
+      border:0px;
+      z-index:200;
+      font-size: 12px;
+    }
+    #left_sidenav li:hover ul {
+      font-size: 14px;
+      padding-left: 10px;
+
+      display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
+    }
+    </style>
   </head>
-  <body style="margin-top: 50px; margin-right: 10%; margin-left:10%; ">
+  <body style="margin:20px 50px 20px 50px">
+    <div class="" style="width:300px" id="left_sidenav">
+      <ul>
+        <h3 class="" style="margin:5px" >강적</h3>
+        <% for ( i = 0; i < list1.length; i++){ %>
+          <% if (list1[i].rival_grade == '일반 강적'){ %>
+            <% var rival_firstname = list1[i].rival_name.split(' "')[0] %>
+            <li>
+              <a href="/rival/<%- rival_firstname %>" class=" "> <%- list1[i].rival_name %></a>
+            </li>
+          <% } %>
 
-    <h1><%= title  %></h1>
+        <% } %>
+
+
+        <h3 class="" style="margin:5px" >희귀 강적</h3>
+        <% for ( i = 0; i < list1.length; i++){ %>
+          <% if (list1[i].rival_grade == '희귀 강적'){ %>
+            <% var rival_firstname = list1[i].rival_name.split(' "')[0] %>
+            <li>
+              <a href="/rival/<%- rival_firstname %>" class=" "> <%- list1[i].rival_name %></a>
+            </li>
+          <% } %>
+        <% } %>
 
 
 
-    <table border='1'>
-      <colgroup>
-      </colgroup>
-      <thead>
-        <tr>
-          <th>강적 이름</th>
-          <th>타입</th>
-          <th>속성</th>
-          <th>내성</th>
-          <th>상속 데미지 변화</th>
-          <th>스킬</th>
-          <th>보상</th>
-        </tr>
-      </thead>
-      <tbody id="my-tbody">
-        <tr>
-          <td>테스트 강적 이름</td>
-          <td>강적 테스트 타입</td>
-          <td>강적 테스트 속성</td>
-          <td>강적 테스트 내성</td>
-          <td>강적 테스트 상속 뎀감</td>
-          <td>강적 테스트 스킬</td>
-          <td>강적 테스트 보상</td>
-        </tr>
+          <h3 class="" style="margin:5px" >대강적</h3>
+          <% for ( i = 0; i < list1.length; i++){ %>
+            <% if (list1[i].rival_grade == '대강적'){ %>
+              <% var rival_firstname = list1[i].rival_name.split(' "')[0] %>
+              <li>
+                <a href="/rival/<%- rival_firstname %>" class=" "> <%- list1[i].rival_name %></a>
+              </li>
+              <li>
 
-      </tbody>
-    </table>
-    <button onclick="add_row()">하와와</button>
+              </li>
+            <% } %>
+          <% } %>
+
+      </ul>
+    </div>
+
+
+
+
+
+    <div style="margin-left:350px">
+      <% if (typeof(Search) != 'undefined'){ %>
+        <table width="100%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="rival_RoseWhip">
+          <thead>
+            <colgroup>
+              <col width="15%">
+              <col width="5%">
+              <col width="5%">
+              <col width="5%">
+              <col width="10%">
+              <col width="10%">
+              <col width="20%">
+              <col width="30%">
+            </colgroup>
+          </thead>
+          <tbody>
+            <tr align="center" height="40">
+              <td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="8"><%- list2[0].rival_name %></td>
+            </tr>
+            <tr>
+                <td style="padding:18px 18px 0 18px;" colspan="8">
+                  <%- list2[0].rival_information %>
+                </td>
+            </tr>
+
+
+            <tr>
+              <td colspan="8" style="text-align:center">
+                무기
+              </td>
+            </tr>
+              <% data1.forEach(function(item) { %>
+                <% if (item.wpname != null ) { %>
+                  <% if (item.wpproperty.indexOf('/') != -1){ %>
+                    <% var WpP = item.wpproperty.split('/') %>
+                    <% if ( WpP[1] == ' 불 ') { %>
+                      <tr class="" id="tabletr" style="white-space: pre-line; background-color:#FFD5DD">
+                    <% } else if (WpP[1] == ' 물 ' ) { %>
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#DBE0FC">
+                    <% } else if (WpP[1] == ' 바람 ') { %>
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#CEFFD3">
+                    <% } else if (WpP[1] == ' 땅 ') { %>
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#F8EAD8">
+                    <% } else if (WpP[1] == ' 정신 ') { %>
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#FFFFDB">
+                    <% } else if (WpP[1] == ' 아스트랄 ') { %>
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#E4C1F2">
+                    <% } else if (WpP[1] == ' 무속성 ') { %>
+                      <tr class="" id="tabletr" style="white-space: pre-line;  background-color:#EAEAEA">
+                    <% } %>
+                  <% } else { %>
+                    <tr class="" id="tabletr" style="white-space: pre-line; ">
+                  <% } %>
+                    <td><%- item.wpname %></td>
+                    <td style='text-align: center'><%- item.wplimit %></td>
+                    <td style='text-align: center'><%- item.wpsocket %></td>
+                    <td style='text-align: center'><%- item.wpether %></td>
+                    <td style='text-align: center'><%- item.wpstats %></td>
+                    <td style='text-align: center'><%- item.wpproperty %></td>
+                    <td><%- item.wpfeat %></td>
+                    <td><%- item.wpcustom %></td>
+                  </tr>
+                <% } %>
+              <% }) %>
+
+
+
+                <tr >
+                  <td colspan="8" style="text-align:center">
+                    방어구
+                  </td>
+                </tr>
+
+                <% data2.forEach(function(item) { %>
+                  <% if (item.armname != null){ %>
+                    <tr>
+                      <td><%- item.armname %></td>
+                      <td style='text-align: center'><%- item.armlimit %></td>
+                      <td style='text-align: center'><%- item.armsocket %></td>
+                      <td style='text-align: center'><%- item.armether %></td>
+                      <td style='text-align: center'><%- item.armstats %></td>
+                      <td style='text-align: center'><%- item.armproperty %></td>
+                      <td><%- item.armfeat %></td>
+                      <td><%- item.armcustom %></td>
+                    </tr>
+                  <% } %>
+
+                <% }) %>
+
+
+                <tr>
+                  <td colspan="8" style="text-align:center">
+                    악세사리
+                  </td>
+                </tr>
+                <% data3.forEach(function(item) { %>
+                  <% if (item.accname != null){ %>
+                    <tr>
+                      <td><%- item.accname %></td>
+                      <td style='text-align: center'><%- item.acclimit %></td>
+                      <td style='text-align: center'><%- item.accsocket %></td>
+                      <td style='text-align: center'><%- item.accether %></td>
+                      <td style='text-align: center'><%- item.accstats %></td>
+                      <td style='text-align: center'><%- item.accproperty %></td>
+                      <td><%- item.accfeat %></td>
+                      <td><%- item.acccustom %></td>
+                    </tr>
+                  <% } %>
+
+                <% }) %>
+              </tbody>
+
+              </table>
+
+              <table width="100%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="rival_RoseWhip">
+                <thead>
+                  <colgroup>
+                    <col width="30%">
+                    <col width="35%">
+                    <col width="35%">
+                  </colgroup>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="8" style="text-align:center">
+                      피트서포터
+                    </td>
+                  </tr>
+                  <% data4.forEach(function(item) { %>
+                    <% if (item.featname != null){ %>
+                      <tr>
+                        <td colspan=""><%- item.featname %></td>
+                        <td colspan=""><%- item.feat %></td>
+                        <td colspan=""><%- item.reversefeat %></td>
+                      </tr>
+                    <% } %>
+
+                  <% }); %>
+                </tbody>
+
+              </table>
+
+
+                  <table width="100%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="rival_RoseWhip">
+
+                  <thead>
+                    <colgroup>
+                      <col width="20%">
+                      <col width="20%">
+                      <col width="20%">
+                      <col width="40%">
+                    </colgroup>
+                  </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="8" style="text-align:center">
+                      루엘
+                    </td>
+                  </tr>
+                  <% data5.forEach(function(item) { %>
+                    <% if (item.gemname != null){ %>
+                      <tr>
+                        <td colspan=""><%- item.gemgrade %></td>
+                        <td colspan="" style='text-align: center'><%- item.gemname %></td>
+                        <td colspan="" style='text-align: center'><%- item.gemobject %></td>
+                        <td colspan=""><%- item.gemeffect %></td>
+                      </tr>
+                    <% } %>
+
+                  <% }); %>
+                </tbody>
+
+              </table>
+
+          <table width="100%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="rival_RoseWhip">
+
+            <tr>
+              <td colspan="8" style="text-align:center">
+                수집품 - 준비중입니다
+              </td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+              <td colspan="8" style="text-align:center">
+                조수 - 준비중입니다
+              </td>
+            </tr>
+            <tr>
+              <td colspan="8" style="text-align:center">
+                칭호 - 준비중입니다
+              </td>
+            </tr>
+          </tbody>
+
+
+
+        </table>
+
+      <% } %>
+
+
+    </div>
+
   </body>
+  <footer>
+    <%- include ('footer') %>
+  </footer>
 </html>

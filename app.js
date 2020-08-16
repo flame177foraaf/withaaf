@@ -35,6 +35,7 @@ var assemblearmRouter = require('./routes/Assemblyarm');
 var assembleaccRouter = require('./routes/Assemblyacc');
 
 var itemRouter = require('./routes/item');
+var rivalRouter = require('./routes/rival');
 
 
 
@@ -84,6 +85,7 @@ app.use('/Assemblywp', assemblewpRouter);
 app.use('/Assemblyarm', assemblearmRouter);
 app.use('/Assemblyacc', assembleaccRouter);
 app.use('/item', itemRouter);
+app.use('/rival', rivalRouter);
 
 
 //app.use('/aafwp/wpadd', aafwpaddRouter);
