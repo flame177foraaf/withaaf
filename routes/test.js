@@ -27,21 +27,22 @@ router.get('/', (req,res,next) => {
 
 router.get('/:id' , (req,res,next) => {
   var Search = req.params.id;
+  var darksky = '사흑천'
   console.log(Search);
-  if (Search === '천룡왕') {
+  if (Search == '천룡왕') {
     Search = '희귀 강적 천룡왕'
   }
   var QueryString = "select * from aquafeq.rival"
   client.query(QueryString, (err, response1) =>{
     var QueryString = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like $1 or feat.featgrade like $1;'
-    if(Search.indexOf('사흑천') != '-1'){
-      var QueryString = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like "%사흑천%" or feat.featgrade like "%사흑천%";'
+    if (Search.indexOf('사흑천') != '-1') {
+      var QueryString = 'select * from aquafeq.aquafwp as wp  full join  aquafeq.aquafgem as gem on wp.wpgrade = gem.collectname full join aquafeq.aquafarm as arm on gem.collectname = arm.armgrade  full join aquafeq.aquafacc as acc on arm.armgrade = acc.accgrade  full join aquafeq.featsup as feat on acc.accgrade = feat.featgrade where wp.wpgrade like $1 or gem.collectname like $1 or arm.armgrade like $1 or acc.accgrade like $2 or feat.featgrade like $2;'
 
     }
-    client.query( QueryString, ['%' + Search + '%' ], (err, data1) => {
+    client.query( QueryString, ['%' + Search + '%', '%' + darksky + '%' ], (err, data1) => {
       if (err) {
         console.log(err);
-        redirect('/')
+        res.redirect('/test');
       }
       res.render('test' , {
         list1: response1.rows,
