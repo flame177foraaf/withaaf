@@ -15,7 +15,7 @@ router.get('/', (req,res,next) => {
   var Search = req.params.id;
   console.log(Search)
 
-  var QueryString = "select rival_name from aquafeq.rival"
+  var QueryString = "select * from aquafeq.rival"
   client.query(QueryString, (err, response1) =>{
     res.render('test' , {
       Rival: Search,
@@ -31,7 +31,7 @@ router.get('/:id' , (req,res,next) => {
   if (Search === '천룡왕') {
     Search = '희귀 강적 천룡왕'
   }
-  var QueryString = "select rival_name from aquafeq.rival"
+  var QueryString = "select * from aquafeq.rival"
   client.query(QueryString, (err, response1) =>{
       var QueryString = 'SELECT * FROM aquafeq.aquafwp where wpgrade like $1';
       client.query( QueryString, ['%' + Search + '%'], (err, data1) => {
