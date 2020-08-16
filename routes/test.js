@@ -17,12 +17,9 @@ router.get('/', (req,res,next) => {
 
   var QueryString = "select rival_name from aquafeq.rival"
   client.query(QueryString, (err, response1) =>{
-        res.render('test' , {
-          Rival: Search,
-
-          list1: response1.rows,
-        })
-      })
+    res.render('test' , {
+      Rival: Search,
+      list1: response1.rows,
     })
   })
 })
@@ -36,10 +33,6 @@ router.get('/:id' , (req,res,next) => {
   }
   var QueryString = "select rival_name from aquafeq.rival"
   client.query(QueryString, (err, response1) =>{
-
-
-    var QueryString = 'SELECT * FROM aquafeq.rival ';
-    client.query( QueryString, ['%' + Search + '%'], (err, response) => {
       var QueryString = 'SELECT * FROM aquafeq.aquafwp where wpgrade like $1';
       client.query( QueryString, ['%' + Search + '%'], (err, data1) => {
         var QueryString = 'SELECT * FROM aquafeq.aquafarm where armgrade like $1';
@@ -59,7 +52,6 @@ router.get('/:id' , (req,res,next) => {
               client.query( QueryString, ['%' + Search + '%'], (err, data5) => {
                 res.render('test' , {
                   list1: response1.rows,
-                  data:response.rows,
                   data1: data1.rows,
                   data2: data2.rows,
                   data3: data3.rows,
@@ -78,9 +70,6 @@ router.get('/:id' , (req,res,next) => {
       })
 
     })
-  })
-
-
 })
 /*
 router.get('/', (req,res,next) => {
