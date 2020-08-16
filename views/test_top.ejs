@@ -1,0 +1,135 @@
+<% if (typeof(rival1[0]) !== 'undefined'){ %>
+  <tr>
+    <td colspan="9" style="text-align:center">
+      무기
+    </td>
+  </tr>
+  <% rival1.forEach(function(item) { %>
+    <% if (item.wpproperty.indexOf('/') != -1){ %>
+      <% var WpP = item.wpproperty.split('/') %>
+      <% if ( WpP[1] == ' 불 ') { %>
+        <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD">
+      <% } else if (WpP[1] == ' 물 ' ) { %>
+        <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC">
+      <% } else if (WpP[1] == ' 바람 ') { %>
+        <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3">
+      <% } else if (WpP[1] == ' 땅 ') { %>
+        <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8">
+      <% } else if (WpP[1] == ' 정신 ') { %>
+        <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB">
+      <% } else if (WpP[1] == ' 아스트랄 ') { %>
+        <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2">
+      <% } else if (WpP[1] == ' 무속성 ') { %>
+        <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA">
+      <% } else { %>
+        <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
+      <% } %>
+    <% } else { %>
+      <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
+    <% } %>
+    <td><%- item.wpname %></td>
+    <td style='text-align: center'><%- item.wplimit %></td>
+    <td style='text-align: center'><%- item.wpsocket %></td>
+    <td style='text-align: center'><%- item.wpether %></td>
+    <td style='text-align: center'><%- item.wpstats %></td>
+    <td style='text-align: center'><%- item.wpproperty %></td>
+    <td><%- item.wpfeat %></td>
+    <td><%- item.wpcustom %></td>
+  <% }) %>
+  </tr>
+<% } %>
+
+  <% if (typeof(rival2[0]) !== 'undefined'){ %>
+    <tr >
+      <td colspan="9" style="text-align:center">
+        방어구
+      </td>
+    </tr>
+    <% rival2.forEach(function(item) { %>
+      <tr>
+        <td><%- item.armname %></td>
+        <td style='text-align: center'><%- item.armlimit %></td>
+        <td style='text-align: center'><%- item.armsocket %></td>
+        <td style='text-align: center'><%- item.armether %></td>
+        <td style='text-align: center'><%- item.armstats %></td>
+        <td style='text-align: center'><%- item.armproperty %></td>
+        <td><%- item.armfeat %></td>
+        <td><%- item.armcustom %></td>
+      </tr>
+    <% }) %>
+  <% } %>
+</tr>
+
+
+  <% if (typeof(rival3[0]) !== 'undefined'){ %>
+    <tr>
+      <td colspan="9" style="text-align:center">
+        악세사리
+      </td>
+    </tr>
+    <% rival3.forEach(function(item) { %>
+      <tr>
+        <td><%- item.accname %></td>
+        <td style='text-align: center'><%- item.acclimit %></td>
+        <td style='text-align: center'><%- item.accsocket %></td>
+        <td style='text-align: center'><%- item.accether %></td>
+        <td style='text-align: center'><%- item.accstats %></td>
+        <td style='text-align: center'><%- item.accproperty %></td>
+        <td><%- item.accfeat %></td>
+        <td><%- item.acccustom %></td>
+      </tr>
+    <% }) %>
+  <% } %>
+
+
+
+
+  <% if (typeof(rival4[0]) !== 'undefined'){ %>
+    <tr>
+      <td colspan="9" style="text-align:center">
+        피트서포터
+      </td>
+    </tr>
+    <% rival4.forEach(function(item) { %>
+      <tr>
+        <td><%- item.featname %></td>
+        <td><%- item.feat %></td>
+        <td><%- item.reversefeat %></td>
+      </tr>
+    <% }); %>
+  <% } %>
+
+
+  <% if (typeof(rival5[0]) !== 'undefined'){ %>
+    <tr>
+      <td colspan="9" style="text-align:center">
+        루엘
+      </td>
+    </tr>
+    <% rival5.forEach(function(item) { %>
+      <tr>
+        <td><%- item.gemgrade %></td>
+        <td style='text-align: center'><%- item.gemname %></td>
+        <td style='text-align: center'><%- item.gemobject %></td>
+        <td><%- item.gemeffect %></td>
+      </tr>
+    <% }); %>
+  <% } %>
+
+<tr>
+  <td colspan="9" style="text-align:center">
+    수집품 - 준비중입니다
+  </td>
+</tr>
+<tr>
+</tr>
+<tr>
+  <td colspan="9" style="text-align:center">
+    조수 - 준비중입니다
+  </td>
+</tr>
+<tr>
+  <td colspan="9" style="text-align:center">
+    칭호 - 준비중입니다
+  </td>
+</tr>
