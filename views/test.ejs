@@ -48,26 +48,26 @@
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%" id="left_sidenav">
       <ul>
         <h3 class="w3-bar-item">강적</h3>
-          <% list1.forEach(item){ %>
+          <% list1.forEach(function(item){ %>
             <li>
               <a href="#" class="w3-bar-item w3-button"> <%- item.rival_name %></a>
             </li>
-          <% } %>
+          <% }) %>
 
         <h3 class="w3-bar-item">희귀 강적</h3>
-        <% list2.forEach(item){ %>
-          <li>
-            <a href="#" class="w3-bar-item w3-button"> <%- item.rival_name %></a>
-          </li>
-        <% } %>
+          <% list2.forEach(function(item){ %>
+            <li>
+              <a href="#" class="w3-bar-item w3-button"> <%- item.rival_name %></a>
+            </li>
+            <% }) %>
 
 
-        <h3 class="w3-bar-item">대강적 강적</h3>
-        <% list3.forEach(item){ %>
-          <li>
-            <a href="#" class="w3-bar-item w3-button"> <%- item.rival_name %></a>
-          </li>
-        <% } %>
+          <h3 class="w3-bar-item">대강적 강적</h3>
+          <% list3.forEach(function(item){ %>
+            <li>
+              <a href="#" class="w3-bar-item w3-button"> <%- item.rival_name %></a>
+            </li>
+            <% }) %>
 
       </ul>
     </div>
