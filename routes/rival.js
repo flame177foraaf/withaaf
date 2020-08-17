@@ -29,15 +29,12 @@ router.get('/:id' , (req,res,next) => {
   var Search = req.params.id;
   var Darksky = '사흑천'
   console.log(Search);
-  if (Search == '천룡왕') {
-    Search = '희귀 강적 천룡왕'
-  }
+
   var QueryString = "select * from aquafeq.rival"
   client.query(QueryString, (err, response1) => {
     console.log(QueryString);
-
     var QueryString = "select * from aquafeq.rival where rival_name like $1 ";
-    client.query(QueryString, ['%' + Search + '%'], (err, response2) => {
+    client.query(QueryString, [Search + '%'], (err, response2) => {
       var QueryString1 = 'select * from aquafeq.aquafwp as wp where wp.wpgrade like $1'
       client.query( QueryString1, ['%' + Search + '%'], (err, data1) => {
         var QueryString1 = 'select * from aquafeq.aquafarm as arm  where arm.armgrade like $1'
@@ -54,7 +51,7 @@ router.get('/:id' , (req,res,next) => {
             client.query( QueryString1, ['%' + Search + '%'], (err, data4) => {
               var QueryString1 = 'select * from aquafeq.aquafgem as gem where gem.collectname like $1'
               client.query( QueryString1, ['%' + Search + '%'], (err, data5) => {
-                console.log(QueryString);
+                console.log(QueryString1);
 
                   if (err) {
                     console.log(err);
