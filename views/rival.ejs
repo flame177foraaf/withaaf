@@ -99,9 +99,9 @@
         <table width="100%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="eqtable">
 
           <tbody>
-            <tr align="center" height="40">
+            <th align="center" height="40">
               <td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="8"><%- list2[0].rival_name %></td>
-            </tr>
+            </th>
             <tr>
                 <td style="padding:18px 18px 0 18px;" colspan="8">
                   <%- list2[0].rival_information %>
@@ -128,11 +128,11 @@
             <tbody>
 
 
-            <tr>
+            <th>
               <td colspan="8" style="text-align:center">
                 무기
               </td>
-            </tr>
+            </th>
               <% data1.forEach(function(item) { %>
                 <% if (item.wpname != null ) { %>
                   <% if (item.wpproperty.indexOf('/') != -1){ %>
@@ -168,12 +168,29 @@
               <% }) %>
 
 
+              </tbody>
+              </table>
 
-                <tr >
+              <table width="100%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="eqtable">
+                <thead>
+                  <colgroup>
+                    <col width="15%">
+                    <col width="5%">
+                    <col width="5%">
+                    <col width="5%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="30%">
+                  </colgroup>
+                </thead>
+                <tbody>
+
+                <th>
                   <td colspan="8" style="text-align:center">
                     방어구
                   </td>
-                </tr>
+                </th>
 
                 <% data2.forEach(function(item) { %>
                   <% if (item.armname != null){ %>
@@ -192,11 +209,29 @@
                 <% }) %>
 
 
-                <tr>
+                </tbody>
+                </table>
+
+                <table width="100%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="eqtable">
+                  <thead>
+                    <colgroup>
+                      <col width="15%">
+                      <col width="5%">
+                      <col width="5%">
+                      <col width="5%">
+                      <col width="10%">
+                      <col width="10%">
+                      <col width="20%">
+                      <col width="30%">
+                    </colgroup>
+                  </thead>
+                  <tbody>
+
+                <th>
                   <td colspan="8" style="text-align:center">
                     악세사리
                   </td>
-                </tr>
+                </th>
                 <% data3.forEach(function(item) { %>
                   <% if (item.accname != null){ %>
                     <tr>
@@ -227,11 +262,11 @@
                   </colgroup>
                 </thead>
                 <tbody>
-                  <tr>
+                  <th>
                     <td colspan="8" style="text-align:center">
                       피트서포터
                     </td>
-                  </tr>
+                  </th>
                   <% data4.forEach(function(item) { %>
                     <% if (item.featname != null){ %>
                       <tr>
@@ -258,11 +293,11 @@
                     </colgroup>
                   </thead>
                 <tbody>
-                  <tr>
+                  <th>
                     <td colspan="8" style="text-align:center">
                       루엘
                     </td>
-                  </tr>
+                  </th>
                   <% data5.forEach(function(item) { %>
                     <% if (item.gemname != null){ %>
                       <tr>
