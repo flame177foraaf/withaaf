@@ -163,8 +163,11 @@
                     <td><%- item.wpfeat %></td>
                     <td><%- item.wpcustom %></td>
                   </tr>
-                <% } %>
-              <% }) %>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="8" style="text-align: center;"> - </td>
+                    </tr>
+                  <% } %>              <% }) %>
 
 
               </tbody>
@@ -201,6 +204,10 @@
                       <td style='text-align: center'><%- item.armproperty %></td>
                       <td><%- item.armfeat %></td>
                       <td><%- item.armcustom %></td>
+                    </tr>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="8" style="text-align: center;"> - </td>
                     </tr>
                   <% } %>
 
@@ -241,7 +248,11 @@
                       <td><%- item.accfeat %></td>
                       <td><%- item.acccustom %></td>
                     </tr>
-                  <% } %>
+                    <% } else { %>
+                      <tr>
+                        <td colspan="8" style="text-align: center;"> - </td>
+                      </tr>
+                    <% } %>
 
                 <% }) %>
               </tbody>
@@ -270,8 +281,11 @@
                         <td colspan=""><%- item.feat %></td>
                         <td colspan=""><%- item.reversefeat %></td>
                       </tr>
-                    <% } %>
-
+                      <% } else { %>
+                        <tr>
+                          <td colspan="3" style="text-align: center;"> - </td>
+                        </tr>
+                      <% } %>
                   <% }); %>
                 </tbody>
 
@@ -301,8 +315,11 @@
                         <td colspan="" style='text-align: center'><%- item.gemobject %></td>
                         <td colspan=""><%- item.gemeffect %></td>
                       </tr>
-                    <% } %>
-
+                      <% } else { %>
+                        <tr>
+                          <td colspan="4" style="text-align: center;"> - </td>
+                        </tr>
+                      <% } %>
                   <% }); %>
                 </tbody>
 
