@@ -99,8 +99,8 @@
         <table width="100%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="eqtable">
 
           <tbody>
-            <th align="center" height="40">
-              <td style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="8"><%- list2[0].rival_name %></td>
+            <th align="center" height="40" style="font-size:18px; font-weight:bold; color:#ffffff; background-color:#b8b6b6;" colspan="8">
+             <%- list2[0].rival_name %>
             </th>
             <tr>
                 <td style="padding:18px 18px 0 18px;" colspan="8">
@@ -128,10 +128,8 @@
             <tbody>
 
 
-            <th>
-              <td colspan="8" style="text-align:center">
+            <th colspan="8">
                 무기
-              </td>
             </th>
               <% data1.forEach(function(item) { %>
                 <% if (item.wpname != null ) { %>
@@ -186,10 +184,8 @@
                 </thead>
                 <tbody>
 
-                <th>
-                  <td colspan="8" style="text-align:center">
+                <th colspan="8">
                     방어구
-                  </td>
                 </th>
 
                 <% data2.forEach(function(item) { %>
@@ -227,10 +223,8 @@
                   </thead>
                   <tbody>
 
-                <th>
-                  <td colspan="8" style="text-align:center">
+                <th colspan="8">
                     악세사리
-                  </td>
                 </th>
                 <% data3.forEach(function(item) { %>
                   <% if (item.accname != null){ %>
@@ -262,10 +256,8 @@
                   </colgroup>
                 </thead>
                 <tbody>
-                  <th>
-                    <td colspan="8" style="text-align:center">
+                  <th colspan="3">
                       피트서포터
-                    </td>
                   </th>
                   <% data4.forEach(function(item) { %>
                     <% if (item.featname != null){ %>
@@ -293,10 +285,8 @@
                     </colgroup>
                   </thead>
                 <tbody>
-                  <th>
-                    <td colspan="8" style="text-align:center">
+                  <th colspan="4">
                       루엘
-                    </td>
                   </th>
                   <% data5.forEach(function(item) { %>
                     <% if (item.gemname != null){ %>
@@ -314,7 +304,7 @@
               </table>
 
           <table width="100%" border="1" class="aaf table_st" style="border-collapse: collapse ; margin: 0 auto 0 auto" id="eqtable">
-
+            <th>준비중</th>
             <tr>
               <td colspan="8" style="text-align:center">
                 수집품 - 준비중입니다
