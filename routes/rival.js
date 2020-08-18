@@ -33,7 +33,7 @@ router.get('/:id' , (req,res,next) => {
   var QueryString = "select * from aquafeq.rival"
   client.query(QueryString, (err, response1) => {
     console.log(QueryString);
-    var QueryString = "select * from aquafeq.rival where rival_name like $1 ";
+    var QueryString = "select * from aquafeq.rival where rival_name like $1 order by id asc";
     client.query(QueryString, [Search + '%'], (err, response2) => {
       var QueryString1 = 'select * from aquafeq.aquafwp as wp where wp.wpgrade like $1'
       client.query( QueryString1, ['%' + Search + '%'], (err, data1) => {
