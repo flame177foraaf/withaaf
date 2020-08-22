@@ -49,17 +49,15 @@ router.get('/search', (req,res,next) => {
         var SearchingType2 = req.query.SearchType2;
 
         var SearchingText = parseInt(SearchingText)
+        var SearchingText2 = parseInt(SearchingText2);
+        var SearchingText2 = req.query.SearchText2;
         if (typeof(SearchingType2) == 'object') {
-          var SearchingText2 = req.query.SearchText2;
-          var SearchingText2 = parseInt(SearchingText2);
-
-          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where (mon_lv - $2 ) % $1 = 0;"
-
+          var SearchingText2 = SearchingText2;
         } else {
           var SearchingText2 = 0;
-          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where (mon_lv - $2 ) % $1 = 0;"
-
+          var SearchingText2 = parseInt(SearchingText2);
         }
+        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where (mon_lv - $2 ) % $1 = 0;"
 
         console.log(SearchingText)
         console.log(SearchingText2)
