@@ -41,7 +41,7 @@ router.get('/search', (req,res,next) => {
   client.query(QueryString, (err,response) => {
     var QueryString = "SELECT  aquafeq.dungeon_partition.id, " + "PartitionName" + "," + "FieldName" + ",   part, COUNT(*) count   FROM aquafeq.dungeon_partition  inner join aquafeq.monster on aquafeq.monster.mon_field = aquafeq.dungeon_partition.part GROUP by  aquafeq.dungeon_partition.id, " + "PartitionName" + "," + "FieldName" + ",  part order by aquafeq.dungeon_partition.id;"
 
-    
+
     client.query(QueryString, (err, response1) => {
       var SearchingType = req.query.SearchType;
       var SearchingText = req.query.SearchText;
@@ -83,7 +83,7 @@ router.get('/search', (req,res,next) => {
               data_monster_count:response3.rows,
               Data_length:Data_length,
             });
-          }
+          });
         });
 
       } else {
