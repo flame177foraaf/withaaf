@@ -12,111 +12,21 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  var Search = req.params.id;
-  console.log(Search)
-
-  var QueryString = "select * from aquafeq.rival"
-  client.query(QueryString, (err, response1) =>{
-    res.render('rival' , {
-      Rival: Search,
-      list1: response1.rows,
-    })
-  })
-})
-
-
-router.get('/:id' , (req,res,next) => {
-  var Search = req.params.id;
-  var Darksky = '사흑천'
-  console.log(Search);
-  if (Search == '천룡왕') {
-    Search = '희귀 강적 천룡왕'
-  }
-  var QueryString = "select * from aquafeq.rival"
-  client.query(QueryString, (err, response1) => {
-    var QueryString = "select * from aquafeq.rival where rival_name like $1 ";
-    console.log(QueryString);
-    client.query(QueryString, ['%' + Search + '%'], (err, response2) => {
-      var QueryString1 = 'select * from aquafeq.aquafwp as wp where wp.wpgrade like $1'
-      client.query( QueryString1, ['%' + Search + '%'], (err, data1) => {
-        var QueryString1 = 'select * from aquafeq.aquafarm as arm  where arm.armgrade like $1'
-        client.query( QueryString1, ['%' + Search + '%'], (err, data2) => {
-          var QueryString1 = 'select * from aquafeq.aquafacc  as acc where acc.accgrade like $1'
-          if (Search.indexOf('사흑천') != '-1') {
-            Search = '사흑천'
-          }
-          client.query( QueryString1, ['%' + Search + '%'], (err, data3) => {
-            var QueryString1 = 'select * from aquafeq.featsup as feat where feat.featgrade like $1'
-            if (Search.indexOf('사흑천') != '-1') {
-              Search = '사흑천'
-            }
-            client.query( QueryString1, ['%' + Search + '%'], (err, data4) => {
-              var QueryString1 = 'select * from aquafeq.aquafgem as gem where gem.collectname like $1'
-              client.query( QueryString1, ['%' + Search + '%'], (err, data5) => {
-                  if (err) {
-                    console.log(err);
-                    res.redirect('/rival');
-                  } else {
-                    console.log(data1.rows[0])
-                    res.render('rival' , {
-                      Search: Search,
-                      list1: response1.rows,
-                      list2: response2.rows,
-                      data1: data1.rows,
-                      data2: data2.rows,
-                      data3: data3.rows,
-                      data4: data4.rows,
-                      data5: data5.rows,
-                    })
-                  }
-              })
-            })
-          })
-        })
-
-
-
-
-      })
-    })
-
-
-  })
-})
-/*
-router.get('/', (req,res,next) => {
   var Data_length = 0;
-  var QueryString = "SELECT * FROM aquafeq.aquafwp WHERE wpgrade ilike $1 "
-  client.query(QueryString, ['%' + '세레스' + '%'], (err, data1) => {
-    var QueryString = "SELECT * FROM aquafeq.aquafarm WHERE armgrade ilike $1 "
-    client.query(QueryString, ['%' + '세레스' + '%'], (err, data2) => {
-      var QueryString = "SELECT * FROM aquafeq.aquafacc WHERE accgrade ilike $1 "
-      client.query(QueryString, ['%' + '세레스' + '%'], (err, data3) => {
-        var QueryString = "SELECT * FROM aquafeq.featsup WHERE featgrade ilike $1 "
-        client.query(QueryString, ['%' + '세레스' + '%'], (err, data4) => {
-          var QueryString = "SELECT * FROM aquafeq.aquafgem WHERE collectname ilike $1 "
-          client.query(QueryString, ['%' + '세레스' + '%'], (err, data5) => {
-
-            if (err) {
-              console.log(err);
-            } else {
-              res.render('rival', {
-                data1: data1.rows,
-                data2: data2.rows,
-                data3: data3.rows,
-                data4: data4.rows,
-                data5: data5.rows,
-              });
-            }
-          })
-        })
-      })
+  var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
+  client.query(QueryString, (err,response) => {
+    var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id asc"
+    client.query(QueryString, (err, response1) => {
+      res.render('test', {
+      title:'AAF 던전 몬스터 정보',
+      fieldname:'검색이 필요합니다',
+      data:response.rows,
+      data_partition:response1.rows,
+      Data_length:Data_length,
+      });
     })
-  })
+  });
 });
-*/
-
-
 //  var QueryString = "SELECT * FROM aquafeq.monster where mon_property Ilike $1;"
 //  var QueryString = "select * from aquafeq.field inner join aquafeq.monster on aquafeq.field.field_id =  aquafeq.monster.mon_field where aquafeq.monster.mon_property Ilike $1 order by aquafeq.field.field_id, aquafeq.monster.mon_lv;"
 // var QueryString = "select (ROW_NUMBER() over()) as num, (select count (DISTINCT field_id) from aquafeq.field  as table1 inner join aquafeq.monster as table2 on table1.field_id =  table2.mon_field where table2.mon_property Ilike $1), * from aquafeq.field  as table1 inner join aquafeq.monster as table2 on table1.field_id =  table2.mon_field where table2.mon_property Ilike $1 order by field_id, mon_lv;"
@@ -126,6 +36,72 @@ router.get('/', (req,res,next) => {
 
 
 
+router.get('/search', (req,res,next) => {
+  var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
+  client.query(QueryString, (err,response) => {
+    var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"
+    client.query(QueryString, (err, response1) => {
+      var SearchingType = req.query.SearchType;
+      var SearchingText = req.query.SearchText;
+      if (SearchingType === 'name'){
+        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_name Ilike $1 order by table1.id, mon_lv;"
+      } else  if (SearchingType === 'property'){
+        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_property Ilike $1 order by table1.id, mon_lv;;"
+      } else if (SearchingType === 'type'){
+        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_type Ilike $1 order by table1.id, mon_lv;"
+      } else if (SearchingType === 'collect') {
+        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_common Ilike $1 or table2.mon_uncommon Ilike $1 or table2.mon_rare Ilike $1 order by table1.id,mon_lv;"
+      } else if (SearchingType === 'level') {
+        SearchType2 = req.query.searchType2
+        var SearchType22 = [];
+
+        if (typeof(SearchType2) == 'object') {
+          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where (mon_lv - searchText2 ) % $1 = 0;"
+        } else {
+          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where mon_lv % $1 = 0;"
+
+        }
+      }
+      client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
+        var Data_length = response2.rows.length;
+        res.render('test', {
+          Searching:'YES',
+          title:'AAF 던전 몬스터 정보',
+          data:response.rows,
+          data_partition:response1.rows,
+          data_monster:response2.rows,
+          Data_length:Data_length,
+        });
+      });
+    })
+  });
+
+});
+
+// params.id 를 쓰는 라우터는 마지막에 쓰라고 한다
+router.get('/:id', (req,res,next) => {
+  var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
+  client.query(QueryString, (err,response) => {
+    var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"
+    client.query(QueryString, (err, response1) => {
+      var Field_Id = req.params.id;
+      var QueryString = "SELECT * FROM aquafeq.monster as table1 left join aquafeq.dungeon_partition as table2 on table1.mon_field = table2.part where mon_field = $1 order by table1.mon_lv asc;"
+      client.query(QueryString, [Field_Id], (err,response2) => {
+        console.log(response2.rows[0])
+        var Data_length = response2.rows.length;
+          res.render('test', {
+          Field_Id:Field_Id,
+          title:'AAF 던전 몬스터 정보',
+          fieldname:'검색이 필요합니다',
+          data:response.rows,
+          data_partition:response1.rows,
+          data_monster:response2.rows,
+          Data_length:Data_length,
+        });
+      });
+    })
+  });
+});
 
 
 
