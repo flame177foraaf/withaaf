@@ -47,10 +47,10 @@ router.get('/search', (req,res,next) => {
       var SearchingText = req.query.SearchText;
       if (SearchingType === 'MonLvDown') {
         var SearchingType2 = req.query.SearchType2;
+        var SearchingText2 = req.query.SearchText2;
 
         var SearchingText = parseInt(SearchingText)
         var SearchingText2 = parseInt(SearchingText2);
-        var SearchingText2 = req.query.SearchText2;
         if (typeof(SearchingType2) !== 'undefined') {
           var SearchingText2 = SearchingText2;
         } else {
