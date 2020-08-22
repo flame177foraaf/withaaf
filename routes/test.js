@@ -59,15 +59,15 @@ router.get('/search', (req,res,next) => {
           var SearchingText2 = 0;
           var SearchingText2 = parseInt(SearchingText2);
         }
-        var QueryString = "select * from aquafeq.dungeon_partition as t1 inner join aquafeq.monster as t2 on t1.part = t2.mon_field where (mon_lv - $2 ) % $1 = 0;";
+        var QueryString = "select * from aquafeq.dungeon_partition as t1 inner join aquafeq.monster as t2 on t1.part = t2.mon_field where (mon_lv - $2) % $1 = 0;";
         console.log(QueryString)
-
         console.log(SearchingText)
         console.log(SearchingText2)
         console.log(typeof(SearchingText))
         console.log(typeof(SearchingText2))
         client.query(QueryString, [SearchingText, SearchingText2], (err,response2) => {
           console.log(QueryString)
+          var Data_length = response2.rows.length;
 
 
           var QueryString = "select " + '"PartitionName"' +" , count(*)  from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field GROUP by "+ '"PartitionName"' +";" ;
@@ -77,7 +77,6 @@ router.get('/search', (req,res,next) => {
             }
             console.log(QueryString)
 
-            var Data_length = response2.rows.length;
             res.render('test', {
               Searching:'YES',
               SearchingType:SearchingType,
