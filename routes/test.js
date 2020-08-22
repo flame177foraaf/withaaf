@@ -68,9 +68,14 @@ router.get('/search', (req,res,next) => {
           var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where mon_lv % $1 = 0;"
 
         }
-        console.log(QueryString)
+
       }
-      client.query(QueryString, [SearchingText ,  SearchingText2], (err,response2) => {
+      console.log(QueryString)
+
+      client.query(QueryString, ['%' + SearchingText + '%',  SearchingText2], (err,response2) => {
+        if (err) {
+          console.log(err)
+        }
         console.log(QueryString)
 
         var Data_length = response2.rows.length;
