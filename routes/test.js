@@ -53,6 +53,9 @@ router.get('/search', (req,res,next) => {
         var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_common Ilike $1 or table2.mon_uncommon Ilike $1 or table2.mon_rare Ilike $1 order by table1.id,mon_lv;"
       } else if (SearchingType === 'MonLvDown') {
         var SearchingText2 = req.query.SearchText2;
+        var SearchingText2 = parseInt(SearchingText2);
+
+        var SearchingText = parseInt(SearchingText)
 
         if (typeof(SearchType2) == 'object') {
 
