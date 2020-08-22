@@ -252,7 +252,7 @@
 
         <tbody>
           <% if (Data_length != 0 ){ %>
-            <% if (typeof(Field_Id) != 'undefined'){ %>
+            <% if (typeof(Field_Id) != 'undefined'){ %> <%--필드별 몬스터 일떄 --%>
               <% if (data_monster[0].FieldName === 'Training'){ %>
                 <tr>
                   <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[0].PartitionName %></td>
@@ -301,6 +301,7 @@
 
                 <% } %>
               <% } %>
+              <%-- 검색시-- %>
             <% } else { %>
               <% if (data_monster[0].FieldName === 'Training'){ %>
                 <tr>
@@ -308,7 +309,12 @@
                 </tr>
               <% } else { %>
                 <tr>
-                  <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
+                  <td colspan="3"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
+                  for (i = 0; i <  data_partition.length ; i ++){
+                    if (data_partition[i].PartitionName === data_monster[0].PartitionName){
+                      <td colspan="8"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
+                    }
+                  }
                 </tr>
               <% } %>
               <% for ( k = 0; k < Data_length ; k++){ %>
@@ -353,7 +359,12 @@
                   </tr>
                 <% } else { %>
                   <tr>
-                    <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[i].PartitionName %></td>
+                    <td colspan="3"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
+                    for (i = 0; i <  data_partition.length ; i ++){
+                      if (data_partition[i].PartitionName === data_monster[0].PartitionName){
+                        <td colspan="8"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
+                      }
+                    }
                   </tr>
                 <% } %>
                     <% for ( k = 0; k < Data_length ; k++){ %>

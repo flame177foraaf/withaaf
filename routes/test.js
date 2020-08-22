@@ -39,7 +39,16 @@ router.get('/', (req,res,next) => {
 router.get('/search', (req,res,next) => {
   var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
   client.query(QueryString, (err,response) => {
-    var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"
+    var QueryString = "SELECT  aquafeq.dungeon_partition.id, " + "PartitionName" + "," + "FieldName" + ",   part, COUNT(*) count   FROM aquafeq.dungeon_partition  inner join aquafeq.monster on aquafeq.monster.mon_field = aquafeq.dungeon_partition.part GROUP by  aquafeq.dungeon_partition.id, " + "PartitionName" + "," + "FieldName" + ",  part order by aquafeq.dungeon_partition.id;"
+
+    <tr>
+      <td colspan="8"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
+      for (i = 0; i <  data_partition.length ; i ++){
+        if (data_partition[i].PartitionName === data_monster[0].PartitionName){
+          <td colspan="3"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
+        }
+      }
+    </tr>
     client.query(QueryString, (err, response1) => {
       var SearchingType = req.query.SearchType;
       var SearchingText = req.query.SearchText;
@@ -63,20 +72,25 @@ router.get('/search', (req,res,next) => {
 
         }
         client.query(QueryString, [SearchingText, SearchingText2], (err,response2) => {
-          if (err) {
-            console.log(err)
-          }
-          console.log(QueryString)
 
-          var Data_length = response2.rows.length;
-          res.render('test', {
-            Searching:'YES',
-            title:'AAF 던전 몬스터 정보',
-            data:response.rows,
-            data_partition:response1.rows,
-            data_monster:response2.rows,
-            Data_length:Data_length,
-          });
+          var QueryString = "select " + "PartitionName" +" , count(*)  from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field GROUP by "+ "PartitionName" +";" ;
+          client.query(QueryString, (err,response3) => {
+            if (err) {
+              console.log(err)
+            }
+            console.log(QueryString)
+
+            var Data_length = response2.rows.length;
+            res.render('test', {
+              Searching:'YES',
+              title:'AAF 던전 몬스터 정보',
+              data:response.rows,
+              data_partition:response1.rows,
+              data_monster:response2.rows,
+              data_monster_count:response3.rows,
+              Data_length:Data_length,
+            });
+          }
         });
 
       } else {
