@@ -56,7 +56,7 @@ router.get('/search', (req,res,next) => {
 
         if (typeof(SearchType2) == 'object') {
 
-          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where (mon_lv - $2 ) % SearchingText = 0;"
+          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where (mon_lv - $3 ) % $2 = 0;"
 
         } else {
           var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where mon_lv % $2 = 0;"
@@ -64,7 +64,7 @@ router.get('/search', (req,res,next) => {
         }
         console.log(QueryString)
       }
-      client.query(QueryString, ['%' + SearchingText + '%' , SearchingText], (err,response2) => {
+      client.query(QueryString, ['%' + SearchingText + '%' , SearchingText, SearchingText2], (err,response2) => {
         console.log(QueryString)
 
         var Data_length = response2.rows.length;
