@@ -67,6 +67,7 @@ router.get('/search', (req,res,next) => {
         console.log(typeof(SearchingText2))
         client.query(QueryString, [SearchingText2, SearchingText ], (err,response3) => {
           console.log(QueryString)
+          var Data_length = response3.rows.length;
 
 
           var QueryString = "select " + '"PartitionName"' +" , count(*)  from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field GROUP by "+ '"PartitionName"' +";" ;
@@ -75,7 +76,6 @@ router.get('/search', (req,res,next) => {
               console.log(err)
             }
             console.log(QueryString)
-            var Data_length = response3.rows.length;
 
             res.render('test', {
               Searching:'YES',
