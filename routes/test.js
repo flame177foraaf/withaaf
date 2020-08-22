@@ -41,6 +41,8 @@ router.get('/search', (req,res,next) => {
   client.query(QueryString, (err,response) => {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"
     client.query(QueryString, (err, response1) => {
+      var SearchingType = req.query.SearchType;
+      var SearchingText = req.query.SearchText;
       if (SearchingType === 'MonLvDown') {
         var SearchingText2 = req.query.SearchText2;
         var SearchingText2 = parseInt(SearchingText2);
