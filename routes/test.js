@@ -39,7 +39,7 @@ router.get('/', (req,res,next) => {
 router.get('/search', (req,res,next) => {
   var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
   client.query(QueryString, (err,response) => {
-    var QueryString = "SELECT  aquafeq.dungeon_partition.id, " + "PartitionName" + "," + "FieldName" + ",   part, COUNT(*) count   FROM aquafeq.dungeon_partition  inner join aquafeq.monster on aquafeq.monster.mon_field = aquafeq.dungeon_partition.part GROUP by  aquafeq.dungeon_partition.id, " + "PartitionName" + "," + "FieldName" + ",  part order by aquafeq.dungeon_partition.id;"
+    var QueryString = "SELECT  aquafeq.dungeon_partition.id, " + '"PartitionName"' + "," + '"FieldName"' + ",   part, COUNT(*) count   FROM aquafeq.dungeon_partition  inner join aquafeq.monster on aquafeq.monster.mon_field = aquafeq.dungeon_partition.part GROUP by  aquafeq.dungeon_partition.id, " + '"PartitionName"' + "," + '"FieldName"' + ",  part order by aquafeq.dungeon_partition.id;"
 
 
     client.query(QueryString, (err, response1) => {
@@ -66,7 +66,7 @@ router.get('/search', (req,res,next) => {
         }
         client.query(QueryString, [SearchingText, SearchingText2], (err,response2) => {
 
-          var QueryString = "select " + "PartitionName" +" , count(*)  from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field GROUP by "+ "PartitionName" +";" ;
+          var QueryString = "select " + '"PartitionName"' +" , count(*)  from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field GROUP by "+ '"PartitionName"' +";" ;
           client.query(QueryString, (err,response3) => {
             if (err) {
               console.log(err)
