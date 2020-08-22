@@ -53,7 +53,7 @@ router.get('/search', (req,res,next) => {
         console.log(SearchingText2)
         console.log(typeof(SearchingText))
         console.log(typeof(SearchingText2))
-        if (typeof(SearchType2) == 'object') {
+        if (typeof(SearchingType2) == 'object') {
           var SearchingText2 = req.query.SearchText2;
           var SearchingText2 = parseInt(SearchingText2);
 
