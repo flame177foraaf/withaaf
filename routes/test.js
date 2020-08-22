@@ -59,13 +59,13 @@ router.get('/search', (req,res,next) => {
           var SearchingText2 = 0;
           var SearchingText2 = parseInt(SearchingText2);
         }
-        var QueryString = "select * from aquafeq.dungeon_partition as t1 inner join aquafeq.monster as t2 on t1.part = t2.mon_field where (t2.mon_lv - ($2::INTEGER)) % ($1::INTEGER) = 0;";
+        var QueryString = "select * from aquafeq.dungeon_partition as t1 inner join aquafeq.monster as t2 on t1.part = t2.mon_field where (t2.mon_lv - ($1::INTEGER)) % ($2::INTEGER) = 0;";
         console.log(QueryString)
         console.log(SearchingText)
         console.log(SearchingText2)
         console.log(typeof(SearchingText))
         console.log(typeof(SearchingText2))
-        client.query(QueryString, [SearchingText, SearchingText2], (err,response3) => {
+        client.query(QueryString, [SearchingText2, SearchingText ], (err,response3) => {
           console.log(QueryString)
 
 
@@ -83,8 +83,9 @@ router.get('/search', (req,res,next) => {
               title:'AAF 던전 몬스터 정보',
               data:response.rows,
               data_partition:response1.rows,
-              data_monster:response2.rows,
               data_monster_count:response3.rows,
+
+              data_monster:response2.rows,
               Data_length:Data_length,
             });
           });
