@@ -311,8 +311,10 @@
                 <tr>
                   <td colspan="3"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
                   <% for (i = 0; i <  data_partition.length ; i ++){ %>
-                    <% if (data_monster_count[i].PartitionName === data_monster[0].PartitionName){ %>
-                      <td colspan="8"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster_count[0].count %></td>
+                    <% if (SearchingType === 'MonLvDown'){ %>
+                      <% if (data_monster_count[0].PartitionName === data_monster[0].PartitionName){ %>
+                        <td colspan="8"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster_count[0].count %></td>
+                      <% } %>
                     <% } %>
 
                   <% } %>
@@ -362,9 +364,12 @@
                   <tr>
                     <td colspan="3"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
                     <% for (i = 0; i <  data_partition.length ; i ++){ %>
-                      <% if (data_monster_count[i].PartitionName === data_monster[0].PartitionName){ %>
-                        <td colspan="8"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster_count[0].count %></td>
+                      <% if (SearchingType === 'MonLvDown'){ %>
+                        <% if (data_monster_count[i].PartitionName === data_monster[0].PartitionName){ %>
+                          <td colspan="8"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster_count[i].count %></td>
+                        <% } %>
                       <% } %>
+
                     <% } %>
                   </tr>
                 <% } %>

@@ -76,6 +76,7 @@ router.get('/search', (req,res,next) => {
             var Data_length = response2.rows.length;
             res.render('test', {
               Searching:'YES',
+              SearchingType:SearchingType,
               title:'AAF 던전 몬스터 정보',
               data:response.rows,
               data_partition:response1.rows,
