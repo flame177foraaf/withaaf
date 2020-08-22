@@ -63,11 +63,7 @@ router.get('/search', (req,res,next) => {
         }
         console.log(QueryString)
       }
-      client.query(QueryString, if (typeof(SearchType2) == 'object') {
-         [SearchingText]
-      } else {
-         ['%' + SearchingText + '%']
-      }, (err,response2) => {
+      client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
         console.log(QueryString)
 
         var Data_length = response2.rows.length;
