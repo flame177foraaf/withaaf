@@ -29,7 +29,7 @@ router.get('/', (req,res,next) => {
 });
 //  var QueryString = "SELECT * FROM aquafeq.monster where mon_property Ilike $1;"
 //  var QueryString = "select * from aquafeq.field inner join aquafeq.monster on aquafeq.field.field_id =  aquafeq.monster.mon_field where aquafeq.monster.mon_property Ilike $1 order by aquafeq.field.field_id, aquafeq.monster.mon_lv;"
-// var QueryString = "select (ROW_NUMBER() over()) as num, (select count (DISTINCT field_id) from aquafeq.field  as table1 inner join aquafeq.monster as table2 on table1.field_id =  table2.mon_field where table2.mon_property Ilike $1), * from aquafeq.field  as table1 inner join aquafeq.monster as table2 on table1.field_id =  table2.mon_field where table2.mon_property Ilike $1 order by field_id, mon_lv;"
+// var QueryString = "select (ROW_NUMBER() over()) as num, (select count (DISTINCT field_id) from aquafeq.field  as t1 inner join aquafeq.monster as t2 on t1.field_id =  t2.mon_field where t2.mon_property Ilike $1), * from aquafeq.field  as t1 inner join aquafeq.monster as t2 on t1.field_id =  t2.mon_field where t2.mon_property Ilike $1 order by field_id, mon_lv;"
 
 // var QueryString = "SELECT * FROM aquafeq.monster where mon_name Ilike $1"
 
@@ -59,7 +59,7 @@ router.get('/search', (req,res,next) => {
           var SearchingText2 = 0;
           var SearchingText2 = parseInt(SearchingText2);
         }
-        var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where ((mon_lv - $2 ) " + "%" + " $1) = 0;"
+        var QueryString = "select * from aquafeq.dungeon_partition as t1 inner join aquafeq.monster as t2 on t1.part = t2.mon_field where (mon_lv - $2 ) % $1 = 0;";
         console.log(QueryString)
 
         console.log(SearchingText)
@@ -70,7 +70,7 @@ router.get('/search', (req,res,next) => {
           console.log(QueryString)
 
 
-          var QueryString = "select " + '"PartitionName"' +" , count(*)  from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field GROUP by "+ '"PartitionName"' +";" ;
+          var QueryString = "select " + '"PartitionName"' +" , count(*)  from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field GROUP by "+ '"PartitionName"' +";" ;
           client.query(QueryString, (err,response3) => {
             if (err) {
               console.log(err)
@@ -93,13 +93,13 @@ router.get('/search', (req,res,next) => {
 
       } else {
         if (SearchingType === 'name'){
-          var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_name Ilike $1 order by table1.id, mon_lv;"
+          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_name Ilike $1 order by t1.id, mon_lv;"
         } else  if (SearchingType === 'property'){
-          var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_property Ilike $1 order by table1.id, mon_lv;;"
+          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_property Ilike $1 order by t1.id, mon_lv;;"
         } else if (SearchingType === 'type'){
-          var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_type Ilike $1 order by table1.id, mon_lv;"
+          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_type Ilike $1 order by t1.id, mon_lv;"
         } else if (SearchingType === 'collect') {
-          var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_common Ilike  % $1 or table2.mon_uncommon Ilike $1 or table2.mon_rare Ilike $1 order by table1.id,mon_lv;"
+          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_common Ilike  % $1 or t2.mon_uncommon Ilike $1 or t2.mon_rare Ilike $1 order by t1.id,mon_lv;"
         }
 
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
@@ -132,7 +132,7 @@ router.get('/:id', (req,res,next) => {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"
     client.query(QueryString, (err, response1) => {
       var Field_Id = req.params.id;
-      var QueryString = "SELECT * FROM aquafeq.monster as table1 left join aquafeq.dungeon_partition as table2 on table1.mon_field = table2.part where mon_field = $1 order by table1.mon_lv asc;"
+      var QueryString = "SELECT * FROM aquafeq.monster as t1 left join aquafeq.dungeon_partition as t2 on t1.mon_field = t2.part where mon_field = $1 order by t1.mon_lv asc;"
       client.query(QueryString, [Field_Id], (err,response2) => {
         console.log(response2.rows[0])
         var Data_length = response2.rows.length;
