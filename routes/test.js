@@ -69,10 +69,10 @@ router.get('/search', (req,res,next) => {
           console.log(QueryString)
           var Data_length = response3.rows.length;
 
+          var PartitionName = "PartitionName"
+          var QueryString = "select $1 , count(*)  from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field GROUP by $1";
 
-          var QueryString = "select $1 , count(*)  from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field GROUP by $1;
- ;
-          client.query(QueryString, ['"' + 'PartitionName' + '"'], (err,response2) => {
+          client.query(QueryString, ['"' + PartitionName + '"'], (err,response2) => {
             if (err) {
               console.log(err)
             }
