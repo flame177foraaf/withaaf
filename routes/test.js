@@ -46,6 +46,7 @@ router.get('/search', (req,res,next) => {
       if (SearchingType === 'MonLvDown') {
         var SearchingText2 = req.query.SearchText2;
         var SearchingText2 = parseInt(SearchingText2);
+        var SearchingType2 = req.query.SearchType2;
 
         var SearchingText = parseInt(SearchingText)
         console.log(SearchingText)
@@ -57,7 +58,8 @@ router.get('/search', (req,res,next) => {
           var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where (mon_lv - $2 ) % $1 = 0;"
 
         } else {
-          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where mon_lv % $1 = 0;"
+          var SearchingText2 = 0;
+          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where (mon_lv - $2 ) % $1 = 0;"
 
         }
         client.query(QueryString, [SearchingText, SearchingText2], (err,response2) => {
