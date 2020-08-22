@@ -89,7 +89,6 @@ router.get('/search', (req,res,next) => {
             });
           });
         //});
-
       } else {
         if (SearchingType === 'name'){
           var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_name Ilike $1 order by t1.id, mon_lv;"
@@ -98,9 +97,8 @@ router.get('/search', (req,res,next) => {
         } else if (SearchingType === 'type'){
           var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_type Ilike $1 order by t1.id, mon_lv;"
         } else if (SearchingType === 'collect') {
-          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_common Ilike  % $1 or t2.mon_uncommon Ilike $1 or t2.mon_rare Ilike $1 order by t1.id,mon_lv;"
+          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_common Ilike $1 or t2.mon_uncommon Ilike $1 or t2.mon_rare Ilike $1 order by t1.id,mon_lv;"
         }
-
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
           if (err) {
             console.log(err)
