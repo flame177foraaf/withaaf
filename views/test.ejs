@@ -310,11 +310,11 @@
               <% } else { %>
                 <tr>
                   <td colspan="3"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
-                  for (i = 0; i <  data_partition.length ; i ++){
-                    if (data_partition[i].PartitionName === data_monster[0].PartitionName){
+                  <% for (i = 0; i <  data_partition.length ; i ++){ %>
+                    <% if (data_partition[i].PartitionName === data_monster[0].PartitionName){ %>
                       <td colspan="8"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
-                    }
-                  }
+                    <% } %>
+                  <% } %>
                 </tr>
               <% } %>
               <% for ( k = 0; k < Data_length ; k++){ %>
@@ -360,11 +360,11 @@
                 <% } else { %>
                   <tr>
                     <td colspan="3"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
-                    for (i = 0; i <  data_partition.length ; i ++){
-                      if (data_partition[i].PartitionName === data_monster[0].PartitionName){
+                    <% for (i = 0; i <  data_partition.length ; i ++){ %>
+                      <% if (data_partition[i].PartitionName === data_monster[0].PartitionName){ %>
                         <td colspan="8"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
-                      }
-                    }
+                      <% } %>
+                    <% } %>
                   </tr>
                 <% } %>
                     <% for ( k = 0; k < Data_length ; k++){ %>

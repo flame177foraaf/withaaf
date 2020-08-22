@@ -41,14 +41,7 @@ router.get('/search', (req,res,next) => {
   client.query(QueryString, (err,response) => {
     var QueryString = "SELECT  aquafeq.dungeon_partition.id, " + "PartitionName" + "," + "FieldName" + ",   part, COUNT(*) count   FROM aquafeq.dungeon_partition  inner join aquafeq.monster on aquafeq.monster.mon_field = aquafeq.dungeon_partition.part GROUP by  aquafeq.dungeon_partition.id, " + "PartitionName" + "," + "FieldName" + ",  part order by aquafeq.dungeon_partition.id;"
 
-    <tr>
-      <td colspan="8"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
-      for (i = 0; i <  data_partition.length ; i ++){
-        if (data_partition[i].PartitionName === data_monster[0].PartitionName){
-          <td colspan="3"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
-        }
-      }
-    </tr>
+    
     client.query(QueryString, (err, response1) => {
       var SearchingType = req.query.SearchType;
       var SearchingText = req.query.SearchText;
