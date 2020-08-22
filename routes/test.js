@@ -44,6 +44,8 @@ router.get('/search', (req,res,next) => {
 
     client.query(QueryString, (err, response1) => {
       var SearchingType = req.query.SearchType;
+      console.log(SearchingType)
+      console.log(typeof(SearchingType))
       var SearchingText = req.query.SearchText;
       if (SearchingType === 'MonLvDown') {
         var SearchingType2 = req.query.SearchType2;
@@ -57,7 +59,7 @@ router.get('/search', (req,res,next) => {
           var SearchingText2 = 0;
           var SearchingText2 = parseInt(SearchingText2);
         }
-        var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where (mon_lv - $2 ) % $1 = 0;"
+        var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where (mon_lv - $2 ) " + "%" + " $1 = 0;";
         console.log(QueryString)
 
         console.log(SearchingText)
@@ -69,7 +71,7 @@ router.get('/search', (req,res,next) => {
 
 
           var QueryString = "select " + '"PartitionName"' +" , count(*)  from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field GROUP by "+ '"PartitionName"' +";" ;
-          client.query(QueryString, (err,response3) => {
+          client.query(QueryString, (err,respons  e3) => {
             if (err) {
               console.log(err)
             }
@@ -91,13 +93,13 @@ router.get('/search', (req,res,next) => {
 
       } else {
         if (SearchingType === 'name'){
-          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_name Ilike $1 order by table1.id, mon_lv;"
+          var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_name Ilike $1 order by table1.id, mon_lv;"
         } else  if (SearchingType === 'property'){
-          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_property Ilike $1 order by table1.id, mon_lv;;"
+          var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_property Ilike $1 order by table1.id, mon_lv;;"
         } else if (SearchingType === 'type'){
-          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_type Ilike $1 order by table1.id, mon_lv;"
+          var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_type Ilike $1 order by table1.id, mon_lv;"
         } else if (SearchingType === 'collect') {
-          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_common Ilike  % $1 or table2.mon_uncommon Ilike $1 or table2.mon_rare Ilike $1 order by table1.id,mon_lv;"
+          var QueryString = "select * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_common Ilike  % $1 or table2.mon_uncommon Ilike $1 or table2.mon_rare Ilike $1 order by table1.id,mon_lv;"
         }
 
         client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
