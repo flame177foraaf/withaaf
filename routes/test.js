@@ -41,17 +41,7 @@ router.get('/search', (req,res,next) => {
   client.query(QueryString, (err,response) => {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"
     client.query(QueryString, (err, response1) => {
-      var SearchingType = req.query.SearchType;
-      var SearchingText = req.query.SearchText;
-      if (SearchingType === 'name'){
-        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_name Ilike $1 order by table1.id, mon_lv;"
-      } else  if (SearchingType === 'property'){
-        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_property Ilike $1 order by table1.id, mon_lv;;"
-      } else if (SearchingType === 'type'){
-        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_type Ilike $1 order by table1.id, mon_lv;"
-      } else if (SearchingType === 'collect') {
-        var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_common Ilike  % $1 or table2.mon_uncommon Ilike $1 or table2.mon_rare Ilike $1 order by table1.id,mon_lv;"
-      } else if (SearchingType === 'MonLvDown') {
+      if (SearchingType === 'MonLvDown') {
         var SearchingText2 = req.query.SearchText2;
         var SearchingText2 = parseInt(SearchingText2);
 
@@ -68,29 +58,53 @@ router.get('/search', (req,res,next) => {
           var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where mon_lv % $1 = 0;"
 
         }
+        client.query(QueryString, [SearchingText, SearchingText2], (err,response2) => {
+          if (err) {
+            console.log(err)
+          }
+          console.log(QueryString)
 
-      }
-      console.log(QueryString)
-
-      client.query(QueryString, ['%' + SearchingText + '%',  SearchingText2], (err,response2) => {
-        if (err) {
-          console.log(err)
-        }
-        console.log(QueryString)
-
-        var Data_length = response2.rows.length;
-        res.render('test', {
-          Searching:'YES',
-          title:'AAF 던전 몬스터 정보',
-          data:response.rows,
-          data_partition:response1.rows,
-          data_monster:response2.rows,
-          Data_length:Data_length,
+          var Data_length = response2.rows.length;
+          res.render('test', {
+            Searching:'YES',
+            title:'AAF 던전 몬스터 정보',
+            data:response.rows,
+            data_partition:response1.rows,
+            data_monster:response2.rows,
+            Data_length:Data_length,
+          });
         });
-      });
+
+      } else {
+        if (SearchingType === 'name'){
+          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_name Ilike $1 order by table1.id, mon_lv;"
+        } else  if (SearchingType === 'property'){
+          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_property Ilike $1 order by table1.id, mon_lv;;"
+        } else if (SearchingType === 'type'){
+          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_type Ilike $1 order by table1.id, mon_lv;"
+        } else if (SearchingType === 'collect') {
+          var QueryString = "select (ROW_NUMBER() over()) as num, * from aquafeq.dungeon_partition  as table1 inner join aquafeq.monster as table2 on table1.part =  table2.mon_field where table2.mon_common Ilike  % $1 or table2.mon_uncommon Ilike $1 or table2.mon_rare Ilike $1 order by table1.id,mon_lv;"
+        }
+
+        client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
+          if (err) {
+            console.log(err)
+          }
+          console.log(QueryString)
+
+          var Data_length = response2.rows.length;
+          res.render('test', {
+            Searching:'YES',
+            title:'AAF 던전 몬스터 정보',
+            data:response.rows,
+            data_partition:response1.rows,
+            data_monster:response2.rows,
+            Data_length:Data_length,
+          });
+        });
+      }
     })
   });
-
 });
 
 // params.id 를 쓰는 라우터는 마지막에 쓰라고 한다
