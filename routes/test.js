@@ -187,7 +187,7 @@ router.get('/:id', (req,res,next) => {
   var CurrentPage = req.params.id;
   console.log(SearchType)
   console.log(SearchType == '1stats')
-
+  console.log(req.query.searchText2)
   var SearchPlus = "";
 
   if (req.query.searchText2 != 'undefined') {
@@ -244,7 +244,7 @@ router.get('/:id', (req,res,next) => {
         console.log(typeof(Search))
       var QueryString = "SELECT *  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >=" + Search +"limit 10 offset (($2- 1)*10)";
     } else {
-      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike % $1 % ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike % "$1" % ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
     }
   }
   console.log(QueryString)
