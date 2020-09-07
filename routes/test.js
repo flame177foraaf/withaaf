@@ -227,25 +227,19 @@ router.get('/:id', (req,res,next) => {
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
 
   } else {
+
+    var Search = parseInt(Search,10)
+    console.log(SearchType)
+    console.log(Search)
+    console.log(typeof(Search))
     if (SearchType == '1stats') {
-        var Search = Search.parseInt
-        console.log(SearchType)
-
-        console.log(Search)
-        console.log(typeof(Search))
-      var QueryString = "SELECT *  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 1) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >=" + Search +"limit 10 offset (($2- 1)*10)";
+      var QueryString = "SELECT *  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 1) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 limit 10 offset (($2- 1)*10)";
     } else if (SearchType == '2stats') {
-        var Search = Search.parseInt
-        console.log(SearchType)
-
-        console.log(Search)
-        console.log(typeof(Search))
-      var QueryString = "SELECT *  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >=" + Search +"limit 10 offset (($2- 1)*10)";
+      var QueryString = "SELECT *  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 limit 10 offset (($2- 1)*10)";
     } else {
       var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike % $1 % ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
     }
   }
-  console.log(QueryString)
 
   client.query(QueryString, [Search, CurrentPage], (err, response) => {
     console.log(QueryString)
