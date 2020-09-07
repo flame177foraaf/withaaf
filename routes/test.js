@@ -186,6 +186,7 @@ router.get('/:id', (req,res,next) => {
   var Search = req.query.searchText;
   var CurrentPage = req.params.id;
   console.log(SearchType)
+  console.log(SearchType == '1stats')
 
   var SearchPlus = "";
 
