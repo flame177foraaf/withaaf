@@ -123,23 +123,64 @@
         <% } else if (SearchType == '1stats' || SearchType == '2stats'){ %>
           <div class="" id="seach_form_id" name="seach_form_id">
           <input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px"  min="1" value="<%= Search %>">
-          <select name="searchType">
-            <option value="1stats">기본 공격력</option>
-            <option value="2stats">부가 공격력</option>
-          </select>
+          <% if (SearchType == '2stats'){  %>
+            <select name="searchType">
+              <option value="1stats">기본 공격력</option>
+              <option value="2stats" selected>부가 공격력</option>
+            </select>
+          <% } else { %>
+            <select name="searchType">
+              <option value="1stats" selected>기본 공격력</option>
+              <option value="2stats">부가 공격력</option>
+            </select>
+          <% } %>
           <input action="" type="submit" class="btn" value="찾기" ></button>
           <input type="button" name="NormalSearch" class="btnAdd" value="일반 검색으로">
         </div>
         <% } else { %>
           <div class="" id="seach_form_id" name="seach_form_id">
             <input type="text" placeholder="모든 항목" name="searchText" style="width:200px" value="<%= Search %>">
-            <select name="searchType">
-                <option value="wpname">이름</option>
-                <option value="wpproperty">속성</option>
-                <option value="wpfeat">피트</option>
-                <option value="wpcustom">커스텀</option>
-                <option value="wpgrade">등급 / 강적</option>
-            </select>
+            <% if (SearchType == 'wpproperty'){ %>
+              <select name="searchType">
+                  <option value="wpname">이름</option>
+                  <option value="wpproperty">속성</option>
+                  <option value="wpfeat">피트</option>
+                  <option value="wpcustom">커스텀</option>
+                  <option value="wpgrade">등급 / 강적</option>
+              </select>
+            <% } else if (SearchType == 'wpfeat'){ %>
+              <select name="searchType">
+                  <option value="wpname">이름</option>
+                  <option value="wpproperty">속성</option>
+                  <option value="wpfeat" selected>피트</option>
+                  <option value="wpcustom">커스텀</option>
+                  <option value="wpgrade">등급 / 강적</option>
+              </select>
+            <% } else if (SearchType == 'wpcustom'){ %>
+              <select name="searchType">
+                  <option value="wpname">이름</option>
+                  <option value="wpproperty">속성</option>
+                  <option value="wpfeat">피트</option>
+                  <option value="wpcustom" selected>커스텀</option>
+                  <option value="wpgrade">등급 / 강적</option>
+              </select>
+            <% } else if (SearchType == 'wpgrade'){ %>
+              <select name="searchType">
+                  <option value="wpname">이름</option>
+                  <option value="wpproperty">속성</option>
+                  <option value="wpfeat">피트</option>
+                  <option value="wpcustom">커스텀</option>
+                  <option value="wpgrade" selected>등급 / 강적</option>
+              </select>
+            <% } else { %>
+              <select name="searchType">
+                  <option value="wpname" selected>이름</option>
+                  <option value="wpproperty">속성</option>
+                  <option value="wpfeat">피트</option>
+                  <option value="wpcustom">커스텀</option>
+                  <option value="wpgrade">등급 / 강적</option>
+              </select>
+            <% } %>
             <input action="" type="submit" class="btn" value="찾기" ></button>
             <input type="button" name="findadd" class="btnAdd" value="조건 추가">
             <input type="button" name="Searchstats" class="btnAdd" value="성능 검색으로">
