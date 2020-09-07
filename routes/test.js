@@ -289,20 +289,17 @@ router.get('/:id', (req,res,next) => {
     console.log(SearchType)
     console.log(SearchType == '1stats')
     console.log(req.query.searchText2)
+
+      var Search = parseInt(Search,10)
+      console.log(SearchType)
+      console.log(Search)
+      console.log(typeof(Search))
     var SearchPlus = "";
     var Search2 = req.query.searchText2;
     if (SearchType == '1stats') {
-      var Search = parseInt(Search,10)
-      console.log(SearchType)
-      console.log(Search)
-      console.log(typeof(Search))
 
       var QueryString = "SELECT *  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 1) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 limit 10 offset (($2- 1)*10)";
     } else if (SearchType == '2stats') {
-      var Search = parseInt(Search,10)
-      console.log(SearchType)
-      console.log(Search)
-      console.log(typeof(Search))
 
       var QueryString = "SELECT *  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 limit 10 offset (($2- 1)*10)";
     }
@@ -346,7 +343,7 @@ router.get('/:id', (req,res,next) => {
         EndPage: EndPage,
         TotalPage: TotalPage,
         SearchType: SearchType,
-        Search: Search,
+        Search: string(Search),
         SearchPlus: SearchPlus,
         Search2: Search2,
         Search22: Search22,
