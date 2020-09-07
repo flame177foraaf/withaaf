@@ -191,7 +191,7 @@ router.get('/:id', (req,res,next) => {
   var SearchPlus = "";
   var Search2 = req.query.searchText2;
 
-  if (Search2 !== 'undefined') {
+  if (Search2 !== undefined) {
     var Search22 = [];
     console.log('추가 검색' + Search2)
     console.log('추가 검색타입 '+ typeof(Search2))
@@ -223,7 +223,7 @@ router.get('/:id', (req,res,next) => {
         var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
       }
     }
-    console.log('req.query.searchText2 !== 'undefined'' + SearchPlus)
+    console.log('req.query.searchText2 !== undefined' + SearchPlus)
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
 
   } else {
