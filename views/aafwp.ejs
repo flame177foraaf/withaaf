@@ -55,7 +55,7 @@
           var add =
 
           '<div class="" id="seach_form_id" name="seach_form_id">'
-          +'<input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px">'
+          +'<input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px"  min="1" max="99">'
           + '<select name="searchType">'
           +    '<option value="1stats">기본 공격력</option>'
           +    '<option value="2stats">부가 공격력</option>'
@@ -104,6 +104,7 @@
     </div>
     <div class="">
       <form action="/aafwp/1" method="get">
+
         <div class="" id="seach_form_id" name="seach_form_id">
 
           <input type="text" placeholder="모든 항목" name="searchText" style="width:200px">
