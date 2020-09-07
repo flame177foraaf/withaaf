@@ -332,7 +332,6 @@ router.get('/:id', (req,res,next) => {
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       };
-      var Search = Search.toString()
       //console.log('엔드페이지'+ EndPage);
       //console.log(response.rows[0])
       res.render('test', {
