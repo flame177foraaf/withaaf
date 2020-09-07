@@ -104,7 +104,24 @@
     </div>
     <div class="">
       <form action="/aafwp/1" method="get">
-        <% if (SearchType == '1stats' || SearchType == '2stats'){ %>
+        <% if (SearchType == 'undefined' ){
+          <div class="" id="seach_form_id" name="seach_form_id">
+            <input type="text" placeholder="모든 항목" name="searchText" style="width:200px" >
+            <select name="searchType">
+                <option value="wpname">이름</option>
+                <option value="wpproperty">속성</option>
+                <option value="wpfeat">피트</option>
+                <option value="wpcustom">커스텀</option>
+                <option value="wpgrade">등급 / 강적</option>
+            </select>
+            <input action="" type="submit" class="btn" value="찾기" ></button>
+            <input type="button" name="findadd" class="btnAdd" value="조건 추가">
+            <input type="button" name="Searchstats" class="btnAdd" value="성능 검색으로">
+          <div class="" id="" name="seach_form_id2">
+          </div>
+        </div>
+        }%>
+        <% else if (SearchType == '1stats' || SearchType == '2stats'){ %>
           <div class="" id="seach_form_id" name="seach_form_id">
           <input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px"  min="1" value="<%= Search %>">
           <select name="searchType">
