@@ -1,422 +1,298 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-
-  <style>
-    #left_sidenav {
-      height: 100%;
-      width: 15%;
-      z-index: 1;
-      background-color: ;
-      overflow-x: hidden;
-      position: absolute;
-    }
-    #left_sidenav ul{
-      padding-left: 0px;
-      font-size: 18px;
-    }
-    #left_sidenav a {
-      padding: 6px 8px 6px 16px;
-      text-decoration: none;
-      color: black;
-      display: block;
-    }
-
-    #left_sidenav a:hover {
-      color: white;
-      background-color: gray;
-    }
-    #left_sidenav li ul {
-      background:;
-      display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
-      height:auto;
-      padding:0px;
-      margin:0px;
-      border:0px;
-      z-index:200;
-      font-size: 12px;
-    }
-    #left_sidenav li:hover ul {
-      font-size: 14px;
-      padding-left: 10px;
-
-      display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
-    }
-
-    .main {
-      margin-left: 15%;
-      padding-left: 20px;
-    }
-
-    .linehead {
-
-      border-right: 2px solid black;
-    }
-
-    .fieldname{
-      font-weight: bold;
-      font-size: 20px;
-    }
-
-  </style>
-  <script type="text/javascript">
-    function checkonclick() {
-      if (document.searchform.SearchText.value == "" || document.searchform.SearchText.value == null || document.searchform.SearchText.value == undefined || ( document.searchform.SearchText.value != null && typeof document.searchform.SearchText.value == "object" && !Object.keys(document.searchform.SearchText.value).length ) ) {
-        alert("내용을 입력해주세요!");
-        document.searchform.SearchText.focus();
-        return false;
-      }
-      return true;
-    }
-
-
-  </script>
-
-  <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
-  <script type="text/javascript">
-
-
-    //배혼 검색 폼
-    $(document).on("click","input[name=SearchMonLv]",function(){
-      var add =
-      '<form action="/monster/search" method="get" name="searchform" onsubmit="return checkonclick()">'
-      +'<div class="" id="seach_form_id" name="seach_form_id">'
-      +'<input type="text" placeholder="숫자를 적어주세요" name="SearchText" style="width:200px">'
-      + '<select name="SearchType">'
-      +    '<option value="MonLvDown">배혼</option>'
-      +'</select>'
-      +'<input type="button" name="SearchType2" class="btnAdd" value="적의 레벨 변화 감소 커스텀">'
-      +'<input action="/monster/search" type="submit" class="btn" value="찾기"  ></button>'
-      +'<input type="button" name="NormalSearch" class="btnAdd" value="일반 검색으로">'
-      +'</div>'
-      +'<div class="" id="seach_form_id2" name="seach_form_id2">'
-      +'</div>'
-      +'</form>'
-
-      $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
-
-    });
-
-    //배혼 검색시 렙변커스텀 적용 추가버튼
-    $(document).on("click","input[name=SearchType2]",function(){
-      var add2 =
-      '<div class="" id="seach_form_id2" name="seach_form_id2">'
-      +'<input type="text" placeholder="렙변 커스텀 수치를 적어주세요" name="SearchText2" style="width:200px">'
-      + '<select name="SearchType2">'
-      +    '<option value="LvCustom">레벨 변화 커스텀</option>'
-      +'</select>'
-
-      +'<button class="btn btn-default" name="delbut">삭제</button>'
-      +'</div>'
-      var aaa2 = $( "div[name=seach_form_id2]:last" ); //last를 사용하여 seach_form_id2라는 명을 가진 마지막 태그 호출
-      if ($("#seach_form_id2").length < 2) {
-        aaa2.html(add2); //마지막 seach_form_id2  뒤에 붙인다.
-      }
-
-      //삭제 버튼
-      $(document).on("click","button[name=delbut]",function(){
-          var aaa2 = $(this).parent();
-          aaa2.remove(); //tr 테그 삭제
-      });
-    })
-
-
-
-    //일반검색 폼으로
-    $(document).on("click","input[name=NormalSearch]",function(){
-      var add =
-      '<form action="/monster/search" method="get" name="searchform" onsubmit="return checkonclick()">'
-      +'  <input type="text" placeholder="찾기 버튼을 누르세요" name="SearchText" id="SearchText" style="width:200px">'
-      +'  <select name="SearchType">'
-      +'    <option value="name">이름</option>'
-      +'    <option value="property">속성</option>'
-      +'    <option value="type">타입</option>'
-      +'    <option value="collect">수집품</option>'
-      +'  </select>'
-      +'  <input action="/monster/search" type="submit" class="btn" value="찾기"  ></button>'
-      +'  <input type="button" name="SearchMonLv" class="btnAdd" value="배혼 검색">'
-      +'</form>'
-
-      $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
-
-    });
-
-
-
-
-  </script>
-
+  <head>
     <%- include ('head') %>
-  <title><%= title%></title>
-</head>
+    <title><%= title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
 
-<body>
-  <div id="left_sidenav">
-    <ul>
-      <% for ( i = 0; i < data.length ; i++){ %>
-        <li class="">
-          <a href="#" ><%- data[i].Field %></a>
-          <ul class="">
-            <% for ( j = 0; j < data_partition.length ; j++){ %>
-              <% if(data_partition[j].FieldName === data[i].FieldName){ %>
-                <li>
-                  <a href="/monster/<%- data_partition[j].part %>"><%- data_partition[j].PartitionName %></a>
-                </li>
-              <% }; %>
-            <% } %>
-          </ul>
-        </li>
-      <% } %>
-    </ul>
+    <style media="screen">
+    </style>
+    <script type="text/javascript">
+      function checkonclick() {
+        if (document.add.datalistname.value == "" || document.add.title.value == null || document.add.datalistname.value == undefined || ( document.add.datalistname.value != null && typeof document.add.datalistname.value == "object" && !Object.keys(document.add.datalistname.value).length ) ) {
+          alert("내용을 입력해주세요!");
+          document.add.datalistname.focus();
+          return false;
+        }
+        return true;
+      }
+    </script>
+
+    <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
+    <script type="text/javascript">
+
+      $(document).on("click","input[name=findadd]",function(){
+
+        var add =
+        '<div class="" id="seach_form_id2" name="seach_form_id2">'
+        +'<input type="text" placeholder="모든 항목" name="searchText2" style="width:200px">'
+        + '<select name="searchType2">'
+        +    '<option value="wpproperty">속성</option>'
+        +    '<option value="wpfeat">피트</option>'
+        +    '<option value="wpcustom">커스텀</option>'
+        +'</select>'
+        +'<button class="btn btn-default" name="delbut">삭제</button>'
+        +'</div>'
+
+        var aaa = $( "div[name=seach_form_id2]:last" ); //last를 사용하여 seach_form_id2라는 명을 가진 마지막 태그 호출
+          aaa.after(add); //마지막 seach_form_id2  뒤에 붙인다.
+      });
+
+        //삭제 버튼
+        $(document).on("click","button[name=delbut]",function(){
+
+            var aaa = $(this).parent();
+
+            aaa.remove(); //tr 테그 삭제
+        });
 
 
-  </div>
-  <div class="main" >
+
+        //
+        //공격력 검색
+        $(document).on("click","input[name=Searchstats]",function(){
+
+          var add =
+          '<form action="/aafwp/1" method="get">'
+
+          '<div class="" id="seach_form_id" name="seach_form_id">'
+          +'<input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px">'
+          + '<select name="searchType">'
+          +    '<option value="1stats">기본 공격력</option>'
+          +    '<option value="2stats">부가 공격력</option>'
+          +'</select>'
+          +'<input action="" type="submit" class="btn" value="찾기" ></button>'
+          +'<input type="button" name="NormalSearch" class="btnAdd" value="일반 검색으로">'
+          +'</div>'
+          +'</form>'
+          $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
+        });
+
+
+        //일반 검색 폼으로
+        $(document).on("click","input[name=NormalSearch]",function(){
+
+        var add =
+        '<form action="/aafwp/1" method="get">'
+        +'<div class="" id="seach_form_id" name="seach_form_id">'
+        +'<input type="text" placeholder="모든 항목" name="searchText" style="width:200px">'
+        +  '<select name="searchType">'
+            +  '<option value="wpname">이름</option>'
+            +  '<option value="wpproperty">속성</option>'
+            +  '<option value="wpfeat">피트</option>'
+            +  '<option value="wpcustom">커스텀</option>'
+            +  '<option value="wpgrade">등급 / 강적</option>'
+        +  '</select>'
+        +  '<input action="" type="submit" class="btn" value="찾기" ></button>'
+        +  '<input type="button" name="findadd" class="btnAdd" value="조건 추가">'
+        +  '<input type="button" name="Searchstats" class="btnAdd" value="성능 검색으로">'
+        +'</div>'
+        +'<div class="" id="" name="seach_form_id2">'
+        +'</div>'
+        +'</form>'
+
+        $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
+
+      });
+
+
+
+    </script>
+
+
+  </head>
+  <body style="">
     <div class="title_div" >
-      <h1>몬스터</h1>
-    </div>
-    <div class="" id="seach_form_id" >
-      <form action="/monster/search" method="get" name="searchform" onsubmit="return checkonclick()">
-        <input type="text" placeholder="찾기 버튼을 누르세요" name="SearchText" id="SearchText" style="width:200px">
-        <select name="SearchType">
-          <option value="name">이름</option>
-          <option value="property">속성</option>
-          <option value="type">타입</option>
-          <option value="collect">수집품</option>
-        </select>
-        <input action="/monster/search" type="submit" class="btn" value="찾기"  ></button>
-        <input type="button" name="SearchMonLv" class="btnAdd" value="배혼 검색">
+      <h1><%= title %></h1>
 
+    </div>
+    <div class="">
+      <form action="/aafwp/1" method="get">
+        <div class="" id="seach_form_id" name="seach_form_id">
+
+          <input type="text" placeholder="모든 항목" name="searchText" style="width:200px">
+          <select name="searchType">
+              <option value="wpname">이름</option>
+
+
+              <option value="wpproperty">속성</option>
+              <option value="wpfeat">피트</option>
+              <option value="wpcustom">커스텀</option>
+              <option value="wpgrade">등급 / 강적</option>
+          </select>
+          <input action="" type="submit" class="btn" value="찾기" ></button>
+          <input type="button" name="findadd" class="btnAdd" value="조건 추가">
+          <input type="button" name="Searchstats" class="btnAdd" value="성능 검색으로">
+
+        </div>
+        <div class="" id="" name="seach_form_id2">
+
+        </div>
 
       </form>
     </div>
-    <div>
-      <table id="mon_table" style="margin-top:5px; width:100%">
 
+    <div class="">
+      <table id="eqtable" style="width:100%;">
+        <colgroup>
+          <col width="100">
+          <col width="200">
+          <col width="50">
+          <col width="50">
+          <col width="100">
+          <col width="200">
+          <col width="350">
+          <col width="300">
+          <col width="650">
+          <col width="200">
 
-        <% if(typeof(Field_Id) === 'undefined'){ %>
-          <thead>
-            <tr>
-              <th>레벨</th>
-              <th>이름</th>
-              <th>속성</th>
-              <th>에테르</th>
-              <th>타입</th>
-              <th>저항</th>
-              <th>보석</th>
-              <th>커먼</th>
-              <th>언커먼</th>
-              <th>레어</th>
-              <th>스킬</th>
-            </tr>
-          </thead>
-        <% } else if (Field_Id === 'FireTower' || Field_Id === 'EarthTower' ){ %>
-          <thead>
-            <tr>
-              <th>층</th>
-              <th>이름</th>
-              <th>HP계수</th>
-              <th>에테르</th>
-              <th>속성</th>
-              <th>타입</th>
-              <th>내성 정보</th>
-              <th>커먼</th>
-              <th>언커먼</th>
-              <th>레어</th>
-              <th>스킬</th>
-            </tr>
-          </thead>
-        <% } else { %>
-          <thead>
-            <tr>
-              <th>레벨</th>
-              <th>이름</th>
-              <th>속성</th>
-              <th>에테르</th>
-              <th>타입</th>
-              <th>저항</th>
-              <th>보석</th>
-              <th>커먼</th>
-              <th>언커먼</th>
-              <th>레어</th>
-              <th>스킬</th>
-            </tr>
-          </thead>
-        <% } %>
-
-
-
+        </colgroup>
+        <thead>
+          <tr  style='text-align: center'>
+            <th>등급</th>
+            <th>이름</th>
+            <th>제한</th>
+            <th>소켓</th>
+            <th>에테르</th>
+            <th>성능</th>
+            <th>속성</th>
+            <th>피트</th>
+            <th>커스텀</th>
+            <th></th>
+          </tr>
+        </thead>
+        <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
         <tbody>
-          <% if (Data_length != 0 ){ %>
-            <% if (typeof(Field_Id) != 'undefined'){ %> <!-- 필드별 몬스터 일떄 -->
-              <% if (data_monster[0].FieldName === 'Training'){ %>
-                <tr>
-                  <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[0].PartitionName %></td>
-                </tr>
+          <% if(typeof(CurrentPage) === 'undefined'){ %>
+            <tr>
+              <td colspan="10"; style= "text-align:center;"> 검색이 필요합니다.</td>
+            </tr>
+          <% } else if (typeof(data[0]) === 'undefined'){ %>
+            <tr>
+              <div class="" id="pagelist" >
+                <td colspan="10" style= "text-align:center; font-size:24px">
+                  해당하는 데이터가 없습니다.
+                </td>
+              </div>
+            </tr>
+          <% } else { %>
+            <% data.forEach(function(item) { %>
+              <% if (item.wpproperty.indexOf('/') != -1){ %>
+                <% var WpP = item.wpproperty.split('/') %>
+                <% if ( WpP[1] == ' 불 ') { %>
+                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD">
+                <% } else if (WpP[1] == ' 물 ' ) { %>
+                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC">
+                <% } else if (WpP[1] == ' 바람 ') { %>
+                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3">
+                <% } else if (WpP[1] == ' 땅 ') { %>
+                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8">
+                <% } else if (WpP[1] == ' 정신 ') { %>
+                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB">
+                <% } else if (WpP[1] == ' 아스트랄 ') { %>
+                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2">
+                <% } else if (WpP[1] == ' 무속성 ') { %>
+                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA">
+                <% } %>
+
               <% } else { %>
-                <tr>
-                  <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
-                </tr>
+                <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
               <% } %>
-              <% for ( k = 0; k < Data_length ; k++){ %>
-                <% if (data_monster[k].part == data_monster[0].part){ %>
-                  <% if (data_monster[k].TowerFloor == '' ){ %>
-                    <tr>
-                      <td style= "text-align:center;"><%- data_monster[k].mon_lv %></td>
-                      <td><%- data_monster[k].mon_name %></td>
-                      <td><%- data_monster[k].mon_property %></td>
-                      <td><%- data_monster[k].mon_ether %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                      <td><%- data_monster[k].mon_resist %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_gem %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                      <td id =""><%- data_monster[k].mon_skill %></td>
-                    </tr>
-                  <% } else { %>
-                    <% if (data_monster[k].TowerFloor.indexOf('~') != -1){ %>
-                      <tr>
-                    <% } else { %>
-                      <tr style="border-bottom: 3px solid #000; border-top: 3px solid #000;">
-                    <% } %>
+              <td><%- item.wpgrade %></td>
+              <td><%- item.wpname %></td>
+              <td style='text-align: center'><%- item.wplimit %></td>
+              <td style='text-align: center'><%- item.wpsocket %></td>
+              <td style='text-align: center'><%- item.wpether %></td>
+              <td style='text-align: center'><%- item.wpstats %></td>
+              <td style='text-align: center'><%- item.wpproperty %></td>
+              <td><%- item.wpfeat %></td>
+              <td><%- item.wpcustom %></td>
+              <td style="white-space: normal; text-align:center">
+                <div class="" style="">
+                  <%# display: inline-block 은 한 줄로 나타냄!%>
+                  <%# display: none 안보임!%>
 
-                      <td style= "text-align:center;"><%- data_monster[k].TowerFloor %></td>
-                      <td><%- data_monster[k].mon_name %></td>
-                      <td style="text-align: center"><%- data_monster[k].Tower_Hp %></td>
-                      <td><%- data_monster[k].mon_ether %></td>
-                      <td><%- data_monster[k].mon_property %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                      <td><%- data_monster[k].mon_resist %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                      <td id =""><%- data_monster[k].mon_skill %></td>
-                    </tr>
-                  <% } %>
+                  <div class="" style="display: inline-block">
+                    <form action="/aafwp/fixwp" method="get ">
+                      <input type=text list=browsers style="display:none" checked value="<%= item.wpname %>" name="Seachname">
 
-                <% } %>
-              <% } %>
-              <!--  검색시-->
-            <% } else { %>
-              <% if (data_monster[0].FieldName === 'Training'){ %>
-                <tr>
-                  <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[0].PartitionName %></td>
-                </tr>
-              <% } else { %>
-                <tr>
-                  <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[0].PartitionName %></td>
+                      <input style="width:60px; " type="submit" value="수정" />
+                    </form>
+                  </div>
+                  <div class="" style="display: inline-block">
 
-                </tr>
-              <% } %>
-              <% for ( k = 0; k < Data_length ; k++){ %>
-                <% if (data_monster[k].part == data_monster[0].part){ %>
-                  <% if ( data_monster[k].part !== 'FireTower' || data_monster[k].part !== 'EarthTower'){ %>
-                    <tr>
-                      <td style= "text-align:center;"><%- data_monster[k].mon_lv %></td>
-                      <td><%- data_monster[k].mon_name %></td>
-                      <td><%- data_monster[k].mon_property %></td>
-                      <td><%- data_monster[k].mon_ether %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                      <td><%- data_monster[k].mon_resist %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_gem %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                      <td id =""><%- data_monster[k].mon_skill %></td>
-                    </tr>
-                  <% } else { %>
-                    <tr>
-                      <td></td>
-                      <td><%- data_monster[k].mon_name %></td>
-                      <td><%- data_monster[k].mon_property %></td>
-                      <td><%- data_monster[k].mon_ether %></td>
-                      <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                      <td><%- data_monster[k].mon_resist %></td>
-                      <td></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                      <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                      <td id =""><%- data_monster[k].mon_skill %></td>
-                    </tr>
-                  <% } %>
-                <% } %>
-
-              <% } %>
-              <% for (i = 1, j = i-1;  i < Data_length; i++, j+=1){ %>
-                <% if( data_monster[i].part == data_monster[j].part ){continue} %>
-                <% if (data_monster[i].FieldName === 'Training'){ %>
-                  <tr>
-                    <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> 수행 <%- data_monster[i].PartitionName %></td>
-                  </tr>
-                <% } else { %>
-                  <tr>
-                    <td colspan="11"; style= "text-align:left; padding-left: 50px;" class="fieldname"> <%- data_monster[i].PartitionName %></td>
-
-                  </tr>
-                <% } %>
-                    <% for ( k = 0; k < Data_length ; k++){ %>
-                      <% if (data_monster[k].part == data_monster[i].part){ %>
-                        <% if ( data_monster[k].part !== 'FireTower' || data_monster[k].part !== 'EarthTower'){ %>
-                          <tr>
-                            <td style= "text-align:center;"><%- data_monster[k].mon_lv %></td>
-                            <td><%- data_monster[k].mon_name %></td>
-                            <td><%- data_monster[k].mon_property %></td>
-                            <td><%- data_monster[k].mon_ether %></td>
-                            <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                            <td><%- data_monster[k].mon_resist %></td>
-                            <td style="text-align: center"><%- data_monster[k].mon_gem %></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                            <td id =""><%- data_monster[k].mon_skill %></td>
-                          </tr>
-                        <% } else { %>
-                          <tr>
-                            <td ></td>
-                            <td><%- data_monster[k].mon_name %></td>
-                            <td><%- data_monster[k].mon_property %></td>
-                            <td><%- data_monster[k].mon_ether %></td>
-                            <td style="text-align: center"><%- data_monster[k].mon_type %></td>
-                            <td><%- data_monster[k].mon_resist %></td>
-                            <td ></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_common %></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_uncommon %></td>
-                            <td id ="" style="text-align: center"><%- data_monster[k].mon_rare %></td>
-                            <td id =""><%- data_monster[k].mon_skill %></td>
-                          </tr>
-                        <% } %>
-                      <% } %>
-
-                    <% } %>
-
-              <% } %>
-            <% } %>
+                    <form action="/Assemblywp" method="get">
+                      <input type=text list=browsers style="display:none" checked value="<%= item.wpname %>" name="assembly">
+                      <input style="width:60px " type="submit" value="재조립" />
+                    </form>
+                  </div>
+                </div>
 
 
+              </td>
+
+
+            </tr>
+            <% }); %>
+          <% } %>
+        <div class="" id="pagelist">
+          <% if(typeof(CurrentPage) === 'undefined'){ %>
+            <tr>
+              <div class="" id="pagelist" >
+                <td colspan="10" style= "text-align:center; font-size:24px">
+                  검색이 필요합니다.
+                </td>
+              </div>
+            </tr>
 
           <% } else { %>
             <tr>
-              <td colspan="11"; style= "text-align:center; " class="fieldname"> 이런! 원하시는 자료를 찾을 수 없습니다! </td>
+              <div class="" id="pagelist">
+                <td colspan="21" style= "text-align:center; font-size:24px">
+                  <% function FuncPageurl(pagenumber) { %>
+                    <% var pageurl = "/aafwp/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
+                    <% if (Searchcount !== 'undefined') { %>
+                      <% for (var i = 0; i < Searchcount; i++) { %>
+                        <% pageurl = pageurl + "&searchText2=" + Search22[i]  + "&searchType2=" +  SearchType22[i] %>
+                      <% } %>
+                    <% } %>
+                    <% return pageurl %>
+                  <% } %>
+                  <% if (CurrentPage > PageSize){ %>
+                    <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+                    <a href=" <%- FuncPageurl(1) %>" id="MoveFirstpage"> ◀◀ </a>
+                    <a href=" <%- FuncPageurl(StartPage-1) %>" onclick="" id="MovePrepage"> ◀ </a>
+                  <% } %>
+                  <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
+                    <% if (iCount == CurrentPage) { %>
+                      <b class="btnnonactive"><%- iCount %></b>
+                    <% } else { %>
+                      <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+                      <a href=" <%- FuncPageurl(iCount) %>" class="btnactive" id="MoveNumpage"><%- iCount %></a>
+                    <% } %>
+                  <% } %>
+                  <% if (EndPage < TotalPage){ %>
+                    <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+                    <a href=" <%- FuncPageurl(EndPage+1) %>" onclick="" id="MoveNextpage">  ▶ </a>
+                    <a href=" <%- FuncPageurl(TotalPage) %>" onclick="" id="MoveEndpage"> ▶▶ </a>
+                  <% } %>
+                </td>
+              </div>
             </tr>
           <% } %>
-
-
-
-
-
+        </div>
         </tbody>
       </table>
     </div>
-  </div>
 
+      <div class="" style="text-align: center; padding-top:30px;">
+          <form class="" action="/addwp" method="get">
+             <button onclick=location.href="/aafwp/addwp" type="button" name="button" style="width:200px">신규등록</a></button>
+          </form>
+      </div>
 
-</body>
-<footer style="margin-left:15%">
-  <%- include ('footer')%>
-</footer>
+  </body>
+  <footer>
+    <%- include ('footer')%>
+  </footer>
 </html>

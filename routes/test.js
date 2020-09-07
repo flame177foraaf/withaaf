@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
+var $ = require('jquery');
+
 
 const { Client } = require('pg');
 
@@ -10,144 +12,287 @@ const client = new Client({
 });
 
 client.connect();
-
 router.get('/', (req,res,next) => {
-  var Data_length = 0;
-  var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
-  client.query(QueryString, (err,response) => {
-    var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id asc"
-    client.query(QueryString, (err, response1) => {
-      res.render('test', {
-      title:'AAF 던전 몬스터 정보',
-      fieldname:'검색이 필요합니다',
-      data:response.rows,
-      data_partition:response1.rows,
-      Data_length:Data_length,
+  var QueryString = "select wpid, wpname from aquafeq.aquafwp ORDER BY wplimit,wpid asc ;"
+  client.query(QueryString, (err, response) => {
+    if (err) {
+      res.redirect('/aafwp');
+    } else {
+      res.render('aafwp', {
+        title:'AAF 장비',
+        data:response.rows
       });
-    })
+    }
   });
 });
-//  var QueryString = "SELECT * FROM aquafeq.monster where mon_property Ilike $1;"
-//  var QueryString = "select * from aquafeq.field inner join aquafeq.monster on aquafeq.field.field_id =  aquafeq.monster.mon_field where aquafeq.monster.mon_property Ilike $1 order by aquafeq.field.field_id, aquafeq.monster.mon_lv;"
-// var QueryString = "select (ROW_NUMBER() over()) as num, (select count (DISTINCT field_id) from aquafeq.field  as t1 inner join aquafeq.monster as t2 on t1.field_id =  t2.mon_field where t2.mon_property Ilike $1), * from aquafeq.field  as t1 inner join aquafeq.monster as t2 on t1.field_id =  t2.mon_field where t2.mon_property Ilike $1 order by field_id, mon_lv;"
 
-// var QueryString = "SELECT * FROM aquafeq.monster where mon_name Ilike $1"
+router.get('/addwp', (req,res,next) => {
+  res.render ('addwp', {
+    title:'AAF 무기 등록'
+  });
+});
 
+//무기 추가하기
+router.post('/', (req, res, next) => {
+  var Wpgrade = req.body.wpgrade;
+    if (Wpgrade !== '') {
+      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
 
+  var Wpname = req.body.wpname;
+  var Wplimit = req.body.wplimit;
+    if (Wplimit == '') {
+        Wplimit = null
+    }
+  var Wpsocket = req.body.wpsocket;
+  var Wpether = req.body.wpether;
+  var Wpstats = req.body.wpstats;
+    if (Wpstats !== '') {
+      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpproperty = req.body.wpproperty;
+    if (Wpproperty !== '') {
+      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpfeat = req.body.wpfeat;
+    if (Wpfeat !== '') {
+      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpcustom = req.body.wpcustom;
+    if (Wpcustom !== ''){
+      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpup = req.body.wpup;
+    if (Wpup !== '') {
+      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var QueryString = "INSERT INTO aquafeq.aquafwp(wpgrade, wpname, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
+  client.query(QueryString, [Wpgrade, Wpname, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup], (err, response) => {
+    var QueryString = "select wpid, wpname from aquafeq.aquafwp where wpname = Wpname ORDER BY wplimit,wpid asc ;"
+    client.query(QueryString, (err, response) => {
+      res.render('aafwp', {
+        title:'AAF 장비',
+        data:response.rows
+      });
+    });
+  });
+});
 
-
-router.get('/search', (req,res,next) => {
-  var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
-  client.query(QueryString, (err,response) => {
-    var QueryString = "SELECT  aquafeq.dungeon_partition.id, " + '"PartitionName"' + "," + '"FieldName"' + ",   part, COUNT(*) count   FROM aquafeq.dungeon_partition  inner join aquafeq.monster on aquafeq.monster.mon_field = aquafeq.dungeon_partition.part GROUP by  aquafeq.dungeon_partition.id, " + '"PartitionName"' + "," + '"FieldName"' + ",  part order by aquafeq.dungeon_partition.id;"
-
-
-    client.query(QueryString, (err, response1) => {
-      var SearchingType = req.query.SearchType;
-      console.log(SearchingType)
-      console.log(typeof(SearchingType))
-      var SearchingText = req.query.SearchText;
-      if (SearchingType === 'MonLvDown') {
-        var SearchingType2 = req.query.SearchType2;
-        var SearchingText2 = req.query.SearchText2;
-
-        var SearchingText = parseInt(SearchingText)
-        var SearchingText2 = parseInt(SearchingText2);
-        if (typeof(SearchingType2) !== 'undefined') {
-          var SearchingText2 = SearchingText2;
-        } else {
-          var SearchingText2 = 0;
-          var SearchingText2 = parseInt(SearchingText2);
-        }
-        //var QueryString = "select * from aquafeq.dungeon_partition as t1 inner join aquafeq.monster as t2 on t1.part = t2.mon_field where (t2.mon_lv - ($1::INTEGER)) % ($2::INTEGER) = 0::INTEGER;";
-        //console.log(QueryString)
-        //console.log(SearchingText)
-        //console.log(SearchingText2)
-        //console.log(typeof(SearchingText))
-        //console.log(typeof(SearchingText2))
-        //client.query(QueryString, [SearchingText2, SearchingText ], (err,response3) => {
-          console.log(QueryString)
-
-          var QueryString = "select * from aquafeq.dungeon_partition as t1 inner join aquafeq.monster as t2 on t1.part = t2.mon_field where (t2.mon_lv - ($1::INTEGER)) % ($2::INTEGER) = 0::INTEGER order by t1.id;";
-
-          client.query(QueryString, [SearchingText2, SearchingText], (err,response2) => {
-            if (err) {
-              console.log(err)
-            }
-            console.log(QueryString)
-            var Data_length = response2.rows.length;
-
-            res.render('test', {
-              Searching:'YES',
-              SearchingType:SearchingType,
-              title:'AAF 던전 몬스터 정보',
-              data:response.rows,
-              data_partition:response1.rows,
-
-              data_monster:response2.rows,
-              Data_length:Data_length,
-            });
-          });
-        //});
-
+//무기 변경 라우트
+router.get('/fixwp', (req,res,next) => {
+  var QueryString = "select wpname from aquafeq.aquafwp"
+  client.query(QueryString, (err, response) => {
+    var Select_name = req.query.Seachname;
+    var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
+    client.query(QueryString, [Select_name], (err, response) => {
+      if(typeof(response.rows[0]) !== "object") {
+        res.render ('addwp', {
+          title: '신규 장비 ' + Select_name + ' 등록',
+        });
       } else {
-        if (SearchingType === 'name'){
-          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_name Ilike $1 order by t1.id, mon_lv;"
-        } else  if (SearchingType === 'property'){
-          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_property Ilike $1 order by t1.id, mon_lv;;"
-        } else if (SearchingType === 'type'){
-          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_type Ilike $1 order by t1.id, mon_lv;"
-        } else if (SearchingType === 'collect') {
-          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_common Ilike  % $1 or t2.mon_uncommon Ilike $1 or t2.mon_rare Ilike $1 order by t1.id,mon_lv;"
-        }
-
-        client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
-          if (err) {
-            console.log(err)
-          }
-          console.log(QueryString)
-
-          var Data_length = response2.rows.length;
-          res.render('test', {
-            Searching:'YES',
-            SearchingType:SearchingType,
-
-            title:'AAF 던전 몬스터 정보',
-            data:response.rows,
-            data_partition:response1.rows,
-            data_monster:response2.rows,
-            Data_length:Data_length,
-          });
+        res.render ('fixwp', {
+          title:Select_name + '정보',
+          data:response.rows[0]
         });
       }
-    })
+    });
   });
 });
 
-// params.id 를 쓰는 라우터는 마지막에 쓰라고 한다
-router.get('/:id', (req,res,next) => {
-  var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
-  client.query(QueryString, (err,response) => {
-    var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"
-    client.query(QueryString, (err, response1) => {
-      var Field_Id = req.params.id;
-      var QueryString = "SELECT * FROM aquafeq.monster as t1 left join aquafeq.dungeon_partition as t2 on t1.mon_field = t2.part where mon_field = $1 order by t1.mon_lv asc;"
-      client.query(QueryString, [Field_Id], (err,response2) => {
-        console.log(response2.rows[0])
-        var Data_length = response2.rows.length;
-          res.render('test', {
-          Field_Id:Field_Id,
-          title:'AAF 던전 몬스터 정보',
-          fieldname:'검색이 필요합니다',
-          data:response.rows,
-          data_partition:response1.rows,
-          data_monster:response2.rows,
-          Data_length:Data_length,
-        });
-      });
-    })
+//무기 변경하기
+router.post('/fixwp', (req,res,next) => {
+  console.log('냠냠')
+  var Eqid = req.body.eqid;
+
+  console.log(Eqid)
+  console.log(req.body.eqid)
+  var Wpgrade = req.body.wpgrade;
+    if (Wpgrade == '') {
+      Wpgrade = null
+    } else if (Wpgrade !== '') {
+      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+    console.log(req.body.wpgrade)
+
+  var Wpname = req.body.wpname;
+  console.log(req.body.wpname)
+
+  var Wplimit = req.body.wplimit;
+    if (Wplimit == '') {
+      Wplimit = null
+    }
+    console.log(req.body.wplimit)
+
+  var Wpsocket = req.body.wpsocket;
+    if (Wpsocket == '') {
+      Wpsocket = null
+    }
+  var Wpether = req.body.wpether;
+    if (Wpether == '') {
+      Wpether = null
+    }
+  var Wpstats = req.body.wpstats;
+    if (Wpstats == '') {
+      Wpstats = null
+    } else if (Wpstats !== '') {
+      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+
+  var Wpproperty = req.body.wpproperty;
+    if (Wpproperty == '') {
+      Wpproperty = null
+    } else if (Wpproperty !== '') {
+      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpfeat = req.body.wpfeat;
+    if (Wpfeat == '') {
+      Wpfeat = null
+    } else if (Wpfeat !== '') {
+      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpcustom = req.body.wpcustom;
+    if (Wpcustom == '') {
+      Wpcustom = null
+    } else if (Wpcustom !== ''){
+      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+  var Wpup = req.body.wpup;
+    if (Wpup == '') {
+      Wpup = null
+    } else if (Wpup !== '') {
+      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    }
+
+
+  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup, wpname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE wpid = $11 returning *"
+  //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
+  client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Wpname, Eqid], (err, response) => {
+    console.log('쿼리스트링' + QueryString)
+
+    var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
+    client.query ( QueryString, [Wpname],  (err, response) => {
+      console.log('쿼리스트링' + QueryString)
+      res.render('aafwp', {
+        title : Wpname + ' 변경 완료',
+        data: response.rows
+      })
+    });
   });
 });
+
+// 일반 검색
+router.get('/:id', (req,res,next) => {
+  var SearchType = req.query.searchType;
+  var Search = req.query.searchText;
+  var CurrentPage = req.params.id;
+
+  var SearchPlus = "";
+
+  if (req.query.searchText2 != 'undefined') {
+    var Search2 = req.query.searchText2;
+    var Search22 = [];
+    console.log('추가 검색' + Search2)
+    console.log('추가 검색타입 '+ typeof(Search2))
+
+    if (typeof(Search2) == 'object') {
+      for (var i = 0; i < Search2.length; i++) {
+        Search22.push(Search2[i]) ;
+      }
+    } else if(typeof(Search2) == 'string' ){
+        Search22.push(Search2) ;
+    }
+    // 포 문 에서 search2 배열의 각각의 값중에서 빈 값이 있는 경우 빈 배열에 넣지않고 그냥 넘어가는 작업을 해야함, 이에 따라 아래의 타입 배열에 넣는 경우에서도 동일함
+    console.log(Search22)
+
+    var SearchType2 = req.query.searchType2;
+    var SearchType22 = [];
+    if (typeof(SearchType2) == 'object') {
+      for (var i = 0; i < Search2.length; i++) {
+        SearchType22.push(SearchType2[i]) ;
+      }
+    } else if(typeof(SearchType2) == 'string' ){
+      SearchType22.push(SearchType2) ;
+    }
+    var Searchcount = Search22.length;
+    if (typeof(SearchType2) == 'string') {
+      var SearchPlus = SearchPlus+ ' AND ' + SearchType22+ ' Ilike ' +" '%"+ Search2 +"%' "
+    } else if (typeof(SearchType2) == 'object') {
+      for (var i = 0; i < Searchcount; i++) {
+        var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+      }
+    }
+    console.log(SearchPlus)
+    if (SearchType == 'wpstats') {
+      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+
+    } else {
+      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+
+    }
+
+  } else {
+    if (true) {
+
+    } else {
+      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+
+    }
+
+  }
+  client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+    console.log(QueryString)
+    if(typeof(response.rows[0]) !== "object") {
+      var TotalCount = 1;
+    } else {
+      var TotalCount = response.rows[0].totalcount;
+    }
+    //console.log('토탈 카운트 ' + TotalCount)
+    //console.log(CurrentPage)
+    //console.log(typeof(CurrentPage))
+    var DataCountInPage = 10;
+    var PageSize = 10;
+    var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+    if (TotalCount % DataCountInPage > 0) {
+      TotalPage++;
+    };
+
+    //console.log('토탈 페이지' + TotalPage);
+    if (TotalPage < CurrentPage) {
+      CurrentPage = TotalPage;
+    };
+    var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
+    //console.log('스타트페이지' + StartPage);
+
+    var EndPage = StartPage + DataCountInPage -1;
+    if (EndPage > TotalPage) {
+      EndPage = TotalPage;
+    };
+    //console.log('엔드페이지'+ EndPage);
+    //console.log(response.rows[0])
+    res.render('aafwp', {
+      title: 'AAF 장비',
+      data: response.rows,
+      CurrentPage: CurrentPage,
+      PageSize: PageSize,
+      StartPage: StartPage,
+      EndPage: EndPage,
+      TotalPage: TotalPage,
+      SearchType: SearchType,
+      Search: Search,
+      SearchPlus: SearchPlus,
+      Search2: Search2,
+      Search22: Search22,
+      SearchType2: SearchType2,
+      SearchType22: SearchType22,
+      Searchcount:Searchcount
+
+
+
+    });
+  });
+
+})
+
 
 
 
