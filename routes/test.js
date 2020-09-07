@@ -237,6 +237,7 @@ router.get('/:id', (req,res,next) => {
     } else {
       var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
     }
+  }
   client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
     console.log(QueryString)
     if(typeof(response.rows[0]) !== "object") {
