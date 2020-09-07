@@ -36,7 +36,7 @@
 
         var aaa = $( "div[name=seach_form_id2]:last" ); //last를 사용하여 seach_form_id2라는 명을 가진 마지막 태그 호출
           aaa.after(add); //마지막 seach_form_id2  뒤에 붙인다.
-        });
+      });
 
         //삭제 버튼
         $(document).on("click","button[name=delbut]",function(){
@@ -45,7 +45,57 @@
 
             aaa.remove(); //tr 테그 삭제
         });
+
+
+
+        //
+        //공격력 검색
+        $(document).on("click","input[name=Searchstats]",function(){
+
+          var add =
+
+          '<div class="" id="seach_form_id" name="seach_form_id">'
+          +'<input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px">'
+          + '<select name="searchType">'
+          +    '<option value="1stats">기본 공격력</option>'
+          +    '<option value="2stats">부가 공격력</option>'
+          +'</select>'
+          +'<input action="" type="submit" class="btn" value="찾기" ></button>'
+          +'<input type="button" name="NormalSearch" class="btnAdd" value="일반 검색으로">'
+          +'</div>'
+          $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
+        });
+
+
+        //일반 검색 폼으로
+        $(document).on("click","input[name=NormalSearch]",function(){
+
+        var add =
+        '<div class="" id="seach_form_id" name="seach_form_id">'
+        +'<input type="text" placeholder="모든 항목" name="searchText" style="width:200px">'
+        +  '<select name="searchType">'
+            +  '<option value="wpname">이름</option>'
+            +  '<option value="wpproperty">속성</option>'
+            +  '<option value="wpfeat">피트</option>'
+            +  '<option value="wpcustom">커스텀</option>'
+            +  '<option value="wpgrade">등급 / 강적</option>'
+        +  '</select>'
+        +  '<input action="" type="submit" class="btn" value="찾기" ></button>'
+        +  '<input type="button" name="findadd" class="btnAdd" value="조건 추가">'
+        +  '<input type="button" name="Searchstats" class="btnAdd" value="성능 검색으로">'
+        +'</div>'
+        +'<div class="" id="" name="seach_form_id2">'
+        +'</div>'
+
+        $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
+
+      });
+
+
+
     </script>
+
+
   </head>
   <body style="">
     <div class="title_div" >
@@ -59,6 +109,8 @@
           <input type="text" placeholder="모든 항목" name="searchText" style="width:200px">
           <select name="searchType">
               <option value="wpname">이름</option>
+
+
               <option value="wpproperty">속성</option>
               <option value="wpfeat">피트</option>
               <option value="wpcustom">커스텀</option>
@@ -66,10 +118,12 @@
           </select>
           <input action="" type="submit" class="btn" value="찾기" ></button>
           <input type="button" name="findadd" class="btnAdd" value="조건 추가">
-        </div>
+          <input type="button" name="Searchstats" class="btnAdd" value="성능 검색으로">
+
         <div class="" id="" name="seach_form_id2">
 
         </div>
+      </div>
 
       </form>
     </div>
@@ -136,7 +190,7 @@
                 <% } else if (WpP[1] == ' 무속성 ') { %>
                   <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA">
                 <% } %>
-                  
+
               <% } else { %>
                 <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
               <% } %>
@@ -188,6 +242,7 @@
             </tr>
 
           <% } else { %>
+            <% Search = Search.toString()%>
             <tr>
               <div class="" id="pagelist">
                 <td colspan="21" style= "text-align:center; font-size:24px">
