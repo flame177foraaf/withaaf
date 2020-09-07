@@ -343,7 +343,7 @@ router.get('/:id', (req,res,next) => {
         EndPage: EndPage,
         TotalPage: TotalPage,
         SearchType: SearchType,
-        Search: string(Search),
+        Search: Search.tosting,
         SearchPlus: SearchPlus,
         Search2: Search2,
         Search22: Search22,
