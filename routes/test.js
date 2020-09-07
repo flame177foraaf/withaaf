@@ -311,6 +311,7 @@ router.get('/:id', (req,res,next) => {
       } else {
         var TotalCount = response.rows[0].totalcount;
       }
+      console.log(TotalCount)
       //console.log('토탈 카운트 ' + TotalCount)
       //console.log(CurrentPage)
       //console.log(typeof(CurrentPage))
@@ -320,7 +321,7 @@ router.get('/:id', (req,res,next) => {
       if (TotalCount % DataCountInPage > 0) {
         TotalPage++;
       };
-
+      console.log(TotalPage)
       //console.log('토탈 페이지' + TotalPage);
       if (TotalPage < CurrentPage) {
         CurrentPage = TotalPage;
