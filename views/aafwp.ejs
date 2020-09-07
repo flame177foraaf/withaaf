@@ -104,7 +104,7 @@
     </div>
     <div class="">
       <form action="/aafwp/1" method="get">
-        <% if (SearchType == 'undefined' ){
+        <% if (SearchType == 'undefined' ){ %>
           <div class="" id="seach_form_id" name="seach_form_id">
             <input type="text" placeholder="모든 항목" name="searchText" style="width:200px" >
             <select name="searchType">
@@ -120,8 +120,7 @@
           <div class="" id="" name="seach_form_id2">
           </div>
         </div>
-        }%>
-        <% else if (SearchType == '1stats' || SearchType == '2stats'){ %>
+        <% } else if (SearchType == '1stats' || SearchType == '2stats'){ %>
           <div class="" id="seach_form_id" name="seach_form_id">
           <input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px"  min="1" value="<%= Search %>">
           <select name="searchType">
