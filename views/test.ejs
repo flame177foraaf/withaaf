@@ -53,7 +53,6 @@
         $(document).on("click","input[name=Searchstats]",function(){
 
           var add =
-          '<form action="/aafwp/1" method="get">'
 
           '<div class="" id="seach_form_id" name="seach_form_id">'
           +'<input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px">'
@@ -64,7 +63,6 @@
           +'<input action="" type="submit" class="btn" value="찾기" ></button>'
           +'<input type="button" name="NormalSearch" class="btnAdd" value="일반 검색으로">'
           +'</div>'
-          +'</form>'
           $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
         });
 
@@ -73,7 +71,6 @@
         $(document).on("click","input[name=NormalSearch]",function(){
 
         var add =
-        '<form action="/aafwp/1" method="get">'
         +'<div class="" id="seach_form_id" name="seach_form_id">'
         +'<input type="text" placeholder="모든 항목" name="searchText" style="width:200px">'
         +  '<select name="searchType">'
@@ -89,7 +86,6 @@
         +'</div>'
         +'<div class="" id="" name="seach_form_id2">'
         +'</div>'
-        +'</form>'
 
         $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
 

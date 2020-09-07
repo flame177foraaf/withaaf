@@ -18,7 +18,7 @@ router.get('/', (req,res,next) => {
     if (err) {
       res.redirect('/aafwp');
     } else {
-      res.render('aafwp', {
+      res.render('test', {
         title:'AAF 장비',
         data:response.rows
       });
@@ -70,7 +70,7 @@ router.post('/', (req, res, next) => {
   client.query(QueryString, [Wpgrade, Wpname, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup], (err, response) => {
     var QueryString = "select wpid, wpname from aquafeq.aquafwp where wpname = Wpname ORDER BY wplimit,wpid asc ;"
     client.query(QueryString, (err, response) => {
-      res.render('aafwp', {
+      res.render('test', {
         title:'AAF 장비',
         data:response.rows
       });
@@ -172,7 +172,7 @@ router.post('/fixwp', (req,res,next) => {
     var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
     client.query ( QueryString, [Wpname],  (err, response) => {
       console.log('쿼리스트링' + QueryString)
-      res.render('aafwp', {
+      res.render('test', {
         title : Wpname + ' 변경 완료',
         data: response.rows
       })
@@ -222,23 +222,21 @@ router.get('/:id', (req,res,next) => {
       }
     }
     console.log(SearchPlus)
-    if (SearchType == 'wpstats') {
-      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
-
-    } else {
-      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
-
-    }
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
 
   } else {
-    if (true) {
-
+    if (SearchType == '1stats' || SearchType == '2stats') {
+      var Searchtext = Searchtext.parseInt
+      console.log(Searchtext)
+      console.log(typeof(Searchtext))
+      if (SearchType == '1stats') {
+        var QueryString = "SELECT *  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 1) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >=" + Searchtext;
+      } else if (SearchType == '2stats') {
+        var QueryString = "SELECT *  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >=" + Searchtext;
+      }
     } else {
       var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
-
     }
-
-  }
   client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
     console.log(QueryString)
     if(typeof(response.rows[0]) !== "object") {
@@ -269,7 +267,7 @@ router.get('/:id', (req,res,next) => {
     };
     //console.log('엔드페이지'+ EndPage);
     //console.log(response.rows[0])
-    res.render('aafwp', {
+    res.render('test', {
       title: 'AAF 장비',
       data: response.rows,
       CurrentPage: CurrentPage,
