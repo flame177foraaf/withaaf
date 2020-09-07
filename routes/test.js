@@ -332,6 +332,7 @@ router.get('/:id', (req,res,next) => {
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       };
+      var Search = Search.toString()
       //console.log('엔드페이지'+ EndPage);
       //console.log(response.rows[0])
       res.render('test', {
@@ -343,7 +344,7 @@ router.get('/:id', (req,res,next) => {
         EndPage: EndPage,
         TotalPage: TotalPage,
         SearchType: SearchType,
-        Search: Search.toString(),
+        Search: Search,
         SearchPlus: SearchPlus,
         Search2: Search2,
         Search22: Search22,
