@@ -183,51 +183,114 @@ router.post('/fixwp', (req,res,next) => {
 // 일반 검색
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
-  var Search = req.query.searchText;
-  var CurrentPage = req.params.id;
-  console.log(SearchType)
-  console.log(SearchType == '1stats')
-  console.log(req.query.searchText2)
-  var SearchPlus = "";
-  var Search2 = req.query.searchText2;
+  if (SearchType != '1stats' || SearchType != '2stats') {
+    var Search = req.query.searchText;
+    var CurrentPage = req.params.id;
+    console.log(SearchType)
+    console.log(SearchType == '1stats')
+    console.log(req.query.searchText2)
+    var SearchPlus = "";
+    var Search2 = req.query.searchText2;
 
-  if (Search2 !== undefined) {
-    var Search22 = [];
-    console.log('추가 검색' + Search2)
-    console.log('추가 검색타입 '+ typeof(Search2))
-    console.LOG(SearchPlus)
-    if (typeof(Search2) == 'object') {
-      for (var i = 0; i < Search2.length; i++) {
-        Search22.push(Search2[i]) ;
+    if (Search2 !== undefined) {
+      var Search22 = [];
+      console.log('추가 검색' + Search2)
+      console.log('추가 검색타입 '+ typeof(Search2))
+      console.LOG(SearchPlus)
+      if (typeof(Search2) == 'object') {
+        for (var i = 0; i < Search2.length; i++) {
+          Search22.push(Search2[i]) ;
+        }
+      } else if(typeof(Search2) == 'string' ){
+          Search22.push(Search2) ;
       }
-    } else if(typeof(Search2) == 'string' ){
-        Search22.push(Search2) ;
-    }
-    // 포 문 에서 search2 배열의 각각의 값중에서 빈 값이 있는 경우 빈 배열에 넣지않고 그냥 넘어가는 작업을 해야함, 이에 따라 아래의 타입 배열에 넣는 경우에서도 동일함
-    console.log(Search22)
+      // 포 문 에서 search2 배열의 각각의 값중에서 빈 값이 있는 경우 빈 배열에 넣지않고 그냥 넘어가는 작업을 해야함, 이에 따라 아래의 타입 배열에 넣는 경우에서도 동일함
+      console.log(Search22)
 
-    var SearchType2 = req.query.searchType2;
-    var SearchType22 = [];
-    if (typeof(SearchType2) == 'object') {
-      for (var i = 0; i < Search2.length; i++) {
-        SearchType22.push(SearchType2[i]) ;
+      var SearchType2 = req.query.searchType2;
+      var SearchType22 = [];
+      if (typeof(SearchType2) == 'object') {
+        for (var i = 0; i < Search2.length; i++) {
+          SearchType22.push(SearchType2[i]) ;
+        }
+      } else if(typeof(SearchType2) == 'string' ){
+        SearchType22.push(SearchType2) ;
       }
-    } else if(typeof(SearchType2) == 'string' ){
-      SearchType22.push(SearchType2) ;
-    }
-    var Searchcount = Search22.length;
-    if (typeof(SearchType2) == 'string') {
-      var SearchPlus = SearchPlus+ ' AND ' + SearchType22+ ' Ilike ' +" '%"+ Search2 +"%' "
-    } else if (typeof(SearchType2) == 'object') {
-      for (var i = 0; i < Searchcount; i++) {
-        var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+      var Searchcount = Search22.length;
+      if (typeof(SearchType2) == 'string') {
+        var SearchPlus = SearchPlus+ ' AND ' + SearchType22+ ' Ilike ' +" '%"+ Search2 +"%' "
+      } else if (typeof(SearchType2) == 'object') {
+        for (var i = 0; i < Searchcount; i++) {
+          var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+        }
       }
-    }
-    console.log('req.query.searchText2 !== undefined' + SearchPlus)
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+      console.log('req.query.searchText2 !== undefined' + SearchPlus)
+      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
 
+    } else {
+      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+
+    }
+
+    client.query(QueryString, ['%' + Search +'%', CurrentPage], (err, response) => {
+      console.log(QueryString)
+      if(typeof(response.rows[0]) !== "object") {
+        var TotalCount = 1;
+      } else {
+        var TotalCount = response.rows[0].totalcount;
+      }
+      //console.log('토탈 카운트 ' + TotalCount)
+      //console.log(CurrentPage)
+      //console.log(typeof(CurrentPage))
+      var DataCountInPage = 10;
+      var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      };
+
+      //console.log('토탈 페이지' + TotalPage);
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      };
+      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
+      //console.log('스타트페이지' + StartPage);
+
+      var EndPage = StartPage + DataCountInPage -1;
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      };
+      //console.log('엔드페이지'+ EndPage);
+      //console.log(response.rows[0])
+      res.render('test', {
+        title: 'AAF 장비',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage: TotalPage,
+        SearchType: SearchType,
+        Search: Search,
+        SearchPlus: SearchPlus,
+        Search2: Search2,
+        Search22: Search22,
+        SearchType2: SearchType2,
+        SearchType22: SearchType22,
+        Searchcount:Searchcount
+
+
+
+      });
+    });
   } else {
-
+    var Search = req.query.searchText;
+    var CurrentPage = req.params.id;
+    console.log(SearchType)
+    console.log(SearchType == '1stats')
+    console.log(req.query.searchText2)
+    var SearchPlus = "";
+    var Search2 = req.query.searchText2;
     if (SearchType == '1stats') {
       var Search = parseInt(Search,10)
       console.log(SearchType)
@@ -242,65 +305,64 @@ router.get('/:id', (req,res,next) => {
       console.log(typeof(Search))
 
       var QueryString = "SELECT *  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 limit 10 offset (($2- 1)*10)";
-    } else {
-      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ SearchType +" Ilike % $1 % ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
     }
+
+    client.query(QueryString, [Search, CurrentPage], (err, response) => {
+      console.log(QueryString)
+      if(typeof(response.rows[0]) !== "object") {
+        var TotalCount = 1;
+      } else {
+        var TotalCount = response.rows[0].totalcount;
+      }
+      //console.log('토탈 카운트 ' + TotalCount)
+      //console.log(CurrentPage)
+      //console.log(typeof(CurrentPage))
+      var DataCountInPage = 10;
+      var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      };
+
+      //console.log('토탈 페이지' + TotalPage);
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      };
+      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
+      //console.log('스타트페이지' + StartPage);
+
+      var EndPage = StartPage + DataCountInPage -1;
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      };
+      //console.log('엔드페이지'+ EndPage);
+      //console.log(response.rows[0])
+      res.render('test', {
+        title: 'AAF 장비',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage: TotalPage,
+        SearchType: SearchType,
+        Search: Search,
+        SearchPlus: SearchPlus,
+        Search2: Search2,
+        Search22: Search22,
+        SearchType2: SearchType2,
+        SearchType22: SearchType22,
+        Searchcount:Searchcount
+
+
+
+      });
+    });
   }
 
-  client.query(QueryString, [Search, CurrentPage], (err, response) => {
-    console.log(QueryString)
-    if(typeof(response.rows[0]) !== "object") {
-      var TotalCount = 1;
-    } else {
-      var TotalCount = response.rows[0].totalcount;
-    }
-    //console.log('토탈 카운트 ' + TotalCount)
-    //console.log(CurrentPage)
-    //console.log(typeof(CurrentPage))
-    var DataCountInPage = 10;
-    var PageSize = 10;
-    var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-    if (TotalCount % DataCountInPage > 0) {
-      TotalPage++;
-    };
 
-    //console.log('토탈 페이지' + TotalPage);
-    if (TotalPage < CurrentPage) {
-      CurrentPage = TotalPage;
-    };
-    var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-    //console.log('스타트페이지' + StartPage);
-
-    var EndPage = StartPage + DataCountInPage -1;
-    if (EndPage > TotalPage) {
-      EndPage = TotalPage;
-    };
-    //console.log('엔드페이지'+ EndPage);
-    //console.log(response.rows[0])
-    res.render('test', {
-      title: 'AAF 장비',
-      data: response.rows,
-      CurrentPage: CurrentPage,
-      PageSize: PageSize,
-      StartPage: StartPage,
-      EndPage: EndPage,
-      TotalPage: TotalPage,
-      SearchType: SearchType,
-      Search: Search,
-      SearchPlus: SearchPlus,
-      Search2: Search2,
-      Search22: Search22,
-      SearchType2: SearchType2,
-      SearchType22: SearchType22,
-      Searchcount:Searchcount
-
-
-
-    });
-  });
 
 })
-
 
 
 
