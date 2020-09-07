@@ -226,7 +226,7 @@ router.get('/:id', (req,res,next) => {
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
 
   } else {
-    if (SearchType == '1stats' || ) {
+    if (SearchType == '1stats' ) {
 
         var Search = Search.parseInt
         console.log(SearchType)
