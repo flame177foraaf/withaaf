@@ -55,7 +55,7 @@
           var add =
 
           '<div class="" id="seach_form_id" name="seach_form_id">'
-          +'<input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px"  min="1">'
+          +'<input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px"  min="1" value ="3000">'
           + '<select name="searchType">'
           +    '<option value="1stats">기본 공격력</option>'
           +    '<option value="2stats">부가 공격력</option>'
@@ -106,19 +106,19 @@
       <form action="/aafwp/1" method="get">
         <% if (SearchType == '1stats' || SearchType == '2stats'){ %>
           <div class="" id="seach_form_id" name="seach_form_id">
-          <input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px"  min="1" ><select name="searchType">
+          <input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px"  min="1" value="<%= Search %>">
+          <select name="searchType">
             <option value="1stats">기본 공격력</option>
-            <option value="2stats">부가 공격력</option></select>
+            <option value="2stats">부가 공격력</option>
+          </select>
           <input action="" type="submit" class="btn" value="찾기" ></button>
           <input type="button" name="NormalSearch" class="btnAdd" value="일반 검색으로">
         </div>
         <% } else { %>
           <div class="" id="seach_form_id" name="seach_form_id">
-            <input type="text" placeholder="모든 항목" name="searchText" style="width:200px">
+            <input type="text" placeholder="모든 항목" name="searchText" style="width:200px" value="<%= Search %>">
             <select name="searchType">
                 <option value="wpname">이름</option>
-
-
                 <option value="wpproperty">속성</option>
                 <option value="wpfeat">피트</option>
                 <option value="wpcustom">커스텀</option>
