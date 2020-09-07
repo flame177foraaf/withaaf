@@ -190,7 +190,7 @@ router.get('/:id', (req,res,next) => {
   console.log(req.query.searchText2)
   var SearchPlus = "";
 
-  if (req.query.searchText2 != 'undefined') {
+  if (req.query.searchText2 !== 'undefined') {
     var Search2 = req.query.searchText2;
     var Search22 = [];
     console.log('추가 검색' + Search2)
