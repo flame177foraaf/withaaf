@@ -286,7 +286,7 @@ router.get('/:id', (req,res,next) => {
   } else {
     var Search = req.query.searchText;
     console.log(Search)
-    if (Search == 'undefined') {
+    if (Search == '' || Search == null || Search == undefined ) {
       var Search = 0;
     }
     var CurrentPage = req.params.id;
