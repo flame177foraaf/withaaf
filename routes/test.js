@@ -196,7 +196,7 @@ router.get('/:id', (req,res,next) => {
       var Search22 = [];
       console.log('추가 검색' + Search2)
       console.log('추가 검색타입 '+ typeof(Search2))
-      console.LOG(SearchPlus)
+      console.log(SearchPlus)
       if (typeof(Search2) == 'object') {
         for (var i = 0; i < Search2.length; i++) {
           Search22.push(Search2[i]) ;
