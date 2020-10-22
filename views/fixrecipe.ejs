@@ -81,8 +81,9 @@
     <script type="text/javascript">
 
       $(document).ready(function(){
-
-        if ($("#jquery3").val() === "") {
+        if ($("#jquery2").val() === "") {
+          $('#recipetable > tr:nth-child(n+2)').css ("display", "none");
+        } else if ($("#jquery3").val() === "") {
           $('#recipetable > tr:nth-child(n+3)').css ("display", "none");
         } else if ($("#jquery4").val() === "") {
           $('#recipetable > tr:nth-child(n+4)').css ("display", "none");
@@ -175,7 +176,7 @@
       <tr id="collect2">
         <td> 두 번째 재료 </td>
         <td style="text-align:center">
-          <input type="text" name="collect2num"  size='40' maxlength='20' value="<%= data.collect2num %>" id="">
+          <input type="text" name="collect2num"  size='40' maxlength='20' value="<%= data.collect2num %>" id="jquery2">
         </td>
         <td>
           <input type="text" name="collect2name"  size='40' maxlength='20' value="<%= data.collect2name %>" id="">
