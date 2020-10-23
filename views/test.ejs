@@ -30,15 +30,16 @@
 
       $(document).ready(function(){
         if ($("#recipematerial2").val() === "") {
-          $('#recipetabletr > td:nth-child(n+7)').css ("display", "none");
+          $('#recipetabletr > td:nth-child(-n+21):nth-child(n+7)').css ("display", "none");
+
         } else if ($("#recipematerial3").val() === "") {
-          $('#recipetabletr > td:nth-child(n+8)').css ("display", "none");
+          $('#recipetabletr > td:nth-child(-n+21):nth-child(n+10)').css ("display", "none");
         } else if ($("#recipematerial4").val() === "") {
-          $('#recipetabletr > td:nth-child(n+9)').css ("display", "none");
+          $('#recipetabletr > td:nth-child(-n+21):nth-child(n+13)').css ("display", "none");
         } else if ($("#recipematerial5").val() === "") {
-          $('#recipetabletr > td:nth-child(n+10)').css ("display", "none");
+          $('#recipetabletr > td:nth-child(-n+21):nth-child(n+16)').css ("display", "none");
         } else if ($("#recipematerial6").val() === "") {
-          $('#recipetabletr > tr:last-child').css ("display", "none");
+          $('#recipetabletr > td:nth-child(-n+21):nth-child(n+19)').css ("display", "none");
         }
       })
       </script>
@@ -87,7 +88,7 @@
           <col width="60">
 
         </colgroup>
-        <thead id="" >
+        <thead id="recipetablehead" >
           <tr >
             <th>레시피</th>
             <th>결과물</th>
