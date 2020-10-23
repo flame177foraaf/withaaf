@@ -115,6 +115,11 @@
               <td id="linehead"><%- item.collectname %></td>
               <td id="recipematerial1"><%- item.collect1num %></td>
               <td><%- item.collect1name %></td>
+              <% if ( item.collect1unit  == ''){ %>
+                <td style="text-align: center; "><%- item.collect1unit %></td>
+              <% } else { %>
+                <td style="text-align: center; "> ( <%- item.collect1unit %> 개 ) </td>
+              <% } %>
               <td style="text-align: center; "><%- item.collect1unit %></td>
               <td id="recipematerial2"><%- item.collect2num %></td>
               <td st><%- item.collect2name %></td>
