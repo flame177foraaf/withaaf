@@ -120,22 +120,41 @@
               <% } else { %>
                 <td style="text-align: center; "> ( <%- item.collect1unit %> 개 ) </td>
               <% } %>
-              <td style="text-align: center; "><%- item.collect1unit %></td>
               <td id="recipematerial2"><%- item.collect2num %></td>
               <td st><%- item.collect2name %></td>
-              <td style="text-align: center; "><%- item.collect2unit %></td>
+              <% if ( item.collect2num  === ''){ %>
+                <td style="text-align: center; "><%- item.collect2unit %></td>
+              <% } else { %>
+                <td style="text-align: center; "> ( <%- item.collect2unit %> 개 ) </td>
+              <% } %>
               <td id="recipematerial3"><%- item.collect3num %></td>
               <td><%- item.collect3name %></td>
-              <td style="text-align: center;"><%- item.collect3unit %></td>
+              <% if ( item.collect3num  === ''){ %>
+                <td style="text-align: center; "><%- item.collect3unit %></td>
+              <% } else { %>
+                <td style="text-align: center; "> ( <%- item.collect3unit %> 개 ) </td>
+              <% } %>
               <td id="recipematerial4"><%- item.collect4num %></td>
               <td><%- item.collect4name %></td>
-              <td style="text-align: center;"><%- item.collect4unit %></td>
+              <% if ( item.collect4num  === ''){ %>
+                <td style="text-align: center; "><%- item.collect4unit %></td>
+              <% } else { %>
+                <td style="text-align: center; "> ( <%- item.collect4unit %> 개 ) </td>
+              <% } %>
               <td id="recipematerial5"><%- item.collect5num %></td>
               <td><%- item.collect5name %></td>
-              <td style="text-align: center;"><%- item.collect5unit %></td>
+              <% if ( item.collect5num  === ''){ %>
+                <td style="text-align: center; "><%- item.collect5unit %></td>
+              <% } else { %>
+                <td style="text-align: center; "> ( <%- item.collect5unit %> 개 ) </td>
+              <% } %>
               <td id="recipematerial6"><%- item.collect6num %></td>
               <td><%- item.collect6name %></td>
-              <td style="text-align: center;"><%- item.collect6unit %></td>
+              <% if ( item.collect6num  === ''){ %>
+                <td style="text-align: center; "><%- item.collect6unit %></td>
+              <% } else { %>
+                <td style="text-align: center; "> ( <%- item.collect6unit %> 개 ) </td>
+              <% } %>
               <td style="white-space: normal; text-align:center">
                   <div class="" style="display: inline-block">
                     <form action="/recipe/fixrecipe" method="get ">
