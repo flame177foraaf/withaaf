@@ -210,7 +210,7 @@ router.get('/:id', (req,res,next) => {
 
   }
   client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-    console.log(SearchType)
+    console.log(Search)
     if (err) {
       res.redirect('/aafacc');
     } else if (typeof(response.rows[0]) !== "object") {
