@@ -210,7 +210,10 @@ router.get('/:id', (req,res,next) => {
 
   }
   client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-    if(typeof(response.rows[0]) !== "object") {
+    console.log(SearchType)
+    if (err) {
+      res.redirect('/aafacc');
+    } else if (typeof(response.rows[0]) !== "object") {
       var TotalCount = 1;
     } else {
       var TotalCount = response.rows[0].totalcount;
