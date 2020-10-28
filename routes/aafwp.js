@@ -233,6 +233,12 @@ router.get('/:id', (req,res,next) => {
     }
 
     client.query(QueryString, ['%' + Search +'%', CurrentPage], (err, response) => {
+      console.log(Search)
+      console.log(SearchType)
+      console.log(CurrentPage)
+      console.log(SearchPlus)
+      console.log(Search2)
+      console.log(Search22)
       console.log(QueryString)
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;

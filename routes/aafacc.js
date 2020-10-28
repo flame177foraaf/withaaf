@@ -211,6 +211,12 @@ router.get('/:id', (req,res,next) => {
   }
   client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
     console.log(Search)
+    console.log(SearchType)
+    console.log(CurrentPage)
+    console.log(SearchPlus)
+    console.log(Search2)
+    console.log(Search22)
+
     if (err) {
       res.redirect('/aafacc');
     } else if (typeof(response.rows[0]) !== "object") {
