@@ -276,11 +276,11 @@
               <td style='text-align: center'><%- item.wpsocket %></td>
               <td style='text-align: center'><%- item.wpether %></td>
               <td style='text-align: center'><%- item.wpstats %></td>
-              if (item.wpproperty.indexOf('업그레이드') != -1){
+              <% if (item.wpproperty.indexOf('업그레이드') != -1){ %>
                 <td id="wpproperty" style='text-align: center' onclick="upbtn"><%- item.wpproperty %></td>
-              } else {
+              <% } else { %>
                 <td id="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
-              }
+              <% } %>
               <td><%- item.wpfeat %></td>
               <td><%- item.wpcustom %></td>
               <td style="white-space: normal; text-align:center">
