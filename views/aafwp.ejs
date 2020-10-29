@@ -94,9 +94,9 @@
       $(document).on("click","td[name=upbtn]",function(){
           status = $("#upgrademeterial").css("display");
         if (status == "none") {
-          $("#upgrademeterial").css("display", "block");
+          $("#upgrademeterial").show();
         } else {
-          $("#upgrademeterial").css("display", "none");
+          $("#upgrademeterial").hide();
         }
 
       });
