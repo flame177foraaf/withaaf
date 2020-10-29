@@ -294,6 +294,11 @@
 
 
             </tr>
+            <% if (item.wpup != ''){ %>
+              <tr>
+                <td colspan="10"> <%- item.wpup %> </td>
+              </tr>
+            <% } %>
             <% }); %>
           <% } %>
         <div class="" id="pagelist">
