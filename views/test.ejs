@@ -95,13 +95,13 @@
 
 
 
-        var list = document.getElementsByid("tabletr");
-        var list2 = document.getElementsByid("upgrademeterial");
+        var list = document.getElementsByClassName("tabletr");
+        var list2 = document.getElementsByClassName("upgrademeterial");
 
         for (var i = 0; i < list.length; i++) {
-              //list[i].id = "tabletr" + (i + 1);
-              list[i].setAttribute("id", "tabletr" + i);
-              list2[i].id = "upgrademeterial" + (i + 1);
+              //list[i].class = "tabletr" + (i + 1);
+              list[i].setAttribute("class", "tabletr" + i);
+              list2[i].class = "upgrademeterial" + (i + 1);
 
         }
 
@@ -275,7 +275,7 @@
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
-              <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="trindex'+nummm+'">
+              <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="trindex'+nummm+'">
               <td><%- item.wpgrade %></td>
               <td><%- item.wpname %></td>
               <td style='text-align: center'><%- item.wplimit %></td>
@@ -315,7 +315,7 @@
 
 
             </tr>
-              <tr id="upgrademeterial" style="display:none">
+              <tr id="" style="display:none" class="upgrademeterial">
                 <td colspan="10"> <%- item.wpup %> </td>
               </tr>
             <% }); %>
