@@ -1,3 +1,9 @@
+var http = require("http");
+setInterval(function () {
+  http.get("http://withaaf.herokuapp.com")
+
+} , 120000);
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
