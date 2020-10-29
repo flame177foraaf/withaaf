@@ -90,16 +90,27 @@
         $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
 
       });
+      $(function() {
+        $("tr#tabletr td#upbtn").click(function(){     //function_td
+          if ( $("#upgrademeterial").css("display") == "none") {
+            $("#upgrademeterial").show();
+          } else {
+            $("#upgrademeterial").hide();
+          }
+        });
+      })
 
-      $(document).on("click","td[name=upbtn]",function(){
-          status = $("#upgrademeterial").css("display");
-        if (status == "none") {
+
+      /*
+      $(document).on("click","tr[name=upbtn]",function(){
+        if ( $("#upgrademeterial").css("display") == "none") {
           $("#upgrademeterial").show();
         } else {
           $("#upgrademeterial").hide();
         }
 
       });
+      */
 
 
     </script>
