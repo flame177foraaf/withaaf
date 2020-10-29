@@ -92,6 +92,17 @@
       });
 
 
+      $(document).ready(function () { // 페이지 document 로딩 완료 후 스크립트 실행
+        $("#upbtn").click(function () {
+          status = $("#upgrademeterial").css("display");
+        if (status == "none") {
+          $("#upgrademeterial").css("display", "show");
+        } else {
+          $("#upgrademeterial").css("display", "none");
+        }
+        });
+      });
+
 
     </script>
 
@@ -265,7 +276,11 @@
               <td style='text-align: center'><%- item.wpsocket %></td>
               <td style='text-align: center'><%- item.wpether %></td>
               <td style='text-align: center'><%- item.wpstats %></td>
-              <td style='text-align: center'><%- item.wpproperty %></td>
+              if (item.wpproperty.indexOf('업그레이드') != -1){
+                <td id="wpproperty" style='text-align: center' onclick="upbtn"><%- item.wpproperty %></td>
+              } else {
+                <td id="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
+              }
               <td><%- item.wpfeat %></td>
               <td><%- item.wpcustom %></td>
               <td style="white-space: normal; text-align:center">
@@ -295,7 +310,7 @@
 
             </tr>
             <% if (item.wpup != ''){ %>
-              <tr>
+              <tr id="upgrademeterial" style="display:none">
                 <td colspan="10"> <%- item.wpup %> </td>
               </tr>
             <% } %>
@@ -303,7 +318,7 @@
           <% } %>
         <div class="" id="pagelist">
           <% if(typeof(CurrentPage) === 'undefined'){ %>
-            <tr>
+            <tr id="up" style="display:none;" >
               <div class="" id="pagelist" >
                 <td colspan="10" style= "text-align:center; font-size:24px">
                   검색이 필요합니다.
