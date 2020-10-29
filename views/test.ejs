@@ -94,17 +94,19 @@
 
 
 
+        $(document).on{ function () {
+          var list = document.getElementsByClassName("tabletr");
+          var list2 = document.getElementsByClassName("upgrademeterial");
 
-        var list = document.getElementsByClassName("tabletr");
-        var list2 = document.getElementsByClassName("upgrademeterial");
-
-        for (var i = 0; i < list.length; i++) {
-              //list[i].class = "tabletr" + (i + 1);
-              list[i].setAttribute("id", "tabletr" + i);
-              list2[i].setAttribute("id", "upgrademeterial" + i);
+          for (var i = 0; i < list.length; i++) {
+                //list[i].class = "tabletr" + (i + 1);
+                list[i].setAttribute("id", "tabletr" + i);
+                list2[i].setAttribute("id", "upgrademeterial" + i);
 
 
+          }
         }
+
 
 
         $( "tr#tabletr td#wpproperty" ).click(function( ) {
