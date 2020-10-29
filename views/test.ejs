@@ -101,7 +101,8 @@
         for (var i = 0; i < list.length; i++) {
               //list[i].class = "tabletr" + (i + 1);
               list[i].setAttribute("id", "tabletr" + i);
-              list2[i].id = "upgrademeterial" + (i + 1);
+              list2[i].setAttribute("id", "upgrademeterial" + i);
+
 
         }
 
@@ -117,18 +118,6 @@
         });
 
 
-      /*
-
-
-      $(document).on("click","td[id=wpproperty]",function(){
-        if ( $("#upgrademeterial").css("display") == "none") {
-          $("#upgrademeterial").show();
-        } else {
-          $("#upgrademeterial").hide();
-        }
-
-      });
-*/
 
     </script>
 
