@@ -92,17 +92,26 @@
         }
         );
 
-      function upbtn(x) {
-        if ( $("#upgrademeterial"+ x ).css("display") == "none") {
+      function upbtn(num) {
+        var x = num
+        var trindex = document.getElementsById("wpproperty");
+        for (var i = 0; i < trindex.length; i++) {
+          x++;
+        }
+
+      }
+
+      /*  if ( $("#upgrademeterial"+ x ).css("display") == "none") {
           $("#upgrademeterial"+ x).block();
         } else {
           $("#upgrademeterial"+ x).none();
         }
       })
+      */
 
-      /*
 
-      $(document).on("click","tr[name=wpproperty]",function(){
+
+      $(document).on("click","td[id=wpproperty]",function(){
         if ( $("#upgrademeterial").css("display") == "none") {
           $("#upgrademeterial").show();
         } else {
@@ -110,7 +119,6 @@
         }
 
       });
-      */
 
 
     </script>
@@ -286,9 +294,9 @@
               <td style='text-align: center'><%- item.wpether %></td>
               <td style='text-align: center'><%- item.wpstats %></td>
               <% if (item.wpproperty.indexOf('업그레이드') != -1){ %>
-                <td id="wpproperty" style='text-align: center' onclick="upbtn(this)"><%- item.wpproperty %></td>
+                <td id="wpproperty" style='text-align: center' onclick="upbtn(num)"><%- item.wpproperty %></td>
               <% } else { %>
-                <td id="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
+                <td id="" style='text-align: center'><%- item.wpproperty %></td>
               <% } %>
               <td><%- item.wpfeat %></td>
               <td><%- item.wpcustom %></td>
@@ -319,7 +327,7 @@
 
             </tr>
             <% if (item.wpup != ''){ %>
-              <tr id="upgrademeterial(this)" style="display:none">
+              <tr id="upgrademeterial('+ num +')" style="display:none">
                 <td colspan="10"> <%- item.wpup %> </td>
               </tr>
             <% } %>
