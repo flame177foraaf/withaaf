@@ -91,11 +91,10 @@
 
       });
 
-
       $(document).on("click","td[name=upbtn]",function(){
           status = $("#upgrademeterial").css("display");
         if (status == "none") {
-          $("#upgrademeterial").css("display", "");
+          $("#upgrademeterial").css("display", "block");
         } else {
           $("#upgrademeterial").css("display", "none");
         }
