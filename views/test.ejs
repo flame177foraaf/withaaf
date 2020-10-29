@@ -123,8 +123,35 @@
           $("#upgrademeterial"+ x).none();
         }
       })
+      <% if (item.wpproperty.indexOf('/') != -1){ %>
+        <% var WpP = item.wpproperty.split('/') %>
+        <% if ( WpP[1] == ' 불 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD" onclick="trindex'+nummm+'">
+        <% } else if (WpP[1] == ' 물 ' ) { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC" onclick="trindex'+nummm+'">
+        <% } else if (WpP[1] == ' 바람 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3" onclick="trindex'+nummm+'">
+        <% } else if (WpP[1] == ' 땅 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8" onclick="trindex'+nummm+'">
+        <% } else if (WpP[1] == ' 정신 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB" onclick="trindex'+nummm+'">
+        <% } else if (WpP[1] == ' 아스트랄 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2" onclick="trindex'+nummm+'">
+        <% } else if (WpP[1] == ' 무속성 ') { %>
+          <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="trindex'+nummm+'">
+        <% } %>
 
+      <% } else { %>
+        <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="trindex'+nummm+'">
+      <% } %>
+      background-color:#EAEAEA
+      background-color:#E4C1F2
+      background-color:#FFFFDB
+      background-color:#F8EAD8
+      background-color:#DBE0FC
+      background-color:#FFD5DD
 
+      background-color:#CEFFD3
 
 
       $(document).on("click","td[id=wpproperty]",function(){
@@ -282,27 +309,7 @@
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
-              <% if (item.wpproperty.indexOf('/') != -1){ %>
-                <% var WpP = item.wpproperty.split('/') %>
-                <% if ( WpP[1] == ' 불 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD" onclick="trindex'+nummm+'">
-                <% } else if (WpP[1] == ' 물 ' ) { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC" onclick="trindex'+nummm+'">
-                <% } else if (WpP[1] == ' 바람 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3" onclick="trindex'+nummm+'">
-                <% } else if (WpP[1] == ' 땅 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8" onclick="trindex'+nummm+'">
-                <% } else if (WpP[1] == ' 정신 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB" onclick="trindex'+nummm+'">
-                <% } else if (WpP[1] == ' 아스트랄 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2" onclick="trindex'+nummm+'">
-                <% } else if (WpP[1] == ' 무속성 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="trindex'+nummm+'">
-                <% } %>
 
-              <% } else { %>
-                <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="trindex'+nummm+'">
-              <% } %>
               <tr class="" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="trindex'+nummm+'">
               <td><%- item.wpgrade %></td>
               <td><%- item.wpname %></td>
