@@ -95,7 +95,18 @@
 
 
 
-        $( "#wpproperty" ).click(function( ) {
+        var list = document.getElementsByid("tabletr");
+        var list2 = document.getElementsByid("upgrademeterial");
+
+        for (var i = 0; i < list.length; i++) {
+              //list[i].id = "tabletr" + (i + 1);
+              list[i].setAttribute("id", "tabletr" + i);
+              list2[i].id = "upgrademeterial" + (i + 1);
+
+        }
+
+
+        $( "tr#tabletr td#wpproperty" ).click(function( ) {
           if ( $("#upgrademeterial").css("display") == "none") {
             $("#upgrademeterial").show();
 
@@ -300,7 +311,7 @@
               <td style='text-align: center'><%- item.wpether %></td>
               <td style='text-align: center'><%- item.wpstats %></td>
               <% if (item.wpproperty.indexOf('업그레이드') != -1){ %>
-                <td id="wpproperty" style='text-align: center' onclick="upbtn(+nummm+)"><%- item.wpproperty %></td>
+                <td id="wpproperty" style='text-align: center' onclick="upbtn"><%- item.wpproperty %></td>
               <% } else { %>
                 <td id="" style='text-align: center'><%- item.wpproperty %></td>
               <% } %>
@@ -332,11 +343,9 @@
 
 
             </tr>
-            <% if (item.wpup != ''){ %>
               <tr id="upgrademeterial" style="display:none">
                 <td colspan="10"> <%- item.wpup %> </td>
               </tr>
-            <% } %>
             <% }); %>
           <% } %>
         <div class="" id="pagelist">
