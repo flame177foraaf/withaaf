@@ -98,13 +98,14 @@
 $(document).ready(function() {
   var list = document.querySelectorAll(".tabletr");
   var list2 = document.querySelectorAll(".upgrademeterial")
-  var wpcolor = document.querySelectorAll(".wpproperty");
+  //var wpcolor = document.querySelectorAll(".wpproperty");
 
     for (var i = 0; i < list.length; i++) {
       list[i].setAttribute("id", "tr(" + i + ")");
       list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
       list2[i].setAttribute("id", "trmeterial(" + i + ")");
 
+/*
       if (wpcolor[i].textContent.indexOf('/') != -1) {
         if ( wpcolor[i].textContent.split('/')[1] == ' 불 ') {
           list[i].css("backgroundColor", "#FFD5DD");
@@ -122,6 +123,7 @@ $(document).ready(function() {
           list[i].css("backgroundColor", "#EAEAEA");
         }
       }
+      */
     }
 
 });
