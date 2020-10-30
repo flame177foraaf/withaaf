@@ -290,18 +290,19 @@ function viewmeterial(i) {
               <td style='text-align: center'><%- item.wplimit %></td>
               <td style='text-align: center'><%- item.wpsocket %></td>
               <td style='text-align: center'><%- item.wpether %></td>
-
+              <% var feattext = item.wpfeat.split('<br />')%>
               <% var featlink1 = item.wpfeat.split(" ("); %>
               <% var featlink2 = [] %>
               <% var featlink3 = []; %>
-              <% var featlink4 = '<a href="http://aafwiki.com/wiki/"' + featlink1[0] + '(피트)/></a>'; %>
+              var link = "http://aafwiki.com/wiki/"
+              <% var featlink4 = '<a href="http://aafwiki.com/wiki/'+ 'featlink1[0](피트)"/>' + feattext[0] + '</a>'; %>
               <% for (var i = 0; i < featlink1.length; i++) { %>
                 <% featlink2.push( featlink1[i].indexOf(">")); %>
                 <% var featlink3 = featlink3 + ( featlink1[i].split(">")); %>
                 <% if (featlink2[i] != -1) { %>
                   <% //featlink4.push(featlink3.indexOf(i).substring(featlink2[i] ,  featlink3[i].length)) %>
 
-                  <% featlink4 = featlink4 + ('<a href="http://aafwiki.com/wiki/"'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length) +'(피트)/ ></a>') %>
+                  <% featlink4 = featlink4 + ('<a href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/ >' + feattext[i] + '</a>') %>
                 <% } %>
               <% } %>
               <td style='text-align: center'><%- item.wpstats %></td>
