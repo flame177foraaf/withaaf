@@ -95,14 +95,12 @@
 
 
 
-        var list = document.querySelectorAll(".tabletr");  //이거야ㅑㅑㅑㅑㅑㅑㅑㅑㅑ
-        var list2 = document.querySelectorAll(".upgrademeterial")
-                    for (var i = 0; i < list.length; i++) {
-                        list[i].setAttribute("id", "test" + i);
-                        list2[i].setAttribute("id", "testonclick" + i);
 
-                  }
+        $(".tabletr").each(function(index) {
+          $(this).attr("id", this.id + index);
+          $(this).attr("onclick", 'test' + index);
 
+        });
     </script>
 
 
