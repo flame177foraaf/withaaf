@@ -331,7 +331,7 @@ router.get('/:id', (req,res,next) => {
       var emp = new Object()
 
       var featlink0 = response.rows[0].wpfeat
-      var featlink1 = str.split("(");
+      var featlink1 = featlink0.split("(");
       var featlink2 = []
       var featlink3 = [];
       var featlink4 = ['<a href="http://aafwiki.com/wiki/"'+featlink1[0] +"(피트)/></a>"];
