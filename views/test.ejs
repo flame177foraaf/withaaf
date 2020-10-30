@@ -93,18 +93,26 @@
         );
 
 
+//이게 맞다
+var list = document.querySelectorAll(".tabletr");
+var list2 = document.querySelectorAll(".upgrademeterial")
 
 $(document).ready(function() {
-
-  var list = document.querySelectorAll(".tabletr");  //이거야ㅑㅑㅑㅑㅑㅑㅑㅑㅑ
-  var list2 = document.querySelectorAll(".upgrademeterial")
     for (var i = 0; i < list.length; i++) {
-      list[i].setAttribute("id", "test" + i);
-      list[i].setAttribute("onclick", "testonclick" + i);
-      list2[i].setAttribute("id", "testmeterial" + i);
+      list[i].setAttribute("id", "test(" + i + ")");
+      list[i].setAttribute("onclick", "testonclick(" + i + ")");
+      list2[i].setAttribute("id", "testmeterial(" + i + ")");
     }
-
 });
+
+function testonclick(i) {
+  if (list2[i].style.display == "none") {
+    list2[i].style.display = "block"
+  } else {
+    list2[i].style.display = "none"
+
+  }
+}
 
     </script>
 
@@ -261,11 +269,7 @@ $(document).ready(function() {
               <td style='text-align: center'><%- item.wpsocket %></td>
               <td style='text-align: center'><%- item.wpether %></td>
               <td style='text-align: center'><%- item.wpstats %></td>
-              <% if (item.wpproperty.indexOf('업그레이드') != -1){ %>
-                <td id="wpproperty" style='text-align: center' onclick="upbtn"><%- item.wpproperty %></td>
-              <% } else { %>
-                <td id="" style='text-align: center'><%- item.wpproperty %></td>
-              <% } %>
+              <td style='text-align: center'><%- item.wpproperty %></td>
               <td><%- item.wpfeat %></td>
               <td><%- item.wpcustom %></td>
               <td style="white-space: normal; text-align:center">
@@ -294,9 +298,12 @@ $(document).ready(function() {
 
 
             </tr>
-              <tr id="" style="display:none" class="upgrademeterial">
+            <% if (item.wpup != ''){ %>
+              <tr id="" style="display:none">
                 <td colspan="10"> <%- item.wpup %> </td>
               </tr>
+            <% } %>
+
             <% }); %>
           <% } %>
         <div class="" id="pagelist">
