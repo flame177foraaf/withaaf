@@ -340,11 +340,17 @@ router.get('/:id', (req,res,next) => {
         var featlink3 = featlink3 + ( featlink1[i].split(">"));
         if (featlink2[i] != -1) {
           //featlink4.push(featlink3.indexOf(i).substring(featlink2[i] , featlink3[i].length))
-          featlink4.push('<a href="http://aafwiki.com/wiki/"'+ featlink1[i].substring(featlink2[i]+1,featlink2[i].length) +'(피트)/></a>')
+
+          featlink4 = featlink4 + ('<a href="http://aafwiki.com/wiki/"'+ featlink1[i].substring(featlink2[i]+1,featlink2[i].length) +'(피트)/></a>')
         }
       }
       emp.wpfeat = featlink4
-
+      console.log(response.rows[0].wpgrade)
+      console.log(response.rows[0].wpname)
+      console.log(response.rows[0].wpsocket)
+      console.log(response.rows[0].wpproperty)
+      console.log(response.rows[0].wpstats)
+      console.log(response.rows[0].wpcustom)
     var hyperlinkdata ={...response.rows[0].wpgrade , ...response.rows[0].wpname , ...response.rows[0].wplimit ,...response.rows[0].wpsocket ,...response.rows[0].wpether ,...response.rows[0].wpstats ,...response.rows[0].wpproperty
     ,featlink4
     ,...response.rows[0].wpcustom ,  ...response.rows[0].wpup}
