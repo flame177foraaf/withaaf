@@ -108,10 +108,11 @@ $(document).ready(function() {
     }
 
   function testonclick(i) {
-    if ( document.getElementById('testmeterial(' + i +')' ).style.display == 'none') {
-      document.getElementById('testmeterial(' + i +')' ).style.display = ''
+    var x = "testmeterial(" + i + ")"
+    if ( document.getElementById(x).style.display == 'none') {
+      document.getElementById(x).style.display = ''
     } else {
-      document.getElementById('testmeterial(' + i +')' ).style.display = 'none'
+      document.getElementById(x).style.display = 'none'
     }
   }
 
