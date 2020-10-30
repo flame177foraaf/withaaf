@@ -98,15 +98,11 @@
 $(document).ready(function() {
   var list = document.querySelectorAll(".tabletr");
   var list2 = document.querySelectorAll(".upgrademeterial")
-  var featlist =  document.querySelectorAll(".PtagInFeat");
+
     for (var i = 0; i < list.length; i++) {
       list[i].setAttribute("id", "tr(" + i + ")");
       list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
       list2[i].setAttribute("id", "trmeterial(" + i + ")");
-    }
-    for (var i = 0; i < PtagInFeat.length; i++) {
-
-      PtagInFeat[i].setAttribute("onclick", "openwiki(" + featlink1[i].substring(featlink3[i]+1,featlink3[i].length) + ")");
     }
 
     var wpcolor = document.querySelectorAll(".wpproperty");
