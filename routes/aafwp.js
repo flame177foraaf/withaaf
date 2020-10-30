@@ -343,6 +343,32 @@ router.get('/:id', (req,res,next) => {
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       };
+      /*
+      var emp = new Object()
+      var featlink0 = response.rows[0].wpfeat
+      var featlink1 = featlink0.split("(");
+      var featlink2 = []
+      var featlink3 = [];
+      var featlink4 = ['<a href="http://aafwiki.com/wiki/"'+featlink1[0] +"(피트)/></a>"];
+      for (var i = 0; i < featlink1.length; i++) {
+        featlink2.push( featlink1[i].indexOf(">"));
+        var featlink3 = featlink3 + ( featlink1[i].split(">"));
+        if (featlink2[i] != -1) {
+          //featlink4.push(featlink3.indexOf(i).substring(featlink2[i] , featlink3[i].length))
+
+          featlink4 = featlink4 + ('<a href="http://aafwiki.com/wiki/"'+ featlink1[i].substring(featlink2[i]+1,featlink2[i].length) +'(피트)/></a>')
+        }
+      }
+      emp.wpgrade = response.rows[0].wpgrade
+      emp.wpname = response.rows[0].wpname
+      emp.wplimit = response.rows[0].wplimit
+      emp.wpsocket = response.rows[0].wpsocket
+      emp.wpether = response.rows[0].wpether
+      emp.wpstats = response.rows[0].wpstats
+      emp.wpproperty = response.rows[0].wpproperty
+      emp.wpfeat = featlink4
+      emp.wpcustom = response.rows[0].wpcustom
+      emp.wpup = response.rows[0].wpup*/
       //console.log('엔드페이지'+ EndPage);
       //console.log(response.rows[0])
       res.render('aafwp', {

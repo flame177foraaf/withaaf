@@ -326,8 +326,8 @@ router.get('/:id', (req,res,next) => {
       };
       console.log(response.rows.wpfeat)
 
+/*
       var emp = new Object()
-
       var featlink0 = response.rows[0].wpfeat
       var featlink1 = featlink0.split("(");
       var featlink2 = []
@@ -355,6 +355,7 @@ router.get('/:id', (req,res,next) => {
 
 
       console.log(emp)
+      */
       console.log(TotalPage)
       //console.log('토탈 페이지' + TotalPage);
       if (TotalPage < CurrentPage) {

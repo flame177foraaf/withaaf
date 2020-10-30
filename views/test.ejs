@@ -294,6 +294,10 @@ function openInNewTab(x) {
               <td style='text-align: center'><%- item.wplimit %></td>
               <td style='text-align: center'><%- item.wpsocket %></td>
               <td style='text-align: center'><%- item.wpether %></td>
+
+              <td style='text-align: center'><%- item.wpstats %></td>
+              <td class="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
+
               <% var feattext = item.wpfeat.split('<br />')%>
               <% var featlink1 = item.wpfeat.split(" ("); %>
               <% var featlink2 = [] %>
@@ -309,10 +313,6 @@ function openInNewTab(x) {
                   <% featlink4 = featlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/ >' + feattext[i] + '</a>') %>
                 <% } %>
               <% } %>
-              <td style='text-align: center'><%- item.wpstats %></td>
-              <td class="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
-
-
               <td><%- featlink4 %></td>
               <td><%- item.wpcustom %></td>
               <td style="white-space: normal; text-align:center">
