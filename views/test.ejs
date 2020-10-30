@@ -102,9 +102,10 @@ $(document).ready(function() {
     for (var i = 0; i < list.length; i++) {
       list[i].setAttribute("id", "test(" + i + ")");
       list[i].setAttribute("onclick", "testonclick(" + i + ")");
-    }
-    for (var i = 0; i < list.length; i++) {
-      list2[i].setAttribute("id", "testmeterial(" + i + ")");
+      if (list2[i] != -1) {
+        list2[i].setAttribute("id", "testmeterial(" + i + ")");
+      }
+
     }
 });
 
