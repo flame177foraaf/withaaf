@@ -151,7 +151,24 @@
               <td style='text-align: center'><%- item.accether %></td>
               <td style='text-align: center'><%- item.accstats %></td>
               <td style='text-align: center'><%- item.accproperty %></td>
-              <td><%- item.accfeat %></td>
+
+              <% var feattext = item.accfeat.split('<br />')%>
+              <% var featlink1 = item.accfeat.split(" ("); %>
+              <% var featlink2 = [] %>
+              <% var featlink3 = []; %>
+              <% var featlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+
+              <% for (var i = 0; i < featlink1.length; i++) { %>
+                <% featlink2.push( featlink1[i].indexOf(">")); %>
+                <% var featlink3 = featlink3 + ( featlink1[i].split(">")); %>
+                <% if (featlink2[i] != -1) { %>
+                  <% //featlink4.push(featlink3.indexOf(i).substring(featlink2[i] ,  featlink3[i].length)) %>
+
+                  <% featlink4 = featlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+                <% } %>
+              <% } %>
+              <td><%- featlink4 %></td>
+
               <td><%- item.acccustom %></td>
               <td style="white-space: normal; text-align:center">
                 <div class="" style="">
