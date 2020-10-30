@@ -344,18 +344,19 @@ router.get('/:id', (req,res,next) => {
           featlink4 = featlink4 + ('<a href="http://aafwiki.com/wiki/"'+ featlink1[i].substring(featlink2[i]+1,featlink2[i].length) +'(피트)/></a>')
         }
       }
+      emp.wpgrade = response.rows[0].wpgrade
+      emp.wpname = response.rows[0].wpname
+      emp.wplimit = response.rows[0].wplimit
+      emp.wpsocket = response.rows[0].wpsocket
+      emp.wpether = response.rows[0].wpether
+      emp.wpstats = response.rows[0].wpstats
+      emp.wpproperty = response.rows[0].wpproperty
       emp.wpfeat = featlink4
-      console.log(response.rows[0].wpgrade)
-      console.log(response.rows[0].wpname)
-      console.log(response.rows[0].wpsocket)
-      console.log(response.rows[0].wpproperty)
-      console.log(response.rows[0].wpstats)
-      console.log(response.rows[0].wpcustom)
-    var hyperlinkdata ={...response.rows[0].wpgrade , ...response.rows[0].wpname , ...response.rows[0].wplimit ,...response.rows[0].wpsocket ,...response.rows[0].wpether ,...response.rows[0].wpstats ,...response.rows[0].wpproperty
-    ,featlink4
-    ,...response.rows[0].wpcustom ,  ...response.rows[0].wpup}
+      emp.wpcustom = response.rows[0].wpcustom
+      emp.wpup = response.rows[0].wpup
 
-      console.log(hyperlinkdata)
+
+      console.log(emp)
       console.log(TotalPage)
       //console.log('토탈 페이지' + TotalPage);
       if (TotalPage < CurrentPage) {
