@@ -107,6 +107,13 @@ $(document).ready(function() {
       list[i].setAttribute("onclick", "testonclick(" + i + ")");
     }
 
+  function testonclick(i) {
+    if (list2[i].style.display == 'none') {
+      list2[i].style.display == ''
+    } else {
+      list2[i].style.display == 'none'
+    }
+  }
 
 });
 
