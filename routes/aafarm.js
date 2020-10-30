@@ -218,6 +218,14 @@ router.get('/:id', (req,res,next) => {
     console.log(SearchPlus)
     console.log(Search2)
     console.log(Search22)
+
+    if (err) {
+      res.redirect('/aafarm');
+    } else if (typeof(response.rows[0]) !== "object") {
+      var TotalCount = 1;
+    } else {
+      var TotalCount = response.rows[0].totalcount;
+    }
     if(typeof(response.rows[0]) !== "object") {
       var TotalCount = 1;
     } else {
