@@ -94,26 +94,14 @@
 
 
 
-        $(document).on(function () {
-          var list = document.getElementsByClassName("tabletr");
-          var list2 = document.getElementsByClassName("upgrademeterial");
 
-          for (var i = 0; i < list.length; i++) {
-                //list[i].class = "tabletr" + (i + 1);
-                list[i].setAttribute("id", "tabletr" + i);
-                list2[i].setAttribute("id", "upgrademeterial" + i);
-
-
-          })
-        })
         var list = document.querySelectorAll(".tabletr");  //이거야ㅑㅑㅑㅑㅑㅑㅑㅑㅑ
+        var list2 = document.querySelectorAll(".upgrademeterial")
                     for (var i = 0; i < list.length; i++) {
                         list[i].setAttribute("id", "test" + i);
-                        list[i].setAttribute("onclick", "testonclick" + i);
-
+                        list2[i].setAttribute("id", "testonclick" + i);
 
                   }
-
 
         $( "tr#tabletr td#wpproperty" ).click(function( ) {
           if ( $("#upgrademeterial").css("display") == "none") {
@@ -272,7 +260,7 @@
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
-              <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="trindex'+nummm+'">
+              <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="myFunction(this)">
               <td><%- item.wpgrade %></td>
               <td><%- item.wpname %></td>
               <td style='text-align: center'><%- item.wplimit %></td>
