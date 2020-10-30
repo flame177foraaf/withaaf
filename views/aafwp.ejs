@@ -27,7 +27,7 @@
         '<div class="" id="seach_form_id2" name="seach_form_id2">'
         +'<input type="text" placeholder="모든 항목" name="searchText2" style="width:200px">'
         + '<select name="searchType2">'
-        +    '<option value="wpproperty">속성</option>'
+        +    '<option value="wpproperty">속성 / 업그레이드</option>'
         +    '<option value="wpfeat">피트</option>'
         +    '<option value="wpcustom">커스텀</option>'
         +'</select>'
@@ -75,7 +75,7 @@
           +'<input type="text" placeholder="모든 항목" name="searchText" style="width:200px">'
           +  '<select name="searchType">'
               +  '<option value="wpname">이름</option>'
-              +  '<option value="wpproperty">속성</option>'
+              +  '<option value="wpproperty">속성 / 업그레이드</option>'
               +  '<option value="wpfeat">피트</option>'
               +  '<option value="wpcustom">커스텀</option>'
               +  '<option value="wpgrade">등급 / 강적</option>'
@@ -155,7 +155,7 @@ function viewmeterial(i) {
             <input type="text" placeholder="모든 항목" name="searchText" style="width:200px" >
             <select name="searchType">
                 <option value="wpname">이름</option>
-                <option value="wpproperty">속성</option>
+                <option value="wpproperty">속성 / 업그레이드</option>
                 <option value="wpfeat">피트</option>
                 <option value="wpcustom">커스텀</option>
                 <option value="wpgrade">등급 / 강적</option>
@@ -197,7 +197,7 @@ function viewmeterial(i) {
             <% } else if (SearchType == 'wpfeat'){ %>
               <select name="searchType">
                   <option value="wpname">이름</option>
-                  <option value="wpproperty">속성</option>
+                  <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat" selected>피트</option>
                   <option value="wpcustom">커스텀</option>
                   <option value="wpgrade">등급 / 강적</option>
@@ -205,7 +205,7 @@ function viewmeterial(i) {
             <% } else if (SearchType == 'wpcustom'){ %>
               <select name="searchType">
                   <option value="wpname">이름</option>
-                  <option value="wpproperty">속성</option>
+                  <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat">피트</option>
                   <option value="wpcustom" selected>커스텀</option>
                   <option value="wpgrade">등급 / 강적</option>
@@ -213,7 +213,7 @@ function viewmeterial(i) {
             <% } else if (SearchType == 'wpgrade'){ %>
               <select name="searchType">
                   <option value="wpname">이름</option>
-                  <option value="wpproperty">속성</option>
+                  <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat">피트</option>
                   <option value="wpcustom">커스텀</option>
                   <option value="wpgrade" selected>등급 / 강적</option>
@@ -221,7 +221,7 @@ function viewmeterial(i) {
             <% } else { %>
               <select name="searchType">
                   <option value="wpname" selected>이름</option>
-                  <option value="wpproperty">속성</option>
+                  <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat">피트</option>
                   <option value="wpcustom">커스텀</option>
                   <option value="wpgrade">등급 / 강적</option>
