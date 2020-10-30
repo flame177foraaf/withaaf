@@ -298,13 +298,15 @@ function openwiki(x) {
               <% var featlink1 = item.wpfeat.split(" ("); %>
               <% var featlink2 = [] %>
               <% var featlink3 = []; %>
-              <% var featlink4 = "<p class="PtagInFeat" style='cursor: pointer;' >" + feattext[0] + "</p>" ; %>
+              <% var featlink4 = "<p style='cursor: pointer;' onclick= 'openwiki(' + featlink1[0] + ')'>" + feattext[0] + "</p>" ; %>
 
               <% for (var i = 0; i < featlink1.length; i++) { %>
                 <% featlink2.push( featlink1[i].indexOf(">")); %>
                 <% var featlink3 = featlink3 + ( featlink1[i].split(">")); %>
                 <% if (featlink2[i] != -1) { %>
-                  <% featlink4 = featlink4 + ('<p class="PtagInFeat" style='cursor: pointer;' >' + feattext[i] + '</p>') %>
+                  <% //featlink4.push(featlink3.indexOf(i).substring(featlink2[i] ,  featlink3[i].length)) %>
+
+                  <% featlink4 = featlink4 + ('<p style='cursor: pointer;' onclick= 'openwiki(' + featlink1[i] + ')'>' + feattext[i] + '</p>') %>
                 <% } %>
               <% } %>
               <td style='text-align: center'><%- item.wpstats %></td>
