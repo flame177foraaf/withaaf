@@ -324,9 +324,7 @@ router.get('/:id', (req,res,next) => {
       if (TotalCount % DataCountInPage > 0) {
         TotalPage++;
       };
-      console.log(response.rows[0])
-      console.log(typeof(response.rows[0]))
-      console.log(JSON.stringify(response.rows[0]))
+      console.log(response.rows.wpfeat)
 
       var emp = new Object()
 
