@@ -294,7 +294,6 @@ function viewmeterial(i) {
               <% var featlink1 = item.wpfeat.split(" ("); %>
               <% var featlink2 = [] %>
               <% var featlink3 = []; %>
-              var link = "http://aafwiki.com/wiki/"
               <% var featlink4 = '<a href="http://aafwiki.com/wiki/'+ 'featlink1[0](피트)"/>' + feattext[0] + '</a>'; %>
               <% for (var i = 0; i < featlink1.length; i++) { %>
                 <% featlink2.push( featlink1[i].indexOf(">")); %>
@@ -309,7 +308,7 @@ function viewmeterial(i) {
               <td class="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
 
 
-              <td><% featlink4 %></td>
+              <td><%- featlink4 %></td>
               <td><%- item.wpcustom %></td>
               <td style="white-space: normal; text-align:center">
                 <div class="" style="">
