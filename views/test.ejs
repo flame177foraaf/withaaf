@@ -104,23 +104,24 @@ $(document).ready(function() {
       list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
       list2[i].setAttribute("id", "trmeterial(" + i + ")");
     }
+
     var wpcolor = document.querySelectorAll(".wpproperty");
     for (var i = 0; i < wpcolor.length; i++) {
       if (wpcolor[i].textContent.indexOf('/') != -1) {
         if ( wpcolor[i].textContent.indexOf('/')[1] == ' 불 ') {
-          wpcolor[i].css("backgroundColor", "#FFD5DD");
+          list[i].css("backgroundColor", "#FFD5DD");
         } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 물 ') {
-          wpcolor[i].css("backgroundColor", "#DBE0FC");
+          list[i].css("backgroundColor", "#DBE0FC");
         } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 바람 ') {
-          wpcolor[i].css("backgroundColor", "#CEFFD3");
+          list[i].css("backgroundColor", "#CEFFD3");
         } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 땅 ') {
-          wpcolor[i].css("backgroundColor", "#F8EAD8");
+          list[i].css("backgroundColor", "#F8EAD8");
         } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 정신 ') {
-          wpcolor[i].css("backgroundColor", "#FFFFDB");
+          list[i].css("backgroundColor", "#FFFFDB");
         } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 아스트랄 ') {
-          wpcolor[i].css("backgroundColor", "#E4C1F2");
+          list[i].css("backgroundColor", "#E4C1F2");
         } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 무속성 ') {
-          wpcolor[i].css("backgroundColor", "#EAEAEA");
+          list[i].css("backgroundColor", "#EAEAEA");
         }
       }
     }
