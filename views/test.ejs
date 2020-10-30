@@ -106,7 +106,13 @@
 
           })
         })
+        var list = document.querySelectorAll(".tabletr");  //이거야ㅑㅑㅑㅑㅑㅑㅑㅑㅑ
+                    for (var i = 0; i < list.length; i++) {
+                        list[i].setAttribute("id", "test" + i);
+                        list[i].setAttribute("onclick", "testonclick" + i);
 
+
+                  }
 
 
         $( "tr#tabletr td#wpproperty" ).click(function( ) {
