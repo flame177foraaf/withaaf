@@ -101,16 +101,16 @@ $(document).ready(function() {
 
     for (var i = 0; i < list.length; i++) {
       list[i].setAttribute("id", "test(" + i + ")");
-      list[i].setAttribute("onclick", "testonclick(" + i + ")");
       list2[i].setAttribute("id", "testmeterial(" + i + ")");
     }
-    
+    for (var i = 0; i < list.length; i++) {
+      list[i].setAttribute("onclick", "testonclick(" + i + ")");
+    }
     function testonclick(i) {
       if (list2[i].style.display == "none") {
         list2[i].style.display = "block"
       } else {
         list2[i].style.display = "none"
-
       }
     }
 
@@ -120,10 +120,6 @@ $(document).ready(function() {
 
     </script>
 
-    var x = document.querySelectorAll(".xxx");
-     for (i = 0; i < x.length; i++) {
-   	list[i].setAttribute("id", "test" + i);
-     }
   </head>
   <body style="">
     <div class="title_div" >
@@ -266,7 +262,7 @@ $(document).ready(function() {
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
-              <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="myFunction(this)">
+              <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="">
               <td><%- item.wpgrade %></td>
               <td><%- item.wpname %></td>
               <td style='text-align: center'><%- item.wplimit %></td>
