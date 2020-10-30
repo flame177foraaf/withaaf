@@ -98,11 +98,15 @@
 $(document).ready(function() {
   var list = document.querySelectorAll(".tabletr");
   var list2 = document.querySelectorAll(".upgrademeterial")
-
+  var featlist =  document.querySelectorAll(".PtagInFeat");
     for (var i = 0; i < list.length; i++) {
       list[i].setAttribute("id", "tr(" + i + ")");
       list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
       list2[i].setAttribute("id", "trmeterial(" + i + ")");
+    }
+    for (var i = 0; i < PtagInFeat.length; i++) {
+
+      PtagInFeat[i].setAttribute("onclick", "openwiki(" + featlink1[i].substring(featlink3[i]+1,featlink3[i].length) + ")");
     }
 
     var wpcolor = document.querySelectorAll(".wpproperty");
@@ -139,7 +143,11 @@ function viewmeterial(i) {
     }
   }
 }
-
+function openwiki(x) {
+        url = "http://aafwiki.com/wiki/" + x + "(피트)"
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
     </script>
 
   </head>
@@ -294,14 +302,13 @@ function viewmeterial(i) {
               <% var featlink1 = item.wpfeat.split(" ("); %>
               <% var featlink2 = [] %>
               <% var featlink3 = []; %>
-              <% var featlink4 = '<a href="http://aafwiki.com/wiki/'+ 'featlink1[0](피트)"/>' + feattext[0] + '</a>'; %>
+              <% var featlink4 = "<p class="PtagInFeat" style='cursor: pointer;' >" + feattext[0] + "</p>" ; %>
+
               <% for (var i = 0; i < featlink1.length; i++) { %>
                 <% featlink2.push( featlink1[i].indexOf(">")); %>
                 <% var featlink3 = featlink3 + ( featlink1[i].split(">")); %>
                 <% if (featlink2[i] != -1) { %>
-                  <% //featlink4.push(featlink3.indexOf(i).substring(featlink2[i] ,  featlink3[i].length)) %>
-
-                  <% featlink4 = featlink4 + ('<a href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/ >' + feattext[i] + '</a>') %>
+                  <% featlink4 = featlink4 + ('<p class="PtagInFeat" style='cursor: pointer;' >' + feattext[i] + '</p>') %>
                 <% } %>
               <% } %>
               <td style='text-align: center'><%- item.wpstats %></td>
