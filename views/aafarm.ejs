@@ -47,6 +47,33 @@
 
         aaa.remove(); //tr 테그 삭제
     });
+
+
+    $(document).ready(function() {
+      var list = document.querySelectorAll(".tabletr");
+      var list2 = document.querySelectorAll(".upgrademeterial")
+
+        for (var i = 0; i < list.length; i++) {
+          list[i].setAttribute("id", "tr(" + i + ")");
+          list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
+          list2[i].setAttribute("id", "trmeterial(" + i + ")");
+
+        }
+    });
+
+    function viewmeterial(i) {
+      var uptext = document.getElementById("trmeterial(" + i + ")")
+
+      if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
+        if ( uptext.style.display == 'none') {
+          uptext.style.display = ''
+        } else {
+          uptext.style.display = 'none'
+        }
+      }
+    }
+
+
   </script>
   <body style="">
     <div class="title_div" >
@@ -142,6 +169,9 @@
                     </div>
                     </div>
                   </td>
+              </tr>
+              <tr id="" class="upgrademeterial" style="display:none">
+                <td colspan="10" style="text-align:center"> <%- item.armup %> </td>
               </tr>
             <% }); %>
           <% } %>

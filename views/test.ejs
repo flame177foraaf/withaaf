@@ -100,15 +100,15 @@ $(document).ready(function() {
   var list2 = document.querySelectorAll(".upgrademeterial")
 
     for (var i = 0; i < list.length; i++) {
-      list[i].setAttribute("id", "test(" + i + ")");
-      list[i].setAttribute("onclick", "testonclick(" + i + ")");
-      list2[i].setAttribute("id", "testmeterial(" + i + ")");
+      list[i].setAttribute("id", "tr(" + i + ")");
+      list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
+      list2[i].setAttribute("id", "trmeterial(" + i + ")");
 
     }
 });
 
-function testonclick(i) {
-  var uptext = document.getElementById("testmeterial(" + i + ")")
+function viewmeterial(i) {
+  var uptext = document.getElementById("trmeterial(" + i + ")")
 
   if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
     if ( uptext.style.display == 'none') {
@@ -128,7 +128,7 @@ function testonclick(i) {
 
     </div>
     <div class="">
-      <form action="/test/1" method="get">
+      <form action="/aafwp/1" method="get">
         <% if (typeof(SearchType) == 'undefined'){ %>
           <div class="" id="seach_form_id" name="seach_form_id">
             <input type="text" placeholder="모든 항목" name="searchText" style="width:200px" >
@@ -279,7 +279,7 @@ function testonclick(i) {
                   <%# display: none 안보임!%>
 
                   <div class="" style="display: inline-block">
-                    <form action="/test/fixwp" method="get ">
+                    <form action="/aafwp/fixwp" method="get ">
                       <input type=text list=browsers style="display:none" checked value="<%= item.wpname %>" name="Seachname">
 
                       <input style="width:60px; " type="submit" value="수정" />
@@ -300,7 +300,7 @@ function testonclick(i) {
 
             </tr>
             <tr id="" class="upgrademeterial" style="display:none">
-              <td colspan="10"> <%- item.wpup %> </td>
+              <td colspan="10" style="text-align:center"> <%- item.wpup %> </td>
             </tr>
 
             <% }); %>
@@ -321,7 +321,7 @@ function testonclick(i) {
               <div class="" id="pagelist">
                 <td colspan="21" style= "text-align:center; font-size:24px">
                   <% function FuncPageurl(pagenumber) { %>
-                    <% var pageurl = "/test/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
+                    <% var pageurl = "/aafwp/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
                     <% if (Searchcount !== 'undefined') { %>
                       <% for (var i = 0; i < Searchcount; i++) { %>
                         <% pageurl = pageurl + "&searchText2=" + Search22[i]  + "&searchType2=" +  SearchType22[i] %>
@@ -358,7 +358,7 @@ function testonclick(i) {
 
       <div class="" style="text-align: center; padding-top:30px;">
           <form class="" action="/addwp" method="get">
-             <button onclick=location.href="/test/addwp" type="button" name="button" style="width:200px">신규등록</a></button>
+             <button onclick=location.href="/aafwp/addwp" type="button" name="button" style="width:200px">신규등록</a></button>
           </form>
       </div>
 

@@ -92,37 +92,34 @@
         }
         );
 
-      function upbtn(num) {
-        var x = num
-        var trindex = document.getElementsById("wpproperty");
-        for (var i = 0; i < trindex.length; i++) {
-          x++;
-        }
 
-      }
+//이게 맞다
 
-      /*  if ( $("#upgrademeterial"+ x ).css("display") == "none") {
-          $("#upgrademeterial"+ x).block();
-        } else {
-          $("#upgrademeterial"+ x).none();
-        }
-      })
-      */
+$(document).ready(function() {
+  var list = document.querySelectorAll(".tabletr");
+  var list2 = document.querySelectorAll(".upgrademeterial")
 
+    for (var i = 0; i < list.length; i++) {
+      list[i].setAttribute("id", "tr(" + i + ")");
+      list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
+      list2[i].setAttribute("id", "trmeterial(" + i + ")");
 
+    }
+});
 
-      $(document).on("click","td[id=wpproperty]",function(){
-        if ( $("#upgrademeterial").css("display") == "none") {
-          $("#upgrademeterial").show();
-        } else {
-          $("#upgrademeterial").hide();
-        }
+function viewmeterial(i) {
+  var uptext = document.getElementById("trmeterial(" + i + ")")
 
-      });
-
+  if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
+    if ( uptext.style.display == 'none') {
+      uptext.style.display = ''
+    } else {
+      uptext.style.display = 'none'
+    }
+  }
+}
 
     </script>
-
 
   </head>
   <body style="">
@@ -266,38 +263,14 @@
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
-              <% if (item.wpproperty.indexOf('/') != -1){ %>
-                <% var WpP = item.wpproperty.split('/') %>
-                <% if ( WpP[1] == ' 불 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD">
-                <% } else if (WpP[1] == ' 물 ' ) { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC">
-                <% } else if (WpP[1] == ' 바람 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3">
-                <% } else if (WpP[1] == ' 땅 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8">
-                <% } else if (WpP[1] == ' 정신 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB">
-                <% } else if (WpP[1] == ' 아스트랄 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2">
-                <% } else if (WpP[1] == ' 무속성 ') { %>
-                  <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA">
-                <% } %>
-
-              <% } else { %>
-                <tr class="" id="tabletr" style="white-space: pre-line; font-size:12px;">
-              <% } %>
+              <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="">
               <td><%- item.wpgrade %></td>
               <td><%- item.wpname %></td>
               <td style='text-align: center'><%- item.wplimit %></td>
               <td style='text-align: center'><%- item.wpsocket %></td>
               <td style='text-align: center'><%- item.wpether %></td>
               <td style='text-align: center'><%- item.wpstats %></td>
-              <% if (item.wpproperty.indexOf('업그레이드') != -1){ %>
-                <td id="wpproperty" style='text-align: center' onclick="upbtn(num)"><%- item.wpproperty %></td>
-              <% } else { %>
-                <td id="" style='text-align: center'><%- item.wpproperty %></td>
-              <% } %>
+              <td style='text-align: center'><%- item.wpproperty %></td>
               <td><%- item.wpfeat %></td>
               <td><%- item.wpcustom %></td>
               <td style="white-space: normal; text-align:center">
@@ -326,11 +299,10 @@
 
 
             </tr>
-            <% if (item.wpup != ''){ %>
-              <tr id="upgrademeterial('+ num +')" style="display:none">
-                <td colspan="10"> <%- item.wpup %> </td>
-              </tr>
-            <% } %>
+            <tr id="" class="upgrademeterial" style="display:none">
+              <td colspan="10" style="text-align:center"> <%- item.wpup %> </td>
+            </tr>
+
             <% }); %>
           <% } %>
         <div class="" id="pagelist">
