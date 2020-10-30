@@ -226,11 +226,8 @@ router.get('/:id', (req,res,next) => {
     } else {
       var TotalCount = response.rows[0].totalcount;
     }
-    if(typeof(response.rows[0]) !== "object") {
-      var TotalCount = 1;
-    } else {
-      var TotalCount = response.rows[0].totalcount;
-    }
+    
+
     //console.log('토탈 카운트 ' + TotalCount)
     //console.log(CurrentPage)
     //console.log(typeof(CurrentPage))

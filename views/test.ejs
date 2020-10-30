@@ -27,7 +27,7 @@
         '<div class="" id="seach_form_id2" name="seach_form_id2">'
         +'<input type="text" placeholder="모든 항목" name="searchText2" style="width:200px">'
         + '<select name="searchType2">'
-        +    '<option value="wpproperty">속성</option>'
+        +    '<option value="wpproperty">속성 / 업그레이드</option>'
         +    '<option value="wpfeat">피트</option>'
         +    '<option value="wpcustom">커스텀</option>'
         +'</select>'
@@ -75,7 +75,7 @@
           +'<input type="text" placeholder="모든 항목" name="searchText" style="width:200px">'
           +  '<select name="searchType">'
               +  '<option value="wpname">이름</option>'
-              +  '<option value="wpproperty">속성</option>'
+              +  '<option value="wpproperty">속성 / 업그레이드</option>'
               +  '<option value="wpfeat">피트</option>'
               +  '<option value="wpcustom">커스텀</option>'
               +  '<option value="wpgrade">등급 / 강적</option>'
@@ -98,32 +98,32 @@
 $(document).ready(function() {
   var list = document.querySelectorAll(".tabletr");
   var list2 = document.querySelectorAll(".upgrademeterial")
+  //var wpcolor = document.querySelectorAll(".wpproperty");
 
     for (var i = 0; i < list.length; i++) {
       list[i].setAttribute("id", "tr(" + i + ")");
       list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
       list2[i].setAttribute("id", "trmeterial(" + i + ")");
-    }
 
-    var wpcolor = document.querySelectorAll(".wpproperty");
-    for (var i = 0; i < wpcolor.length; i++) {
+/*
       if (wpcolor[i].textContent.indexOf('/') != -1) {
-        if ( wpcolor[i].textContent.indexOf('/')[1] == ' 불 ') {
+        if ( wpcolor[i].textContent.split('/')[1] == ' 불 ') {
           list[i].css("backgroundColor", "#FFD5DD");
-        } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 물 ') {
+        } else if (wpcolor[i].textContent.split('/')[1] == ' 물 ') {
           list[i].css("backgroundColor", "#DBE0FC");
-        } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 바람 ') {
+        } else if (wpcolor[i].textContent.split('/')[1] == ' 바람 ') {
           list[i].css("backgroundColor", "#CEFFD3");
-        } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 땅 ') {
-          list[i].css("backgroundColor", "#wF8EAD8");
-        } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 정신 ') {
+        } else if (wpcolor[i].textContent.split('/')[1] == ' 땅 ') {
+          list[i].css("backgroundColor", "#F8EAD8");
+        } else if (wpcolor[i].textContent.split('/')[1] == ' 정신 ') {
           list[i].css("backgroundColor", "#FFFFDB");
-        } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 아스트랄 ') {
+        } else if (wpcolor[i].textContent.split('/')[1] == ' 아스트랄 ') {
           list[i].css("backgroundColor", "#E4C1F2");
-        } else if (wpcolor[i].textContent.indexOf('/')[1] == ' 무속성 ') {
+        } else if (wpcolor[i].textContent.split('/')[1] == ' 무속성 ') {
           list[i].css("backgroundColor", "#EAEAEA");
         }
       }
+      */
     }
 
 });
@@ -139,11 +139,7 @@ function viewmeterial(i) {
     }
   }
 }
-function openInNewTab(x) {
-        url = "http://aafwiki.com/wiki/" + x + "(피트)"
-        var win = window.open(url, '_blank');
-        win.focus();
-    }
+
     </script>
 
   </head>
@@ -159,7 +155,7 @@ function openInNewTab(x) {
             <input type="text" placeholder="모든 항목" name="searchText" style="width:200px" >
             <select name="searchType">
                 <option value="wpname">이름</option>
-                <option value="wpproperty">속성</option>
+                <option value="wpproperty">속성 / 업그레이드</option>
                 <option value="wpfeat">피트</option>
                 <option value="wpcustom">커스텀</option>
                 <option value="wpgrade">등급 / 강적</option>
@@ -201,7 +197,7 @@ function openInNewTab(x) {
             <% } else if (SearchType == 'wpfeat'){ %>
               <select name="searchType">
                   <option value="wpname">이름</option>
-                  <option value="wpproperty">속성</option>
+                  <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat" selected>피트</option>
                   <option value="wpcustom">커스텀</option>
                   <option value="wpgrade">등급 / 강적</option>
@@ -209,7 +205,7 @@ function openInNewTab(x) {
             <% } else if (SearchType == 'wpcustom'){ %>
               <select name="searchType">
                   <option value="wpname">이름</option>
-                  <option value="wpproperty">속성</option>
+                  <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat">피트</option>
                   <option value="wpcustom" selected>커스텀</option>
                   <option value="wpgrade">등급 / 강적</option>
@@ -217,7 +213,7 @@ function openInNewTab(x) {
             <% } else if (SearchType == 'wpgrade'){ %>
               <select name="searchType">
                   <option value="wpname">이름</option>
-                  <option value="wpproperty">속성</option>
+                  <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat">피트</option>
                   <option value="wpcustom">커스텀</option>
                   <option value="wpgrade" selected>등급 / 강적</option>
@@ -225,7 +221,7 @@ function openInNewTab(x) {
             <% } else { %>
               <select name="searchType">
                   <option value="wpname" selected>이름</option>
-                  <option value="wpproperty">속성</option>
+                  <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat">피트</option>
                   <option value="wpcustom">커스텀</option>
                   <option value="wpgrade">등급 / 강적</option>
@@ -288,29 +284,54 @@ function openInNewTab(x) {
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
-              <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="">
+                <% if (item.wpproperty.indexOf('/') != -1){ %>
+                  <% var WpP = item.wpproperty.split('/') %>
+                  <% if ( WpP[1] == ' 불 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD" onclick="">
+                  <% } else if (WpP[1] == ' 물 ' ) { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC" onclick="">
+                  <% } else if (WpP[1] == ' 바람 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3" onclick="">
+                  <% } else if (WpP[1] == ' 땅 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8" onclick="">
+                  <% } else if (WpP[1] == ' 정신 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB" onclick="">
+                  <% } else if (WpP[1] == ' 아스트랄 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2" onclick="">
+                  <% } else if (WpP[1] == ' 무속성 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="">
+                  <% } %>
+
+                <% } else { %>
+                  <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
+                <% } %>
+
               <td><%- item.wpgrade %></td>
               <td><%- item.wpname %></td>
               <td style='text-align: center'><%- item.wplimit %></td>
               <td style='text-align: center'><%- item.wpsocket %></td>
               <td style='text-align: center'><%- item.wpether %></td>
-
               <td style='text-align: center'><%- item.wpstats %></td>
               <td class="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
-
               <% var feattext = item.wpfeat.split('<br />')%>
               <% var featlink1 = item.wpfeat.split(" ("); %>
               <% var featlink2 = [] %>
               <% var featlink3 = []; %>
-              <% var featlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)/">' + feattext[0] + '</a>'; %>
+              <% if (feattext[0].indexOf('티어') != -1){ %>
+                <% var featlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+              <% } else { %>
+                <% var featlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+              <% } %>
 
               <% for (var i = 0; i < featlink1.length; i++) { %>
                 <% featlink2.push( featlink1[i].indexOf(">")); %>
                 <% var featlink3 = featlink3 + ( featlink1[i].split(">")); %>
-                <% if (featlink2[i] != -1) { %>
-                  <% //featlink4.push(featlink3.indexOf(i).substring(featlink2[i] ,  featlink3[i].length)) %>
+              <% if (feattext[i].indexOf('티어') != -1){ %>
+                  <% featlink4 = featlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
 
-                  <% featlink4 = featlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/ >' + feattext[i] + '</a>') %>
+                <% } else {  %>
+                  <% featlink4 = featlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+
                 <% } %>
               <% } %>
               <td><%- featlink4 %></td>
