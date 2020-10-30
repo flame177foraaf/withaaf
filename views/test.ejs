@@ -94,25 +94,29 @@
 
 
 //이게 맞다
-var list = document.querySelectorAll(".tabletr");
-var list2 = document.querySelectorAll(".upgrademeterial")
 
 $(document).ready(function() {
+  var list = document.querySelectorAll(".tabletr");
+  var list2 = document.querySelectorAll(".upgrademeterial")
+
     for (var i = 0; i < list.length; i++) {
       list[i].setAttribute("id", "test(" + i + ")");
       list[i].setAttribute("onclick", "testonclick(" + i + ")");
       list2[i].setAttribute("id", "testmeterial(" + i + ")");
     }
+    
+    function testonclick(i) {
+      if (list2[i].style.display == "none") {
+        list2[i].style.display = "block"
+      } else {
+        list2[i].style.display = "none"
+
+      }
+    }
+
+
 });
 
-function testonclick(i) {
-  if (list2[i].style.display == "none") {
-    list2[i].style.display = "block"
-  } else {
-    list2[i].style.display = "none"
-
-  }
-}
 
     </script>
 
