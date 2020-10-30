@@ -94,16 +94,24 @@
 
 
 
+$(document).ready(function() {
 
+  var list = document.querySelectorAll(".tabletr");  //이거야ㅑㅑㅑㅑㅑㅑㅑㅑㅑ
+  var list2 = document.querySelectorAll(".upgrademeterial")
+    for (var i = 0; i < list.length; i++) {
+      list[i].setAttribute("id", "test" + i);
+      list[i].setAttribute("onclick", "testonclick" + i);
+      list2[i].setAttribute("id", "testmeterial" + i);
+    }
 
-        $(".tabletr").each(function(index) {
-          $(this).attr("id", this.id + index);
-          $(this).attr("onclick", 'test' + index);
+});
 
-        });
     </script>
 
-
+    var x = document.querySelectorAll(".xxx");
+     for (i = 0; i < x.length; i++) {
+   	list[i].setAttribute("id", "test" + i);
+     }
   </head>
   <body style="">
     <div class="title_div" >
