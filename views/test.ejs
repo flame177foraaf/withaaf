@@ -101,10 +101,10 @@ $(document).ready(function() {
 
     for (var i = 0; i < list.length; i++) {
       list[i].setAttribute("id", "test(" + i + ")");
-      list2[i].setAttribute("id", "testmeterial(" + i + ")");
+      list[i].setAttribute("onclick", "testonclick(" + i + ")");
     }
     for (var i = 0; i < list.length; i++) {
-      list[i].setAttribute("onclick", "testonclick(" + i + ")");
+      list2[i].setAttribute("id", "testmeterial(" + i + ")");
     }
 });
 
