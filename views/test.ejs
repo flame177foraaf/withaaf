@@ -107,17 +107,17 @@ $(document).ready(function() {
       list[i].setAttribute("onclick", "testonclick(" + i + ")");
     }
 
-  function testonclick(i) {
-    var x = "testmeterial(" + i + ")"
-    if ( document.getElementById(x).style.display == 'none') {
-      document.getElementById(x).style.display = ''
-    } else {
-      document.getElementById(x).style.display = 'none'
-    }
-  }
+
 
 });
-
+function testonclick(i) {
+  var x = "testmeterial(" + i + ")"
+  if ( document.getElementById(x).style.display == 'none') {
+    document.getElementById(x).style.display = ''
+  } else {
+    document.getElementById(x).style.display = 'none'
+  }
+}
 
     </script>
 
