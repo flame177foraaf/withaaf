@@ -298,7 +298,7 @@ function openInNewTab(x) {
               <% var featlink1 = item.wpfeat.split(" ("); %>
               <% var featlink2 = [] %>
               <% var featlink3 = []; %>
-              <% var featlink4 = '<a href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)/">' + feattext[0] + '</a>'; %>
+              <% var featlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)/">' + feattext[0] + '</a>'; %>
 
               <% for (var i = 0; i < featlink1.length; i++) { %>
                 <% featlink2.push( featlink1[i].indexOf(">")); %>
@@ -306,7 +306,7 @@ function openInNewTab(x) {
                 <% if (featlink2[i] != -1) { %>
                   <% //featlink4.push(featlink3.indexOf(i).substring(featlink2[i] ,  featlink3[i].length)) %>
 
-                  <% featlink4 = featlink4 + ('<a href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/ >' + feattext[i] + '</a>') %>
+                  <% featlink4 = featlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/ >' + feattext[i] + '</a>') %>
                 <% } %>
               <% } %>
               <td style='text-align: center'><%- item.wpstats %></td>
