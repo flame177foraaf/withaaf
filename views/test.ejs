@@ -103,8 +103,9 @@ $(document).ready(function() {
       list[i].setAttribute("id", "test(" + i + ")");
       list[i].setAttribute("onclick", "testonclick(" + i + ")");
       if (list2[i] != -1) {
-        list2[i].setAttribute("id", "testmeterial(" + i + ")");
+        continue;
       }
+      list2[i].setAttribute("id", "testmeterial(" + i + ")");
 
     }
 });
