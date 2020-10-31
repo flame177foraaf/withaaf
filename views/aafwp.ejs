@@ -314,9 +314,10 @@ function viewmeterial(i) {
               <td style='text-align: center'><%- item.wpstats %></td>
               <td class="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
 
-              <% var feattext = item.wpfeat.replace(/\s/g," ") %>
-              <% var feattext = feattext.split('<br />') %>
-              <% var featlink1 = feattext.split(" ("); %>
+              <% var text = item.wpfeat.replace(/\s/g," ") %>
+              <% var feattext = text.split('<br />') %>
+              <% var featlink1 = text.split(" ("); %>
+
               <% var featlink2 = [] %>
               <% var featlink3 = []; %>
               <% if (feattext[0].indexOf('티어') != -1){ %>
