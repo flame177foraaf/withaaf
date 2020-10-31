@@ -102,8 +102,9 @@
               <td><%- item.featgrade %></td>
               <td><%- item.featname %></td>
 
-              <% var feattext = item.feat.split('<br />')%>
-              <% var featlink1 = item.feat.split(" +"); %>
+              <% var feattext = item.feat.replace(/\s/g," ") %>
+              <% var feattext = feattext.split('<br />') %>
+              <% var featlink1 = feattext.split(" ("); %>
               <% var featlink2 = [] %>
               <% var featlink3 = []; %>
               <% var featlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
@@ -118,9 +119,10 @@
               <td><%- featlink4 %></td>
 
 
+              <% var feattext = item.reversefeat.replace(/\s/g," ") %>
+              <% var feattext = feattext.split('<br />') %>
+              <% var featlink1 = feattext.split(" ("); %>
 
-              <% var feattext = item.reversefeat.split('<br />')%>
-              <% var featlink1 = item.reversefeat.split(" -"); %>
               <% var featlink2 = [] %>
               <% var featlink3 = []; %>
               <% var featlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>

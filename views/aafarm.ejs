@@ -150,8 +150,9 @@
                 <td style='text-align: center'><%- item.armstats %></td>
                 <td style='text-align: center'><%- item.armproperty %></td>
 
-                <% var feattext = item.armfeat.split('<br />')%>
-                <% var featlink1 = item.armfeat.split(" ("); %>
+                <% var feattext = item.armfeat.replace(/\s/g," ") %>
+                <% var feattext = feattext.split('<br />') %>
+                <% var featlink1 = feattext.split(" ("); %>
                 <% var featlink2 = [] %>
                 <% var featlink3 = []; %>
                 <% var featlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
