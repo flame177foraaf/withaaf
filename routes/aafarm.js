@@ -1,19 +1,17 @@
 var express = require('express');
 var router = express.Router();
-
 var app = express();
-
 const { Client } = require('pg');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  // ssl: true,
+  //ssl: true,
 });
 
 client.connect();
 
 router.get('/', (req,res,next) => {
-  var QueryString = "select armid, armname from aquafeq.aquafarm ORDER BY armlimit,armid asc ;"
+  var QueryString = "select armid, Armname from aquafeq.aquafarm ORDER BY armlimit,armid asc ;"
   client.query(QueryString, (err, response) => {
     console.log(response.rows[0])
     if (err) {
@@ -24,13 +22,13 @@ router.get('/', (req,res,next) => {
         data:response.rows
       });
     };
-  });
-});
+  });});
 
 router.get('/addarm', (req,res,next) => {
   res.render ('addarm', {
-    title:'AAF 방어구 등록'
+    title:'AAF 악세사리 등록'
   });
+
 });
 
 router.post('/', (req, res, next) => {
@@ -52,7 +50,7 @@ router.post('/', (req, res, next) => {
     }
   var Armproperty = req.body.armproperty;
     if (Armproperty !== '') {
-      Armproperty = Armproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armproperty = armproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Armfeat = req.body.armfeat;
     if (Armfeat !== '') {
@@ -66,9 +64,9 @@ router.post('/', (req, res, next) => {
     if (Armup !== '') {
       Armup = Armup.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
-  var QueryString = "INSERT INTO aquafeq.aquafarm(armgrade, armname, armlimit, armsocket, armether, armstats, armproperty, armfeat, armcustom, armup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
+  var QueryString = "INSERT INTO aquafeq.aquafarm(armgrade, Armname, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
   client.query(QueryString, [Armgrade, Armname, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup], (err, response) => {
-    var QueryString = "select armid, armname from aquafeq.aquafarm where armname = Armname ORDER BY armlimit,armid asc ;"
+    var QueryString = "select armid, Armname from aquafeq.aquafarm where armname = armname ORDER BY armlimit,armid asc ;"
     client.query(QueryString, (err, response) => {
       res.render('aafarm', {
         title:'AAF 장비',
@@ -77,8 +75,6 @@ router.post('/', (req, res, next) => {
     });
   });
 });
-
-
 router.get('/fixarm', (req,res,next) => {
   var QueryString = "select armname from aquafeq.aquafarm"
   client.query(QueryString, (err, response) => {
@@ -99,10 +95,12 @@ router.get('/fixarm', (req,res,next) => {
   });
 });
 
+
 //무기 변경하기
 router.post('/fixarm', (req,res,next) => {
   var Eqid = req.body.eqid;
   console.log(Eqid)
+
   var Armgrade = req.body.armgrade;
     if (Armgrade == '') {
       Armgrade = null
@@ -111,7 +109,7 @@ router.post('/fixarm', (req,res,next) => {
     }
   var Armname = req.body.armname;
   var Armlimit = req.body.armlimit;
-    if (Armlimit == '') {
+    if ( Armlimit == '') {
       Armlimit = null
     }
   var Armsocket = req.body.armsocket;
@@ -155,7 +153,7 @@ router.post('/fixarm', (req,res,next) => {
     }
 
 
-  var QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, armlimit, armsocket, armether, armstats, armproperty, armfeat, armcustom, armup, armname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE armid = $11 returning *"
+  var QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup, Armname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE armid = $11 returning *"
   client.query(QueryString, [Armgrade, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup, Armname, Eqid], (err, response) => {
 
     var QueryString = "select * from aquafeq.aquafarm where armname = $1"
@@ -226,8 +224,6 @@ router.get('/:id', (req,res,next) => {
     } else {
       var TotalCount = response.rows[0].totalcount;
     }
-    
-
     //console.log('토탈 카운트 ' + TotalCount)
     //console.log(CurrentPage)
     //console.log(typeof(CurrentPage))
@@ -268,11 +264,10 @@ router.get('/:id', (req,res,next) => {
       SearchType22: SearchType22,
       Searchcount:Searchcount
 
+
     });
   });
 
 })
-
-
 
 module.exports = router;
