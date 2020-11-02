@@ -85,17 +85,15 @@ router.get('/:id', (req,res,next) => {
   } else if (SearchType === 'number') {
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectnum = $1 OR collect1num = $1 OR collect2num = $1 OR ollect3num = $1 OR collect4num = $1 OR collect5num = $1 OR collect6num = $1 ORDER BY recipenum asc limit 20 offset (($2- 1)*20);"
   } else {
-    res.redirect('/test');
+    res.redirect('/recipe');
   }
   client.query(QueryString, ['%' + Search + '%',  CurrentPage], (err, response) => {
     if (err) {
       res.redirect('/')
     } else {
       if(typeof(response.rows[0]) !== "object") {
-          var TotalCountNull = 0;
           var TotalCount = 1;
       } else {
-        var TotalCountNull = 1;
         var TotalCount = response.rows[0].totalcount;
       }
       var DataCountInPage = 20;
@@ -123,8 +121,7 @@ router.get('/:id', (req,res,next) => {
           TotalPage: TotalPage,
           SearchType: SearchType,
           Search: Search,
-          TotalCountNull:TotalCountNull
-        });
+      });
     }
   });
 
