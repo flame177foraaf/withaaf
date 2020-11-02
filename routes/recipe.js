@@ -82,7 +82,7 @@ router.get('/:id', (req,res,next) => {
   var CurrentPage = req.params.id;
   var QueryString;
   if (SearchType == 'name') {
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM  aquafeq.aquafrecipe WHERE collectname Ilike %$1% OR collect1name Ilike %$1% OR collect2name Ilike %$1% OR collect3name Ilike %$1% OR collect4name Ilike '%$1%' OR collect5name Ilike %$1% OR collect6name Ilike %$1% ORDER BY recipenum asc limit 20 offset (($2- 1)*20);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM  aquafeq.aquafrecipe WHERE collectname Ilike %$1% OR collect1name Ilike %$1% OR collect2name Ilike %$1% OR collect3name Ilike %$1% OR collect4name Ilike %$1% OR collect5name Ilike %$1% OR collect6name Ilike %$1% ORDER BY recipenum asc limit 20 offset (($2- 1)*20);"
   } else if (SearchType == 'number') {
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectnum = $1 OR collect1num = $1 OR collect2num = $1 OR collect3num = $1 OR collect4num = $1 OR collect5num = $1 OR collect6num = $1 ORDER BY recipenum asc limit 20 offset (($2- 1)*20);"
   } else {
