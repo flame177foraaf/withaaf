@@ -180,7 +180,7 @@
                   <% if (customtext[i].indexOf("(") != -1) { %>
                     <% customlink2.push( customlink1[i].indexOf(">")); %>
                     <% if (customlink2[i] != -1) { %>
-                      <% customlink3 = customlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i],customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>')
+                      <% customlink3 = customlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i],customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
                     <% } %>
                   <% } else { %>
                     <% customlink3 = customlink3 + '<br />' + customtext[i] %>
