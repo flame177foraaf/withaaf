@@ -346,20 +346,16 @@ function viewmeterial(i) {
 
               <% var customlink2 = [] %>
               <% var customlink3 = []; %>
-              <% if (customtext[0].indexOf('티어') != -1){ %>
-                <% var customlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
-              <% } %>
+              <% var customlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
 
               <% for (var i = 0; i < customlink1.length; i++) { %>
                 <% customlink2.push( customlink1[i].indexOf(">")); %>
                 <% var customlink3 = customlink3 + ( customlink1[i].split(">")); %>
-                <% if (customlink2[i] != -1) { %>
-                  <% if (customtext[i].indexOf('티어') != -1){ %>
-                    <% customlink4 = customlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
-                  <% } %>
-                <% } %>
+                <% customlink4 = customlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
               <% } %>
+
               <td><%- customlink4 %></td>
+
               <td style="white-space: normal; text-align:center">
                 <div class="" style="">
                   <%# display: inline-block 은 한 줄로 나타냄!%>
