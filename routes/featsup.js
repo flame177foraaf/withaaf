@@ -110,155 +110,53 @@ router.post('/add_feat', (req,res,next) => {
 
 router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
-  if (SearchType === 'name') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where featname Ilike $1 ORDER BY featid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      res.render('featsup', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage: TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-      });
-    });
-  } else if (SearchType === 'feat') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where feat Ilike $1 ORDER BY featid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      res.render('featsup', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage: TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-      });
-      console.log(Search)
+    if (SearchType == 'name') {
+      var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where featname Ilike $1 ORDER BY featid asc limit 10 offset (($2- 1)*10);"
+    } else if (SearchType == 'feat'){
+      var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where feat Ilike $1 ORDER BY featid asc limit 10 offset (($2- 1)*10);"
+    } else if (SearchType == 'reversefeat') {
+      var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where reversefeat Ilike $1 ORDER BY featid asc limit 10 offset (($2- 1)*10);"
+    } else if (SearchType == 'featgrade'){
+      var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where featgrade Ilike $1 ORDER BY featid asc limit 10 offset (($2- 1)*10);"
+    } else {
+      res.redirect('/')
+    }
 
+    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+      if(typeof(response.rows[0]) !== "object") {
+        var TotalCount = 1;
+      } else {
+        var TotalCount = response.rows[0].totalcount;
+      }
+      var DataCountInPage = 10;
+      var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      };
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      };
+      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
+      var EndPage = StartPage + DataCountInPage -1;
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      };
+      res.render('featsup', {
+        title: 'AAF 장비',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage: TotalPage,
+        SearchType: SearchType,
+        Search: Search,
+      });
     });
-  } else if (SearchType === 'reversefeat') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where reversefeat Ilike $1 ORDER BY featid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      res.render('featsup', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage: TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-      });
-    })
-  } else if (SearchType === 'featgrade') {
-    var Search = req.query.searchText;
-    var CurrentPage = req.params.id;
-    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.featsup where featgrade Ilike $1 ORDER BY featid asc limit 10 offset (($2- 1)*10);"
-    client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      var DataCountInPage = 10;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + DataCountInPage -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      res.render('featsup', {
-        title: 'AAF 장비',
-        data: response.rows,
-        CurrentPage: CurrentPage,
-        PageSize: PageSize,
-        StartPage: StartPage,
-        EndPage: EndPage,
-        TotalPage: TotalPage,
-        SearchType: SearchType,
-        Search: Search,
-      });
-    })
-  } else {
-    res.redirect('/featsup');
-  };
+
 })
 
 
