@@ -107,7 +107,7 @@ router.get('/:id', (req,res,next) => {
   var Search = req.query.searchText;
   var CurrentPage = req.params.id;
   if (SearchType == 'name') {
-    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where collectname Ilike $1 ORDER BY gemid asc iimit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where collectname Ilike $1 ORDER BY gemid asc limit 10 offset (($2- 1)*10);"
   } else if (SearchType == 'effect') {
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where gemeffect Ilike $1 ORDER BY gemid asc limit 10 offset (($2- 1)*10);"
   } else {
@@ -119,6 +119,7 @@ router.get('/:id', (req,res,next) => {
       console.log(err)
       res.redirect('/')
     }
+
     if(typeof(response.rows[0]) !== "object") {
       var TotalCount = 1;
     } else {
