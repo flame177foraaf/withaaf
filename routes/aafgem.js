@@ -183,6 +183,10 @@ router.get('/:id', (req,res,next) => {
     var CurrentPage = req.params.id;
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where reversefeat Ilike $1 ORDER BY gemid asc limit 10 offset (($2- 1)*10);"
     client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+      if (err) {
+        res.redirect('/aafgem');
+
+      }
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {

@@ -225,6 +225,10 @@ router.get('/:id', (req,res,next) => {
     }
 
     client.query(QueryString, ['%' + Search +'%', CurrentPage], (err, response) => {
+      if (err) {
+        res.redirect('/aafwp');
+
+      }
       console.log(Search)
       console.log(SearchType)
       console.log(CurrentPage)
@@ -307,6 +311,10 @@ router.get('/:id', (req,res,next) => {
     }
 
     client.query(QueryString, [Search, CurrentPage], (err, response) => {
+      if (err) {
+        res.redirect('/aafwp');
+
+      }
       console.log(QueryString)
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
