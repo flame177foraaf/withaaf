@@ -7,75 +7,76 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <style media="screen">
     </style>
-  <script type="text/javascript">
-    function checkonclick() {
-      if (document.add.datalistname.value == "" || document.add.title.value == null || document.add.datalistname.value == undefined || ( document.add.datalistname.value != null && typeof document.add.datalistname.value == "object" && !Object.keys(document.add.datalistname.value).length ) ) {
-        alert("내용을 입력해주세요!");
-        document.add.datalistname.focus();
-        return false;
-      }
-      return true;
-    }
-  </script>
-  <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
-  <script type="text/javascript">
-    $(document).on("click","input[name=findadd]",function(){
-
-    var add =
-    '<div class="" id="seach_form_id2" name="seach_form_id2">'
-    +'<input type="text" placeholder="모든 항목" name="searchText2" style="width:200px">'
-    + '<select name="searchType2">'
-    +    '<option value="armfeat">피트</option>'
-    +    '<option value="armcustom">커스텀</option>'
-    +'</select>'
-    +'<button class="btn btn-default" name="delbut">삭제</button>'
-    +'</div>'
-    var aaa = $( "div[name=seach_form_id2]:last" ); //last를 사용하여 seach_form_id2라는 명을 가진 마지막 태그 호출
-
-    aaa.after(add); //마지막 seach_form_id2명 뒤에 붙인다.
-
-    });
-
-    //삭제 버튼
-    $(document).on("click","button[name=delbut]",function(){
-
-        var aaa = $(this).parent();
-
-        aaa.remove(); //tr 테그 삭제
-    });
-
-
-    $(document).ready(function() {
-      var list = document.querySelectorAll(".tabletr");
-      var list2 = document.querySelectorAll(".upgrademeterial")
-
-        for (var i = 0; i < list.length; i++) {
-          list[i].setAttribute("id", "tr(" + i + ")");
-          list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
-          list2[i].setAttribute("id", "trmeterial(" + i + ")");
-
+    <script type="text/javascript">
+      function checkonclick() {
+        if (document.add.datalistname.value == "" || document.add.title.value == null || document.add.datalistname.value == undefined || ( document.add.datalistname.value != null && typeof document.add.datalistname.value == "object" && !Object.keys(document.add.datalistname.value).length ) ) {
+          alert("내용을 입력해주세요!");
+          document.add.datalistname.focus();
+          return false;
         }
-    });
+        return true;
+      }
+    </script>
+    <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
+    <script type="text/javascript">
+      $(document).on("click","input[name=findadd]",function(){
 
-    function viewmeterial(i) {
-      var uptext = document.getElementById("trmeterial(" + i + ")")
+      var add =
+      '<div class="" id="seach_form_id2" name="seach_form_id2">'
+      +'<input type="text" placeholder="모든 항목" name="searchText2" style="width:200px">'
+      + '<select name="searchType2">'
+      +    '<option value="armfeat">피트</option>'
+      +    '<option value="armcustom">커스텀</option>'
+      +'</select>'
+      +'<button class="btn btn-default" name="delbut">삭제</button>'
+      +'</div>'
+      var aaa = $( "div[name=seach_form_id2]:last" ); //last를 사용하여 seach_form_id2 명을 가진 마지막 태그 호출
 
-      if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
-        if ( uptext.style.display == 'none') {
-          uptext.style.display = ''
-        } else {
-          uptext.style.display = 'none'
+      aaa.after(add); //마지막 seach_form_id2 뒤에 붙인다.
+
+      });
+
+      //삭제 버튼
+      $(document).on("click","button[name=delbut]",function(){
+
+          var aaa = $(this).parent();
+
+          aaa.remove(); //tr 테그 삭제
+      });
+
+
+
+      $(document).ready(function() {
+        var list = document.querySelectorAll(".tabletr");
+        var list2 = document.querySelectorAll(".upgrademeterial")
+
+          for (var i = 0; i < list.length; i++) {
+            list[i].setAttribute("id", "tr(" + i + ")");
+            list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
+            list2[i].setAttribute("id", "trmeterial(" + i + ")");
+
+          }
+      });
+
+      function viewmeterial(i) {
+        var uptext = document.getElementById("trmeterial(" + i + ")")
+
+        if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
+          if ( uptext.style.display == 'none') {
+            uptext.style.display = ''
+          } else {
+            uptext.style.display = 'none'
+          }
         }
       }
-    }
 
 
-  </script>
-</head>
-
-  <body style="">
-    <div class="title_div" >
+    </script>
+  </head>
+  <div class="title_div" >
+    <div class="" >
       <h1><%= title %></h1>
+
     </div>
     <div class="" id="" >
       <form action="/aafarm/1" method="get">
@@ -92,16 +93,18 @@
           </select>
           <input action="/aafarm/1" type="submit" class="btn" value="찾기" ></button>
           <input type="button" name="findadd" class="btnAdd" value="조건 추가">
+
         </div>
         <div class="" id="" name="seach_form_id2">
 
         </div>
 
-
       </form>
+
     </div>
     <div class="">
       <table id="eqtable" style="width:100%;">
+
         <colgroup>
           <col width="100">
           <col width="200">
@@ -110,13 +113,14 @@
 
           <col width="100">
           <col width="200">
-          <col width="350">
-          <col width="300">
+          <col width="250">
+          <col width="250">
           <col width="600">
           <col width="200">
 
         </colgroup>
         <thead>
+
           <tr>
             <th>등급</th>
             <th>이름</th>
@@ -132,73 +136,74 @@
         </thead>
 
         <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
-        <tbody>
+        <tbody >
           <% if(typeof(CurrentPage) === 'undefined'){ %>
             <tr>
               <td colspan="10"; style= "text-align:center;"> 검색이 필요합니다.</td>
             </tr>
           <% } else { %>
             <% data.forEach(function(item) { %>
-              <tr  style="white-space: pre-line; font-size:12px;" class="tabletr">
-                <td><%- item.armgrade %></td>
-                <td><%- item.armname %></td>
-                <td style='text-align: center'><%- item.armlimit %></td>
-                <td style='text-align: center'><%- item.armsocket %></td>
-                <td style='text-align: center'><%- item.armether %></td>
-                <td style='text-align: center'><%- item.armstats %></td>
-                <td style='text-align: center'><%- item.armproperty %></td>
+            <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
+              <td><%- item.armgrade %></td>
+              <td><%- item.armname %></td>
+              <td style='text-align: center'><%- item.armlimit %></td>
+              <td style='text-align: center'><%- item.armsocket %></td>
+              <td style='text-align: center'><%- item.armether %></td>
+              <td style='text-align: center'><%- item.armstats %></td>
+              <td style='text-align: center'><%- item.armproperty %></td>
 
-                <% var text = item.armfeat.replace(/\s/g," ") %>
-                <% var feattext = text.split('<br />') %>
-                <% var featlink1 = text.split(" ("); %>
+              <% var text = item.armfeat.replace(/\s/g," ") %>
+              <% var feattext = text.split('<br />') %>
+              <% var featlink1 = text.split(" ("); %>
 
-                <% var featlink2 = [] %>
-                <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+              <% var featlink2 = [] %>
+              <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
 
-                <% for (var i = 0; i < featlink1.length; i++) { %>
-                  <% featlink2.push( featlink1[i].indexOf(">")); %>
-                  <% if (featlink2[i] != -1) { %>
-                  <% featlink3 = featlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
-                  <% } %>
+              <% for (var i = 0; i < featlink1.length; i++) { %>
+                <% featlink2.push( featlink1[i].indexOf(">")); %>
+                <% if (featlink2[i] != -1) { %>
+                <% featlink3 = featlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
                 <% } %>
-                <td><%- featlink3 %></td>
+              <% } %>
+              <td><%- featlink3 %></td>
 
-                <% var text = item.armcustom.replace(/\s/g," ") %>
-                <% var customtext = text.split('<br />') %>
-                <% var customlink1 = text.split(" ("); %>
-                <% var customlink2 = [] %>
-                <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
-                <% for (var i = 0; i < customtext.length; i++) { %>
-                  <% customlink2.push( customlink1[i].indexOf(">")); %>
-                  <% if (customlink2[i] != -1) { %>
-                    <% customlink3 = customlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
-                  <% } %>
+              <% var text = item.armcustom.replace(/\s/g," ") %>
+              <% var customtext = text.split('<br />') %>
+              <% var customlink1 = text.split(" ("); %>
+              <% var customlink2 = [] %>
+              <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+              <% for (var i = 0; i < customtext.length; i++) { %>
+                <% customlink2.push( customlink1[i].indexOf(">")); %>
+                <% if (customlink2[i] != -1) { %>
+                  <% customlink3 = customlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
                 <% } %>
+              <% } %>
 
-                <td><%- customlink3 %></td>
+              <td><%- customlink3 %></td>
 
-                <td style="white-space: normal; text-align:center">
-                  <div class="" style="">
-                    <div class="" style="display: inline-block">
-                      <form action="/aafarm/fixarm" method="get ">
-                        <input type=text list=browsers style="display:none" checked value="<%= item.armname %>" name="Seachname">
+              <td style="white-space: normal; text-align:center">
+                <div class="" style="">
+                  <div class="" style="display: inline-block">
+                    <form action="/aafarm/fixarm" method="get ">
+                      <input type=text list=browsers style="display:none" checked value="<%= item.armname %>" name="Seachname">
 
-                        <input style="width:60px; " type="submit" value="수정" />
-                      </form>
-                    </div>
-                    <div class="" style="display: inline-block">
+                      <input style="width:60px; " type="submit" value="수정" />
+                    </form>
+                  </div>
+                  <div class="" style="display: inline-block">
 
-                      <form action="/Assemblyarm" method="get">
-                        <input type=text list=browsers style="display:none" checked value="<%= item.armname %>" name="assembly">
-                        <input style="width:60px " type="submit" value="재조립" />
-                      </form>
-                    </div>
-                    </div>
-                  </td>
-              </tr>
-              <tr id="" class="upgrademeterial" style="display:none">
-                <td colspan="10" style="text-align:center"> <%- item.armup %> </td>
-              </tr>
+                    <form action="/Assemblyarm" method="get">
+                      <input type=text list=browsers style="display:none" checked value="<%= item.armname %>" name="assembly">
+                      <input style="width:60px " type="submit" value="재조립" />
+                    </form>
+                  </div>
+                  </div>
+                </td>
+            </tr>
+
+            <tr id="" class="upgrademeterial" style="display:none">
+              <td colspan="10" style="text-align:center"> <%- item.armup %> </td>
+            </tr>
             <% }); %>
           <% } %>
           <div class="" id="PageUl">
@@ -212,7 +217,7 @@
               </tr>
             <% } else { %>
               <tr>
-                <div class="" id="pagelist">
+                <div class="" id="pagelist" >
                   <td colspan="10" style= "text-align:center; font-size:24px">
                     <% function FuncPageurl(pagenumber) { %>
                       <% var pageurl = "/aafarm/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
@@ -241,7 +246,7 @@
                       <a href=" <%- FuncPageurl(EndPage+1) %>" onclick="" id="MoveNextpage">  ▶ </a>
                       <a href=" <%- FuncPageurl(TotalPage) %>" onclick="" id="MoveEndpage"> ▶▶ </a>
                     <% } %>
-                  </td>
+                </td>
                 </div>
               </tr>
             <% } %>
@@ -250,15 +255,15 @@
       </table>
     </div>
 
-      <div class="" style="text-align: center; padding-top:30px;">
-        <form class="" action="/addarm" method="get">
-          <button onclick=location.href="/aafarm/addarm" type="button" name="button" style="width:200px">신규등록</a></button>
-        </form>
-      </div>
+    <div class="" style="text-align: center; padding-top:30px;">
+      <form class="" action="/addarm" method="get">
+        <button onclick=location.href="/aafarm/addarm" type="button" ame="button" style="width:200px">신규등록</a></button>
+      </form>
+    </div>
+
 
   </body>
   <footer>
     <%- include ('footer')%>
   </footer>
-
 </html>
