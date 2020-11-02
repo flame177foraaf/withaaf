@@ -343,16 +343,24 @@ function viewmeterial(i) {
               <% var text = item.wpcustom.replace(/\s/g," ") %>
               <% var customtext = text.split('<br />') %>
               <% var customlink1 = text.split(" ("); %>
+
               <% var customlink2 = [] %>
               <% var customlink3 = []; %>
               <% if (customtext[0].indexOf('티어') != -1){ %>
+                <% var customlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(웨이블렘스킬)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+              <% } else { %>
                 <% var customlink4 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
               <% } %>
+
               <% for (var i = 0; i < customlink1.length; i++) { %>
                 <% customlink2.push( customlink1[i].indexOf(">")); %>
                 <% var customlink3 = customlink3 + ( customlink1[i].split(">")); %>
                 <% if (customlink2[i] != -1) { %>
-                  <% customlink4 = customlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                  <% if (customtext[i].indexOf('티어') != -1){ %>
+                    <% customlink4 = customlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(웨이블렘스킬)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                  <% } else { %>
+                    <% customlink4 = customlink4 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                  <% } %>
                 <% } %>
               <% } %>
               <td><%- customlink4 %></td>
