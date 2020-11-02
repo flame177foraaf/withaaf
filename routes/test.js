@@ -88,6 +88,7 @@ router.get('/:id', (req,res,next) => {
     res.redirect('/recipe');
   }
   client.query(QueryString, ['%' + Search + '%',  CurrentPage], (err, response) => {
+    console.log(QueryString)
     if (err) {
       res.redirect('/')
     } else {
