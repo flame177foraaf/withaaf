@@ -12,17 +12,8 @@ const client = new Client({
 client.connect();
 
 router.get('/', (req,res,next) => {
-  var QueryString = "select gemid, gemname from aquafeq.aquafgem ORDER BY gemid asc ;"
-  client.query(QueryString, (err, response) => {
-    console.log(response.rows[0])
-    if (err) {
-      res.redirect('/aafgem');
-    } else {
-      res.render('aafgem', {
-        title:'AAF 장비',
-        data:response.rows
-      });
-    };
+  res.render('aafgem', {
+    title:'AAF 장비',
   });
 });
 

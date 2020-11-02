@@ -13,16 +13,8 @@ const client = new Client({
 
 client.connect();
 router.get('/', (req,res,next) => {
-  var QueryString = "select wpid, wpname from aquafeq.aquafwp ORDER BY wplimit,wpid asc ;"
-  client.query(QueryString, (err, response) => {
-    if (err) {
-      res.redirect('/aafwp');
-    } else {
-      res.render('aafwp', {
-        title:'AAF 장비',
-        data:response.rows
-      });
-    }
+  res.render('aafwp', {
+    title:'AAF 장비'
   });
 });
 
