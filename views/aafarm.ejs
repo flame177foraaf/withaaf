@@ -171,12 +171,15 @@
               <% var customtext = text.split('<br />') %>
               <% var customlink1 = text.split(" ("); %>
               <% var customlink2 = [] %>
-              <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
-              <% for (var i = 0; i < customtext.length; i++) { %>
-                <% customlink2.push( customlink1[i].indexOf(">")); %>
-                <% if (customlink2[i] != -1) { %>
-                  <% customlink3 = customlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+              <% if (customlink1.indexOf("(")!= -1) { %>
+                <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+                <% for (var i = 0; i < customtext.length; i++) { %>
+                  <% customlink2.push( customlink1[i].indexOf(">")); %>
+                  <% if (customlink2[i] != -1) { %>
+                    <% customlink3 = customlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                  <% } %>
                 <% } %>
+
               <% } %>
 
               <td><%- customlink3 %></td>
