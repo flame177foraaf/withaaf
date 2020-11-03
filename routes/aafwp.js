@@ -227,7 +227,7 @@ router.get('/:id', (req,res,next) => {
     client.query(QueryString, ['%' + Search +'%', CurrentPage], (err, response) => {
       if (err) {
         res.redirect('/aafwp');
-
+        console.log(err)
       }
       console.log(Search)
       console.log(SearchType)

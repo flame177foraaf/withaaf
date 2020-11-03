@@ -211,6 +211,7 @@ router.get('/:id', (req,res,next) => {
 
     if (err) {
       res.redirect('/aafarm');
+      console.log(err)
     } else if (typeof(response.rows[0]) !== "object") {
       var TotalCount = 1;
     } else {
