@@ -140,7 +140,10 @@ router.post('/fixitem', (req,res,next) => {
 
     var QueryString = "select * from aquafeq.aquafitem where item_name = $1"
     client.query ( QueryString, [Itemname],  (err, response) => {
-      console.log(response.rows[0])
+      if (err) {
+        console.log(err)
+        res.redirect('/')
+      }
       res.render('item', {
         title : Itemname + ' 변경 완료',
         data: response.rows
@@ -159,8 +162,10 @@ router.get('/:id', (req,res,next) => {
     var CurrentPage = req.params.id;
     var QueryString = 'SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name Ilike $1 ORDER BY item_name collate "ko_KR.utf8" limit 10 offset (($2- 1)*10);'
       client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
-        console.log(QueryString)
-        console.log(response.rows)
+        if (err) {
+          console.log(err)
+          res.redirect('/')
+        }
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
