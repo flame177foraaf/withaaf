@@ -18,7 +18,7 @@ router.get('/', (req,res,next) => {
 
 router.get('/addarm', (req,res,next) => {
   res.render ('addarm', {
-    title:'AAF 악세사리 등록'
+    title:'AAF 방어구 등록'
   });
 
 });
@@ -42,7 +42,7 @@ router.post('/', (req, res, next) => {
     }
   var Armproperty = req.body.armproperty;
     if (Armproperty !== '') {
-      Armproperty = armproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armproperty = Armproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
   var Armfeat = req.body.armfeat;
     if (Armfeat !== '') {
