@@ -198,10 +198,11 @@ router.get('/:id', (req,res,next) => {
     }
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
   } else {
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE "+ SearchType +" Ilike $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE " + SearchType +" Ilike $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
 
   }
   client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+    console.log(QueryString)
     console.log(Search)
     console.log(SearchType)
     console.log(CurrentPage)

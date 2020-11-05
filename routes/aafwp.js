@@ -174,7 +174,9 @@ router.post('/fixwp', (req,res,next) => {
 
 // 일반 검색
 router.get('/:id', (req,res,next) => {
+  var url = require('url');
   var SearchType = req.query.searchType;
+  console.log(req.url)
   if (SearchType != '1stats' && SearchType != '2stats') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
