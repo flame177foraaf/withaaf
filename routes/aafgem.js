@@ -107,6 +107,8 @@ router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   var Search = req.query.searchText;
   var CurrentPage = req.params.id;
+  var CurrentPage = parseInt(CurrentPage)
+
   if (SearchType == 'name') {
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where collectname Ilike $1 ORDER BY gemid asc limit 10 offset (($2- 1)*10);"
   } else if (SearchType == 'effect') {

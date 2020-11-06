@@ -169,6 +169,7 @@ router.get('/:id', (req,res,next) => {
 
   var Search = req.query.searchText;
   var CurrentPage = req.params.id;
+  var CurrentPage = parseInt(CurrentPage)
   var SearchPlus = "";
 
   if (req.query.searchText2 != 'undefined') {

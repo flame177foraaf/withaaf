@@ -130,6 +130,7 @@ router.get('/:id', (req,res,next) => {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"
     client.query(QueryString, (err, response1) => {
       var Field_Id = req.params.id;
+      vra Field_Id = parseInt(Field_Id)
       var QueryString = "SELECT * FROM aquafeq.monster as t1 left join aquafeq.dungeon_partition as t2 on t1.mon_field = t2.part where mon_field = $1 order by t1.mon_lv asc;"
       client.query(QueryString, [Field_Id], (err,response2) => {
         console.log(response2.rows[0])

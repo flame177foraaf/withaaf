@@ -180,6 +180,9 @@ router.get('/:id', (req,res,next) => {
   if (SearchType != '1stats' && SearchType != '2stats') {
     var Search = req.query.searchText;
     var CurrentPage = req.params.id;
+    var CurrentPage = parseInt(CurrentPage)
+
+    console.log(CurrentPage)
     console.log(SearchType)
     console.log(SearchType == '1stats')
     console.log(req.query.searchText2)
