@@ -179,6 +179,7 @@ router.get('/:id', (req,res,next) => {
     var Search = req.query.searchText;
     console.log(Search)
     var Search = encodeURI(encodeURIComponent(Search))
+    console.log(Search)
 
     var CurrentPage = req.params.id;
     console.log(SearchType)
@@ -229,7 +230,7 @@ router.get('/:id', (req,res,next) => {
     console.log(QueryString)
     client.query(QueryString, ['%' + Search +'%', CurrentPage], (err, response) => {
       if (err) {
-        res.redirect('/aafwp');
+        res.redirect('/test');
         console.log(err)
       }
       console.log(Search)
@@ -315,7 +316,7 @@ router.get('/:id', (req,res,next) => {
 
     client.query(QueryString, [Search, CurrentPage], (err, response) => {
       if (err) {
-        res.redirect('/aafwp');
+        res.redirect('/test');
 
       }
       console.log(QueryString)

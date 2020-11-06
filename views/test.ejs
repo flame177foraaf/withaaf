@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <%- include ('head') %>
     <title><%= title%></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -93,52 +94,52 @@
         );
 
 
-//이게 맞다
+      //이게 맞다
 
-$(document).ready(function() {
-  var list = document.querySelectorAll(".tabletr");
-  var list2 = document.querySelectorAll(".upgrademeterial")
-  //var wpcolor = document.querySelectorAll(".wpproperty");
+        $(document).ready(function() {
+        var list = document.querySelectorAll(".tabletr");
+        var list2 = document.querySelectorAll(".upgrademeterial")
+        //var wpcolor = document.querySelectorAll(".wpproperty");
 
-    for (var i = 0; i < list.length; i++) {
-      list[i].setAttribute("id", "tr(" + i + ")");
-      list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
-      list2[i].setAttribute("id", "trmeterial(" + i + ")");
+          for (var i = 0; i < list.length; i++) {
+            list[i].setAttribute("id", "tr(" + i + ")");
+            list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
+            list2[i].setAttribute("id", "trmeterial(" + i + ")");
 
-/*
-      if (wpcolor[i].textContent.indexOf('/') != -1) {
-        if ( wpcolor[i].textContent.split('/')[1] == ' 불 ') {
-          list[i].css("backgroundColor", "#FFD5DD");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 물 ') {
-          list[i].css("backgroundColor", "#DBE0FC");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 바람 ') {
-          list[i].css("backgroundColor", "#CEFFD3");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 땅 ') {
-          list[i].css("backgroundColor", "#F8EAD8");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 정신 ') {
-          list[i].css("backgroundColor", "#FFFFDB");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 아스트랄 ') {
-          list[i].css("backgroundColor", "#E4C1F2");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 무속성 ') {
-          list[i].css("backgroundColor", "#EAEAEA");
+      /*
+            if (wpcolor[i].textContent.indexOf('/') != -1) {
+              if ( wpcolor[i].textContent.split('/')[1] == ' 불 ') {
+                list[i].css("backgroundColor", "#FFD5DD");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 물 ') {
+                list[i].css("backgroundColor", "#DBE0FC");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 바람 ') {
+                list[i].css("backgroundColor", "#CEFFD3");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 땅 ') {
+                list[i].css("backgroundColor", "#F8EAD8");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 정신 ') {
+                list[i].css("backgroundColor", "#FFFFDB");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 아스트랄 ') {
+                list[i].css("backgroundColor", "#E4C1F2");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 무속성 ') {
+                list[i].css("backgroundColor", "#EAEAEA");
+              }
+            }
+            */
+          }
+
+      });
+
+      function viewmeterial(i) {
+        var uptext = document.getElementById("trmeterial(" + i + ")")
+
+        if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
+          if ( uptext.style.display == 'none') {
+            uptext.style.display = ''
+          } else {
+            uptext.style.display = 'none'
+          }
         }
       }
-      */
-    }
-
-});
-
-function viewmeterial(i) {
-  var uptext = document.getElementById("trmeterial(" + i + ")")
-
-  if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
-    if ( uptext.style.display == 'none') {
-      uptext.style.display = ''
-    } else {
-      uptext.style.display = 'none'
-    }
-  }
-}
 
     </script>
 
@@ -149,7 +150,7 @@ function viewmeterial(i) {
 
     </div>
     <div class="">
-      <form action="/test/1" method="get">
+      <form action="/test/1" accept-charset="utf-8" method="get">
         <% if (typeof(SearchType) == 'undefined'){ %>
           <div class="" id="seach_form_id" name="seach_form_id">
             <input type="text" placeholder="모든 항목" name="searchText" style="width:200px" >
@@ -160,7 +161,7 @@ function viewmeterial(i) {
                 <option value="wpcustom">커스텀</option>
                 <option value="wpgrade">등급 / 강적</option>
             </select>
-            <input  type="submit" class="btn" value="찾기" ></button>
+            <input type="submit" class="btn" value="찾기" formaction="/test/1"></button>
             <input type="button" name="findadd" class="btnAdd" value="조건 추가">
             <input type="button" name="Searchstats" class="btnAdd" value="성능 검색으로">
           <div class="" id="" name="seach_form_id2">
@@ -351,7 +352,7 @@ function viewmeterial(i) {
                   <% if (customtext[i].indexOf("(") != -1) { %>
                     <% customlink2.push( customlink1[i].indexOf(">")); %>
                     <% if (customlink2[i] != -1) { %>
-                      <% customlink3 = customlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i],customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                      <% customlink3 = customlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
                     <% } %>
                   <% } else { %>
                     <% customlink3 = customlink3 + '<br />' + customtext[i] %>
@@ -368,7 +369,7 @@ function viewmeterial(i) {
                   <%# display: none 안보임!%>
 
                   <div class="" style="display: inline-block">
-                    <form action="/test/fixwp" method="get ">
+                    <form accept-charset="UTF-8" action="/test/fixwp" method="get ">
                       <input type=text list=browsers style="display:none" checked value="<%= item.wpname %>" name="Seachname">
 
                       <input style="width:60px; " type="submit" value="수정" />
@@ -376,7 +377,7 @@ function viewmeterial(i) {
                   </div>
                   <div class="" style="display: inline-block">
 
-                    <form action="/Assemblywp" method="get">
+                    <form accept-charset="UTF-8" action="/Assemblywp" method="get">
                       <input type=text list=browsers style="display:none" checked value="<%= item.wpname %>" name="assembly">
                       <input style="width:60px " type="submit" value="재조립" />
                     </form>
@@ -446,7 +447,7 @@ function viewmeterial(i) {
     </div>
 
       <div class="" style="text-align: center; padding-top:30px;">
-          <form class="" action="/addwp" method="get">
+          <form accept-charset="UTF-8" class="" action="/addwp" method="get">
              <button onclick=location.href="/test/addwp" type="button" name="button" style="width:200px">신규등록</a></button>
           </form>
       </div>
