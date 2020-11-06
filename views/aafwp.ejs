@@ -369,7 +369,7 @@ function viewmeterial(i) {
                   <%# display: none 안보임!%>
 
                   <div class="" style="display: inline-block">
-                    <form action="/aafwp/fixwp" method="get ">
+                    <form accept-charset="UTF-8" action="/aafwp/fixwp" method="get ">
                       <input type=text list=browsers style="display:none" checked value="<%= item.wpname %>" name="Seachname">
 
                       <input style="width:60px; " type="submit" value="수정" />
@@ -377,7 +377,7 @@ function viewmeterial(i) {
                   </div>
                   <div class="" style="display: inline-block">
 
-                    <form action="/Assemblywp" method="get">
+                    <form accept-charset="UTF-8" action="/Assemblywp" method="get">
                       <input type=text list=browsers style="display:none" checked value="<%= item.wpname %>" name="assembly">
                       <input style="width:60px " type="submit" value="재조립" />
                     </form>
@@ -447,7 +447,7 @@ function viewmeterial(i) {
     </div>
 
       <div class="" style="text-align: center; padding-top:30px;">
-          <form class="" action="/addwp" method="get">
+          <form accept-charset="UTF-8" class="" action="/addwp" method="get">
              <button onclick=location.href="/aafwp/addwp" type="button" name="button" style="width:200px">신규등록</a></button>
           </form>
       </div>

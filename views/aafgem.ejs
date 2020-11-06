@@ -75,7 +75,7 @@
                 <%# 밸류값을 %=title 과 같이 해주면 받아오는 title 값에 따라 value 값이 달라지게 된다. %>
 
                   <div class="" style="display: inline-block">
-                    <form action="/aafgem/fixgem" method="get ">
+                    <form accept-charset="UTF-8" action="/aafgem/fixgem" method="get ">
                       <input type=text list=browsers style="display:none" checked value="<%= item.gemname %>" name="Seachname">
 
                       <input style="width:60px; " type="submit" value="수정" />
@@ -124,7 +124,7 @@
 
         <div class="" style="text-align: center">
           <div class="">
-            <form class="" action="/aafgem/add_gem" method="get">
+            <form accept-charset="UTF-8" class="" action="/aafgem/add_gem" method="get">
               <button onclick=location.href="/aafgem/add_gem" type="button" name="button" style="width:200px">신규등록</a></button>
             </form>
           </div>

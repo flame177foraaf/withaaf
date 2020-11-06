@@ -84,7 +84,7 @@
               <td style='text-align: center'><%- item.item_route %></td>
               <td style="white-space: normal; text-align:center">
                   <div class="" style="display: inline-block">
-                    <form action="/item/fixitem" method="get ">
+                    <form accept-charset="UTF-8" action="/item/fixitem" method="get ">
                       <input type=text list=browsers style="display:none" checked value="<%= item.item_name %>" name="Seachname">
 
                       <input style="width:60px; " type="submit" value="수정" />
@@ -137,7 +137,7 @@
 
     <div class="" style="text-align: center">
       <div class="">
-        <form class="" action="/add_item" method="get">
+        <form accept-charset="UTF-8" class="" action="/add_item" method="get">
           <button onclick=location.href="/item/add_item" type="button" name="button" style="width:200px">신규등록</a></button>
         </form>
       </div>
