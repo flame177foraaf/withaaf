@@ -2,12 +2,13 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var $ = require('jquery');
+
 var url = require('url');
 
 
-const { Client } = require('pg');
+var { Client } = require('pg');
 
-const client = new Client({
+var client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });
@@ -175,12 +176,14 @@ router.post('/fixwp', (req,res,next) => {
 
 // 일반 검색
 router.get('/:id', (req,res,next) => {
+  console.log(url.parse(req.url, true))
+  var CurrentPage = req.params.id;
+  var CurrentPage = parseInt(CurrentPage)
   var SearchType = req.query.searchType;
-  console.log(req.url)
+
   if (SearchType != '1stats' && SearchType != '2stats') {
     var Search = req.query.searchText;
-    var CurrentPage = req.params.id;
-    var CurrentPage = parseInt(CurrentPage)
+
 
     console.log(CurrentPage)
     console.log(SearchType)
@@ -193,7 +196,6 @@ router.get('/:id', (req,res,next) => {
       var Search22 = [];
       console.log('추가 검색' + Search2)
       console.log('추가 검색타입 '+ typeof(Search2))
-      console.log(SearchPlus)
       if (typeof(Search2) == 'object') {
         for (var i = 0; i < Search2.length; i++) {
           Search22.push(Search2[i]) ;
@@ -202,7 +204,6 @@ router.get('/:id', (req,res,next) => {
           Search22.push(Search2) ;
       }
       // 포 문 에서 search2 배열의 각각의 값중에서 빈 값이 있는 경우 빈 배열에 넣지않고 그냥 넘어가는 작업을 해야함, 이에 따라 아래의 타입 배열에 넣는 경우에서도 동일함
-      console.log(Search22)
 
       var SearchType2 = req.query.searchType2;
       var SearchType22 = [];
@@ -296,7 +297,6 @@ router.get('/:id', (req,res,next) => {
     if (Search == '' || Search == null || Search == undefined ) {
       var Search = 0;
     }
-    var CurrentPage = req.params.id;
     console.log(SearchType)
     console.log(SearchType == '1stats')
     console.log(req.query.searchText2)

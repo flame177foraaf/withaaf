@@ -163,7 +163,7 @@ router.post('/fixacc', (req,res,next) => {
 router.get('/:id', (req,res,next) => {
   var url = require('url');
 
-  console.log(req.url)
+  console.log(url.parse(req.url, true))
 
   var SearchType = req.query.searchType;
 

@@ -17,7 +17,7 @@ client.connect();
 
 
 router.get('/', (req,res, next) => {
-
+  console.log(url)
   var psql = "SELECT * FROM aquafeq.freeboard ORDER BY fbid DESC"
   client.query(psql, (err, response) => {
     res.render('board', {
@@ -52,13 +52,12 @@ router.get('/write', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   var fbid = req.params.id;
   console.log(fbid)
-
   console.log(typeof(fbid))
   var fbid = parseInt(fbid)
   console.log(fbid)
   console.log(typeof(fbid))
 
-  console.log(req.url)
+  console.log(url.parse(req.url, true))
   var QueryString = "SELECT * FROM aquafeq.freeboard WHERE fbid = $1"
   var QueryStringComment = "SELECT * FROM aquafeq.fb_comment WHERE fbid = $1"
   client.query(QueryString, [fbid], (err, response) => {
@@ -85,7 +84,7 @@ router.get('/:id', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-  console.log(req.url)
+  console.log(url.parse(req.url, true))
 
   var BoardBody = req.body.boardbody;
   BoardBody = BoardBody.replace(/(?:\r\n|\r|\n)/g, '<br />');
@@ -108,7 +107,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.post('/comment', (req, res, next) => {
-  console.log(req.url)
+  console.log(url.parse(req.url, true))
   var Comment_body = req.body.comment_box;
   var Comment_writer = req.body.comment_writer;
   var Fbid =req.body.fbid;

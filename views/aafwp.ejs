@@ -94,52 +94,52 @@
         );
 
 
-//이게 맞다
+      //이게 맞다
 
-$(document).ready(function() {
-  var list = document.querySelectorAll(".tabletr");
-  var list2 = document.querySelectorAll(".upgrademeterial")
-  //var wpcolor = document.querySelectorAll(".wpproperty");
+        $(document).ready(function() {
+        var list = document.querySelectorAll(".tabletr");
+        var list2 = document.querySelectorAll(".upgrademeterial")
+        //var wpcolor = document.querySelectorAll(".wpproperty");
 
-    for (var i = 0; i < list.length; i++) {
-      list[i].setAttribute("id", "tr(" + i + ")");
-      list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
-      list2[i].setAttribute("id", "trmeterial(" + i + ")");
+          for (var i = 0; i < list.length; i++) {
+            list[i].setAttribute("id", "tr(" + i + ")");
+            list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
+            list2[i].setAttribute("id", "trmeterial(" + i + ")");
 
-/*
-      if (wpcolor[i].textContent.indexOf('/') != -1) {
-        if ( wpcolor[i].textContent.split('/')[1] == ' 불 ') {
-          list[i].css("backgroundColor", "#FFD5DD");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 물 ') {
-          list[i].css("backgroundColor", "#DBE0FC");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 바람 ') {
-          list[i].css("backgroundColor", "#CEFFD3");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 땅 ') {
-          list[i].css("backgroundColor", "#F8EAD8");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 정신 ') {
-          list[i].css("backgroundColor", "#FFFFDB");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 아스트랄 ') {
-          list[i].css("backgroundColor", "#E4C1F2");
-        } else if (wpcolor[i].textContent.split('/')[1] == ' 무속성 ') {
-          list[i].css("backgroundColor", "#EAEAEA");
+      /*
+            if (wpcolor[i].textContent.indexOf('/') != -1) {
+              if ( wpcolor[i].textContent.split('/')[1] == ' 불 ') {
+                list[i].css("backgroundColor", "#FFD5DD");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 물 ') {
+                list[i].css("backgroundColor", "#DBE0FC");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 바람 ') {
+                list[i].css("backgroundColor", "#CEFFD3");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 땅 ') {
+                list[i].css("backgroundColor", "#F8EAD8");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 정신 ') {
+                list[i].css("backgroundColor", "#FFFFDB");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 아스트랄 ') {
+                list[i].css("backgroundColor", "#E4C1F2");
+              } else if (wpcolor[i].textContent.split('/')[1] == ' 무속성 ') {
+                list[i].css("backgroundColor", "#EAEAEA");
+              }
+            }
+            */
+          }
+
+      });
+
+      function viewmeterial(i) {
+        var uptext = document.getElementById("trmeterial(" + i + ")")
+
+        if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
+          if ( uptext.style.display == 'none') {
+            uptext.style.display = ''
+          } else {
+            uptext.style.display = 'none'
+          }
         }
       }
-      */
-    }
-
-});
-
-function viewmeterial(i) {
-  var uptext = document.getElementById("trmeterial(" + i + ")")
-
-  if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
-    if ( uptext.style.display == 'none') {
-      uptext.style.display = ''
-    } else {
-      uptext.style.display = 'none'
-    }
-  }
-}
 
     </script>
 

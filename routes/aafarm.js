@@ -163,7 +163,7 @@ router.post('/fixarm', (req,res,next) => {
 router.get('/:id', (req,res,next) => {
 
 
-  console.log(req.url)
+  console.log(url.parse(req.url, true))
 
   var SearchType = req.query.searchType;
 
