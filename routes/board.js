@@ -57,8 +57,7 @@ router.get('/:id', (req, res, next) => {
   console.log(fbid)
   console.log(typeof(fbid))
 
-  console.log(url.parse(req.url, true))
-  var QueryString = "SELECT * FROM aquafeq.freeboard WHERE fbid = $1"
+    var QueryString = "SELECT * FROM aquafeq.freeboard WHERE fbid = $1"
   var QueryStringComment = "SELECT * FROM aquafeq.fb_comment WHERE fbid = $1"
   client.query(QueryString, [fbid], (err, response) => {
     console.log(QueryString)
@@ -85,7 +84,6 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   console.log(url.parse(req.url, true))
-
   var BoardBody = req.body.boardbody;
   BoardBody = BoardBody.replace(/(?:\r\n|\r|\n)/g, '<br />');
   var QueryString = "set timezone TO 'Asia/Seoul'";
@@ -109,8 +107,7 @@ router.post('/', (req, res, next) => {
 router.post('/comment', (req, res, next) => {
   console.log(url.parse(req.url, true))
   var Comment_body = req.body.comment_box;
-  var Comment_writer = req.body.comment_writer;
-  var Fbid =req.body.fbid;
+    var Fbid =req.body.fbid;
   var Count_Comment = req.body.commentcount;
   if (Count_Comment == null) {
     Count_Comment = 0;
