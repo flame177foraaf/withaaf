@@ -83,8 +83,7 @@ router.get('/:id', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-  console.log(url.parse(req.url, true))
-  var BoardBody = req.body.boardbody;
+    var BoardBody = req.body.boardbody;
   BoardBody = BoardBody.replace(/(?:\r\n|\r|\n)/g, '<br />');
   var QueryString = "set timezone TO 'Asia/Seoul'";
   var Commentcount = 0;
@@ -105,8 +104,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.post('/comment', (req, res, next) => {
-  console.log(url.parse(req.url, true))
-  var Comment_body = req.body.comment_box;
+    var Comment_body = req.body.comment_box;
     var Fbid =req.body.fbid;
   var Count_Comment = req.body.commentcount;
   if (Count_Comment == null) {
