@@ -52,6 +52,12 @@ router.get('/write', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   var fbid = req.params.id;
   console.log(fbid)
+
+  console.log(typeof(fbid))
+  var fbid = parseInt(fbid)
+  console.log(fbid)
+  console.log(typeof(fbid))
+
   console.log(req.url)
   var QueryString = "SELECT * FROM aquafeq.freeboard WHERE fbid = $1"
   var QueryStringComment = "SELECT * FROM aquafeq.fb_comment WHERE fbid = $1"
