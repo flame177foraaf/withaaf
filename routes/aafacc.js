@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 const { Client } = require('pg');
+var url = require('url');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,

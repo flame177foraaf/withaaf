@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var $ = require('jquery');
+var url = require('url');
 
 
 const { Client } = require('pg');
@@ -174,7 +175,6 @@ router.post('/fixwp', (req,res,next) => {
 
 // 일반 검색
 router.get('/:id', (req,res,next) => {
-  var url = require('url');
   var SearchType = req.query.searchType;
   console.log(req.url)
   if (SearchType != '1stats' && SearchType != '2stats') {

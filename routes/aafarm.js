@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
+var url = require('url');
 const { Client } = require('pg');
 
 const client = new Client({
@@ -160,7 +161,7 @@ router.post('/fixarm', (req,res,next) => {
 });
 
 router.get('/:id', (req,res,next) => {
-  var url = require('url');
+
 
   console.log(req.url)
 
