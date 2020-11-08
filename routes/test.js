@@ -118,6 +118,10 @@ router.get('/:id', (req,res,next) => {
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       };
+
+      var Search = encodeURIComponent(decodeURIComponent(Search))
+      var SearchType = encodeURIComponent(decodeURIComponent(SearchType))
+
       res.render('test', {
           title: 'AAF 레시피',
           data: response.rows,
