@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var url = require('url');
-
 const { Client } = require('pg');
 
 const client = new Client({
@@ -124,8 +123,8 @@ router.get('/:id', (req,res,next) => {
           StartPage: StartPage,
           EndPage: EndPage,
           TotalPage: TotalPage,
-          SearchType: SearchType,
-          Search: Search,
+          SearchType: encodeURIComponent(SearchType),
+          Search: encodeURIComponent(Search),
       });
     }
   });

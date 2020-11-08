@@ -255,13 +255,13 @@ router.get('/:id', (req,res,next) => {
       StartPage: StartPage,
       EndPage: EndPage,
       TotalPage: TotalPage,
-      SearchType: SearchType,
-      Search: Search,
+      SearchType: encodeURIComponent(SearchType),
+      Search: encodeURIComponent(Search),
       SearchPlus: SearchPlus,
-      Search2: Search2,
-      Search22: Search22,
-      SearchType2: SearchType2,
-      SearchType22: SearchType22,
+      Search2: encodeURIComponent(Search2),
+      Search22: encodeURIComponent(Search22),
+      SearchType2: encodeURIComponent(SearchType2),
+      SearchType22: encodeURIComponent(SearchType22),
       Searchcount:Searchcount
 
 

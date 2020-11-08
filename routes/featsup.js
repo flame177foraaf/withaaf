@@ -155,8 +155,8 @@ router.get('/:id', (req,res,next) => {
         StartPage: StartPage,
         EndPage: EndPage,
         TotalPage: TotalPage,
-        SearchType: SearchType,
-        Search: Search,
+        SearchType: encodeURIComponent(SearchType),
+        Search: encodeURIComponent(Search),
       });
     });
 

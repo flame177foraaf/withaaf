@@ -59,7 +59,7 @@ router.get('/:id' , (req,res,next) => {
                   } else {
                     console.log(data1.rows[0])
                     res.render('rival' , {
-                      Search: Search,
+                      Search: encodeURIComponent(Search),
                       list1: response1.rows,
                       list2: response2.rows,
                       data1: data1.rows,
