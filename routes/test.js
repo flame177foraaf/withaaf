@@ -121,6 +121,8 @@ router.get('/:id', (req,res,next) => {
 
       var Search = encodeURIComponent(decodeURIComponent(Search))
       var SearchType = encodeURIComponent(decodeURIComponent(SearchType))
+      console.log(Search)
+      console.log(SearchType)
 
       res.render('test', {
           title: 'AAF 레시피',
