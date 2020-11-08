@@ -2,7 +2,7 @@ var http = require("http");
 setInterval(function () {
   http.get("http://withaaf.herokuapp.com")
 
-} , 120000);
+} , 150000);
 
 var createError = require('http-errors');
 var express = require('express');
