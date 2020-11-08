@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var url = require('url');
-var utf8 = require('utf8');
 const { Client } = require('pg');
 
 const client = new Client({
