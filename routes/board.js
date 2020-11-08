@@ -50,6 +50,10 @@ router.get('/write', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   var fbid = req.params.id;
+  if(fbid == null) {
+    console.log('fbid is null');
+    res.redirect('/board');
+  )
   console.log(fbid)
   console.log(typeof(fbid))
   var fbid = parseInt(fbid)
