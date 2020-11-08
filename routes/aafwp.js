@@ -200,9 +200,6 @@ router.get('/:id', (req,res,next) => {
   console.log(Search2)
   console.log(Search22)
   console.log('QueryString' + QueryString)
-  if (Search == '' || Search == null || Search == undefined ) {
-    var Search = 0;
-  }
   var SearchType2 = req.query.searchType2;
   var SearchType22 = [];
 
