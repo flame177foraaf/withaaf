@@ -60,8 +60,10 @@ router.get('/:id', (req, res, next) => {
   console.log(fbid)
   console.log(typeof(fbid))
   var fbid = parseInt(fbid)
-  console.log(fbid)
-  console.log(typeof(fbid))
+  if (isNaN(fbid)) {
+    console.log(fbid)
+    res.redirect('/board')
+  }
 
   var QueryString = "SELECT * FROM aquafeq.freeboard WHERE fbid = $1"
   var QueryStringComment = "SELECT * FROM aquafeq.fb_comment WHERE fbid = $1"
