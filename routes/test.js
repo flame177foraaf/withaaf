@@ -118,9 +118,11 @@ router.get('/:id', (req,res,next) => {
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       };
-
+      console.log(encodeURIComponent(Search))
       var Search = encodeURIComponent(Search)
       var SearchType = encodeURIComponent(SearchType)
+      console.log(encodeURIComponent(Search))
+
       console.log(Search)
       console.log(SearchType)
 
