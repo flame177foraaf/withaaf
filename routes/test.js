@@ -80,8 +80,7 @@ router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   var Search = req.query.searchText;
   console.log(Search)
-  console.log(decodeURIComponent(Search))
-  var Search = encodeURIComponent(Search)
+  console.log(encodeURIComponent(Search))
   var CurrentPage = req.params.id;
   var CurrentPage = parseInt(CurrentPage)
   var QueryString;
@@ -119,8 +118,6 @@ router.get('/:id', (req,res,next) => {
         EndPage = TotalPage;
       };
       console.log(encodeURIComponent(Search))
-      var Search = encodeURIComponent(Search)
-      var SearchType = encodeURIComponent(SearchType)
       console.log(encodeURIComponent(Search))
 
       console.log(Search)
@@ -134,8 +131,8 @@ router.get('/:id', (req,res,next) => {
           StartPage: StartPage,
           EndPage: EndPage,
           TotalPage: TotalPage,
-          SearchType: SearchType,
-          Search: Search,
+          SearchType: encodeURIComponent(SearchType),
+          Search: encodeURIComponent(Search),
       });
     }
   });
