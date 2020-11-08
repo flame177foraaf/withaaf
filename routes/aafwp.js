@@ -177,23 +177,40 @@ router.post('/fixwp', (req,res,next) => {
 // 일반 검색
 router.get('/:id', (req,res,next) => {
   console.log(url.parse(req.url, true))
+
   var CurrentPage = req.params.id;
   var CurrentPage = parseInt(CurrentPage)
   var SearchType = req.query.searchType;
+  var Search = req.query.searchText;
+
+  var SearchPlus = "";
+  var Search2 = req.query.searchText2;
+
+  console.log('req.query.searchType' + Search)
+  console.log('req.query.searchType' + SearchType)
+  console.log(Search)
+  console.log(SearchType)
+  console.log(decodeURIComponent(Search))
+  console.log(encodeURIComponent(Search))
+
+
+
+  console.log(CurrentPage)
+  console.log(SearchPlus)
+  console.log(Search2)
+  console.log(Search22)
+  console.log('QueryString' + QueryString)
+  if (Search == '' || Search == null || Search == undefined ) {
+    var Search = 0;
+  }
+  var SearchType2 = req.query.searchType2;
+  var SearchType22 = [];
 
   if (SearchType != '1stats' && SearchType != '2stats') {
-    var Search = req.query.searchText;
+    var Search22 = [];
 
-
-    console.log(CurrentPage)
-    console.log(SearchType)
-    console.log(SearchType == '1stats')
-    console.log(req.query.searchText2)
-    var SearchPlus = "";
-    var Search2 = req.query.searchText2;
 
     if (Search2 !== undefined) {
-      var Search22 = [];
       console.log('추가 검색' + Search2)
       console.log('추가 검색타입 '+ typeof(Search2))
       if (typeof(Search2) == 'object') {
@@ -205,8 +222,6 @@ router.get('/:id', (req,res,next) => {
       }
       // 포 문 에서 search2 배열의 각각의 값중에서 빈 값이 있는 경우 빈 배열에 넣지않고 그냥 넘어가는 작업을 해야함, 이에 따라 아래의 타입 배열에 넣는 경우에서도 동일함
 
-      var SearchType2 = req.query.searchType2;
-      var SearchType22 = [];
       if (typeof(SearchType2) == 'object') {
         for (var i = 0; i < Search2.length; i++) {
           SearchType22.push(SearchType2[i]) ;
@@ -235,13 +250,6 @@ router.get('/:id', (req,res,next) => {
         res.redirect('/aafwp');
         console.log(err)
       }
-      console.log(Search)
-      console.log(SearchType)
-      console.log(CurrentPage)
-      console.log(SearchPlus)
-      console.log(Search2)
-      console.log(Search22)
-      console.log(QueryString)
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
@@ -292,19 +300,12 @@ router.get('/:id', (req,res,next) => {
       });
     });
   } else {
-    var Search = req.query.searchText;
     console.log(Search)
     if (Search == '' || Search == null || Search == undefined ) {
       var Search = 0;
     }
-    console.log(SearchType)
-    console.log(SearchType == '1stats')
-    console.log(req.query.searchText2)
 
       var Search = parseInt(Search,10)
-      console.log(SearchType)
-      console.log(Search)
-      console.log(typeof(Search))
     var SearchPlus = "";
     var Search2 = req.query.searchText2;
     if (SearchType == '1stats') {
@@ -320,13 +321,11 @@ router.get('/:id', (req,res,next) => {
         res.redirect('/aafwp');
 
       }
-      console.log(QueryString)
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
         var TotalCount = response.rows[0].totalcount;
       }
-      console.log(TotalCount)
       //console.log('토탈 카운트 ' + TotalCount)
       //console.log(CurrentPage)
       //console.log(typeof(CurrentPage))
@@ -336,7 +335,6 @@ router.get('/:id', (req,res,next) => {
       if (TotalCount % DataCountInPage > 0) {
         TotalPage++;
       };
-      console.log(TotalPage)
       //console.log('토탈 페이지' + TotalPage);
       if (TotalPage < CurrentPage) {
         CurrentPage = TotalPage;
