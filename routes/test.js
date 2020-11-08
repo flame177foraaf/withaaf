@@ -119,8 +119,8 @@ router.get('/:id', (req,res,next) => {
         EndPage = TotalPage;
       };
 
-      var Search = encodeURIComponent(decodeURIComponent(Search))
-      var SearchType = encodeURIComponent(decodeURIComponent(SearchType))
+      var Search = encodeURIComponent(Search)
+      var SearchType = encodeURIComponent(SearchType)
       console.log(Search)
       console.log(SearchType)
 
