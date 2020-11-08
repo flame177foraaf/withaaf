@@ -81,7 +81,7 @@ router.get('/:id', (req,res,next) => {
   var Search = req.query.searchText;
   console.log(Search)
   console.log(decodeURIComponent(Search))
-  console.log(encodeURIComponent(Search))
+  var Search = encodeURIComponent(Search)
   var CurrentPage = req.params.id;
   var CurrentPage = parseInt(CurrentPage)
   var QueryString;
