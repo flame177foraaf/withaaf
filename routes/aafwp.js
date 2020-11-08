@@ -182,24 +182,16 @@ router.get('/:id', (req,res,next) => {
   var CurrentPage = parseInt(CurrentPage)
   var SearchType = req.query.searchType;
   var Search = req.query.searchText;
+  if (Search == null ) {
+    var Search = ""
+  }
+  if (Search == null ) {
+    var SearchType = "wpname"
+  }
 
   var SearchPlus = "";
   var Search2 = req.query.searchText2;
 
-  console.log('req.query.searchType' + Search)
-  console.log('req.query.searchType' + SearchType)
-  console.log(Search)
-  console.log(SearchType)
-  console.log(decodeURIComponent(Search))
-  console.log(encodeURIComponent(Search))
-
-
-
-  console.log(CurrentPage)
-  console.log(SearchPlus)
-  console.log(Search2)
-  console.log(Search22)
-  console.log('QueryString' + QueryString)
   var SearchType2 = req.query.searchType2;
   var SearchType22 = [];
 
@@ -242,6 +234,17 @@ router.get('/:id', (req,res,next) => {
 
     }
 
+      console.log('req.query.searchType' + Search)
+      console.log('req.query.searchType' + SearchType)
+      console.log(Search)
+      console.log(SearchType)
+      console.log(decodeURIComponent(Search))
+      console.log(encodeURIComponent(Search))
+      console.log(CurrentPage)
+      console.log(SearchPlus)
+      console.log(Search2)
+      console.log(Search22)
+      console.log('QueryString' + QueryString)
     client.query(QueryString, ['%' + Search +'%', CurrentPage], (err, response) => {
       if (err) {
         res.redirect('/aafwp');
@@ -283,8 +286,8 @@ router.get('/:id', (req,res,next) => {
         StartPage: StartPage,
         EndPage: EndPage,
         TotalPage: TotalPage,
-        SearchType: encodeURIComponent(SearchType),
-        Search: encodeURIComponent(Search),
+        SearchType: SearchType,
+        Search: Search,
         SearchPlus: SearchPlus,
         Search2: Search2,
         Search22: Search22,
