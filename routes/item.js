@@ -160,6 +160,9 @@ router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
   if (SearchType === 'name') {
     var Search = req.query.searchText;
+    if (Search == null ) {
+      var Search = ""
+    }
     var CurrentPage = req.params.id;
     var CurrentPage = parseInt(CurrentPage)
 
@@ -201,7 +204,6 @@ router.get('/:id', (req,res,next) => {
       });
     });
   } else if (SearchType === 'effect') {
-    var Search = req.query.searchText;
     var CurrentPage = req.params.id;
     var CurrentPage = parseInt(CurrentPage)
 

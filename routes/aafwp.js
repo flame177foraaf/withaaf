@@ -185,9 +185,6 @@ router.get('/:id', (req,res,next) => {
   if (Search == null ) {
     var Search = ""
   }
-  if (Search == null ) {
-    var SearchType = "wpname"
-  }
 
   var SearchPlus = "";
   var Search2 = req.query.searchText2;

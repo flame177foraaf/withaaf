@@ -168,6 +168,9 @@ router.get('/:id', (req,res,next) => {
   var SearchType = req.query.searchType;
 
   var Search = req.query.searchText;
+  if (Search == null ) {
+    var Search = ""
+  }
   var CurrentPage = req.params.id;
   var CurrentPage = parseInt(CurrentPage)
 
