@@ -63,7 +63,6 @@ router.get('/:id', (req, res, next) => {
   console.log(fbid)
   console.log(typeof(fbid))
 
-  console.log(req.url)
   var QueryString = "SELECT * FROM aquafeq.freeboard WHERE fbid = $1"
   var QueryStringComment = "SELECT * FROM aquafeq.fb_comment WHERE fbid = $1"
   client.query(QueryString, [fbid], (err, response) => {
@@ -90,7 +89,7 @@ router.get('/:id', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-  console.log(req.url)
+
 
   var BoardBody = req.body.boardbody;
   BoardBody = BoardBody.replace(/(?:\r\n|\r|\n)/g, '<br />');
@@ -113,7 +112,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.post('/comment', (req, res, next) => {
-  console.log(req.url)
+
   var Comment_body = req.body.comment_box;
   var Comment_writer = req.body.comment_writer;
   var Fbid =req.body.fbid;
