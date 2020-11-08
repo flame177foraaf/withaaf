@@ -50,9 +50,9 @@
   </style>
   <script type="text/javascript">
     function checkonclick() {
-      if (document.searchform.SearchText.value == "" || document.searchform.SearchText.value == null || document.searchform.SearchText.value == undefined || ( document.searchform.SearchText.value != null && typeof document.searchform.SearchText.value == "object" && !Object.keys(document.searchform.SearchText.value).length ) ) {
+      if (document.searchform.searchtext.value == "" || document.searchform.searchtext.value == null || document.searchform.searchtext.value == undefined || ( document.searchform.searchtext.value != null && typeof document.searchform.searchtext.value == "object" && !Object.keys(document.searchform.searchtext.value).length ) ) {
         alert("내용을 입력해주세요!");
-        document.searchform.SearchText.focus();
+        document.searchform.searchtext.focus();
         return false;
       }
       return true;
@@ -102,11 +102,11 @@
       var add =
       '<form accept-charset="UTF-8" action="/monster/search" method="get" name="searchform" onsubmit="return checkonclick()">'
       +'<div class="" id="seach_form_id" name="seach_form_id">'
-      +'<input type="number" placeholder="숫자를 적어주세요" name="SearchText" style="width:200px" min="1" max="99">'
-      + '<select name="SearchType">'
+      +'<input type="number" placeholder="숫자를 적어주세요" name="searchtext" style="width:200px" min="1" max="99">'
+      + '<select name="searchtype">'
       +    '<option value="MonLvDown">배혼</option>'
       +'</select>'
-      +'<input type="button" name="SearchType2" class="btnAdd" value="적의 레벨 변화 감소 커스텀">'
+      +'<input type="button" name="searchtype2" class="btnAdd" value="적의 레벨 변화 감소 커스텀">'
       +'<input type="submit" class="btn" value="찾기"  />'
       +'<input type="button" name="NormalSearch" class="btnAdd" value="일반 검색으로">'
       +'</div>'
@@ -119,11 +119,11 @@
     });
 
     //배혼 검색시 렙변커스텀 적용 추가버튼
-    $(document).on("click","input[name=SearchType2]",function(){
+    $(document).on("click","input[name=searchtype2]",function(){
       var add2 =
       '<div class="" id="seach_form_id2" name="seach_form_id2">'
-      +'<input type="number" class="" placeholder="렙변 커스텀 수치를 적어주세요" name="SearchText2" style="width:200px" min="-99" max="99">'
-      + '<select name="SearchType2">'
+      +'<input type="number" class="" placeholder="렙변 커스텀 수치를 적어주세요" name="searchtext2" style="width:200px" min="-99" max="99">'
+      + '<select name="searchtype2">'
       +    '<option value="LvCustom">레벨 변화 커스텀</option>'
       +'</select>'
 
@@ -147,8 +147,8 @@
     $(document).on("click","input[name=NormalSearch]",function(){
       var add =
       '<form accept-charset="UTF-8" action="/monster/search" method="get" name="searchform" onsubmit="return checkonclick()">'
-      +'  <input type="text" placeholder="찾기 버튼을 누르세요" name="SearchText" id="SearchText" style="width:200px">'
-      +'  <select name="SearchType">'
+      +'  <input type="text" placeholder="찾기 버튼을 누르세요" name="searchtext" id="searchtext" style="width:200px">'
+      +'  <select name="searchtype">'
       +'    <option value="name">이름</option>'
       +'    <option value="property">속성</option>'
       +'    <option value="type">타입</option>'
@@ -197,8 +197,8 @@
     </div>
     <div class="" id="seach_form_id" >
       <form accept-charset="utf-8" action="/monster/search" method="get" name="searchform" onsubmit="return checkonclick()">
-        <input type="text" placeholder="찾기 버튼을 누르세요" name="SearchText" id="SearchText" style="width:200px">
-        <select name="SearchType">
+        <input type="text" placeholder="찾기 버튼을 누르세요" name="searchtext" id="searchtext" style="width:200px">
+        <select name="searchtype">
           <option value="name">이름</option>
           <option value="property">속성</option>
           <option value="type">타입</option>

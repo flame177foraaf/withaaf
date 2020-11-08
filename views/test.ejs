@@ -1,207 +1,92 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <%- include ('head') %>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <style media="screen">
-      #PageUl{
-        display: table;
-        margin-left: auto;
-        margin-right: auto;
+      #mainWrapper{
+        margin: 0 auto; /*가운데 정렬*/
       }
-      #pagelist{
-        list-style-type: none;
 
+      #mainWrapper > ul > li:first-child {
+        font-size:14pt;
+        vertical-align:middle;
       }
-      #linehead {
 
-        border-right: 2px solid black;
+      #boardlist ul, li{
+        list-style:none;
+        text-align:center;
+        padding:0;
+        margin:0;
       }
-      #line1{
-        border-left: 2px solid black;
+      #boardlist {margin-top:10px;}
+      #boardlist > li:first-child > ul > li {
+          background-color:#c9c9c9;
+          font-weight:bold;
       }
-      #line2{
-        border-left: 1px solid grey;
+      #boardlist > li > ul {
+          clear:both;
+          padding:0px auto;
+          position:relative;
+          min-width:40px;
       }
+      #boardlist > li > ul > li {
+        height:25px;
+        line-height: 25px;
+        float:left;
+        font-size:10pt;
+        border-bottom:1px solid silver;
+        vertical-align:baseline;
+      }
+      #boardlist > li > ul > li:first-child               {width:10%;} /*No 열 크기*/
+      #boardlist > li > ul > li:first-child +li           {width:55%;} /*제목 열 크기*/
+      #boardlist > li > ul > li:first-child +li+li        {width:20%;} /*작성일 열 크기*/
+      #boardlist > li > ul > li:first-child +li+li+li     {width:15%;} /*작성자 열 크기*/
+      // #boardlist > li > ul > li:first-child +li+li+li+li{width:10%;} /*조회수 열 크기*/
     </style>
 
   </head>
-  <body style="">
-    <div class="title_div" >
-      <h1><%= title  %></h1>
 
-    </div>
-    <div class="" id="seach_form_id" >
-      <form accept-charset="utf-8" action="/test/1"  method="get">
-        <input type="text" placeholder="모든 항목" name="searchText" style="width:200px">
-        <select name="searchType">
-          <option value="name">수집품 이름</option>
-          <option value="number">수집품 번호</option>
-
-        </select>
-        <input type="submit" class="btn" value="찾기"/ >
-
+  <body>
+    <div class="" style="float:right; height:50px ; width:100%" >
+      <form class="" accept-charset="UTF-8" action="/test/write" method="get">
+        <button type="submit" style=" float:right; height:50px ; width : 100px;">글쓰기</button>
       </form>
     </div>
-    <div class="">
-      <table id="eqtable" class="recipetable" style="width:100%;">
-        <colgroup>
-          <col width="60" >
-          <col width="60" >
-          <col span="">
-          <col width="40">
-          <col span="">
-          <col width="60">
-          <col width="40">
-          <col span="">
-          <col width="60">
-          <col width="40">
-          <col span="">
-          <col width="60">
-          <col width="40">
-          <col span="">
-          <col width="60">
-          <col width="40">
-          <col span="">
-          <col width="60">
-          <col width="40">
-          <col span="">
-          <col width="60">
-
-        </colgroup>
-        <thead id="" >
-          <tr >
-            <th>레시피</th>
-            <th>결과물</th>
-            <th id="linehead"></th>
-            <th id="line1"></th>
-            <th></th>
-            <th></th>
-            <th id="line2"></th>
-            <th></th>
-            <th></th>
-            <th id="line2"></th>
-            <th></th>
-            <th></th>
-            <th id="line2"></th>
-            <th></th>
-            <th></th>
-            <th id="line2"></th>
-            <th></th>
-            <th></th>
-            <th id="line2"></th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody >
-          <% if(typeof(CurrentPage) === 'undefined'){ %>
-            <tr>
-              <td colspan="22"; style= "text-align:center;"> 검색이 필요합니다.</td>
-            </tr>
-          <% } else{ %>
-            <% data.forEach(function(item) { %>
-            <tr style="white-space: pre-line; font-size:12px;" id="recipetabletr">
-              <td style="text-align: center;"><%- item.recipenum %></td>
-              <td style="text-align: center;"><%- item.collectnum %></td>
-              <td id="linehead"><%- item.collectname %></td>
-              <td id="recipematerial1"><%- item.collect1num %></td>
-              <td><%- item.collect1name %></td>
-              <% if ( item.collect1num  === ''){ %>
-                <td style="text-align: center; "><%- item.collect1unit %></td>
-              <% } else { %>
-                <td style="text-align: center; "> ( <%- item.collect1unit %> 개 ) </td>
-              <% } %>
-              <td id="recipematerial2"><%- item.collect2num %></td>
-              <td st><%- item.collect2name %></td>
-              <% if ( item.collect2num  === ''){ %>
-                <td style="text-align: center; "><%- item.collect2unit %></td>
-              <% } else { %>
-                <td style="text-align: center; "> ( <%- item.collect2unit %> 개 ) </td>
-              <% } %>
-              <td id="recipematerial3"><%- item.collect3num %></td>
-              <td><%- item.collect3name %></td>
-              <% if ( item.collect3num  === ''){ %>
-                <td style="text-align: center; "><%- item.collect3unit %></td>
-              <% } else { %>
-                <td style="text-align: center; "> ( <%- item.collect3unit %> 개 ) </td>
-              <% } %>
-              <td id="recipematerial4"><%- item.collect4num %></td>
-              <td><%- item.collect4name %></td>
-              <% if ( item.collect4num  === ''){ %>
-                <td style="text-align: center; "><%- item.collect4unit %></td>
-              <% } else { %>
-                <td style="text-align: center; "> ( <%- item.collect4unit %> 개 ) </td>
-              <% } %>
-              <td id="recipematerial5"><%- item.collect5num %></td>
-              <td><%- item.collect5name %></td>
-              <% if ( item.collect5num  === ''){ %>
-                <td style="text-align: center; "><%- item.collect5unit %></td>
-              <% } else { %>
-                <td style="text-align: center; "> ( <%- item.collect5unit %> 개 ) </td>
-              <% } %>
-              <td id="recipematerial6"><%- item.collect6num %></td>
-              <td><%- item.collect6name %></td>
-              <% if ( item.collect6num  === ''){ %>
-                <td style="text-align: center; "><%- item.collect6unit %></td>
-              <% } else { %>
-                <td style="text-align: center; "> ( <%- item.collect6unit %> 개 ) </td>
-              <% } %>
-              <td style="white-space: normal; text-align:center">
-                  <div class="" style="display: inline-block">
-                    <form accept-charset="UTF-8" action="/test/fixrecipe" method="get ">
-                      <input type=text list=browsers style="display:none" checked value="<%= item.recipenum %>" name="SeachNum">
-
-                      <input style="width:60px; " type="submit" value="수정" />
-                    </form>
-                  </div>
-              </td>
-            </tr>
-            <% }); %>
-          <% } %>
-          <div class="" id="PageUl" >
-          <% if(typeof(CurrentPage) === 'undefined'){ %>
-            <tr>
-              <div class="" id="pagelist" >
-                <td colspan="22" style= "text-align:center; font-size:24px">
-                  검색이 필요합니다.
-                </td>
-              </div>
-            </tr>
-          <% } else { %>
-            <tr>
-              <div class="" id="pagelist">
-                <td colspan="22" style= "text-align:center; font-size:24px">
-                  <% if (CurrentPage > PageSize){ %>
-                    <a href="/test/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
-                    <a href="/test/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
-                  <% } %>
-                  <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
-                    <% if (iCount == CurrentPage) { %>
-                      <b class="btnnonactive"><%- iCount %></b>
-                    <% } else { %>
-                      <a href="/test/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>"class="btnactive"><%- iCount %></a>
-                    <% } %>
-                  <% } %>
-                  <% if (EndPage < TotalPage){ %>
-                    <a href="/test/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>">  ▶ </a>
-                    <a href="/test/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
-                  <% } %>
-                </td>
-              </div>
-            </tr>
-          <% } %>
-          </div>
-        </tbody>
-      </table>
+    <div  id="mainWrapper" class="">
+      <li >
+        <ul id="boardlist">
+          <li>
+            <ul >
+              <li >번호</li>
+              <li >제목</li>
+              <li>글쓴이</li>
+              <li>작성시간</li>
+            </ul>
+          </li>
+          <% for (var i = 0; i < data.length; i++) {  %>
+            <li>
+              <ul>
+                <li><%- data[i].fbid %></li>
+                <% if(data[i].commentcount != '0' ){  %>
+                  <li><a href="/test/<%- data[i].fbid %>"><%- data[i].fbtitle %></a> [<%- data[i].commentcount %>]</li>
+                <% } else { %>
+                  <li><a href="/test/<%- data[i].fbid %>"><%- data[i].fbtitle %></a></li>
+                <% } %>
+                <li><%- data[i].fbname %></li>
+                <li><%- data[i].fbcreatedat %></li>
+              </ul>
+            </li>
+          <% }; %>
+        </ul>
+      </li>
     </div>
-
-
   </body>
+
   <footer>
     <%- include ('footer') %>
   </footer>
+
 </html>

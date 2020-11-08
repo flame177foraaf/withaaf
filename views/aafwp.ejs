@@ -26,8 +26,8 @@
 
         var add =
         '<div class="" id="seach_form_id2" name="seach_form_id2">'
-        +'<input type="text" placeholder="모든 항목" name="searchText2" style="width:200px">'
-        + '<select name="searchType2">'
+        +'<input type="text" placeholder="모든 항목" name="searchtext2" style="width:200px">'
+        + '<select name="searchtype2">'
         +    '<option value="wpproperty">속성 / 업그레이드</option>'
         +    '<option value="wpfeat">피트</option>'
         +    '<option value="wpcustom">커스텀</option>'
@@ -56,8 +56,8 @@
           var add =
 
           '<div class="" id="seach_form_id" name="seach_form_id">'
-          +'<input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px"  min="1" value ="">'
-          + '<select name="searchType">'
+          +'<input type="number" placeholder="숫자를 입력해주세요" name="searchtext" style="width:200px"  min="1" value ="">'
+          + '<select name="searchtype">'
           +    '<option value="1stats">기본 공격력</option>'
           +    '<option value="2stats">부가 공격력</option>'
           +'</select>'
@@ -73,8 +73,8 @@
 
           var add =
           '<div class="" id="seach_form_id" name="seach_form_id">'
-          +'<input type="text" placeholder="모든 항목" name="searchText" style="width:200px">'
-          +  '<select name="searchType">'
+          +'<input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">'
+          +  '<select name="searchtype">'
               +  '<option value="wpname">이름</option>'
               +  '<option value="wpproperty">속성 / 업그레이드</option>'
               +  '<option value="wpfeat">피트</option>'
@@ -151,10 +151,10 @@
     </div>
     <div class="">
       <form action="/aafwp/1" accept-charset="utf-8" method="get">
-        <% if (typeof(SearchType) == 'undefined'){ %>
+        <% if (typeof(searchtype) == 'undefined'){ %>
           <div class="" id="seach_form_id" name="seach_form_id">
-            <input type="text" placeholder="모든 항목" name="searchText" style="width:200px" >
-            <select name="searchType">
+            <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px" >
+            <select name="searchtype">
                 <option value="wpname">이름</option>
                 <option value="wpproperty">속성 / 업그레이드</option>
                 <option value="wpfeat">피트</option>
@@ -167,16 +167,16 @@
           <div class="" id="" name="seach_form_id2">
           </div>
         </div>
-        <% } else if (SearchType == '1stats' || SearchType == '2stats'){ %>
+        <% } else if (searchtype == '1stats' || searchtype == '2stats'){ %>
           <div class="" id="seach_form_id" name="seach_form_id">
-          <input type="number" placeholder="숫자를 입력해주세요" name="searchText" style="width:200px"  min="1" value="<%= Search %>">
-          <% if (SearchType == '2stats'){  %>
-            <select name="searchType">
+          <input type="number" placeholder="숫자를 입력해주세요" name="searchtext" style="width:200px"  min="1" value="<%= Search %>">
+          <% if (searchtype == '2stats'){  %>
+            <select name="searchtype">
               <option value="1stats">기본 공격력</option>
               <option value="2stats" selected>부가 공격력</option>
             </select>
           <% } else { %>
-            <select name="searchType">
+            <select name="searchtype">
               <option value="1stats" selected>기본 공격력</option>
               <option value="2stats">부가 공격력</option>
             </select>
@@ -186,33 +186,33 @@
         </div>
         <% } else { %>
           <div class="" id="seach_form_id" name="seach_form_id">
-            <input type="text" placeholder="모든 항목" name="searchText" style="width:200px" value="<%= Search %>">
-            <% if (SearchType == 'wpproperty'){ %>
-              <select name="searchType">
+            <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px" value="<%= Search %>">
+            <% if (searchtype == 'wpproperty'){ %>
+              <select name="searchtype">
                   <option value="wpname">이름</option>
                   <option value="wpproperty" selected>속성</option>
                   <option value="wpfeat">피트</option>
                   <option value="wpcustom">커스텀</option>
                   <option value="wpgrade">등급 / 강적</option>
               </select>
-            <% } else if (SearchType == 'wpfeat'){ %>
-              <select name="searchType">
+            <% } else if (searchtype == 'wpfeat'){ %>
+              <select name="searchtype">
                   <option value="wpname">이름</option>
                   <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat" selected>피트</option>
                   <option value="wpcustom">커스텀</option>
                   <option value="wpgrade">등급 / 강적</option>
               </select>
-            <% } else if (SearchType == 'wpcustom'){ %>
-              <select name="searchType">
+            <% } else if (searchtype == 'wpcustom'){ %>
+              <select name="searchtype">
                   <option value="wpname">이름</option>
                   <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat">피트</option>
                   <option value="wpcustom" selected>커스텀</option>
                   <option value="wpgrade">등급 / 강적</option>
               </select>
-            <% } else if (SearchType == 'wpgrade'){ %>
-              <select name="searchType">
+            <% } else if (searchtype == 'wpgrade'){ %>
+              <select name="searchtype">
                   <option value="wpname">이름</option>
                   <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat">피트</option>
@@ -220,7 +220,7 @@
                   <option value="wpgrade" selected>등급 / 강적</option>
               </select>
             <% } else { %>
-              <select name="searchType">
+              <select name="searchtype">
                   <option value="wpname" selected>이름</option>
                   <option value="wpproperty">속성 / 업그레이드</option>
                   <option value="wpfeat">피트</option>
@@ -411,10 +411,10 @@
               <div class="" id="pagelist">
                 <td colspan="21" style= "text-align:center; font-size:24px">
                   <% function FuncPageurl(pagenumber) { %>
-                    <% var pageurl = "/aafwp/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
+                    <% var pageurl = "/aafwp/" + pagenumber + "?searchtext=" + Search + "&searchtype=" +  searchtype %>
                     <% if (Searchcount !== 'undefined') { %>
                       <% for (var i = 0; i < Searchcount; i++) { %>
-                        <% pageurl = pageurl + "&searchText2=" + Search22[i]  + "&searchType2=" +  SearchType22[i] %>
+                        <% pageurl = pageurl + "&searchtext2=" + Search22[i]  + "&searchtype2=" +  searchtype22[i] %>
                       <% } %>
                     <% } %>
                     <% return pageurl %>

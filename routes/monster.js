@@ -44,13 +44,13 @@ router.get('/search', (req,res,next) => {
 
 
     client.query(QueryString, (err, response1) => {
-      var SearchingType = req.query.SearchType;
+      var SearchingType = req.query.searchtype;
       console.log(SearchingType)
       console.log(typeof(SearchingType))
-      var SearchingText = req.query.SearchText;
+      var SearchingText = req.query.searchtext;
       if (SearchingType === 'MonLvDown') {
-        var SearchingType2 = req.query.SearchType2;
-        var SearchingText2 = req.query.SearchText2;
+        var SearchingType2 = req.query.searchtype2;
+        var SearchingText2 = req.query.searchtext2;
 
         var SearchingText = parseInt(SearchingText)
         var SearchingText2 = parseInt(SearchingText2);

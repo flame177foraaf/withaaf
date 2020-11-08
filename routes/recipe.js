@@ -77,17 +77,17 @@ router.post('/fixrecipe', (req,res,next) => {
 
 
 router.get('/:id', (req,res,next) => {
-  var SearchType = req.query.searchType;
-  var Search = req.query.searchText;
+  var searchtype = req.query.searchtype;
+  var Search = req.query.searchtext;
   if (Search == null ) {
     var Search = ""
   }
   var CurrentPage = req.params.id;
   var CurrentPage = parseInt(CurrentPage)
   var QueryString;
-  if (SearchType == 'name') {
+  if (searchtype == 'name') {
     var QueryString = "SELECT *, count(*) over() as totalcount FROM  aquafeq.aquafrecipe WHERE collectname Ilike '%' || $1 || '%' OR collect1name Ilike '%' || $1 || '%' OR collect2name Ilike '%' || $1 || '%' OR collect3name Ilike '%' || $1 || '%' OR collect4name Ilike '%' || $1 || '%' OR collect5name Ilike '%' || $1 || '%' OR collect6name Ilike '%' || $1 || '%' ORDER BY recipenum asc limit 20 offset (($2- 1)*20);"
-  } else if (SearchType == 'number') {
+  } else if (searchtype == 'number') {
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectnum = $1 OR collect1num = $1 OR collect2num = $1 OR collect3num = $1 OR collect4num = $1 OR collect5num = $1 OR collect6num = $1 ORDER BY recipenum asc limit 20 offset (($2- 1)*20);"
   } else {
     res.redirect('/')
@@ -126,7 +126,7 @@ router.get('/:id', (req,res,next) => {
           StartPage: StartPage,
           EndPage: EndPage,
           TotalPage: TotalPage,
-          SearchType: encodeURIComponent(SearchType),
+          searchtype: encodeURIComponent(searchtype),
           Search: encodeURIComponent(Search),
       });
     }

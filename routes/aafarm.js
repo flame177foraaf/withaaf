@@ -165,9 +165,9 @@ router.get('/:id', (req,res,next) => {
 
   console.log(url.parse(req.url, true))
 
-  var SearchType = req.query.searchType;
+  var searchtype = req.query.searchtype;
 
-  var Search = req.query.searchText;
+  var Search = req.query.searchtext;
   if (Search == null ) {
     var Search = ""
   }
@@ -175,8 +175,8 @@ router.get('/:id', (req,res,next) => {
   var CurrentPage = parseInt(CurrentPage)
   var SearchPlus = "";
 
-  if (req.query.searchText2 != 'undefined') {
-    var Search2 = req.query.searchText2;
+  if (req.query.searchtext2 != 'undefined') {
+    var Search2 = req.query.searchtext2;
     var Search22 = [];
 
     if (typeof(Search2) == 'object') {
@@ -188,32 +188,32 @@ router.get('/:id', (req,res,next) => {
     }
     // 포 문 에서 search2 배열의 각각의 값중에서 빈 값이 있는 경우 빈 배열에 넣지않고 그냥 넘어가는 작업을 해야함, 이에 따라 아래의 타입 배열에 넣는 경우에서도 동일함
 
-    var SearchType2 = req.query.searchType2;
-    var SearchType22 = [];
-    if (typeof(SearchType2) == 'object') {
+    var searchtype2 = req.query.searchtype2;
+    var searchtype22 = [];
+    if (typeof(searchtype2) == 'object') {
       for (var i = 0; i < Search2.length; i++) {
-        SearchType22.push(SearchType2[i]) ;
+        searchtype22.push(searchtype2[i]) ;
       }
-    } else if(typeof(SearchType2) == 'string' ){
-      SearchType22.push(SearchType2) ;
+    } else if(typeof(searchtype2) == 'string' ){
+      searchtype22.push(searchtype2) ;
     }
     var Searchcount = Search22.length;
-    if (typeof(SearchType2) == 'string') {
-      var SearchPlus = SearchPlus+ ' AND ' + SearchType22+ ' Ilike ' +" '%"+ Search2 +"%' "
-    } else if (typeof(SearchType2) == 'object') {
+    if (typeof(searchtype2) == 'string') {
+      var SearchPlus = SearchPlus+ ' AND ' + searchtype22+ ' Ilike ' +" '%"+ Search2 +"%' "
+    } else if (typeof(searchtype2) == 'object') {
       for (var i = 0; i < Searchcount; i++) {
-        var SearchPlus = SearchPlus+ ' AND ' + SearchType22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+        var SearchPlus = SearchPlus+ ' AND ' + searchtype22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
       }
     }
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE " + SearchType +" Ilike $1 " + SearchPlus + " ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE " + searchtype +" Ilike $1 " + SearchPlus + " ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
   } else {
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE " + SearchType +" Ilike $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
+    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE " + searchtype +" Ilike $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
 
   }
   client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
     console.log(QueryString)
     console.log(Search)
-    console.log(SearchType)
+    console.log(searchtype)
     console.log(CurrentPage)
     console.log(SearchPlus)
     console.log(Search2)
@@ -258,13 +258,13 @@ router.get('/:id', (req,res,next) => {
       StartPage: StartPage,
       EndPage: EndPage,
       TotalPage: TotalPage,
-      SearchType: encodeURIComponent(SearchType),
+      searchtype: encodeURIComponent(searchtype),
       Search: encodeURIComponent(Search),
       SearchPlus: SearchPlus,
       Search2: encodeURIComponent(Search2),
       Search22: encodeURIComponent(Search22),
-      SearchType2: encodeURIComponent(SearchType2),
-      SearchType22: encodeURIComponent(SearchType22),
+      searchtype2: encodeURIComponent(searchtype2),
+      searchtype22: encodeURIComponent(searchtype22),
       Searchcount:Searchcount
 
 

@@ -27,8 +27,8 @@
     </div>
     <div class="" id="seach_form_id" >
       <form action="/aafgem/1"  accept-charset="utf-8" method="get">
-        <input type="text" placeholder="찾기 버튼을 누르세요" name="searchText" style="width:200px">
-        <select name="searchType">
+        <input type="text" placeholder="찾기 버튼을 누르세요" name="searchtext" style="width:200px">
+        <select name="searchtype">
             <option value="name">이름 / 강적</option>
             <option value="effect">효과</option>
         </select>
@@ -100,19 +100,19 @@
                 <div class=""  id="pagelist" >
                   <td colspan="6" style= "text-align:center; font-size:24px">
                     <% if (CurrentPage > PageSize){ %>
-                      <a href="/aafgem/1?searchText=<%-Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
-                      <a href="/aafgem/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
+                      <a href="/aafgem/1?searchtext=<%-Search %>&searchtype=<%- searchtype %>"> ◀◀ </a>
+                      <a href="/aafgem/<%- StartPage-1 %>?searchtext=<%- Search %>&searchtype=<%- searchtype %>"> ◀ </a>
                     <% } %>
                     <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
                       <% if (iCount == CurrentPage) { %>
                         <b class="btnnonactive"><%- iCount %></b>
                       <% } else { %>
-                        <a href="/aafgem/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>" class="btnactive"><%- iCount %></a>
+                        <a href="/aafgem/<%- iCount %>?searchtext=<%- Search %>&searchtype=<%- searchtype %>" class="btnactive"><%- iCount %></a>
                       <% } %>
                     <% } %>
                     <% if (EndPage < TotalPage){ %>
-                      <a href="/aafgem/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>">  ▶ </a>
-                      <a href="/aafgem/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
+                      <a href="/aafgem/<%- EndPage+1 %>?searchtext=<%- Search %>&searchtype=<%- searchtype %>">  ▶ </a>
+                      <a href="/aafgem/<%- TotalPage %>?searchtext=<%- Search %>&searchtype=<%- searchtype %>"> ▶▶ </a>
                     <% } %>
                   </td>
                 </div>

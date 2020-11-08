@@ -157,9 +157,9 @@ router.post('/fixitem', (req,res,next) => {
 
 //일반 검색
 router.get('/:id', (req,res,next) => {
-  var SearchType = req.query.searchType;
-  if (SearchType === 'name') {
-    var Search = req.query.searchText;
+  var searchtype = req.query.searchtype;
+  if (searchtype === 'name') {
+    var Search = req.query.searchtext;
     if (Search == null ) {
       var Search = ""
     }
@@ -199,11 +199,11 @@ router.get('/:id', (req,res,next) => {
         StartPage: StartPage,
         EndPage: EndPage,
         TotalPage: TotalPage,
-        SearchType: encodeURIComponent(SearchType),
+        searchtype: encodeURIComponent(searchtype),
         Search: encodeURIComponent(Search),
       });
     });
-  } else if (SearchType === 'effect') {
+  } else if (searchtype === 'effect') {
     var CurrentPage = req.params.id;
     var CurrentPage = parseInt(CurrentPage)
 
@@ -236,7 +236,7 @@ router.get('/:id', (req,res,next) => {
         StartPage: StartPage,
         EndPage: EndPage,
         TotalPage: TotalPage,
-        SearchType: encodeURIComponent(SearchType),
+        searchtype: encodeURIComponent(searchtype),
         Search: encodeURIComponent(Search),
       });
     });

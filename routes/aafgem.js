@@ -104,17 +104,17 @@ router.post('/add_gem', (req,res,next) => {
 
 
 router.get('/:id', (req,res,next) => {
-  var SearchType = req.query.searchType;
-  var Search = req.query.searchText;
+  var searchtype = req.query.searchtype;
+  var Search = req.query.searchtext;
   if (Search == null ) {
     var Search = ""
   }
   var CurrentPage = req.params.id;
   var CurrentPage = parseInt(CurrentPage)
 
-  if (SearchType == 'name') {
+  if (searchtype == 'name') {
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where collectname Ilike $1 ORDER BY gemid asc limit 10 offset (($2- 1)*10);"
-  } else if (SearchType == 'effect') {
+  } else if (searchtype == 'effect') {
     var QueryString = "SELECT *, count(*) over() as totalcount, row_number(*) over() FROM aquafeq.aquafgem where gemeffect Ilike $1 ORDER BY gemid asc limit 10 offset (($2- 1)*10);"
   } else {
     res.redirect('/')
@@ -155,7 +155,7 @@ router.get('/:id', (req,res,next) => {
       StartPage: StartPage,
       EndPage: EndPage,
       TotalPage: TotalPage,
-      SearchType: encodeURIComponent(SearchType),
+      searchtype: encodeURIComponent(searchtype),
       Search: encodeURIComponent(Search),
     });
   });

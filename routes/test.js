@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
+var bodyParser = require('body-parser');
 var url = require('url');
+
+
 const { Client } = require('pg');
 
 const client = new Client({
@@ -11,135 +14,128 @@ const client = new Client({
 
 client.connect();
 
-router.get('/', (req,res,next) => {
-  res.render('test', {
-    title:'AAF 레시피'
-  });
-});
 
-router.get('/fixrecipe', (req,res,next) => {
-  var QueryString = "select recipenum from aquafeq.aquafrecipe"
-  client.query(QueryString, (err, response) => {
-    var SeachRecipeNum = req.query.SeachNum;
-    var QueryString = "select * from aquafeq.aquafrecipe where recipenum = $1"
-    client.query(QueryString, [SeachRecipeNum], (err, response) => {
 
-      res.render ('fixrecipe', {
-        title:SeachRecipeNum + ' 번 레시피 수정',
-        data:response.rows[0]
-      });
+router.get('/', (req,res, next) => {
+  var psql = "SELECT * FROM aquafeq.freeboard ORDER BY fbid DESC"
+  client.query(psql, (err, response) => {
+    res.render('test', {
+      title: '자유게시판',
+      data: response.rows
     });
   });
 });
 
-router.post('/fixrecipe', (req,res,next) => {
-  var RecipeN = req.body.recipenum;
-  //req.body.name ... id와 항상 헷갈리지 말자 ㅠㅠ
+/*
+router.get('/test/:page', (req,res, next) => {
+  var page = req.params.page
+  var totalcount ="SELECT count(*) from aquafeq.freeboard;"
 
-  var Collectname = req.body.collectname
-
-  var Collectnum = req.body.collectnum
-
-  var Collect1name = req.body.collect1name
-  var Collect2name = req.body.collect2name
-  var Collect3name = req.body.collect3name
-  var Collect4name = req.body.collect4name
-  var Collect5name = req.body.collect5name
-  var Collect6name = req.body.collect6name
-  var Collect1num = req.body.collect1num
-  var Collect2num = req.body.collect2num
-  var Collect3num = req.body.collect3num
-  var Collect4num = req.body.collect4num
-  var Collect5num = req.body.collect5num
-  var Collect6num = req.body.collect6num
-  var Collect1unit = req.body.collect1unit
-  var Collect2unit = req.body.collect2unit
-  var Collect3unit = req.body.collect3unit
-  var Collect4unit = req.body.collect4unit
-  var Collect5unit = req.body.collect5unit
-  var Collect6unit = req.body.collect6unit
+  var psql = "SELECT (row_number() OVER(ORDER BY fbid)) AS rownum, fbtitle, fbname, fbcreatedat, count(*) OVER() AS totalcount FROM aquafeq.freeboard ORDER BY fbid DESC limit 10 offset ($1 - 1) * 10";
+  client.query(psql, ['%' + page + '%'], (err, response) => {
+    res.render('boardtest', {
+      title: '자유게시판',
+      data: response.rows,
 
 
-  var QueryString = "UPDATE aquafeq.aquafrecipe SET (collectnum,   collectname,  collect1num,  collect1name,  collect1unit,  collect2num,  collect2name,  collect2unit,  collect3num,  collect3name,  collect3unit,  collect4num,  collect4name,  collect4unit,  collect5num,  collect5name,  collect5unit,  collect6num,  collect6name,  collect6unit) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20 )  WHERE recipenum = $21 returning *"
-  //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
-  client.query(QueryString, [Collectnum, Collectname, Collect1num, Collect1name,   Collect1unit, Collect2num,   Collect2name,   Collect2unit, Collect3num, Collect3name,  Collect3unit, Collect4num, Collect4name,  Collect4unit, Collect5num,  Collect5name,  Collect5unit, Collect6num, Collect6name,Collect6unit, RecipeN], (err, response) => {
-
-    var QueryString = "select * from aquafeq.aquafrecipe where recipenum = $1"
-    client.query ( QueryString, [RecipeN],  (err, response) => {
-      console.log('쿼리스트링' + QueryString)
-      res.render('test', {
-        title : RecipeN + ' 번 레시피 수정 완료',
-        data: response.rows
-      })
     });
   });
 });
+*/
+router.get('/write', (req, res, next) => {
+  res.render('boardwrite' ,{
+    title: '글 작성하기'
+  });
+});
+
+router.get('/:id', (req, res, next) => {
+  var fbid = req.params.id;
+  console.log(fbid)
+  console.log(typeof(fbid))
+  var fbid = parseInt(fbid)
+  console.log(fbid)
+  console.log(typeof(fbid))
 
 
-router.get('/:id', (req,res,next) => {
-  var SearchType = req.query.searchType;
-  var Search = req.query.searchText;
-  console.log(Search)
-  console.log(encodeURIComponent(Search))
-  var CurrentPage = req.params.id;
-  var CurrentPage = parseInt(CurrentPage)
-  var QueryString;
-  if (SearchType == 'name') {
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM  aquafeq.aquafrecipe WHERE collectname Ilike '%' || $1 || '%' OR collect1name Ilike '%' || $1 || '%' OR collect2name Ilike '%' || $1 || '%' OR collect3name Ilike '%' || $1 || '%' OR collect4name Ilike '%' || $1 || '%' OR collect5name Ilike '%' || $1 || '%' OR collect6name Ilike '%' || $1 || '%' ORDER BY recipenum asc limit 20 offset (($2- 1)*20);"
-  } else if (SearchType == 'number') {
-    var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectnum = $1 OR collect1num = $1 OR collect2num = $1 OR collect3num = $1 OR collect4num = $1 OR collect5num = $1 OR collect6num = $1 ORDER BY recipenum asc limit 20 offset (($2- 1)*20);"
-  } else {
-    res.redirect('/')
-  }
-  client.query(QueryString, [Search,  CurrentPage], (err, response) => {
-    var TotalCount;
+  var QueryString = "SELECT * FROM aquafeq.freeboard WHERE fbid = $1"
+  var QueryStringComment = "SELECT * FROM aquafeq.fb_comment WHERE fbid = $1"
+  client.query(QueryString, [fbid], (err, response) => {
+    console.log(QueryString)
     if (err) {
       console.log(err)
-      res.redirect('/')
-    } else {
-      if(typeof(response.rows[0]) !== "object") {
-          var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      var DataCountInPage = 20;
-      var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
-
-      if (TotalPage < CurrentPage) {
-        CurrentPage = TotalPage;
-      };
-      var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      var EndPage = StartPage + PageSize -1;
-      if (EndPage > TotalPage) {
-        EndPage = TotalPage;
-      };
-      console.log(encodeURIComponent(Search))
-      console.log(encodeURIComponent(Search))
-
-      console.log(Search)
-      console.log(SearchType)
-
-      res.render('test', {
-          title: 'AAF 레시피',
-          data: response.rows,
-          CurrentPage: CurrentPage,
-          PageSize: PageSize,
-          StartPage: StartPage,
-          EndPage: EndPage,
-          TotalPage: TotalPage,
-          SearchType: encodeURIComponent(SearchType),
-          Search: encodeURIComponent(Search),
-      });
+      res.redirect('/test')
     }
-  });
 
+    client.query(QueryStringComment, [fbid], (err, response_comment) => {
+      console.log(QueryStringComment)
+      if (err) {
+        console.log(err)
+        res.redirect('/test')
+      }
+      res.render('showboard', {
+        data: response.rows[0],
+        data_comment: response_comment.rows
+      });
+    });
+  });
 });
 
 
 
+router.post('/', (req, res, next) => {
 
+
+  var BoardBody = req.body.boardbody;
+  BoardBody = BoardBody.replace(/(?:\r\n|\r|\n)/g, '<br />');
+  var QueryString = "set timezone TO 'Asia/Seoul'";
+  var Commentcount = 0;
+  client.query(QueryString, (err,response) => {
+    var QueryString = "INSERT INTO aquafeq.freeboard(fbtitle, fbbody, fbname, fbcreatedat, commentcount) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI:SS'), $4);"
+    client.query(QueryString, [req.body.title, BoardBody, req.body.writer, Commentcount], (err, response) => {
+      if (err) {
+        console.log(err);
+      } else {
+        var psql = "SELECT * FROM aquafeq.freeboard"
+        client.query(psql, (err, response) => {
+          res.redirect('/test')
+        });
+      };
+    });
+  })
+
+});
+
+router.post('/comment', (req, res, next) => {
+
+  var Comment_body = req.body.comment_box;
+  var Comment_writer = req.body.comment_writer;
+  var Fbid =req.body.fbid;
+  var Count_Comment = req.body.commentcount;
+  if (Count_Comment == null) {
+    Count_Comment = 0;
+  }
+  Count_Comment = parseInt(Count_Comment)
+
+  var url ='/test/'+Fbid
+
+
+  Comment_body = Comment_body.replace(/(?:\r\n|\r|\n)/g, '<br />');
+  var QueryString = "set timezone TO 'Asia/Seoul'";
+  client.query(QueryString, (err,response) => {
+    if (err) {
+      console.log(err);
+    }
+    var QueryString = "INSERT INTO aquafeq.fb_comment(fbid, writer, body, time) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI'));"
+    client.query(QueryString, [Fbid, Comment_writer, Comment_body], (err, response) => {
+      if (err) {
+        console.log(err);
+      }
+      Count_Comment = Count_Comment+1;
+      var QueryString = "UPDATE aquafeq.freeboard SET commentcount = $1 where fbid = $2"
+      client.query(QueryString, [Count_Comment, Fbid], (err, response) => {
+        res.redirect(url)
+      });
+    });
+  })
+});
 module.exports = router;

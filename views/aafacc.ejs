@@ -23,8 +23,8 @@
 
       var add =
       '<div class="" id="seach_form_id2" name="seach_form_id2">'
-      +'<input type="text" placeholder="모든 항목" name="searchText2" style="width:200px">'
-      + '<select name="searchType2">'
+      +'<input type="text" placeholder="모든 항목" name="searchtext2" style="width:200px">'
+      + '<select name="searchtype2">'
       +    '<option value="accfeat">피트</option>'
       +    '<option value="acccustom">커스텀</option>'
       +'</select>'
@@ -82,8 +82,8 @@
       <form action="/aafacc/1" accept-charset="utf-8" method="get">
         <div class="" id="seach_form_id" name="seach_form_id">
 
-          <input type="text" placeholder="모든 항목" name="searchText" style="width:200px">
-          <select name="searchType">
+          <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">
+          <select name="searchtype">
               <option value="accname">이름</option>
               <option value="accproperty">업그레이드</option>
               <option value="accfeat">피트</option>
@@ -229,10 +229,10 @@
                 <div class="" id="pagelist" >
                   <td colspan="10" style= "text-align:center; font-size:24px">
                     <% function FuncPageurl(pagenumber) { %>
-                      <% var pageurl = "/aafacc/" + pagenumber + "?searchText=" + Search + "&searchType=" +  SearchType %>
+                      <% var pageurl = "/aafacc/" + pagenumber + "?searchtext=" + Search + "&searchtype=" +  searchtype %>
                       <% if (Searchcount !== 'undefined') { %>
                         <% for (var i = 0; i < Searchcount; i++) { %>
-                          <% pageurl = pageurl + "&searchText2=" + Search22[i]  + "&searchType2=" +  SearchType22[i] %>
+                          <% pageurl = pageurl + "&searchtext2=" + Search22[i]  + "&searchtype2=" +  searchtype22[i] %>
                         <% } %>
                       <% } %>
                       <% return pageurl %>

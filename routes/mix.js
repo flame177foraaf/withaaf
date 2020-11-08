@@ -47,8 +47,8 @@ router.get('/', (req, res, next) => {
 console.log('asdf')
 
 /*
-  if(req.query.searchType === 'name') {
-    var searchingtext = req.query.searchText
+  if(req.query.searchtype === 'name') {
+    var searchingtext = req.query.searchtext
     var sqlwp = 'SELECT * FROM aquafwp WHERE wpname Ilike ?' ;
     connection.query(sqlwp, "%" + searchingtext + "%",function(err, results, field) {
       res.render('mix', {

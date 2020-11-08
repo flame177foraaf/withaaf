@@ -57,9 +57,9 @@
 
     <div class="" id="seach_form_id" >
       <form action="/featsup/1" accept-charset="UTF-8" method="get" >
-        <input type="text" placeholder="모든 항목" name="searchText" style="width:200px">
+        <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">
 
-        <select name="searchType">
+        <select name="searchtype">
             <option value="name">이름</option>
             <option value="feat">피트</option>
             <option value="reversefeat">역피트</option>
@@ -170,8 +170,8 @@
                     <td colspan="5" style= "text-align:center; font-size:24px">
                       <% if (CurrentPage > PageSize){ %>
                         <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-                        <a href="/featsup/1?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀◀ </a>
-                        <a href="/featsup/<%- StartPage-1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ◀ </a>
+                        <a href="/featsup/1?searchtext=<%- Search %>&searchtype=<%- searchtype %>"> ◀◀ </a>
+                        <a href="/featsup/<%- StartPage-1 %>?searchtext=<%- Search %>&searchtype=<%- searchtype %>"> ◀ </a>
                       <% } %>
                       <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
                         <% if (iCount == CurrentPage) { %>
@@ -179,14 +179,14 @@
                         <% } else { %>
                           <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                          <a href="/featsup/<%- iCount %>?searchText=<%- Search %>&searchType=<%- SearchType %>" class="btnactive"><%- iCount %></a>
+                          <a href="/featsup/<%- iCount %>?searchtext=<%- Search %>&searchtype=<%- searchtype %>" class="btnactive"><%- iCount %></a>
                         <% } %>
                       <% } %>
                       <% if (EndPage < TotalPage){ %>
                         <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
 
-                        <a href="/featsup/<%- EndPage+1 %>?searchText=<%- Search %>&searchType=<%- SearchType %>">  ▶ </a>
-                        <a href="/featsup/<%- TotalPage %>?searchText=<%- Search %>&searchType=<%- SearchType %>"> ▶▶ </a>
+                        <a href="/featsup/<%- EndPage+1 %>?searchtext=<%- Search %>&searchtype=<%- searchtype %>">  ▶ </a>
+                        <a href="/featsup/<%- TotalPage %>?searchtext=<%- Search %>&searchtype=<%- searchtype %>"> ▶▶ </a>
                       <% } %>
                     </td>
                   </div>
