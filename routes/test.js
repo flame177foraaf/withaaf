@@ -94,7 +94,7 @@ router.get('/search', (req,res,next) => {
         if (SearchingType === 'name'){
           var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_name Ilike $1 order by t1.id, mon_lv;"
         } else  if (SearchingType === 'property'){
-          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_property Ilike $1 NOT FieldName IN ('Training') order by t1.id, mon_lv;;"
+          var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_property Ilike $1 order by t1.id, mon_lv;"
         } else if (SearchingType === 'type'){
           var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_type Ilike $1 order by t1.id, mon_lv;"
         } else if (SearchingType === 'collect') {
