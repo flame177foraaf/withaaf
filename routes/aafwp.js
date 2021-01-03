@@ -30,7 +30,7 @@ router.get('/addwp', (req,res,next) => {
 router.post('/', (req, res, next) => {
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade !== '') {
-      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
   var Wpname = req.body.wpname;
@@ -42,23 +42,23 @@ router.post('/', (req, res, next) => {
   var Wpether = req.body.wpether;
   var Wpstats = req.body.wpstats;
     if (Wpstats !== '') {
-      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Wpproperty = req.body.wpproperty;
     if (Wpproperty !== '') {
-      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Wpfeat = req.body.wpfeat;
     if (Wpfeat !== '') {
-      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Wpcustom = req.body.wpcustom;
     if (Wpcustom !== ''){
-      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Wpup = req.body.wpup;
     if (Wpup !== '') {
-      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var QueryString = "INSERT INTO aquafeq.aquafwp(wpgrade, wpname, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
   client.query(QueryString, [Wpgrade, Wpname, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup], (err, response) => {
@@ -104,7 +104,7 @@ router.post('/fixwp', (req,res,next) => {
     if (Wpgrade == '') {
       Wpgrade = null
     } else if (Wpgrade !== '') {
-      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
     console.log(req.body.wpgrade)
 
@@ -129,32 +129,32 @@ router.post('/fixwp', (req,res,next) => {
     if (Wpstats == '') {
       Wpstats = null
     } else if (Wpstats !== '') {
-      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
   var Wpproperty = req.body.wpproperty;
     if (Wpproperty == '') {
       Wpproperty = null
     } else if (Wpproperty !== '') {
-      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Wpfeat = req.body.wpfeat;
     if (Wpfeat == '') {
       Wpfeat = null
     } else if (Wpfeat !== '') {
-      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Wpcustom = req.body.wpcustom;
     if (Wpcustom == '') {
       Wpcustom = null
     } else if (Wpcustom !== ''){
-      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Wpup = req.body.wpup;
     if (Wpup == '') {
       Wpup = null
     } else if (Wpup !== '') {
-      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
 
