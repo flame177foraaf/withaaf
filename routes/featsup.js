@@ -45,20 +45,20 @@ router.post('/fixfeat', (req,res,next) => {
 
   var Featgrade =req.body.grade;
     if (Featgrade !== '') {
-      Featgrade = Featgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Featgrade = Featgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Featname = req.body.name;
   var Feat = req.body.feat;
     if (Feat !== '') {
-      Feat = Feat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Feat = Feat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Reversefeat =req.body.reversefeat;
     if (Reversefeat !== '') {
-      Reversefeat = Reversefeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Reversefeat = Reversefeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Featup = req.body.up;
     if (Featup !== '') {
-      Featup = Featup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Featup = Featup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var QueryString = "UPDATE aquafeq.featsup SET (featgrade, feat, reversefeat, featup, featname) = ($1, $2, $3, $4, $5)  WHERE featid = $6 returning *"
   client.query(QueryString, [Featgrade, Feat, Reversefeat, Featup, Featname, Eqid], (err, response) => {
@@ -82,20 +82,20 @@ router.get('/add_feat', (req,res,next) => {
 router.post('/add_feat', (req,res,next) => {
   var Featgrade =req.body.grade;
     if (Featgrade !== '') {
-      Featgrade = Featgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Featgrade = Featgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Featname = req.body.name;
   var Feat = req.body.feat;
     if (Feat !== '') {
-      Feat = Feat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Feat = Feat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Reversefeat =req.body.reversefeat;
     if (Reversefeat !== '') {
-      Reversefeat = Reversefeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Reversefeat = Reversefeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Featup = req.body.up;
     if (Featup !== '') {
-      Featup = Featup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Featup = Featup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var QueryString = "INSERT INTO aquafeq.featsup(featgrade, featname, feat, reversefeat, featup) values ($1, $2, $3, $4, $5);"
   client.query(QueryString, [Featgrade, Featname, Feat, Reversefeat, Featup], (err, response) => {

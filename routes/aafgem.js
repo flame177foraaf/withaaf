@@ -46,14 +46,14 @@ router.post('/fixgem', (req,res,next) => {
 
   var Gemgrade =req.body.grade;
     if (Gemgrade !== '') {
-      Gemgrade = Gemgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Gemgrade = Gemgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Collectname = req.body.name;
   var Gemname = req.body.gemname;
   var Gemobject =req.body.obj;
   var Gemeffect = req.body.effect;
     if (Gemeffect !== '') {
-      Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var QueryString = "UPDATE aquafeq.aquafgem SET (gemgrade, collectname, gemobject, gemeffect, gemname) = ($1, $2, $3, $4, $5)  WHERE gemid = $6 returning *"
   client.query(QueryString, [Gemgrade, Collectname, Gemobject, Gemeffect, Gemname, Eqid], (err, response) => {
@@ -80,14 +80,14 @@ router.get('/add_gem', (req,res,next) => {
 router.post('/add_gem', (req,res,next) => {
   var Gemgrade =req.body.grade;
   if (Gemgrade !== '') {
-    Gemgrade = Gemgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    Gemgrade = Gemgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
   var Collectname = req.body.name;
   var Gemname = req.body.gemname;
   var Gemobject =req.body.obj;
   var Gemeffect = req.body.effect;
   if (Gemeffect !== '') {
-    Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
   var QueryString = "INSERT INTO aquafeq.aquafgem(gemgrade, collectname, gemname, gemobject, gemeffect) values ($1, $2, $3, $4, $5);"
   client.query(QueryString, [Gemgrade, Collectname, Gemname, Gemobject, Gemeffect], (err, response) => {

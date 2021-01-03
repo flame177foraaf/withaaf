@@ -27,7 +27,7 @@ router.get('/addarm', (req,res,next) => {
 router.post('/', (req, res, next) => {
   var Armgrade = req.body.armgrade;
     if (Armgrade !== '') {
-      Armgrade = Armgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armgrade = Armgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
   var Armname = req.body.armname;
@@ -39,23 +39,23 @@ router.post('/', (req, res, next) => {
   var Armether = req.body.armether;
   var Armstats = req.body.armstats;
     if (Armstats !== '') {
-      Armstats = Armstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armstats = Armstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Armproperty = req.body.armproperty;
     if (Armproperty !== '') {
-      Armproperty = Armproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armproperty = Armproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Armfeat = req.body.armfeat;
     if (Armfeat !== '') {
-      Armfeat = Armfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armfeat = Armfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Armcustom = req.body.armcustom;
     if (Armcustom !== ''){
-      Armcustom = Armcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armcustom = Armcustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Armup = req.body.armup;
     if (Armup !== '') {
-      Armup = Armup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armup = Armup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var QueryString = "INSERT INTO aquafeq.aquafarm(armgrade, Armname, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
   client.query(QueryString, [Armgrade, Armname, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup], (err, response) => {
@@ -98,7 +98,7 @@ router.post('/fixarm', (req,res,next) => {
     if (Armgrade == '') {
       Armgrade = null
     } else if (Armgrade !== '') {
-      Armgrade = Armgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armgrade = Armgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Armname = req.body.armname;
   var Armlimit = req.body.armlimit;
@@ -117,32 +117,32 @@ router.post('/fixarm', (req,res,next) => {
     if (Armstats == '') {
       Armstats = null
     } else if (Armstats !== '') {
-      Armstats = Armstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armstats = Armstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
   var Armproperty = req.body.armproperty;
     if (Armproperty == '') {
       Armproperty = null
     } else if (Armproperty !== '') {
-      Armproperty = Armproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armproperty = Armproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Armfeat = req.body.armfeat;
     if (Armfeat == '') {
       Armfeat = null
     } else if (Armfeat !== '') {
-      Armfeat = Armfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armfeat = Armfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Armcustom = req.body.armcustom;
     if (Armcustom == '') {
       Armcustom = null
     } else if (Armcustom !== ''){
-      Armcustom = Armcustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armcustom = Armcustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Armup = req.body.armup;
     if (Armup == '') {
       Armup = null
     } else if (Armup !== '') {
-      Armup = Armup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Armup = Armup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
 

@@ -182,13 +182,13 @@ router.get('/ing', (req,res,next) => {
         var result_custom = "재조립할 커스텀이 없네요~_~";
 
       } else {
-        var eqcustom = Allcustom.split('<br />');
+        var eqcustom = Allcustom.split('<br>');
         var result_custom = 'null';
 
         for (var i = 0; i < eqcustom.length; i++) {
 
           if (eqcustom[i].indexOf('[') === -1) {
-            var result_custom = "커스텀이 적용될 확률이 얼마인지 모르겠어요." +"<br />"+"그래서 주사위를 못굴립니다. 호호."
+            var result_custom = "커스텀이 적용될 확률이 얼마인지 모르겠어요." +"<br>"+"그래서 주사위를 못굴립니다. 호호."
           } else {
             if (eqcustom[i].indexOf("웨이블렘") == -1) {
               var find_cus_val1 = eqcustom[i].indexOf("(");
@@ -235,13 +235,13 @@ router.get('/ing', (req,res,next) => {
                     if (result_custom === 'null') {
                       var result_custom = cut_cus_name + rancustom;
                     } else {
-                      var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+                      var result_custom = result_custom +"<br>" + cut_cus_name + rancustom;
                     }
                   } else {
                     if (result_custom === 'null') {
                       var result_custom = cut_cus_name +"+ "+ rancustom;
                     } else {
-                      var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
+                      var result_custom = result_custom +"<br>" + cut_cus_name +"+ "+ rancustom;
                     }
                   }
                 }
@@ -298,13 +298,13 @@ router.get('/ing', (req,res,next) => {
                     if (result_custom === 'null') {
                       var result_custom = cut_cus_name + rancustom;
                     } else {
-                      var result_custom = result_custom +"<br />" + cut_cus_name + rancustom;
+                      var result_custom = result_custom +"<br>" + cut_cus_name + rancustom;
                     }
                   } else {
                     if (result_custom === 'null') {
                       var result_custom = cut_cus_name +"+ "+ rancustom;
                     } else {
-                      var result_custom = result_custom +"<br />" + cut_cus_name +"+ "+ rancustom;
+                      var result_custom = result_custom +"<br>" + cut_cus_name +"+ "+ rancustom;
                     }
                   }
                 }

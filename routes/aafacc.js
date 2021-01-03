@@ -27,7 +27,7 @@ router.get('/addacc', (req,res,next) => {
 router.post('/', (req, res, next) => {
   var Accgrade = req.body.accgrade;
     if (Accgrade !== '') {
-      Accgrade = Accgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Accgrade = Accgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
   var Accname = req.body.accname;
@@ -39,23 +39,23 @@ router.post('/', (req, res, next) => {
   var Accether = req.body.accether;
   var Accstats = req.body.accstats;
     if (Accstats !== '') {
-      Accstats = Accstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Accstats = Accstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Accproperty = req.body.accproperty;
     if (Accproperty !== '') {
-      Accproperty = Accproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Accproperty = Accproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Accfeat = req.body.accfeat;
     if (Accfeat !== '') {
-      Accfeat = Accfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Accfeat = Accfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Acccustom = req.body.acccustom;
     if (Acccustom !== ''){
-      Acccustom = Acccustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Acccustom = Acccustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Accup = req.body.accup;
     if (Accup !== '') {
-      Accup = Accup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Accup = Accup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var QueryString = "INSERT INTO aquafeq.aquafacc(accgrade, accname, acclimit, accsocket, accether, accstats, accproperty, accfeat, acccustom, accup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
   client.query(QueryString, [Accgrade, Accname, Acclimit, Accsocket, Accether, Accstats, Accproperty, Accfeat, Acccustom, Accup], (err, response) => {
@@ -98,7 +98,7 @@ router.post('/fixacc', (req,res,next) => {
     if (Accgrade == '') {
       Accgrade = null
     } else if (Accgrade !== '') {
-      Accgrade = Accgrade.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Accgrade = Accgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Accname = req.body.accname;
   var Acclimit = req.body.acclimit;
@@ -117,32 +117,32 @@ router.post('/fixacc', (req,res,next) => {
     if (Accstats == '') {
       Accstats = null
     } else if (Accstats !== '') {
-      Accstats = Accstats.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Accstats = Accstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
   var Accproperty = req.body.accproperty;
     if (Accproperty == '') {
       Accproperty = null
     } else if (Accproperty !== '') {
-      Accproperty = Accproperty.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Accproperty = Accproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Accfeat = req.body.accfeat;
     if (Accfeat == '') {
       Accfeat = null
     } else if (Accfeat !== '') {
-      Accfeat = Accfeat.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Accfeat = Accfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Acccustom = req.body.acccustom;
     if (Acccustom == '') {
       Acccustom = null
     } else if (Acccustom !== ''){
-      Acccustom = Acccustom.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Acccustom = Acccustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Accup = req.body.accup;
     if (Accup == '') {
       Accup = null
     } else if (Accup !== '') {
-      Accup = Accup.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      Accup = Accup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
 
