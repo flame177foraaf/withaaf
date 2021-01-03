@@ -332,16 +332,16 @@
                 <% featlink2.push( featlink1[i].indexOf(">")); %>
                 <% if (featlink2[i] != -1) { %>
                   <% if (feattext[i].indexOf('티어') != -1){ %>
-                    <% featlink3 = featlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+                    <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
                   <% } else { %>
-                    <% featlink3 = featlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+                    <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
                   <% } %>
                 <% } %>
               <% } %>
               <td><%- featlink3 %></td>
 
               <% var text = item.wpcustom.replace(/\s/g," ") %>
-              <% var customtext = text.split('<br />') %>
+              <% var customtext = text.split('<br>') %>
               <% var customlink1 = text.split(" ("); %>
               <% var customlink2 = [customlink1[0].indexOf(">")] %>
                 <% if (customtext[0].indexOf("(") != -1) { %>
@@ -354,10 +354,10 @@
                   <% if (customtext[i].indexOf("(") != -1) { %>
                     <% customlink2.push( customlink1[i].indexOf(">")); %>
                     <% if (customlink2[i] != -1) { %>
-                      <% customlink3 = customlink3 + '<br />' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                      <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
                     <% } %>
                   <% } else { %>
-                    <% customlink3 = customlink3 + '<br />' + customtext[i] %>
+                    <% customlink3 = customlink3 + '<br>' + customtext[i] %>
                   <% } %>
                 <% } %>
 
