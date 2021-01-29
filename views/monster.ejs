@@ -5,6 +5,7 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
 
   <style>
+
     #left_sidenav {
       height: 100%;
       width: 15%;
@@ -22,6 +23,7 @@
       text-decoration: none;
       color: black;
       display: block;
+      cursor:pointer;
     }
 
     #left_sidenav a:hover {
@@ -42,9 +44,10 @@
       font-size: 14px;
       padding-left: 10px;
 
-      display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
+      /* display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */ */
     }
 
+    #left_sidenav .hide{display:none;}
 
 
   </style>
@@ -62,6 +65,25 @@
   </script>
 
   <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
+
+  <script type="text/javascript">
+
+  $(document).ready(function(){
+        // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+        $("#left_sidenav>ul>li>a").click(function(){
+            var submenu = $(this).next("ul");
+
+            // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+            if( submenu.is(":visible") ){
+                submenu.slideUp();
+            }else{
+                submenu.slideDown();
+            }
+        });
+    });
+
+
+  </script>
   <script type="text/javascript">
   $(document).ready( function() {
 
