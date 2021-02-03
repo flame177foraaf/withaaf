@@ -229,8 +229,8 @@ router.get('/:id', async function(req,res,next) {
 
     }
 
-      // console.log('req.query.searchtype' + Search);
-      // console.log('req.query.searchtype' + searchtype);
+      console.log('req.query.searchtype : ' + Search);
+      console.log('req.query.searchtype : ' + searchtype);
       // console.log(Search);
       // console.log(searchtype);
       // console.log(decodeURIComponent(Search));
