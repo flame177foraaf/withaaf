@@ -244,7 +244,7 @@ router.get('/:id', async function(req,res,next) {
       // console.log(Search2)
       // console.log(Search22)
       // console.log('QueryString' + QueryString)
-    await client.query(QueryString, ['%' + Search +'%', CurrentPage], funtion(err, response) {
+    await client.query(QueryString, ['%' + Search +'%', CurrentPage], function(err, response) {
       if (err) {
       console.log(err)
         res.redirect('/aafwp');
@@ -315,7 +315,7 @@ router.get('/:id', async function(req,res,next) {
       var QueryString = "SELECT * , count(*) over() as totalcount  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
     }
 
-    await client.query(QueryString, [Search, CurrentPage], funtion(err, response) {
+    await client.query(QueryString, [Search, CurrentPage], function(err, response) {
       if (err) {
         console.log(err)
         res.redirect('/aafwp');
