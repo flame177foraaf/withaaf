@@ -12,12 +12,6 @@ var client = new Client({
 
 client.connect();
 
-var client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  // ssl: true,
-});
-
-client.connect();
 router.get('/', async function(req,res,next) {
   res.render('aafwp', {
     title:'AAF 장비'
