@@ -75,12 +75,12 @@ router.post('/', async (req, res, next)  => {
 });
 
 //무기 변경 라우트
-router.get('/fixwp', (req,res,next) => {
-  var QueryString = "select wpname from aquafeq.aquafwp"
-  client.query(QueryString, (err, response) => {
+router.get('/fixwp', async function(req,res,next) {
+  var QueryString = "select wpname from aquafeq.aquafwp";
+    await client.query(QueryString, function(err, response){
     var Select_name = req.query.Seachname;
-    var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
-    client.query(QueryString, [Select_name], (err, response) => {
+    var QueryString = "select * from aquafeq.aquafwp where wpname = $1";
+     client.query(QueryString, [Select_name], (err, response) => {
       if(typeof(response.rows[0]) !== "object") {
         res.render ('addwp', {
           title: '신규 장비 ' + Select_name + ' 등록',
@@ -177,8 +177,8 @@ router.post('/fixwp', (req,res,next) => {
 });
 
 // 일반 검색
-router.get('/:id', (req,res,next) => {
-  console.log(url.parse(req.url, true))
+router.get('/:id', async function(req,res,next) {
+  // console.log(url.parse(req.url, true))
 
   var CurrentPage = req.params.id;
   var CurrentPage = parseInt(CurrentPage)
@@ -199,8 +199,8 @@ router.get('/:id', (req,res,next) => {
 
 
     if (Search2 !== undefined) {
-      console.log('추가 검색' + Search2)
-      console.log('추가 검색타입 '+ typeof(Search2))
+      // console.log('추가 검색' + Search2)
+      // console.log('추가 검색타입 '+ typeof(Search2))
       if (typeof(Search2) == 'object') {
         for (var i = 0; i < Search2.length; i++) {
           Search22.push(Search2[i]) ;
@@ -225,7 +225,7 @@ router.get('/:id', (req,res,next) => {
           var SearchPlus = SearchPlus+ ' AND ' + searchtype22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
         }
       }
-      console.log('req.query.searchtext2 !== undefined' + SearchPlus)
+      // console.log('req.query.searchtext2 !== undefined' + SearchPlus)
       var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + searchtype +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
 
     } else {
@@ -233,18 +233,18 @@ router.get('/:id', (req,res,next) => {
 
     }
 
-      console.log('req.query.searchtype' + Search)
-      console.log('req.query.searchtype' + searchtype)
-      console.log(Search)
-      console.log(searchtype)
-      console.log(decodeURIComponent(Search))
-      console.log(encodeURIComponent(Search))
-      console.log(CurrentPage)
-      console.log(SearchPlus)
-      console.log(Search2)
-      console.log(Search22)
-      console.log('QueryString' + QueryString)
-    client.query(QueryString, ['%' + Search +'%', CurrentPage], (err, response) => {
+      // console.log('req.query.searchtype' + Search)
+      // console.log('req.query.searchtype' + searchtype)
+      // console.log(Search)
+      // console.log(searchtype)
+      // console.log(decodeURIComponent(Search))
+      // console.log(encodeURIComponent(Search))
+      // console.log(CurrentPage)
+      // console.log(SearchPlus)
+      // console.log(Search2)
+      // console.log(Search22)
+      // console.log('QueryString' + QueryString)
+    await client.query(QueryString, ['%' + Search +'%', CurrentPage], funtion(err, response) {
       if (err) {
         res.redirect('/aafwp');
         console.log(err)
@@ -299,7 +299,7 @@ router.get('/:id', (req,res,next) => {
       });
     });
   } else {
-    console.log(Search)
+    // console.log(Search)
     if (Search == '' || Search == null || Search == undefined ) {
       var Search = 0;
     }
@@ -315,7 +315,7 @@ router.get('/:id', (req,res,next) => {
       var QueryString = "SELECT * , count(*) over() as totalcount  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
     }
 
-    client.query(QueryString, [Search, CurrentPage], (err, response) => {
+    await client.query(QueryString, [Search, CurrentPage], funtion(err, response) {
       if (err) {
         res.redirect('/aafwp');
 
