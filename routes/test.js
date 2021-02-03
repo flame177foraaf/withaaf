@@ -246,8 +246,8 @@ router.get('/:id', async function(req,res,next) {
       // console.log('QueryString' + QueryString)
     await client.query(QueryString, ['%' + Search +'%', CurrentPage], funtion(err, response) {
       if (err) {
+      console.log(err)
         res.redirect('/aafwp');
-        console.log(err)
       }
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
@@ -317,6 +317,7 @@ router.get('/:id', async function(req,res,next) {
 
     await client.query(QueryString, [Search, CurrentPage], funtion(err, response) {
       if (err) {
+        console.log(err)
         res.redirect('/aafwp');
 
       }
