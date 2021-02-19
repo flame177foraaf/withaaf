@@ -68,10 +68,7 @@ router.get('/searchall', async function(req, res, next) {
         test['collect6num'] = rows.collect6num;
         test['collect6name'] = rows.collect6name;
         test['collect6unit'] = rows.collect6unit;
-        function () {
-          searchdataRecipe.push(test);
-          
-        }
+        searchdataRecipe.push(test);
 
     }
     console.log(searchdataRecipe)
