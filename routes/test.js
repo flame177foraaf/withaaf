@@ -28,13 +28,12 @@ router.get('/searchall', async function(req, res, next) {
   console.log(QueryString)
 
   // await client.query(QueryString, ['%' + Search + '%', ], function(err, response) {
-  await client.query(QueryString, ['%' + Search + '%'], function(err, response) {
+  await client.query(QueryString, ['%' + Search + '%'], function(err, dataRecipe) {
 
-    var dataRecipe = response.rows;
 
     res.render('test', {
       title: 'AAF 장비',
-      dataRecipe: dataRecipe,
+      dataRecipe: dataRecipe.row,
 
 
 
