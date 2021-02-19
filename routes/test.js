@@ -34,7 +34,7 @@ router.get('/searchall', async function(req, res, next) {
           await client.query(QueryString, ['%' + Search + '%'], async function(err, dataARM) {
 
                 var QueryString = " Select * From aquafeq.aquafacc WHERE accup Ilike $1 ORDER BY accid ;"
-                await client.query(QueryString, ['%' + Search + '%'], async function(err, dataACC) {
+                await client.query(QueryString, ['%' + Search + '%'], function(err, dataACC) {
 
                   res.render('test', {
                     title: 'AAF 장비',
