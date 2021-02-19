@@ -13,7 +13,7 @@ client.connect();
 
 
 router.get('/', async function(req, res, next) {
-  await res.render('test', {
+  res.render('test', {
     title: 'AAF 장비'
   });
 });
