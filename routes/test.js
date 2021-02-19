@@ -36,13 +36,13 @@ router.get('/searchall', async function(req, res, next) {
                   var QueryString = " Select * From aquafeq.aquafacc WHERE accup Ilike $1 ORDER BY accid ;";
                   await client.query(QueryString, ['%' + Search + '%'], async function(err, dataACC) {
 
-                      var QueryString = "select * from aquafeq.monster where mon_common Ilike $1 or mon_uncommon Ilike $1 or mon_rare Ilike $1 AND mon_field not Ilike '%Tower%' order by mon_lv;";
+                      var QueryString = "select * from aquafeq.monster where mon_common Ilike $1 or mon_uncommon Ilike $1 or mon_rare Ilike $1 AND mon_field not Ilike " + "'%Tower%'" + " order by mon_lv;";
                       await client.query(QueryString, ['%' + Search + '%'], async function(err, dataMonsterField) {
                         console.log(QueryString)
                         console.log(dataMonsterField.length)
 
 
-                          var QueryString = "select * from aquafeq.monster where mon_common Ilike $1 or mon_uncommon Ilike $1 or mon_rare Ilike $1  AND mon_field Ilike '%Tower%' order by mon_lv;";
+                          var QueryString = "select * from aquafeq.monster where mon_common Ilike $1 or mon_uncommon Ilike $1 or mon_rare Ilike $1  AND mon_field Ilike " + "'%Tower%'" + " order by mon_lv;";
                           await client.query(QueryString, ['%' + Search + '%'], function(err, dataMonsterTower) {
                             console.log(QueryString)
 
