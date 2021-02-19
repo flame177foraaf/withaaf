@@ -9,6 +9,8 @@
 
   <style media="screen">
   </style>
+  <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
+
   <script type="text/javascript">
     function checkonclick() {
 
@@ -185,7 +187,6 @@
       <col width="350">
       <col width="300">
       <col width="650">
-      <col width="200">
 
     </colgroup>
     <thead>
@@ -292,6 +293,186 @@
           <td colspan="10" style="text-align:center"> <%- item.wpup %> </td>
         </tr>
 
+        <% }); %>
+      <% } %>
+    </tbody>
+  </table>
+
+
+  <table id="eqtable" style="width:100%;">
+
+    <colgroup>
+      <col width="100">
+      <col width="200">
+      <col width="50">
+      <col width="50">
+
+      <col width="100">
+      <col width="200">
+      <col width="250">
+      <col width="250">
+      <col width="600">
+    </colgroup>
+    <thead>
+
+      <tr>
+        <th>등급</th>
+        <th>이름</th>
+        <th>제한</th>
+        <th>소켓</th>
+        <th>에테르</th>
+        <th>방어력</th>
+        <th>속성 방어</th>
+        <th>피트</th>
+        <th>커스텀</th>
+      </tr>
+    </thead>
+
+    <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+    <tbody >
+      <% if(typeof(dataARM) != 'undefined'){ %>
+        <% data.forEach(function(item) { %>
+        <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
+          <td><%- item.armgrade %></td>
+          <td><%- item.armname %></td>
+          <td style='text-align: center'><%- item.armlimit %></td>
+          <td style='text-align: center'><%- item.armsocket %></td>
+          <td style='text-align: center'><%- item.armether %></td>
+          <td style='text-align: center'><%- item.armstats %></td>
+          <td style='text-align: center'><%- item.armproperty %></td>
+
+          <% var text = item.armfeat.replace(/\s/g," ") %>
+          <% var feattext = text.split('<br>') %>
+          <% var featlink1 = text.split(" ("); %>
+
+          <% var featlink2 = [] %>
+          <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+
+          <% for (var i = 0; i < featlink1.length; i++) { %>
+            <% featlink2.push( featlink1[i].indexOf(">")); %>
+            <% if (featlink2[i] != -1) { %>
+            <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+            <% } %>
+          <% } %>
+          <td><%- featlink3 %></td>
+
+          <% var text = item.armcustom.replace(/\s/g," ") %>
+          <% var customtext = text.split('<br>') %>
+          <% var customlink1 = text.split(" ("); %>
+          <% var customlink2 = [customlink1[0].indexOf(">")] %>
+            <% if (customtext[0].indexOf("(") != -1) { %>
+              <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+            <% } else { %>
+              <% var customlink3 = customtext[0] %>
+            <% } %>
+
+            <% for (var i = 1; i < customtext.length; i++) { %>
+              <% if (customtext[i].indexOf("(") != -1) { %>
+                <% customlink2.push( customlink1[i].indexOf(">")); %>
+                <% if (customlink2[i] != -1) { %>
+                  <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                <% } %>
+              <% } else { %>
+                <% customlink3 = customlink3 + '<br>' + customtext[i] %>
+              <% } %>
+            <% } %>
+
+          <td><%- customlink3 %></td>
+
+        </tr>
+
+        <tr id="" class="upgrademeterial" style="display:none">
+          <td colspan="10" style="text-align:center"> <%- item.armup %> </td>
+        </tr>
+        <% }); %>
+      <% } %>
+    </tbody>
+  </table>
+
+  <table id="eqtable" style="width:100%;">
+
+    <colgroup>
+      <col width="100">
+      <col width="200">
+      <col width="50">
+      <col width="50">
+
+      <col width="100">
+      <col width="200">
+      <col width="250">
+      <col width="250">
+      <col width="600">
+    </colgroup>
+    <thead>
+
+      <tr>
+        <th>등급</th>
+        <th>이름</th>
+        <th>제한</th>
+        <th>소켓</th>
+        <th>에테르</th>
+        <th>방어력</th>
+        <th>속성 방어</th>
+        <th>피트</th>
+        <th>커스텀</th>
+      </tr>
+    </thead>
+
+    <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+    <tbody >
+      <% if(typeof(dataACC) != 'undefined'){ %>
+        <% data.forEach(function(item) { %>
+        <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
+          <td><%- item.accgrade %></td>
+          <td><%- item.accname %></td>
+          <td style='text-align: center'><%- item.acclimit %></td>
+          <td style='text-align: center'><%- item.accsocket %></td>
+          <td style='text-align: center'><%- item.accether %></td>
+          <td style='text-align: center'><%- item.accstats %></td>
+          <td style='text-align: center'><%- item.accproperty %></td>
+
+          <% var text = item.accfeat.replace(/\s/g," ") %>
+          <% var feattext = text.split('<br>') %>
+          <% var featlink1 = text.split(" ("); %>
+          <% var featlink2 = [] %>
+          <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+
+          <% for (var i = 0; i < featlink1.length; i++) { %>
+            <% featlink2.push( featlink1[i].indexOf(">")); %>
+            <% if (featlink2[i] != -1) { %>
+            <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+            <% } %>
+          <% } %>
+          <td><%- featlink3 %></td>
+
+          <% var text = item.acccustom.replace(/\s/g," ") %>
+          <% var customtext = text.split('<br>') %>
+          <% var customlink1 = text.split(" ("); %>
+          <% var customlink2 = [customlink1[0].indexOf(">")] %>
+            <% if (customtext[0].indexOf("(") != -1) { %>
+              <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+            <% } else { %>
+              <% var customlink3 = customtext[0] %>
+            <% } %>
+
+            <% for (var i = 1; i < customtext.length; i++) { %>
+              <% if (customtext[i].indexOf("(") != -1) { %>
+                <% customlink2.push( customlink1[i].indexOf(">")); %>
+                <% if (customlink2[i] != -1) { %>
+                  <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                <% } %>
+              <% } else { %>
+                <% customlink3 = customlink3 + '<br>' + customtext[i] %>
+              <% } %>
+            <% } %>
+
+
+          <td><%- customlink3 %></td>
+        </tr>
+
+        <tr id="" class="upgrademeterial" style="display:none">
+          <td colspan="10" style="text-align:center"> <%- item.accup %> </td>
+        </tr>
         <% }); %>
       <% } %>
     </tbody>
