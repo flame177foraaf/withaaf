@@ -32,43 +32,49 @@ router.get('/searchall', async function(req, res, next) {
   // await client.query(QueryString, ['%' + Search + '%', ], function(err, response) {
   await client.query(QueryString, ['%' + Search + '%'], function(err, response) {
 
-
+    var data1 = response.rows;
     var test = {};
 
-    for (var i = 0; i < response.rows.length; i++) {
+    for (var i = 0; i < data.length; i++) {
+      var data = data1[i]
+      try {
 
-      var rows = response.rows[i];
-        test['recipenum'] = rows.recipenum;
-        test['collectnum'] = rows.collectnum;
-        test['collectname'] = rows.collectname;
+          test['recipenum'] = data.recipenum;
+          test['collectnum'] = data.collectnum;
+          test['collectname'] = data.collectname;
 
-        test['collect1num'] = rows.collect1num;
-        test['collect1name'] = rows.collect1name;
-        test['collect1unit'] = rows.collect1unit;
+          test['collect1num'] = data.collect1num;
+          test['collect1name'] = data.collect1name;
+          test['collect1unit'] = data.collect1unit;
 
-        test['collect2num'] = rows.collect2num;
-        test['collect2name'] = rows.collect2name;
-        test['collect2unit'] = rows.collect2unit;
-
-
-        test['collect3num'] = rows.collect3num;
-        test['collect3name'] = rows.collect3name;
-        test['collect3unit'] = rows.collect3unit;
-
-        test['collect4num'] = rows.collect4num;
-        test['collect4name'] = rows.collect4name;
-        test['collect4unit'] = rows.collect4unit;
+          test['collect2num'] = data.collect2num;
+          test['collect2name'] = data.collect2name;
+          test['collect2unit'] = data.collect2unit;
 
 
-        test['collect5num'] = rows.collect5num;
-        test['collect5name'] = rows.collect5name;
-        test['collect5unit'] = rows.collect5unit;
+          test['collect3num'] = data.collect3num;
+          test['collect3name'] = data.collect3name;
+          test['collect3unit'] = data.collect3unit;
+
+          test['collect4num'] = data.collect4num;
+          test['collect4name'] = data.collect4name;
+          test['collect4unit'] = data.collect4unit;
 
 
-        test['collect6num'] = rows.collect6num;
-        test['collect6name'] = rows.collect6name;
-        test['collect6unit'] = rows.collect6unit;
+          test['collect5num'] = data.collect5num;
+          test['collect5name'] = data.collect5name;
+          test['collect5unit'] = data.collect5unit;
+
+
+          test['collect6num'] = data.collect6num;
+          test['collect6name'] = data.collect6name;
+          test['collect6unit'] = data.collect6unit;
+
+      } catch (e) {
+        console(e)
+      } finally {
         searchdataRecipe.push(test);
+      }
 
     }
     console.log(searchdataRecipe)
