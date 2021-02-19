@@ -331,7 +331,7 @@
     <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
     <tbody >
       <% if(typeof(dataARM) != 'undefined'){ %>
-        <% data.forEach(function(item) { %>
+        <% dataARM.forEach(function(item) { %>
         <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
           <td><%- item.armgrade %></td>
           <td><%- item.armname %></td>
@@ -421,7 +421,7 @@
     <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
     <tbody >
       <% if(typeof(dataACC) != 'undefined'){ %>
-        <% data.forEach(function(item) { %>
+        <% dataACC.forEach(function(item) { %>
         <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
           <td><%- item.accgrade %></td>
           <td><%- item.accname %></td>
