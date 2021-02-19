@@ -11,10 +11,10 @@
   </style>
   <script type="text/javascript">
     function checkonclick() {
-      if (document.add.datalistname.value == "" || document.add.title.value == null || document.add.datalistname.value == undefined || (document.add.datalistname.value != null && typeof document.add.datalistname.value == "object" && !Object.keys(
-          document.add.datalistname.value).length)) {
+      if (document.searchtext.value == null || document.searchtext.value == undefined || document.searchtext.trim().value == "" (document.searchtext.value != null && typeof document.searchtext.value == "object" && !Object.keys(
+          document.searchtext.value).length)) {
         alert("내용을 입력해주세요!");
-        document.add.datalistname.focus();
+        document.searchtext.focus();
         return false;
       }
       return true;
@@ -25,7 +25,7 @@
 </head>
 
 <body style="">
-  <form accept-charset="utf-8" action="/test/searchall"  method="get">
+  <form accept-charset="utf-8" action="/test/searchall"  method="get"onsubmit="return checkonclick()">
     <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">
     <select name="searchtype">
       <option value="name">수집품 이름</option>
@@ -144,6 +144,14 @@
 
               <% }%>
       </tbody>
+  </table>
+  <table>
+    <thead>
+
+    </thead>
+    <tbody>
+
+    </tbody>
   </table>
 
 </body>
