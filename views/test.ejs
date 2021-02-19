@@ -11,10 +11,9 @@
   </style>
   <script type="text/javascript">
     function checkonclick() {
-      if (document.bodyform.searchtext.value == null || document.bodyform.searchtext.value == undefined || document.bodyform.searchtext.trim().value == "" || (document.bodyform.bodyform.searchtext.value != null && typeof document.bodyform.searchtext.value == "object" && !Object.keys(
-          document.bodyform.searchtext.value).length)) {
+      if (document.bodyform.searchtext.value == "" || document.bodyform.searchtext.value.trim() == ""  ||  document.bodyform.searchtext.value == null || document.bodyform.searchtext.value == undefined || ( document.bodyform.searchtext.value != null && typeof document.bodyform.searchtext.value == "object" && !Object.keys(document.bodyform.searchtext.value).length ) ) {
         alert("내용을 입력해주세요!");
-        document.searchtext.focus();
+        document.bodyform.searchtext.focus();
         return false;
       }
       return true;
