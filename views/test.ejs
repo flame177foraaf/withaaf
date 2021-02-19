@@ -148,15 +148,128 @@
               <% }%>
       </tbody>
   </table>
-  <table>
+  <table id="eqtable" style="width:100%;">
+    <colgroup>
+      <col width="100">
+      <col width="200">
+      <col width="50">
+      <col width="50">
+      <col width="100">
+      <col width="200">
+      <col width="350">
+      <col width="300">
+      <col width="650">
+      <col width="200">
+
+    </colgroup>
     <thead>
-
+      <tr  style='text-align: center'>
+        <th>등급</th>
+        <th>이름</th>
+        <th>제한</th>
+        <th>소켓</th>
+        <th>에테르</th>
+        <th>성능</th>
+        <th>속성</th>
+        <th>피트</th>
+        <th>커스텀</th>
+      </tr>
     </thead>
+    <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
     <tbody>
+      <% if(typeof(dataWP) != 'undefined'){ %>
+        <% dataWP.forEach(function(item) { %>
+            <% if (item.wpproperty.indexOf('/') != -1){ %>
+              <% var WpP = item.wpproperty.split('/') %>
+              <% if ( WpP[1] == ' 불 ') { %>
+                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD" onclick="">
+              <% } else if (WpP[1] == ' 물 ' ) { %>
+                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC" onclick="">
+              <% } else if (WpP[1] == ' 바람 ') { %>
+                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3" onclick="">
+              <% } else if (WpP[1] == ' 땅 ') { %>
+                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8" onclick="">
+              <% } else if (WpP[1] == ' 정신 ') { %>
+                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB" onclick="">
+              <% } else if (WpP[1] == ' 아스트랄 ') { %>
+                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2" onclick="">
+              <% } else if (WpP[1] == ' 무속성 ') { %>
+                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="">
+              <% } else { %>
+                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
+              <% } %>
 
+            <% } else { %>
+              <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
+            <% } %>
+
+          <td><%- item.wpgrade %></td>
+          <td><%- item.wpname %></td>
+          <td style='text-align: center'><%- item.wplimit %></td>
+          <td style='text-align: center'><%- item.wpsocket %></td>
+          <td style='text-align: center'><%- item.wpether %></td>
+          <td style='text-align: center'><%- item.wpstats %></td>
+          <td class="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
+
+          <% var text = item.wpfeat.replace(/\s/g," ") %>
+          <% var feattext = text.split('<br>') %>
+          <% var featlink1 = text.split(" ("); %>
+
+          <% var featlink2 = [] %>
+          <% if (feattext[0].indexOf('티어') != -1){ %>
+            <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+          <% } else { %>
+            <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+          <% } %>
+
+          <% for (var i = 0; i < featlink1.length; i++) { %>
+            <% featlink2.push( featlink1[i].indexOf(">")); %>
+            <% if (featlink2[i] != -1) { %>
+              <% if (feattext[i].indexOf('티어') != -1){ %>
+                <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+              <% } else { %>
+                <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+              <% } %>
+            <% } %>
+          <% } %>
+          <td><%- featlink3 %></td>
+
+          <% var text = item.wpcustom.replace(/\s/g," ") %>
+          <% var customtext = text.split('<br>') %>
+          <% var customlink1 = text.split(" ("); %>
+          <% var customlink2 = [customlink1[0].indexOf(">")] %>
+            <% if (customtext[0].indexOf("(") != -1) { %>
+              <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+            <% } else { %>
+              <% var customlink3 = customtext[0] %>
+            <% } %>
+
+            <% for (var i = 1; i < customtext.length; i++) { %>
+              <% if (customtext[i].indexOf("(") != -1) { %>
+                <% customlink2.push( customlink1[i].indexOf(">")); %>
+                <% if (customlink2[i] != -1) { %>
+                  <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                <% } %>
+              <% } else { %>
+                <% customlink3 = customlink3 + '<br>' + customtext[i] %>
+              <% } %>
+            <% } %>
+
+
+
+          <td><%- customlink3 %></td>
+
+
+
+        </tr>
+        <tr id="" class="upgrademeterial" style="display:none">
+          <td colspan="10" style="text-align:center"> <%- item.wpup %> </td>
+        </tr>
+
+        <% }); %>
+      <% } %>
     </tbody>
   </table>
-
 </body>
 <footer>
   <%- include ('footer')%>
