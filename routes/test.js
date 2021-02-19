@@ -42,7 +42,7 @@ router.get('/searchall', async function(req, res, next) {
       console.log(rows)
       try {
 
-        test['recipenum'] = rows.recipenum[i];
+        test['recipenum'] = rows.recipenum;
         test['collectnum'] = rows.collectnum;
         test['collectname'] = rows.collectname;
 
