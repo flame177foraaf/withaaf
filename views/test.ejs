@@ -1,462 +1,155 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <%- include ('head') %>
-    <title><%= title%></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
 
-    <style media="screen">
-    </style>
-    <script type="text/javascript">
-      function checkonclick() {
-        if (document.add.datalistname.value == "" || document.add.title.value == null || document.add.datalistname.value == undefined || ( document.add.datalistname.value != null && typeof document.add.datalistname.value == "object" && !Object.keys(document.add.datalistname.value).length ) ) {
-          alert("내용을 입력해주세요!");
-          document.add.datalistname.focus();
-          return false;
-        }
-        return true;
+<head>
+  <meta charset="utf-8">
+  <%- include ('head') %>
+  <title><%= title%></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  <style media="screen">
+  </style>
+  <script type="text/javascript">
+    function checkonclick() {
+      if (document.add.datalistname.value == "" || document.add.title.value == null || document.add.datalistname.value == undefined || (document.add.datalistname.value != null && typeof document.add.datalistname.value == "object" && !Object.keys(
+          document.add.datalistname.value).length)) {
+        alert("내용을 입력해주세요!");
+        document.add.datalistname.focus();
+        return false;
       }
-    </script>
-
-    <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
-    <script type="text/javascript">
-
-      $(document).on("click","input[name=findadd]",function(){
-
-        var add =
-        '<div class="" id="seach_form_id2" name="seach_form_id2">'
-        +'<input type="text" placeholder="모든 항목" name="searchtext2" style="width:200px">'
-        + '<select name="searchtype2">'
-        +    '<option value="wpproperty">속성 / 업그레이드</option>'
-        +    '<option value="wpfeat">피트</option>'
-        +    '<option value="wpcustom">커스텀</option>'
-        +'</select>'
-        +'<button class="btn btn-default" name="delbut">삭제</button>'
-        +'</div>'
-
-        var aaa = $( "div[name=seach_form_id2]:last" ); //last를 사용하여 seach_form_id2라는 명을 가진 마지막 태그 호출
-          aaa.after(add); //마지막 seach_form_id2  뒤에 붙인다.
-      });
-
-        //삭제 버튼
-        $(document).on("click","button[name=delbut]",function(){
-
-            var aaa = $(this).parent();
-
-            aaa.remove(); //tr 테그 삭제
-        });
+      return true;
+    }
+  </script>
 
 
+</head>
 
-        //
-        //공격력 검색
-        $(document).on("click","input[name=Searchstats]",function(){
+<body style="">
+  <form accept-charset="utf-8" action="/searchall"  method="get">
+    <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">
+    <select name="searchtype">
+      <option value="name">수집품 이름</option>
 
-          var add =
+    </select>
+    <input type="submit" class="btn" value="찾기"/ >
 
-          '<div class="" id="seach_form_id" name="seach_form_id">'
-          +'<input type="number" placeholder="숫자를 입력해주세요" name="searchtext" style="width:200px"  min="1" value ="">'
-          + '<select name="searchtype">'
-          +    '<option value="1stats">기본 공격력</option>'
-          +    '<option value="2stats">부가 공격력</option>'
-          +'</select>'
-          +'<input  type="submit" class="btn" value="찾기" />'
-          +'<input type="button" name="NormalSearch" class="btnAdd" value="일반 검색으로">'
-          +'</div>'
-          $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
-        });
+  </form>
+  <table>
 
+      <colgroup>
+        <col width="60" >
+        <col width="60" >
+        <col span="">
+        <col width="40">
+        <col span="">
+        <col width="60">
+        <col width="40">
+        <col span="">
+        <col width="60">
+        <col width="40">
+        <col span="">
+        <col width="60">
+        <col width="40">
+        <col span="">
+        <col width="60">
+        <col width="40">
+        <col span="">
+        <col width="60">
+        <col width="40">
+        <col span="">
+        <col width="60">
 
-        //일반 검색 폼으로
-        $(document).on("click","input[name=NormalSearch]",function(){
+      </colgroup>
 
-          var add =
-          '<div class="" id="seach_form_id" name="seach_form_id">'
-          +'<input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">'
-          +  '<select name="searchtype">'
-              +  '<option value="wpname">이름</option>'
-              +  '<option value="wpproperty">속성 / 업그레이드</option>'
-              +  '<option value="wpfeat">피트</option>'
-              +  '<option value="wpcustom">커스텀</option>'
-              +  '<option value="wpgrade">등급 / 강적</option>'
-          +  '</select>'
-          +  '<input  type="submit" class="btn" value="찾기" />'
-          +  '<input type="button" name="findadd" class="btnAdd" value="조건 추가">'
-          +  '<input type="button" name="Searchstats" class="btnAdd" value="성능 검색으로">'
-          +'</div>'
-          +'<div class="" id="" name="seach_form_id2">'
-          +'</div>'
+      <thead id="" >
+        <tr >
+          <th>레시피</th>
+          <th>결과물</th>
+          <th id="linehead"></th>
+          <th id="line1"></th>
+          <th></th>
+          <th></th>
+          <th id="line2"></th>
+          <th></th>
+          <th></th>
+          <th id="line2"></th>
+          <th></th>
+          <th></th>
+          <th id="line2"></th>
+          <th></th>
+          <th></th>
+          <th id="line2"></th>
+          <th></th>
+          <th></th>
+          <th id="line2"></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
 
-          $("#seach_form_id").html(add); //seach_form_id 라는 id의 태그를 add 로 바꿈
-
-        }
-        );
-
-
-      //이게 맞다
-
-        $(document).ready(function() {
-        var list = document.querySelectorAll(".tabletr");
-        var list2 = document.querySelectorAll(".upgrademeterial")
-        //var wpcolor = document.querySelectorAll(".wpproperty");
-
-          for (var i = 0; i < list.length; i++) {
-            list[i].setAttribute("id", "tr(" + i + ")");
-            list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
-            list2[i].setAttribute("id", "trmeterial(" + i + ")");
-
-      /*
-            if (wpcolor[i].textContent.indexOf('/') != -1) {
-              if ( wpcolor[i].textContent.split('/')[1] == ' 불 ') {
-                list[i].css("backgroundColor", "#FFD5DD");
-              } else if (wpcolor[i].textContent.split('/')[1] == ' 물 ') {
-                list[i].css("backgroundColor", "#DBE0FC");
-              } else if (wpcolor[i].textContent.split('/')[1] == ' 바람 ') {
-                list[i].css("backgroundColor", "#CEFFD3");
-              } else if (wpcolor[i].textContent.split('/')[1] == ' 땅 ') {
-                list[i].css("backgroundColor", "#F8EAD8");
-              } else if (wpcolor[i].textContent.split('/')[1] == ' 정신 ') {
-                list[i].css("backgroundColor", "#FFFFDB");
-              } else if (wpcolor[i].textContent.split('/')[1] == ' 아스트랄 ') {
-                list[i].css("backgroundColor", "#E4C1F2");
-              } else if (wpcolor[i].textContent.split('/')[1] == ' 무속성 ') {
-                list[i].css("backgroundColor", "#EAEAEA");
-              }
-            }
-            */
-          }
-
-      });
-
-      function viewmeterial(i) {
-        var uptext = document.getElementById("trmeterial(" + i + ")")
-
-        if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
-          if ( uptext.style.display == 'none') {
-            uptext.style.display = ''
-          } else {
-            uptext.style.display = 'none'
-          }
-        }
-      }
-
-    </script>
-
-  </head>
-  <body style="">
-    <div class="title_div" >
-      <h1><%= title %></h1>
-
-    </div>
-    <div class="">
-      <form action="/test/1" accept-charset="utf-8" method="get">
-        <% if (typeof(searchtype) == 'undefined'){ %>
-          <div class="" id="seach_form_id" name="seach_form_id">
-            <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px" >
-            <select name="searchtype">
-                <option value="wpname">이름</option>
-                <option value="wpproperty">속성 / 업그레이드</option>
-                <option value="wpfeat">피트</option>
-                <option value="wpcustom">커스텀</option>
-                <option value="wpgrade">등급 / 강적</option>
-            </select>
-            <input type="submit" class="btn" value="찾기" />
-            <input type="button" name="findadd" class="btnAdd" value="조건 추가" >
-            <input type="button" name="Searchstats" class="btnAdd" value="성능 검색으로">
-          <div class="" id="" name="seach_form_id2">
-          </div>
-        </div>
-        <% } else if (searchtype == '1stats' || searchtype == '2stats'){ %>
-          <div class="" id="seach_form_id" name="seach_form_id">
-          <input type="number" placeholder="숫자를 입력해주세요" name="searchtext" style="width:200px"  min="1" value="<%= Search %>">
-          <% if (searchtype == '2stats'){  %>
-            <select name="searchtype">
-              <option value="1stats">기본 공격력</option>
-              <option value="2stats" selected>부가 공격력</option>
-            </select>
-          <% } else { %>
-            <select name="searchtype">
-              <option value="1stats" selected>기본 공격력</option>
-              <option value="2stats">부가 공격력</option>
-            </select>
-          <% } %>
-          <input  type="submit" class="btn" value="찾기" />
-          <input type="button" name="NormalSearch" class="btnAdd" value="일반 검색으로">
-        </div>
-        <% } else { %>
-          <div class="" id="seach_form_id" name="seach_form_id">
-            <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px" value="<%= Search %>">
-            <% if (searchtype == 'wpproperty'){ %>
-              <select name="searchtype">
-                  <option value="wpname">이름</option>
-                  <option value="wpproperty" selected>속성</option>
-                  <option value="wpfeat">피트</option>
-                  <option value="wpcustom">커스텀</option>
-                  <option value="wpgrade">등급 / 강적</option>
-              </select>
-            <% } else if (searchtype == 'wpfeat'){ %>
-              <select name="searchtype">
-                  <option value="wpname">이름</option>
-                  <option value="wpproperty">속성 / 업그레이드</option>
-                  <option value="wpfeat" selected>피트</option>
-                  <option value="wpcustom">커스텀</option>
-                  <option value="wpgrade">등급 / 강적</option>
-              </select>
-            <% } else if (searchtype == 'wpcustom'){ %>
-              <select name="searchtype">
-                  <option value="wpname">이름</option>
-                  <option value="wpproperty">속성 / 업그레이드</option>
-                  <option value="wpfeat">피트</option>
-                  <option value="wpcustom" selected>커스텀</option>
-                  <option value="wpgrade">등급 / 강적</option>
-              </select>
-            <% } else if (searchtype == 'wpgrade'){ %>
-              <select name="searchtype">
-                  <option value="wpname">이름</option>
-                  <option value="wpproperty">속성 / 업그레이드</option>
-                  <option value="wpfeat">피트</option>
-                  <option value="wpcustom">커스텀</option>
-                  <option value="wpgrade" selected>등급 / 강적</option>
-              </select>
-            <% } else { %>
-              <select name="searchtype">
-                  <option value="wpname" selected>이름</option>
-                  <option value="wpproperty">속성 / 업그레이드</option>
-                  <option value="wpfeat">피트</option>
-                  <option value="wpcustom">커스텀</option>
-                  <option value="wpgrade">등급 / 강적</option>
-              </select>
-            <% } %>
-            <input  type="submit" class="btn" value="찾기" />
-            <input type="button" name="findadd" class="btnAdd" value="조건 추가">
-            <input type="button" name="Searchstats" class="btnAdd" value="성능 검색으로">
-          <div class="" id="" name="seach_form_id2">
-          </div>
-        </div>
-        <% } %>
-
-
-      </form>
-    </div>
-
-    <div class="">
-    <p style="text-align : right; font-style: oblique; "> ※ 자료 수집 및 정리 - Xeno ※</p>
-      <table id="eqtable" style="width:100%;">
-        <colgroup>
-          <col width="100">
-          <col width="200">
-          <col width="50">
-          <col width="50">
-          <col width="100">
-          <col width="200">
-          <col width="350">
-          <col width="300">
-          <col width="650">
-          <col width="200">
-
-        </colgroup>
-        <thead>
-          <tr  style='text-align: center'>
-            <th>등급</th>
-            <th>이름</th>
-            <th>제한</th>
-            <th>소켓</th>
-            <th>에테르</th>
-            <th>성능</th>
-            <th>속성</th>
-            <th>피트</th>
-            <th>커스텀</th>
-            <th></th>
-          </tr>
-        </thead>
-        <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
-        <tbody>
-          <% if(typeof(CurrentPage) === 'undefined'){ %>
+          <% if(typeof(data.length) == 0){ %>
             <tr>
-              <td colspan="10"; style= "text-align:center;"> 검색이 필요합니다.</td>
+              <td colspan="22"; style= "text-align:center;"> 자료가 없습니다.</td>
             </tr>
-          <% } else if (typeof(data[0]) === 'undefined'){ %>
-            <tr>
-              <div class="" id="pagelist" >
-                <td colspan="10" style= "text-align:center; font-size:24px">
-                  해당하는 데이터가 없습니다.
-                </td>
-              </div>
-            </tr>
-          <% } else { %>
-            <% data.forEach(function(item) { %>
-                <% if (item.wpproperty.indexOf('/') != -1){ %>
-                  <% var WpP = item.wpproperty.split('/') %>
-                  <% if ( WpP[1] == ' 불 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD" onclick="">
-                  <% } else if (WpP[1] == ' 물 ' ) { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC" onclick="">
-                  <% } else if (WpP[1] == ' 바람 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3" onclick="">
-                  <% } else if (WpP[1] == ' 땅 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8" onclick="">
-                  <% } else if (WpP[1] == ' 정신 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB" onclick="">
-                  <% } else if (WpP[1] == ' 아스트랄 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2" onclick="">
-                  <% } else if (WpP[1] == ' 무속성 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="">
-                  <% } else { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
-                  <% } %>
+          <% } else{ %>
 
+              <% data.forEach(function(item) { %>
+              <tr style="white-space: pre-line; font-size:12px;" id="recipetabletr">
+                <td style="text-align: center;"><%- item.recipenum %></td>
+                <td style="text-align: center;"><%- item.collectnum %></td>
+                <td id="linehead"><%- item.collectname %></td>
+                <td id="recipematerial1"><%- item.collect1num %></td>
+                <td><%- item.collect1name %></td>
+                <% if ( item.collect1num  === ''){ %>
+                  <td style="text-align: center; "><%- item.collect1unit %></td>
                 <% } else { %>
-                  <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
+                  <td style="text-align: center; "> ( <%- item.collect1unit %> 개 ) </td>
                 <% } %>
-
-              <td><%- item.wpgrade %></td>
-              <td><%- item.wpname %></td>
-              <td style='text-align: center'><%- item.wplimit %></td>
-              <td style='text-align: center'><%- item.wpsocket %></td>
-              <td style='text-align: center'><%- item.wpether %></td>
-              <td style='text-align: center'><%- item.wpstats %></td>
-              <td class="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
-
-              <% var text = item.wpfeat.replace(/\s/g," ") %>
-              <% var feattext = text.split('<br>') %>
-              <% var featlink1 = text.split(" ("); %>
-
-              <% var featlink2 = [] %>
-              <% if (feattext[0].indexOf('티어') != -1){ %>
-                <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
-              <% } else { %>
-                <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
-              <% } %>
-
-              <% for (var i = 0; i < featlink1.length; i++) { %>
-                <% featlink2.push( featlink1[i].indexOf(">")); %>
-                <% if (featlink2[i] != -1) { %>
-                  <% if (feattext[i].indexOf('티어') != -1){ %>
-                    <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
-                  <% } else { %>
-                    <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
-                  <% } %>
-                <% } %>
-              <% } %>
-              <td><%- featlink3 %></td>
-
-              <% var text = item.wpcustom.replace(/\s/g," ") %>
-              <% var customtext = text.split('<br>') %>
-              <% var customlink1 = text.split(" ("); %>
-              <% var customlink2 = [customlink1[0].indexOf(">")] %>
-                <% if (customtext[0].indexOf("(") != -1) { %>
-                  <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+                <td id="recipematerial2"><%- item.collect2num %></td>
+                <td st><%- item.collect2name %></td>
+                <% if ( item.collect2num  === ''){ %>
+                  <td style="text-align: center; "><%- item.collect2unit %></td>
                 <% } else { %>
-                  <% var customlink3 = customtext[0] %>
+                  <td style="text-align: center; "> ( <%- item.collect2unit %> 개 ) </td>
                 <% } %>
-
-                <% for (var i = 1; i < customtext.length; i++) { %>
-                  <% if (customtext[i].indexOf("(") != -1) { %>
-                    <% customlink2.push( customlink1[i].indexOf(">")); %>
-                    <% if (customlink2[i] != -1) { %>
-                      <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
-                    <% } %>
-                  <% } else { %>
-                    <% customlink3 = customlink3 + '<br>' + customtext[i] %>
-                  <% } %>
+                <td id="recipematerial3"><%- item.collect3num %></td>
+                <td><%- item.collect3name %></td>
+                <% if ( item.collect3num  === ''){ %>
+                  <td style="text-align: center; "><%- item.collect3unit %></td>
+                <% } else { %>
+                  <td style="text-align: center; "> ( <%- item.collect3unit %> 개 ) </td>
                 <% } %>
+                <td id="recipematerial4"><%- item.collect4num %></td>
+                <td><%- item.collect4name %></td>
+                <% if ( item.collect4num  === ''){ %>
+                  <td style="text-align: center; "><%- item.collect4unit %></td>
+                <% } else { %>
+                  <td style="text-align: center; "> ( <%- item.collect4unit %> 개 ) </td>
+                <% } %>
+                <td id="recipematerial5"><%- item.collect5num %></td>
+                <td><%- item.collect5name %></td>
+                <% if ( item.collect5num  === ''){ %>
+                  <td style="text-align: center; "><%- item.collect5unit %></td>
+                <% } else { %>
+                  <td style="text-align: center; "> ( <%- item.collect5unit %> 개 ) </td>
+                <% } %>
+                <td id="recipematerial6"><%- item.collect6num %></td>
+                <td><%- item.collect6name %></td>
+                <% if ( item.collect6num  === ''){ %>
+                  <td style="text-align: center; "><%- item.collect6unit %></td>
+                <% } else { %>
+                  <td style="text-align: center; "> ( <%- item.collect6unit %> 개 ) </td>
+                <% } %>
+              </tr>
+              <% }); %>
+      </tbody>
+  </table>
 
+</body>
+<footer>
+  <%- include ('footer')%>
+</footer>
 
-
-              <td><%- customlink3 %></td>
-
-              <td style="white-space: normal; text-align:center">
-                <div class="" style="">
-                  <%# display: inline-block 은 한 줄로 나타냄!%>
-                  <%# display: none 안보임!%>
-
-                  <div class="" style="display: inline-block">
-                    <form accept-charset="UTF-8" action="/test/fixwp" method="get ">
-                      <input type=text list=browsers style="display:none" checked value="<%= item.wpname %>" name="Seachname">
-
-                      <input style="width:60px; " type="submit" value="수정" />
-                    </form>
-                  </div>
-                  <div class="" style="display: inline-block">
-
-                    <form accept-charset="UTF-8" action="/Assemblywp" method="get">
-                      <input type=text list=browsers style="display:none" checked value="<%= item.wpname %>" name="assembly">
-                      <input style="width:60px " type="submit" value="재조립" />
-                    </form>
-                  </div>
-                </div>
-
-
-              </td>
-
-
-            </tr>
-            <tr id="" class="upgrademeterial" style="display:none">
-              <td colspan="10" style="text-align:center"> <%- item.wpup %> </td>
-            </tr>
-
-            <% }); %>
-          <% } %>
-        <div class="" id="pagelist">
-          <% if(typeof(CurrentPage) === 'undefined'){ %>
-            <tr id="up" style="display:none;" >
-              <div class="" id="pagelist" >
-                <td colspan="10" style= "text-align:center; font-size:24px">
-                  검색이 필요합니다.
-                </td>
-              </div>
-            </tr>
-
-          <% } else { %>
-            <% Search = Search.toString()%>
-            <tr>
-              <div class="" id="pagelist">
-                <td colspan="21" style= "text-align:center; font-size:24px">
-                  <% function FuncPageurl(pagenumber) { %>
-                    <% var pageurl = "/test/" + pagenumber + "?searchtext=" + Search + "&searchtype=" +  searchtype %>
-                    <% if (Searchcount !== 'undefined') { %>
-                      <% for (var i = 0; i < Searchcount; i++) { %>
-                        <% pageurl = pageurl + "&searchtext2=" + Search22[i]  + "&searchtype2=" +  searchtype22[i] %>
-                      <% } %>
-                    <% } %>
-                    <% return pageurl %>
-                  <% } %>
-                  <% if (CurrentPage > PageSize){ %>
-                    <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-                    <a href=" <%- FuncPageurl(1) %>" id="MoveFirstpage"> ◀◀ </a>
-                    <a href=" <%- FuncPageurl(StartPage-1) %>" onclick="" id="MovePrepage"> ◀ </a>
-                  <% } %>
-                  <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
-                    <% if (iCount == CurrentPage) { %>
-                      <b class="btnnonactive"><%- iCount %></b>
-                    <% } else { %>
-                      <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-                      <a href=" <%- FuncPageurl(iCount) %>" class="btnactive" id="MoveNumpage"><%- iCount %></a>
-                    <% } %>
-                  <% } %>
-                  <% if (EndPage < TotalPage){ %>
-                    <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-                    <a href=" <%- FuncPageurl(EndPage+1) %>" onclick="" id="MoveNextpage">  ▶ </a>
-                    <a href=" <%- FuncPageurl(TotalPage) %>" onclick="" id="MoveEndpage"> ▶▶ </a>
-                  <% } %>
-                </td>
-              </div>
-            </tr>
-          <% } %>
-        </div>
-        </tbody>
-      </table>
-    </div>
-
-      <div class="" style="text-align: center; padding-top:30px;">
-          <form accept-charset="UTF-8" class="" action="/addwp" method="get">
-             <button onclick=location.href="/test/addwp" type="button" name="button" style="width:200px">신규등록</a></button>
-          </form>
-      </div>
-
-  </body>
-  <footer>
-    <%- include ('footer')%>
-  </footer>
 </html>
