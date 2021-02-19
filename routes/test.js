@@ -35,7 +35,7 @@ router.get('/searchall', async function(req, res, next) {
 
     var test = {};
 
-    for (var i = 0; i < response.rows.totalcount; i++) {
+    for (var i = 0; i < response.rows.length; i++) {
 
       var rows = response.rows[i];
       console.log(i)
