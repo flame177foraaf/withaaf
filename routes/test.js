@@ -32,7 +32,7 @@ router.get('/searchall', async function(req, res, next) {
 
 
 
-          for (var i = 0; i < response.rows.length; i++) {
+           for (var i = 0; i < response.rows.length; i++) {
 
             row = response.rows[i];
             test = {};
@@ -73,6 +73,7 @@ router.get('/searchall', async function(req, res, next) {
             searchdataRecipe.push(test);
 
           }
+          console.log(searchdataRecipe)
     // searchdataRecipe['recipenum'] = response.rows.recipenum;
     // searchdataRecipe['collectnum'] = response.rows.collectnum;
     // searchdataRecipe['collectname'] = response.rows.collectname;
