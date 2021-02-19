@@ -22,6 +22,32 @@
       }
       return true;
     }
+
+
+
+      $(document).ready(function() {
+      var list = document.querySelectorAll(".tabletr");
+      var list2 = document.querySelectorAll(".upgrademeterial")
+      //var wpcolor = document.querySelectorAll(".wpproperty");
+
+        for (var i = 0; i < list.length; i++) {
+          list[i].setAttribute("id", "tr(" + i + ")");
+          list[i].setAttribute("onclick", "viewmeterial(" + i + ")");
+          list2[i].setAttribute("id", "trmeterial(" + i + ")");
+        }
+      });
+
+    function viewmeterial(i) {
+      var uptext = document.getElementById("trmeterial(" + i + ")")
+
+      if (( uptext.textContent.trim() != "" ) || (uptext.textContent == null))  {
+        if ( uptext.style.display == 'none') {
+          uptext.style.display = ''
+        } else {
+          uptext.style.display = 'none'
+        }
+      }
+    }
   </script>
 
 
