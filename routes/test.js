@@ -34,7 +34,7 @@ router.get('/searchall',  async function  (req, res, next) {
            for (var i = 0; i < response.rows.length; i++) {
 
             var rows = response.rows[i];
-
+            console.log(i)
 
           test['recipenum'] = rows.recipenum;
           test['collectnum'] = rows.collectnum;
