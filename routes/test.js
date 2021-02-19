@@ -4,7 +4,9 @@ var $ = require('jquery');
 var url = require('url');
 var asyncify = require('express-asyncify');
 var router = asyncify(express.Router());
-var { Client } = require('pg');
+var {
+  Client
+} = require('pg');
 var client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
@@ -19,7 +21,7 @@ router.get('/', async function(req, res, next) {
   });
 });
 
-router.get('/searchall',  async function  (req, res, next) {
+router.get('/searchall', async function(req, res, next) {
   var Search = req.query.searchtext;
   console.log(Search)
   var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectname Ilike $1 OR collect1name Ilike $1 OR collect2name Ilike $1 OR collect3name Ilike $1 OR collect4name Ilike $1 OR collect5name Ilike $1 OR collect6name Ilike $1 ORDER BY recipenum asc;";
@@ -28,52 +30,58 @@ router.get('/searchall',  async function  (req, res, next) {
   var searchdataRecipe = [];
 
   // await client.query(QueryString, ['%' + Search + '%', ], function(err, response) {
-  await client.query(QueryString, ['%' + Search + '%'],  function  (err, response) {
+  await client.query(QueryString, ['%' + Search + '%'], function(err, response) {
 
 
     var test = {};
 
-           for (var i = 0; i < response.rows.length; i++) {
+    for (var i = 0; i < response.rows.length; i++) {
 
-            var rows = response.rows[i];
-            console.log(i)
+      var rows = response.rows;
+      console.log(i)
+      console.log(rows)
+      try {
 
-          test['recipenum'] = rows.recipenum;
-          test['collectnum'] = rows.collectnum;
-          test['collectname'] = rows.collectname;
-
-
-          test['collect1num'] = rows.collect1num;
-          test['collect1name'] = rows.collect1name;
-          test['collect1unit'] = rows.collect1unit;
-
-          test['collect2num'] = rows.collect2num;
-          test['collect2name'] = rows.collect2name;
-          test['collect2unit'] = rows.collect2unit;
+        test['recipenum'] = rows.recipenum[i];
+        test['collectnum'] = rows.collectnum;
+        test['collectname'] = rows.collectname;
 
 
-          test['collect3num'] = rows.collect3num;
-          test['collect3name'] = rows.collect3name;
-          test['collect3unit'] = rows.collect3unit;
+        test['collect1num'] = rows.collect1num;
+        test['collect1name'] = rows.collect1name;
+        test['collect1unit'] = rows.collect1unit;
 
-          test['collect4num'] = rows.collect4num;
-          test['collect4name'] = rows.collect4name;
-          test['collect4unit'] = rows.collect4uni;
-
-
-          test['collect5num'] = rows.collect5num;
-          test['collect5name'] = rows.collect5name;
-          test['collect5unit'] = rows.collect5unit;
+        test['collect2num'] = rows.collect2num;
+        test['collect2name'] = rows.collect2name;
+        test['collect2unit'] = rows.collect2unit;
 
 
-          test['collect6num'] = rows.collect6num;
-          test['collect6name'] = rows.collect6name;
-          test['collect6unit'] = rows.collect6unit;
+        test['collect3num'] = rows.collect3num;
+        test['collect3name'] = rows.collect3name;
+        test['collect3unit'] = rows.collect3unit;
 
-            searchdataRecipe.push(test);
+        test['collect4num'] = rows.collect4num;
+        test['collect4name'] = rows.collect4name;
+        test['collect4unit'] = rows.collect4unit;
 
-          }
-          console.log(searchdataRecipe)
+
+        test['collect5num'] = rows.collect5num;
+        test['collect5name'] = rows.collect5name;
+        test['collect5unit'] = rows.collect5unit;
+
+
+        test['collect6num'] = rows.collect6num;
+        test['collect6name'] = rows.collect6name;
+        test['collect6unit'] = rows.collect6unit;
+
+        searchdataRecipe.push(test);
+      } catch (e) {
+        console.log(e)
+
+      }
+
+    }
+    console.log(searchdataRecipe)
     // searchdataRecipe['recipenum'] = response.rows.recipenum;
     // searchdataRecipe['collectnum'] = response.rows.collectnum;
     // searchdataRecipe['collectname'] = response.rows.collectname;
