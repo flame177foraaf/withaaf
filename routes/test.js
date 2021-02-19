@@ -28,14 +28,14 @@ router.get('/searchall',  async function  (req, res, next) {
   var searchdataRecipe = [];
 
   // await client.query(QueryString, ['%' + Search + '%', ], function(err, response) {
-  await client.query(QueryString, ['%' + Search + '%'],  async function  (err, response) {
+  await client.query(QueryString, ['%' + Search + '%'],  function  (err, response) {
 
 
+    test = {};
 
            for (var i = 0; i < response.rows.length; i++) {
 
             row = response.rows[i];
-            test = {};
 
 
           test['recipenum'] = rows.recipenum;
