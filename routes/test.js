@@ -38,14 +38,9 @@ router.get('/searchall', async function(req, res, next) {
     for (var i = 0; i < response.rows.length; i++) {
 
       var rows = response.rows[i];
-      console.log(i)
-      console.log(rows)
-      try {
-
         test['recipenum'] = rows.recipenum;
         test['collectnum'] = rows.collectnum;
         test['collectname'] = rows.collectname;
-
 
         test['collect1num'] = rows.collect1num;
         test['collect1name'] = rows.collect1name;
@@ -73,12 +68,10 @@ router.get('/searchall', async function(req, res, next) {
         test['collect6num'] = rows.collect6num;
         test['collect6name'] = rows.collect6name;
         test['collect6unit'] = rows.collect6unit;
-
-        searchdataRecipe.push(test);
-      } catch (e) {
-        console.log(e)
-
-      }
+        function () {
+          searchdataRecipe.push(test);
+          
+        }
 
     }
     console.log(searchdataRecipe)
