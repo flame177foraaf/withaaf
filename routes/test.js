@@ -56,7 +56,7 @@ router.get('/searchall', async function(req, res, next) {
                           })
 
 
-                        }
+                        })
 
 
                       });
