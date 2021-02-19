@@ -27,21 +27,14 @@ router.get('/searchall', async function(req, res, next) {
   var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectname Ilike $1 OR collect1name Ilike $1 OR collect2name Ilike $1 OR collect3name Ilike $1 OR collect4name Ilike $1 OR collect5name Ilike $1 OR collect6name Ilike $1 ORDER BY recipenum asc;";
   console.log(QueryString)
 
-  var searchdataRecipe = [];
-  var searchdataRecipe1 = [];
-
   // await client.query(QueryString, ['%' + Search + '%', ], function(err, response) {
   await client.query(QueryString, ['%' + Search + '%'], function(err, response) {
 
-    var data1 = response.rows;
-    for (var i = 0; i < data1.length; i++) {
-      searchdataRecipe1.push(data1[i])
-    }
-    console.log(searchdataRecipe1)
+    var dataRecipe = response.rows;
 
     res.render('test', {
       title: 'AAF 장비',
-      data: response.rows,
+      dataRecipe: dataRecipe,
 
 
 

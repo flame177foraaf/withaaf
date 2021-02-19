@@ -11,8 +11,8 @@
   </style>
   <script type="text/javascript">
     function checkonclick() {
-      if (document.searchtext.value == null || document.searchtext.value == undefined || document.searchtext.trim().value == "" (document.searchtext.value != null && typeof document.searchtext.value == "object" && !Object.keys(
-          document.searchtext.value).length)) {
+      if (document.bodyform.searchtext.value == null || document.bodyform.searchtext.value == undefined || document.bodyform.searchtext.trim().value == "" || (document.bodyform.bodyform.searchtext.value != null && typeof document.bodyform.searchtext.value == "object" && !Object.keys(
+          document.bodyform.searchtext.value).length)) {
         alert("내용을 입력해주세요!");
         document.searchtext.focus();
         return false;
@@ -25,7 +25,7 @@
 </head>
 
 <body style="">
-  <form accept-charset="utf-8" action="/test/searchall"  method="get"onsubmit="return checkonclick()">
+  <form accept-charset="utf-8" action="/test/searchall" name="bodyform"   method="get"onsubmit="return checkonclick()">
     <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">
     <select name="searchtype">
       <option value="name">수집품 이름</option>
@@ -90,9 +90,9 @@
       <tbody>
 
 
-          <% if(typeof(data) != 'undefined'){ %>
+          <% if(typeof(dataRecipe) != 'undefined'){ %>
 
-              <% data.forEach(function(item) { %>
+              <% dataRecipe.forEach(function(item) { %>
               <tr style="white-space: pre-line; font-size:12px;" id="recipetabletr">
                 <td style="text-align: center;"><%- item.recipenum %></td>
                 <td style="text-align: center;"><%- item.collectnum %></td>
