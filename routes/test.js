@@ -25,19 +25,23 @@ router.get('/searchall', async function(req, res, next) {
   var Search = req.query.searchtext;
   console.log(Search)
   var QueryString = "SELECT * FROM aquafeq.aquafrecipe WHERE collectname Ilike $1 OR collect1name Ilike $1 OR collect2name Ilike $1 OR collect3name Ilike $1 OR collect4name Ilike $1 OR collect5name Ilike $1 OR collect6name Ilike $1 ORDER BY recipenum asc;";
-  await client.query(QueryString, ['%' + Search + '%'], function(err, dataRecipe) {});
+  await client.query(QueryString, ['%' + Search + '%'], async function(err, dataRecipe) {
 
-  var QueryString = " Select * FROm aquafeq.aquafwp WHERE wpup Ilike $1 ORDER BY wpid ;"
-  await client.query(QueryString, ['%' + Search + '%'], function(err, dataWP) {
+    var QueryString = " Select * FROm aquafeq.aquafwp WHERE wpup Ilike $1 ORDER BY wpid ;"
+    await client.query(QueryString, ['%' + Search + '%'], function(err, dataWP) {
+
+      res.render('test', {
+        title: 'AAF 장비',
+        dataRecipe: dataRecipe.rows,
+        dataWP: dataWP.rows
+
+
+      })
+    });
+
   });
 
-  res.render('test', {
-    title: 'AAF 장비',
-    dataRecipe: dataRecipe.rows,
-    dataWP: dataWP.rows
 
-
-  })
 })
 
 
