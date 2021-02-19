@@ -33,7 +33,7 @@ router.get('/searchall', async function(req, res, next) {
 
     res.render('test', {
       title: 'AAF 장비',
-      dataRecipe: dataRecipe.row,
+      dataRecipe: dataRecipe.rows,
 
 
 
