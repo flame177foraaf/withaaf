@@ -14,7 +14,7 @@
 
 
       if (
-        document.bodyform.searchtext == "" || document.bodyform.searchtext == null || document.bodyform.searchtext == undefined || ( document.bodyform.searchtext != null && typeof(document.bodyform.searchtext) == "object" && !Object.keys(document.bodyform.searchtext).length )
+        document.bodyform.searchtext.value == "" || document.bodyform.searchtext.value == null || document.bodyform.searchtext.value == undefined || ( document.bodyform.searchtext.value != null && typeof document.bodyform.searchtext.value == "object" && !Object.keys(document.bodyform.searchtext.value).length )
       ) {
         alert("내용을 입력해주세요!");
         document.bodyform.searchtext.focus();
