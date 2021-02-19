@@ -28,7 +28,7 @@ router.get('/searchall',  async function  (req, res, next) {
   var searchdataRecipe = [];
 
   // await client.query(QueryString, ['%' + Search + '%', ], function(err, response) {
-  await client.query(QueryString, ['%' + Search + '%'], function async (err, response) {
+  await client.query(QueryString, ['%' + Search + '%'],  async function  (err, response) {
 
 
 
