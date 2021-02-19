@@ -28,7 +28,7 @@ router.get('/searchall', async function(req, res, next) {
   var searchdataRecipe = [];
 
   // await client.query(QueryString, ['%' + Search + '%', ], function(err, response) {
-  await client.query(QueryString, ['%' + Search + '%'], function(err, response) {
+  await client.query(QueryString, ['%' + Search + '%'], function async (err, response) {
 
 
 
@@ -158,7 +158,7 @@ router.get('/searchall', async function(req, res, next) {
 
     //console.log('엔드페이지'+ EndPage);
     //console.log(response.rows[0])
-    res.render('test', {
+    await res.render('test', {
       title: 'AAF 장비',
       data: searchdataRecipe,
 
