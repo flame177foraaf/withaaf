@@ -158,7 +158,7 @@ router.get('/searchall',  async function  (req, res, next) {
 
     //console.log('엔드페이지'+ EndPage);
     //console.log(response.rows[0])
-    await res.render('test', {
+    res.render('test', {
       title: 'AAF 장비',
       data: searchdataRecipe,
 
