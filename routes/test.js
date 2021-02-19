@@ -28,143 +28,20 @@ router.get('/searchall', async function(req, res, next) {
   console.log(QueryString)
 
   var searchdataRecipe = [];
+  var searchdataRecipe1 = [];
 
   // await client.query(QueryString, ['%' + Search + '%', ], function(err, response) {
   await client.query(QueryString, ['%' + Search + '%'], function(err, response) {
 
     var data1 = response.rows;
-    var test = {};
-
     for (var i = 0; i < data1.length; i++) {
-      try {
-        var data = data1[i]
-
-          test['recipenum'] = data.recipenum;
-          test['collectnum'] = data.collectnum;
-          test['collectname'] = data.collectname;
-
-          test['collect1num'] = data.collect1num;
-          test['collect1name'] = data.collect1name;
-          test['collect1unit'] = data.collect1unit;
-
-          test['collect2num'] = data.collect2num;
-          test['collect2name'] = data.collect2name;
-          test['collect2unit'] = data.collect2unit;
-
-
-          test['collect3num'] = data.collect3num;
-          test['collect3name'] = data.collect3name;
-          test['collect3unit'] = data.collect3unit;
-
-          test['collect4num'] = data.collect4num;
-          test['collect4name'] = data.collect4name;
-          test['collect4unit'] = data.collect4unit;
-
-
-          test['collect5num'] = data.collect5num;
-          test['collect5name'] = data.collect5name;
-          test['collect5unit'] = data.collect5unit;
-
-
-          test['collect6num'] = data.collect6num;
-          test['collect6name'] = data.collect6name;
-          test['collect6unit'] = data.collect6unit;
-
-      } catch (e) {
-        console(e)
-      } finally {
-        searchdataRecipe.push(test);
-      }
-
+      searchdataRecipe1.push(data1[i])
     }
-    console.log(searchdataRecipe)
-    // searchdataRecipe['recipenum'] = response.rows.recipenum;
-    // searchdataRecipe['collectnum'] = response.rows.collectnum;
-    // searchdataRecipe['collectname'] = response.rows.collectname;
-    //
-    //
-    // searchdataRecipe['collect1num'] = response.rows.collect1num;
-    // searchdataRecipe['collect1name'] = response.rows.collect1name;
-    // searchdataRecipe['collect1unit'] = response.rows.collect1unit;
-    //
-    // searchdataRecipe['collect2num'] = response.rows.collect2num;
-    // searchdataRecipe['collect2name'] = response.rows.collect2name;
-    // searchdataRecipe['collect2unit'] = response.rows.collect2unit;
-    //
-    //
-    // searchdataRecipe['collect3num'] = response.rows.collect3num;
-    // searchdataRecipe['collect3name'] = response.rows.collect3name;
-    // searchdataRecipe['collect3unit'] = response.rows.collect3unit;
-    //
-    // searchdataRecipe['collect4num'] = response.rows.collect4num;
-    // searchdataRecipe['collect4name'] = response.rows.collect4name;
-    // searchdataRecipe['collect4unit'] = response.rows.collect4uni;
-    //
-    //
-    // searchdataRecipe['collect5num'] = response.rows.collect5num;
-    // searchdataRecipe['collect5name'] = response.rows.collect5name;
-    // searchdataRecipe['collect5unit'] = response.rows.collect5unit;
-    //
-    //
-    // searchdataRecipe['collect6num'] = response.rows.collect6num;
-    // searchdataRecipe['collect6name'] = response.rows.collect6name;
-    // searchdataRecipe['collect6unit'] = response.rows.collect6unit;
+    console.log(searchdataRecipe1)
 
-
-    // function async1() {
-    //   return Promise.resolve(
-    //     searchdataRecipe['collect1num'] = response.rows.collect1num,
-    //     searchdataRecipe['collect1name'] = response.rows.collect1name,
-    //     searchdataRecipe['collect1unit'] = response.rows.collect1unit
-    //   );
-    // }
-    //
-    // function async2() {
-    //   return Promise.resolve(
-    //     searchdataRecipe['collect2num'] = response.rows.collect2num,
-    //     searchdataRecipe['collect2name'] = response.rows.collect2name,
-    //     searchdataRecipe['collect2unit'] = response.rows.collect2unit
-    //   );
-    // }
-    //
-    // function async3() {
-    //   return Promise.resolve(
-    //     searchdataRecipe['collect3num'] = response.rows.collect3num,
-    //     searchdataRecipe['collect3name'] = response.rows.collect3name,
-    //     searchdataRecipe['collect3unit'] = response.rows.collect3unit
-    //   );
-    // }
-    //
-    // function async4() {
-    //   return Promise.resolve(
-    //     searchdataRecipe['collect4num'] = response.rows.collect4num,
-    //     searchdataRecipe['collect4name'] = response.rows.collect4name,
-    //     searchdataRecipe['collect4unit'] = response.rows.collect4unit
-    //   );
-    // }
-    //
-    // function async5() {
-    //   return Promise.resolve(
-    //     searchdataRecipe['collect5num'] = response.rows.collect5num,
-    //     searchdataRecipe['collect5name'] = response.rows.collect5name,
-    //     searchdataRecipe['collect5unit'] = response.rows.collect5unit);
-    // }
-    //
-    // function async6() {
-    //   return Promise.resolve(
-    //     searchdataRecipe['collect6num'] = response.rows.collect6num,
-    //     searchdataRecipe['collect6name'] = response.rows.collect6name,
-    //     searchdataRecipe['collect6unit'] = response.rows.collect6unit);
-    // }
-
-
-
-
-    //console.log('엔드페이지'+ EndPage);
-    //console.log(response.rows[0])
     res.render('test', {
       title: 'AAF 장비',
-      data: searchdataRecipe,
+      data: response.rows,
 
 
 
