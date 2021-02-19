@@ -15,7 +15,7 @@ client.connect();
 
 router.get('/', async function(req, res, next) {
   res.render('test', {
-    title: 'AAF 장비'
+    title: '테스트'
   });
 });
 
@@ -29,11 +29,11 @@ router.get('/searchall',  async function  (req, res, next) {
   await client.query(QueryString, ['%' + Search + '%'],  function  (err, response) {
 
 
-    test = {};
+    var test = {};
 
            for (var i = 0; i < response.rows.length; i++) {
 
-            row = response.rows[i];
+            var rows = response.rows[i];
 
 
           test['recipenum'] = rows.recipenum;
