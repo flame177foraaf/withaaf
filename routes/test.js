@@ -23,8 +23,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/searchall', async function(req, res, next) {
   var Search = req.query.searchtext;
-  var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectname Ilike $1 OR collect1name Ilike $1 OR collect2name Ilike $1 OR collect3name Ilike $1 OR collect4name Ilike $1 OR collect5name Ilike $1 OR collect6name Ilike $1 ORDER BY recipenum asc;"
-  var searchdataRecipe = {};
+  var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafrecipe WHERE collectname Ilike $1 OR collect1name Ilike $1 OR collect2name Ilike $1 OR collect3name Ilike $1 OR collect4name Ilike $1 OR collect5name Ilike $1 OR collect6name Ilike $1 ORDER BY recipenum asc;";
+
+  var searchdataRecipe = [];
 
   // await client.query(QueryString, ['%' + Search + '%', ], function(err, response) {
   await client.query(QueryString, ['%' + Search + '%'], function(err, response) {
@@ -34,40 +35,42 @@ router.get('/searchall', async function(req, res, next) {
           for (var i = 0; i < response.rows.length; i++) {
 
             row = response.rows[i];
-
-          searchdataRecipe['recipenum'] = rows.recipenum;
-          searchdataRecipe['collectnum'] = rows.collectnum;
-          searchdataRecipe['collectname'] = rows.collectname;
+            test = {};
 
 
-          searchdataRecipe['collect1num'] = rows.collect1num;
-          searchdataRecipe['collect1name'] = rows.collect1name;
-          searchdataRecipe['collect1unit'] = rows.collect1unit;
-
-          searchdataRecipe['collect2num'] = rows.collect2num;
-          searchdataRecipe['collect2name'] = rows.collect2name;
-          searchdataRecipe['collect2unit'] = rows.collect2unit;
+          test['recipenum'] = rows.recipenum;
+          test['collectnum'] = rows.collectnum;
+          test['collectname'] = rows.collectname;
 
 
-          searchdataRecipe['collect3num'] = rows.collect3num;
-          searchdataRecipe['collect3name'] = rows.collect3name;
-          searchdataRecipe['collect3unit'] = rows.collect3unit;
+          test['collect1num'] = rows.collect1num;
+          test['collect1name'] = rows.collect1name;
+          test['collect1unit'] = rows.collect1unit;
 
-          searchdataRecipe['collect4num'] = rows.collect4num;
-          searchdataRecipe['collect4name'] = rows.collect4name;
-          searchdataRecipe['collect4unit'] = rows.collect4uni;
-
-
-          searchdataRecipe['collect5num'] = rows.collect5num;
-          searchdataRecipe['collect5name'] = rows.collect5name;
-          searchdataRecipe['collect5unit'] = rows.collect5unit;
+          test['collect2num'] = rows.collect2num;
+          test['collect2name'] = rows.collect2name;
+          test['collect2unit'] = rows.collect2unit;
 
 
-          searchdataRecipe['collect6num'] = rows.collect6num;
-          searchdataRecipe['collect6name'] = rows.collect6name;
-          searchdataRecipe['collect6unit'] = respoe.rows.collect6unit;
+          test['collect3num'] = rows.collect3num;
+          test['collect3name'] = rows.collect3name;
+          test['collect3unit'] = rows.collect3unit;
 
-            searchdataRecipe.push(searchdataRecipe);
+          test['collect4num'] = rows.collect4num;
+          test['collect4name'] = rows.collect4name;
+          test['collect4unit'] = rows.collect4uni;
+
+
+          test['collect5num'] = rows.collect5num;
+          test['collect5name'] = rows.collect5name;
+          test['collect5unit'] = rows.collect5unit;
+
+
+          test['collect6num'] = rows.collect6num;
+          test['collect6name'] = rows.collect6name;
+          test['collect6unit'] = respoe.rows.collect6unit;
+
+            searchdataRecipe.push(test);
 
           }
     // searchdataRecipe['recipenum'] = response.rows.recipenum;
