@@ -78,7 +78,7 @@
               <th>레시피 검색</th>
             </thead>
             <tbody>
-              <td>해당 자료가 없습니다.</td>
+              <td style="text-align:center;">해당 자료가 없습니다.</td>
             </tbody>
           </table>
       <%  } else { %>
@@ -199,7 +199,17 @@
   <div class="">
 
       <% if(typeof(dataWP) != 'undefined'){ %>
+        <%  if (dataWP.length == 0) { %>
+              <table >
+                <thead>
+                  <th>장비-무기 리버스 재료 검색</th>
+                </thead>
+                <tbody>
+                  <td style="text-align:center;">해당 자료가 없습니다.</td>
+                </tbody>
+              </table>
 
+          <%  } else { %>
       <table id="eqtable" style="width:100%;">
         <colgroup>
           <col width="100">
@@ -320,6 +330,8 @@
         </tbody>
       </table>
       <% } %>
+
+      <% } %>
   </div>
 
 
@@ -327,6 +339,17 @@
 
       <% if(typeof(dataARM) != 'undefined'){ %>
 
+          <%  if (dataARM.length == 0) { %>
+                <table >
+                  <thead>
+                    <th>장비-방어구 리버스 재료 검색</th>
+                  </thead>
+                  <tbody>
+                    <td style="text-align:center;">해당 자료가 없습니다.</td>
+                  </tbody>
+                </table>
+
+            <%  } else { %>
       <table id="eqtable" style="width:100%;">
 
         <colgroup>
@@ -415,11 +438,24 @@
         </tbody>
       </table>
       <% } %>
+      <% } %>
   </div>
 
 
   <div class="">
         <% if(typeof(dataACC) != 'undefined'){ %>
+
+            <%  if (dataACC.length == 0) { %>
+                  <table >
+                    <thead>
+                      <th>장비-악세서리 리버스 재료 검색</th>
+                    </thead>
+                    <tbody>
+                      <td style="text-align:center;">해당 자료가 없습니다.</td>
+                    </tbody>
+                  </table>
+
+              <%  } else { %>
       <table id="eqtable" style="width:100%;">
         <colgroup>
           <col width="100">
@@ -506,55 +542,63 @@
         </tbody>
 
       </table>
+
+      <% } %>
       <% } %>
   </div>
 
   <div class="">
-        <% if (typeof(dataMonsterField) != 'undefined'){ %>
-          <table id="mon_table" style="margin-top:5px; width:100%">
+    <% if (typeof(dataMonsterField) != 'undefined' && typeof(dataMonsterTower) != 'undefined'){ %>
+            <table >
               <thead>
-                <tr>
-                  <th>레벨</th>
-                  <th>이름</th>
-                  <th>속성</th>
-                  <th>에테르</th>
-                  <th>타입</th>
-                  <th>저항</th>
-                  <th>보석</th>
-                  <th>커먼</th>
-                  <th>언커먼</th>
-                  <th>레어</th>
-                  <th>스킬</th>
-                </tr>
+                <th>몬스터 드랍 검색</th>
               </thead>
               <tbody>
-
-                              <% dataMonsterField.forEach(function(item) { %>
-
-                                <tr>
-                                <td style= "text-align:center;"><%- item.mon_lv %></td>
-                                <td><%- item.mon_name %></td>
-                                <td><%- item.mon_property %></td>
-                                <td><%- item.mon_ether %></td>
-                                <td style="text-align: center"><%- item.mon_type %></td>
-                                <td><%- item.mon_resist %></td>
-                                <td style="text-align: center"><%- item.mon_gem %></td>
-                                <td id ="" style="text-align: center"><%- item.mon_common %></td>
-                                <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
-                                <td id ="" style="text-align: center"><%- item.mon_rare %></td>
-                                <td id =""><%- item.mon_skill %></td>
-                                </tr>
-                                <% })%>
+                <td style="text-align:center;">해당 자료가 없습니다.</td>
               </tbody>
-          </table>
-        <% } %>
-  </div>
+            </table>
+    <% } else { %>
+      <% if (typeof(dataMonsterField) != 'undefined'){ %>
+        <table id="mon_table" style="margin-top:5px; width:100%">
+            <thead>
+              <tr>
+                <th>레벨</th>
+                <th>이름</th>
+                <th>속성</th>
+                <th>에테르</th>
+                <th>타입</th>
+                <th>저항</th>
+                <th>보석</th>
+                <th>커먼</th>
+                <th>언커먼</th>
+                <th>레어</th>
+                <th>스킬</th>
+              </tr>
+            </thead>
+            <tbody>
 
-  <div class="">
+                            <% dataMonsterField.forEach(function(item) { %>
 
-        <% if (typeof(dataMonsterTower) != 'undefined'){ %>
+                              <tr>
+                              <td style= "text-align:center;"><%- item.mon_lv %></td>
+                              <td><%- item.mon_name %></td>
+                              <td><%- item.mon_property %></td>
+                              <td><%- item.mon_ether %></td>
+                              <td style="text-align: center"><%- item.mon_type %></td>
+                              <td><%- item.mon_resist %></td>
+                              <td style="text-align: center"><%- item.mon_gem %></td>
+                              <td id ="" style="text-align: center"><%- item.mon_common %></td>
+                              <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
+                              <td id ="" style="text-align: center"><%- item.mon_rare %></td>
+                              <td id =""><%- item.mon_skill %></td>
+                              </tr>
+                              <% })%>
+            </tbody>
+        </table>
+      <% } %>
 
-      <table id="mon_table" style="margin-top:5px; width:100%">
+      <% if (typeof(dataMonsterTower) != 'undefined'){ %>
+        <table id="mon_table" style="margin-top:5px; width:100%">
           <thead>
             <tr>
               <th>층</th>
@@ -610,9 +654,9 @@
               <% } %>
             <% }) %>
           </tbody>
-      </table>
-
+        </table>
       <% } %>
+    <% } %>
   </div>
 
 
