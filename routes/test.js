@@ -191,6 +191,7 @@ router.get('/:id', async function(req,res,next) {
 
   if (searchtype != '1stats' && searchtype != '2stats') {
     var Search22 = [];
+    var QueryString;
     if (Search2 !== undefined) {
       console.log('추가 검색' + Search2);
       console.log('추가 검색타입 '+ typeof(Search2));
@@ -218,18 +219,17 @@ router.get('/:id', async function(req,res,next) {
           var SearchPlus = SearchPlus+ ' AND ' + searchtype22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' ";
         }
       }
-      console.log('req.query.searchtext2 !== undefined' + SearchPlus)
+      console.log('req.query.searchtext2 !== undefined' + SearchPlus);
       // var QueryString = "SELECT * FROM aquafeq.aquafwp AS t1 LEFT JOIN  (SELECT name, effect FROM aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1." + searchtype +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
       var QueryString = "SELECT DISTINCT wpname,* FROM aquafeq.aquafwp AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
-
     } else {
       // var QueryString = "SELECT * FROM aquafeq.aquafwp AS t1 LEFT JOIN  (SELECT effect FROM aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
       var QueryString = "SELECT DISTINCT wpname, * FROM aquafeq.aquafwp AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
       console.log('here')
     }
+    console.log(QueryString);
     await client.query(QueryString, ['%' + Search +'%', CurrentPage], async function (err, response){
       await response;
-      print(response);
 
       if (err) {
         res.redirect('/test');
