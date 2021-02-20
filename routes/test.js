@@ -289,9 +289,9 @@ router.get('/:id', async function(req,res,next) {
     }
     console.log(Search);
     if (searchtype == '1stats') {
-      var QueryString = "SELECT * from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 1))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);";
+      var QueryString = "SELECT * , count(*) over() as totalcount from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 1))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);";
     } else if (searchtype == '2stats') {
-      var QueryString = "SELECT * from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 2))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);";
+      var QueryString = "SELECT * , count(*) over() as totalcount from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 2))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);";
     }
     console.log("QueryString : " +QueryString);
     await client.query(QueryString, [Search, CurrentPage], async function (err, response){
@@ -299,6 +299,12 @@ router.get('/:id', async function(req,res,next) {
       if (err) {
         res.redirect('/test');
         console.log(err)
+      }
+
+      if(typeof(response.rows[0]) !== "object") {
+        var TotalCount = 1;
+      } else {
+        var TotalCount = response.rows[0].totalcount;
       }
       //console.log(CurrentPage)
       //console.log(typeof(CurrentPage))
@@ -308,6 +314,7 @@ router.get('/:id', async function(req,res,next) {
       if (TotalPage < CurrentPage) {
         CurrentPage = TotalPage;
       };
+
       var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
       //console.log('스타트페이지' + StartPage);
 
