@@ -54,7 +54,10 @@
     cursor: pointer;
     text-decoration: none;
   }
-
+  .main{
+    margin-top: 50px;
+    margin-bottom: 50px
+  }
   .eqtable {
     border-collapse: collapse;
     text-align: left;
