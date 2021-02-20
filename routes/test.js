@@ -310,6 +310,8 @@ router.get('/:id', async function(req,res,next) {
       //console.log(typeof(CurrentPage))
       var DataCountInPage = 10;
       var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
+      
       //console.log('토탈 페이지' + TotalPage);
       if (TotalPage < CurrentPage) {
         CurrentPage = TotalPage;
