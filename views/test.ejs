@@ -553,7 +553,9 @@
 
 
     <% if (typeof(dataMonsterField) != 'undefined' && typeof(dataMonsterTower) != 'undefined'){ %>
-  <div class="NotSearchMonsterDrop">
+  <div class="NotSearchMonsterDrop" >
+    <b><%- typeof(dataMonsterField)%></b>
+    <b><%- typeof(dataMonsterTower)%></b>
 
                 <%  if (dataMonsterField.length == 0 && dataMonsterTower.length == 0) { %>
             <table class="eqtable" style="width:100%; margin: 50px 0px 50px 0px; border-top: 1px solid #444444; border-bottom: 1px solid #444444;">
