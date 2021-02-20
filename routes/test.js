@@ -179,13 +179,9 @@ router.post('/fixwp', async function(req,res,next) {
 router.get('/:id', async function(req,res,next) {
   console.log(url.parse(req.url, true));
 
-  var CurrentPage = req.params.id;
-  var CurrentPage = parseInt(CurrentPage);
+  var CurrentPage = parseInt(req.params.id);
   var searchtype = req.query.searchtype;
   var Search = req.query.searchtext;
-  if (Search == null ) {
-    var Search = "";
-  }
 
   var SearchPlus = "";
   var Search2 = req.query.searchtext2;
@@ -195,8 +191,6 @@ router.get('/:id', async function(req,res,next) {
 
   if (searchtype != '1stats' && searchtype != '2stats') {
     var Search22 = [];
-
-
     if (Search2 !== undefined) {
       console.log('추가 검색' + Search2);
       console.log('추가 검색타입 '+ typeof(Search2));
@@ -234,18 +228,6 @@ router.get('/:id', async function(req,res,next) {
       console.log('here')
 
     }
-
-      console.log('req.query.searchtype : ' + Search);
-      console.log('req.query.searchtype : ' + searchtype);
-      // console.log(Search);
-      // console.log(searchtype);
-      // console.log(decodeURIComponent(Search));
-      // console.log(encodeURIComponent(Search));
-      // console.log(CurrentPage);
-      // console.log(SearchPlus);
-      // console.log(Search2);
-      // console.log(Search22);
-      // console.log('QueryString' + QueryString);
     await client.query(QueryString, ['%' + Search +'%', CurrentPage], async function (err, response){
       await response;
       if (err) {
@@ -257,9 +239,6 @@ router.get('/:id', async function(req,res,next) {
       } else {
         var TotalCount = response.rows[0].totalcount;
       }
-      //console.log('토탈 카운트 ' + TotalCount)
-      //console.log(CurrentPage)
-      //console.log(typeof(CurrentPage))
       var DataCountInPage = 10;
       var PageSize = 10;
       var TotalPage = parseInt(TotalCount / DataCountInPage,10);
@@ -278,8 +257,6 @@ router.get('/:id', async function(req,res,next) {
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       };
-      //console.log('엔드페이지'+ EndPage);
-      //console.log(response.rows[0])
       res.render('test', {
         title: 'AAF 장비',
         data: response.rows,
@@ -303,26 +280,23 @@ router.get('/:id', async function(req,res,next) {
     });
   } else {
     console.log(Search)
+    console.log(searchtype)
     if (Search == '' || Search == null || Search == undefined ) {
       var Search = 0;
+    } else {
+      var Search = parseInt(Search);
     }
-
-      var Search = parseInt(Search,10)
-      var SearchPlus = "";
-      var Search2 = req.query.searchtext2;
+    console.log(Search);
     if (searchtype == '1stats') {
-      var QueryString = "SELECT * from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 1))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);"
-
+      var QueryString = "SELECT * from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 1))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);";
     } else if (searchtype == '2stats') {
-
-      var QueryString = "SELECT * from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 2))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);"
+      var QueryString = "SELECT * from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 2))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);";
     }
     console.log("QueryString : " +QueryString);
     await client.query(QueryString, [Search, CurrentPage], async function (err, response){
-      await response
+      await response;
       if (err) {
         res.redirect('/test');
-
       }
       //console.log(CurrentPage)
       //console.log(typeof(CurrentPage))
@@ -339,34 +313,6 @@ router.get('/:id', async function(req,res,next) {
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       };
-      /*
-      var emp = new Object()
-      var featlink0 = response.rows[0].wpfeat
-      var featlink1 = featlink0.split("(");
-      var featlink2 = []
-      var featlink3 = [];
-      var featlink4 = ['<a href="http://aafwiki.com/wiki/"'+featlink1[0] +"(피트)/></a>"];
-      for (var i = 0; i < featlink1.length; i++) {
-        featlink2.push( featlink1[i].indexOf(">"));
-        var featlink3 = featlink3 + ( featlink1[i].split(">"));
-        if (featlink2[i] != -1) {
-          //featlink4.push(featlink3.indexOf(i).substring(featlink2[i] , featlink3[i].length))
-
-          featlink4 = featlink4 + ('<a href="http://aafwiki.com/wiki/"'+ featlink1[i].substring(featlink2[i]+1,featlink2[i].length) +'(피트)/></a>')
-        }
-      }
-      emp.wpgrade = response.rows[0].wpgrade
-      emp.wpname = response.rows[0].wpname
-      emp.wplimit = response.rows[0].wplimit
-      emp.wpsocket = response.rows[0].wpsocket
-      emp.wpether = response.rows[0].wpether
-      emp.wpstats = response.rows[0].wpstats
-      emp.wpproperty = response.rows[0].wpproperty
-      emp.wpfeat = featlink4
-      emp.wpcustom = response.rows[0].wpcustom
-      emp.wpup = response.rows[0].wpup*/
-      //console.log('엔드페이지'+ EndPage);
-      //console.log(response.rows[0])
       res.render('test', {
         title: 'AAF 장비',
         data: response.rows,
