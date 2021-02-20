@@ -17,20 +17,17 @@
       if (
         document.bodyform.searchtext.value == "" || document.bodyform.searchtext.value.trim() == "" || document.bodyform.searchtext.value == null || document.bodyform.searchtext.value == undefined || ( document.bodyform.searchtext.value != null && typeof document.bodyform.searchtext.value == "object" && !Object.keys(document.bodyform.searchtext.value).length )
       ) {
-          alert("내용을 입력해주세요!");
+          alert("수집품 이름을 입력해주세요!");
           document.bodyform.searchtext.focus();
           return false;
       }
       else if (document.bodyform.searchtext.value.trim().length <= 1) {
         if (
           document.bodyform.searchtext.value.trim() == '연' || document.bodyform.searchtext.value.trim() == '숯' || document.bodyform.searchtext.value.trim() == '뿔' || document.bodyform.searchtext.value.trim() == '쑥' || document.bodyform.searchtext.value.trim() == '못') {
-            alert("힝.. 검색하기 애매한 자료들이에요.. ");
-
+            // alert("힝.. 검색하기 애매한 자료들이에요.. ");
             return true;
-
         }
-
-        alert("ㅠㅠ 2글자 이상 입력하시면 더 정확한 자료가 나옵니다");
+        alert("수집품 이름이 외자가 아닌이상 두글자 이상 입력해주세요!");
         document.bodyform.searchtext.focus();
         return false;
 
