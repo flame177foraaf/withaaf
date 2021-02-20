@@ -226,12 +226,11 @@ router.get('/:id', async function(req,res,next) {
       }
       console.log('req.query.searchtext2 !== undefined' + SearchPlus)
       // var QueryString = "SELECT * FROM aquafeq.aquafwp AS t1 LEFT JOIN  (SELECT name, effect FROM aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1." + searchtype +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
-      var QueryString = "SELECT * FROM aquafeq.aquafwp AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 " + SearchPlus + "ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
-
+      var QueryString = "SELECT DISTINCT wpname,* FROM aquafeq.aquafwp AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 " + SearchPlus + "ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
 
     } else {
       // var QueryString = "SELECT * FROM aquafeq.aquafwp AS t1 LEFT JOIN  (SELECT effect FROM aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
-      var QueryString = "SELECT * FROM aquafeq.aquafwp AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
+      var QueryString = "SELECT DISTINCT wpname, * FROM aquafeq.aquafwp AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
       console.log('here')
 
     }
@@ -309,14 +308,14 @@ router.get('/:id', async function(req,res,next) {
     }
 
       var Search = parseInt(Search,10)
-    var SearchPlus = "";
-    var Search2 = req.query.searchtext2;
+      var SearchPlus = "";
+      var Search2 = req.query.searchtext2;
     if (searchtype == '1stats') {
+      var QueryString = "SELECT * from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 1))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);"
 
-      var QueryString = "SELECT *, count(*) over() as totalcount from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 1) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
     } else if (searchtype == '2stats') {
 
-      var QueryString = "SELECT *, count(*) over() as totalcount from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
+      var QueryString = "SELECT * from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 2))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);"
     }
     console.log("QueryString : " +QueryString);
     await client.query(QueryString, [Search, CurrentPage], async function (err, response){
@@ -325,20 +324,10 @@ router.get('/:id', async function(req,res,next) {
         res.redirect('/test');
 
       }
-      if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
-      } else {
-        var TotalCount = response.rows[0].totalcount;
-      }
-      //console.log('토탈 카운트 ' + TotalCount)
       //console.log(CurrentPage)
       //console.log(typeof(CurrentPage))
       var DataCountInPage = 10;
       var PageSize = 10;
-      var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      if (TotalCount % DataCountInPage > 0) {
-        TotalPage++;
-      };
       //console.log('토탈 페이지' + TotalPage);
       if (TotalPage < CurrentPage) {
         CurrentPage = TotalPage;

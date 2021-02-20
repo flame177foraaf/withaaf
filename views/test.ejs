@@ -646,7 +646,12 @@
                   <% } %>
 
                 <td><%- item.wpgrade %></td>
-                <td><%- item.wpname %></td>
+                <% if (item.effect == null || item.effect == undefined || item.effect == "undefined") { %>
+                  <td><%- item.wpname %></td>
+
+                <% } else { %>
+                  <td><%- item.effect.replace('span>', 'td>') %></td>
+                <% } %>
                 <td style='text-align: center'><%- item.wplimit %></td>
                 <td style='text-align: center'><%- item.wpsocket %></td>
                 <td style='text-align: center'><%- item.wpether %></td>
