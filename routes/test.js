@@ -16,7 +16,7 @@ client.connect();
 
 
 router.get('/', async function(req, res, next) {
-  if (req.query.searchtext != undefined) {
+  if (req.query.searchtext == undefined) {
     res.render('test', {
       title: '테스트'
     });
