@@ -26,7 +26,7 @@ router.get('/', async function(req, res, next) {
 
     var QueryString = "SELECT * FROM aquafeq.aquafrecipe WHERE collectname Ilike '%' || $1 || '%' OR collect1name Ilike '%' || $1 || '%' OR collect2name Ilike '%' || $1 || '%' OR collect3name Ilike '%' || $1 || '%' OR collect4name Ilike '%' || $1 || '%' OR collect5name Ilike '%' || $1 || '%' OR collect6name Ilike '%' || $1 || '%' ORDER BY recipenum asc;";
     if (Search.length == 1) {
-      var QueryString = "SELECT * FROM aquafeq.aquafrecipe WHERE collectname = $1 OR collect1name = $1 OR collect2name = $1 OR collect3name = $1 OR collect4name = $1' OR collect5name = $1 OR collect6name = $1 ORDER BY recipenum asc;";
+      var QueryString = "SELECT * FROM aquafeq.aquafrecipe WHERE collectname = $1 OR collect1name = $1 OR collect2name = $1 OR collect3name = $1 OR collect4name = $1 OR collect5name = $1 OR collect6name = $1 ORDER BY recipenum asc;";
     }
     await client.query(QueryString, [Search], async function(err, dataRecipe) {
 
