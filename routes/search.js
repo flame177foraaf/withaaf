@@ -21,8 +21,9 @@ router.get('/', async function(req, res, next) {
       title: 'AAF 통합검색'
     });
   } else {
-    var Search = req.query.searchtext;
+    var Search = await req.query.searchtext;
     console.log(Search)
+
 
     var QueryString = "SELECT * FROM aquafeq.aquafrecipe WHERE collectname Ilike '%' || $1 || '%' OR collect1name Ilike '%' || $1 || '%' OR collect2name Ilike '%' || $1 || '%' OR collect3name Ilike '%' || $1 || '%' OR collect4name Ilike '%' || $1 || '%' OR collect5name Ilike '%' || $1 || '%' OR collect6name Ilike '%' || $1 || '%' ORDER BY recipenum asc;";
     if (Search.length == 1) {
@@ -32,19 +33,19 @@ router.get('/', async function(req, res, next) {
 
       var QueryString = " Select * From aquafeq.aquafwp WHERE wpup Ilike '%' || $1 || '%' ORDER BY wpid ;";
       if (Search.length == 1) {
-        var QueryString = " Select * From aquafeq.aquafwp WHERE wpup Ilike '%'<br> || $1 || '%' ORDER BY wpid ;";
+        var QueryString = " Select * From aquafeq.aquafwp WHERE wpup Ilike '%<br>' || $1 || '%' ORDER BY wpid ;";
       }
       await client.query(QueryString, [Search], async function(err, dataWP) {
 
         var QueryString = " Select * From aquafeq.aquafarm WHERE armup Ilike '%' || $1 || '%' ORDER BY armid ;";
         if (Search.length == 1) {
-          var QueryString = " Select * From aquafeq.aquafarm WHERE armup Ilike '%' <br> || $1 || '%' ORDER BY armid ;";
+          var QueryString = " Select * From aquafeq.aquafarm WHERE armup Ilike '%<br>' || $1 || '%' ORDER BY armid ;";
         }
         await client.query(QueryString, [Search], async function(err, dataARM) {
 
           var QueryString = " Select * From aquafeq.aquafacc WHERE accup Ilike '%' || $1 || '%' ORDER BY accid ;";
           if (Search.length == 1) {
-            var QueryString = " Select * From aquafeq.aquafacc WHERE accup Ilike '%' <br> || $1 || '%' ORDER BY accid ;";
+            var QueryString = " Select * From aquafeq.aquafacc WHERE accup Ilike '%<br>'|| $1 || '%' ORDER BY accid ;";
           }
           await client.query(QueryString, [Search], async function(err, dataACC) {
 
