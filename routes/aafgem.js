@@ -1,29 +1,30 @@
 var express = require('express');
-var router = express.Router();
 var app = express();
+var $ = require('jquery');
 var url = require('url');
-
-const { Client } = require('pg');
-
-const client = new Client({
+var asyncify = require('express-asyncify');
+var router = asyncify(express.Router());
+var { Client } = require('pg');
+var client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });
 
 client.connect();
 
-router.get('/', (req,res,next) => {
+router.get('/', async function(req,res,next) {
   res.render('aafgem', {
     title:'AAF 장비',
   });
 });
 
-router.get('/fixgem', (req,res,next) => {
+router.get('/fixgem', async function(req,res,next) {
   var QueryString = "select gemname from aquafeq.aquafgem"
-  client.query(QueryString, (err, response) => {
+  await client.query(QueryString, async function (err, response){
     var Select_name = req.query.Seachname;
     var QueryString = "select * from aquafeq.aquafgem where gemname = $1"
-    client.query(QueryString, [Select_name], (err, response) => {
+    await client.query(QueryString, [Select_name], async function (err, response){
+      await  response;
       if(typeof(response.rows[0]) !== "object") {
         res.render ('addgem', {
           title: '신규 루엘 ' + Select_name + ' 등록',
@@ -38,7 +39,7 @@ router.get('/fixgem', (req,res,next) => {
   });
 })
 
-router.post('/fixgem', (req,res,next) => {
+router.post('/fixgem', async function(req,res,next) {
   var Eqid = req.body.eqid;
   console.log(Eqid)
 
@@ -56,9 +57,10 @@ router.post('/fixgem', (req,res,next) => {
       Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var QueryString = "UPDATE aquafeq.aquafgem SET (gemgrade, collectname, gemobject, gemeffect, gemname) = ($1, $2, $3, $4, $5)  WHERE gemid = $6 returning *"
-  client.query(QueryString, [Gemgrade, Collectname, Gemobject, Gemeffect, Gemname, Eqid], (err, response) => {
+  await client.query(QueryString, [Gemgrade, Collectname, Gemobject, Gemeffect, Gemname, Eqid], async function (err, response){
     var QueryString = "select * from aquafeq.aquafgem where gemname = $1"
-    client.query (QueryString, [Gemname],  (err, response) => {
+    await client.query (QueryString, [Gemname],  async function(err, response) {
+      await response;
       console.log(response.rows[0])
       res.render('aafgem', {
         title : Gemname + ' 변경 완료',
@@ -70,14 +72,14 @@ router.post('/fixgem', (req,res,next) => {
 
 
 
-router.get('/add_gem', (req,res,next) => {
+router.get('/add_gem', async function(req,res,next) {
   res.render('addgem', {
     title:'AAF 장비'
   });
 })
 
 
-router.post('/add_gem', (req,res,next) => {
+router.post('/add_gem', async function(req,res,next) {
   var Gemgrade =req.body.grade;
   if (Gemgrade !== '') {
     Gemgrade = Gemgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
@@ -90,9 +92,10 @@ router.post('/add_gem', (req,res,next) => {
     Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
   var QueryString = "INSERT INTO aquafeq.aquafgem(gemgrade, collectname, gemname, gemobject, gemeffect) values ($1, $2, $3, $4, $5);"
-  client.query(QueryString, [Gemgrade, Collectname, Gemname, Gemobject, Gemeffect], (err, response) => {
+  await client.query(QueryString, [Gemgrade, Collectname, Gemname, Gemobject, Gemeffect], async function (err, response){
     var QueryString = "select gemid, gemname from aquafeq.aquafgem where gemname = Gemname ORDER BY gemid asc ;"
-    client.query(QueryString, (err, response) => {
+    await client.query(QueryString, async function (err, response){
+      await response;
       res.render('aafgem', {
         title:'AAF 루엘',
         data:response.rows
@@ -103,7 +106,7 @@ router.post('/add_gem', (req,res,next) => {
 
 
 
-router.get('/:id', (req,res,next) => {
+router.get('/:id', async function(req,res,next) {
   var searchtype = req.query.searchtype;
   var Search = req.query.searchtext;
   if (Search == null ) {
@@ -120,7 +123,8 @@ router.get('/:id', (req,res,next) => {
     res.redirect('/')
   }
 
-  client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+  await client.query(QueryString, ['%' + Search + '%', CurrentPage], async function (err, response){
+    await response;
     if (err) {
       console.log(err)
       res.redirect('/')

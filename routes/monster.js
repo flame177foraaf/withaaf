@@ -1,18 +1,19 @@
 var express = require('express');
-var router = express.Router();
+var asyncify = require('express-asyncify');
+var router = asyncify(express.Router());
 var app = express();
 var url = require('url');
 
-const { Client } = require('pg');
+var { Client } = require('pg');
 
-const client = new Client({
+var client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });
 
 client.connect();
 
-router.get('/', (req,res,next) => {
+router.get('/', async function(req,res,next) {
   var Data_length = 0;
   var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
   client.query(QueryString, (err,response) => {
@@ -37,7 +38,7 @@ router.get('/', (req,res,next) => {
 
 
 
-router.get('/search', (req,res,next) => {
+router.get('/search', async function(req,res,next) {
   var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
   client.query(QueryString, (err,response) => {
     var QueryString = "SELECT  aquafeq.dungeon_partition.id, " + '"PartitionName"' + "," + '"FieldName"' + ",   part, COUNT(*) count   FROM aquafeq.dungeon_partition  inner join aquafeq.monster on aquafeq.monster.mon_field = aquafeq.dungeon_partition.part GROUP by  aquafeq.dungeon_partition.id, " + '"PartitionName"' + "," + '"FieldName"' + ",  part order by aquafeq.dungeon_partition.id;"
@@ -124,7 +125,7 @@ router.get('/search', (req,res,next) => {
 });
 
 // params.id 를 쓰는 라우터는 마지막에 쓰라고 한다
-router.get('/:id', (req,res,next) => {
+router.get('/:id', async function(req,res,next) {
   var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
   client.query(QueryString, (err,response) => {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"

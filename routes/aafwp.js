@@ -61,7 +61,8 @@ router.post('/', async function(req,res,next) {
   var QueryString = "INSERT INTO aquafeq.aquafwp(wpgrade, wpname, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
   await client.query(QueryString, [Wpgrade, Wpname, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup], async function (err, response){
     var QueryString = "select wpid, wpname from aquafeq.aquafwp where wpname = Wpname ORDER BY wplimit,wpid asc ;";
-    await client.query(QueryString, function (err, response){
+    await client.query(QueryString,async function (err, response){
+      await response;
       res.render('aafwp', {
         title:'AAF 장비',
         data:response.rows
@@ -76,7 +77,8 @@ router.get('/fixwp', async function(req,res,next) {
   await client.query(QueryString, async function (err, response){
     var Select_name = req.query.Seachname;
     var QueryString = "select * from aquafeq.aquafwp where wpname = $1";
-    await client.query(QueryString, [Select_name], function (err, response){
+    await client.query(QueryString, [Select_name], async function (err, response){
+      await response;
       if(typeof(response.rows[0]) !== "object") {
         res.render ('addwp', {
           title: '신규 장비 ' + Select_name + ' 등록',
@@ -162,7 +164,8 @@ router.post('/fixwp', async function(req,res,next) {
     console.log('쿼리스트링' + QueryString)
 
     var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
-    await client.query ( QueryString, [Wpname],  function(err, response) {
+    await client.query ( QueryString, [Wpname], async function(err, response) {
+      await response;
       console.log('쿼리스트링' + QueryString);
       res.render('aafwp', {
         title : Wpname + ' 변경 완료',
@@ -240,7 +243,8 @@ router.get('/:id', async function(req,res,next) {
       // console.log(Search2);
       // console.log(Search22);
       // console.log('QueryString' + QueryString);
-    await client.query(QueryString, ['%' + Search +'%', CurrentPage], function (err, response){
+    await client.query(QueryString, ['%' + Search +'%', CurrentPage], async function (err, response){
+      await response;
       if (err) {
         res.redirect('/aafwp');
         console.log(err)
@@ -308,10 +312,11 @@ router.get('/:id', async function(req,res,next) {
       var QueryString = "SELECT *, count(*) over() as totalcount from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 1) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
     } else if (searchtype == '2stats') {
 
-      var QueryString = "SELECT * , count(*) over() as totalcount  from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
+      var QueryString = "SELECT *, count(*) over() as totalcount from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
     }
     console.log("QueryString : " +QueryString);
-    await client.query(QueryString, [Search, CurrentPage], function (err, response){
+    await client.query(QueryString, [Search, CurrentPage], async function (err, response){
+      await response
       if (err) {
         res.redirect('/aafwp');
 

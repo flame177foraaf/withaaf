@@ -1,21 +1,23 @@
 var express = require('express');
-var router = express.Router();
+var asyncify = require('express-asyncify');
+var router = asyncify(express.Router());
 var app = express();
 var url = require('url');
 
 
-const { Client } = require('pg');
+var { Client } = require('pg');
 
-const client = new Client({
+var client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });
 
 client.connect();
 
-router.get('/', (req,res,next) => {
+router.get('/', async function(req,res,next) {
   var QueryString = 'select item_name from aquafeq.aquafitem ORDER BY item_name collate "ko_KR.utf8";'
-  client.query(QueryString, (err, response) => {
+  await client.query(QueryString, async function (err, response){
+    await response;
     console.log(response.rows[0]);
     if (err) {
       res.redirect('/');
@@ -29,7 +31,7 @@ router.get('/', (req,res,next) => {
 });
 
 
-router.get('/add_item', (req,res,next) => {
+router.get('/add_item', async function(req,res,next) {
 
   res.render ('additem', {
     title:'AAF 아이템 추가'
@@ -38,7 +40,7 @@ router.get('/add_item', (req,res,next) => {
 
 
 //무기 추가하기
-router.post('/add_item', (req, res, next) => {
+router.post('/add_item', async function(req,res,next) {
 
   var Itemname = req.body.name;
 
@@ -67,9 +69,11 @@ router.post('/add_item', (req, res, next) => {
       Itemroute = null
     }
   var QueryString = "INSERT INTO aquafeq.aquafitem(item_name, item_text, item_effect, item_type, item_count, item_route) values ($1, $2, $3, $4, $5, $6);"
-  client.query(QueryString, [Itemname, Itemtext, Itemeffect, Itemtype, Itemcount, Itemroute], (err, response) => {
+  await client.query(QueryString, [Itemname, Itemtext, Itemeffect, Itemtype, Itemcount, Itemroute], async function (err, response){
+
     var QueryString = 'select item_name from aquafeq.aquafitem ORDER BY item_name collate "ko_KR.utf8";'
-    client.query(QueryString, (err, response) => {
+    await client.query(QueryString, async function (err, response){
+      await response;
       if (err) {
         res.redirect('/');
       } else {
@@ -83,12 +87,13 @@ router.post('/add_item', (req, res, next) => {
 });
 
 //아이템 변경
-router.get('/fixitem', (req,res,next) => {
+router.get('/fixitem', async function(req,res,next) {
   var QueryString = "select item_name from aquafeq.aquafitem"
-  client.query(QueryString, (err, response) => {
+  await client.query(QueryString, async function (err, response){
     var Select_name = req.query.Seachname;
     var QueryString = "select * from aquafeq.aquafitem where item_name = $1"
-    client.query(QueryString, [Select_name], (err, response) => {
+    await client.query(QueryString, [Select_name], async function (err, response){
+      await response;
       if(typeof(response.rows[0]) !== "object") {
         res.render ('additem', {
           title: '신규 아이템 ' +Select_name + ' 등록',
@@ -103,7 +108,7 @@ router.get('/fixitem', (req,res,next) => {
   });
 })
 
-router.post('/fixitem', (req,res,next) => {
+router.post('/fixitem', async function(req,res,next) {
   var Itemname = req.body.name;
   var Eqid = req.body.eqid;
   console.log(Eqid)
@@ -137,10 +142,11 @@ router.post('/fixitem', (req,res,next) => {
 
   var QueryString = "UPDATE aquafeq.aquafitem SET (item_name, item_text, item_effect, item_type, item_count, item_route) = ($1, $2, $3, $4, $5, $6)  WHERE item_id = $7 returning *"
   //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
-  client.query(QueryString, [Itemname, Itemtext, Itemeffect, Itemtype, Itemcount, Itemroute, Eqid], (err, response) => {
+  await client.query(QueryString, [Itemname, Itemtext, Itemeffect, Itemtype, Itemcount, Itemroute, Eqid], async function (err, response){
 
     var QueryString = "select * from aquafeq.aquafitem where item_name = $1"
-    client.query ( QueryString, [Itemname],  (err, response) => {
+    await client.query ( QueryString, [Itemname],  async function(err, response) {
+      await response;
       if (err) {
         console.log(err)
         res.redirect('/')
@@ -156,7 +162,7 @@ router.post('/fixitem', (req,res,next) => {
 
 
 //일반 검색
-router.get('/:id', (req,res,next) => {
+router.get('/:id', async function(req,res,next) {
   var searchtype = req.query.searchtype;
   if (searchtype === 'name') {
     var Search = req.query.searchtext;
@@ -167,7 +173,8 @@ router.get('/:id', (req,res,next) => {
     var CurrentPage = parseInt(CurrentPage)
 
     var QueryString = 'SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name Ilike $1 ORDER BY item_name collate "ko_KR.utf8" limit 10 offset (($2- 1)*10);'
-      client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+      await client.query(QueryString, ['%' + Search + '%', CurrentPage], async function (err, response){
+        await response;
         if (err) {
           console.log(err)
           res.redirect('/')
@@ -208,7 +215,8 @@ router.get('/:id', (req,res,next) => {
     var CurrentPage = parseInt(CurrentPage)
 
     var QueryString = 'SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name Ilike $1 ORDER BY item_name collate "ko_KR.utf8" limit 10 offset (($2- 1)*10);'
-      client.query(QueryString, ['%' + Search + '%', CurrentPage], (err, response) => {
+      await client.query(QueryString, ['%' + Search + '%', CurrentPage], async function (err, response){
+        await response;
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {

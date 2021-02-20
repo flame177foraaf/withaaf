@@ -19,7 +19,8 @@ client.connect();
 
 router.get('/', async function(req,res, next){
   var psql = "SELECT * FROM aquafeq.freeboard ORDER BY fbid DESC"
-  await client.query(psql, function (err, response){
+  await client.query(psql, async function (err, response){
+    await response;
     res.render('board', {
       title: '자유게시판',
       data: response.rows
@@ -99,14 +100,12 @@ router.post('/', async function(req,res,next) {
   await client.query(QueryString, async function (err,response) {
     var QueryString = "INSERT INTO aquafeq.freeboard(fbtitle, fbbody, fbname, fbcreatedat, commentcount) values ($1, $2, $3, to_char(now(), 'YYYY-MM-DD HH24:MI:SS'), $4);";
     await client.query(QueryString, [req.body.title, BoardBody, req.body.writer, Commentcount], async function (err, response){
-      if (err) {
-        console.log(err);
-      } else {
+
         var psql = "SELECT * FROM aquafeq.freeboard";
         client.query(psql, function (err, response){
           res.redirect('/board');
         });
-      }
+
     });
   });
 

@@ -1,28 +1,30 @@
 var express = require('express');
-var router = express.Router();
+var asyncify = require('express-asyncify');
+var router = asyncify(express.Router());
 var app = express();
 var url = require('url');
-const { Client } = require('pg');
+var { Client } = require('pg');
 
-const client = new Client({
+var client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });
 
 client.connect();
 
-router.get('/', (req,res,next) => {
+router.get('/', async function(req,res,next) {
   res.render('recipe', {
     title:'AAF 레시피'
   });
 });
 
-router.get('/fixrecipe', (req,res,next) => {
+router.get('/fixrecipe', async function(req,res,next) {
   var QueryString = "select recipenum from aquafeq.aquafrecipe"
-  client.query(QueryString, (err, response) => {
+  await client.query(QueryString, async function (err, response){
     var SeachRecipeNum = req.query.SeachNum;
     var QueryString = "select * from aquafeq.aquafrecipe where recipenum = $1"
-    client.query(QueryString, [SeachRecipeNum], (err, response) => {
+    await client.query(QueryString, [SeachRecipeNum], async function (err, response){
+      await response;
 
       res.render ('fixrecipe', {
         title:SeachRecipeNum + ' 번 레시피 수정',
@@ -32,7 +34,7 @@ router.get('/fixrecipe', (req,res,next) => {
   });
 });
 
-router.post('/fixrecipe', (req,res,next) => {
+router.post('/fixrecipe', async function(req,res,next) {
   var RecipeN = req.body.recipenum;
   //req.body.name ... id와 항상 헷갈리지 말자 ㅠㅠ
 
@@ -62,10 +64,11 @@ router.post('/fixrecipe', (req,res,next) => {
 
   var QueryString = "UPDATE aquafeq.aquafrecipe SET (collectnum,   collectname,  collect1num,  collect1name,  collect1unit,  collect2num,  collect2name,  collect2unit,  collect3num,  collect3name,  collect3unit,  collect4num,  collect4name,  collect4unit,  collect5num,  collect5name,  collect5unit,  collect6num,  collect6name,  collect6unit) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20 )  WHERE recipenum = $21 returning *"
   //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
-  client.query(QueryString, [Collectnum, Collectname, Collect1num, Collect1name,   Collect1unit, Collect2num,   Collect2name,   Collect2unit, Collect3num, Collect3name,  Collect3unit, Collect4num, Collect4name,  Collect4unit, Collect5num,  Collect5name,  Collect5unit, Collect6num, Collect6name,Collect6unit, RecipeN], (err, response) => {
+    await client.query(QueryString, [Collectnum, Collectname, Collect1num, Collect1name,   Collect1unit, Collect2num,   Collect2name,   Collect2unit, Collect3num, Collect3name,  Collect3unit, Collect4num, Collect4name,  Collect4unit, Collect5num,  Collect5name,  Collect5unit, Collect6num, Collect6name,Collect6unit, RecipeN], async function (err, response){
 
     var QueryString = "select * from aquafeq.aquafrecipe where recipenum = $1"
-    client.query ( QueryString, [RecipeN],  (err, response) => {
+    await client.query ( QueryString, [RecipeN], async function(err, response) {
+      await response;
       console.log('쿼리스트링' + QueryString)
       res.render('recipe', {
         title : RecipeN + ' 번 레시피 수정 완료',
@@ -76,7 +79,7 @@ router.post('/fixrecipe', (req,res,next) => {
 });
 
 
-router.get('/:id', (req,res,next) => {
+router.get('/:id', async function(req,res,next) {
   var searchtype = req.query.searchtype;
   var Search = req.query.searchtext;
   if (Search == null ) {
@@ -92,7 +95,8 @@ router.get('/:id', (req,res,next) => {
   } else {
     res.redirect('/')
   }
-  client.query(QueryString, [Search,  CurrentPage], (err, response) => {
+  await client.query(QueryString, [Search,  CurrentPage], async function (err, response){
+    await response;
     var TotalCount;
     if (err) {
       console.log(err)

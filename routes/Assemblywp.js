@@ -1,18 +1,19 @@
 var express = require('express');
-var router = express.Router();
+var asyncify = require('express-asyncify');
+var router = asyncify(express.Router());
 var app = express();
 var bodyParser = require('body-parser');
 var $ = require('jquery');
 
-const { Client } = require('pg');
-const client = new Client({
+var { Client } = require('pg');
+var client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });
 
 client.connect();
 
-router.get('/', (req,res,next) => {
+router.get('/', async function(req,res,next) {
   var Assembly = req.query.assembly;
 
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
@@ -24,7 +25,7 @@ router.get('/', (req,res,next) => {
   });
 });
 
-router.get('/ing', (req,res,next) => {
+router.get('/ing', async function(req,res,next) {
   var Assembly = req.query.assembly;
   //console.log(Assembly)
   if (req.query.special !== 'undefined') {
@@ -39,7 +40,8 @@ router.get('/ing', (req,res,next) => {
   }
   console.log(req.query.special)
   var QueryString = "SELECT * FROM aquafeq.aquafwp where wpname = $1";
-  client.query(QueryString, [Assembly], (err, response) => {
+ await  client.query(QueryString, [Assembly], async function (err, response){
+   await response;
     if (typeof(response.rows) === undefined) {
       var data = {
         Assembly:"null",
