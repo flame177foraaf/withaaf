@@ -73,7 +73,7 @@
 
     <% if(typeof(dataRecipe) != 'undefined'){ %>
       <%  if (dataRecipe.length == 0) { %>
-          <table >
+          <table style="width:100%;">
             <thead>
               <th>레시피 검색</th>
             </thead>
@@ -82,7 +82,7 @@
             </tbody>
           </table>
       <%  } else { %>
-            <table>
+            <table style="width:100%;">
 
                 <colgroup>
                   <col width="60" >
@@ -109,7 +109,7 @@
 
                 </colgroup>
 
-                <thead id="" >
+                <thead >
                   <tr >
                     <th>레시피</th>
                     <th>결과물</th>
@@ -200,7 +200,7 @@
 
       <% if(typeof(dataWP) != 'undefined'){ %>
         <%  if (dataWP.length == 0) { %>
-              <table >
+              <table style="width:100%;" >
                 <thead>
                   <th>장비-무기 리버스 재료 검색</th>
                 </thead>
@@ -210,7 +210,7 @@
               </table>
 
           <%  } else { %>
-      <table id="eqtable" style="width:100%;">
+      <table style="width:100%;">
         <colgroup>
           <col width="100">
           <col width="200">
@@ -242,25 +242,25 @@
                 <% if (item.wpproperty.indexOf('/') != -1){ %>
                   <% var WpP = item.wpproperty.split('/') %>
                   <% if ( WpP[1] == ' 불 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD" onclick="">
+                    <tr class="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD" onclick="">
                   <% } else if (WpP[1] == ' 물 ' ) { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC" onclick="">
+                    <tr class="tabletr" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC" onclick="">
                   <% } else if (WpP[1] == ' 바람 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3" onclick="">
+                    <tr class="tabletr" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3" onclick="">
                   <% } else if (WpP[1] == ' 땅 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8" onclick="">
+                    <tr class="tabletr" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8" onclick="">
                   <% } else if (WpP[1] == ' 정신 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB" onclick="">
+                    <tr class="tabletr" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB" onclick="">
                   <% } else if (WpP[1] == ' 아스트랄 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2" onclick="">
+                    <tr class="tabletr" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2" onclick="">
                   <% } else if (WpP[1] == ' 무속성 ') { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="">
+                    <tr class="tabletr" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="">
                   <% } else { %>
-                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
+                    <tr class="tabletr" style="white-space: pre-line; font-size:12px; " onclick="">
                   <% } %>
 
                 <% } else { %>
-                  <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
+                  <tr class="tabletr" style="white-space: pre-line; font-size:12px; " onclick="">
                 <% } %>
 
               <td><%- item.wpgrade %></td>
@@ -322,7 +322,7 @@
 
 
             </tr>
-            <tr id="" class="upgrademeterial" style="display:none">
+            <tr class="upgrademeterial" style="display:none">
               <td colspan="10" style="text-align:center"> <%- item.wpup %> </td>
             </tr>
 
@@ -340,7 +340,7 @@
       <% if(typeof(dataARM) != 'undefined'){ %>
 
           <%  if (dataARM.length == 0) { %>
-                <table >
+                <table style="width:100%;">
                   <thead>
                     <th>장비-방어구 리버스 재료 검색</th>
                   </thead>
@@ -350,7 +350,7 @@
                 </table>
 
             <%  } else { %>
-      <table id="eqtable" style="width:100%;">
+      <table style="width:100%;">
 
         <colgroup>
           <col width="100">
@@ -431,7 +431,7 @@
 
             </tr>
 
-            <tr id="" class="upgrademeterial" style="display:none">
+            <tr class="upgrademeterial" style="display:none">
               <td colspan="10" style="text-align:center"> <%- item.armup %> </td>
             </tr>
             <% }); %>
@@ -446,7 +446,7 @@
         <% if(typeof(dataACC) != 'undefined'){ %>
 
             <%  if (dataACC.length == 0) { %>
-                  <table >
+                  <table style="width:100%;">
                     <thead>
                       <th>장비-악세서리 리버스 재료 검색</th>
                     </thead>
@@ -456,7 +456,7 @@
                   </table>
 
               <%  } else { %>
-      <table id="eqtable" style="width:100%;">
+      <table style="width:100%;">
         <colgroup>
           <col width="100">
           <col width="200">
@@ -535,7 +535,7 @@
               <td><%- customlink3 %></td>
             </tr>
 
-            <tr id="" class="upgrademeterial" style="display:none">
+            <tr class="upgrademeterial" style="display:none">
               <td colspan="10" style="text-align:center"> <%- item.accup %> </td>
             </tr>
             <% }); %>
@@ -549,7 +549,8 @@
 
   <div class="">
     <% if (typeof(dataMonsterField) != 'undefined' && typeof(dataMonsterTower) != 'undefined'){ %>
-            <table >
+
+            <table style="width:100%;">
               <thead>
                 <th>몬스터 드랍 검색</th>
               </thead>
@@ -557,105 +558,108 @@
                 <td style="text-align:center;">해당 자료가 없습니다.</td>
               </tbody>
             </table>
+
     <% } else { %>
-      <% if (typeof(dataMonsterField) != 'undefined'){ %>
-        <table id="mon_table" style="margin-top:5px; width:100%">
-            <thead>
-              <tr>
-                <th>레벨</th>
-                <th>이름</th>
-                <th>속성</th>
-                <th>에테르</th>
-                <th>타입</th>
-                <th>저항</th>
-                <th>보석</th>
-                <th>커먼</th>
-                <th>언커먼</th>
-                <th>레어</th>
-                <th>스킬</th>
-              </tr>
-            </thead>
-            <tbody>
 
-                            <% dataMonsterField.forEach(function(item) { %>
-
-                              <tr>
-                              <td style= "text-align:center;"><%- item.mon_lv %></td>
-                              <td><%- item.mon_name %></td>
-                              <td><%- item.mon_property %></td>
-                              <td><%- item.mon_ether %></td>
-                              <td style="text-align: center"><%- item.mon_type %></td>
-                              <td><%- item.mon_resist %></td>
-                              <td style="text-align: center"><%- item.mon_gem %></td>
-                              <td id ="" style="text-align: center"><%- item.mon_common %></td>
-                              <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
-                              <td id ="" style="text-align: center"><%- item.mon_rare %></td>
-                              <td id =""><%- item.mon_skill %></td>
-                              </tr>
-                              <% })%>
-            </tbody>
-        </table>
-      <% } %>
-
-      <% if (typeof(dataMonsterTower) != 'undefined'){ %>
-        <table id="mon_table" style="margin-top:5px; width:100%">
+    <% if (typeof(dataMonsterField) != 'undefined'){ %>
+      <table class="field_mon_drop" style="margin-top:5px; width:100%">
           <thead>
             <tr>
-              <th>층</th>
+              <th>레벨</th>
               <th>이름</th>
-              <th>HP계수</th>
-              <th>에테르</th>
               <th>속성</th>
+              <th>에테르</th>
               <th>타입</th>
-              <th>내성 정보</th>
+              <th>저항</th>
+              <th>보석</th>
               <th>커먼</th>
               <th>언커먼</th>
               <th>레어</th>
               <th>스킬</th>
             </tr>
           </thead>
-
           <tbody>
-            <% dataMonsterTower.forEach(function(item) { %>
 
-              <% if (item.TowerFloor == '' ){ %>
-                <tr>
-                  <td style= "text-align:center;"><%- item.mon_lv %></td>
-                  <td><%- item.mon_name %></td>
-                  <td><%- item.mon_property %></td>
-                  <td><%- item.mon_ether %></td>
-                  <td style="text-align: center"><%- item.mon_type %></td>
-                  <td><%- item.mon_resist %></td>
-                  <td style="text-align: center"><%- item.mon_gem %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_common %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_rare %></td>
-                  <td id =""><%- item.mon_skill %></td>
-                </tr>
-              <% } else { %>
-                <% if (item.TowerFloor.indexOf('~') != -1){ %>
-                  <tr>
-                <% } else { %>
-                  <tr style="border-bottom: 3px solid #000; border-top: 3px solid #000;">
-                <% } %>
+                          <% dataMonsterField.forEach(function(item) { %>
 
-                  <td style= "text-align:center;"><%- item.TowerFloor %></td>
-                  <td><%- item.mon_name %></td>
-                  <td style="text-align: center"><%- item.Tower_Hp %></td>
-                  <td><%- item.mon_ether %></td>
-                  <td><%- item.mon_property %></td>
-                  <td style="text-align: center"><%- item.mon_type %></td>
-                  <td><%- item.mon_resist %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_common %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_rare %></td>
-                  <td id =""><%- item.mon_skill %></td>
-                </tr>
-              <% } %>
-            <% }) %>
+                            <tr>
+                            <td style= "text-align:center;"><%- item.mon_lv %></td>
+                            <td><%- item.mon_name %></td>
+                            <td><%- item.mon_property %></td>
+                            <td><%- item.mon_ether %></td>
+                            <td style="text-align: center"><%- item.mon_type %></td>
+                            <td><%- item.mon_resist %></td>
+                            <td style="text-align: center"><%- item.mon_gem %></td>
+                            <td id ="" style="text-align: center"><%- item.mon_common %></td>
+                            <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
+                            <td id ="" style="text-align: center"><%- item.mon_rare %></td>
+                            <td id =""><%- item.mon_skill %></td>
+                            </tr>
+                            <% })%>
           </tbody>
-        </table>
-      <% } %>
+      </table>
+    <% } %>
+
+    <% if (typeof(dataMonsterTower) != 'undefined'){ %>
+      <table class="tower_mon_drop" style="margin-top:5px; width:100%">
+      <thead>
+        <tr>
+          <th>층</th>
+          <th>이름</th>
+          <th>HP계수</th>
+          <th>에테르</th>
+          <th>속성</th>
+          <th>타입</th>
+          <th>내성 정보</th>
+          <th>커먼</th>
+          <th>언커먼</th>
+          <th>레어</th>
+          <th>스킬</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% dataMonsterTower.forEach(function(item) { %>
+
+          <% if (item.TowerFloor == '' ){ %>
+            <tr>
+              <td style= "text-align:center;"><%- item.mon_lv %></td>
+              <td><%- item.mon_name %></td>
+              <td><%- item.mon_property %></td>
+              <td><%- item.mon_ether %></td>
+              <td style="text-align: center"><%- item.mon_type %></td>
+              <td><%- item.mon_resist %></td>
+              <td style="text-align: center"><%- item.mon_gem %></td>
+              <td id ="" style="text-align: center"><%- item.mon_common %></td>
+              <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
+              <td id ="" style="text-align: center"><%- item.mon_rare %></td>
+              <td id =""><%- item.mon_skill %></td>
+            </tr>
+          <% } else { %>
+            <% if (item.TowerFloor.indexOf('~') != -1){ %>
+              <tr>
+            <% } else { %>
+              <tr style="border-bottom: 3px solid #000; border-top: 3px solid #000;">
+            <% } %>
+
+              <td style= "text-align:center;"><%- item.TowerFloor %></td>
+              <td><%- item.mon_name %></td>
+              <td style="text-align: center"><%- item.Tower_Hp %></td>
+              <td><%- item.mon_ether %></td>
+              <td><%- item.mon_property %></td>
+              <td style="text-align: center"><%- item.mon_type %></td>
+              <td><%- item.mon_resist %></td>
+              <td id ="" style="text-align: center"><%- item.mon_common %></td>
+              <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
+              <td id ="" style="text-align: center"><%- item.mon_rare %></td>
+              <td id =""><%- item.mon_skill %></td>
+            </tr>
+          <% } %>
+        <% }) %>
+      </tbody>
+      </table>
+
+    <% } %>
     <% } %>
   </div>
 
