@@ -229,7 +229,7 @@ router.get('/:id', async function(req,res,next) {
 
 
     } else {
-      var QueryString = "SELECT * FROM aquafeq.aquafwp AS t1 LEFT JOIN  (SELECT effect FROM aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE"+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
+      var QueryString = "SELECT * FROM aquafeq.aquafwp AS t1 LEFT JOIN  (SELECT effect FROM aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE "+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
 
     }
 
