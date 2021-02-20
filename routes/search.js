@@ -50,13 +50,13 @@ router.get('/', async function(req, res, next) {
 
             var QueryString = "select * from aquafeq.monster where ( mon_common Ilike '%' || $1 || '%' or mon_uncommon Ilike '%' || $1 || '%' or mon_rare Ilike '%' || $1 || '%') AND mon_field not Ilike '%Tower%' order by mon_lv;";
             if (Search.length == 1) {
-              var QueryString = "select * from aquafeq.monster where ( mon_common = $1 or mon_uncommon = $1 or mon_rare = $1   ) AND mon_field not Ilike '%Tower%' order by mon_lv;";
+              var QueryString = "select * from aquafeq.monster where ( mon_common = $1 or mon_uncommon = $1 or mon_rare = $1) AND mon_field not Ilike '%Tower%' order by mon_lv;";
             }
             await client.query(QueryString, [Search], async function(err, dataMonsterField) {
 
               var QueryString = "select * from aquafeq.monster where ( mon_common Ilike '%' || $1 || '%' or mon_uncommon Ilike '%' || $1 || '%' or mon_rare Ilike '%' || $1 || '%') AND mon_field Ilike '%Tower%' order by mon_lv;";
               if (Search.length == 1) {
-                var QueryString = "select * from aquafeq.monster where ( mon_common = $1 or mon_uncommon = $1 or mon_rare = $1   ) AND mon_field = '%Tower%' order by mon_lv;";
+                var QueryString = "select * from aquafeq.monster where ( mon_common = $1 or mon_uncommon = $1 or mon_rare = $1) AND mon_field Ilike '%Tower%' order by mon_lv;";
               }
               await client.query(QueryString, [Search], async function(err, dataMonsterTower) {
 
