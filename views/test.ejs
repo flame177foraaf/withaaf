@@ -570,105 +570,108 @@
           </div>
     <% } else { %>
 
-      <div class="">
-      <% if (dataMonsterField.length != 0){ %>
-        <table class="field_mon_drop" style="width:100% ; margin: 50px 0px 50px 0px; border-top: 1px solid #444444; border-bottom: 1px solid #444444;">
-            <thead>
-              <tr>
-                <th>레벨</th>
-                <th>이름</th>
-                <th>속성</th>
-                <th>에테르</th>
-                <th>타입</th>
-                <th>저항</th>
-                <th>보석</th>
-                <th>커먼</th>
-                <th>언커먼</th>
-                <th>레어</th>
-                <th>스킬</th>
-              </tr>
-            </thead>
-            <tbody>
+    <div class="">
+      <% if (typeof(dataMonsterField) != 'undefined'){ %>
+        <% if (dataMonsterField.length != 0){ %>
+          <table class="field_mon_drop" style="width:100% ; margin: 50px 0px 50px 0px; border-top: 1px solid #444444; border-bottom: 1px solid #444444;">
+              <thead>
+                <tr>
+                  <th>레벨</th>
+                  <th>이름</th>
+                  <th>속성</th>
+                  <th>에테르</th>
+                  <th>타입</th>
+                  <th>저항</th>
+                  <th>보석</th>
+                  <th>커먼</th>
+                  <th>언커먼</th>
+                  <th>레어</th>
+                  <th>스킬</th>
+                </tr>
+              </thead>
+              <tbody>
 
-                            <% dataMonsterField.forEach(function(item) { %>
+                              <% dataMonsterField.forEach(function(item) { %>
 
-                              <tr>
-                              <td style= "text-align:center;"><%- item.mon_lv %></td>
-                              <td><%- item.mon_name %></td>
-                              <td><%- item.mon_property %></td>
-                              <td><%- item.mon_ether %></td>
-                              <td style="text-align: center"><%- item.mon_type %></td>
-                              <td><%- item.mon_resist %></td>
-                              <td style="text-align: center"><%- item.mon_gem %></td>
-                              <td id ="" style="text-align: center"><%- item.mon_common %></td>
-                              <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
-                              <td id ="" style="text-align: center"><%- item.mon_rare %></td>
-                              <td id =""><%- item.mon_skill %></td>
-                              </tr>
-                              <% })%>
-            </tbody>
-        </table>
+                                <tr>
+                                <td style= "text-align:center;"><%- item.mon_lv %></td>
+                                <td><%- item.mon_name %></td>
+                                <td><%- item.mon_property %></td>
+                                <td><%- item.mon_ether %></td>
+                                <td style="text-align: center"><%- item.mon_type %></td>
+                                <td><%- item.mon_resist %></td>
+                                <td style="text-align: center"><%- item.mon_gem %></td>
+                                <td id ="" style="text-align: center"><%- item.mon_common %></td>
+                                <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
+                                <td id ="" style="text-align: center"><%- item.mon_rare %></td>
+                                <td id =""><%- item.mon_skill %></td>
+                                </tr>
+                                <% })%>
+              </tbody>
+          </table>
+        <% } %>
       <% } %>
 
-      <% if (dataMonsterTower.length != 0){ %>
-        <table class="tower_mon_drop" style="width:100%; margin: 50px 0px 50px 0px; border-top: 1px solid #444444; border-bottom: 1px solid #444444;">
-          <thead>
-            <tr>
-              <th>층</th>
-              <th>이름</th>
-              <th>HP계수</th>
-              <th>에테르</th>
-              <th>속성</th>
-              <th>타입</th>
-              <th>내성 정보</th>
-              <th>커먼</th>
-              <th>언커먼</th>
-              <th>레어</th>
-              <th>스킬</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% dataMonsterTower.forEach(function(item) { %>
-
-              <% if (item.TowerFloor == '' ){ %>
+      <% if (typeof(dataMonsterField) != 'undefined'){ %>
+        <% if (dataMonsterTower.length != 0){ %>
+          <table class="tower_mon_drop" style="width:100%; margin: 50px 0px 50px 0px; border-top: 1px solid #444444; border-bottom: 1px solid #444444;">
+            <thead>
                 <tr>
-                  <td style= "text-align:center;"><%- item.mon_lv %></td>
-                  <td><%- item.mon_name %></td>
-                  <td><%- item.mon_property %></td>
-                  <td><%- item.mon_ether %></td>
-                  <td style="text-align: center"><%- item.mon_type %></td>
-                  <td><%- item.mon_resist %></td>
-                  <td style="text-align: center"><%- item.mon_gem %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_common %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_rare %></td>
-                  <td id =""><%- item.mon_skill %></td>
+                  <th>층</th>
+                  <th>이름</th>
+                  <th>HP계수</th>
+                  <th>에테르</th>
+                  <th>속성</th>
+                  <th>타입</th>
+                  <th>내성 정보</th>
+                  <th>커먼</th>
+                  <th>언커먼</th>
+                  <th>레어</th>
+                  <th>스킬</th>
                 </tr>
-              <% } else { %>
-                <% if (item.TowerFloor.indexOf('~') != -1){ %>
-                  <tr>
-                <% } else { %>
-                  <tr style="border-bottom: 3px solid #000; border-top: 3px solid #000;">
-                <% } %>
+              </thead>
+            <tbody>
+                <% dataMonsterTower.forEach(function(item) { %>
 
-                  <td style= "text-align:center;"><%- item.TowerFloor %></td>
-                  <td><%- item.mon_name %></td>
-                  <td style="text-align: center"><%- item.Tower_Hp %></td>
-                  <td><%- item.mon_ether %></td>
-                  <td><%- item.mon_property %></td>
-                  <td style="text-align: center"><%- item.mon_type %></td>
-                  <td><%- item.mon_resist %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_common %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
-                  <td id ="" style="text-align: center"><%- item.mon_rare %></td>
-                  <td id =""><%- item.mon_skill %></td>
-                </tr>
-              <% } %>
-            <% }) %>
-          </tbody>
-        </table>
+                  <% if (item.TowerFloor == '' ){ %>
+                    <tr>
+                      <td style= "text-align:center;"><%- item.mon_lv %></td>
+                      <td><%- item.mon_name %></td>
+                      <td><%- item.mon_property %></td>
+                      <td><%- item.mon_ether %></td>
+                      <td style="text-align: center"><%- item.mon_type %></td>
+                      <td><%- item.mon_resist %></td>
+                      <td style="text-align: center"><%- item.mon_gem %></td>
+                      <td id ="" style="text-align: center"><%- item.mon_common %></td>
+                      <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
+                      <td id ="" style="text-align: center"><%- item.mon_rare %></td>
+                      <td id =""><%- item.mon_skill %></td>
+                    </tr>
+                  <% } else { %>
+                    <% if (item.TowerFloor.indexOf('~') != -1){ %>
+                      <tr>
+                    <% } else { %>
+                      <tr style="border-bottom: 3px solid #000; border-top: 3px solid #000;">
+                    <% } %>
 
-    <% } %>
+                      <td style= "text-align:center;"><%- item.TowerFloor %></td>
+                      <td><%- item.mon_name %></td>
+                      <td style="text-align: center"><%- item.Tower_Hp %></td>
+                      <td><%- item.mon_ether %></td>
+                      <td><%- item.mon_property %></td>
+                      <td style="text-align: center"><%- item.mon_type %></td>
+                      <td><%- item.mon_resist %></td>
+                      <td id ="" style="text-align: center"><%- item.mon_common %></td>
+                      <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
+                      <td id ="" style="text-align: center"><%- item.mon_rare %></td>
+                      <td id =""><%- item.mon_skill %></td>
+                    </tr>
+                  <% } %>
+                <% }) %>
+              </tbody>
+          </table>
+        <% } %>
+      <% } %>
   </div>
 
   <% } %>
