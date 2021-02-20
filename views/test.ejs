@@ -16,7 +16,7 @@
 
 
       if (
-        document.bodyform.searchtext.value == "" || document.bodyform.searchtext.value == null || document.bodyform.searchtext.value == undefined || ( document.bodyform.searchtext.value != null && typeof document.bodyform.searchtext.value == "object" && !Object.keys(document.bodyform.searchtext.value).length )
+        document.bodyform.searchtext.value == "" || document.bodyform.searchtext.value.trim() == "" || document.bodyform.searchtext.value == null || document.bodyform.searchtext.value == undefined || ( document.bodyform.searchtext.value != null && typeof document.bodyform.searchtext.value == "object" && !Object.keys(document.bodyform.searchtext.value).length )
       ) {
         alert("내용을 입력해주세요!");
         document.bodyform.searchtext.focus();
@@ -56,538 +56,585 @@
 </head>
 
 <body style="">
-  <form accept-charset="utf-8" action="/test/searchall" name="bodyform"   method="get"onsubmit="return checkonclick()">
-    <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">
-    <select name="searchtype">
-      <option value="name">수집품 이름</option>
+  <div class="">
+    <form accept-charset="utf-8" action="/test/searchall" name="bodyform"   method="get"onsubmit="return checkonclick()">
+      <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">
+      <select name="searchtype">
+        <option value="name">수집품 이름</option>
 
-    </select>
-    <input type="submit" class="btn" value="찾기"/ >
+      </select>
+      <input type="submit" class="btn" value="찾기"/ >
 
-  </form>
+    </form>
 
-  <% if(typeof(dataRecipe) != 'undefined'){ %>
+  </div>
 
-  <table>
+<div class="">
 
-      <colgroup>
-        <col width="60" >
-        <col width="60" >
-        <col span="">
-        <col width="40">
-        <col span="">
-        <col width="60">
-        <col width="40">
-        <col span="">
-        <col width="60">
-        <col width="40">
-        <col span="">
-        <col width="60">
-        <col width="40">
-        <col span="">
-        <col width="60">
-        <col width="40">
-        <col span="">
-        <col width="60">
-        <col width="40">
-        <col span="">
-        <col width="60">
+    <% if(typeof(dataRecipe) != 'undefined'){ %>
+    <%  if (dataRecipe.length == 0) { %>
+        <table >
+          <thead>
+            <th>레시피 검색</th>
 
-      </colgroup>
+          </thead>
+          <tbody>
+            <td>해당 자료가 없습니다.</td>
+          </tbody>
+        </table>
+    <%  } else if { %>
 
-      <thead id="" >
-        <tr >
-          <th>레시피</th>
-          <th>결과물</th>
-          <th id="linehead"></th>
-          <th id="line1"></th>
-          <th></th>
-          <th></th>
-          <th id="line2"></th>
-          <th></th>
-          <th></th>
-          <th id="line2"></th>
-          <th></th>
-          <th></th>
-          <th id="line2"></th>
-          <th></th>
-          <th></th>
-          <th id="line2"></th>
-          <th></th>
-          <th></th>
-          <th id="line2"></th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
+          <table>
+
+              <colgroup>
+                <col width="60" >
+                <col width="60" >
+                <col span="">
+                <col width="40">
+                <col span="">
+                <col width="60">
+                <col width="40">
+                <col span="">
+                <col width="60">
+                <col width="40">
+                <col span="">
+                <col width="60">
+                <col width="40">
+                <col span="">
+                <col width="60">
+                <col width="40">
+                <col span="">
+                <col width="60">
+                <col width="40">
+                <col span="">
+                <col width="60">
+
+              </colgroup>
+
+              <thead id="" >
+                <tr >
+                  <th>레시피</th>
+                  <th>결과물</th>
+                  <th id="linehead"></th>
+                  <th id="line1"></th>
+                  <th></th>
+                  <th></th>
+                  <th id="line2"></th>
+                  <th></th>
+                  <th></th>
+                  <th id="line2"></th>
+                  <th></th>
+                  <th></th>
+                  <th id="line2"></th>
+                  <th></th>
+                  <th></th>
+                  <th id="line2"></th>
+                  <th></th>
+                  <th></th>
+                  <th id="line2"></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
 
 
 
-              <% dataRecipe.forEach(function(item) { %>
-              <tr style="white-space: pre-line; font-size:12px;" id="recipetabletr">
-                <td style="text-align: center;"><%- item.recipenum %></td>
-                <td style="text-align: center;"><%- item.collectnum %></td>
-                <td id="linehead"><%- item.collectname %></td>
-                <td id="recipematerial1"><%- item.collect1num %></td>
-                <td><%- item.collect1name %></td>
-                <% if ( item.collect1num  === ''){ %>
-                  <td style="text-align: center; "><%- item.collect1unit %></td>
+                      <% dataRecipe.forEach(function(item) { %>
+                      <tr style="white-space: pre-line; font-size:12px;" id="recipetabletr">
+                        <td style="text-align: center;"><%- item.recipenum %></td>
+                        <td style="text-align: center;"><%- item.collectnum %></td>
+                        <td id="linehead"><%- item.collectname %></td>
+                        <td id="recipematerial1"><%- item.collect1num %></td>
+                        <td><%- item.collect1name %></td>
+                        <% if ( item.collect1num  === ''){ %>
+                          <td style="text-align: center; "><%- item.collect1unit %></td>
+                        <% } else { %>
+                          <td style="text-align: center; "> ( <%- item.collect1unit %> 개 ) </td>
+                        <% } %>
+                        <td id="recipematerial2"><%- item.collect2num %></td>
+                        <td st><%- item.collect2name %></td>
+                        <% if ( item.collect2num  === ''){ %>
+                          <td style="text-align: center; "><%- item.collect2unit %></td>
+                        <% } else { %>
+                          <td style="text-align: center; "> ( <%- item.collect2unit %> 개 ) </td>
+                        <% } %>
+                        <td id="recipematerial3"><%- item.collect3num %></td>
+                        <td><%- item.collect3name %></td>
+                        <% if ( item.collect3num  === ''){ %>
+                          <td style="text-align: center; "><%- item.collect3unit %></td>
+                        <% } else { %>
+                          <td style="text-align: center; "> ( <%- item.collect3unit %> 개 ) </td>
+                        <% } %>
+                        <td id="recipematerial4"><%- item.collect4num %></td>
+                        <td><%- item.collect4name %></td>
+                        <% if ( item.collect4num  === ''){ %>
+                          <td style="text-align: center; "><%- item.collect4unit %></td>
+                        <% } else { %>
+                          <td style="text-align: center; "> ( <%- item.collect4unit %> 개 ) </td>
+                        <% } %>
+                        <td id="recipematerial5"><%- item.collect5num %></td>
+                        <td><%- item.collect5name %></td>
+                        <% if ( item.collect5num  === ''){ %>
+                          <td style="text-align: center; "><%- item.collect5unit %></td>
+                        <% } else { %>
+                          <td style="text-align: center; "> ( <%- item.collect5unit %> 개 ) </td>
+                        <% } %>
+                        <td id="recipematerial6"><%- item.collect6num %></td>
+                        <td><%- item.collect6name %></td>
+                        <% if ( item.collect6num  === ''){ %>
+                          <td style="text-align: center; "><%- item.collect6unit %></td>
+                        <% } else { %>
+                          <td style="text-align: center; "> ( <%- item.collect6unit %> 개 ) </td>
+                        <% } %>
+                      </tr>
+                      <% }); %>
+
+              </tbody>
+          </table>
+      <% } %>
+
+
+    <% }%>
+</div>
+
+
+  <div class="">
+
+      <% if(typeof(dataWP) != 'undefined'){ %>
+
+      <table id="eqtable" style="width:100%;">
+        <colgroup>
+          <col width="100">
+          <col width="200">
+          <col width="50">
+          <col width="50">
+          <col width="100">
+          <col width="200">
+          <col width="350">
+          <col width="300">
+          <col width="650">
+
+        </colgroup>
+        <thead>
+          <tr  style='text-align: center'>
+            <th>등급</th>
+            <th>이름</th>
+            <th>제한</th>
+            <th>소켓</th>
+            <th>에테르</th>
+            <th>성능</th>
+            <th>속성</th>
+            <th>피트</th>
+            <th>커스텀</th>
+          </tr>
+        </thead>
+        <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+        <tbody>
+            <% dataWP.forEach(function(item) { %>
+                <% if (item.wpproperty.indexOf('/') != -1){ %>
+                  <% var WpP = item.wpproperty.split('/') %>
+                  <% if ( WpP[1] == ' 불 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD" onclick="">
+                  <% } else if (WpP[1] == ' 물 ' ) { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC" onclick="">
+                  <% } else if (WpP[1] == ' 바람 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3" onclick="">
+                  <% } else if (WpP[1] == ' 땅 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8" onclick="">
+                  <% } else if (WpP[1] == ' 정신 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB" onclick="">
+                  <% } else if (WpP[1] == ' 아스트랄 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2" onclick="">
+                  <% } else if (WpP[1] == ' 무속성 ') { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="">
+                  <% } else { %>
+                    <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
+                  <% } %>
+
                 <% } else { %>
-                  <td style="text-align: center; "> ( <%- item.collect1unit %> 개 ) </td>
+                  <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
                 <% } %>
-                <td id="recipematerial2"><%- item.collect2num %></td>
-                <td st><%- item.collect2name %></td>
-                <% if ( item.collect2num  === ''){ %>
-                  <td style="text-align: center; "><%- item.collect2unit %></td>
-                <% } else { %>
-                  <td style="text-align: center; "> ( <%- item.collect2unit %> 개 ) </td>
-                <% } %>
-                <td id="recipematerial3"><%- item.collect3num %></td>
-                <td><%- item.collect3name %></td>
-                <% if ( item.collect3num  === ''){ %>
-                  <td style="text-align: center; "><%- item.collect3unit %></td>
-                <% } else { %>
-                  <td style="text-align: center; "> ( <%- item.collect3unit %> 개 ) </td>
-                <% } %>
-                <td id="recipematerial4"><%- item.collect4num %></td>
-                <td><%- item.collect4name %></td>
-                <% if ( item.collect4num  === ''){ %>
-                  <td style="text-align: center; "><%- item.collect4unit %></td>
-                <% } else { %>
-                  <td style="text-align: center; "> ( <%- item.collect4unit %> 개 ) </td>
-                <% } %>
-                <td id="recipematerial5"><%- item.collect5num %></td>
-                <td><%- item.collect5name %></td>
-                <% if ( item.collect5num  === ''){ %>
-                  <td style="text-align: center; "><%- item.collect5unit %></td>
-                <% } else { %>
-                  <td style="text-align: center; "> ( <%- item.collect5unit %> 개 ) </td>
-                <% } %>
-                <td id="recipematerial6"><%- item.collect6num %></td>
-                <td><%- item.collect6name %></td>
-                <% if ( item.collect6num  === ''){ %>
-                  <td style="text-align: center; "><%- item.collect6unit %></td>
-                <% } else { %>
-                  <td style="text-align: center; "> ( <%- item.collect6unit %> 개 ) </td>
-                <% } %>
-              </tr>
-              <% }); %>
 
-      </tbody>
-  </table>
-  <% }%>
+              <td><%- item.wpgrade %></td>
+              <td><%- item.wpname %></td>
+              <td style='text-align: center'><%- item.wplimit %></td>
+              <td style='text-align: center'><%- item.wpsocket %></td>
+              <td style='text-align: center'><%- item.wpether %></td>
+              <td style='text-align: center'><%- item.wpstats %></td>
+              <td class="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
 
-  <% if(typeof(dataWP) != 'undefined'){ %>
+              <% var text = item.wpfeat.replace(/\s/g," ") %>
+              <% var feattext = text.split('<br>') %>
+              <% var featlink1 = text.split(" ("); %>
 
-  <table id="eqtable" style="width:100%;">
-    <colgroup>
-      <col width="100">
-      <col width="200">
-      <col width="50">
-      <col width="50">
-      <col width="100">
-      <col width="200">
-      <col width="350">
-      <col width="300">
-      <col width="650">
-
-    </colgroup>
-    <thead>
-      <tr  style='text-align: center'>
-        <th>등급</th>
-        <th>이름</th>
-        <th>제한</th>
-        <th>소켓</th>
-        <th>에테르</th>
-        <th>성능</th>
-        <th>속성</th>
-        <th>피트</th>
-        <th>커스텀</th>
-      </tr>
-    </thead>
-    <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
-    <tbody>
-        <% dataWP.forEach(function(item) { %>
-            <% if (item.wpproperty.indexOf('/') != -1){ %>
-              <% var WpP = item.wpproperty.split('/') %>
-              <% if ( WpP[1] == ' 불 ') { %>
-                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFD5DD" onclick="">
-              <% } else if (WpP[1] == ' 물 ' ) { %>
-                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#DBE0FC" onclick="">
-              <% } else if (WpP[1] == ' 바람 ') { %>
-                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#CEFFD3" onclick="">
-              <% } else if (WpP[1] == ' 땅 ') { %>
-                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#F8EAD8" onclick="">
-              <% } else if (WpP[1] == ' 정신 ') { %>
-                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#FFFFDB" onclick="">
-              <% } else if (WpP[1] == ' 아스트랄 ') { %>
-                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#E4C1F2" onclick="">
-              <% } else if (WpP[1] == ' 무속성 ') { %>
-                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; background-color:#EAEAEA" onclick="">
+              <% var featlink2 = [] %>
+              <% if (feattext[0].indexOf('티어') != -1){ %>
+                <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
               <% } else { %>
-                <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
+                <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
               <% } %>
 
-            <% } else { %>
-              <tr class="tabletr" id="" style="white-space: pre-line; font-size:12px; " onclick="">
-            <% } %>
+              <% for (var i = 0; i < featlink1.length; i++) { %>
+                <% featlink2.push( featlink1[i].indexOf(">")); %>
+                <% if (featlink2[i] != -1) { %>
+                  <% if (feattext[i].indexOf('티어') != -1){ %>
+                    <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+                  <% } else { %>
+                    <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+                  <% } %>
+                <% } %>
+              <% } %>
+              <td><%- featlink3 %></td>
 
-          <td><%- item.wpgrade %></td>
-          <td><%- item.wpname %></td>
-          <td style='text-align: center'><%- item.wplimit %></td>
-          <td style='text-align: center'><%- item.wpsocket %></td>
-          <td style='text-align: center'><%- item.wpether %></td>
-          <td style='text-align: center'><%- item.wpstats %></td>
-          <td class="wpproperty" style='text-align: center'><%- item.wpproperty %></td>
+              <% var text = item.wpcustom.replace(/\s/g," ") %>
+              <% var customtext = text.split('<br>') %>
+              <% var customlink1 = text.split(" ("); %>
+              <% var customlink2 = [customlink1[0].indexOf(">")] %>
+                <% if (customtext[0].indexOf("(") != -1) { %>
+                  <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+                <% } else { %>
+                  <% var customlink3 = customtext[0] %>
+                <% } %>
 
-          <% var text = item.wpfeat.replace(/\s/g," ") %>
-          <% var feattext = text.split('<br>') %>
-          <% var featlink1 = text.split(" ("); %>
+                <% for (var i = 1; i < customtext.length; i++) { %>
+                  <% if (customtext[i].indexOf("(") != -1) { %>
+                    <% customlink2.push( customlink1[i].indexOf(">")); %>
+                    <% if (customlink2[i] != -1) { %>
+                      <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                    <% } %>
+                  <% } else { %>
+                    <% customlink3 = customlink3 + '<br>' + customtext[i] %>
+                  <% } %>
+                <% } %>
 
-          <% var featlink2 = [] %>
-          <% if (feattext[0].indexOf('티어') != -1){ %>
-            <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
-          <% } else { %>
-            <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
-          <% } %>
 
-          <% for (var i = 0; i < featlink1.length; i++) { %>
-            <% featlink2.push( featlink1[i].indexOf(">")); %>
-            <% if (featlink2[i] != -1) { %>
-              <% if (feattext[i].indexOf('티어') != -1){ %>
-                <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(웨이블렘스킬)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
-              <% } else { %>
+
+              <td><%- customlink3 %></td>
+
+
+
+            </tr>
+            <tr id="" class="upgrademeterial" style="display:none">
+              <td colspan="10" style="text-align:center"> <%- item.wpup %> </td>
+            </tr>
+
+            <% }); %>
+        </tbody>
+      </table>
+      <% } %>
+  </div>
+  <div class="">
+
+      <% if(typeof(dataARM) != 'undefined'){ %>
+
+      <table id="eqtable" style="width:100%;">
+
+        <colgroup>
+          <col width="100">
+          <col width="200">
+          <col width="50">
+          <col width="50">
+
+          <col width="100">
+          <col width="200">
+          <col width="250">
+          <col width="250">
+          <col width="600">
+        </colgroup>
+        <thead>
+
+          <tr>
+            <th>등급</th>
+            <th>이름</th>
+            <th>제한</th>
+            <th>소켓</th>
+            <th>에테르</th>
+            <th>방어력</th>
+            <th>속성 방어</th>
+            <th>피트</th>
+            <th>커스텀</th>
+          </tr>
+        </thead>
+
+        <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+        <tbody >
+            <% dataARM.forEach(function(item) { %>
+            <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
+              <td><%- item.armgrade %></td>
+              <td><%- item.armname %></td>
+              <td style='text-align: center'><%- item.armlimit %></td>
+              <td style='text-align: center'><%- item.armsocket %></td>
+              <td style='text-align: center'><%- item.armether %></td>
+              <td style='text-align: center'><%- item.armstats %></td>
+              <td style='text-align: center'><%- item.armproperty %></td>
+
+              <% var text = item.armfeat.replace(/\s/g," ") %>
+              <% var feattext = text.split('<br>') %>
+              <% var featlink1 = text.split(" ("); %>
+
+              <% var featlink2 = [] %>
+              <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+
+              <% for (var i = 0; i < featlink1.length; i++) { %>
+                <% featlink2.push( featlink1[i].indexOf(">")); %>
+                <% if (featlink2[i] != -1) { %>
                 <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
-              <% } %>
-            <% } %>
-          <% } %>
-          <td><%- featlink3 %></td>
-
-          <% var text = item.wpcustom.replace(/\s/g," ") %>
-          <% var customtext = text.split('<br>') %>
-          <% var customlink1 = text.split(" ("); %>
-          <% var customlink2 = [customlink1[0].indexOf(">")] %>
-            <% if (customtext[0].indexOf("(") != -1) { %>
-              <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
-            <% } else { %>
-              <% var customlink3 = customtext[0] %>
-            <% } %>
-
-            <% for (var i = 1; i < customtext.length; i++) { %>
-              <% if (customtext[i].indexOf("(") != -1) { %>
-                <% customlink2.push( customlink1[i].indexOf(">")); %>
-                <% if (customlink2[i] != -1) { %>
-                  <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
                 <% } %>
-              <% } else { %>
-                <% customlink3 = customlink3 + '<br>' + customtext[i] %>
               <% } %>
-            <% } %>
+              <td><%- featlink3 %></td>
 
-
-
-          <td><%- customlink3 %></td>
-
-
-
-        </tr>
-        <tr id="" class="upgrademeterial" style="display:none">
-          <td colspan="10" style="text-align:center"> <%- item.wpup %> </td>
-        </tr>
-
-        <% }); %>
-    </tbody>
-  </table>
-  <% } %>
-
-  <% if(typeof(dataARM) != 'undefined'){ %>
-
-  <table id="eqtable" style="width:100%;">
-
-    <colgroup>
-      <col width="100">
-      <col width="200">
-      <col width="50">
-      <col width="50">
-
-      <col width="100">
-      <col width="200">
-      <col width="250">
-      <col width="250">
-      <col width="600">
-    </colgroup>
-    <thead>
-
-      <tr>
-        <th>등급</th>
-        <th>이름</th>
-        <th>제한</th>
-        <th>소켓</th>
-        <th>에테르</th>
-        <th>방어력</th>
-        <th>속성 방어</th>
-        <th>피트</th>
-        <th>커스텀</th>
-      </tr>
-    </thead>
-
-    <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
-    <tbody >
-        <% dataARM.forEach(function(item) { %>
-        <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
-          <td><%- item.armgrade %></td>
-          <td><%- item.armname %></td>
-          <td style='text-align: center'><%- item.armlimit %></td>
-          <td style='text-align: center'><%- item.armsocket %></td>
-          <td style='text-align: center'><%- item.armether %></td>
-          <td style='text-align: center'><%- item.armstats %></td>
-          <td style='text-align: center'><%- item.armproperty %></td>
-
-          <% var text = item.armfeat.replace(/\s/g," ") %>
-          <% var feattext = text.split('<br>') %>
-          <% var featlink1 = text.split(" ("); %>
-
-          <% var featlink2 = [] %>
-          <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
-
-          <% for (var i = 0; i < featlink1.length; i++) { %>
-            <% featlink2.push( featlink1[i].indexOf(">")); %>
-            <% if (featlink2[i] != -1) { %>
-            <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
-            <% } %>
-          <% } %>
-          <td><%- featlink3 %></td>
-
-          <% var text = item.armcustom.replace(/\s/g," ") %>
-          <% var customtext = text.split('<br>') %>
-          <% var customlink1 = text.split(" ("); %>
-          <% var customlink2 = [customlink1[0].indexOf(">")] %>
-            <% if (customtext[0].indexOf("(") != -1) { %>
-              <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
-            <% } else { %>
-              <% var customlink3 = customtext[0] %>
-            <% } %>
-
-            <% for (var i = 1; i < customtext.length; i++) { %>
-              <% if (customtext[i].indexOf("(") != -1) { %>
-                <% customlink2.push( customlink1[i].indexOf(">")); %>
-                <% if (customlink2[i] != -1) { %>
-                  <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+              <% var text = item.armcustom.replace(/\s/g," ") %>
+              <% var customtext = text.split('<br>') %>
+              <% var customlink1 = text.split(" ("); %>
+              <% var customlink2 = [customlink1[0].indexOf(">")] %>
+                <% if (customtext[0].indexOf("(") != -1) { %>
+                  <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+                <% } else { %>
+                  <% var customlink3 = customtext[0] %>
                 <% } %>
-              <% } else { %>
-                <% customlink3 = customlink3 + '<br>' + customtext[i] %>
-              <% } %>
-            <% } %>
 
-          <td><%- customlink3 %></td>
-
-        </tr>
-
-        <tr id="" class="upgrademeterial" style="display:none">
-          <td colspan="10" style="text-align:center"> <%- item.armup %> </td>
-        </tr>
-        <% }); %>
-    </tbody>
-  </table>
-  <% } %>
-
-    <% if(typeof(dataACC) != 'undefined'){ %>
-  <table id="eqtable" style="width:100%;">
-
-    <colgroup>
-      <col width="100">
-      <col width="200">
-      <col width="50">
-      <col width="50">
-
-      <col width="100">
-      <col width="200">
-      <col width="250">
-      <col width="250">
-      <col width="600">
-    </colgroup>
-    <thead>
-
-      <tr>
-        <th>등급</th>
-        <th>이름</th>
-        <th>제한</th>
-        <th>소켓</th>
-        <th>에테르</th>
-        <th>방어력</th>
-        <th>속성 방어</th>
-        <th>피트</th>
-        <th>커스텀</th>
-      </tr>
-    </thead>
-
-    <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
-    <tbody >
-        <% dataACC.forEach(function(item) { %>
-        <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
-          <td><%- item.accgrade %></td>
-          <td><%- item.accname %></td>
-          <td style='text-align: center'><%- item.acclimit %></td>
-          <td style='text-align: center'><%- item.accsocket %></td>
-          <td style='text-align: center'><%- item.accether %></td>
-          <td style='text-align: center'><%- item.accstats %></td>
-          <td style='text-align: center'><%- item.accproperty %></td>
-
-          <% var text = item.accfeat.replace(/\s/g," ") %>
-          <% var feattext = text.split('<br>') %>
-          <% var featlink1 = text.split(" ("); %>
-          <% var featlink2 = [] %>
-          <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
-
-          <% for (var i = 0; i < featlink1.length; i++) { %>
-            <% featlink2.push( featlink1[i].indexOf(">")); %>
-            <% if (featlink2[i] != -1) { %>
-            <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
-            <% } %>
-          <% } %>
-          <td><%- featlink3 %></td>
-
-          <% var text = item.acccustom.replace(/\s/g," ") %>
-          <% var customtext = text.split('<br>') %>
-          <% var customlink1 = text.split(" ("); %>
-          <% var customlink2 = [customlink1[0].indexOf(">")] %>
-            <% if (customtext[0].indexOf("(") != -1) { %>
-              <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
-            <% } else { %>
-              <% var customlink3 = customtext[0] %>
-            <% } %>
-
-            <% for (var i = 1; i < customtext.length; i++) { %>
-              <% if (customtext[i].indexOf("(") != -1) { %>
-                <% customlink2.push( customlink1[i].indexOf(">")); %>
-                <% if (customlink2[i] != -1) { %>
-                  <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                <% for (var i = 1; i < customtext.length; i++) { %>
+                  <% if (customtext[i].indexOf("(") != -1) { %>
+                    <% customlink2.push( customlink1[i].indexOf(">")); %>
+                    <% if (customlink2[i] != -1) { %>
+                      <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                    <% } %>
+                  <% } else { %>
+                    <% customlink3 = customlink3 + '<br>' + customtext[i] %>
+                  <% } %>
                 <% } %>
-              <% } else { %>
-                <% customlink3 = customlink3 + '<br>' + customtext[i] %>
+
+              <td><%- customlink3 %></td>
+
+            </tr>
+
+            <tr id="" class="upgrademeterial" style="display:none">
+              <td colspan="10" style="text-align:center"> <%- item.armup %> </td>
+            </tr>
+            <% }); %>
+        </tbody>
+      </table>
+      <% } %>
+  </div>
+  <div class="">
+
+        <% if(typeof(dataACC) != 'undefined'){ %>
+      <table id="eqtable" style="width:100%;">
+
+        <colgroup>
+          <col width="100">
+          <col width="200">
+          <col width="50">
+          <col width="50">
+
+          <col width="100">
+          <col width="200">
+          <col width="250">
+          <col width="250">
+          <col width="600">
+        </colgroup>
+        <thead>
+
+          <tr>
+            <th>등급</th>
+            <th>이름</th>
+            <th>제한</th>
+            <th>소켓</th>
+            <th>에테르</th>
+            <th>방어력</th>
+            <th>속성 방어</th>
+            <th>피트</th>
+            <th>커스텀</th>
+          </tr>
+        </thead>
+
+        <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+        <tbody >
+            <% dataACC.forEach(function(item) { %>
+            <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
+              <td><%- item.accgrade %></td>
+              <td><%- item.accname %></td>
+              <td style='text-align: center'><%- item.acclimit %></td>
+              <td style='text-align: center'><%- item.accsocket %></td>
+              <td style='text-align: center'><%- item.accether %></td>
+              <td style='text-align: center'><%- item.accstats %></td>
+              <td style='text-align: center'><%- item.accproperty %></td>
+
+              <% var text = item.accfeat.replace(/\s/g," ") %>
+              <% var feattext = text.split('<br>') %>
+              <% var featlink1 = text.split(" ("); %>
+              <% var featlink2 = [] %>
+              <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+
+              <% for (var i = 0; i < featlink1.length; i++) { %>
+                <% featlink2.push( featlink1[i].indexOf(">")); %>
+                <% if (featlink2[i] != -1) { %>
+                <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+                <% } %>
               <% } %>
-            <% } %>
+              <td><%- featlink3 %></td>
+
+              <% var text = item.acccustom.replace(/\s/g," ") %>
+              <% var customtext = text.split('<br>') %>
+              <% var customlink1 = text.split(" ("); %>
+              <% var customlink2 = [customlink1[0].indexOf(">")] %>
+                <% if (customtext[0].indexOf("(") != -1) { %>
+                  <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+                <% } else { %>
+                  <% var customlink3 = customtext[0] %>
+                <% } %>
+
+                <% for (var i = 1; i < customtext.length; i++) { %>
+                  <% if (customtext[i].indexOf("(") != -1) { %>
+                    <% customlink2.push( customlink1[i].indexOf(">")); %>
+                    <% if (customlink2[i] != -1) { %>
+                      <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                    <% } %>
+                  <% } else { %>
+                    <% customlink3 = customlink3 + '<br>' + customtext[i] %>
+                  <% } %>
+                <% } %>
 
 
-          <td><%- customlink3 %></td>
-        </tr>
+              <td><%- customlink3 %></td>
+            </tr>
 
-        <tr id="" class="upgrademeterial" style="display:none">
-          <td colspan="10" style="text-align:center"> <%- item.accup %> </td>
-        </tr>
-        <% }); %>
-    </tbody>
+            <tr id="" class="upgrademeterial" style="display:none">
+              <td colspan="10" style="text-align:center"> <%- item.accup %> </td>
+            </tr>
+            <% }); %>
+        </tbody>
 
-  </table>
+      </table>
 
-  <% } %>
+      <% } %>
+  </div>
+  <div class="">
 
+        <% if (typeof(dataMonsterField) != 'undefined'){ %>
 
+          <table id="mon_table" style="margin-top:5px; width:100%">
+              <thead>
+                <tr>
+                  <th>레벨</th>
+                  <th>이름</th>
+                  <th>속성</th>
+                  <th>에테르</th>
+                  <th>타입</th>
+                  <th>저항</th>
+                  <th>보석</th>
+                  <th>커먼</th>
+                  <th>언커먼</th>
+                  <th>레어</th>
+                  <th>스킬</th>
+                </tr>
+              </thead>
+              <tbody>
 
-    <% if (typeof(dataMonsterField) != 'undefined'){ %>
+                              <% dataMonsterField.forEach(function(item) { %>
+
+                                <tr>
+                                <td style= "text-align:center;"><%- item.mon_lv %></td>
+                                <td><%- item.mon_name %></td>
+                                <td><%- item.mon_property %></td>
+                                <td><%- item.mon_ether %></td>
+                                <td style="text-align: center"><%- item.mon_type %></td>
+                                <td><%- item.mon_resist %></td>
+                                <td style="text-align: center"><%- item.mon_gem %></td>
+                                <td id ="" style="text-align: center"><%- item.mon_common %></td>
+                                <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
+                                <td id ="" style="text-align: center"><%- item.mon_rare %></td>
+                                <td id =""><%- item.mon_skill %></td>
+                                </tr>
+                                <% })%>
+              </tbody>
+          </table>
+        <% } %>
+
+  </div>
+
+  <div class="">
+
+        <% if (typeof(dataMonsterTower) != 'undefined'){ %>
 
       <table id="mon_table" style="margin-top:5px; width:100%">
           <thead>
             <tr>
-              <th>레벨</th>
+              <th>층</th>
               <th>이름</th>
-              <th>속성</th>
+              <th>HP계수</th>
               <th>에테르</th>
+              <th>속성</th>
               <th>타입</th>
-              <th>저항</th>
-              <th>보석</th>
+              <th>내성 정보</th>
               <th>커먼</th>
               <th>언커먼</th>
               <th>레어</th>
               <th>스킬</th>
             </tr>
           </thead>
+
           <tbody>
+            <% dataMonsterTower.forEach(function(item) { %>
 
-                          <% dataMonsterField.forEach(function(item) { %>
+              <% if (item.TowerFloor == '' ){ %>
+                <tr>
+                  <td style= "text-align:center;"><%- item.mon_lv %></td>
+                  <td><%- item.mon_name %></td>
+                  <td><%- item.mon_property %></td>
+                  <td><%- item.mon_ether %></td>
+                  <td style="text-align: center"><%- item.mon_type %></td>
+                  <td><%- item.mon_resist %></td>
+                  <td style="text-align: center"><%- item.mon_gem %></td>
+                  <td id ="" style="text-align: center"><%- item.mon_common %></td>
+                  <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
+                  <td id ="" style="text-align: center"><%- item.mon_rare %></td>
+                  <td id =""><%- item.mon_skill %></td>
+                </tr>
+              <% } else { %>
+                <% if (item.TowerFloor.indexOf('~') != -1){ %>
+                  <tr>
+                <% } else { %>
+                  <tr style="border-bottom: 3px solid #000; border-top: 3px solid #000;">
+                <% } %>
 
-                            <tr>
-                            <td style= "text-align:center;"><%- item.mon_lv %></td>
-                            <td><%- item.mon_name %></td>
-                            <td><%- item.mon_property %></td>
-                            <td><%- item.mon_ether %></td>
-                            <td style="text-align: center"><%- item.mon_type %></td>
-                            <td><%- item.mon_resist %></td>
-                            <td style="text-align: center"><%- item.mon_gem %></td>
-                            <td id ="" style="text-align: center"><%- item.mon_common %></td>
-                            <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
-                            <td id ="" style="text-align: center"><%- item.mon_rare %></td>
-                            <td id =""><%- item.mon_skill %></td>
-                            </tr>
-                            <% })%>
+                  <td style= "text-align:center;"><%- item.TowerFloor %></td>
+                  <td><%- item.mon_name %></td>
+                  <td style="text-align: center"><%- item.Tower_Hp %></td>
+                  <td><%- item.mon_ether %></td>
+                  <td><%- item.mon_property %></td>
+                  <td style="text-align: center"><%- item.mon_type %></td>
+                  <td><%- item.mon_resist %></td>
+                  <td id ="" style="text-align: center"><%- item.mon_common %></td>
+                  <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
+                  <td id ="" style="text-align: center"><%- item.mon_rare %></td>
+                  <td id =""><%- item.mon_skill %></td>
+                </tr>
+              <% } %>
+            <% }) %>
           </tbody>
       </table>
-    <% } %>
+
+      <% } %>
+  </div>
+
+  <div class="">
+
+  </div>
+
+  <div class="">
+
+  </div>
 
 
-    <% if (typeof(dataMonsterTower) != 'undefined'){ %>
 
-  <table id="mon_table" style="margin-top:5px; width:100%">
-      <thead>
-        <tr>
-          <th>층</th>
-          <th>이름</th>
-          <th>HP계수</th>
-          <th>에테르</th>
-          <th>속성</th>
-          <th>타입</th>
-          <th>내성 정보</th>
-          <th>커먼</th>
-          <th>언커먼</th>
-          <th>레어</th>
-          <th>스킬</th>
-        </tr>
-      </thead>
 
-      <tbody>
-        <% dataMonsterTower.forEach(function(item) { %>
 
-          <% if (item.TowerFloor == '' ){ %>
-            <tr>
-              <td style= "text-align:center;"><%- item.mon_lv %></td>
-              <td><%- item.mon_name %></td>
-              <td><%- item.mon_property %></td>
-              <td><%- item.mon_ether %></td>
-              <td style="text-align: center"><%- item.mon_type %></td>
-              <td><%- item.mon_resist %></td>
-              <td style="text-align: center"><%- item.mon_gem %></td>
-              <td id ="" style="text-align: center"><%- item.mon_common %></td>
-              <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
-              <td id ="" style="text-align: center"><%- item.mon_rare %></td>
-              <td id =""><%- item.mon_skill %></td>
-            </tr>
-          <% } else { %>
-            <% if (item.TowerFloor.indexOf('~') != -1){ %>
-              <tr>
-            <% } else { %>
-              <tr style="border-bottom: 3px solid #000; border-top: 3px solid #000;">
-            <% } %>
 
-              <td style= "text-align:center;"><%- item.TowerFloor %></td>
-              <td><%- item.mon_name %></td>
-              <td style="text-align: center"><%- item.Tower_Hp %></td>
-              <td><%- item.mon_ether %></td>
-              <td><%- item.mon_property %></td>
-              <td style="text-align: center"><%- item.mon_type %></td>
-              <td><%- item.mon_resist %></td>
-              <td id ="" style="text-align: center"><%- item.mon_common %></td>
-              <td id ="" style="text-align: center"><%- item.mon_uncommon %></td>
-              <td id ="" style="text-align: center"><%- item.mon_rare %></td>
-              <td id =""><%- item.mon_skill %></td>
-            </tr>
-          <% } %>
-        <% }) %>
-      </tbody>
-  </table>
 
-  <% } %>
+
 
 
 
