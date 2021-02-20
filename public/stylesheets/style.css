@@ -56,7 +56,6 @@
   }
 
   .eqtable {
-    border-top: 3px solid #036;
     border-collapse: collapse;
     text-align: left;
     line-height: 1.5;
@@ -67,6 +66,7 @@
     vertical-align: center;
     text-align: center;
     color: #369;
+      border-top: 3px solid #036;
     border-bottom: 3px solid #036;
   }
   .eqtable td {
