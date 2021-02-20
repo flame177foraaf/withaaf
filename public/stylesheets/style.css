@@ -55,13 +55,13 @@
     text-decoration: none;
   }
 
-  #eqtable {
+  .eqtable {
     border-top: 3px solid #036;
     border-collapse: collapse;
     text-align: left;
     line-height: 1.5;
     }
-  #eqtable th {
+  .eqtable th {
     padding: 5px;
     font-weight: bold;
     vertical-align: center;
@@ -69,7 +69,7 @@
     color: #369;
     border-bottom: 3px solid #036;
   }
-  #eqtable td {
+  .eqtable td {
     padding: 3px;
     vertical-align: center;
     border-bottom: 1px solid #ccc;
