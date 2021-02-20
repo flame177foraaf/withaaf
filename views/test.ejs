@@ -69,136 +69,139 @@
 
   </div>
 
-<div class="">
+      <% if(typeof(dataRecipe) != 'undefined'){ %>
+      <div class="">
 
-    <% if(typeof(dataRecipe) != 'undefined'){ %>
-      <%  if (dataRecipe.length == 0) { %>
-          <table style="width:100%;">
-            <thead>
-              <th>레시피 검색</th>
-            </thead>
-            <tbody>
-              <td style="text-align:center;">해당 자료가 없습니다.</td>
-            </tbody>
-          </table>
-      <%  } else { %>
-            <table style="width:100%;">
+            <%  if (dataRecipe.length == 0) { %>
+                <table style="width:100%;">
+                  <thead>
+                    <th>레시피 검색</th>
+                  </thead>
+                  <tbody>
+                    <td style="text-align:center;">해당 자료가 없습니다.</td>
+                  </tbody>
+                </table>
+            <%  } else { %>
+                  <table style="width:100%;">
 
-                <colgroup>
-                  <col width="60" >
-                  <col width="60" >
-                  <col span="">
-                  <col width="40">
-                  <col span="">
-                  <col width="60">
-                  <col width="40">
-                  <col span="">
-                  <col width="60">
-                  <col width="40">
-                  <col span="">
-                  <col width="60">
-                  <col width="40">
-                  <col span="">
-                  <col width="60">
-                  <col width="40">
-                  <col span="">
-                  <col width="60">
-                  <col width="40">
-                  <col span="">
-                  <col width="60">
+                      <colgroup>
+                        <col width="60" >
+                        <col width="60" >
+                        <col span="">
+                        <col width="40">
+                        <col span="">
+                        <col width="60">
+                        <col width="40">
+                        <col span="">
+                        <col width="60">
+                        <col width="40">
+                        <col span="">
+                        <col width="60">
+                        <col width="40">
+                        <col span="">
+                        <col width="60">
+                        <col width="40">
+                        <col span="">
+                        <col width="60">
+                        <col width="40">
+                        <col span="">
+                        <col width="60">
 
-                </colgroup>
+                      </colgroup>
 
-                <thead >
-                  <tr >
-                    <th>레시피</th>
-                    <th>결과물</th>
-                    <th id="linehead"></th>
-                    <th id="line1"></th>
-                    <th></th>
-                    <th></th>
-                    <th id="line2"></th>
-                    <th></th>
-                    <th></th>
-                    <th id="line2"></th>
-                    <th></th>
-                    <th></th>
-                    <th id="line2"></th>
-                    <th></th>
-                    <th></th>
-                    <th id="line2"></th>
-                    <th></th>
-                    <th></th>
-                    <th id="line2"></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-
-
-
-                        <% dataRecipe.forEach(function(item) { %>
-                        <tr style="white-space: pre-line; font-size:12px;" id="recipetabletr">
-                          <td style="text-align: center;"><%- item.recipenum %></td>
-                          <td style="text-align: center;"><%- item.collectnum %></td>
-                          <td id="linehead"><%- item.collectname %></td>
-                          <td id="recipematerial1"><%- item.collect1num %></td>
-                          <td><%- item.collect1name %></td>
-                          <% if ( item.collect1num  === ''){ %>
-                            <td style="text-align: center; "><%- item.collect1unit %></td>
-                          <% } else { %>
-                            <td style="text-align: center; "> ( <%- item.collect1unit %> 개 ) </td>
-                          <% } %>
-                          <td id="recipematerial2"><%- item.collect2num %></td>
-                          <td st><%- item.collect2name %></td>
-                          <% if ( item.collect2num  === ''){ %>
-                            <td style="text-align: center; "><%- item.collect2unit %></td>
-                          <% } else { %>
-                            <td style="text-align: center; "> ( <%- item.collect2unit %> 개 ) </td>
-                          <% } %>
-                          <td id="recipematerial3"><%- item.collect3num %></td>
-                          <td><%- item.collect3name %></td>
-                          <% if ( item.collect3num  === ''){ %>
-                            <td style="text-align: center; "><%- item.collect3unit %></td>
-                          <% } else { %>
-                            <td style="text-align: center; "> ( <%- item.collect3unit %> 개 ) </td>
-                          <% } %>
-                          <td id="recipematerial4"><%- item.collect4num %></td>
-                          <td><%- item.collect4name %></td>
-                          <% if ( item.collect4num  === ''){ %>
-                            <td style="text-align: center; "><%- item.collect4unit %></td>
-                          <% } else { %>
-                            <td style="text-align: center; "> ( <%- item.collect4unit %> 개 ) </td>
-                          <% } %>
-                          <td id="recipematerial5"><%- item.collect5num %></td>
-                          <td><%- item.collect5name %></td>
-                          <% if ( item.collect5num  === ''){ %>
-                            <td style="text-align: center; "><%- item.collect5unit %></td>
-                          <% } else { %>
-                            <td style="text-align: center; "> ( <%- item.collect5unit %> 개 ) </td>
-                          <% } %>
-                          <td id="recipematerial6"><%- item.collect6num %></td>
-                          <td><%- item.collect6name %></td>
-                          <% if ( item.collect6num  === ''){ %>
-                            <td style="text-align: center; "><%- item.collect6unit %></td>
-                          <% } else { %>
-                            <td style="text-align: center; "> ( <%- item.collect6unit %> 개 ) </td>
-                          <% } %>
+                      <thead >
+                        <tr >
+                          <th>레시피</th>
+                          <th>결과물</th>
+                          <th id="linehead"></th>
+                          <th id="line1"></th>
+                          <th></th>
+                          <th></th>
+                          <th id="line2"></th>
+                          <th></th>
+                          <th></th>
+                          <th id="line2"></th>
+                          <th></th>
+                          <th></th>
+                          <th id="line2"></th>
+                          <th></th>
+                          <th></th>
+                          <th id="line2"></th>
+                          <th></th>
+                          <th></th>
+                          <th id="line2"></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
                         </tr>
-                        <% }); %>
+                      </thead>
+                      <tbody>
 
-                </tbody>
-            </table>
-      <% } %>
+
+
+                              <% dataRecipe.forEach(function(item) { %>
+                              <tr style="white-space: pre-line; font-size:12px;" id="recipetabletr">
+                                <td style="text-align: center;"><%- item.recipenum %></td>
+                                <td style="text-align: center;"><%- item.collectnum %></td>
+                                <td id="linehead"><%- item.collectname %></td>
+                                <td id="recipematerial1"><%- item.collect1num %></td>
+                                <td><%- item.collect1name %></td>
+                                <% if ( item.collect1num  === ''){ %>
+                                  <td style="text-align: center; "><%- item.collect1unit %></td>
+                                <% } else { %>
+                                  <td style="text-align: center; "> ( <%- item.collect1unit %> 개 ) </td>
+                                <% } %>
+                                <td id="recipematerial2"><%- item.collect2num %></td>
+                                <td st><%- item.collect2name %></td>
+                                <% if ( item.collect2num  === ''){ %>
+                                  <td style="text-align: center; "><%- item.collect2unit %></td>
+                                <% } else { %>
+                                  <td style="text-align: center; "> ( <%- item.collect2unit %> 개 ) </td>
+                                <% } %>
+                                <td id="recipematerial3"><%- item.collect3num %></td>
+                                <td><%- item.collect3name %></td>
+                                <% if ( item.collect3num  === ''){ %>
+                                  <td style="text-align: center; "><%- item.collect3unit %></td>
+                                <% } else { %>
+                                  <td style="text-align: center; "> ( <%- item.collect3unit %> 개 ) </td>
+                                <% } %>
+                                <td id="recipematerial4"><%- item.collect4num %></td>
+                                <td><%- item.collect4name %></td>
+                                <% if ( item.collect4num  === ''){ %>
+                                  <td style="text-align: center; "><%- item.collect4unit %></td>
+                                <% } else { %>
+                                  <td style="text-align: center; "> ( <%- item.collect4unit %> 개 ) </td>
+                                <% } %>
+                                <td id="recipematerial5"><%- item.collect5num %></td>
+                                <td><%- item.collect5name %></td>
+                                <% if ( item.collect5num  === ''){ %>
+                                  <td style="text-align: center; "><%- item.collect5unit %></td>
+                                <% } else { %>
+                                  <td style="text-align: center; "> ( <%- item.collect5unit %> 개 ) </td>
+                                <% } %>
+                                <td id="recipematerial6"><%- item.collect6num %></td>
+                                <td><%- item.collect6name %></td>
+                                <% if ( item.collect6num  === ''){ %>
+                                  <td style="text-align: center; "><%- item.collect6unit %></td>
+                                <% } else { %>
+                                  <td style="text-align: center; "> ( <%- item.collect6unit %> 개 ) </td>
+                                <% } %>
+                              </tr>
+                              <% }); %>
+
+                      </tbody>
+                  </table>
+            <% } %>
+
+      </div>
+
     <% }%>
-</div>
 
 
+
+          <% if(typeof(dataWP) != 'undefined'){ %>
   <div class="">
 
-      <% if(typeof(dataWP) != 'undefined'){ %>
         <%  if (dataWP.length == 0) { %>
               <table style="width:100%;" >
                 <thead>
@@ -331,13 +334,13 @@
       </table>
       <% } %>
 
-      <% } %>
   </div>
 
+        <% } %>
 
+              <% if(typeof(dataARM) != 'undefined'){ %>
   <div class="">
 
-      <% if(typeof(dataARM) != 'undefined'){ %>
 
           <%  if (dataARM.length == 0) { %>
                 <table style="width:100%;">
@@ -438,12 +441,12 @@
         </tbody>
       </table>
       <% } %>
-      <% } %>
   </div>
 
+  <% } %>
 
-  <div class="">
         <% if(typeof(dataACC) != 'undefined'){ %>
+  <div class="">
 
             <%  if (dataACC.length == 0) { %>
                   <table style="width:100%;">
@@ -544,11 +547,13 @@
       </table>
 
       <% } %>
-      <% } %>
   </div>
 
+  <% } %>
+
+
+    <% if (typeof(dataMonsterField) == 'undefined' && typeof(dataMonsterTower) == 'undefined'){ %>
   <div class="">
-    <% if (typeof(dataMonsterField) != 'undefined' && typeof(dataMonsterTower) != 'undefined'){ %>
 
             <table style="width:100%;">
               <thead>
@@ -660,9 +665,9 @@
       </table>
 
     <% } %>
-    <% } %>
   </div>
 
+  <% } %>
 
 
 
