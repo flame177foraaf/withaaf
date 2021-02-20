@@ -553,7 +553,7 @@
 
 
     <% if (typeof(dataMonsterField) != 'undefined' && typeof(dataMonsterTower) != 'undefined'){ %>
-  <div class="">
+  <div class="NotSearchMonsterDrop">
 
                 <%  if (dataMonsterField.length == 0 && dataMonsterTower.length == 0) { %>
             <table class="eqtable" style="width:100%; margin: 50px 0px 50px 0px; border-top: 1px solid #444444; border-bottom: 1px solid #444444;">
@@ -570,7 +570,7 @@
           </div>
     <% } else { %>
 
-    <div class="">
+    <div class="SearchMonsterDrop">
       <% if (typeof(dataMonsterField) != 'undefined'){ %>
         <% if (dataMonsterField.length != 0){ %>
           <table class="field_mon_drop" style="width:100% ; margin: 50px 0px 50px 0px; border-top: 1px solid #444444; border-bottom: 1px solid #444444;">
