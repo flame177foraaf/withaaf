@@ -59,7 +59,7 @@ router.post('/', async function(req,res,next) {
     if (Wpup !== '') {
       Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
-    
+
   var QueryString = "INSERT INTO aquafeq.aquafwp(wpgrade, wpname, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
   await client.query(QueryString, [Wpgrade, Wpname, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup], async function (err, response){
     var QueryString = "select wpid, wpname from aquafeq.aquafwp where wpname = Wpname ORDER BY wplimit,wpid asc ;";
@@ -97,7 +97,6 @@ router.get('/fixwp', async function(req,res,next) {
 
 //무기 변경하기
 router.post('/fixwp', async function(req,res,next) {
-  console.log('냠냠
   var Eqid = req.body.eqid;
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade !== '') {
