@@ -281,10 +281,10 @@ router.get('/ing', async function(req,res,next) {
       //console.log(second_stat)
       //console.log(parseInt(first_stat))
 
-      var Dice_roll_first_stat = parseInt(Dice_roll(-10,10))
+      var Dice_roll_first_stat = parseInt(Dice_roll(-15,15))
       //console.log(Dice_roll_first_stat)
       if (Special == "checked") {
-        Dice_roll_first_stat = parseInt(Dice_roll(-5,15))
+        Dice_roll_first_stat = parseInt(Dice_roll(-9,21))
       }
 
       var Dice_roll_first_stat_per =  (100 + Dice_roll_first_stat  )/100
@@ -303,9 +303,9 @@ router.get('/ing', async function(req,res,next) {
 
       }
 
-      var Dice_roll_second_stat = parseInt(Dice_roll(-10,10))
+      var Dice_roll_second_stat = parseInt(Dice_roll(-15,15))
       if (Special == "checked") {
-        Dice_roll_second_stat = parseInt(Dice_roll(-5,15))
+        Dice_roll_second_stat = parseInt(Dice_roll(-9,21))
       }
 
       //console.log(Dice_roll_second_stat)
