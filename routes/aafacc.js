@@ -27,40 +27,64 @@ router.get('/addacc', async function(req,res,next) {
 
 router.post('/', async function(req,res,next) {
   var Accgrade = req.body.accgrade;
-    if (Accgrade !== '') {
+    if (Accgrade !== '' || Accgrade.trim() !== "") {
       Accgrade = Accgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    } else if (Accgrade == null ) {
+      Accgrade = ""
     }
 
   var Accname = req.body.accname;
   var Acclimit = req.body.acclimit;
-    if (Acclimit == '') {
-        Acclimit = null
+    if (Acclimit !== '' || Acclimit.trim() !== "") {
+      Acclimit = Acclimit.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    } else if (Acclimit == null ) {
+      Acclimit = ""
     }
   var Accsocket = req.body.accsocket;
+    if (Accsocket !== '' || Accsocket.trim() !== "") {
+      Accsocket = Accsocket.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    } else if (Accsocket == null ) {
+      Accsocket = ""
+    }
   var Accether = req.body.accether;
+    if (Accether !== '' || Accether.trim() !== "") {
+      Accether = Accether.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    } else if (Accether == null ) {
+      Accether = ""
+    }
   var Accstats = req.body.accstats;
-    if (Accstats !== '') {
+    if (Accstats !== '' || Accstats.trim() !== "") {
       Accstats = Accstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    } else if (Accstats == null ) {
+      Accstats = ""
     }
   var Accproperty = req.body.accproperty;
-    if (Accproperty !== '') {
+    if (Accproperty !== '' || Accproperty.trim() !== "") {
       Accproperty = Accproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    } else if (Accproperty == null ) {
+      Accproperty = ""
     }
   var Accfeat = req.body.accfeat;
-    if (Accfeat !== '') {
+    if (Accfeat !== '' || Accfeat.trim() !== "") {
       Accfeat = Accfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    } else if (Accfeat == null ) {
+      Accfeat = ""
     }
   var Acccustom = req.body.acccustom;
-    if (Acccustom !== ''){
+    if (Acccustom !== '' || Acccustom.trim() !== "") {
       Acccustom = Acccustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    } else if (Acccustom == null ) {
+      Acccustom = ""
     }
   var Accup = req.body.accup;
-    if (Accup !== '') {
+    if (Accup !== '' || Accup.trim() !== "") {
       Accup = Accup.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    } else if (Accup == null ) {
+      Accup = ""
     }
-  var QueryString = "INSERT INTO aquafeq.aquafacc(accgrade, accname, acclimit, accsocket, accether, accstats, accproperty, accfeat, acccustom, accup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
+  var QueryString = "INSERT INTO aquafeq.aquafacc(accgrade, accname, acclimit, accsocket, accether, accstats, accproperty, accfeat, acccustom, accup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
   await client.query(QueryString, [Accgrade, Accname, Acclimit, Accsocket, Accether, Accstats, Accproperty, Accfeat, Acccustom, Accup], async function (err, response){
-    var QueryString = "select accid, accname from aquafeq.aquafacc where accname = Accname ORDER BY acclimit,accid asc ;"
+    var QueryString = "select accid, accname from aquafeq.aquafacc where accname = Accname ORDER BY acclimit,accid asc ;";
     await client.query(QueryString, async function (err, response){
       await response;
       res.render('aafacc', {
@@ -71,10 +95,10 @@ router.post('/', async function(req,res,next) {
   });
 });
 router.get('/fixacc', async function(req,res,next) {
-  var QueryString = "select accname from aquafeq.aquafacc"
+  var QueryString = "select accname from aquafeq.aquafacc";
   await client.query(QueryString, async function (err, response){
     var Select_name = req.query.Seachname;
-    var QueryString = "select * from aquafeq.aquafacc where accname = $1"
+    var QueryString = "select * from aquafeq.aquafacc where accname = $1";
     await client.query(QueryString, [Select_name], async function (err, response){
       await response;
       if(typeof(response.rows[0]) !== "object") {
@@ -95,86 +119,92 @@ router.get('/fixacc', async function(req,res,next) {
 //무기 변경하기
 router.post('/fixacc', async function(req,res,next) {
   var Eqid = req.body.eqid;
-  console.log(Eqid)
+  console.log(Eqid);
 
-  var Accgrade = req.body.accgrade;
-    if (Accgrade == '') {
-      Accgrade = null
-    } else if (Accgrade !== '') {
-      Accgrade = Accgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    }
-  var Accname = req.body.accname;
-  var Acclimit = req.body.acclimit;
-    if (Acclimit == '') {
-      Acclimit = null
-    }
-  var Accsocket = req.body.accsocket;
-    if (Accsocket == '') {
-      Accsocket = null
-    }
-  var Accether = req.body.accether;
-    if (Accether == '') {
-      Accether = null
-    }
-  var Accstats = req.body.accstats;
-    if (Accstats == '') {
-      Accstats = null
-    } else if (Accstats !== '') {
-      Accstats = Accstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    }
+    var Accgrade = req.body.accgrade;
+      if (Accgrade !== '' || Accgrade.trim() !== "") {
+        Accgrade = Accgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      } else if (Accgrade == null ) {
+        Accgrade = ""
+      }
+  
+    var Accname = req.body.accname;
+    var Acclimit = req.body.acclimit;
+      if (Acclimit !== '' || Acclimit.trim() !== "") {
+        Acclimit = Acclimit.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      } else if (Acclimit == null ) {
+        Acclimit = ""
+      }
+    var Accsocket = req.body.accsocket;
+      if (Accsocket !== '' || Accsocket.trim() !== "") {
+        Accsocket = Accsocket.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      } else if (Accsocket == null ) {
+        Accsocket = ""
+      }
+    var Accether = req.body.accether;
+      if (Accether !== '' || Accether.trim() !== "") {
+        Accether = Accether.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      } else if (Accether == null ) {
+        Accether = ""
+      }
+    var Accstats = req.body.accstats;
+      if (Accstats !== '' || Accstats.trim() !== "") {
+        Accstats = Accstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      } else if (Accstats == null ) {
+        Accstats = ""
+      }
+    var Accproperty = req.body.accproperty;
+      if (Accproperty !== '' || Accproperty.trim() !== "") {
+        Accproperty = Accproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      } else if (Accproperty == null ) {
+        Accproperty = ""
+      }
+    var Accfeat = req.body.accfeat;
+      if (Accfeat !== '' || Accfeat.trim() !== "") {
+        Accfeat = Accfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      } else if (Accfeat == null ) {
+        Accfeat = ""
+      }
+    var Acccustom = req.body.acccustom;
+      if (Acccustom !== '' || Acccustom.trim() !== "") {
+        Acccustom = Acccustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      } else if (Acccustom == null ) {
+        Acccustom = ""
+      }
+    var Accup = req.body.accup;
+      if (Accup !== '' || Accup.trim() !== "") {
+        Accup = Accup.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      } else if (Accup == null ) {
+        Accup = ""
+      }
 
-  var Accproperty = req.body.accproperty;
-    if (Accproperty == '') {
-      Accproperty = null
-    } else if (Accproperty !== '') {
-      Accproperty = Accproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    }
-  var Accfeat = req.body.accfeat;
-    if (Accfeat == '') {
-      Accfeat = null
-    } else if (Accfeat !== '') {
-      Accfeat = Accfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    }
-  var Acccustom = req.body.acccustom;
-    if (Acccustom == '') {
-      Acccustom = null
-    } else if (Acccustom !== ''){
-      Acccustom = Acccustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    }
-  var Accup = req.body.accup;
-    if (Accup == '') {
-      Accup = null
-    } else if (Accup !== '') {
-      Accup = Accup.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    }
 
-
-  var QueryString = "UPDATE aquafeq.aquafacc SET (accgrade, acclimit, accsocket, accether, accstats, accproperty, accfeat, acccustom, accup, accname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE accid = $11 returning *"
+  var QueryString = "UPDATE aquafeq.aquafacc SET (accgrade, acclimit, accsocket, accether, accstats, accproperty, accfeat, acccustom, accup, accname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE accid = $11 returning *";
   await client.query(QueryString, [Accgrade, Acclimit, Accsocket, Accether, Accstats, Accproperty, Accfeat, Acccustom, Accup, Accname, Eqid], async function(err, response) {
 
-    var QueryString = "select * from aquafeq.aquafacc where accname = $1"
+    var QueryString = "select * from aquafeq.aquafacc where accname = $1";
     await client.query ( QueryString, [Accname],  async function (err, response) {
       await response;
       res.render('aafacc', {
         title : Accname + ' 변경 완료',
         data: response.rows
-      })
+      });
     });
   });
 });
 
 router.get('/:id', async function(req,res,next) {
 
-  console.log(url.parse(req.url, true))
+  console.log(url.parse(req.url, true));
 
   var searchtype = req.query.searchtype;
 
   var Search = req.query.searchtext;
   if (Search == null ) {
-    var Search = ""
+    var Search = "";
   }
   var CurrentPage = req.params.id;
-  var CurrentPage = parseInt(CurrentPage)
+  var CurrentPage = parseInt(CurrentPage);
 
   var SearchPlus = "";
 
@@ -202,10 +232,10 @@ router.get('/:id', async function(req,res,next) {
     }
     var Searchcount = Search22.length;
     if (typeof(searchtype2) == 'string') {
-      var SearchPlus = SearchPlus+ ' AND ' + searchtype22+ ' Ilike ' +" '%"+ Search2 +"%' "
+      var SearchPlus = SearchPlus+ ' AND ' + searchtype22+ ' Ilike ' +" '%"+ Search2 +"%' ";
     } else if (typeof(searchtype2) == 'object') {
       for (var i = 0; i < Searchcount; i++) {
-        var SearchPlus = SearchPlus+ ' AND ' + searchtype22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' "
+        var SearchPlus = SearchPlus+ ' AND ' + searchtype22[i] + ' Ilike ' +" '%"+ Search2[i] +"%' ";
       }
     }
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc WHERE " + searchtype +" Ilike $1 " + SearchPlus + " ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);";
@@ -244,7 +274,7 @@ router.get('/:id', async function(req,res,next) {
     var EndPage = StartPage + DataCountInPage -1;
     if (EndPage > TotalPage) {
       EndPage = TotalPage;
-    };
+    }
     //console.log('엔드페이지'+ EndPage);
     //console.log(response.rows[0])
     res.render('aafacc', {
@@ -268,6 +298,6 @@ router.get('/:id', async function(req,res,next) {
     });
   });
 
-})
+});
 
 module.exports = router;

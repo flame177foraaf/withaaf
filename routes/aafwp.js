@@ -26,22 +26,23 @@ router.get('/addwp', async function(req,res,next) {
 
 //무기 추가하기
 router.post('/', async function(req,res,next) {
+
   var Wpgrade = req.body.wpgrade;
     if (Wpgrade !== '') {
       Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
   var Wpname = req.body.wpname;
+
   var Wplimit = req.body.wplimit;
-    if (Wplimit == '') {
-        Wplimit = null
-    }
+
   var Wpsocket = req.body.wpsocket;
   var Wpether = req.body.wpether;
   var Wpstats = req.body.wpstats;
     if (Wpstats !== '') {
       Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
+
   var Wpproperty = req.body.wpproperty;
     if (Wpproperty !== '') {
       Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
@@ -58,6 +59,7 @@ router.post('/', async function(req,res,next) {
     if (Wpup !== '') {
       Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
+    
   var QueryString = "INSERT INTO aquafeq.aquafwp(wpgrade, wpname, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
   await client.query(QueryString, [Wpgrade, Wpname, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup], async function (err, response){
     var QueryString = "select wpid, wpname from aquafeq.aquafwp where wpname = Wpname ORDER BY wplimit,wpid asc ;";
@@ -95,65 +97,38 @@ router.get('/fixwp', async function(req,res,next) {
 
 //무기 변경하기
 router.post('/fixwp', async function(req,res,next) {
-  console.log('냠냠');
+  console.log('냠냠
   var Eqid = req.body.eqid;
-
-  console.log(Eqid);
-  console.log(req.body.eqid);
   var Wpgrade = req.body.wpgrade;
-    if (Wpgrade == '') {
-      Wpgrade = null
-    } else if (Wpgrade !== '') {
+    if (Wpgrade !== '') {
       Wpgrade = Wpgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
-    console.log(req.body.wpgrade)
 
   var Wpname = req.body.wpname;
-  console.log(req.body.wpname)
 
   var Wplimit = req.body.wplimit;
-    if (Wplimit == '') {
-      Wplimit = null
-    }
-    console.log(req.body.wplimit)
 
   var Wpsocket = req.body.wpsocket;
-    if (Wpsocket == '') {
-      Wpsocket = null
-    }
   var Wpether = req.body.wpether;
-    if (Wpether == '') {
-      Wpether = null
-    }
   var Wpstats = req.body.wpstats;
-    if (Wpstats == '') {
-      Wpstats = null
-    } else if (Wpstats !== '') {
+    if (Wpstats !== '') {
       Wpstats = Wpstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
   var Wpproperty = req.body.wpproperty;
-    if (Wpproperty == '') {
-      Wpproperty = null
-    } else if (Wpproperty !== '') {
+    if (Wpproperty !== '') {
       Wpproperty = Wpproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Wpfeat = req.body.wpfeat;
-    if (Wpfeat == '') {
-      Wpfeat = null
-    } else if (Wpfeat !== '') {
+    if (Wpfeat !== '') {
       Wpfeat = Wpfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Wpcustom = req.body.wpcustom;
-    if (Wpcustom == '') {
-      Wpcustom = null
-    } else if (Wpcustom !== ''){
+    if (Wpcustom !== ''){
       Wpcustom = Wpcustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var Wpup = req.body.wpup;
-    if (Wpup == '') {
-      Wpup = null
-    } else if (Wpup !== '') {
+    if (Wpup !== '') {
       Wpup = Wpup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
 
@@ -232,17 +207,6 @@ router.get('/:id', async function(req,res,next) {
 
     }
 
-      console.log('req.query.searchtype : ' + Search);
-      console.log('req.query.searchtype : ' + searchtype);
-      // console.log(Search);
-      // console.log(searchtype);
-      // console.log(decodeURIComponent(Search));
-      // console.log(encodeURIComponent(Search));
-      // console.log(CurrentPage);
-      // console.log(SearchPlus);
-      // console.log(Search2);
-      // console.log(Search22);
-      // console.log('QueryString' + QueryString);
     await client.query(QueryString, ['%' + Search +'%', CurrentPage], async function (err, response){
       await response;
       if (err) {

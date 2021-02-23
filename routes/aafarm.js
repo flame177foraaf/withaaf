@@ -35,9 +35,6 @@ router.post('/', async function(req, res, next) {
 
   var Armname = req.body.armname;
   var Armlimit = req.body.armlimit;
-  if (Armlimit == '') {
-    Armlimit = null
-  }
   var Armsocket = req.body.armsocket;
   var Armether = req.body.armether;
   var Armstats = req.body.armstats;
@@ -100,53 +97,33 @@ router.post('/fixarm', async function(req, res, next) {
   console.log(Eqid)
 
   var Armgrade = req.body.armgrade;
-  if (Armgrade == '') {
-    Armgrade = null
-  } else if (Armgrade !== '') {
+  if (Armgrade !== '') {
     Armgrade = Armgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
   var Armname = req.body.armname;
   var Armlimit = req.body.armlimit;
-  if (Armlimit == '') {
-    Armlimit = null
-  }
   var Armsocket = req.body.armsocket;
-  if (Armsocket == '') {
-    Armsocket = null
-  }
   var Armether = req.body.armether;
-  if (Armether == '') {
-    Armether = null
-  }
+
   var Armstats = req.body.armstats;
-  if (Armstats == '') {
-    Armstats = null
-  } else if (Armstats !== '') {
+  if (Armstats !== '') {
     Armstats = Armstats.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
 
   var Armproperty = req.body.armproperty;
-  if (Armproperty == '') {
-    Armproperty = null
-  } else if (Armproperty !== '') {
+  if (Armproperty !== '') {
     Armproperty = Armproperty.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
   var Armfeat = req.body.armfeat;
-  if (Armfeat == '') {
-    Armfeat = null
-  } else if (Armfeat !== '') {
+  if (Armfeat !== '') {
     Armfeat = Armfeat.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
   var Armcustom = req.body.armcustom;
-  if (Armcustom == '') {
-    Armcustom = null
-  } else if (Armcustom !== '') {
+  if (Armcustom !== '') {
     Armcustom = Armcustom.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
   var Armup = req.body.armup;
-  if (Armup == '') {
-    Armup = null
-  } else if (Armup !== '') {
+  if (Armup !== '') {
     Armup = Armup.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
 
