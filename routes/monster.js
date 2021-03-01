@@ -16,9 +16,9 @@ client.connect();
 router.get('/', async function(req,res,next) {
   var Data_length = 0;
   var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
-  await client.query(QueryString, (err,response) => {
+  await client.query(QueryString, (err,response) async {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id asc"
-    await client.query(QueryString, (err, response1) => {
+    await client.query(QueryString, (err, response1) async {
       res.render('monster', {
       title:'AAF 던전 몬스터 정보',
       fieldname:'검색이 필요합니다',
@@ -40,11 +40,11 @@ router.get('/', async function(req,res,next) {
 
 router.get('/search', async function(req,res,next) {
   var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
-  await client.query(QueryString, (err,response) => {
+  await client.query(QueryString, (err,response) async {
     var QueryString = "SELECT  aquafeq.dungeon_partition.id, " + '"PartitionName"' + "," + '"FieldName"' + ",   part, COUNT(*) count   FROM aquafeq.dungeon_partition  inner join aquafeq.monster on aquafeq.monster.mon_field = aquafeq.dungeon_partition.part GROUP by  aquafeq.dungeon_partition.id, " + '"PartitionName"' + "," + '"FieldName"' + ",  part order by aquafeq.dungeon_partition.id;"
 
 
-    await client.query(QueryString, (err, response1) => {
+    await client.query(QueryString, (err, response1) async {
       var SearchingType = req.query.searchtype;
       console.log(SearchingType)
       console.log(typeof(SearchingType))
@@ -72,7 +72,7 @@ router.get('/search', async function(req,res,next) {
 
           var QueryString = "select * from aquafeq.dungeon_partition as t1 inner join aquafeq.monster as t2 on t1.part = t2.mon_field where (t2.mon_lv - ($1::INTEGER)) % ($2::INTEGER) = 0::INTEGER order by t1.id;";
 
-          await client.query(QueryString, [SearchingText2, SearchingText], (err,response2) => {
+          await client.query(QueryString, [SearchingText2, SearchingText], (err,response2) async {
             if (err) {
               console.log(err)
             }
@@ -101,7 +101,7 @@ router.get('/search', async function(req,res,next) {
         } else if (SearchingType === 'collect') {
           var QueryString = "select * from aquafeq.dungeon_partition  as t1 inner join aquafeq.monster as t2 on t1.part =  t2.mon_field where t2.mon_common Ilike $1 or t2.mon_uncommon Ilike $1 or t2.mon_rare Ilike $1 order by t1.id,mon_lv;"
         }
-        await  client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) => {
+        await  client.query(QueryString, ['%' + SearchingText + '%'], (err,response2) async {
           if (err) {
             console.log(err)
           }
@@ -127,12 +127,12 @@ router.get('/search', async function(req,res,next) {
 // params.id 를 쓰는 라우터는 마지막에 쓰라고 한다
 router.get('/:id', async function(req,res,next) {
   var QueryString = "SELECT * FROM aquafeq.dungeon order by id asc"
-  await client.query(QueryString, (err,response) => {
+  await client.query(QueryString, (err,response) async {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"
-    await client.query(QueryString, (err, response1) => {
+    await client.query(QueryString, (err, response1) async {
       var Field_Id = req.params.id;
       var QueryString = "SELECT * FROM aquafeq.monster as t1 left join aquafeq.dungeon_partition as t2 on t1.mon_field = t2.part where mon_field = $1 order by t1.id,t1.mon_lv  asc;"
-      await client.query(QueryString, [Field_Id], (err,response2) => {
+      await client.query(QueryString, [Field_Id], (err,response2) async {
         console.log(response2.rows[0])
         var Data_length = response2.rows.length;
           res.render('monster', {
