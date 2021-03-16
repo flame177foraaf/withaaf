@@ -22,7 +22,7 @@ router.get('/', async function(req,res,next) {
   await client.query(QueryString, async function (err, response){
     res.render('rival' , {
       Rival: Search,
-      list1: response1.rows,
+      list1: response.rows,
     })
   })
 })
