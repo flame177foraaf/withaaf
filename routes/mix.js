@@ -10,9 +10,9 @@ var bodyparser = require('body-parser');
 var bodyparser = require('body-parser');
 
 var jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-const { window } = new JSDOM();
-const { document } = (new JSDOM('')).window;
+var { JSDOM } = jsdom;
+var { window } = new JSDOM();
+var { document } = (new JSDOM('')).window;
 global.document = document;
 
 var $ = jQuery = require('jquery')(window);
@@ -21,7 +21,7 @@ var $ = jQuery = require('jquery')(window);
 
 
 // GET home page.
-router.get('/', (req, res, next) => {
+router.get('/', async function(req,res,next) {
   var sqlwp = 'SELECT * FROM aquafwp';
     connection.query(sqlwp, function(err, wpresults, field) {
       if (err) console.error(err);
