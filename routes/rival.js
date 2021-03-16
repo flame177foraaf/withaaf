@@ -34,14 +34,14 @@ router.get('/:id' , async function(req,res,next) {
   console.log(Search);
 
   var QueryString = "select * from aquafeq.rival"
-  await client.query(QueryString, async function (err, response){
+  await client.query(QueryString, async function (err, response1){
     console.log(QueryString);
     var QueryString = "select * from aquafeq.rival where rival_name like $1 order by id asc";
-    await client.query(QueryString, [Search + '%'], async function (err, response){
+    await client.query(QueryString, [Search + '%'], async function (err, response2){
       var QueryString1 = 'select * from aquafeq.aquafwp as wp where wp.wpgrade like $1'
-      await client.query( QueryString1, ['%' + Search + '%'], async function (err, response){
+      await client.query( QueryString1, ['%' + Search + '%'], async function (err, data1){
         var QueryString1 = 'select * from aquafeq.aquafarm as arm  where arm.armgrade like $1'
-        await client.query( QueryString1, ['%' + Search + '%'], async function (err, response){
+        await client.query( QueryString1, ['%' + Search + '%'], async function (err, data2){
           var QueryString1 = 'select * from aquafeq.aquafacc  as acc where acc.accgrade like $1'
           if (Search.indexOf('사흑천') != '-1') {
             Search = '사흑천'
