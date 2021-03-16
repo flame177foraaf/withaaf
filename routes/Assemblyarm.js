@@ -5,8 +5,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var $ = require('jquery');
 
-var { Client } = require('pg');
-var client = new Client({
+const { Client } = require('pg');
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });

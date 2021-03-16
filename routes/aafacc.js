@@ -4,8 +4,8 @@ var $ = require('jquery');
 var url = require('url');
 var asyncify = require('express-asyncify');
 var router = asyncify(express.Router());
-var { Client } = require('pg');
-var client = new Client({
+const { Client } = require('pg');
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });

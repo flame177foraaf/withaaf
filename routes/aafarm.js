@@ -7,7 +7,7 @@ var router = asyncify(express.Router());
 var {
   Client
 } = require('pg');
-var client = new Client({
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });

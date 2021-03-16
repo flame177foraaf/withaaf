@@ -6,9 +6,9 @@ var bodyParser = require('body-parser');
 var url = require('url');
 
 
-var { Client } = require('pg');
+const { Client } = require('pg');
 
-var client = new Client({
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });

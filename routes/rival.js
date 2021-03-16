@@ -1,5 +1,6 @@
 var express = require('express');
-var router = express.Router();
+var asyncify = require('express-asyncify');
+var router = asyncify(express.Router());
 var app = express();
 
 const { Client } = require('pg');
@@ -11,12 +12,12 @@ const client = new Client({
 
 client.connect();
 
-router.get('/', (req,res,next) => {
+router.get('/', async function(req,res,next) {
   var Search = req.params.id;
   console.log(Search)
 
   var QueryString = "select * from aquafeq.rival"
-  client.query(QueryString, (err, response1) =>{
+  await client.query(QueryString, async function (err, response){
     res.render('rival' , {
       Rival: Search,
       list1: response1.rows,
@@ -25,32 +26,32 @@ router.get('/', (req,res,next) => {
 })
 
 
-router.get('/:id' , (req,res,next) => {
+router.get('/:id' , async function(req,res,next) {
   var Search = req.params.id;
   var Darksky = '사흑천'
   console.log(Search);
 
   var QueryString = "select * from aquafeq.rival"
-  client.query(QueryString, (err, response1) => {
+  await client.query(QueryString, async function (err, response){
     console.log(QueryString);
     var QueryString = "select * from aquafeq.rival where rival_name like $1 order by id asc";
-    client.query(QueryString, [Search + '%'], (err, response2) => {
+    await client.query(QueryString, [Search + '%'], async function (err, response){
       var QueryString1 = 'select * from aquafeq.aquafwp as wp where wp.wpgrade like $1'
-      client.query( QueryString1, ['%' + Search + '%'], (err, data1) => {
+      await client.query( QueryString1, ['%' + Search + '%'], async function (err, response){
         var QueryString1 = 'select * from aquafeq.aquafarm as arm  where arm.armgrade like $1'
-        client.query( QueryString1, ['%' + Search + '%'], (err, data2) => {
+        await client.query( QueryString1, ['%' + Search + '%'], async function (err, response){
           var QueryString1 = 'select * from aquafeq.aquafacc  as acc where acc.accgrade like $1'
           if (Search.indexOf('사흑천') != '-1') {
             Search = '사흑천'
           }
-          client.query( QueryString1, ['%' + Search + '%'], (err, data3) => {
+          await client.query( QueryString1, ['%' + Search + '%'], async function (err, data3) {
             var QueryString1 = 'select * from aquafeq.featsup as feat where feat.featgrade like $1'
             if (Search.indexOf('사흑천') != '-1') {
               Search = '사흑천'
             }
-            client.query( QueryString1, ['%' + Search + '%'], (err, data4) => {
+            await client.query( QueryString1, ['%' + Search + '%'], async function(err, data4) {
               var QueryString1 = 'select * from aquafeq.aquafgem as gem where gem.collectname like $1'
-              client.query( QueryString1, ['%' + Search + '%'], (err, data5) => {
+              await client.query( QueryString1, ['%' + Search + '%'], async function(err, data5) {
                 console.log(QueryString1);
 
                   if (err) {
@@ -84,7 +85,7 @@ router.get('/:id' , (req,res,next) => {
   })
 })
 /*
-router.get('/', (req,res,next) => {
+router.get('/', async function(req,res,next) {
   var Data_length = 0;
   var QueryString = "SELECT * FROM aquafeq.aquafwp WHERE wpgrade ilike $1 "
   client.query(QueryString, ['%' + '세레스' + '%'], (err, data1) => {

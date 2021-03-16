@@ -4,9 +4,9 @@ var router = asyncify(express.Router());
 var app = express();
 var url = require('url');
 
-var { Client } = require('pg');
+const { Client } = require('pg');
 
-var client = new Client({
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
   // ssl: true,
 });
@@ -142,7 +142,7 @@ router.get('/:id', async function(req,res,next) {
     var QueryString = "SELECT * FROM aquafeq.dungeon_partition order by id"
     await client.query(QueryString, async function (err, response1){
       await response1;
-      
+
       var Field_Id = req.params.id;
       var QueryString = "SELECT * FROM aquafeq.monster as t1 left join aquafeq.dungeon_partition as t2 on t1.mon_field = t2.part where mon_field = $1 order by t1.id,t1.mon_lv  asc;"
       await client.query(QueryString, [Field_Id], async function (err, response2){
