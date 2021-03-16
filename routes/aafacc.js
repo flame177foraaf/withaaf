@@ -7,7 +7,9 @@ var router = asyncify(express.Router());
 const { Client } = require('pg');
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  // ssl: true,
+  ssl: {
+  rejectUnauthorized: false
+},
 });
 
 client.connect();
@@ -127,7 +129,7 @@ router.post('/fixacc', async function(req,res,next) {
       } else if (Accgrade == null ) {
         Accgrade = ""
       }
-  
+
     var Accname = req.body.accname;
     var Acclimit = req.body.acclimit;
       if (Acclimit !== '' || Acclimit.trim() !== "") {

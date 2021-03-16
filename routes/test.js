@@ -4,10 +4,12 @@ var $ = require('jquery');
 var url = require('url');
 var asyncify = require('express-asyncify');
 var router = asyncify(express.Router());
-var { Client } = require('pg');
-var client = new Client({
+const { Client } = require('pg');
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  // ssl: true,
+  ssl: {
+  rejectUnauthorized: false
+},
 });
 
 client.connect();
@@ -311,7 +313,7 @@ router.get('/:id', async function(req,res,next) {
       var DataCountInPage = 10;
       var PageSize = 10;
       var TotalPage = parseInt(TotalCount / DataCountInPage,10);
-      
+
       //console.log('토탈 페이지' + TotalPage);
       if (TotalPage < CurrentPage) {
         CurrentPage = TotalPage;

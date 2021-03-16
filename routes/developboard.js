@@ -9,7 +9,9 @@ const { Client } = require('pg');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  // ssl: true,
+  ssl: {
+  rejectUnauthorized: false
+},
 });
 
 client.connect();
@@ -37,7 +39,7 @@ router.get('/:id', async function(req,res,next) {
 });
 
 
-=if(B5="",,if(B6="",TRANSPOSE(A6:if(B6="",if(B7="",if(B8="",if(B9="",if(B10="",IF(B11="",IF(B12="",IF(B13="",IF(B14="",IF(B15="",IF(B16="",IF(B17="",IF(B18="",IF(B19="",IF(B20="",A20,A19),A18),A17),A16),A15),A14),A13),A12),A11),A10),A9),A8),A7),A6),A6)),))
+=if(B5="",if(B6="",TRANSPOSE(A6:if(B6="",if(B7="",if(B8="",if(B9="",if(B10="",IF(B11="",IF(B12="",IF(B13="",IF(B14="",IF(B15="",IF(B16="",IF(B17="",IF(B18="",IF(B19="",IF(B20="",A20,A19),A18),A17),A16),A15),A14),A13),A12),A11),A10),A9),A8),A7),A6),A6)),))
 
 router.post('/', async function(req,res,next) {
   client.query("INSERT INTO aquafeq.developboard(developid, developproject, developcontent) values ($1, $2, $3, to_char(now(),'YYYY-MM-DD'))", [req.body.title, req.body.boardbody, req.body.writer], function (err, response){
