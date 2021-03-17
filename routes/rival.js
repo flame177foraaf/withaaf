@@ -56,7 +56,7 @@ router.get('/:id' , async function(req,res,next) {
             Search = '사흑천'
           }
           if (Search == '천룡왕') { 
-            var QueryString1 = 'select * from aquafeq.aquafacc as wp where acc.accgrade like $1 and acc.accgrade like '%희귀%''
+            var QueryString1 = 'select * from aquafeq.aquafacc as acc where acc.accgrade like $1 and acc.accgrade like '%희귀%''
               }
           await client.query( QueryString1, ['%' + Search + '%'], async function (err, data3) {
             var QueryString1 = 'select * from aquafeq.featsup as feat where feat.featgrade like $1'
