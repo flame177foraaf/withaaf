@@ -47,7 +47,7 @@ router.get('/:id' , async function(req,res,next) {
       await client.query( QueryString1, ['%' + Search + '%'], async function (err, data1){
         var QueryString1 = 'select * from aquafeq.aquafarm as arm  where arm.armgrade like $1'
         if (Search == '천룡왕') { 
-          var QueryString1 = 'select * from aquafeq.aquafarm as arm where arm.armgrade like $1 and arm.armgrade "%"|| Search ||"%"'
+          var QueryString1 = 'select * from aquafeq.aquafarm as arm where arm.armgrade like $1 and arm.armgrade like "%"|| Search ||"%"'
             }
 
         await client.query( QueryString1, ['%' + Search + '%'], async function (err, data2){
@@ -64,12 +64,12 @@ router.get('/:id' , async function(req,res,next) {
               Search = '사흑천'
             }
     if (Search == '천룡왕') { 
-      var QueryString1 = 'select * from aquafeq.featsup as feat where feat.featgrade like $1 and feat.featgrade "%"|| Search ||"%"'
+      var QueryString1 = 'select * from aquafeq.featsup as feat where feat.featgrade like $1 and feat.featgrade  like "%"|| Search ||"%"'
         }
             await client.query( QueryString1, ['%' + Search + '%'], async function(err, data4) {
               var QueryString1 = 'select * from aquafeq.aquafgem as gem where gem.collectname like $1'
     if (Search == '천룡왕') { 
-      var QueryString1 = "select * from aquafeq.aquafgem as gem where  gem.collectname like $1 and  gem.collectname '%' || Search || '%' "
+      var QueryString1 = "select * from aquafeq.aquafgem as gem where  gem.collectname like $1 and  gem.collectname like '%' || Search || '%' "
         }
               await client.query( QueryString1, ['%' + Search + '%'], async function(err, data5) {
                 console.log(QueryString1);
