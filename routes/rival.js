@@ -69,7 +69,7 @@ router.get('/:id' , async function(req,res,next) {
             await client.query( QueryString1, ['%' + Search + '%'], async function(err, data4) {
               var QueryString1 = 'select * from aquafeq.aquafgem as gem where gem.collectname like $1'
     if (Search == '천룡왕') { 
-      var QueryString1 = "select * from aquafeq.aquafgem as gem where  gem.collectname like $1 and  gem.collectname '%' || Search | '%' "
+      var QueryString1 = "select * from aquafeq.aquafgem as gem where  gem.collectname like $1 and  gem.collectname '%' || Search || '%' "
         }
               await client.query( QueryString1, ['%' + Search + '%'], async function(err, data5) {
                 console.log(QueryString1);
