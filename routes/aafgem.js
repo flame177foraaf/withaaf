@@ -93,7 +93,7 @@ router.post('/add_gem', async function(req,res,next) {
   if (Gemeffect !== '') {
     Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
-  var QueryString = "INSERT INTO aquafeq.aquafgem(gemgrade, collectname, gemname, gemobject, gemeffect) values ($1, $2, $3, $4, $5);"
+  var QueryString = "INSERT INTO aquafeq.aquafgem (gemgrade, collectname, gemname, gemobject, gemeffect) values ($1, $2, $3, $4, $5);"
   await client.query(QueryString, [Gemgrade, Collectname, Gemname, Gemobject, Gemeffect], async function (err, response){
     var QueryString = "select gemid, gemname from aquafeq.aquafgem where gemname = Gemname ORDER BY gemid asc ;"
     await client.query(QueryString, async function (err, response){
