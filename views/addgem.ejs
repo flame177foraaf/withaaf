@@ -60,55 +60,61 @@
     </script>
   </head>
   <body style="margin-top: 5px; margin-right: 10%; margin-left:10%; ">
-    <h1><%= title  %></h1>
+    <div class="main">
 
-    <div class="">
-      <form class="" accept-charset="utf-8" name="bodyform" action="/aafgem/add_gem" method="post" onsubmit="return checkonclick()">
-        <div class="">
+      <div class="title_div">
+
+        <h1><%= title  %></h1>
+      </div>
+
+      <div class="">
+        <form class="" accept-charset="utf-8" name="bodyform" action="/aafgem" method="post" onsubmit="return checkonclick()">
           <div class="">
-            <label for="">등급</label>
             <div class="">
-              <textarea type="text" name="grade" rows="6" cols="60" id="featgrade"></textarea>
+              <label for="">등급</label>
+              <div class="">
+                <textarea type="text" name="grade" rows="6" cols="60" id="featgrade"></textarea>
 
+              </div>
             </div>
-          </div>
-          <div class="">
-            <label for="">수집품 이름</label>
             <div class="">
-              <input type="text" name="name"  size='40' maxlength='50' value="" id="title">
+              <label for="">수집품 이름</label>
+              <div class="">
+                <input type="text" name="name"  size='40' maxlength='50' value="" id="title">
+              </div>
             </div>
-          </div>
-          <div class="">
-            <label for="">루엘 이름</label>
             <div class="">
-              <input type="text" name="gemname"  size='40' maxlength='50' value="" id="title">
+              <label for="">루엘 이름</label>
+              <div class="">
+                <input type="text" name="gemname"  size='40' maxlength='50' value="" id="title">
+              </div>
             </div>
-          </div>
-          <div class="">
-            <label for="">착용 대상</label>
             <div class="">
-              <input type="text" name="obj"  size='40' maxlength='50' value="" id="title">
+              <label for="">착용 대상</label>
+              <div class="">
+                <input type="text" name="obj"  size='40' maxlength='50' value="" id="title">
+              </div>
             </div>
-          </div>
-          <div class="">
-            <label for="">효과</label>
             <div class="">
-              <textarea type="text" name="effect" rows="6" cols="60" id=""></textarea>
+              <label for="">효과</label>
+              <div class="">
+                <textarea type="text" name="effect" rows="6" cols="60" id=""></textarea>
 
+              </div>
+            </div>
+
+            <div class="writhingbtn" style="height:100px">
+
+              <div class="" style="float:right;">
+                <input type="submit" name="등록하기" value="등록하기" />
+                <input onclick="history.back(-1);" type="button" name="" value="뒤로" />
+
+              </div>
             </div>
           </div>
 
-          <div class="writhingbtn" style="height:100px">
-
-            <div class="" style="float:right;">
-              <input type="submit" name="등록하기" value="등록하기" />
-              <input onclick="history.back(-1);" type="button" name="" value="뒤로" />
-
-            </div>
-          </div>
-        </div>
-
-      </form>
+        </form>
+      </div>
     </div>
 
   </body>
