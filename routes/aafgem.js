@@ -95,6 +95,7 @@ router.post('/add_gem', async function(req,res,next) {
   }
   var QueryString = "INSERT INTO aquafeq.aquafgem (gemgrade, collectname, gemname, gemobject, gemeffect) values ($1, $2, $3, $4, $5);"
   await client.query(QueryString, [Gemgrade, Collectname, Gemname, Gemobject, Gemeffect], async function (err, response){
+    console.log(QueryString);
     var QueryString = "select gemid, gemname from aquafeq.aquafgem where gemname = Gemname ORDER BY gemid asc ;"
     await client.query(QueryString, async function (err, response){
       await response;
