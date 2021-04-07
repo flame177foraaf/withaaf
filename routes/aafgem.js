@@ -81,7 +81,7 @@ router.get('/add_gem', async function(req,res,next) {
 })
 
 
-router.post('/add_gem', async function(req,res,next) {
+router.post('/', async function(req,res,next) {
   var Gemgrade =req.body.grade;
   if (Gemgrade !== '') {
     Gemgrade = Gemgrade.replace(/(?:\r\n|\r|\n)/g, '<br>');
@@ -93,7 +93,9 @@ router.post('/add_gem', async function(req,res,next) {
   if (Gemeffect !== '') {
     Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
-  var QueryString = "INSERT INTO aquafeq.aquafgem (gemgrade, collectname, gemname, gemobject, gemeffect) values ($1, $2, $3, $4, $5);"
+  var QueryString = "INSERT INTO aquafeq.aquafgem (gemgrade, collectname, gemname, gemobject, gemeffect) values ($1, $2, $3, $4, $5);";
+  console.log(QueryString);
+
   await client.query(QueryString, [Gemgrade, Collectname, Gemname, Gemobject, Gemeffect], async function (err, response){
     console.log(QueryString);
     var QueryString = "select gemid, gemname from aquafeq.aquafgem where gemname = Gemname ORDER BY gemid asc ;"
