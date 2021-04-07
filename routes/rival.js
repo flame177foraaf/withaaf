@@ -38,21 +38,39 @@ router.get('/:id' , async function(req,res,next) {
     console.log(QueryString);
     var QueryString = "select * from aquafeq.rival where rival_name like $1 order by id asc";
     await client.query(QueryString, [Search + '%'], async function (err, response2){
+      
       var QueryString1 = 'select * from aquafeq.aquafwp as wp where wp.wpgrade like $1'
+      if (Search == '천룡왕') { 
+        var QueryString1 = "select * from aquafeq.aquafwp as wp where wp.wpgrade like $1 and wp.wpgrade like '%희귀%' "
+          }
+      
       await client.query( QueryString1, ['%' + Search + '%'], async function (err, data1){
         var QueryString1 = 'select * from aquafeq.aquafarm as arm  where arm.armgrade like $1'
+        if (Search == '천룡왕') { 
+          var QueryString1 = "select * from aquafeq.aquafarm as arm where arm.armgrade like $1 and arm.armgrade like  '%희귀%' "
+            }
+
         await client.query( QueryString1, ['%' + Search + '%'], async function (err, data2){
           var QueryString1 = 'select * from aquafeq.aquafacc  as acc where acc.accgrade like $1'
           if (Search.indexOf('사흑천') != '-1') {
             Search = '사흑천'
           }
+          if (Search == '천룡왕') { 
+            var QueryString1 = "select * from aquafeq.aquafacc as acc where acc.accgrade like $1 and acc.accgrade like '%희귀%' "
+              }
           await client.query( QueryString1, ['%' + Search + '%'], async function (err, data3) {
             var QueryString1 = 'select * from aquafeq.featsup as feat where feat.featgrade like $1'
             if (Search.indexOf('사흑천') != '-1') {
               Search = '사흑천'
             }
+    if (Search == '천룡왕') { 
+      var QueryString1 ="select * from aquafeq.featsup as feat where feat.featgrade like $1 and feat.featgrade like '%희귀%' "
+        }
             await client.query( QueryString1, ['%' + Search + '%'], async function(err, data4) {
               var QueryString1 = 'select * from aquafeq.aquafgem as gem where gem.collectname like $1'
+    if (Search == '천룡왕') { 
+      var QueryString1 = "select * from aquafeq.aquafgem as gem where  gem.collectname like $1 and  gem.collectname like'%희귀%' "
+        }
               await client.query( QueryString1, ['%' + Search + '%'], async function(err, data5) {
                 console.log(QueryString1);
 
