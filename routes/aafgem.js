@@ -97,9 +97,15 @@ router.post('/', async function(req,res,next) {
   console.log(QueryString);
 
   await client.query(QueryString, [Gemgrade, Collectname, Gemname, Gemobject, Gemeffect], async function (err, response){
-    console.log(QueryString);
+    if (err) {
+      console.log(err);
+    }
     var QueryString = "select gemid, gemname from aquafeq.aquafgem where gemname = Gemname ORDER BY gemid asc ;"
     await client.query(QueryString, async function (err, response){
+      
+        if (err) {
+          console.log(err);
+        }
       await response;
       res.render('aafgem', {
         title:'AAF 루엘',
