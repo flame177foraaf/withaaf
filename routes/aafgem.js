@@ -4,15 +4,7 @@ var $ = require('jquery');
 var url = require('url');
 var asyncify = require('express-asyncify');
 var router = asyncify(express.Router());
-const { Client } = require('pg');
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-  rejectUnauthorized: false
-},
-});
-
-client.connect();
+const client = require('../config/dbconfig.js');
 
 router.get('/', async function(req,res,next) {
   res.render('aafgem', {
@@ -22,11 +14,15 @@ router.get('/', async function(req,res,next) {
 
 router.get('/fixgem', async function(req,res,next) {
   var QueryString = "select gemname from aquafeq.aquafgem"
+
+
   await client.query(QueryString, async function (err, response){
     var Select_name = req.query.Seachname;
     var QueryString = "select * from aquafeq.aquafgem where gemname = $1"
     await client.query(QueryString, [Select_name], async function (err, response){
       await  response;
+
+
       if(typeof(response.rows[0]) !== "object") {
         res.render ('addgem', {
           title: '신규 루엘 ' + Select_name + ' 등록',
@@ -59,10 +55,15 @@ router.post('/fixgem', async function(req,res,next) {
       Gemeffect = Gemeffect.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var QueryString = "UPDATE aquafeq.aquafgem SET (gemgrade, collectname, gemobject, gemeffect, gemname) = ($1, $2, $3, $4, $5)  WHERE gemid = $6 returning *"
+
+
+
   await client.query(QueryString, [Gemgrade, Collectname, Gemobject, Gemeffect, Gemname, Eqid], async function (err, response){
     var QueryString = "select * from aquafeq.aquafgem where gemname = $1"
     await client.query (QueryString, [Gemname],  async function(err, response) {
       await response;
+
+
       console.log(response.rows[0])
       res.render('aafgem', {
         title : Gemname + ' 변경 완료',
@@ -96,17 +97,20 @@ router.post('/', async function(req,res,next) {
   var QueryString = "INSERT INTO aquafeq.aquafgem (gemgrade, collectname, gemname, gemobject, gemeffect) values ($1, $2, $3, $4, $5);";
   console.log(QueryString);
 
+
   await client.query(QueryString, [Gemgrade, Collectname, Gemname, Gemobject, Gemeffect], async function (err, response){
     if (err) {
       console.log(err);
     }
     var QueryString = "select gemid, gemname from aquafeq.aquafgem where gemname = Gemname ORDER BY gemid asc ;"
     await client.query(QueryString, async function (err, response){
-      
+
         if (err) {
           console.log(err);
         }
       await response;
+
+
       res.render('aafgem', {
         title:'AAF 루엘',
         data:response.rows
@@ -134,8 +138,11 @@ router.get('/:id', async function(req,res,next) {
     res.redirect('/')
   }
 
+
   await client.query(QueryString, ['%' + Search + '%', CurrentPage], async function (err, response){
     await response;
+
+
     if (err) {
       console.log(err)
       res.redirect('/')

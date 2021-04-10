@@ -3,16 +3,9 @@ var asyncify = require('express-asyncify');
 var router = asyncify(express.Router());
 var app = express();
 var url = require('url');
-const { Client } = require('pg');
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-  rejectUnauthorized: false
-},
-});
+const client = require('../config/dbconfig.js');
 
-client.connect();
 
 router.get('/', async function(req,res,next) {
   res.render('recipe', {

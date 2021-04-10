@@ -5,15 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var $ = require('jquery');
 
-const { Client } = require('pg');
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-  rejectUnauthorized: false
-},
-});
-
-client.connect();
+const client = require('../config/dbconfig.js');
 
 router.get('/', async function(req,res,next) {
   var Assembly = req.query.assembly;
