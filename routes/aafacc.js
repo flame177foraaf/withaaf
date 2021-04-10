@@ -4,15 +4,7 @@ var $ = require('jquery');
 var url = require('url');
 var asyncify = require('express-asyncify');
 var router = asyncify(express.Router());
-const { Client } = require('pg');
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-  rejectUnauthorized: false
-},
-});
-
-client.connect();
+const client = require('../config/dbconfig.js');
 
 router.get('/', async function(req,res,next) {
   res.render('aafacc', {
@@ -85,10 +77,15 @@ router.post('/', async function(req,res,next) {
       Accup = ""
     }
   var QueryString = "INSERT INTO aquafeq.aquafacc(accgrade, accname, acclimit, accsocket, accether, accstats, accproperty, accfeat, acccustom, accup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
+
+
+  await client.connect();
   await client.query(QueryString, [Accgrade, Accname, Acclimit, Accsocket, Accether, Accstats, Accproperty, Accfeat, Acccustom, Accup], async function (err, response){
     var QueryString = "select accid, accname from aquafeq.aquafacc where accname = Accname ORDER BY acclimit,accid asc ;";
     await client.query(QueryString, async function (err, response){
       await response;
+      await client.end();
+
       res.render('aafacc', {
         title:'AAF 장비',
         data:response.rows
@@ -98,11 +95,15 @@ router.post('/', async function(req,res,next) {
 });
 router.get('/fixacc', async function(req,res,next) {
   var QueryString = "select accname from aquafeq.aquafacc";
+  await client.connect();
+
   await client.query(QueryString, async function (err, response){
     var Select_name = req.query.Seachname;
     var QueryString = "select * from aquafeq.aquafacc where accname = $1";
     await client.query(QueryString, [Select_name], async function (err, response){
       await response;
+      await client.end();
+
       if(typeof(response.rows[0]) !== "object") {
         res.render ('addacc', {
           title: '신규 장비 ' + Select_name + ' 등록',
@@ -182,11 +183,16 @@ router.post('/fixacc', async function(req,res,next) {
 
 
   var QueryString = "UPDATE aquafeq.aquafacc SET (accgrade, acclimit, accsocket, accether, accstats, accproperty, accfeat, acccustom, accup, accname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE accid = $11 returning *";
+
+
+  await client.connect();
   await client.query(QueryString, [Accgrade, Acclimit, Accsocket, Accether, Accstats, Accproperty, Accfeat, Acccustom, Accup, Accname, Eqid], async function(err, response) {
 
     var QueryString = "select * from aquafeq.aquafacc where accname = $1";
     await client.query ( QueryString, [Accname],  async function (err, response) {
       await response;
+      await client.end();
+
       res.render('aafacc', {
         title : Accname + ' 변경 완료',
         data: response.rows
@@ -245,8 +251,12 @@ router.get('/:id', async function(req,res,next) {
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafacc WHERE "+ searchtype +" Ilike $1 ORDER BY acclimit,accid asc limit 10 offset (($2- 1)*10);";
 
   }
+
+
+  await client.connect();
   await client.query(QueryString, ['%' + Search + '%', CurrentPage], async function (err, response){
     await response;
+    await client.end();
 
     if (err) {
       res.redirect('/aafacc');

@@ -63,10 +63,12 @@ router.post('/', async function(req, res, next) {
   var QueryString = "INSERT INTO aquafeq.aquafarm(armgrade, Armname, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
 
 
+  await client.connect();
   client.query(QueryString, [Armgrade, Armname, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup], async function(err, response) {
     var QueryString = "select armid, Armname from aquafeq.aquafarm where armname = armname ORDER BY armlimit,armid asc ;"
     await client.query(QueryString, async function(err, response) {
       await response;
+      await client.end();
 
       res.render('aafarm', {
         title: 'AAF 장비',
@@ -77,11 +79,14 @@ router.post('/', async function(req, res, next) {
 });
 router.get('/fixarm', async function(req, res, next) {
   var QueryString = "select armname from aquafeq.aquafarm"
+  await client.connect();
   await client.query(QueryString, async function(err, response) {
     var Select_name = req.query.Seachname;
     var QueryString = "select * from aquafeq.aquafarm where armname = $1"
     await client.query(QueryString, [Select_name], async function(err, response) {
       await response;
+      await client.end();
+
       if (typeof(response.rows[0]) !== "object") {
         res.render('addarm', {
           title: '신규 장비 ' + Select_name + ' 등록',
@@ -133,13 +138,15 @@ router.post('/fixarm', async function(req, res, next) {
     Armup = Armup.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
 
-
+  await client.connect();
   var QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup, Armname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE armid = $11 returning *"
   client.query(QueryString, [Armgrade, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup, Armname, Eqid], async function(err, response) {
 
     var QueryString = "select * from aquafeq.aquafarm where armname = $1"
     await client.query(QueryString, [Armname], async function(err, response) {
       await response;
+      await client.end();
+
       res.render('aafarm', {
         title: Armname + ' 변경 완료',
         data: response.rows
@@ -198,7 +205,11 @@ router.get('/:id', async function(req, res, next) {
     var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafarm WHERE " + searchtype + " Ilike $1 ORDER BY armlimit,armid asc limit 10 offset (($2- 1)*10);"
 
   }
-    client.connect();
+
+
+  await client.connect();
+
+
   await  client.query(QueryString, ['%' + Search + '%', CurrentPage], async function(err, response) {
 
     await response;
@@ -233,7 +244,7 @@ router.get('/:id', async function(req, res, next) {
       EndPage = TotalPage;
     };
 
-        client.end();
+    await client.end();
     //console.log('엔드페이지'+ EndPage);
     //console.log(response.rows[0])
     res.render('aafarm', {
