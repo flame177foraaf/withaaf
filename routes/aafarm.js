@@ -5,7 +5,7 @@ var url = require('url');
 var asyncify = require('express-asyncify');
 var router = asyncify(express.Router());
 
-var client = require('./config/dbconfig');
+const client = require('./config/dbconfig.js');
 // var {
 //   Client
 // } = require('pg');
@@ -16,7 +16,6 @@ var client = require('./config/dbconfig');
 //   },
 // });
 
-client.connect();
 
 router.get('/', async function(req, res, next) {
   res.render('aafarm', {
