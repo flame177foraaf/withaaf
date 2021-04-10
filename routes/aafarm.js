@@ -5,7 +5,7 @@ var url = require('url');
 var asyncify = require('express-asyncify');
 var router = asyncify(express.Router());
 
-var client = require('/dbconfig');
+var client = require('./config/dbconfig');
 // var {
 //   Client
 // } = require('pg');
