@@ -1,7 +1,15 @@
-module.exports = {
-  const client = new Client({
+
+var {
+  Client
+} = require('pg');
+
+
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  ssl: true,
+  ssl: {
+    rejectUnauthorized: false
+  },
 });
 
-}
+
+module.exports = client;
