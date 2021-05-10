@@ -17,14 +17,14 @@ router.get('/', async function(req,res,next) {
 router.get('/fixfeat', async function(req,res,next) {
   var QueryString = "select featname from aquafeq.featsup"
 
-  client.connect();
+  // client.connect();
 
   await  client.query(QueryString, async function (err, response){
     var Select_name = req.query.Seachname;
     var QueryString = "select * from aquafeq.featsup where featname = $1"
     await client.query(QueryString, [Select_name], async function (err, response){
       await response;
-      client.end();
+      // client.end();
 
       if(typeof(response.rows[0]) !== "object") {
         res.render ('addfeat', {
@@ -62,13 +62,13 @@ router.post('/fixfeat', async function(req,res,next) {
       Featup = Featup.replace(/(?:\r\n|\r|\n)/g, '<br>');
     }
   var QueryString = "UPDATE aquafeq.featsup SET (featgrade, feat, reversefeat, featup, featname) = ($1, $2, $3, $4, $5)  WHERE featid = $6 returning *"
-  
+
 
   await client.query(QueryString, [Featgrade, Feat, Reversefeat, Featup, Featname, Eqid], async function (err, response){
     var QueryString = "select * from aquafeq.featsup"
     await client.query (QueryString, async function (err, response){
       await response;
-      
+
 
       res.render('featsup', {
         title : Featname + ' 변경 완료',
@@ -105,13 +105,13 @@ router.post('/add_feat', async function(req,res,next) {
     }
 
 
-  await  client.connect();
+  // await  client.connect();
   var QueryString = "INSERT INTO aquafeq.featsup(featgrade, featname, feat, reversefeat, featup) values ($1, $2, $3, $4, $5);"
   await client.query(QueryString, [Featgrade, Featname, Feat, Reversefeat, Featup], async function (err, response){
     var QueryString = "select featid, featname from aquafeq.featsup where featname = Featname ORDER BY featid asc ;"
     await client.query(QueryString, async function (err, response){
       await response;
-      
+
 
       res.render('featsup', {
         title:'AAF 피트서포터',
@@ -142,7 +142,7 @@ router.get('/:id', async function(req,res,next) {
       res.redirect('/')
     }
 
-    
+
     await client.query(QueryString, ['%' + Search + '%', CurrentPage],async function (err, response){
       await response;
       if(typeof(response.rows[0]) !== "object") {
@@ -164,7 +164,7 @@ router.get('/:id', async function(req,res,next) {
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       };
-      
+
       res.render('featsup', {
         title: 'AAF 장비',
         data: response.rows,
