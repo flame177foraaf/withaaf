@@ -4,7 +4,12 @@ var $ = require('jquery');
 var url = require('url');
 var asyncify = require('express-asyncify');
 var router = asyncify(express.Router());
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json({limit: '2mb'}));
+app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
+
+
 const client = require('../config/dbconfig.js');
 
 
