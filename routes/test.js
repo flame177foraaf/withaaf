@@ -19,7 +19,8 @@ router.get('/', async function(req, res, next) {
 
 //무기 추가하기
 router.post('/ing', async function(req, res, next) {
-  var testcontent = req.query.contentbox;
+  console.log('here');
+  var testcontent = req.body.contentbox;
   var content = '';
 
   function functionName(a) {
@@ -27,12 +28,13 @@ router.post('/ing', async function(req, res, next) {
 
     for (var i = 0; i < lines.length; i++) {
       if (lines[i].indexOf('<option value="">합성할 수집품 선택</option>') != -1) {
-        // console.log(i + '번 째 줄부터');
+        console.log(i + '번 째 줄부터');
         var startline = i;
       }
       if (lines[i].indexOf('</select> 을(/를)') != -1) {
-        // console.log(i + '번 째 줄까지 수집품 목록');
+        console.log(i + '번 째 줄까지 수집품 목록');
         var endline = i;
+
       }
     }
 
@@ -61,7 +63,7 @@ router.post('/ing', async function(req, res, next) {
     content = content.replace("[ 21", "\n 매우 희귀한 \n[ 21");
     content = content.replace("[ 24", "\n 전설적인 \n[ 24");
     content = content.replace("[ 27", "\n 유일6 \n[ 27");
-    //   // console.log(content)
+      console.log(content)
   }
 
   await functionName(testcontent);
