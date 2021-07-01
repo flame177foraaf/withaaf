@@ -16,14 +16,13 @@
     $(document).ready(function() {
 
       $('#try_btn').click(function() {
-        var data = {};
-        data.content = $("#contentbox").value,
-
           $.ajax({
             url: '/test/ing',
             type: 'post',
-            data: JSON.stringify(data),
-            contentType: "application/json; charset=utf-8"
+            data: {
+              text: $("#contentbox").value
+            },
+            // contentType: "application/json; charset=utf-8"
             success: function(data) {
               $('#contentbox').value(data);
             }
