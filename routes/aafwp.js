@@ -211,7 +211,7 @@ router.get('/:id', async function(req,res,next) {
       if(typeof(response.rows[0]) !== "object") {
         var TotalCount = 1;
       } else {
-        var TotalCount = response.rows[0].totalcount;
+        var TotalCount = response.length;
       }
       console.log('토탈 카운트 ' + TotalCount)
       console.log(CurrentPage)
