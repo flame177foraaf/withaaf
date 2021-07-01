@@ -18,7 +18,7 @@
       $('#try_btn').click(function() {
         $.ajax({
           url: '/test/ing',
-          type: 'post',
+          type: 'get',
           data: {
             content: $("#contentbox").text(),
           },
