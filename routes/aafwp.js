@@ -198,7 +198,7 @@ router.get('/:id', async function(req,res,next) {
 
     } else {
       // var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
-      var QueryString = "SELECT DISTINCT wpname, * FROM (select *, count(*) over() as totalcount from aquafeq.aquafwp ) AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1.wpname Ilike '%%' ORDER BY wplimit,wpid asc limit 10 offset ((1- 1)*10);";
+      var QueryString = "SELECT DISTINCT wpname, * FROM (select *, count(*) over() as totalcount from aquafeq.aquafwp ) AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
 
     }
 
@@ -213,9 +213,6 @@ router.get('/:id', async function(req,res,next) {
       } else {
         var TotalCount = response.rows[0].totalcount;
       }
-      console.log(response.length)
-      console.log(response.rows.length)
-      console.log(response.affectedRows)
       console.log('토탈 카운트 ' + TotalCount)
       console.log(CurrentPage)
       console.log(typeof(CurrentPage))
