@@ -18,9 +18,9 @@ router.get('/', async function(req, res, next) {
 });
 
 //무기 추가하기
-router.post('/ing', async function(req, res, next) {
+router.get('/ing', async function(req, res, next) {
   console.log('here');
-  var testcontent = req.body.contentbox;
+  var testcontent = req.query.contentbox;
   console.log(testcontent.length);
   var content = '';
 
