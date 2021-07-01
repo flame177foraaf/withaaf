@@ -4,8 +4,9 @@ var $ = require('jquery');
 var url = require('url');
 var asyncify = require('express-asyncify');
 var router = asyncify(express.Router());
-
-
+var bodyParser = require('body-parser')
+var jsonParser = bodyParser.json()
+app.use(bodyParser.json());
 const client = require('../config/dbconfig.js');
 
 
@@ -17,7 +18,7 @@ router.get('/', async function(req, res, next) {
   });
 });
 
-router.post('/ing', async function(req, res, next) {
+router.post('/ing', jsonParser, async function(req, res, next) {
   console.log('here');
   var testcontent = req.body.content;
   console.log(testcontent)

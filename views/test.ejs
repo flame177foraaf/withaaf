@@ -16,16 +16,18 @@
     $(document).ready(function() {
 
       $('#try_btn').click(function() {
-        $.ajax({
-          url: '/test/ing',
-          type: 'post',
-          data: {
-            content: $("#contentbox").value,
-          },
-          success: function(data) {
-            $('#contentbox').value(data);
-          }
-        });
+        var data = {};
+        data.content = $("#contentbox").value,
+
+          $.ajax({
+            url: '/test/ing',
+            type: 'post',
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8"
+            success: function(data) {
+              $('#contentbox').value(data);
+            }
+          });
       });
     });
   </script>
@@ -36,16 +38,16 @@
   <div class="">
     <form class="" action="/aafwp" method="post">
 
-    <div class="" style="text-align: center; " >
-        <textarea  id="contentbox"rows="15" cols="80"></textarea>
+      <div class="" style="text-align: center; ">
+        <textarea id="contentbox" rows="15" cols="80"></textarea>
 
 
-    </div>
-    <div class="" style="text-align: center; ">
-      <button type="button" name="button" style="" id="try_btn"> 변환!</button>
+      </div>
+      <div class="" style="text-align: center; ">
+        <button type="button" name="button" style="" id="try_btn"> 변환!</button>
 
-    </div>
-  </form>
+      </div>
+    </form>
 
   </div>
 </body>
