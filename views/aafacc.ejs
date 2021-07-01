@@ -18,6 +18,405 @@
       }
     </script>
     <script  src="https://code.jquery.com/jquery-3.5.1.min.js">    </script>
+
+    <script type="text/javascript">
+      var rnb = new Array();
+      var cgtype = new Array(new Array(), new Array());
+
+      cgtype[1] = Array("", "#FFFFFF", "#D0E2FD", "#ADAFF5", "#6C73F4", "#0F0FCE", "#1B1B76", "#0F0FCE", "#6C73F4", "#ADAFF5", "#D0E2FD");
+      cgtype[2] = Array("", "#FFFFFF", "#FFEEEE", "#FFC8C9", "#FF6F72", "#FF0006", "#910003", "#FF0006", "#FF6F72", "#FFC8C9", "#FFEEEE");
+      cgtype[3] = Array("", "#FFFFFF", "#F0FFF1", "#8CFB8C", "#32F341", "#1ADE0A", "#0A8406", "#1ADE0A", "#32F341", "#8CFB8C", "#F0FFF1");
+      cgtype[4] = Array("", "#FFFFFF", "#FBFACE", "#F0F76F", "#E2ED1D", "#C4C813", "#8D910B", "#C4C813", "#E2ED1D", "#F0F76F", "#FBFACE");
+      cgtype[5] = Array("", "#FFFFFF", "#EBDDF2", "#CFAEDD", "#A771C1", "#7D50A3", "#4F305C", "#7D50A3", "#A771C1", "#CFAEDD", "#EBDDF2");
+      cgtype[6] = Array("", "#FFFFFF", "#D2D2D2", "#959595", "#575757", "#353535", "#000000", "#353535", "#575757", "#959595", "#D2D2D2");
+      cgtype[7] = Array("", "#FFFF00", "#FF9966", "#FF00FF", "#9933FF", "#6666CC", "#66FF99", "#0099FF", "#006666", "#993366", "#CC0066");
+      cgtype[8] = Array("", "#FFFFFF", "#EECC96", "#E6B362", "#C68622", "#C58013", "#825B1D", "#C58013", "#C68622", "#E6B362", "#EECC96");
+
+      //document.body.innerHTML = document.body.innerHTML.replace(/fixglowStart/g, 'fixglowStart2');
+      //alert('loaded');
+      function repeatShadow(reBuffer, times) {
+        var reOutput = '';
+        for (var rIndex = 0; rIndex < times; rIndex++) {
+          reOutput += reBuffer;
+          reOutput += ', ';
+        }
+        reOutput = reOutput.slice(0, reOutput.length - 2);
+        return reOutput;
+      }
+
+      function doBlink(rn, idx) {
+        var r = rn.style;
+        if (rnb[idx] == 8) rnb[idx] = 1;
+        if (rnb[idx] == 1) r.color = "#FF0000";
+        else if (rnb[idx] == 2) r.color = "#FF9900";
+        else if (rnb[idx] == 3) r.color = "#FFFF00";
+        else if (rnb[idx] == 4) r.color = "#009900";
+        else if (rnb[idx] == 5) r.color = "#0000FF";
+        else if (rnb[idx] == 6) r.color = "#000066";
+        else r.color = "#9900CC";
+        rnb[idx]++;
+      }
+
+      function doGrad(rn, idx, gtype) {
+        var r = rn.style;
+        if (rnb[idx] == 11) rnb[idx] = 1;
+        if (rnb[idx] == 1) r.color = cgtype[gtype][1];
+        else if (rnb[idx] == 2) r.color = cgtype[gtype][2];
+        else if (rnb[idx] == 3) r.color = cgtype[gtype][3];
+        else if (rnb[idx] == 4) r.color = cgtype[gtype][4];
+        else if (rnb[idx] == 5) r.color = cgtype[gtype][5];
+        else if (rnb[idx] == 6) r.color = cgtype[gtype][6];
+        else if (rnb[idx] == 7) r.color = cgtype[gtype][7];
+        else if (rnb[idx] == 8) r.color = cgtype[gtype][8];
+        else if (rnb[idx] == 9) r.color = cgtype[gtype][9];
+        else r.color = cgtype[gtype][10];
+        rnb[idx]++;
+      }
+
+      function startCng(rn, idx, intv) {
+        rnb[idx] = 1;
+        setInterval("doBlink(" + rn + "," + idx + ")", intv);
+      }
+
+      function startGrad(rn, idx, intv, gtype) {
+        rnb[idx] = 1;
+        setInterval("doGrad(" + rn + "," + idx + "," + gtype + ")", intv);
+      }
+
+      //range of glowing
+      var glow_from = 4;
+      var glow_to = 8;
+      //NO MORE EDITING!!!
+      var glow_i = glow_to;
+      var glow_j = 0;
+      //speed of pulsing
+      var glow_delay = 120;
+
+      var glow_tarray = new Array();
+      var glow_tfcolor = new Array();
+      var rainbow_array = new Array();
+
+
+
+      function setglowStart(tform, idx, fcolor) {
+        glow_tarray[idx] = tform;
+        glow_tfcolor[idx] = fcolor;
+        textPulseDown(idx);
+      }
+
+
+      function fixglowNoise(idx, glowval) {
+        var textShadowNoise = Math.floor((Math.random()) * 10) % 2;
+        var textShadowNoiseString = repeatShadow("0px 0px " + (glowval + 2) + "px " + glow_tfcolor[idx], glowval + textShadowNoise);
+        glow_tarray[idx].style.textShadow = textShadowNoiseString;
+        theTimeout = setTimeout("fixglowNoise(" + idx + ", " + glowval + ")", 250);
+      }
+
+      function fixglowStart(tform, idx, glowval, fcolor) {
+        //alert('start fixglow');
+        glow_tarray[idx] = tform;
+        glow_tfcolor[idx] = fcolor;
+        //glow_tarray[idx].style.filter = "Glow(Color=" + glow_tfcolor[idx] + ", Strength="+glowval+")";
+        //var textShadowNoise = Math.floor((Math.random() - 0.5) * 10) % 5;
+        var textShadow_add3 = repeatShadow("0px 0px " + (glowval + 1) + "px " + glow_tfcolor[idx], glowval + 2);
+        glow_tarray[idx].style.textShadow = textShadow_add3;
+        //alert("fixglowStart("+tform+", "+idx+", "+glowval+", "+fcolor+")");
+        //fixglowNoise(idx,glowval);
+      }
+
+      function textPulseUp(idx) {
+        /*
+        if (!document.all)
+          return
+        */
+        if (glow_i < glow_to) {
+          //glow_tarray[idx].style.filter = "Glow(Color=" + glow_tfcolor[idx] + ", Strength=" + glow_i + ")";
+          glow_tarray[idx].style.textShadow = repeatShadow("0px 0px " + (glow_i + 2) + "px " + glow_tfcolor[idx], glow_i + 3);
+          glow_i++;
+          theTimeout = setTimeout("textPulseUp(" + idx + ")", glow_delay);
+          return 0;
+        }
+
+        if (glow_i = glow_to) {
+          theTimeout = setTimeout("textPulseDown(" + idx + ")", glow_delay);
+          return 0;
+        }
+      }
+
+      function textPulseDown(idx) {
+        /*
+        if (!document.all)
+          return
+        */
+        if (glow_i > glow_from) {
+          //glow_tarray[idx].style.filter = "Glow(Color=" + glow_tfcolor[idx] + ", Strength=" + glow_i + ")";
+          glow_tarray[idx].style.textShadow = repeatShadow("0px 0px " + (glow_i + 2) + "px " + glow_tfcolor[idx], glow_i + 3);
+          glow_i--;
+          theTimeout = setTimeout("textPulseDown(" + idx + ")", glow_delay);
+          return 0;
+        }
+
+        if (glow_i = glow_from) {
+          theTimeout = setTimeout("textPulseUp(" + idx + ")", glow_delay);
+          return 0;
+        }
+      }
+
+      function textBlur(idx, btype, dirr) {
+        /*
+        if (!document.all)
+          return
+        */
+        if (btype == 1) {
+          if (dirr == 1)
+            glow_tarray[idx].style.textShadow = "3px 3px " + '4' + "px " + glow_tfcolor[idx];
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:45,strength:4)";
+          else if (dirr == 2)
+            glow_tarray[idx].style.textShadow = "3px -3px " + '4' + "px " + glow_tfcolor[idx];
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:135,strength:4)";
+          else if (dirr == 3)
+            glow_tarray[idx].style.textShadow = "-3px -3px " + '4' + "px " + glow_tfcolor[idx];
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:225,strength:4)";
+          else if (dirr == 4)
+            glow_tarray[idx].style.textShadow = "-3px 3px " + '4' + "px " + glow_tfcolor[idx];
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:315,strength:4)";
+        } else if (btype == 2) {
+          if (dirr == 1)
+            glow_tarray[idx].style.textShadow = "3px 0px " + '4' + "px " + glow_tfcolor[idx];
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:90,strength:4)";
+          else if (dirr == 2)
+            glow_tarray[idx].style.textShadow = "0px -3px " + '4' + "px " + glow_tfcolor[idx];
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:180,strength:4)";
+          else if (dirr == 3)
+            glow_tarray[idx].style.textShadow = "-3px 0px " + '4' + "px " + glow_tfcolor[idx];
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:270,strength:4)";
+          else if (dirr == 4)
+            glow_tarray[idx].style.textShadow = "0px 3px " + '4' + "px " + glow_tfcolor[idx];
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:360,strength:4)";
+        } else if (btype == 3) {
+          if (dirr == 1)
+            glow_tarray[idx].style.textShadow = repeatShadow("2px 2px " + '4' + "px " + glow_tfcolor[idx], 4);
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:135,strength:4)";
+          else if (dirr == 2)
+            glow_tarray[idx].style.textShadow = repeatShadow("3px 3px " + '6' + "px " + glow_tfcolor[idx], 3);
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:135,strength:6)";
+          else if (dirr == 3)
+            glow_tarray[idx].style.textShadow = repeatShadow("4px 4px " + '8' + "px " + glow_tfcolor[idx], 3);
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:135,strength:8)";
+          else if (dirr == 4)
+            glow_tarray[idx].style.textShadow = repeatShadow("5px 5px " + '10' + "px " + glow_tfcolor[idx], 2);
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:135,strength:10)";
+        } else if (btype == 4) {
+          if (dirr == 1)
+            glow_tarray[idx].style.textShadow = repeatShadow("3px 3px " + '4' + "px " + glow_tfcolor[idx], 4);
+          //glow_tarray[idx].style.filter = "Blur(add:1,direction:45,strength:4)";
+          else if (dirr == 2)
+            glow_tarray[idx].style.textShadow = repeatShadow("3px -3px " + '5' + "px " + glow_tfcolor[idx], 3);
+          //glow_tarray[idx].style.filter = "Blur(add:4,direction:135,strength:5)";
+          else if (dirr == 3)
+            glow_tarray[idx].style.textShadow = repeatShadow("-3px -3px " + '6' + "px " + glow_tfcolor[idx], 2);
+          //glow_tarray[idx].style.filter = "Blur(add:7,direction:225,strength:6)";
+          else if (dirr == 4)
+            glow_tarray[idx].style.textShadow = repeatShadow("-3px 3px " + '7' + "px " + glow_tfcolor[idx], 1);
+          //glow_tarray[idx].style.filter = "Blur(add:10,direction:315,strength:7)";
+        } else {
+          if (dirr == 1)
+            glow_tarray[idx].style.textShadow = repeatShadow("2px 0px " + '4' + "px " + glow_tfcolor[idx], 4);
+          //glow_tarray[idx].style.filter = "Blur(add:0,direction:90,strength:4)";
+          else if (dirr == 2)
+            glow_tarray[idx].style.textShadow = repeatShadow("4px 0px " + '4' + "px " + glow_tfcolor[idx], 3);
+          //glow_tarray[idx].style.filter = "Blur(add:3,direction:90,strength:10)";
+          else if (dirr == 3)
+            glow_tarray[idx].style.textShadow = repeatShadow("6px 0px " + '4' + "px " + glow_tfcolor[idx], 2);
+          //glow_tarray[idx].style.filter = "Blur(add:5,direction:90,strength:20)";
+          else if (dirr == 4)
+            glow_tarray[idx].style.textShadow = repeatShadow("8px 0px " + '4' + "px " + glow_tfcolor[idx], 1);
+          //glow_tarray[idx].style.filter = "Blur(add:7,direction:90,strength:30)";
+        }
+
+        if (dirr == 4)
+          dirr = 1
+        else
+          dirr++;
+
+        theTimeout = setTimeout("textBlur(" + idx + "," + btype + "," + dirr + ")", glow_delay);
+
+      }
+
+      function setblurStart(tform, idx, btype, fcolor) {
+        glow_tarray[idx] = tform;
+        glow_tfcolor[idx] = fcolor;
+        glow_tarray[idx].style.fontWeight = 700;
+        tform.style.color = 'white';
+        textBlur(idx, btype, 1);
+      }
+
+      function createHexArray(n) {
+        this.length = n;
+        for (var i = 1; i <= n; i++)
+          this[i] = i - 1;
+
+        this[11] = "A"; //��
+        this[12] = "B"; //��
+        this[13] = "C"; //�� ������ ���� �� ���� �κ�
+        this[14] = "D"; //�� �� ���� ��.. ^^;;
+        this[15] = "E"; //��
+        this[16] = "F"; //��
+        return this;
+      }
+      hx = new createHexArray(16);
+
+      function convertToHex(x) {
+        if (x < 17) x = 16;
+        var high = x / 16;
+        var s = high + "";
+        s = s.substring(0, 2);
+        high = parseInt(s, 10);
+        var left = hx[high + 1];
+        var low = x - high * 16;
+        if (low < 1) low = 1;
+        s = low + "";
+        s = s.substring(0, 2);
+        low = parseInt(s, 10);
+        var right = hx[low + 1];
+        var string = left + "" + right;
+        return string;
+      }
+
+      function makeRainbow(text) {
+        text = text.substring(0, text.length);
+        color_d1 = 255;
+        mul = color_d1 / text.length;
+        for (var i = 0; i < text.length; i++) {
+          color_d1 = 255 * Math.sin(i / (text.length / 3));
+          color_h1 = convertToHex(color_d1);
+          color_d2 = mul * i;
+          color_h2 = convertToHex(color_d2);
+
+          k = text.length;
+          j = k - i;
+          if (j < 0) j = 0;
+          color_d3 = mul * j;
+          color_h3 = convertToHex(color_d3);
+
+          document.write("<FONT COLOR=\"#" + color_h3 + color_h1 + color_h2 + "\">" + text.substring(i, i + 1) + "</FONT>");
+        }
+      }
+
+      function setrainBow(tform, idx) {
+        rainbow_array[idx] = tform;
+        makeRainbow_tgt(idx);
+      }
+
+
+      function makeRainbow_tgt(idx) {
+        text = rainbow_array[idx].innerText.substring(0, rainbow_array[idx].innerText.length);
+
+        color_d1 = 255;
+        mul = color_d1 / text.length;
+        var rst_txt = "";
+        for (var i = 0; i < text.length; i++) {
+          color_d1 = 255 * Math.sin(i / (text.length / 3));
+          color_h1 = convertToHex(color_d1);
+          color_d2 = mul * i;
+          color_h2 = convertToHex(color_d2);
+
+          k = text.length;
+          j = k - i;
+          if (j < 0) j = 0;
+          color_d3 = mul * j;
+          color_h3 = convertToHex(color_d3);
+
+          rst_txt += "<FONT COLOR=\"#" + color_h3 + color_h1 + color_h2 + "\">" + text.substring(i, i + 1) + "</FONT>";
+        }
+
+        rainbow_array[idx].innerHTML = rst_txt;
+      }
+
+      var diztarray = new Array();
+
+      function setDiztext(tform, idx, mtype, leftColor, rightColor, speed) {
+        diztarray[idx] = tform;
+        makeDiztext(idx, mtype, 1, 1, 1, 1, -1, -1, 1, leftColor, rightColor, speed);
+      }
+
+      function makeDiztext(idx, mtype, curX, curY, offX, offY, offX2, offY2, mode, leftColor, rightColor, speed) {
+
+        if (mode == 1) {
+
+          curX -= 1;
+          if (mtype == 1) {
+            curX += 2;
+            curY += 1;
+          }
+
+          if (mtype == 1 || mtype == 4)
+            diztarray[idx].style.textShadow = repeatShadow(curX + "px " + curY + "px " + leftColor, 3);
+          //diztarray[idx].style.filter = "dropShadow(color="+leftColor+", offX=" + curX + ", offY=" + curY + ", positive=1)";
+          else if (mtype == 2)
+            diztarray[idx].style.textShadow = repeatShadow(curX + "px " + "1" + "px " + leftColor, 3);
+          //diztarray[idx].style.filter = "dropShadow(color="+leftColor+", offX=" + curX + ", offY=1, positive=1)";
+          else if (mtype == 3)
+            diztarray[idx].style.textShadow = repeatShadow("1" + "px " + curX + "px " + leftColor, 3);
+          //diztarray[idx].style.filter = "dropShadow(color="+leftColor+", offX=1, offY=" + curX + ", positive=1)";
+
+          if (curX < offX2)
+            mode = 2;
+
+          if (mtype > 1)
+            setTimeout("makeDiztext(" + idx + "," + mtype + "," + curX + "," + curY + "," + offX + "," + offY + "," + offX2 + "," + offY2 + "," + mode + ",'" + rightColor + "','" + leftColor + "'," + speed + ")", speed);
+
+        } else if (mode == 2) {
+
+          curX += 1;
+
+          if (mtype == 1 || mtype == 4)
+            diztarray[idx].style.textShadow = repeatShadow(curX + "px " + curX + "px " + rightColor, 3);
+          //diztarray[idx].style.filter = "dropShadow(color="+rightColor+", offX=" + curX + ", offY=" + curX + ", positive=1)";
+          else if (mtype == 2)
+            diztarray[idx].style.textShadow = repeatShadow(curX + "px " + "1" + "px " + rightColor, 3);
+          //diztarray[idx].style.filter = "dropShadow(color="+rightColor+", offX=" + curX + ", offY=1, positive=1)";
+          else if (mtype == 3)
+            diztarray[idx].style.textShadow = repeatShadow("1" + "px " + curX + "px " + rightColor, 3);
+          //diztarray[idx].style.filter = "dropShadow(color="+rightColor+", offX=1, offY=" + curX + ", positive=1)";
+
+          if (curX > offX)
+            mode = 1;
+
+          if (mtype > 1)
+            setTimeout("makeDiztext(" + idx + "," + mtype + "," + curX + "," + curY + "," + offX + "," + offY + "," + offX2 + "," + offY2 + "," + mode + ",'" + rightColor + "','" + leftColor + "'," + speed + ")", speed);
+
+        }
+
+      }
+
+      var alparray = new Array();
+
+      function setAniatext(tform, idx, shadow, speed) {
+        alparray[idx] = tform;
+        makeAnialpha(idx, 50, 1, shadow, speed);
+      }
+
+      function makeAnialpha(idx, nalpha, mode, shadow, speed) {
+
+        if (nalpha >= 20 && mode == 1) {
+          nalpha -= 2;
+          if (nalpha == 20)
+            mode = 2;
+        } else if (nalpha <= 140 && mode == 2) {
+          nalpha += 2;
+          if (nalpha == 140)
+            mode = 1;
+        }
+
+        //alparray[idx].style.filter = "Alpha(Opacity="+nalpha+", FinishOpacity=0, Style=1, StartX=100, StartY=100, FinishX=300, FinishY=150) DropShadow(Color="+shadow+", OffX=2, OffY=2, Positive=1)";
+        if (alparray[idx] != undefined) {
+          alparray[idx].style.opacity = nalpha * 0.01;
+          alparray[idx].style.textShadow = repeatShadow("2" + "px " + "2" + "px " + shadow, 3);
+        }
+        setTimeout("makeAnialpha(" + idx + "," + nalpha + "," + mode + ",'" + shadow + "'," + speed + ")", speed);
+      }
+    </script>
     <script type="text/javascript">
       $(document).on("click","input[name=findadd]",function(){
 
@@ -73,205 +472,215 @@
 
     </script>
   </head>
-  <div class="title_div" >
-    <div class="" >
-      <h1><%= title %></h1>
+  <body>
+    <div class="main">
 
-    </div>
-    <div class="" id="" >
-      <form action="/aafacc/1" accept-charset="utf-8" method="get">
-        <div class="" id="seach_form_id" name="seach_form_id">
+      <div class="title_div" >
+        <h1><%= title %></h1>
 
-          <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">
-          <select name="searchtype">
-              <option value="accname">이름</option>
-              <option value="accproperty">업그레이드</option>
-              <option value="accfeat">피트</option>
-              <option value="acccustom">커스텀</option>
-              <option value="accgrade">등급 / 강적</option>
+      </div>
+      <div class="" id="" >
+        <form action="/aafacc/1" accept-charset="utf-8" method="get">
+          <div class="" id="seach_form_id" name="seach_form_id">
 
-          </select>
-          <input type="submit" class="btn" value="찾기" />
-          <input type="button" name="findadd" class="btnAdd" value="조건 추가">
+            <input type="text" placeholder="모든 항목" name="searchtext" style="width:200px">
+            <select name="searchtype">
+                <option value="accname">이름</option>
+                <option value="accproperty">업그레이드</option>
+                <option value="accfeat">피트</option>
+                <option value="acccustom">커스텀</option>
+                <option value="accgrade">등급 / 강적</option>
 
-        </div>
-        <div class="" id="" name="seach_form_id2">
+            </select>
+            <input type="submit" class="btn" value="찾기" />
+            <input type="button" name="findadd" class="btnAdd" value="조건 추가">
 
-        </div>
+          </div>
+          <div class="" id="" name="seach_form_id2">
 
-      </form>
+          </div>
 
-    </div>
-    <div class="">
-    <p style="text-align : right; font-style: oblique; "> ※ 자료 수집 및 정리 - Xeno ※</p>
-      <table class="eqtable" style="width:100%;">
+        </form>
 
-        <colgroup>
-          <col width="100">
-          <col width="200">
-          <col width="50">
-          <col width="50">
+      </div>
+      <div class="">
+      <p style="text-align : right; font-style: oblique; "> ※ 자료 수집 및 정리 - Xeno ※</p>
+        <table class="eqtable" style="width:100%;">
 
-          <col width="100">
-          <col width="200">
-          <col width="250">
-          <col width="250">
-          <col width="600">
-          <col width="200">
+          <colgroup>
+            <col width="100">
+            <col width="200">
+            <col width="50">
+            <col width="50">
 
-        </colgroup>
-        <thead>
+            <col width="100">
+            <col width="200">
+            <col width="250">
+            <col width="250">
+            <col width="600">
+            <col width="200">
 
-          <tr>
-            <th>등급</th>
-            <th>이름</th>
-            <th>제한</th>
-            <th>소켓</th>
-            <th>에테르</th>
-            <th>방어력</th>
-            <th>속성 방어</th>
-            <th>피트</th>
-            <th>커스텀</th>
-            <th></th>
-          </tr>
-        </thead>
+          </colgroup>
+          <thead>
 
-        <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
-        <tbody >
-          <% if(typeof(CurrentPage) === 'undefined'){ %>
             <tr>
-              <td colspan="10"; style= "text-align:center;"> 검색이 필요합니다.</td>
+              <th>등급</th>
+              <th>이름</th>
+              <th>제한</th>
+              <th>소켓</th>
+              <th>에테르</th>
+              <th>방어력</th>
+              <th>속성 방어</th>
+              <th>피트</th>
+              <th>커스텀</th>
+              <th></th>
             </tr>
-          <% } else { %>
-            <% data.forEach(function(item) { %>
-            <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
-              <td><%- item.accgrade %></td>
-              <td><%- item.accname %></td>
-              <td style='text-align: center'><%- item.acclimit %></td>
-              <td style='text-align: center'><%- item.accsocket %></td>
-              <td style='text-align: center'><%- item.accether %></td>
-              <td style='text-align: center'><%- item.accstats %></td>
-              <td style='text-align: center'><%- item.accproperty %></td>
+          </thead>
 
-              <% var text = item.accfeat.replace(/\s/g," ") %>
-              <% var feattext = text.split('<br>') %>
-              <% var featlink1 = text.split(" ("); %>
-              <% var featlink2 = [] %>
-              <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
-
-              <% for (var i = 0; i < featlink1.length; i++) { %>
-                <% featlink2.push( featlink1[i].indexOf(">")); %>
-                <% if (featlink2[i] != -1) { %>
-                <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
-                <% } %>
-              <% } %>
-              <td><%- featlink3 %></td>
-
-              <% var text = item.acccustom.replace(/\s/g," ") %>
-              <% var customtext = text.split('<br>') %>
-              <% var customlink1 = text.split(" ("); %>
-              <% var customlink2 = [customlink1[0].indexOf(">")] %>
-                <% if (customtext[0].indexOf("(") != -1) { %>
-                  <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
-                <% } else { %>
-                  <% var customlink3 = customtext[0] %>
-                <% } %>
-
-                <% for (var i = 1; i < customtext.length; i++) { %>
-                  <% if (customtext[i].indexOf("(") != -1) { %>
-                    <% customlink2.push( customlink1[i].indexOf(">")); %>
-                    <% if (customlink2[i] != -1) { %>
-                      <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
-                    <% } %>
-                  <% } else { %>
-                    <% customlink3 = customlink3 + '<br>' + customtext[i] %>
-                  <% } %>
-                <% } %>
-
-
-              <td><%- customlink3 %></td>
-
-              <td style="white-space: normal; text-align:center">
-                <div class="" style="">
-                  <div class="" style="display: inline-block">
-                    <form accept-charset="UTF-8" action="/aafacc/fixacc" method="get ">
-                      <input type=text list=browsers style="display:none" checked value="<%= item.accname %>" name="Seachname">
-
-                      <input style="width:60px; " type="submit" value="수정" />
-                    </form>
-                  </div>
-                  <div class="" style="display: inline-block">
-
-                    <form accept-charset="UTF-8" action="/Assemblyacc" method="get">
-                      <input type=text list=browsers style="display:none" checked value="<%= item.accname %>" name="assembly">
-                      <input style="width:60px " type="submit" value="재조립" />
-                    </form>
-                  </div>
-                  </div>
-                </td>
-            </tr>
-
-            <tr id="" class="upgrademeterial" style="display:none">
-              <td colspan="10" style="text-align:center"> <%- item.accup %> </td>
-            </tr>
-            <% }); %>
-          <% } %>
-          <div class="" id="PageUl">
+          <%# tbody에 잇는 스타일은 '\n ' 줄바꿈을 표현함 %>
+          <tbody >
             <% if(typeof(CurrentPage) === 'undefined'){ %>
               <tr>
-                <div class="" id="pagelist" >
-                  <td colspan="10" style= "text-align:center; font-size:24px">
-                    검색이 필요합니다.
-                  </td>
-                </div>
+                <td colspan="10"; style= "text-align:center;"> 검색이 필요합니다.</td>
               </tr>
             <% } else { %>
-              <tr>
-                <div class="" id="pagelist" >
-                  <td colspan="10" style= "text-align:center; font-size:24px">
-                    <% function FuncPageurl(pagenumber) { %>
-                      <% var pageurl = "/aafacc/" + pagenumber + "?searchtext=" + Search + "&searchtype=" +  searchtype %>
-                      <% if (Searchcount !== 'undefined') { %>
-                        <% for (var i = 0; i < Searchcount; i++) { %>
-                          <% pageurl = pageurl + "&searchtext2=" + Search22[i]  + "&searchtype2=" +  searchtype22[i] %>
+              <% data.forEach(function(item) { %>
+              <tr style="white-space: pre-line; font-size:12px;" class="tabletr">
+                <td><%- item.accgrade %></td>
+
+                <% if (item.effect == null || item.effect == undefined || item.effect == "undefined") { %>
+
+                <td><%- item.accname %></td>
+
+                <% } else { %>
+                <td><%- item.effect.replace('span>', 'td>') %></td>
+                <% } %>
+                <td style='text-align: center'><%- item.acclimit %></td>
+                <td style='text-align: center'><%- item.accsocket %></td>
+                <td style='text-align: center'><%- item.accether %></td>
+                <td style='text-align: center'><%- item.accstats %></td>
+                <td style='text-align: center'><%- item.accproperty %></td>
+
+                <% var text = item.accfeat.replace(/\s/g," ") %>
+                <% var feattext = text.split('<br>') %>
+                <% var featlink1 = text.split(" ("); %>
+                <% var featlink2 = [] %>
+                <% var featlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + featlink1[0] + '(피트)"/' + 'target="_blank"' + '>' + feattext[0] + '</a>'; %>
+
+                <% for (var i = 0; i < featlink1.length; i++) { %>
+                  <% featlink2.push( featlink1[i].indexOf(">")); %>
+                  <% if (featlink2[i] != -1) { %>
+                  <% featlink3 = featlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+  featlink1[i].substring(featlink2[i]+1,featlink2[i].length)+'(피트)"/' + 'target="_blank"' + '>' + feattext[i] + '</a>') %>
+                  <% } %>
+                <% } %>
+                <td><%- featlink3 %></td>
+
+                <% var text = item.acccustom.replace(/\s/g," ") %>
+                <% var customtext = text.split('<br>') %>
+                <% var customlink1 = text.split(" ("); %>
+                <% var customlink2 = [customlink1[0].indexOf(">")] %>
+                  <% if (customtext[0].indexOf("(") != -1) { %>
+                    <% var customlink3 = '<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/' + customlink1[0] + '(커스텀)"/' + 'target="_blank"' + '>' + customtext[0] + '</a>'; %>
+                  <% } else { %>
+                    <% var customlink3 = customtext[0] %>
+                  <% } %>
+
+                  <% for (var i = 1; i < customtext.length; i++) { %>
+                    <% if (customtext[i].indexOf("(") != -1) { %>
+                      <% customlink2.push( customlink1[i].indexOf(">")); %>
+                      <% if (customlink2[i] != -1) { %>
+                        <% customlink3 = customlink3 + '<br>' + ('<a style="text-decoration: none; color: black;" href="http://aafwiki.com/wiki/'+   customlink1[i].substring(customlink2[i]+1,customlink2[i].length)+'(커스텀)"/' + 'target="_blank"' + '>' + customtext[i] + '</a>') %>
+                      <% } %>
+                    <% } else { %>
+                      <% customlink3 = customlink3 + '<br>' + customtext[i] %>
+                    <% } %>
+                  <% } %>
+
+
+                <td><%- customlink3 %></td>
+
+                <td style="white-space: normal; text-align:center">
+                  <div class="" style="">
+                    <div class="" style="display: inline-block">
+                      <form accept-charset="UTF-8" action="/aafacc/fixacc" method="get ">
+                        <input type=text list=browsers style="display:none" checked value="<%= item.accname %>" name="Seachname">
+
+                        <input style="width:60px; " type="submit" value="수정" />
+                      </form>
+                    </div>
+                    <div class="" style="display: inline-block">
+
+                      <form accept-charset="UTF-8" action="/Assemblyacc" method="get">
+                        <input type=text list=browsers style="display:none" checked value="<%= item.accname %>" name="assembly">
+                        <input style="width:60px " type="submit" value="재조립" />
+                      </form>
+                    </div>
+                    </div>
+                  </td>
+              </tr>
+
+              <tr id="" class="upgrademeterial" style="display:none">
+                <td colspan="10" style="text-align:center"> <%- item.accup %> </td>
+              </tr>
+              <% }); %>
+            <% } %>
+            <div class="" id="PageUl">
+              <% if(typeof(CurrentPage) === 'undefined'){ %>
+                <tr>
+                  <div class="" id="pagelist" >
+                    <td colspan="10" style= "text-align:center; font-size:24px">
+                      검색이 필요합니다.
+                    </td>
+                  </div>
+                </tr>
+              <% } else { %>
+                <tr>
+                  <div class="" id="pagelist" >
+                    <td colspan="10" style= "text-align:center; font-size:24px">
+                      <% function FuncPageurl(pagenumber) { %>
+                        <% var pageurl = "/aafacc/" + pagenumber + "?searchtext=" + Search + "&searchtype=" +  searchtype %>
+                        <% if (Searchcount !== 'undefined') { %>
+                          <% for (var i = 0; i < Searchcount; i++) { %>
+                            <% pageurl = pageurl + "&searchtext2=" + Search22[i]  + "&searchtype2=" +  searchtype22[i] %>
+                          <% } %>
+                        <% } %>
+                        <% return pageurl %>
+                      <% } %>
+                      <% if (CurrentPage > PageSize){ %>
+                        <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+                        <a href=" <%- FuncPageurl(1) %>" id="MoveFirstpage"> ◀◀ </a>
+                        <a href=" <%- FuncPageurl(StartPage-1) %>" onclick="" id="MovePrepage"> ◀ </a>
+                      <% } %>
+                      <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
+                        <% if (iCount == CurrentPage) { %>
+                          <b class="btnnonactive"><%- iCount %></b>
+                        <% } else { %>
+                          <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
+                          <a href=" <%- FuncPageurl(iCount) %>" class="btnactive" id="MoveNumpage"><%- iCount %></a>
                         <% } %>
                       <% } %>
-                      <% return pageurl %>
-                    <% } %>
-                    <% if (CurrentPage > PageSize){ %>
-                      <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-                      <a href=" <%- FuncPageurl(1) %>" id="MoveFirstpage"> ◀◀ </a>
-                      <a href=" <%- FuncPageurl(StartPage-1) %>" onclick="" id="MovePrepage"> ◀ </a>
-                    <% } %>
-                    <% for (var iCount = StartPage; iCount <= EndPage; iCount++ ){ %>
-                      <% if (iCount == CurrentPage) { %>
-                        <b class="btnnonactive"><%- iCount %></b>
-                      <% } else { %>
+                      <% if (EndPage < TotalPage){ %>
                         <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-                        <a href=" <%- FuncPageurl(iCount) %>" class="btnactive" id="MoveNumpage"><%- iCount %></a>
+                        <a href=" <%- FuncPageurl(EndPage+1) %>" onclick="" id="MoveNextpage">  ▶ </a>
+                        <a href=" <%- FuncPageurl(TotalPage) %>" onclick="" id="MoveEndpage"> ▶▶ </a>
                       <% } %>
-                    <% } %>
-                    <% if (EndPage < TotalPage){ %>
-                      <% Search= Search.replace(/&/g,"%26").replace(/\+/g,"%2B"); %>
-                      <a href=" <%- FuncPageurl(EndPage+1) %>" onclick="" id="MoveNextpage">  ▶ </a>
-                      <a href=" <%- FuncPageurl(TotalPage) %>" onclick="" id="MoveEndpage"> ▶▶ </a>
-                    <% } %>
-                </td>
+                  </td>
 
-                </div>
-              </tr>
-            <% } %>
-          </div>
-        </tbody>
-      </table>
+                  </div>
+                </tr>
+              <% } %>
+            </div>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="" style="text-align: center; padding-top:30px;">
+        <form class="" action="/addacc" method="get">
+          <button onclick=location.href="/aafacc/addacc" type="button" ame="button" style="width:200px">신규등록</a></button>
+        </form>
+      </div>
+
     </div>
-
-    <div class="" style="text-align: center; padding-top:30px;">
-      <form class="" action="/addacc" method="get">
-        <button onclick=location.href="/aafacc/addacc" type="button" ame="button" style="width:200px">신규등록</a></button>
-      </form>
-    </div>
-
 
   </body>
   <footer>
