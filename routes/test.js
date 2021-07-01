@@ -21,6 +21,7 @@ router.get('/', async function(req, res, next) {
 router.post('/ing', async function(req, res, next) {
   console.log('here');
   var testcontent = req.body.contentbox;
+  console.log(testcontent.length);
   var content = '';
 
   function functionName(a) {
@@ -65,14 +66,12 @@ router.post('/ing', async function(req, res, next) {
     content = content.replace("[ 27", "\n 유일6 \n[ 27");
       console.log(content)
   }
+  console.log(content.length)
 
   await functionName(testcontent);
 
+  res.send(content)
 
-  res.render('test', {
-    title: 'AAF 장비',
-    data: content
-  });
 });
 
 
