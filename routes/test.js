@@ -21,6 +21,10 @@ router.post('/ing', async function(req, res, next) {
   console.log('here');
   var testcontent = req.body.content;
   console.log(testcontent);
+  console.log(data);
+  console.log(req.body.data);
+  console.log(req.body.data.content);
+  console.log(req.query.data);
   var content = '';
 
   function functionName(a) {
