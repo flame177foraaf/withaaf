@@ -193,10 +193,12 @@ router.get('/:id', async function(req,res,next) {
         }
       }
       console.log('req.query.searchtext2 !== undefined' + SearchPlus)
-      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + searchtype +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+      // var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + searchtype +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
+      var QueryString = "SELECT DISTINCT wpname,* FROM aquafeq.aquafwp AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
 
     } else {
-      var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
+      // var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
+      var QueryString = "SELECT DISTINCT wpname, * FROM aquafeq.aquafwp AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
 
     }
 
@@ -266,10 +268,14 @@ router.get('/:id', async function(req,res,next) {
     var Search2 = req.query.searchtext2;
     if (searchtype == '1stats') {
 
-      var QueryString = "SELECT *, count(*) over() as totalcount from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 1) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
+      // var QueryString = "SELECT *, count(*) over() as totalcount from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 1) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
+      var QueryString = "SELECT * , count(*) over() as totalcount from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 1))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);";
+
     } else if (searchtype == '2stats') {
 
-      var QueryString = "SELECT *, count(*) over() as totalcount from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
+      // var QueryString = "SELECT *, count(*) over() as totalcount from (SELECT *, trim ( split_part (replace( wpstats, '+', '') , '/', 2) )::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2- 1)*10)";
+      var QueryString = "SELECT * , count(*) over() as totalcount from (SELECT *, trim (split_part (replace( wpstats, '+', '') , '/', 2))::INTEGER as splitstats from aquafeq.aquafwp where not(rtrim(wpstats)='')) t1 left join (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name where splitstats >= $1 ORDER by splitstats asc limit 10 offset (($2-1)*10);";
+
     }
     console.log("QueryString : " +QueryString);
     await client.query(QueryString, [Search, CurrentPage], async function (err, response){
