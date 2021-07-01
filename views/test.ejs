@@ -20,11 +20,11 @@
             url: '/test/ing',
             type: 'post',
             data: {
-              text: $("#contentbox").value
+              text: $("#contentbox").val()
             },
             // contentType: "application/json; charset=utf-8"
             success: function(data) {
-              $('#contentbox').value(data);
+              $('#contentbox').val(data);
             }
           });
       });
