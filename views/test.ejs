@@ -20,10 +20,10 @@
           url: '/test/ing',
           type: 'post',
           data: {
-            content: $("#contentbox").text(),
+            content: $("#contentbox").value,
           },
           success: function(data) {
-            $('#contentbox').text(data.content);
+            $('#contentbox').value(data.content);
           }
         });
       });
