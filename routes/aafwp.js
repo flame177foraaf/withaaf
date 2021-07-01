@@ -215,6 +215,7 @@ router.get('/:id', async function(req,res,next) {
       }
       console.log(response.length)
       console.log(response.rows.length)
+      console.log(response.affectedRows)
       console.log('토탈 카운트 ' + TotalCount)
       console.log(CurrentPage)
       console.log(typeof(CurrentPage))
