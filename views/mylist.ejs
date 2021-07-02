@@ -61,9 +61,13 @@
                   test = test.split("★")[0].trim()
                 }
 
-                content = content + "\n" + test;
+                if (content == '') {
+                  content = test;
+                } else {
+                  content = content + "\n" + test;
+                }
               }
-              content = content.replace("[ 00", "\n 사방에 널린 \n[ 00");
+              content = content.replace("[ 00", "사방에 널린 \n[ 00");
               content = content.replace("[ 03", "\n 풍족한 \n[ 03");
               content = content.replace("[ 06", "\n 많은 \n[ 06");
               content = content.replace("[ 09", "\n 흔한 \n[ 09");
@@ -82,7 +86,7 @@
         });
       </script>
 
-      <p style="text-align:center; margin-top:30px" > 수집품 합성소에 들어가서 페이지 소스를 전부 긁어오시면 됩니다!
+      <p style="text-align:center; margin-top:30px"> 수집품 합성소에 들어가서 페이지 소스를 전부 긁어오시면 됩니다!
       <div class="" style="text-align: center; ">
         <textarea id="contentbox" rows="15" cols="80" style="margin: 30px 0px 30px 0px;" placeholder=></textarea>
 
