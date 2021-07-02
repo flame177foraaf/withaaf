@@ -132,13 +132,12 @@ router.post('/fixarm', async function(req, res, next) {
 
 
   var QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, armlimit, armsocket, armether, armstats, armproperty, armfeat, armcustom, armup, armname) = ($1, " + Armlimit + "," + "$2, $3, $4, $5, $6, $7, $8, $9)  WHERE armid = $10 returning *"
-  console.log(QueryString)
+  // console.log(QueryString)
 
   if (Armlimit == '') {
-    console.log('ㅁㄴㅇㅁㅇㄴ')
     QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, armsocket, armether, armstats, armproperty, armfeat, armcustom, armup, armname) = ($1,  $2, $3, $4, $5, $6, $7, $8, $9)  WHERE armid = $10 returning *"
   }
-  console.log(QueryString);
+  // console.log(QueryString);
 
   client.query(QueryString, [Armgrade, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup, Armname, Eqid], async function(err, response) {
     console.log(QueryString);
@@ -148,6 +147,59 @@ router.post('/fixarm', async function(req, res, next) {
     await client.query(QueryString, [Armname], async function(err, response) {
       await response;
 
+      if (err) {
+        res.redirect('/aafacc');
+        console.log(err);
+      } else if (typeof(response.rows[0]) !== "object") {
+        var TotalCount = 1;
+      } else {
+        var TotalCount = response.rows[0].totalcount;
+      }
+      //console.log('토탈 카운트 ' + TotalCount)
+      //console.log(CurrentPage)
+      //console.log(typeof(CurrentPage))
+      var CurrentPage = 1;
+      var searchtype = 'armname';
+
+      var DataCountInPage = 10;
+      var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage, 10);
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      }
+
+      //console.log('토탈 페이지' + TotalPage);
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      }
+      var StartPage = parseInt(((CurrentPage - 1) / 10), 10) * 10 + 1;
+      //console.log('스타트페이지' + StartPage);
+
+      var EndPage = StartPage + DataCountInPage - 1;
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      }
+      //console.log('엔드페이지'+ EndPage);
+      //console.log(response.rows[0])
+      res.render('aafacc', {
+        title: 'AAF 장비',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage: TotalPage,
+        searchtype: encodeURIComponent(searchtype),
+        Search: encodeURIComponent(Armname),
+        SearchPlus: SearchPlus,
+        Search2: Search2,
+        Search22: Search22,
+        searchtype2: searchtype2,
+        searchtype22: searchtype22,
+        Searchcount: Searchcount
+
+
+      });
 
       res.render('aafarm', {
         title: Armname + ' 변경 완료',

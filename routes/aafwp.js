@@ -126,9 +126,16 @@ router.post('/fixwp', async function(req,res,next) {
     }
 
 
-  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup, wpname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE wpid = $11 returning *"
+  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup, wpname) = ($1,  " + Armlimit + "," + " $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpid = $10 returning *";
+
+
+    if (Wplimit == '') {
+      QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup, wpname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpid = $10 returning *";
+    }
+
+
   //client.query("UPDATE aquafeq.aquafwp SET wpgrade = Wpgrade, wplimit =Wplimit, wpsocket=Wpsocket, wpether=Wpether, wpstats=Wpstats, wpproperty=Wpproperty, wpfeat=Wpfeat, wpcustom=Wpcustom, wpup=Wpup  WHERE wpname = Wpname ",  (err, response) => {
-  await client.query(QueryString, [Wpgrade, Wplimit, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Wpname, Eqid], async function (err, response){
+  await client.query(QueryString, [Wpgrade, Wpsocket, Wpether, Wpstats, Wpproperty, Wpfeat, Wpcustom, Wpup, Wpname, Eqid], async function (err, response){
     console.log('쿼리스트링' + QueryString)
 
     var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
