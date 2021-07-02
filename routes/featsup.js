@@ -65,8 +65,8 @@ router.post('/fixfeat', async function(req, res, next) {
 
 
   await client.query(QueryString, [Featgrade, Feat, Reversefeat, Featup, Featname, Eqid], async function(err, response) {
-    var QueryString = "select * from aquafeq.featsup"
-    await client.query(QueryString, async function(err, response) {
+    var QueryString = "select * from aquafeq.featsup where featname = $1"
+    await client.query(QueryString, [Featname] , async function(err, response) {
       await response;
 
       if (err) {
