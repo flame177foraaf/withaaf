@@ -201,10 +201,10 @@ router.post('/fixarm', async function(req, res, next) {
 
       });
 
-      res.render('aafarm', {
-        title: Armname + ' 변경 완료',
-        data: response.rows
-      })
+      // res.render('aafarm', {
+      //   title: Armname + ' 변경 완료',
+      //   data: response.rows
+      // })
     });
   });
 });
