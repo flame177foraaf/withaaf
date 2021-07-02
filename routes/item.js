@@ -142,11 +142,41 @@ router.post('/fixitem', async function(req,res,next) {
       if (err) {
         console.log(err)
         res.redirect('/')
+      } else {
+        var TotalCount = 1;
       }
+      var DataCountInPage = 10;
+      var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage, 10);
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      };
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      };
+      var StartPage = parseInt(((CurrentPage - 1) / 10), 10) * 10 + 1;
+      var EndPage = StartPage + DataCountInPage - 1;
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      };
+
       res.render('item', {
-        title : Itemname + ' 변경 완료',
-        data: response.rows
-      })
+        title:'AAF 아이템',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage: TotalPage,
+        searchtype: encodeURIComponent(name),
+        Search: encodeURIComponent(Itemname),
+      });
+
+
+      // res.render('item', {
+      //   title : Itemname + ' 변경 완료',
+      //   data: response.rows
+      // })
     });
   });
 });
@@ -156,40 +186,44 @@ router.post('/fixitem', async function(req,res,next) {
 //일반 검색
 router.get('/:id', async function(req,res,next) {
   var searchtype = req.query.searchtype;
+  var QueryString = '';
+  
   if (searchtype === 'name') {
     var Search = req.query.searchtext;
     if (Search == null ) {
       var Search = ""
     }
     var CurrentPage = req.params.id;
-    var CurrentPage = parseInt(CurrentPage)
+    CurrentPage = parseInt(CurrentPage)
 
-    var QueryString = 'SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name Ilike $1 ORDER BY item_name collate "ko_KR.utf8" limit 10 offset (($2- 1)*10);'
+
+    QueryString = 'SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name Ilike $1 ORDER BY item_name collate "ko_KR.utf8" limit 10 offset (($2- 1)*10);';
       await client.query(QueryString, ['%' + Search + '%', CurrentPage], async function (err, response){
         await response;
         if (err) {
-          console.log(err)
-          res.redirect('/')
+          console.log(err);
+          res.redirect('/');
         }
+        var TotalCount = '';
       if(typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
+        TotalCount = 1;
       } else {
-        var TotalCount = response.rows[0].totalcount;
+        TotalCount = response.rows[0].totalcount;
       }
       var DataCountInPage = 10;
       var PageSize = 10;
       var TotalPage = parseInt(TotalCount / DataCountInPage,10);
       if (TotalCount % DataCountInPage > 0) {
         TotalPage++;
-      };
+      }
       if (TotalPage < CurrentPage) {
         CurrentPage = TotalPage;
-      };
+      }
       var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
       var EndPage = StartPage + DataCountInPage -1;
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
-      };
+      }
       res.render('item', {
         title:'AAF 아이템',
         data: response.rows,
@@ -203,10 +237,10 @@ router.get('/:id', async function(req,res,next) {
       });
     });
   } else if (searchtype === 'effect') {
-    var CurrentPage = req.params.id;
-    var CurrentPage = parseInt(CurrentPage)
+    CurrentPage = req.params.id;
+    CurrentPage = parseInt(CurrentPage);
 
-    var QueryString = 'SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name Ilike $1 ORDER BY item_name collate "ko_KR.utf8" limit 10 offset (($2- 1)*10);'
+    QueryString = 'SELECT *, count(*) over() as totalcount FROM aquafeq.aquafitem where item_name Ilike $1 ORDER BY item_name collate "ko_KR.utf8" limit 10 offset (($2- 1)*10);';
       await client.query(QueryString, ['%' + Search + '%', CurrentPage], async function (err, response){
         await response;
       if(typeof(response.rows[0]) !== "object") {
