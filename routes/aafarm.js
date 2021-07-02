@@ -104,6 +104,7 @@ router.post('/fixarm', async function(req, res, next) {
   }
   var Armname = req.body.armname;
   var Armlimit = req.body.armlimit;
+  console.log('Armlimit = ' Armlimit)
   var Armsocket = req.body.armsocket;
   var Armether = req.body.armether;
 
@@ -133,7 +134,7 @@ router.post('/fixarm', async function(req, res, next) {
   var QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, Armlimit, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup, Armname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE armid = $11 returning *"
 
   if (Armlimit == '') {
-    QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup, Armname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9)  WHERE armid = $10 returning *"
+    QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, Armsocket, Armether, Armstats, Armproperty, Armfeat, Armcustom, Armup, Armname) = ($1,  $3, $4, $5, $6, $7, $8, $9, 10)  WHERE armid = $11 returning *"
   }
   console.log(QueryString);
 
