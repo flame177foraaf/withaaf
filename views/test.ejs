@@ -18,6 +18,25 @@
   <div class="">
     <form class="" action="" method="">
 
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"> </script>
+      <script type="text/javascript">
+        $(document).ready(function() {
+
+          $('#try_btn').click(function() {
+            $.ajax({
+              url: '/test/ing',
+              type: 'post',
+              data: {
+                text: $("#contentbox").val()
+              },
+              // contentType: "application/json; charset=utf-8"
+              success: function(data) {
+                $('#contentbox').val(data);
+              }
+            });
+          });
+        });
+      </script>
       <div class="" style="text-align: center; ">
         <textarea id="contentbox" rows="15" cols="80"></textarea>
 
@@ -31,25 +50,6 @@
 
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"> </script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-
-      $('#try_btn').click(function() {
-        $.ajax({
-          url: '/test/ing',
-          type: 'post',
-          data: {
-            text: $("#contentbox").val()
-          },
-          // contentType: "application/json; charset=utf-8"
-          success: function(data) {
-            $('#contentbox').val(data);
-          }
-        });
-      });
-    });
-  </script>
 </body>
 <footer>
   <%- include ('footer')%>
