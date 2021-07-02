@@ -104,7 +104,7 @@ router.post('/fixarm', async function(req, res, next) {
   }
   var Armname = req.body.armname;
   var Armlimit = req.body.armlimit;
-  console.log('Armlimit = ' Armlimit)
+  console.log('Armlimit = ' + Armlimit);
   var Armsocket = req.body.armsocket;
   var Armether = req.body.armether;
 
