@@ -10,25 +10,6 @@
   <style media="screen">
   </style>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"> </script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-
-      $('#try_btn').click(function() {
-        $.ajax({
-          url: '/test/ing',
-          type: 'post',
-          data: {
-            text: $("#contentbox").val()
-          },
-          // contentType: "application/json; charset=utf-8"
-          success: function(data) {
-            $('#contentbox').val(data);
-          }
-        });
-      });
-    });
-  </script>
 
 </head>
 
@@ -49,6 +30,26 @@
     </form>
 
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"> </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      $('#try_btn').click(function() {
+        $.ajax({
+          url: '/test/ing',
+          type: 'post',
+          data: {
+            text: $("#contentbox").val()
+          },
+          // contentType: "application/json; charset=utf-8"
+          success: function(data) {
+            $('#contentbox').val(data);
+          }
+        });
+      });
+    });
+  </script>
 </body>
 <footer>
   <%- include ('footer')%>
