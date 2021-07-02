@@ -354,21 +354,16 @@ router.get('/:id', async function(req,res,next) {
       } else {
         var TotalCount = response.rows[0].totalcount;
       }
-      //console.log('토탈 카운트 ' + TotalCount)
-      //console.log(CurrentPage)
-      //console.log(typeof(CurrentPage))
       var DataCountInPage = 10;
       var PageSize = 10;
       var TotalPage = parseInt(TotalCount / DataCountInPage,10);
       if (TotalCount % DataCountInPage > 0) {
         TotalPage++;
       };
-      //console.log('토탈 페이지' + TotalPage);
       if (TotalPage < CurrentPage) {
         CurrentPage = TotalPage;
       };
       var StartPage = parseInt(((CurrentPage - 1)/10),10) *10 +1;
-      //console.log('스타트페이지' + StartPage);
 
       var EndPage = StartPage + DataCountInPage -1;
       if (EndPage > TotalPage) {
@@ -400,7 +395,13 @@ router.get('/:id', async function(req,res,next) {
       emp.wpfeat = featlink4
       emp.wpcustom = response.rows[0].wpcustom
       emp.wpup = response.rows[0].wpup*/
-      //console.log('엔드페이지'+ EndPage);
+
+      console.log('토탈 카운트 ' + TotalCount)
+      console.log(CurrentPage)
+      console.log(typeof(CurrentPage))
+      console.log('토탈 페이지' + TotalPage);
+      console.log('스타트페이지' + StartPage);
+      console.log('엔드페이지'+ EndPage);
       //console.log(response.rows[0])
       res.render('aafwp', {
         title: 'AAF 장비',
