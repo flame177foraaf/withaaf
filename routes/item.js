@@ -169,7 +169,7 @@ router.post('/fixitem', async function(req,res,next) {
         StartPage: StartPage,
         EndPage: EndPage,
         TotalPage: TotalPage,
-        searchtype: encodeURIComponent(name),
+        searchtype: encodeURIComponent('name'),
         Search: encodeURIComponent(Itemname),
       });
 

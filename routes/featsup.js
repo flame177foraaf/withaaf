@@ -77,7 +77,7 @@ router.post('/fixfeat', async function(req, res, next) {
         var TotalCount = 1;
       }
       var CurrentPage = 1;
-      
+
       var DataCountInPage = 10;
       var PageSize = 10;
       var TotalPage = parseInt(TotalCount / DataCountInPage, 10);
@@ -101,7 +101,7 @@ router.post('/fixfeat', async function(req, res, next) {
         StartPage: StartPage,
         EndPage: EndPage,
         TotalPage: TotalPage,
-        searchtype: encodeURIComponent(name),
+        searchtype: encodeURIComponent('name'),
         Search: encodeURIComponent(Featname),
       });
 

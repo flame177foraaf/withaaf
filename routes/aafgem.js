@@ -64,11 +64,46 @@ router.post('/fixgem', async function(req,res,next) {
       await response;
 
 
-      console.log(response.rows[0])
+      // console.log(response.rows[0])
+      // res.render('aafgem', {
+      //   title : Gemname + ' 변경 완료',
+      //   data: response.rows
+      // })
+
+      if (err) {
+        console.log(err)
+        res.redirect('/')
+      } else {
+        var TotalCount = 1;
+      }
+      var DataCountInPage = 10;
+      var PageSize = 10;
+      var CurrentPage = 1;
+      var TotalPage = parseInt(TotalCount / DataCountInPage, 10);
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      };
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      };
+      var StartPage = parseInt(((CurrentPage - 1) / 10), 10) * 10 + 1;
+      var EndPage = StartPage + DataCountInPage - 1;
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      };
+
       res.render('aafgem', {
-        title : Gemname + ' 변경 완료',
-        data: response.rows
-      })
+        title:'AAF 루엘',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage: TotalPage,
+        searchtype: encodeURIComponent('name'),
+        Search: encodeURIComponent(Gemname),
+      });
+
     });
   });
 })
