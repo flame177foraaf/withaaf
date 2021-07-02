@@ -147,6 +147,7 @@ router.post('/fixitem', async function(req,res,next) {
       }
       var DataCountInPage = 10;
       var PageSize = 10;
+      var CurrentPage = 1;
       var TotalPage = parseInt(TotalCount / DataCountInPage, 10);
       if (TotalCount % DataCountInPage > 0) {
         TotalPage++;
@@ -187,7 +188,7 @@ router.post('/fixitem', async function(req,res,next) {
 router.get('/:id', async function(req,res,next) {
   var searchtype = req.query.searchtype;
   var QueryString = '';
-  
+
   if (searchtype === 'name') {
     var Search = req.query.searchtext;
     if (Search == null ) {
