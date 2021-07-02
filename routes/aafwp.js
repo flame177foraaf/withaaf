@@ -259,11 +259,11 @@ router.get('/:id', async function(req,res,next) {
       }
       console.log('req.query.searchtext2 !== undefined' + SearchPlus)
       // var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE " + searchtype +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);"
-      var QueryString = "SELECT DISTINCT wpname,* FROM (select *, count(*) over() as totalcount from aquafeq.aquafwp where wpname Ilike $1 ) AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
+      var QueryString = "SELECT DISTINCT wpname,* FROM (select *, count(*) over() as totalcount from aquafeq.aquafwp where "+ searchtype +" Ilike $1 ) AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 " + SearchPlus + " ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
 
     } else {
       // var QueryString = "SELECT *, count(*) over() as totalcount FROM aquafeq.aquafwp WHERE "+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
-      var QueryString = "SELECT DISTINCT wpname, * FROM (select *, count(*) over() as totalcount from aquafeq.aquafwp where wpname Ilike $1 ) AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
+      var QueryString = "SELECT DISTINCT wpname, * FROM (select *, count(*) over() as totalcount from aquafeq.aquafwp where "+ searchtype +" Ilike $1 ) AS t1 LEFT JOIN (select name, effect From aquafeq.realize_atk) AS t2 ON t1.wpname = t2.name WHERE t1."+ searchtype +" Ilike $1 ORDER BY wplimit,wpid asc limit 10 offset (($2- 1)*10);";
 
     }
     console.log(QueryString)
