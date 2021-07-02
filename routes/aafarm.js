@@ -187,7 +187,7 @@ router.post('/fixarm', async function(req, res, next) {
 
       //console.log('엔드페이지'+ EndPage);
       //console.log(response.rows[0])
-      res.render('aafacc', {
+      res.render('aafarm', {
         title: 'AAF 장비',
         data: response.rows,
         CurrentPage: CurrentPage,
