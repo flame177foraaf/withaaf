@@ -146,6 +146,7 @@ router.post('/fixarm', async function(req, res, next) {
     console.log(QueryString);
     await client.query(QueryString, [Armname], async function(err, response) {
       await response;
+      console.log(response.rows[0])
 
       if (err) {
         res.redirect('/aafacc');
