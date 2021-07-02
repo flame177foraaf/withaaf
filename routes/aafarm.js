@@ -160,6 +160,9 @@ router.post('/fixarm', async function(req, res, next) {
       //console.log(typeof(CurrentPage))
       var CurrentPage = 1;
       var searchtype = 'armname';
+      var SearchPlus = "";
+
+
 
       var DataCountInPage = 10;
       var PageSize = 10;
@@ -179,6 +182,8 @@ router.post('/fixarm', async function(req, res, next) {
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       }
+
+
       //console.log('엔드페이지'+ EndPage);
       //console.log(response.rows[0])
       res.render('aafacc', {
@@ -192,11 +197,11 @@ router.post('/fixarm', async function(req, res, next) {
         searchtype: encodeURIComponent(searchtype),
         Search: encodeURIComponent(Armname),
         SearchPlus: SearchPlus,
-        Search2: Search2,
-        Search22: Search22,
-        searchtype2: searchtype2,
-        searchtype22: searchtype22,
-        Searchcount: Searchcount
+        // Search2: Search2,
+        // Search22: Search22,
+        // searchtype2: searchtype2,
+        // searchtype22: searchtype22,
+        // Searchcount: Searchcount
 
 
       });
