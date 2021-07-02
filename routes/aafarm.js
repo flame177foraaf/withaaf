@@ -202,7 +202,7 @@ router.post('/fixarm', async function(req, res, next) {
         // Search22: Search22,
         // searchtype2: searchtype2,
         // searchtype22: searchtype22,
-        // Searchcount: Searchcount
+        Searchcount: undefined
 
 
       });
