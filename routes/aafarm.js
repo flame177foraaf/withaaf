@@ -146,7 +146,6 @@ router.post('/fixarm', async function(req, res, next) {
     console.log(QueryString);
     await client.query(QueryString, [Armname], async function(err, response) {
       await response;
-      console.log(response.rows[0])
 
       if (err) {
         res.redirect('/aafacc');
@@ -156,9 +155,6 @@ router.post('/fixarm', async function(req, res, next) {
       } else {
         var TotalCount = response.rows[0].totalcount;
       }
-      //console.log('토탈 카운트 ' + TotalCount)
-      //console.log(CurrentPage)
-      //console.log(typeof(CurrentPage))
       var CurrentPage = 1;
       var searchtype = 'armname';
       var SearchPlus = "";
@@ -172,21 +168,24 @@ router.post('/fixarm', async function(req, res, next) {
         TotalPage++;
       }
 
-      //console.log('토탈 페이지' + TotalPage);
       if (TotalPage < CurrentPage) {
         CurrentPage = TotalPage;
       }
       var StartPage = parseInt(((CurrentPage - 1) / 10), 10) * 10 + 1;
-      //console.log('스타트페이지' + StartPage);
 
       var EndPage = StartPage + DataCountInPage - 1;
       if (EndPage > TotalPage) {
         EndPage = TotalPage;
       }
+      console.log('토탈 페이지' + TotalPage);
 
+      console.log('토탈 카운트 ' + TotalCount)
+      console.log(CurrentPage)
+      console.log(typeof(CurrentPage))
+      console.log('스타트페이지' + StartPage);
 
-      //console.log('엔드페이지'+ EndPage);
-      //console.log(response.rows[0])
+      console.log('엔드페이지'+ EndPage);
+      console.log(response.rows[0])
       res.render('aafarm', {
         title: 'AAF 장비',
         data: response.rows,
