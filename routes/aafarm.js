@@ -148,7 +148,7 @@ router.post('/fixarm', async function(req, res, next) {
       await response;
 
       if (err) {
-        res.redirect('/aafacc');
+        res.redirect('/aafarm');
         console.log(err);
       } else {
         var TotalCount = 1;

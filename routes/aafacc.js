@@ -196,11 +196,67 @@ router.post('/fixacc', async function(req, res, next) {
     await client.query(QueryString, [Accname], async function(err, response) {
       await response;
 
+      if (err) {
+        res.redirect('/aafacc');
+        console.log(err);
+      } else {
+        var TotalCount = 1;
+      }
+      var CurrentPage = 1;
+      var searchtype = 'accname';
+      var SearchPlus = "";
 
+
+
+      var DataCountInPage = 10;
+      var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage, 10);
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      }
+
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      }
+      var StartPage = parseInt(((CurrentPage - 1) / 10), 10) * 10 + 1;
+
+      var EndPage = StartPage + DataCountInPage - 1;
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      }
+      console.log('토탈 페이지' + TotalPage);
+
+      console.log('토탈 카운트 ' + TotalCount)
+      console.log(CurrentPage)
+      console.log(typeof(CurrentPage))
+      console.log('스타트페이지' + StartPage);
+
+      console.log('엔드페이지'+ EndPage);
+      console.log(response.rows[0])
       res.render('aafacc', {
-        title: Accname + ' 변경 완료',
-        data: response.rows
+        title: 'AAF 장비',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage: TotalPage,
+        searchtype: encodeURIComponent(searchtype),
+        Search: encodeURIComponent(Accname),
+        SearchPlus: SearchPlus,
+        // Search2: Search2,
+        // Search22: Search22,
+        // searchtype2: searchtype2,
+        // searchtype22: searchtype22,
+        Searchcount: undefined
+
+
       });
+
+      // res.render('aafacc', {
+      //   title: Accname + ' 변경 완료',
+      //   data: response.rows
+      // });
     });
   });
 });

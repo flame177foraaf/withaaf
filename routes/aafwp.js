@@ -141,11 +141,69 @@ router.post('/fixwp', async function(req,res,next) {
     var QueryString = "select * from aquafeq.aquafwp where wpname = $1"
     await client.query ( QueryString, [Wpname], async function(err, response) {
       await response;
-      console.log('쿼리스트링' + QueryString);
+
+      if (err) {
+        res.redirect('/aafwp');
+        console.log(err);
+      } else {
+        var TotalCount = 1;
+      }
+      var CurrentPage = 1;
+      var searchtype = 'wpname';
+      var SearchPlus = "";
+
+
+
+      var DataCountInPage = 10;
+      var PageSize = 10;
+      var TotalPage = parseInt(TotalCount / DataCountInPage, 10);
+      if (TotalCount % DataCountInPage > 0) {
+        TotalPage++;
+      }
+
+      if (TotalPage < CurrentPage) {
+        CurrentPage = TotalPage;
+      }
+      var StartPage = parseInt(((CurrentPage - 1) / 10), 10) * 10 + 1;
+
+      var EndPage = StartPage + DataCountInPage - 1;
+      if (EndPage > TotalPage) {
+        EndPage = TotalPage;
+      }
+      console.log('토탈 페이지' + TotalPage);
+
+      console.log('토탈 카운트 ' + TotalCount)
+      console.log(CurrentPage)
+      console.log(typeof(CurrentPage))
+      console.log('스타트페이지' + StartPage);
+
+      console.log('엔드페이지'+ EndPage);
+      console.log(response.rows[0])
       res.render('aafwp', {
-        title : Wpname + ' 변경 완료',
-        data: response.rows
+        title: 'AAF 장비',
+        data: response.rows,
+        CurrentPage: CurrentPage,
+        PageSize: PageSize,
+        StartPage: StartPage,
+        EndPage: EndPage,
+        TotalPage: TotalPage,
+        searchtype: encodeURIComponent(searchtype),
+        Search: encodeURIComponent(Armname),
+        SearchPlus: SearchPlus,
+        // Search2: Search2,
+        // Search22: Search22,
+        // searchtype2: searchtype2,
+        // searchtype22: searchtype22,
+        Searchcount: undefined
+
+
       });
+
+      // console.log('쿼리스트링' + QueryString);
+      // res.render('aafwp', {
+      //   title : Wpname + ' 변경 완료',
+      //   data: response.rows
+      // });
     });
   });
 });
