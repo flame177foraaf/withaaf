@@ -134,7 +134,8 @@ router.post('/fixarm', async function(req, res, next) {
   var QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, armlimit, armsocket, armether, armstats, armproperty, armfeat, armcustom, armup, armname) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)  WHERE armid = $11 returning *"
 
   if (Armlimit == '') {
-    QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, armsocket, armether, armstats, armproperty, armfeat, armcustom, armup, armname) = ($1,  $3, $4, $5, $6, $7, $8, $9, 10)  WHERE armid = $11 and armlimit = $2 returning *"
+    console.log('ㅁㄴㅇㅁㅇㄴ')
+    QueryString = "UPDATE aquafeq.aquafarm SET (armgrade, armsocket, armether, armstats, armproperty, armfeat, armcustom, armup, armname) = ($1,  $3, $4, $5, $6, $7, $8, $9, 10)  WHERE armid = $11 returning *"
   }
   console.log(QueryString);
 
