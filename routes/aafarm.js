@@ -150,10 +150,8 @@ router.post('/fixarm', async function(req, res, next) {
       if (err) {
         res.redirect('/aafacc');
         console.log(err);
-      } else if (typeof(response.rows[0]) !== "object") {
-        var TotalCount = 1;
       } else {
-        var TotalCount = response.rows[0].totalcount;
+        var TotalCount = 1;
       }
       var CurrentPage = 1;
       var searchtype = 'armname';
