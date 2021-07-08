@@ -188,7 +188,7 @@ router.post('/fixwp', async function(req,res,next) {
         EndPage: EndPage,
         TotalPage: TotalPage,
         searchtype: encodeURIComponent(searchtype),
-        Search: encodeURIComponent(Armname),
+        Search: encodeURIComponent(Wpname),
         SearchPlus: SearchPlus,
         // Search2: Search2,
         // Search22: Search22,
