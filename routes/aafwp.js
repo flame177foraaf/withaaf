@@ -126,7 +126,7 @@ router.post('/fixwp', async function(req,res,next) {
     }
 
 
-  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup, wpname) = ($1,  " + Armlimit + "," + " $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpid = $10 returning *";
+  var QueryString = "UPDATE aquafeq.aquafwp SET (wpgrade, wplimit, wpsocket, wpether, wpstats, wpproperty, wpfeat, wpcustom, wpup, wpname) = ($1,  " + Wplimit + "," + " $2, $3, $4, $5, $6, $7, $8, $9)  WHERE wpid = $10 returning *";
 
 
     if (Wplimit == '') {
